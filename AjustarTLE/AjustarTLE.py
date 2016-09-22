@@ -157,6 +157,7 @@ if __name__ == '__main__':
     for i in item:
         tlesec=tleOrdenados[i][0]
         pos,vel,fsec=tleSecundario(tlesec, ffin)
+        print fsec,pos,vel
         dx,dy,dz=tuplaFloat(r-pos)
         dr=r-pos
         dif.append(dr)
