@@ -38,7 +38,7 @@ def gegraf(datos):
     plt.grid()
     plt.title('Diferencias en la Coordenada U [km]')
     plt.ylabel('U [km]')
-    plt.ylim(-2.0,2.0)
+    plt.ylim(-2.0,18.0)
     ax.plot(fechas,xx, label='modulo de distancia')
     fig.autofmt_xdate() # rotate and align the tick labels so they look better
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
@@ -52,7 +52,7 @@ def gegraf(datos):
     plt.grid()
     plt.title('Diferencias en la Coordenada V [km]')
     plt.ylabel('V [km]')
-    plt.ylim(-7.0,7.0)
+    plt.ylim(-2.0,18.0)
     ax.plot(fechas,yy, label='modulo de distancia')
     fig.autofmt_xdate() # rotate and align the tick labels so they look better
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
@@ -66,13 +66,12 @@ def gegraf(datos):
     plt.grid()
     plt.title('Diferencias en la Coordenada W [km]')
     plt.ylabel('W [km]')
-    plt.ylim(-2.0,2.0)
+    plt.ylim(-2.0,18.0)
     ax.plot(fechas,zz, label='modulo de distancia')
     fig.autofmt_xdate() # rotate and align the tick labels so they look better
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
 
     plt.savefig('../visual/difcoordenadasW.png')
     plt.show()
-
 
 

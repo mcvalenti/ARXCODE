@@ -65,7 +65,6 @@ def ordenaTles(tledic):
     return tleOrdenados
 
 
-
 def tuplaFloat(tupla):
     """
     transforma las tuplas a sus componentes en flotante
@@ -89,7 +88,7 @@ def tlePrimario(tlepri):
         ffin: epoca del TLE primario (datetime)
     """
     whichconst = wgs72
-    archivotle=open('../tles/'+tlepri,'r')
+    archivotle=open('../TleAdmin/tle/'+tlepri,'r')
     lineas=archivotle.readlines()
     line1=lineas[0]
     line2=lineas[1]
@@ -115,7 +114,7 @@ def tleSecundario(tlesec,ffin):
         fsec: epoca del TLE secundario
     """
     whichconst = wgs72
-    archivotle=open('../tles/'+tlesec,'r')
+    archivotle=open('../TleAdmin/tle/'+tlesec,'r')
     lineas=archivotle.readlines()
     line1=lineas[0]
     line2=lineas[1]
@@ -137,31 +136,44 @@ if __name__ == '__main__':
     """
     Administra los archivos TLEs
     """
-    lista=glob.glob('../tles/*')
+    lista=glob.glob('../TleAdmin/tle/*')
     tledic=generadorDatos(lista)
-
     """
     Ordena los TLEs segun sus fechas.
     """
     tleOrdenados=ordenaTles(tledic)
+    print len(tleOrdenados)
 
     """
     Propagacion de TLEs y calculo de las diferencias
     """
-    tlepri=tleOrdenados[-1][0] # me quedo con el ultimo
+#    print tleOrdenados
+    a=40
+    b=51
+    dieztles=tleOrdenados[a:b]
+#
+    tlepri=dieztles[-1][0]
+    print tlepri
+#     tlepri=tleOrdenados[-1][0] # me quedo con el ultimo
     r,rp,ffin=tlePrimario(tlepri)
     print 'Vector Primario =',r,rp
     d=open('diferencias','w')
     dif=[]
-    item=range(8,0,-1)
+    uu=[]
+    vv=[]
+    ww=[]
+    item=range(b,a,-1)
     for i in item:
         tlesec=tleOrdenados[i][0]
         pos,vel,fsec=tleSecundario(tlesec, ffin)
         print fsec,pos,vel
-        dx,dy,dz=tuplaFloat(r-pos)
-        dr=r-pos
+        dx,dy,dz=tuplaFloat(pos-r)
+        dr=pos-r
         dif.append(dr)
         u,v,w=uvwSis(r, rp, dr)
+        uu.append(u)
+        vv.append(v)
+        ww.append(w)
         infodif=str(fsec)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
         d.write(infodif)
     d.close()
@@ -169,20 +181,33 @@ if __name__ == '__main__':
     """
     generacion de graficos
     """ 
-#    gegraf('../AjustarTLE/diferencias')
+    gegraf('../AjustarTLE/diferencias')
     
     """
     Estimacion estadistica.
     """
-    uu=[]
-    vv=[]
-    ww=[]
-    for k in range(len(dif)):
-        uu.append(dif[k][0])
-#        vv.append(dif[k][1])
-#        ww.append(dif[k][2])
-        
-    mu=np.mean(uu)
-    varu=np.var(uu)
-    sigmau=np.std(uu)
-    print mu, varu,sigmau,np.sqrt(varu)
+    mu_u=np.mean(uu)
+    mu_v=np.mean(vv)
+    mu_w=np.mean(ww)
+    print mu_u,mu_v,mu_w
+    u_medio=[]
+    v_medio=[]
+    w_medio=[]
+    for i in uu:
+        u_medio.append(i-mu_u)
+    for j in vv:
+        v_medio.append(i-mu_v)
+    for k in ww:
+        w_medio.append(i-mu_w)
+    
+    # Ma. de Covarianza.
+    sigma2_u=np.dot(u_medio,u_medio)/len(uu)
+    sigma2_v=np.dot(v_medio,v_medio)/len(vv)
+    sigma2_w=np.dot(w_medio,w_medio)/len(ww)
+    sigma_uv=np.dot(u_medio,v_medio)/len(uu)
+    sigma_uw=np.dot(u_medio,w_medio)/len(ww)
+    sigma_vw=np.dot(v_medio,w_medio)/len(vv)
+    
+    cov=np.array([[sigma2_u,sigma_uv,sigma_uw],[sigma_uv,sigma2_v,sigma_uw],[sigma_uw,sigma_vw,sigma2_w]])
+    print cov
+    print sigma2_u, sigma2_v,sigma2_w
