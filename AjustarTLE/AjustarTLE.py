@@ -137,6 +137,7 @@ if __name__ == '__main__':
     Administra los archivos TLEs
     """
     lista=glob.glob('../TleAdmin/tle/*')
+    total_tles=len(lista)
     tledic=generadorDatos(lista)
     """
     Ordena los TLEs segun sus fechas.
@@ -147,41 +148,42 @@ if __name__ == '__main__':
     """
     Propagacion de TLEs y calculo de las diferencias
     """
-#    print tleOrdenados
-    a=40
-    b=51
-    dieztles=tleOrdenados[a:b]
-#
-    tlepri=dieztles[-1][0]
-    print tlepri
-#     tlepri=tleOrdenados[-1][0] # me quedo con el ultimo
-    r,rp,ffin=tlePrimario(tlepri)
-    print 'Vector Primario =',r,rp
-    d=open('diferencias','w')
-    dif=[]
-    uu=[]
-    vv=[]
-    ww=[]
-    item=range(b,a,-1)
-    for i in item:
-        tlesec=tleOrdenados[i][0]
-        pos,vel,fsec=tleSecundario(tlesec, ffin)
-        print fsec,pos,vel
-        dx,dy,dz=tuplaFloat(pos-r)
-        dr=pos-r
-        dif.append(dr)
-        u,v,w=uvwSis(r, rp, dr)
-        uu.append(u)
-        vv.append(v)
-        ww.append(w)
-        infodif=str(fsec)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
-        d.write(infodif)
-    d.close()
-    
-    """
-    generacion de graficos
-    """ 
-    gegraf('../AjustarTLE/diferencias')
+    print len(tleOrdenados)
+    for a in range(0,len(tleOrdenados),10):
+        if a < total_tles-10:
+            b=a+10
+            dieztles=tleOrdenados[a:b]
+            tlepri=dieztles[-1][0]
+            print tlepri
+        #     tlepri=tleOrdenados[-1][0] # me quedo con el ultimo
+            r,rp,ffin=tlePrimario(tlepri)
+            print 'Vector Primario =',r,rp
+            d=open('diferencias'+tlepri,'w')
+            dif=[]
+            uu=[]
+            vv=[]
+            ww=[]
+            item=range(b,a,-1)
+            for i in item:
+                tlesec=tleOrdenados[i][0]
+                pos,vel,fsec=tleSecundario(tlesec, ffin)
+                print fsec,pos,vel
+                dx,dy,dz=tuplaFloat(pos-r)
+                dr=pos-r
+                dif.append(dr)
+                u,v,w=uvwSis(r, rp, dr)
+                uu.append(u)
+                vv.append(v)
+                ww.append(w)
+                infodif=str(fsec)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
+                d.write(infodif)
+            d.close()
+        else:
+            pass  
+            """
+        generacion de graficos
+        """ 
+        gegraf('../AjustarTLE/diferencias'+tlepri,tlepri)
     
     """
     Estimacion estadistica.

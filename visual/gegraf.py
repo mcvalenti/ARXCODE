@@ -14,7 +14,7 @@ import matplotlib.pylab as plt
 import matplotlib.dates as mdates
 from datetime import datetime
 
-def gegraf(datos):  
+def gegraf(datos,sufijo):  
     f1=open(datos,'r')
     fechas=[]
     xx=[]
@@ -34,44 +34,48 @@ def gegraf(datos):
     Coordenada U
     """
 
-    fig, ax = plt.subplots(1)
+    fig, ax = plt.subplots()
+    ax.plot(fechas, xx, 'r--', label='U')
+    ax.plot(fechas, yy, 'bs', label='V')
+    ax.plot(fechas, zz, 'go', label='W')
     plt.grid()
-    plt.title('Diferencias en la Coordenada U [km]')
-    plt.ylabel('U [km]')
-    plt.ylim(-2.0,18.0)
-    ax.plot(fechas,xx, label='modulo de distancia')
+    plt.title('Diferencias en las Coordenadas U,V,W [km]')
+    plt.ylabel('Diferencia en Km')
+    plt.ylim(-20.0,20.0)
+  #  ax.plot(fechas,xx,'r--',fechas,yy,'bs',fechas,zz,label='U')#,label='modulo de distancia')
+    legend = ax.legend(loc='upper right')
     fig.autofmt_xdate() # rotate and align the tick labels so they look better
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
-    plt.savefig('../visual/difcoordenadasU.png')
+    plt.savefig('../visual/'+sufijo+'.png')
     plt.show()
 
     """
     Coordenada V
     """
-    fig, ax = plt.subplots(1)
-    plt.grid()
-    plt.title('Diferencias en la Coordenada V [km]')
-    plt.ylabel('V [km]')
-    plt.ylim(-2.0,18.0)
-    ax.plot(fechas,yy, label='modulo de distancia')
-    fig.autofmt_xdate() # rotate and align the tick labels so they look better
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
-    plt.savefig('../visual/difcoordenadasV.png')
-    plt.show()
+#     fig, ax = plt.subplots(1)
+#     plt.grid()
+#     plt.title('Diferencias en la Coordenada V [km]')
+#     plt.ylabel('V [km]')
+#     plt.ylim(-2.0,18.0)
+#     ax.plot(fechas,yy, label='modulo de distancia')
+#     fig.autofmt_xdate() # rotate and align the tick labels so they look better
+#     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
+#     plt.savefig('../visual/difcoordenadasV.png')
+#     plt.show()
 
     """
     COMPONENTE W
     """
-    fig, ax = plt.subplots(1)
-    plt.grid()
-    plt.title('Diferencias en la Coordenada W [km]')
-    plt.ylabel('W [km]')
-    plt.ylim(-2.0,18.0)
-    ax.plot(fechas,zz, label='modulo de distancia')
-    fig.autofmt_xdate() # rotate and align the tick labels so they look better
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
-
-    plt.savefig('../visual/difcoordenadasW.png')
-    plt.show()
+#     fig, ax = plt.subplots(1)
+#     plt.grid()
+#     plt.title('Diferencias en la Coordenada W [km]')
+#     plt.ylabel('W [km]')
+#     plt.ylim(-2.0,18.0)
+#     ax.plot(fechas,zz, label='modulo de distancia')
+#     fig.autofmt_xdate() # rotate and align the tick labels so they look better
+#     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
+# 
+#     plt.savefig('../visual/difcoordenadasW.png')
+#    plt.show()
 
 

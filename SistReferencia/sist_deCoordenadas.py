@@ -170,8 +170,7 @@ def uvwSis(r,rp,dr):
     eu=np.dot(1.0/ru,r)
     rxrp_int=np.cross(r,rp)
     rxrp_mod=np.sqrt(np.dot(rxrp_int,rxrp_int))
-    rxrp=np.cross(r,rp)
-    ew=np.dot(1.0/rxrp_mod,rxrp)
+    ew=np.dot(1.0/rxrp_mod,rxrp_int)
     ev=np.cross(ew,eu)
     
     u=np.dot(eu,dr)
