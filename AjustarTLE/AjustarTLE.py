@@ -12,9 +12,11 @@ import numpy as np
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from sgp4.propagation import sgp4
+from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import tle_info
 from visual.gegraf import gegraf
 from SistReferencia.sist_deCoordenadas import uvwSis
+from TleAdmin import TLE
 
 def generadorDatos(lista):
     """
@@ -132,7 +134,24 @@ def tleSecundario(tlesec,ffin):
     return pos,vel,fsec
 
 if __name__ == '__main__':
-        
+    """
+    Preprocesamiento del dato crudo bajado de Space-track
+    Preparacion de los archivos TLE, para el procesamiento
+    """
+    satelites_datos=glob.glob('../TleAdmin/crudosTLE/*')
+    nombres=[]
+    for arch in satelites_datos:
+        nombre_archivo=arch.split('/')[-1]
+        nombres.append(nombre_archivo)
+    print satelites_datos
+    print "Seleccione el Satelite a analizar"
+    
+    crudo=raw_input()
+    id_sat=crudo.split('_')[0]
+    if crudo in nombres:
+        setTLE(id_sat, crudo)
+    else:
+        print "Error en el nombre del archivo"
     """
     Administra los archivos TLEs
     """
@@ -155,7 +174,6 @@ if __name__ == '__main__':
             dieztles=tleOrdenados[a:b]
             tlepri=dieztles[-1][0]
             print tlepri
-        #     tlepri=tleOrdenados[-1][0] # me quedo con el ultimo
             r,rp,ffin=tlePrimario(tlepri)
             print 'Vector Primario =',r,rp
             d=open('diferencias'+tlepri,'w')

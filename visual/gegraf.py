@@ -47,7 +47,7 @@ def gegraf(datos,sufijo):
     fig.autofmt_xdate() # rotate and align the tick labels so they look better
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
     plt.savefig('../visual/'+sufijo+'.png')
-    plt.show()
+#    plt.show()
 
     """
     Coordenada V

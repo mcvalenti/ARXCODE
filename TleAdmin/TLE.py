@@ -13,6 +13,7 @@ from datetime import datetime
 class tle_info:
     
     def __init__(self,archivo):
+        
         self.tle = open(archivo,'r')
         lineas = self.tle.readlines()
         self.linea1 = lineas[0].split()
