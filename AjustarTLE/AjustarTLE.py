@@ -6,7 +6,7 @@ a fin de obtener una matriz de covarianza con el error.
 
 @author: mcvalenti
 '''
-import glob
+import os, glob
 import operator
 import numpy as np
 from sgp4.earth_gravity import wgs72
@@ -17,6 +17,29 @@ from TleAdmin.TLE import tle_info
 from visual.gegraf import gegraf
 from SistReferencia.sist_deCoordenadas import uvwSis
 from TleAdmin import TLE
+
+def seleccionSat():
+    """
+    Preprocesamiento del dato crudo bajado de Space-track
+    Preparacion de los archivos TLE, para el procesamiento
+    (el archivo debe contener solo las lineas de los tle)
+    """
+    satelites_datos=glob.glob('../TleAdmin/crudosTLE/*')
+    nombres=[]
+    for arch in satelites_datos:
+        nombre_archivo=arch.split('/')[-1]
+        nombres.append(nombre_archivo)
+    print satelites_datos
+    print "Seleccione el Satelite a analizar"
+    
+    crudo=raw_input()
+    id_sat=crudo.split('_')[0]
+    if crudo in nombres:
+        setTLE(id_sat, crudo)
+    else:
+        print "Error en el nombre del archivo"
+        
+    return {}
 
 def generadorDatos(lista):
     """
@@ -135,23 +158,14 @@ def tleSecundario(tlesec,ffin):
 
 if __name__ == '__main__':
     """
-    Preprocesamiento del dato crudo bajado de Space-track
-    Preparacion de los archivos TLE, para el procesamiento
+    Borro los archivos generados para otro satelite.
     """
-    satelites_datos=glob.glob('../TleAdmin/crudosTLE/*')
-    nombres=[]
-    for arch in satelites_datos:
-        nombre_archivo=arch.split('/')[-1]
-        nombres.append(nombre_archivo)
-    print satelites_datos
-    print "Seleccione el Satelite a analizar"
+    files=glob.glob('../TleAdmin/tle/*')
+    for filename in files:
+        os.unlink(filename)
     
-    crudo=raw_input()
-    id_sat=crudo.split('_')[0]
-    if crudo in nombres:
-        setTLE(id_sat, crudo)
-    else:
-        print "Error en el nombre del archivo"
+    seleccionSat() # se selecciona el satelite y se generan sus datos crudos
+
     """
     Administra los archivos TLEs
     """
@@ -162,21 +176,19 @@ if __name__ == '__main__':
     Ordena los TLEs segun sus fechas.
     """
     tleOrdenados=ordenaTles(tledic)
-    print len(tleOrdenados)
 
     """
     Propagacion de TLEs y calculo de las diferencias
     """
-    print len(tleOrdenados)
+    print 'Cantidad de TLE a procesar= ',len(tleOrdenados)
+    print 'Procesando ...'
     for a in range(0,len(tleOrdenados),10):
         if a < total_tles-10:
             b=a+10
             dieztles=tleOrdenados[a:b]
             tlepri=dieztles[-1][0]
-            print tlepri
             r,rp,ffin=tlePrimario(tlepri)
-            print 'Vector Primario =',r,rp
-            d=open('diferencias'+tlepri,'w')
+            d=open('diferencias/diferencias'+tlepri,'w')
             dif=[]
             uu=[]
             vv=[]
@@ -185,7 +197,6 @@ if __name__ == '__main__':
             for i in item:
                 tlesec=tleOrdenados[i][0]
                 pos,vel,fsec=tleSecundario(tlesec, ffin)
-                print fsec,pos,vel
                 dx,dy,dz=tuplaFloat(pos-r)
                 dr=pos-r
                 dif.append(dr)
@@ -196,38 +207,39 @@ if __name__ == '__main__':
                 infodif=str(fsec)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
                 d.write(infodif)
             d.close()
+            """
+            Estimacion estadistica.
+            """
+            mu_u=np.mean(uu)
+            mu_v=np.mean(vv)
+            mu_w=np.mean(ww)
+            u_medio=[]
+            v_medio=[]
+            w_medio=[]
+            for iu in uu:
+                u_medio.append(iu-mu_u)
+            for j in vv:
+                v_medio.append(j-mu_v)
+            for k in ww:
+                w_medio.append(k-mu_w)
+        
+            # Ma. de Covarianza.
+            sigma2_u=np.dot(u_medio,u_medio)/len(uu)
+            sigma2_v=np.dot(v_medio,v_medio)/len(vv)
+            sigma2_w=np.dot(w_medio,w_medio)/len(ww)
+            sigma_uv=np.dot(u_medio,v_medio)/len(uu)
+            sigma_uw=np.dot(u_medio,w_medio)/len(ww)
+            sigma_vw=np.dot(v_medio,w_medio)/len(vv)
+        
+            cov=np.array([[sigma2_u,sigma_uv,sigma_uw],[sigma_uv,sigma2_v,sigma_uw],[sigma_uw,sigma_vw,sigma2_w]])
+            salida2=open('Covarma','a')
+            salida2.write('-------------'+tlesec+'------------------------------------'+'\n')
+            salida2.write(str(cov)+'\n')
         else:
             pass  
             """
         generacion de graficos
         """ 
-        gegraf('../AjustarTLE/diferencias'+tlepri,tlepri)
-    
-    """
-    Estimacion estadistica.
-    """
-    mu_u=np.mean(uu)
-    mu_v=np.mean(vv)
-    mu_w=np.mean(ww)
-    print mu_u,mu_v,mu_w
-    u_medio=[]
-    v_medio=[]
-    w_medio=[]
-    for i in uu:
-        u_medio.append(i-mu_u)
-    for j in vv:
-        v_medio.append(i-mu_v)
-    for k in ww:
-        w_medio.append(i-mu_w)
-    
-    # Ma. de Covarianza.
-    sigma2_u=np.dot(u_medio,u_medio)/len(uu)
-    sigma2_v=np.dot(v_medio,v_medio)/len(vv)
-    sigma2_w=np.dot(w_medio,w_medio)/len(ww)
-    sigma_uv=np.dot(u_medio,v_medio)/len(uu)
-    sigma_uw=np.dot(u_medio,w_medio)/len(ww)
-    sigma_vw=np.dot(v_medio,w_medio)/len(vv)
-    
-    cov=np.array([[sigma2_u,sigma_uv,sigma_uw],[sigma_uv,sigma2_v,sigma_uw],[sigma_uw,sigma_vw,sigma2_w]])
-    print cov
-    print sigma2_u, sigma2_v,sigma2_w
+        gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
+
+    print '--Fin del PROCESAMIENTO--'

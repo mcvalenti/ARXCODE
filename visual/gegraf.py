@@ -46,7 +46,7 @@ def gegraf(datos,sufijo):
     legend = ax.legend(loc='upper right')
     fig.autofmt_xdate() # rotate and align the tick labels so they look better
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
-    plt.savefig('../visual/'+sufijo+'.png')
+    plt.savefig('../visual/graficos/'+sufijo+'.png')
 #    plt.show()
 
     """
