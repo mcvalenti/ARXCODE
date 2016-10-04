@@ -14,6 +14,35 @@ import matplotlib.pylab as plt
 import matplotlib.dates as mdates
 from datetime import datetime
 
+def gegrafTot(difTot):
+    
+    archivo=open(difTot,'r')
+    dtt=[]
+    xx=[]
+    yy=[]
+    zz=[]
+    lineas=archivo.readlines()
+    
+    for i in lineas:
+        ls = i.split(' ')
+        if len(ls)== 6:
+            dt=ls[0]
+            dt=float(dt)
+            dtt.append(dt)
+            xx.append(ls[3])
+            yy.append(ls[4])
+            zz.append(ls[5])
+    plt.plot(dtt, xx, 'rx', label='U')
+    plt.plot(dtt, yy, 'b+', label='V')
+    plt.plot(dtt, zz, 'g+', label='W')
+    plt.grid()
+    plt.title('Diferencias en las Coordenadas U,V,W [km]')
+    plt.ylabel('Diferencia en Km')
+    plt.xlim(0,-19)
+    plt.ylim(-5.0,2.0)
+    plt.legend()
+    plt.savefig('../visual/graficos/difTot.png')
+
 def gegraf(datos,sufijo):  
     f1=open(datos,'r')
     fechas=[]
@@ -35,15 +64,14 @@ def gegraf(datos,sufijo):
     """
 
     fig, ax = plt.subplots()
-    ax.plot(fechas, xx, 'r--', label='U')
+    ax.plot(fechas, xx, 'rx', label='U')
     ax.plot(fechas, yy, 'bs', label='V')
-    ax.plot(fechas, zz, 'go', label='W')
+    ax.plot(fechas, zz, 'g.', label='W')
     plt.grid()
     plt.title('Diferencias en las Coordenadas U,V,W [km]')
     plt.ylabel('Diferencia en Km')
     plt.ylim(-20.0,20.0)
-  #  ax.plot(fechas,xx,'r--',fechas,yy,'bs',fechas,zz,label='U')#,label='modulo de distancia')
-    legend = ax.legend(loc='upper right')
+    ax.plot(fechas,xx,'r--',fechas,yy,'bs',fechas,zz,label='U')#,label='modulo de distancia')
     fig.autofmt_xdate() # rotate and align the tick labels so they look better
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
     plt.savefig('../visual/graficos/'+sufijo+'.png')
