@@ -6,42 +6,39 @@ Grafica las diferencias en la posicion.
 
 @author: mcvalenti
 """
-#-----------------------------
-# INPUT :: diferencias
-#-----------------------------
-
 import matplotlib.pylab as plt
 import matplotlib.dates as mdates
 from datetime import datetime
 
-def gegrafTot(difTot):
-    
+def gegrafTot(difTot,setID):
     archivo=open(difTot,'r')
     dtt=[]
     xx=[]
     yy=[]
     zz=[]
-    lineas=archivo.readlines()
-    
-    for i in lineas:
-        ls = i.split(' ')
-        if len(ls)== 6:
+    lineas=archivo.readlines()    
+    if len(lineas)==0:
+        print 'El archivo: '+difTot+' tiene algun problema'
+    else:
+        for i in lineas:
+            ls = i.split(' ')
             dt=ls[0]
             dt=float(dt)
             dtt.append(dt)
-            xx.append(ls[3])
-            yy.append(ls[4])
-            zz.append(ls[5])
-    plt.plot(dtt, xx, 'rx', label='U')
-    plt.plot(dtt, yy, 'b+', label='V')
-    plt.plot(dtt, zz, 'g+', label='W')
-    plt.grid()
-    plt.title('Diferencias en las Coordenadas U,V,W [km]')
-    plt.ylabel('Diferencia en Km')
-    plt.xlim(0,-19)
-    plt.ylim(-5.0,2.0)
-    plt.legend()
-    plt.savefig('../visual/graficos/difTot.png')
+            xx.append(ls[1])
+            yy.append(ls[2])
+            zz.append(ls[3])
+        plt.plot(dtt, xx, 'rx', label='U')
+        plt.plot(dtt, yy, 'b+', label='V')
+        plt.plot(dtt, zz, 'g+', label='W')
+        plt.grid()
+        plt.title('Diferencias en las Coordenadas U,V,W [km]')
+        plt.ylabel('Diferencia en Km')
+        plt.xlim(0,16)
+        plt.ylim(-5.0,2.0)
+        plt.legend(loc=4)
+        plt.savefig('../visual/graficos/difTot'+setID+'.png')
+        plt.close()
 
 def gegraf(datos,sufijo):  
     f1=open(datos,'r')
@@ -75,7 +72,6 @@ def gegraf(datos,sufijo):
     fig.autofmt_xdate() # rotate and align the tick labels so they look better
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
     plt.savefig('../visual/graficos/'+sufijo+'.png')
-#    plt.show()
 
     """
     Coordenada V

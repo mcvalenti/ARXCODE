@@ -163,7 +163,38 @@ def tleSecundario(tlesec,ffin):
     fsec=satrec1.epoch
     return pos,vel,fsec
 
-def estimacionEstadistica():
+def difTle(setID,tleOrdenados,cantidad_tles):
+    """
+    ---------------------------------------------------------------
+    Calcula las diferencias entre TLE primario y secundarios
+    en el sistema u,v y w. 
+    Lo hace en forma iterativa, recorriendo todos los TLE a fin
+    de que todos son primarios en algun momento.
+    ---------------------------------------------------------------
+    input:
+        setID: numero de set a ser analizado (string)
+        tleOrdeandos: lista de TLEs y sus 2-lineas (lista de lista)
+    output:
+        difTotal# : archivo de texto plano (4 columnas) para cada set
+        [AjustarTLE/diferencias/difTotal#]
+    """
+    dtot=open('diferencias/difTotal'+setID,'w')
+    for i in range(cantidad_tles-1,0,-1):
+        tlepri=tleOrdenados[i][0]
+        r,rp,ffin=tlePrimario(tlepri)        
+        item=range(i-1,0,-1)
+        for j in item:
+            tlesec=tleOrdenados[j][0]
+            pos,vel,fsec=tleSecundario(tlesec, ffin)
+            dr=pos-r
+            dt=abs(fsec-ffin)
+            dtfracdias=dt.total_seconds()/86400.0
+            u,v,w=uvwSis(r, rp, dr)
+            infodiftot=str(dtfracdias)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
+            dtot.write(infodiftot)
+    return {}
+
+def estimacionEstadistica(uu,vv,ww):
         """
         Estimacion estadistica.
         """
@@ -190,13 +221,12 @@ def estimacionEstadistica():
     
         cov=np.array([[sigma2_u,sigma_uv,sigma_uw],[sigma_uv,sigma2_v,sigma_uw],[sigma_uw,sigma_vw,sigma2_w]])
         salida2=open('Covarma','a')
-        salida2.write('-------------'+tlesec+'------------------------------------'+'\n')
+        #   salida2.write('-------------'+tlesec+'------------------------------------'+'\n')
         salida2.write(str(cov)+'\n')
-        
+        return {}  
     
 
-if __name__ == '__main__':
-    
+if __name__ == '__main__':   
     """
     Borro los archivos generados para otro satelite.
         carpeta de tles: TleAdmin/tle
@@ -238,42 +268,18 @@ if __name__ == '__main__':
     print 'Cantidad de TLE a procesar= ',cantidad_tles
     print 'Procesando ...'
 
-    ut=[]
-    vt=[]
-    wt=[]
-    dtt=[]
-    dtot=open('diferencias/difTotal','w')
-    for i in range(cantidad_tles-1,0,-1):
-        tlepri=tleOrdenados[i][0]
-        r,rp,ffin=tlePrimario(tlepri)        
-        dif=[]
-        uu=[]
-        vv=[]
-        ww=[]
-        d=open('diferencias/diferencias'+'_'+tlepri,'w')
-        item=range(i-1,0,-1)
-        for j in item:
-            tlesec=tleOrdenados[j][0]
-            pos,vel,fsec=tleSecundario(tlesec, ffin)
-            dx,dy,dz=tuplaFloat(pos-r)
-            dr=pos-r
-            dt=fsec-ffin
-            dif.append(dr)
-            u,v,w=uvwSis(r, rp, dr)
-            uu.append(u)
-            vv.append(v)
-            ww.append(w)
-            infodif=str(fsec)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
-            d.write(infodif)
-            infodiftot=str(dt)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
-            dtot.write(infodiftot)
-        d.close()
-
-
-    """
-    generacion de graficos
-    """ 
-    gegrafTot('../AjustarTLE/diferencias/difTotal')
+    set15=cantidad_tles/15
+    for s in range(set15):
+        a=s*15
+        b=a+15
+        tleOrdenados1=tleOrdenados[a:b]
+        setID=str(s)
+        cantidad_tles=len(tleOrdenados1)
+        difTle(setID, tleOrdenados1, cantidad_tles)
+        """
+        generacion de graficos
+        """ 
+        gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
 
 #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
 
