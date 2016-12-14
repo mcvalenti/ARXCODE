@@ -125,12 +125,14 @@ def tlePrimario(tlepri):
     line1=lineas[0]
     line2=lineas[1]
     satrec = twoline2rv(line1, line2, whichconst)
-    r,v = sgp4(satrec,0)
+    ffin=satrec.epoch
+    r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
+#    r,v = sgp4(satrec,0)
     xf,yf,zf=tuplaFloat(r)
     xv,yv,zv=tuplaFloat(v)
     r=np.array([xf,yf,zf])
     v=np.array([xv,yv,zv])
-    ffin=satrec.epoch
+
     return r,v,ffin
 
 def tleSecundario(tlesec,ffin):
@@ -178,11 +180,15 @@ def difTle(setID,tleOrdenados,cantidad_tles):
         difTotal# : archivo de texto plano (4 columnas) para cada set
         [AjustarTLE/diferencias/difTotal#]
     """
+    
     dtot=open('diferencias/difTotal'+setID,'w')
     for i in range(cantidad_tles-1,0,-1):
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
         item=range(i-1,0,-1)
+        print '------------------------------------------------------------------------------------'
+        print 'TLE Primario: ', tlepri, ffin
+        print '------------------------------------------------------------------------------------'
         for j in item:
             tlesec=tleOrdenados[j][0]
             pos,vel,fsec=tleSecundario(tlesec, ffin)
@@ -190,9 +196,11 @@ def difTle(setID,tleOrdenados,cantidad_tles):
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
             u,v,w=uvwSis(r, rp, dr)
-            infodiftot=str(dtfracdias)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
+            infodiftot=str(dtfracdias)+' '+str(u)+' '+str(v)+' '+str(w)+' '+str(fsec)+' '+tlesec+'\n'
             dtot.write(infodiftot)
-    return {}
+            inforepo=tlesec+' '+str(fsec)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
+            print inforepo
+    return tlepri,ffin,tlesec,fsec,u,v,w
 
 def estimacionEstadistica(uu,vv,ww):
         """
@@ -275,7 +283,20 @@ if __name__ == '__main__':
         tleOrdenados1=tleOrdenados[a:b]
         setID=str(s)
         cantidad_tles=len(tleOrdenados1)
-        difTle(setID, tleOrdenados1, cantidad_tles)
+        tlepri,ffin,tlesec,fsec,u,v,w = difTle(setID, tleOrdenados1, cantidad_tles)
+#         """
+#         Reporte
+#         """
+#         repoarchivo=open('../AjustarTLE/diferencias/difTotal'+setID,'r')
+#         datos=repoarchivo.readlines()
+#         for fila in datos:
+#             campo=fila.split(' ')
+#             u=campo[1]
+#             v=campo[2]
+#             w=campo[3]
+#             tle=campo[4]
+#             fecha=campo[5]
+#             print tle, fecha, u, v, w
         """
         generacion de graficos
         """ 
