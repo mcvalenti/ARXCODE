@@ -20,6 +20,8 @@ class importar_tle():
         fecha1=str(y)+'-'+'0'+str(m)+'-'+str(df)
 #       
         s=session()
+        
+        
         s.post('https://www.space-track.org/auth/login',data)
         fquery1 = "https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/"+fecha+"--"+fecha1+"/NORAD_CAT_ID/" + str(noradId) + "/orderby/TLE_LINE1 ASC/format/tle"
         r = s.get(fquery1)
