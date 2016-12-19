@@ -5,5 +5,6 @@ Created on Dec 17, 2016
 '''
 from os import system
 
-system('gnuplot sim.plt')
+system('gnuplot difPosiciones.plt')
+system('gnuplot uvwMultiplot.plt')
 

@@ -196,11 +196,11 @@ def difTle(setID,tleOrdenados,cantidad_tles):
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
             u,v,w=uvwSis(r, rp, dr)
-            infodiftot=str(dtfracdias)+' '+str(u)+' '+str(v)+' '+str(w)+' '+str(fsec)+' '+tlesec+'\n'
+            infodiftot=str(dtfracdias)+','+str(u)+','+str(v)+','+str(w)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
             inforepo=tlesec+' '+str(fsec)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
             print inforepo
-    return tlepri,ffin,tlesec,fsec,u,v,w
+    return {}
 
 def estimacionEstadistica(uu,vv,ww):
         """
@@ -283,24 +283,12 @@ if __name__ == '__main__':
         tleOrdenados1=tleOrdenados[a:b]
         setID=str(s)
         cantidad_tles=len(tleOrdenados1)
-        tlepri,ffin,tlesec,fsec,u,v,w = difTle(setID, tleOrdenados1, cantidad_tles)
-#         """
-#         Reporte
-#         """
-#         repoarchivo=open('../AjustarTLE/diferencias/difTotal'+setID,'r')
-#         datos=repoarchivo.readlines()
-#         for fila in datos:
-#             campo=fila.split(' ')
-#             u=campo[1]
-#             v=campo[2]
-#             w=campo[3]
-#             tle=campo[4]
-#             fecha=campo[5]
-#             print tle, fecha, u, v, w
+        difTle(setID, tleOrdenados1, cantidad_tles)
+
         """
         generacion de graficos
         """ 
-        gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
+       # gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
 
 #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
 
