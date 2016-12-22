@@ -66,8 +66,8 @@ def generadorDatos(lista):
     datos=[]
     for arch in lista:
         nombre=arch.split('/')[-1]
-        tle=tle_info(arch)
-        datos.append(tle.epoca())
+        tle=tle_info(arch) # instancia un objeto de la clase  TLE
+        datos.append(tle.epoca()) # ejecuta un metodo de la clase TLE
         tledic[nombre]= datos
         datos=[]
     
