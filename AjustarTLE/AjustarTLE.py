@@ -36,19 +36,30 @@ def seleccionSat():
     """
     satelites_datos=glob.glob('../TleAdmin/crudosTLE/*')
     nombres=[]
-    for arch in satelites_datos:
-        nombre_archivo=arch.split('/')[-1]
-        nombres.append(nombre_archivo)
-    print nombres
-    print "Seleccione el Satelite a analizar"
-    
-    crudo=raw_input()
-    id_sat=crudo.split('_')[0]
-    if crudo in nombres:
-        setTLE(id_sat, crudo)
-    else:
-        print "Error en el nombre del archivo"
+    condicion=True
+    while(condicion):
+        for arch in satelites_datos:
+            nombre_archivo=arch.split('/')[-1]
+            print nombre_archivo
+            nombres.append(nombre_archivo)
+        print "Seleccione el Satelite a analizar"
         
+        
+        crudo=raw_input()
+        id_sat=crudo.split('_')[0]
+        
+        
+        if crudo in nombres:
+            setTLE(id_sat, crudo)
+            condicion=False
+        else:
+            print '-------------------------------'
+            print "Error en el nombre del archivo"
+            print '--------------------------------'
+            print '...'
+        
+    print 'El archivo seleccionado es = ', crudo
+    print 'Ud. Selecciono el satelite con ID= ', id_sat  
     return {}
 
 def generadorDatos(lista):

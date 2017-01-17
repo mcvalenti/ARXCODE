@@ -9,9 +9,7 @@ en forma ordenada, con un unico sv (state vector) por fecha y epoca.
 '''
 
 import os, glob
-import numpy as np
 from datetime import datetime
-from StateVector import StateVector
 
 
 def ordenaTOD(lista):
@@ -39,19 +37,26 @@ def ordenaTOD(lista):
     codsOrdenados=sorted(archCods.items())
     return codsOrdenados
 
-# for arch in lista:
-#     datos=open(arch,'r').readlines()
-#     print '-----------------------------------------------------------------------------'
-#     print '-----------------------------------------------------------------------------'
-#     print arch
-#     for i in datos:
-#         datos1=i.split(' ')
-#         campos=len(datos1)
-#         if datos1[0]=='*HEADER':
-#             continue
-#         sv1=StateVector(i)
-#        print sv1.fecha, sv1.hora, sv1.x, sv1.y, sv1.z, sv1.vx, sv1.vy, sv1.vz
-
+def generaTOD(lista):
+    
+    ephemFile = open('TOD_O/TOD_CODS_SACD_xyz.txt','a')
+    
+    listafechas=[]
+    claveUnica=' '
+    for i in TODlista:
+        f=open(i[1],'r')
+        contenido=f.readlines()
+        contenido.reverse()
+        for c in contenido:
+            c1=c.split(' ')
+            if c1[0]=='*HEADER':
+                continue
+            claveUnica=c1[0]+c1[1]
+            if claveUnica in listafechas:
+                continue
+            ephemFile.write(c)
+            listafechas.append(claveUnica)
+    
 
 if __name__ == '__main__':  
     """
@@ -66,21 +71,8 @@ if __name__ == '__main__':
     TODlista=ordenaTOD(lista) 
     TODlista.reverse()
     
+    generaTOD(TODlista)
 
-    ephemFile = open('TOD_O/TOD_CODS_SACD_xyz.txt','a')
-    
-    nuevalista=[] 
-    claveUnica=' '
-    for i in TODlista:
-        f=open(i[1],'r')
-        contenido=f.readlines()
-        for c in contenido:
-            c1=c.split(' ')
-            if c1[0]=='*HEADER':
-                continue
-            if claveUnica != c1[0]:
-                nuevalista.append(c)
-                claveUnica=c1[0]
-            
+    print 'FIN'
 
 

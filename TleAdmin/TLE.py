@@ -6,6 +6,9 @@ Extrae la informacion de los TLE
 @author: mcvalenti
 """
 
+from sgp4.earth_gravity import wgs72
+from sgp4.io import twoline2rv
+from sgp4.propagation import sgp4
 from sgp4.ext import days2mdhms
 from sgp4.ext import jday
 from datetime import datetime
@@ -16,22 +19,22 @@ class tle_info:
         
         self.tle = open(archivo,'r')
         lineas = self.tle.readlines()
-        self.linea1 = lineas[0].split()
-        self.linea2 = lineas[1].split()
+        self.linea1 = lineas[0]
+        self.linea2 = lineas[1]
         self.tle.close() 
-        self.i=self.linea2[2]
-        self.Omega=self.linea2[3]
-        self.e=self.linea2[4]
-        self.ap=self.linea2[5]
-        self.m=self.linea2[6]
-        self.n=self.linea2[7]
+        self.i=self.linea2.split()[2]
+        self.Omega=self.linea2.split()[3]
+        self.e=self.linea2.split()[4]
+        self.ap=self.linea2.split()[5]
+        self.m=self.linea2.split()[6]
+        self.n=self.linea2.split()[7]
 
     def catID(self):
         self.catID=self.linea1[1]
         return self.catID
         
     def epoca(self):
-        self.fecha = str(self.linea1[3])  # Extraemos fecha del TLE
+        self.fecha = str(self.linea1.split()[3])  # Extraemos fecha del TLE
         self.anio = str(self.fecha[0:2])
         self.dias = str(self.fecha[2:14])
         self.a = int(self.anio)
@@ -45,3 +48,10 @@ class tle_info:
         self.jd1 = jday(self.a, self.mon, self.d, self.hr, self.minu, self.sec)
         self.epoca=datetime(2000+self.a, self.mes, self.dia1, self.hora, self.minuto, self.seg)
         return self.epoca
+    
+    def propagaTLE(self):
+        whichconst = wgs72
+        satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+        ffin=satrec.epoch
+        r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
+        return r,v

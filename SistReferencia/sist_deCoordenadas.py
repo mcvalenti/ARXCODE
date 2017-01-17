@@ -1,24 +1,26 @@
 
-"""
----------------------------------------------
-Trasformacion de vector de estado x,v
-a elementos orbitales.
----------------------------------------------
-inputs:
-    x: posicion (vector) - [km]
-    v: velocidad (vector) - [km/s]
-outputs:
-    a: semieje mayor (float) - [km]
-    e: excentricidad (float)
-    i: inclinacion (float) - [rad]
-    Omega: Longitud del Nodo (float) - [rad]
-    w: Argumento del perigeo (float) - [rad]
-    nu: Anomalia verdadera (float) - [rad]
-"""
+
 import numpy as np
+from math import pi
 #from newton import newton
 
 def xv2eo(r,v):
+    """
+    ---------------------------------------------
+    Trasformacion de vector de estado x,v
+    a elementos orbitales.
+    ---------------------------------------------
+    inputs:
+        x: posicion (vector) - [km]
+        v: velocidad (vector) - [km/s]
+    outputs:
+        a: semieje mayor (float) - [km]
+        e: excentricidad (float)
+        i: inclinacion (float) - [rad]
+        Omega: Longitud del Nodo (float) - [rad]
+        w: Argumento del perigeo (float) - [rad]
+        nu: Anomalia verdadera (float) - [rad]
+    """
 #    Rt=6378.0 #[km]
     GM=398600.4405 #[km3/s2]
     deg=180.0/np.pi 
@@ -218,5 +220,58 @@ def rot_tierra(x,y,z,minu,ts):
                   
     r_prima=np.dot(ma_rot,pos)
     return r_prima 
+
+def teme2tod(tt,r_teme):
+    """
+    Created on Mon Jul 27 09:42:53 2015
+    
+    Calculo del TOD
+    
+    @author: mcvalenti
+    """
+    rad = pi/180.0
+    rad1 = 2*pi/86400.0
+    
+    #psi = -0.0522 # para el 28/06/2000 ["]
+    
+    #tt = 0.004904360547
+    #jd=2451724.13115529340
+    #julicen=(jd-2451545.0)/36525 # [Centurias Julianas]
+    #r_teme=np.matrix([[3961.0035498],[6010.7511740],[4619.3009301]])
+    """
+    epsiraya(tt):
+    """
+    a=84381.448
+    b=-46.8150
+    c=-0.00059
+    d=0.001813
+    epsiraya=a+b*tt+c*tt**2+d*tt**3
+
+    """    
+    Omega(tt):
+    """
+    a=125.04452222 # en [grados]
+    b=-6962.8905390
+    c=7.455
+    d=0.008
+    Ome1=b*tt+c*tt**2+d*tt**3
+    Ome2=Ome1/3600.0
+    Omega=a+Ome2
+    
+    """
+    transformacion(tt,r_teme):
+    """
+    eps=epsiraya
+    eps1=eps*rad/3600.0
+    Omegaf=Omega*rad#
+    psi =-17.1996*np.sin(Omegaf)
+    eqe=psi*np.cos(eps1)+0.00264*np.sin(Omegaf)+0.000063*np.sin(2*Omegaf)
+    eqe1=eqe*rad/3600.0
+    Q=np.matrix([[np.cos(-eqe1),np.sin(-eqe1),0],[-np.sin(-eqe1),
+                  np.cos(-eqe1),0],[0,0,1]])          
+    r_tod=np.dot(Q,r_teme)
+    
+    return r_tod
+
 
     
