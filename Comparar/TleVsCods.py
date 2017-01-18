@@ -70,16 +70,49 @@ if __name__ == '__main__':
         fechas=campof[0]+' '+campof[1]
         dg=datetime.strptime(fechas[:19],'%Y/%m/%d %H:%M:%S')
         fechasgps.append(dg)
-    
+    d=datetime(2013,12,31,10,12,00)
+    print fechasgps[0]
+    print fechasgps.index(d)
+    """
+    Metodo de biseccion para encontrar la coincidencia
+    """
+    tot=len(gpslista)
+    print 'Total de filas de GPS = ',tot
+    print 'Total de Tles = ', len(tlelista)
     for l in tlelista:
+        print '---------------------------------------------------------------'
+        print '------------------NUEVO TLE------------------------------------'
+        print '---------------------------------------------------------------'
         campos=l.split()
-        d=datetime.strptime(campos[0]+' '+campos[1],'%Y-%m-%d %H:%M:%S')            
-        for i in range(len(gpslista)):
-            if fechasgps[i] > d:
-                print 'hay que seguir'
+        campos1=campos[0].split('-')
+        yy=int(campos1[0])
+        mm=int(campos1[1])
+        dd=int(campos1[2])
+        campos2=campos[1].split(':')
+        hh=int(campos2[0])
+        minu=int(campos2[1])
+        segu=0
+        d1=datetime(yy,mm,dd,hh,minu,segu)      
+        print 'FECHA DEL TLE= ',d1
+        if d1 < fechasgps[tot/2]:
+            if d1 in fechasgps[:tot/4]:
+                indice=fechasgps.index(d1)
+                print 'Inferior = ',gpslista[indice]
+                print 'Superior =', gpslista[indice-1]
             else:
-                print d,fechasgps[0]
-    
+                indice=fechasgps.index(d1)
+                print 'Inferior = ',gpslista[indice]
+                print 'Superior =', gpslista[indice-1]
+        else:
+            if d1 in fechasgps[:tot*3/4]:
+                indice=fechasgps.index(d1)
+                print 'Inferior = ',gpslista[indice]
+                print 'Superior =', gpslista[indice-1]
+            else:
+                indice=fechasgps.index(d1)
+                print 'Inferior = ',gpslista[indice]
+                print 'Superior =', gpslista[indice-1]
+             
     
     print 'FIN'
     
