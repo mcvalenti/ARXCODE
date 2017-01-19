@@ -4,13 +4,15 @@ Created on 17/01/2017
 @author: mcvalenti
 '''
 import os, glob
-import calendar
+import numpy as np
 from datetime import datetime
+from time import time
 from scipy.interpolate import barycentric_interpolate
 from AjustarTLE.AjustarTLE import seleccionSat
-from TleAdmin.TleArchivos import setTLE
+from funcionesUtiles.funciones import toTimestamp
 from TleAdmin.TLE import tle_info
-
+from visual.gegraf import gegrafTot
+from SistReferencia.sist_deCoordenadas import uvwSis
 
 """
 Hace las diferencias
@@ -84,8 +86,7 @@ def encuentraBordes(gpslista,l):
                 
     return inferior,superior
              
-def toTimestamp(d):
-    return calendar.timegm(d.timetuple())
+
 
 def interpola(l,inferior,superior):
     """
@@ -106,7 +107,6 @@ def interpola(l,inferior,superior):
     lcampos=l.split()
     dicampos=inferior.split()
     dscampos=superior.split()
-    # Conversion de las fechas a enteros para la interpolacion-----
     # fecha inferior
     di=inferior[:19]
     di=datetime.strptime(di,'%Y/%m/%d %H:%M:%S')
@@ -135,6 +135,21 @@ def interpola(l,inferior,superior):
     yz_new=barycentric_interpolate(x_array, fz_array, x_new)
     lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+'\n'
     
+#     # Interpolacion en vx
+#     vx_array=[di_int,ds_int]
+#     fx_array=[float(dicampos[5]),float(dscampos[5])]
+#     x_new=dt_int
+#     yx_new=barycentric_interpolate(x_array, fx_array, x_new)
+# 
+#     # Interpolacion en vy
+#     fy_array=[float(dicampos[3]),float(dscampos[3])]
+#     yy_new=barycentric_interpolate(x_array, fy_array, x_new)
+#     
+#     # Interpolacion en vz
+#     fz_array=[float(dicampos[4]),float(dscampos[4])]
+#     yz_new=barycentric_interpolate(x_array, fz_array, x_new)
+#     lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+'\n'
+    
     return lineaInterpol
     
 if __name__ == '__main__':   
@@ -144,10 +159,11 @@ if __name__ == '__main__':
         carpeta de diferencias: AjustarTLE/diferencias
         carpeta de graficos: Visual/graficos
     """
+    inicio=time()
+    
     files=glob.glob('../TleAdmin/tle/*')
     for filename in files:
-        os.unlink(filename)
-        
+        os.unlink(filename)  
     seleccionSat()
     tles = glob.glob('../TleAdmin/tle/*')
     generaTEME(tles) # ver de mover a TleAdmin
@@ -167,17 +183,27 @@ if __name__ == '__main__':
     print 'Total de filas de GPS = ',tot
     print 'Total de Tles = ', len(tlelista)
     print 'Procesando ... '
-    salida=open('datos_interpol','w+')
+    
+    
+    r=[]
+    difTOD=open('diferenciasTOD','w')
+    difUVW=open('diferenciasUVW','w')
+    r=[]
+    rp=[]
+    df=[]
     for l in tlelista:
+        tle_ephem=l.split()
         inferior, superior= encuentraBordes(gpslista,l)
         lineaInterpol=interpola(l,inferior,superior)
-        salida.write(lineaInterpol)
+        interpol_ephem=lineaInterpol.split()
+        dif_x=float(tle_ephem[2])-float(interpol_ephem[2])
+        dif_y=float(tle_ephem[3])-float(interpol_ephem[3])
+        dif_z=float(tle_ephem[4])-float(interpol_ephem[4])
+        info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+'\n'
+        difTOD.write(info)
         
-    difTOD=open('diferenciasTOD','w')
-    """... continuar...""" 
-        
-    
-              
-    print 'FIN'
+
+    fin=time()          
+    print 'FIN', 'Tiempo de Ejecucion = ', fin-inicio
     
     
