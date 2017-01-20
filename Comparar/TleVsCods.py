@@ -196,11 +196,23 @@ if __name__ == '__main__':
         inferior, superior= encuentraBordes(gpslista,l)
         lineaInterpol=interpola(l,inferior,superior)
         interpol_ephem=lineaInterpol.split()
-        dif_x=float(tle_ephem[2])-float(interpol_ephem[2])
-        dif_y=float(tle_ephem[3])-float(interpol_ephem[3])
-        dif_z=float(tle_ephem[4])-float(interpol_ephem[4])
+        xx=float(tle_ephem[2])
+        yy=float(tle_ephem[3])
+        zz=float(tle_ephem[4])
+        r=[xx,yy,zz]
+        vx=float(tle_ephem[5])
+        vy=float(tle_ephem[6])
+        vz=float(tle_ephem[7])
+        rp=[vx,vy,vz]
+        dif_x=xx-float(interpol_ephem[2])
+        dif_y=yy-float(interpol_ephem[3])
+        dif_z=zz-float(interpol_ephem[4])
+        df=[dif_x,dif_y,dif_z]
         info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+'\n'
         difTOD.write(info)
+        u,v,w=uvwSis(r,rp,df)
+        info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
+        difUVW.write(info1)
         
 
     fin=time()          
