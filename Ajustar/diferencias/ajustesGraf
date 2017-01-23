@@ -1,0 +1,22 @@
+#set title 'Diferencias y Ajuestes entre TLE y CODS'
+set terminal postscript eps enhanced color font 'Helvetica,10'
+set output 'ajustesUVW.eps'
+set multiplot
+set size 1,.3
+set ylabel 'km'
+#set xdata time
+#set datafile separator ' '
+#set timefmt '%Y-%m-%d'
+#set xrange ['2013-11-01':'2013-12-30']
+#set yrange [-1:4]
+#set format x "%m-%d"
+set origin 0,0
+plot 'diferencias/diferenciasAjustadas' u 1:2 w p, 'diferencias/diferenciasAjustadas' u 1:5 w l title 'Coordenada U', 
+set origin 0,.3
+plot 'diferencias/diferenciasAjustadas' u 1:3 w p, 'diferencias/diferenciasAjustadas' u 1:6 w l title 'Coordenada V'
+set origin 0,.6
+plot 'diferencias/diferenciasAjustadas' u 1:4 w p, 'diferencias/diferenciasAjustadas' u 1:7 w l title 'Coordenada W'
+unset multiplot
+unset output
+set term x11
+pause 10

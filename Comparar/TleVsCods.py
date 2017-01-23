@@ -7,6 +7,7 @@ import os, glob
 import numpy as np
 from datetime import datetime
 from time import time
+from jdcal import gcal2jd, jd2gcal
 from scipy.interpolate import barycentric_interpolate
 from AjustarTLE.AjustarTLE import seleccionSat
 from funcionesUtiles.funciones import toTimestamp
@@ -187,10 +188,12 @@ if __name__ == '__main__':
     
     r=[]
     difTOD=open('diferenciasTOD','w')
-    difUVW=open('diferenciasUVW','w')
+    difUVW=open('../Ajustar/diferencias/diferenciasUVW','w')
     r=[]
     rp=[]
     df=[]
+    d=gcal2jd(2013,6,2.2)
+    d1=gcal2jd(2013, 6, 2.7)
     for l in tlelista:
         tle_ephem=l.split()
         inferior, superior= encuentraBordes(gpslista,l)
@@ -215,7 +218,8 @@ if __name__ == '__main__':
         difUVW.write(info1)
         
 
-    fin=time()          
+    fin=time()  
+            
     print 'FIN', 'Tiempo de Ejecucion = ', fin-inicio
     
     
