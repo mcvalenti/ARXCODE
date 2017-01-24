@@ -3,14 +3,9 @@ Created on 16/01/2017
 
 @author: mcvalenti
 '''
+import ephem
+from ephem import constellation
 
-a='hola'
-
-b=['perro gato','hola','conejo zorro','estrella planeta','hola perro','hola','hola']
-
-m=0
-for i in b:
-    if i=='hola':
-        m = m + 1
-    palabras=i.split()
-    print len(palabras)
+v=ephem.Saturn('2017')
+    
+print (constellation(v))

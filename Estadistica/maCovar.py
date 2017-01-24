@@ -33,9 +33,25 @@ def maCovCODS(u,v,w):
     s2_vw=sigmaCalcCODS(v,w)
     s2_ww=sigmaCalcCODS(w,w)
     
-    maCovarC=np.array([[s2_uu,s2_uv,s2_uw],[s2_uv,s2_vv,s2_vw],[s2_uw,s2_uw,s2_ww]])
+    maCovarC=np.array([[s2_uu,s2_uv,s2_uw],[s2_uv,s2_vv,s2_vw],[s2_uw,s2_vw,s2_ww]])
     
     return maCovarC
+
+def maCovTLE(u,v,w):
+    m_u=np.mean(u)
+    m_v=np.mean(v)
+    m_w=np.mean(w)
+    uu=[]
+    vv=[]
+    ww=[]
+    for i in range(len(u)):
+        uu.append(abs(u[i]-m_u))
+        vv.append(abs(v[i]-m_v))
+        ww.append(abs(w[i]-m_w))
+        
+    maCovarT=maCovCODS(uu,vv,ww)
+    
+    return maCovarT   
 
 
 if __name__ == '__main__':
@@ -68,7 +84,7 @@ if __name__ == '__main__':
             u.append(float(campos[2]))
             v.append(float(campos[3]))
             w.append(float(campos[4]))
-        maCovar=maCovCODS(u,v,w)
+        maCovar=maCovTLE(u, v, w)
         
     print maCovar
     
