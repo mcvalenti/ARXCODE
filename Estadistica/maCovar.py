@@ -37,19 +37,39 @@ def maCovCODS(u,v,w):
     
     return maCovarC
 
-if __name__ == '__main__':   
-    datos=open('../Ajustar/diferencias/diferenciasUVW','r')
+
+if __name__ == '__main__':
+    
+    print 'Para procesamiento de TLEs, presione = 1'
+    print 'Para procesamiento de datos de Mision, presione = 2'
+    
+    datoTipo=raw_input()
     u=[]
     v=[]
     w=[]
-    datos1=datos.readlines()
-    for l in datos1:
-        campos=l.split()
-        dt=l[:19]
-        dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
-        u.append(float(campos[2]))
-        v.append(float(campos[3]))
-        w.append(float(campos[4]))
-
+    if datoTipo==2:
+        datos=open('../Ajustar/diferencias/diferenciasUVW','r')
+        datos1=datos.readlines()
+        for l in datos1:
+            campos=l.split()
+            dt=l[:19]
+            dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+            u.append(float(campos[2]))
+            v.append(float(campos[3]))
+            w.append(float(campos[4]))
+        maCovar=maCovCODS(u,v,w)
+    else:
+        datos=open('../AjustarTLE/diferencias/difPrimario','r')
+        datos1=datos.readlines()
+        for l in datos1:
+            campos=l.split()
+            dt=l[:19]
+            dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+            u.append(float(campos[2]))
+            v.append(float(campos[3]))
+            w.append(float(campos[4]))
+        maCovar=maCovCODS(u,v,w)
+        
+    print maCovar
     
-    maCovar=maCovCODS(u,v,w)
+    

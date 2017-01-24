@@ -213,37 +213,6 @@ def difTle(setID,tleOrdenados,cantidad_tles):
             print inforepo
     return {}
 
-def estimacionEstadistica(uu,vv,ww):
-        """
-        Estimacion estadistica.
-        """
-        mu_u=np.mean(uu)
-        mu_v=np.mean(vv)
-        mu_w=np.mean(ww)
-        u_medio=[]
-        v_medio=[]
-        w_medio=[]
-        for iu in uu:
-            u_medio.append(iu-mu_u)
-        for j in vv:
-            v_medio.append(j-mu_v)
-        for k in ww:
-            w_medio.append(k-mu_w)
-    
-        # Ma. de Covarianza.
-        sigma2_u=np.dot(u_medio,u_medio)/len(uu)
-        sigma2_v=np.dot(v_medio,v_medio)/len(vv)
-        sigma2_w=np.dot(w_medio,w_medio)/len(ww)
-        sigma_uv=np.dot(u_medio,v_medio)/len(uu)
-        sigma_uw=np.dot(u_medio,w_medio)/len(ww)
-        sigma_vw=np.dot(v_medio,w_medio)/len(vv)
-    
-        cov=np.array([[sigma2_u,sigma_uv,sigma_uw],[sigma_uv,sigma2_v,sigma_uw],[sigma_uw,sigma_vw,sigma2_w]])
-        salida2=open('Covarma','a')
-        #   salida2.write('-------------'+tlesec+'------------------------------------'+'\n')
-        salida2.write(str(cov)+'\n')
-        return {}  
-    
 
 if __name__ == '__main__':   
     """
@@ -287,7 +256,7 @@ if __name__ == '__main__':
     print 'Cantidad de TLE a procesar= ',cantidad_tles
     print 'Procesando ...'
 
-    set15=cantidad_tles/15
+    set15=cantidad_tles/15 # generaliza y hace el estudio para ventanas temporales superiores a los 15 dias.
     for s in range(set15):
         a=s*15
         b=a+15
@@ -295,11 +264,24 @@ if __name__ == '__main__':
         setID=str(s)
         cantidad_tles=len(tleOrdenados1)
         difTle(setID, tleOrdenados1, cantidad_tles)
+       
+    """
+    Tabla para la estimacion de la Ma. de Covarianza.
+    archivo: difPrimario
+    """
+    difG=open('diferencias/difTotal0','r')
+    contenido=difG.readlines()
+    difP=open('diferencias/difPrimario','w')
+    for c in range(13):
+        campos=contenido[c].split(',')
+        info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
+        difP.write(info)
+    
 
-        """
-        generacion de graficos
-        """ 
-       # gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
+    """
+    generacion de graficos
+    """ 
+    # gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
 
 #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
 
