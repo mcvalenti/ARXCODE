@@ -163,23 +163,23 @@ def uvwSis(r,rp,dr):
         rp: velocidad en el sistema cartesiano (Vector) -[km/s]
         dr: vector de diferencia en la posicion - (Vector) - [km]
     outputs
-        u: direccion radial - (Vector) - [km]
-        v: direccion transversal - (Vector) - [km]
-        w: direccion perpendicular al plano - (Vector) - [km]
+        v: direccion along track (velocidad) - (Vector) - [km]
+        n: direccion normal/radial - (Vector) - [km]
+        c: direccion perpendicular al plano - (Vector) - [km]
     """
     
-    ru=np.sqrt(np.dot(r,r))
-    eu=np.dot(1.0/ru,r)
+    rv=np.sqrt(np.dot(rp,rp))
+    ev=np.dot(1.0/rv,rp)
     rxrp_int=np.cross(r,rp)
     rxrp_mod=np.sqrt(np.dot(rxrp_int,rxrp_int))
-    ew=np.dot(1.0/rxrp_mod,rxrp_int)
-    ev=np.cross(ew,eu)
+    ec=np.dot(1.0/rxrp_mod,rxrp_int)
+    en=np.cross(ev,ec)
     
-    u=np.dot(eu,dr)
     v=np.dot(ev,dr)
-    w=np.dot(ew,dr)
+    n=np.dot(en,dr)
+    c=np.dot(ec,dr)
     
-    return u,v,w
+    return v,n,c
     
 def lof_qsw(rt,vt):
     """

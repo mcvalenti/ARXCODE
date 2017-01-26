@@ -55,7 +55,7 @@ def encuentraBordes(gpslista,l):
         fechas=campof[0]+' '+campof[1]
         dg=datetime.strptime(fechas[:19],'%Y/%m/%d %H:%M:%S')
         fechasgps.append(dg)
-
+    tot=len(fechasgps)
     campos=l.split()
     campos1=campos[0].split('-')
     yy=int(campos1[0])
@@ -153,7 +153,7 @@ def interpola(l,inferior,superior):
     
     return lineaInterpol
     
-if __name__ == '__main__':   
+def EjecutaComparacion():   
     """
     Borro los archivos generados para otro satelite.
         carpeta de tles: TleAdmin/tle
@@ -166,11 +166,12 @@ if __name__ == '__main__':
     for filename in files:
         os.unlink(filename)  
     seleccionSat()
+    
     tles = glob.glob('../TleAdmin/tle/*')
-    generaTEME(tles) # ver de mover a TleAdmin
+    generaTEME(tles) 
     
     """
-    Comparacion
+    Comparacion HARDCODEADO!!!!!
     """
     
     gpsf=open('../CodsAdmin/TOD_O/TOD_CODS_SACD_xyz.txt','r')

@@ -6,17 +6,14 @@ a fin de obtener una matriz de covarianza con el error.
 
 @author: mcvalenti
 '''
-import os, glob
+import glob, os, os.path, time
 import operator
 import numpy as np
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
-from sgp4.propagation import sgp4
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import tle_info
-from visual.gegraf import gegraf, gegrafTot
 from SistReferencia.sist_deCoordenadas import uvwSis
-from TleAdmin import TLE
 
 def seleccionSat():
     """
@@ -36,7 +33,9 @@ def seleccionSat():
     """
     satelites_datos=glob.glob('../TleAdmin/crudosTLE/*')
     nombres=[]
+
     condicion=True
+    
     while(condicion):
         for arch in satelites_datos:
             nombre_archivo=arch.split('/')[-1]
@@ -47,7 +46,6 @@ def seleccionSat():
         
         crudo=raw_input()
         id_sat=crudo.split('_')[0]
-        
         
         if crudo in nombres:
             setTLE(id_sat, crudo)
@@ -191,14 +189,14 @@ def difTle(setID,tleOrdenados,cantidad_tles):
         difTotal# : archivo de texto plano (4 columnas) para cada set
         [AjustarTLE/diferencias/difTotal#]
     """
-    
-    dtot=open('diferencias/difTotal'+setID,'w')
+
+    dtot=open('../AjustarTLE/diferencias/difTotal'+setID,'w')
     for i in range(cantidad_tles-1,0,-1):
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
         item=range(i-1,0,-1)
         print '------------------------------------------------------------------------------------'
-        print 'TLE Primario: ', tlepri, ffin
+        print 'TLE Primario: ', tlepri, ffin, r, rp
         print '------------------------------------------------------------------------------------'
         for j in item:
             tlesec=tleOrdenados[j][0]
@@ -206,15 +204,25 @@ def difTle(setID,tleOrdenados,cantidad_tles):
             dr=pos-r
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
-            u,v,w=uvwSis(r, rp, dr)
-            infodiftot=str(dtfracdias)+','+str(u)+','+str(v)+','+str(w)+','+str(fsec)+','+tlesec+'\n'
+            v,n,c=uvwSis(r, rp, dr)
+            infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
-            inforepo=tlesec+' '+str(fsec)+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
+            inforepo=tlesec+' '+str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+'\n'
+    #        inforepo=tlesec+' '+str(fsec)+' '+str(pos[0])+' '+str(pos[1])+' '+str(pos[2])+str(vel[0])+' '+str(vel[1])+' '+str(vel[2])+'\n'
             print inforepo
     return {}
 
-
-if __name__ == '__main__':   
+def EjecutaAjustarTLE():
+    """
+    -----------------------------------------------------------------------------------------
+    Ejecuta el Metodo de Osweiler [ref] para la obtencion de diferencias de a pares.
+    (aunque ofrece la variante de agrupar de a 15 TLEs y aceptar listados mayores) 
+    Solicita el ingreso de un dato crudo  (luego sera un sat id y un intervalo temporal)
+    El dato crudo es un listado continuo de mas de un TLE. ('TleAdmin/crudosTLE')
+    Ordena los TLE de acuerdo a sus fechas y genera un archivo por TLE   (TleAdmin/tle).
+    El codigo solo puede procesar un TLE por dia.    
+    -----------------------------------------------------------------------------------------
+    """
     """
     Borro los archivos generados para otro satelite.
         carpeta de tles: TleAdmin/tle
@@ -225,13 +233,14 @@ if __name__ == '__main__':
     for filename in files:
         os.unlink(filename)
         
-    files=glob.glob('diferencias/*')
+    files=glob.glob('../TleAdmin/diferencias/*')
     for filename in files:
         os.unlink(filename)
         
     files=glob.glob('../visual/graficos/*')
     for filename in files:
         os.unlink(filename)
+        
     """
     Se comienza el procesamiento
     Se elije el satelite a procesar entre los datos crudos disponibles.
@@ -267,22 +276,32 @@ if __name__ == '__main__':
        
     """
     Tabla para la estimacion de la Ma. de Covarianza.
-    archivo: difPrimario
+    archivo: difPrimario - automatizar
     """
-    difG=open('diferencias/difTotal0','r')
+    
+    difG=open('../AjustarTLE/diferencias/difTotal0','r')
     contenido=difG.readlines()
-    difP=open('diferencias/difPrimario','w')
+    difP=open('../AjustarTLE/diferencias/difPrimario','w')
     for c in range(13):
         campos=contenido[c].split(',')
         info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
         difP.write(info)
     
-
+    """
+    Verificacion de generacion del archivo con las diferencias
+    """
+    print '---------------------------------------------------------------------------------'
+    print "Verifiacion de la Generacion del archivo de diferencias"
+    print "Ultima modificacion %s" % time.ctime(os.path.getmtime('../AjustarTLE/diferencias/difTotal0'))
+    print "creado: %s" % time.ctime(os.path.getctime('../AjustarTLE/diferencias/difTotal0'))
+    print ' '
+    print ' '
     """
     generacion de graficos
     """ 
-    # gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
+        # gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
+    
+    #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
 
-#     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
 
-    print '--Fin del PROCESAMIENTO--'
+

@@ -45,9 +45,9 @@ def maCovTLE(u,v,w):
     vv=[]
     ww=[]
     for i in range(len(u)):
-        uu.append(abs(u[i]-m_u))
-        vv.append(abs(v[i]-m_v))
-        ww.append(abs(w[i]-m_w))
+        uu.append(u[i]-m_u)
+        vv.append(v[i]-m_v)
+        ww.append(w[i]-m_w)
         
     maCovarT=maCovCODS(uu,vv,ww)
     
