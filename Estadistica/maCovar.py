@@ -3,6 +3,7 @@ Created on 23/01/2017
 
 @author: mcvalenti
 '''
+import csv
 import numpy as np
 from datetime import datetime
 
@@ -34,7 +35,7 @@ def maCovCODS(u,v,w):
     s2_ww=sigmaCalcCODS(w,w)
     
     maCovarC=np.array([[s2_uu,s2_uv,s2_uw],[s2_uv,s2_vv,s2_vw],[s2_uw,s2_vw,s2_ww]])
-    
+   
     return maCovarC
 
 def maCovTLE(u,v,w):
@@ -54,7 +55,7 @@ def maCovTLE(u,v,w):
     return maCovarT   
 
 
-if __name__ == '__main__':
+def EjecutaMaCovar(archivo):
     
     print 'Para procesamiento de TLEs, presione = 1'
     print 'Para procesamiento de datos de Mision, presione = 2'
@@ -75,7 +76,7 @@ if __name__ == '__main__':
             w.append(float(campos[4]))
         maCovar=maCovCODS(u,v,w)
     else:
-        datos=open('../AjustarTLE/diferencias/difPrimario','r')
+        datos=open('../AjustarTLE/diferencias/'+archivo,'r')
         datos1=datos.readlines()
         for l in datos1:
             campos=l.split()
@@ -86,6 +87,12 @@ if __name__ == '__main__':
             w.append(float(campos[4]))
         maCovar=maCovTLE(u, v, w)
         
+        
+    csvsalida = open(archivo+'.csv', 'w')
+    salida = csv.writer(csvsalida)
+    salida.writerows(maCovar)
+    
+    print 'Ma. de Covarianza de: ', archivo    
     print maCovar
     
     

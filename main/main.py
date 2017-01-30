@@ -6,6 +6,7 @@ Created on 26/01/2017
 import os, glob, os.path, time
 from AjustarTLE.AjustarTLE import *
 from Comparar.TleVsCods import *
+from Estadistica.maCovar import *
 
 if __name__ == '__main__':
     
@@ -24,7 +25,14 @@ if __name__ == '__main__':
     DATOS=raw_input()
     
     if DATOS == 'TLE':
-        EjecutaAjustarTLE()
+        archivo=EjecutaAjustarTLE()
     else:
         EjecutaComparacion()
+        
+    """
+    Calculo de la matriz de Covarianza
+    """    
+    EjecutaMaCovar(archivo)
+    
+    print '-----------------------------------------------'
     print '--Fin del PROCESAMIENTO--'

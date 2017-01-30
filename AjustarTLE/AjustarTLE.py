@@ -58,7 +58,7 @@ def seleccionSat():
         
     print 'El archivo seleccionado es = ', crudo
     print 'Ud. Selecciono el satelite con ID= ', id_sat  
-    return {}
+    return crudo
 
 def generadorDatos(lista):
     """
@@ -245,7 +245,7 @@ def EjecutaAjustarTLE():
     Se comienza el procesamiento
     Se elije el satelite a procesar entre los datos crudos disponibles.
     """
-    seleccionSat() # se selecciona el satelite y se generan sus datos crudos
+    crudo=seleccionSat() # se selecciona el satelite y se generan sus datos crudos
 
     """
     Administra los archivos TLEs
@@ -281,7 +281,8 @@ def EjecutaAjustarTLE():
     
     difG=open('../AjustarTLE/diferencias/difTotal0','r')
     contenido=difG.readlines()
-    difP=open('../AjustarTLE/diferencias/difPrimario','w')
+    salida='dif_'+crudo
+    difP=open('../AjustarTLE/diferencias/'+salida,'w')
     for c in range(13):
         campos=contenido[c].split(',')
         info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
@@ -291,7 +292,7 @@ def EjecutaAjustarTLE():
     Verificacion de generacion del archivo con las diferencias
     """
     print '---------------------------------------------------------------------------------'
-    print "Verifiacion de la Generacion del archivo de diferencias"
+    print "Verifiacion de la Generacion del archivo de diferencias: ",salida
     print "Ultima modificacion %s" % time.ctime(os.path.getmtime('../AjustarTLE/diferencias/difTotal0'))
     print "creado: %s" % time.ctime(os.path.getctime('../AjustarTLE/diferencias/difTotal0'))
     print ' '
@@ -303,5 +304,5 @@ def EjecutaAjustarTLE():
     
     #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
 
-
+    return salida
 
