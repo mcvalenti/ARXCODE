@@ -88,7 +88,7 @@ def EjecutaMaCovar(archivo):
         maCovar=maCovTLE(u, v, w)
         
         
-    csvsalida = open(archivo+'.csv', 'w')
+    csvsalida = open('../main/matrices/'+archivo+'.csv', 'w')
     salida = csv.writer(csvsalida)
     salida.writerows(maCovar)
     

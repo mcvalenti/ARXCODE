@@ -6,7 +6,7 @@ a fin de obtener una matriz de covarianza con el error.
 
 @author: mcvalenti
 '''
-import glob, os, os.path, time
+import glob, os.path, time
 import operator
 import numpy as np
 from sgp4.earth_gravity import wgs72
@@ -174,7 +174,7 @@ def tleSecundario(tlesec,ffin):
     fsec=satrec1.epoch
     return pos,vel,fsec
 
-def difTle(setID,tleOrdenados,cantidad_tles):
+def difTle(tleOrdenados,cantidad_tles):
     """
     ---------------------------------------------------------------
     Calcula las diferencias entre TLE primario y secundarios
@@ -183,14 +183,13 @@ def difTle(setID,tleOrdenados,cantidad_tles):
     de que todos son primarios en algun momento.
     ---------------------------------------------------------------
     input:
-        setID: numero de set a ser analizado (string)
         tleOrdeandos: lista de TLEs y sus 2-lineas (lista de lista)
     output:
         difTotal# : archivo de texto plano (4 columnas) para cada set
         [AjustarTLE/diferencias/difTotal#]
     """
 
-    dtot=open('../AjustarTLE/diferencias/difTotal'+setID,'w')
+    dtot=open('../AjustarTLE/diferencias/difTotal','w')
     for i in range(cantidad_tles-1,0,-1):
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
@@ -241,6 +240,10 @@ def EjecutaAjustarTLE():
     for filename in files:
         os.unlink(filename)
         
+    files=glob.glob('../main/matrices/*')
+    for filename in files:
+        os.unlink(filename)
+        
     """
     Se comienza el procesamiento
     Se elije el satelite a procesar entre los datos crudos disponibles.
@@ -265,25 +268,19 @@ def EjecutaAjustarTLE():
     print 'Cantidad de TLE a procesar= ',cantidad_tles
     print 'Procesando ...'
 
-    set15=cantidad_tles/15 # generaliza y hace el estudio para ventanas temporales superiores a los 15 dias.
-    for s in range(set15):
-        a=s*15
-        b=a+15
-        tleOrdenados1=tleOrdenados[a:b]
-        setID=str(s)
-        cantidad_tles=len(tleOrdenados1)
-        difTle(setID, tleOrdenados1, cantidad_tles)
+    cantidad_tles=len(tleOrdenados)
+    difTle(tleOrdenados, cantidad_tles)
        
     """
     Tabla para la estimacion de la Ma. de Covarianza.
     archivo: difPrimario - automatizar
     """
     
-    difG=open('../AjustarTLE/diferencias/difTotal0','r')
+    difG=open('../AjustarTLE/diferencias/difTotal','r')
     contenido=difG.readlines()
     salida='dif_'+crudo
     difP=open('../AjustarTLE/diferencias/'+salida,'w')
-    for c in range(13):
+    for c in range(len(tleOrdenados)):
         campos=contenido[c].split(',')
         info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
         difP.write(info)
@@ -293,8 +290,8 @@ def EjecutaAjustarTLE():
     """
     print '---------------------------------------------------------------------------------'
     print "Verifiacion de la Generacion del archivo de diferencias: ",salida
-    print "Ultima modificacion %s" % time.ctime(os.path.getmtime('../AjustarTLE/diferencias/difTotal0'))
-    print "creado: %s" % time.ctime(os.path.getctime('../AjustarTLE/diferencias/difTotal0'))
+    print "Ultima modificacion %s" % time.ctime(os.path.getmtime('../AjustarTLE/diferencias/difTotal'))
+    print "creado: %s" % time.ctime(os.path.getctime('../AjustarTLE/diferencias/difTotal'))
     print ' '
     print ' '
     """
