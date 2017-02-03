@@ -36,12 +36,20 @@ class importar_tle():
         return data
     
     def solicitudTle(self):
-        self.f0=str(self.anio0)+'-'+str(self.mes0)+'-'+str(self.dia0)
-        self.f1=str(self.anio1)+'-'+str(self.mes1)+'-'+str(self.dia1)
+        self.sincero=[self.mes0,self.mes1,self.dia0,self.dia1]
+        i=0
+        for i in range(len(self.sincero)):           
+            if self.sincero[i] < 10:
+                self.sincero[i]='0'+str(self.sincero[i])
+            i= i+1
+        self.sincero=[str(self.sincero[0]),str(self.sincero[1]),str(self.sincero[2]),str(self.sincero[3])]
+        self.f0=str(self.anio0)+self.sincero[0]+self.sincero[2]
+        self.f1=str(self.anio1)+self.sincero[1]+self.sincero[3]
+        print self.f0, self.f1
         data = self.ConsultaAutentica()
         s=session() 
         s.post('https://www.space-track.org/auth/login',data)
-        fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+self.f0+'--'+self.f1+'/NORAD_CAT_ID/8820/orderby/TLE_LINE1 ASC/format/tle'
+        fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+self.f0+'--'+self.f1+'/NORAD_CAT_ID/'+self.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
         r = s.get(fquery1)
         s.close()
         return r.text
