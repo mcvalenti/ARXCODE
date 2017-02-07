@@ -1,0 +1,143 @@
+'''
+Created on Feb 5, 2017
+
+@author: mcvalenti
+'''
+import sys
+from PyQt4.QtGui import *
+from PyQt4.QtCore import *
+from TleAdmin.TleArchivos import setTLE
+from AjustarTLE.AjustarTLE import EjecutaAjustarTLE
+
+
+class ProcARxCODE(QWidget):
+    
+    def __init__(self):
+        super(ProcARxCODE, self).__init__()    
+        
+        self.resize(300, 300)
+        grid = QGridLayout()
+        grid.setSpacing(10)
+        
+        self.CDM_label       = QLabel('No se registran CDM')
+        self.boton_ProManual = QPushButton('Procesamiento Manual')
+        
+        grid.addWidget(self.CDM_label)
+        grid.addWidget(self.boton_ProManual)
+
+        self.boton_ProManual.clicked.connect(self.AbrirProc)
+        self.setLayout(grid)
+        self.setWindowTitle('ARxCODE')
+        self.show()
+        
+
+        
+    def AbrirProc(self):
+        ventana2=ProcManual().exec_()
+
+class ProcManual(QDialog):
+    
+    def __init__(self):
+        super(ProcManual, self).__init__()
+        
+        self.filename = ''
+        self.sat_id='99999'
+        
+        self.initUI()
+        
+        
+    def initUI(self):
+        self.palette = QPalette()
+        self.palette.setColor(QPalette.Background,Qt.white)
+        self.setPalette(self.palette)
+        
+        """
+        Etiquetas
+        """
+        self.inicio          = QLabel('Inicio del Procedimiento.')
+        self.carga           = QLabel('CARGADO DE TLEs')
+        self.norad           = QLabel('A partir de NORAD')  
+        self.equipo          = QLabel('Desde el Equipo')
+        self.arch_prepro     = QLabel('Archivo a Procesar: ')
+        self.verificacion    = QLabel('Verificacion de Datos:')
+        self.sat_id_label    = QLabel('NORAD_ID')
+        self.cant_tles       = QLabel('Cantidad de TLEs')
+        self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
+        """
+        Botonoes
+        """
+        self.boton_norad     = QPushButton('Space-Track')
+        self.boton_equipo    = QPushButton('Directorios')
+        self.boton_prepros   = QPushButton('Preprocesamiento')
+        self.boton_procesa   = QPushButton('PROCESAR')
+        self.boton_salir     = QPushButton('Salir')
+        """
+        Campos de Edicion
+        """
+        self.arch_cargado    = QLineEdit()
+        self.sat_id_line     = QLineEdit()
+        self.cant_tles_edit  = QLineEdit()
+        self.matriz          = QLineEdit()
+        
+        grid = QGridLayout()
+        grid.setSpacing(10)
+
+        grid.addWidget(self.inicio, 1, 0)
+        grid.addWidget(self.carga,2,0)
+        grid.addWidget(self.norad,3,0)
+        grid.addWidget(self.boton_norad,3,1)
+        grid.addWidget(self.equipo,4,0)
+        grid.addWidget(self.boton_equipo,4,1)
+        grid.addWidget(self.arch_prepro,5,0)
+        grid.addWidget(self.arch_cargado,5,1)
+        grid.addWidget(self.boton_prepros,5,2)
+        grid.addWidget(self.verificacion,6,0)
+        grid.addWidget(self.sat_id_label,7,0)
+        grid.addWidget(self.cant_tles,7,1)
+        grid.addWidget(self.sat_id_line,8,0)
+        grid.addWidget(self.cant_tles_edit,8,1)
+        grid.addWidget(self.boton_procesa,9,1)
+        grid.addWidget(self.ma_covar_label,10,0)
+        grid.addWidget(self.matriz,10,1,3,1)
+        grid.addWidget(self.boton_salir,13,2)
+        
+        """
+        Acciones
+        """
+        self.boton_equipo.clicked.connect(self.Archivo)
+        self.boton_salir.clicked.connect(self.salir)
+        self.boton_prepros.clicked.connect(self.PreProc)
+        
+        self.setLayout(grid)
+        self.setWindowTitle('Procesamiento de TLE')    
+        self.show()
+   
+        
+
+    def Archivo(self):
+    
+        fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
+        nombre=str(fname).split('/')[-1]
+        self.filename = nombre
+        self.sat_id = nombre.split('_')[0]
+        self.arch_cargado.setText(self.filename)
+        
+    def PreProc(self):
+        setTLE(self.sat_id, self.filename)
+        self.sat_id_line.setText(self.sat_id)
+        cant_tles_edit=EjecutaAjustarTLE(self.filename) 
+        self.cant_tles_edit.setText(str(cant_tles_edit))
+    
+    def procesar(self):
+        pass
+    
+    def salir(self):
+        exit()
+        
+def IniciaApp():
+    
+    app = QApplication(sys.argv)
+    ex = ProcARxCODE()
+    sys.exit(app.exec_())
+
+

@@ -2,7 +2,7 @@
 Created on Sep 21, 2016
 @author: mcvalenti
 '''
-from funcionesUtiles.funciones import ensure_dir
+
 def setTLE(id_sat,crudo):
     """
     Obtiene un dato con un listado de TLEs para todo un intervalo temporal.

@@ -33,9 +33,9 @@ def seleccionSat():
     """
     satelites_datos=glob.glob('../TleAdmin/crudosTLE/*')
     nombres=[]
-
+ 
     condicion=True
-    
+     
     while(condicion):
         for arch in satelites_datos:
             nombre_archivo=arch.split('/')[-1]
@@ -46,7 +46,7 @@ def seleccionSat():
         
         crudo=raw_input()
         id_sat=crudo.split('_')[0]
-        
+         
         if crudo in nombres:
             setTLE(id_sat, crudo)
             condicion=False
@@ -55,10 +55,11 @@ def seleccionSat():
             print "Error en el nombre del archivo"
             print '--------------------------------'
             print '...'
-        
+         
     print 'El archivo seleccionado es = ', crudo
     print 'Ud. Selecciono el satelite con ID= ', id_sat  
     return crudo
+
 
 def generadorDatos(lista):
     """
@@ -211,7 +212,7 @@ def difTle(tleOrdenados,cantidad_tles):
             print inforepo
     return {}
 
-def EjecutaAjustarTLE():
+def EjecutaAjustarTLE(crudo):
     """
     -----------------------------------------------------------------------------------------
     Ejecuta el Metodo de Osweiler [ref] para la obtencion de diferencias de a pares.
@@ -248,7 +249,8 @@ def EjecutaAjustarTLE():
     Se comienza el procesamiento
     Se elije el satelite a procesar entre los datos crudos disponibles.
     """
-    crudo=seleccionSat() # se selecciona el satelite y se generan sus datos crudos
+   # crudo=seleccionSat() # se selecciona el satelite y se generan sus datos crudos
+   # seleccionSat()
 
     """
     Administra los archivos TLEs
@@ -265,41 +267,41 @@ def EjecutaAjustarTLE():
     Propagacion de TLEs y calculo de las diferencias
     """
     cantidad_tles=len(tleOrdenados)
-    print 'Cantidad de TLE a procesar= ',cantidad_tles
-    print 'Procesando ...'
+#     print 'Cantidad de TLE a procesar= ',cantidad_tles
+#     print 'Procesando ...'
 
     cantidad_tles=len(tleOrdenados)
     difTle(tleOrdenados, cantidad_tles)
        
-    """
-    Tabla para la estimacion de la Ma. de Covarianza.
-    archivo: difPrimario - automatizar
-    """
-    
-    difG=open('../AjustarTLE/diferencias/difTotal','r')
-    contenido=difG.readlines()
-    salida='dif_'+crudo
-    difP=open('../AjustarTLE/diferencias/'+salida,'w')
-    for c in range(len(tleOrdenados)):
-        campos=contenido[c].split(',')
-        info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
-        difP.write(info)
-    
-    """
-    Verificacion de generacion del archivo con las diferencias
-    """
-    print '---------------------------------------------------------------------------------'
-    print "Verifiacion de la Generacion del archivo de diferencias: ",salida
-    print "Ultima modificacion %s" % time.ctime(os.path.getmtime('../AjustarTLE/diferencias/difTotal'))
-    print "creado: %s" % time.ctime(os.path.getctime('../AjustarTLE/diferencias/difTotal'))
-    print ' '
-    print ' '
-    """
-    generacion de graficos
-    """ 
+#     """
+#     Tabla para la estimacion de la Ma. de Covarianza.
+#     archivo: difPrimario - automatizar
+#     """
+#     
+#     difG=open('../AjustarTLE/diferencias/difTotal','r')
+#     contenido=difG.readlines()
+#     salida='dif_'+crudo
+#     difP=open('../AjustarTLE/diferencias/'+salida,'w')
+#     for c in range(len(tleOrdenados)):
+#         campos=contenido[c].split(',')
+#         info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
+#         difP.write(info)
+#     
+#     """
+#     Verificacion de generacion del archivo con las diferencias
+#     """
+#     print '---------------------------------------------------------------------------------'
+#     print "Verifiacion de la Generacion del archivo de diferencias: ",salida
+#     print "Ultima modificacion %s" % time.ctime(os.path.getmtime('../AjustarTLE/diferencias/difTotal'))
+#     print "creado: %s" % time.ctime(os.path.getctime('../AjustarTLE/diferencias/difTotal'))
+#     print ' '
+#     print ' '
+#     """
+#     generacion de graficos
+#     """ 
         # gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
     
     #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
 
-    return salida
+    return cantidad_tles
 
