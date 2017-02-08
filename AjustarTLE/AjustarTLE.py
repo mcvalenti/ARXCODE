@@ -212,6 +212,22 @@ def difTle(tleOrdenados,cantidad_tles):
             print inforepo
     return {}
 
+def difPrimario(nombre,largo):
+    """
+    Tabla para la estimacion de la Ma. de Covarianza.
+    archivo: difPrimario - automatizar
+    """
+     
+    difG=open('../AjustarTLE/diferencias/difTotal','r')
+    contenido=difG.readlines()
+    salida='dif_'+nombre
+    difP=open('../AjustarTLE/diferencias/'+salida,'w')
+    for c in range(largo):
+        campos=contenido[c].split(',')
+        info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
+        difP.write(info)
+    return salida
+
 def EjecutaAjustarTLE(crudo):
     """
     -----------------------------------------------------------------------------------------
@@ -225,17 +241,10 @@ def EjecutaAjustarTLE(crudo):
     """
     """
     Borro los archivos generados para otro satelite.
-        carpeta de tles: TleAdmin/tle
-        carpeta de diferencias: AjustarTLE/diferencias
+
         carpeta de graficos: Visual/graficos
     """
-    files=glob.glob('../TleAdmin/tle/*')
-    for filename in files:
-        os.unlink(filename)
-        
-    files=glob.glob('../TleAdmin/diferencias/*')
-    for filename in files:
-        os.unlink(filename)
+
         
     files=glob.glob('../visual/graficos/*')
     for filename in files:
@@ -252,40 +261,23 @@ def EjecutaAjustarTLE(crudo):
    # crudo=seleccionSat() # se selecciona el satelite y se generan sus datos crudos
    # seleccionSat()
 
-    """
-    Administra los archivos TLEs
-    """
-    lista=glob.glob('../TleAdmin/tle/*')
-    total_tles=len(lista)
-    tledic=generadorDatos(lista)
-    """
-    Ordena los TLEs segun sus fechas.
-    """
-    tleOrdenados=ordenaTles(tledic)
-
-    """
-    Propagacion de TLEs y calculo de las diferencias
-    """
-    cantidad_tles=len(tleOrdenados)
+#     tledic=generadorDatos(lista)
+#     """
+#     Ordena los TLEs segun sus fechas.
+#     """
+#     tleOrdenados=ordenaTles(tledic)
+# 
+#     """
+#     Propagacion de TLEs y calculo de las diferencias
+#     """
+#     cantidad_tles=len(tleOrdenados)
 #     print 'Cantidad de TLE a procesar= ',cantidad_tles
 #     print 'Procesando ...'
 
-    cantidad_tles=len(tleOrdenados)
-    difTle(tleOrdenados, cantidad_tles)
+#    difTle(tleOrdenados, cantidad_tles)
        
 #     """
-#     Tabla para la estimacion de la Ma. de Covarianza.
-#     archivo: difPrimario - automatizar
-#     """
-#     
-#     difG=open('../AjustarTLE/diferencias/difTotal','r')
-#     contenido=difG.readlines()
-#     salida='dif_'+crudo
-#     difP=open('../AjustarTLE/diferencias/'+salida,'w')
-#     for c in range(len(tleOrdenados)):
-#         campos=contenido[c].split(',')
-#         info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
-#         difP.write(info)
+
 #     
 #     """
 #     Verificacion de generacion del archivo con las diferencias
@@ -303,5 +295,5 @@ def EjecutaAjustarTLE(crudo):
     
     #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
 
-    return cantidad_tles
+    
 

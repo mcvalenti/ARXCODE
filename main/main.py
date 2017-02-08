@@ -6,7 +6,7 @@ Created on 26/01/2017
 import os, glob, os.path, time
 from datetime import datetime
 from AjustarTLE.AjustarTLE import *
-from Comparar.TleVsCods import *
+#from Comparar.TleVsCods import *
 from Estadistica.maCovar import *
 from TleAdmin.get_tle import*
 from Aplicacion.grilla import IniciaApp
@@ -30,17 +30,14 @@ if __name__ == '__main__':
 #     t0=datetime(2003,03,20)
 #     
 #     arch_tle=importar_tle('8820',t0,t1)
-    
     """
     INICIA LA INTERFAZ
     """
-    IniciaApp()
- #       archivo=EjecutaAjustarTLE()
-        
+    IniciaApp()    
     """
     Calculo de la matriz de Covarianza
     """    
-#    EjecutaMaCovar(archivo)
+    #    EjecutaMaCovar(archivo)
     
     print '-----------------------------------------------'
     print '--Fin del PROCESAMIENTO--'

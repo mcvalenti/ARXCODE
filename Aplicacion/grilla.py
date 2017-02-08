@@ -3,12 +3,12 @@ Created on Feb 5, 2017
 
 @author: mcvalenti
 '''
-import sys
+import sys, glob, os
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from TleAdmin.TleArchivos import setTLE
-from AjustarTLE.AjustarTLE import EjecutaAjustarTLE
-
+from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario
+from Estadistica.maCovar import EjecutaMaCovar
 
 class ProcARxCODE(QWidget):
     
@@ -42,6 +42,10 @@ class ProcManual(QDialog):
         
         self.filename = ''
         self.sat_id='99999'
+        self.tles=0
+        self.tleOrdenados={}
+        self.diferencias=''
+        self.macovarT=''
         
         self.initUI()
         
@@ -62,6 +66,7 @@ class ProcManual(QDialog):
         self.verificacion    = QLabel('Verificacion de Datos:')
         self.sat_id_label    = QLabel('NORAD_ID')
         self.cant_tles       = QLabel('Cantidad de TLEs')
+        self.estado_proc     = QLabel('Procesando ... ')
         self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
         """
         Botonoes
@@ -71,6 +76,8 @@ class ProcManual(QDialog):
         self.boton_prepros   = QPushButton('Preprocesamiento')
         self.boton_procesa   = QPushButton('PROCESAR')
         self.boton_salir     = QPushButton('Salir')
+        self.boton_ma_covar  = QPushButton('Calcular')
+        
         """
         Campos de Edicion
         """
@@ -78,6 +85,7 @@ class ProcManual(QDialog):
         self.sat_id_line     = QLineEdit()
         self.cant_tles_edit  = QLineEdit()
         self.matriz          = QLineEdit()
+        self.estado_proc_edit= QLineEdit()
         
         grid = QGridLayout()
         grid.setSpacing(10)
@@ -97,9 +105,12 @@ class ProcManual(QDialog):
         grid.addWidget(self.sat_id_line,8,0)
         grid.addWidget(self.cant_tles_edit,8,1)
         grid.addWidget(self.boton_procesa,9,1)
-        grid.addWidget(self.ma_covar_label,10,0)
-        grid.addWidget(self.matriz,10,1,3,1)
-        grid.addWidget(self.boton_salir,13,2)
+        grid.addWidget(self.estado_proc,10,0)
+        grid.addWidget(self.estado_proc_edit,10,2)
+        grid.addWidget(self.ma_covar_label,11,0)
+        grid.addWidget(self.matriz,11,1,5,1)
+        grid.addWidget(self.boton_ma_covar,11,2)
+        grid.addWidget(self.boton_salir,17,2)
         
         """
         Acciones
@@ -107,6 +118,8 @@ class ProcManual(QDialog):
         self.boton_equipo.clicked.connect(self.Archivo)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_prepros.clicked.connect(self.PreProc)
+        self.boton_procesa.clicked.connect(self.procesar)
+        self.boton_ma_covar.clicked.connect(self.Macovar)
         
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de TLE')    
@@ -123,13 +136,32 @@ class ProcManual(QDialog):
         self.arch_cargado.setText(self.filename)
         
     def PreProc(self):
+        files=glob.glob('../TleAdmin/tle/*')
+        for filename in files:
+            os.unlink(filename)
         setTLE(self.sat_id, self.filename)
         self.sat_id_line.setText(self.sat_id)
-        cant_tles_edit=EjecutaAjustarTLE(self.filename) 
-        self.cant_tles_edit.setText(str(cant_tles_edit))
+        self.lista=glob.glob('../TleAdmin/tle/*')
+        self.tles=len(self.lista)
+        self.cant_tles_edit.setText(str(self.tles))
+        """
+        Preprocesamiento, ordenamiento de los TLEs
+        """
+        self.tledic=generadorDatos(self.lista)
+        self.tleOrdenados=ordenaTles(self.tledic)
+        
     
     def procesar(self):
-        pass
+        files=glob.glob('../AjustarTLE/diferencias/*')
+        for filename in files:
+            os.unlink(filename)
+        difTle(self.tleOrdenados, self.tles)
+        self.diferencias=difPrimario(self.filename,self.tles)
+        self.estado_proc_edit.setText('Finalizado')
+        
+    def Macovar(self):
+        self.macovarT=EjecutaMaCovar(self.diferencias)
+        self.matriz.setText(str(self.macovarT))
     
     def salir(self):
         exit()

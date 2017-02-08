@@ -57,42 +57,41 @@ def maCovTLE(u,v,w):
 
 def EjecutaMaCovar(archivo):
     
-    print 'Para procesamiento de TLEs, presione = 1'
-    print 'Para procesamiento de datos de Mision, presione = 2'
-    
-    datoTipo=raw_input()
+#    datoTipo=raw_input()
     u=[]
     v=[]
     w=[]
-    if datoTipo==2:
-        datos=open('../Ajustar/diferencias/diferenciasUVW','r')
-        datos1=datos.readlines()
-        for l in datos1:
-            campos=l.split()
-            dt=l[:19]
-            dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
-            u.append(float(campos[2]))
-            v.append(float(campos[3]))
-            w.append(float(campos[4]))
-        maCovar=maCovCODS(u,v,w)
-    else:
-        datos=open('../AjustarTLE/diferencias/'+archivo,'r')
-        datos1=datos.readlines()
-        for l in datos1:
-            campos=l.split()
-            dt=l[:19]
-            dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
-            u.append(float(campos[2]))
-            v.append(float(campos[3]))
-            w.append(float(campos[4]))
-        maCovar=maCovTLE(u, v, w)
-        
-        
+#     if datoTipo==2:
+#         datos=open('../Ajustar/diferencias/diferenciasUVW','r')
+#         datos1=datos.readlines()
+#         for l in datos1:
+#             campos=l.split()
+#             dt=l[:19]
+#             dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+#             u.append(float(campos[2]))
+#             v.append(float(campos[3]))
+#             w.append(float(campos[4]))
+#         maCovar=maCovCODS(u,v,w)
+#     else:
+    datos=open('../AjustarTLE/diferencias/'+archivo,'r')
+    datos1=datos.readlines()
+    for l in datos1:
+        campos=l.split()
+        dt=l[:19]
+        dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+        u.append(float(campos[2]))
+        v.append(float(campos[3]))
+        w.append(float(campos[4]))
+    maCovar=maCovTLE(u, v, w)
+    
+    
     csvsalida = open('../main/matrices/'+archivo+'.csv', 'w')
     salida = csv.writer(csvsalida)
     salida.writerows(maCovar)
     
     print 'Ma. de Covarianza de: ', archivo    
     print maCovar
+    
+    return maCovar
     
     
