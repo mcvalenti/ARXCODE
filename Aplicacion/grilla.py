@@ -30,10 +30,10 @@ class ProcARxCODE(QWidget):
         self.setWindowTitle('ARxCODE')
         self.show()
         
-
-        
     def AbrirProc(self):
-        ventana2=ProcManual().exec_()
+        ventana2=ProcManual()
+        ventana2.exec_()
+
 
 class ProcManual(QDialog):
     
@@ -86,9 +86,13 @@ class ProcManual(QDialog):
         self.cant_tles_edit  = QLineEdit()
         self.matriz          = QLineEdit()
         self.estado_proc_edit= QLineEdit()
+        """
+        OTROS
+        """
+        self.tableView       = QTableWidget()
         
         grid = QGridLayout()
-        grid.setSpacing(10)
+        grid.setSpacing(5)
 
         grid.addWidget(self.inicio, 1, 0)
         grid.addWidget(self.carga,2,0)
@@ -108,13 +112,15 @@ class ProcManual(QDialog):
         grid.addWidget(self.estado_proc,10,0)
         grid.addWidget(self.estado_proc_edit,10,2)
         grid.addWidget(self.ma_covar_label,11,0)
-        grid.addWidget(self.matriz,11,1,5,1)
+        grid.addWidget(self.tableView,11,1)
         grid.addWidget(self.boton_ma_covar,11,2)
+       
         grid.addWidget(self.boton_salir,17,2)
         
         """
         Acciones
         """
+        self.boton_norad.clicked.connect(self.botonNorad)
         self.boton_equipo.clicked.connect(self.Archivo)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_prepros.clicked.connect(self.PreProc)
@@ -126,6 +132,11 @@ class ProcManual(QDialog):
         self.show()
    
         
+    def botonNorad(self):
+        frm=ConexionNorad()
+        frm.exec_()
+        
+
 
     def Archivo(self):
     
@@ -161,10 +172,61 @@ class ProcManual(QDialog):
         
     def Macovar(self):
         self.macovarT=EjecutaMaCovar(self.diferencias)
-        self.matriz.setText(str(self.macovarT))
+        self.tableView.setRowCount(len(self.macovarT))
+        self.tableView.setColumnCount(len(self.macovarT))
+        for i,fila in enumerate(self.macovarT):
+            for j,col in enumerate(fila):
+                self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
     
     def salir(self):
         exit()
+        
+class ConexionNorad(QWidget):
+    
+    def __init__(self):
+        super(ConexionNorad, self).__init__()
+        
+    def initUI(self):
+        self.palette = QPalette()
+        self.palette.setColor(QPalette.Background,Qt.blue)
+        self.setPalette(self.palette)
+        self.resize(200, 500)
+        
+        self.grid = QGridLayout()
+        self.grid.setSpacing(10)
+        
+        """
+        Etiquetas
+        """
+        self.usuario    = QLabel('Usuario: ')
+        self.clave      = QLabel('Password: ')
+        """
+        Botones
+        """
+        self.boton_cerrar = QPushButton('cerrar')
+        """
+        Campos de Edicion
+        """
+        self.usuario_edit = QLineEdit()
+        self.clave_edit   = QLineEdit()
+        
+        """
+        Acciones
+        """
+        self.boton_cerrar.clicked.connect(self.cerrar)
+        
+        self.grid.addWidget(self.usuario)
+        
+        
+        self.setLayout(self.grid)
+        self.setWindowTitle('Conexion con NORAD')    
+        self.show()
+        
+    def cerrar(self):
+        self.close()
+   
+        
+        
         
 def IniciaApp():
     

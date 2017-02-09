@@ -171,7 +171,9 @@ def tleSecundario(tlesec,ffin):
     ffin_s=ffin.second
     pos, vel=satrec1.propagate(ffin_anno, ffin_mes, ffin_dia, ffin_hora, ffin_min, ffin_s)
     x,y,z=tuplaFloat(pos)
+    vx,vy,vz=tuplaFloat(vel)
     pos=np.array([x,y,z])
+    vel=np.array([vx,vy,vz])
     fsec=satrec1.epoch
     return pos,vel,fsec
 
@@ -194,7 +196,7 @@ def difTle(tleOrdenados,cantidad_tles):
     for i in range(cantidad_tles-1,0,-1):
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
-        item=range(i-1,0,-1)
+        item=range(i,0,-1)
         print '------------------------------------------------------------------------------------'
         print 'TLE Primario: ', tlepri, ffin, r, rp
         print '------------------------------------------------------------------------------------'
@@ -202,20 +204,23 @@ def difTle(tleOrdenados,cantidad_tles):
             tlesec=tleOrdenados[j][0]
             pos,vel,fsec=tleSecundario(tlesec, ffin)
             dr=pos-r
+            dv=vel-rp
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
             v,n,c=uvwSis(r, rp, dr)
-            infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(fsec)+','+tlesec+'\n'
+            vv,nn,cc=uvwSis(r,rp,dv)
+            infodiftot=str(dtfracdias)+','+str(n)+','+str(c)+','+str(v)+','+str(nn)+','+str(cc)+','+str(vv)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
-            inforepo=tlesec+' '+str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+'\n'
+            inforepo=tlesec+' '+str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
     #        inforepo=tlesec+' '+str(fsec)+' '+str(pos[0])+' '+str(pos[1])+' '+str(pos[2])+str(vel[0])+' '+str(vel[1])+' '+str(vel[2])+'\n'
             print inforepo
+    
     return {}
 
 def difPrimario(nombre,largo):
     """
     Tabla para la estimacion de la Ma. de Covarianza.
-    archivo: difPrimario - automatizar
+    archivo: difPrimario 
     """
      
     difG=open('../AjustarTLE/diferencias/difTotal','r')
@@ -224,61 +229,10 @@ def difPrimario(nombre,largo):
     difP=open('../AjustarTLE/diferencias/'+salida,'w')
     for c in range(largo):
         campos=contenido[c].split(',')
-        info=campos[4]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'\n'
+        info=campos[7]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+'\n'
         difP.write(info)
     return salida
 
-def EjecutaAjustarTLE(crudo):
-    """
-    -----------------------------------------------------------------------------------------
-    Ejecuta el Metodo de Osweiler [ref] para la obtencion de diferencias de a pares.
-    (aunque ofrece la variante de agrupar de a 15 TLEs y aceptar listados mayores) 
-    Solicita el ingreso de un dato crudo  (luego sera un sat id y un intervalo temporal)
-    El dato crudo es un listado continuo de mas de un TLE. ('TleAdmin/crudosTLE')
-    Ordena los TLE de acuerdo a sus fechas y genera un archivo por TLE   (TleAdmin/tle).
-    El codigo solo puede procesar un TLE por dia.    
-    -----------------------------------------------------------------------------------------
-    """
-    """
-    Borro los archivos generados para otro satelite.
-
-        carpeta de graficos: Visual/graficos
-    """
-
-        
-    files=glob.glob('../visual/graficos/*')
-    for filename in files:
-        os.unlink(filename)
-        
-    files=glob.glob('../main/matrices/*')
-    for filename in files:
-        os.unlink(filename)
-        
-    """
-    Se comienza el procesamiento
-    Se elije el satelite a procesar entre los datos crudos disponibles.
-    """
-   # crudo=seleccionSat() # se selecciona el satelite y se generan sus datos crudos
-   # seleccionSat()
-
-#     tledic=generadorDatos(lista)
-#     """
-#     Ordena los TLEs segun sus fechas.
-#     """
-#     tleOrdenados=ordenaTles(tledic)
-# 
-#     """
-#     Propagacion de TLEs y calculo de las diferencias
-#     """
-#     cantidad_tles=len(tleOrdenados)
-#     print 'Cantidad de TLE a procesar= ',cantidad_tles
-#     print 'Procesando ...'
-
-#    difTle(tleOrdenados, cantidad_tles)
-       
-#     """
-
-#     
 #     """
 #     Verificacion de generacion del archivo con las diferencias
 #     """
