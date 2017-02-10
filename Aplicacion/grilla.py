@@ -7,39 +7,49 @@ import sys, glob, os
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from TleAdmin.TleArchivos import setTLE
+from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario
 from Estadistica.maCovar import EjecutaMaCovar
 
-class ProcARxCODE(QWidget):
+class ProcARxCODE(QMainWindow):
     
     def __init__(self):
-        super(ProcARxCODE, self).__init__()    
+        super(ProcARxCODE, self).__init__()
+
+        extractAction = QAction("Salir", self)
+        extractAction.setShortcut("Ctrl+Q")
+        extractAction.setStatusTip('Leave The App')
+        extractAction.triggered.connect(self.close_application)
+
+        self.statusBar()
+
+        mainMenu = self.menuBar()
+        fileMenu = mainMenu.addMenu('&File')
+        fileMenu.addAction(extractAction)  
         
         self.resize(300, 300)
-        grid = QGridLayout()
-        grid.setSpacing(10)
-        
-        self.CDM_label       = QLabel('No se registran CDM')
-        self.boton_ProManual = QPushButton('Procesamiento Manual')
-        
-        grid.addWidget(self.CDM_label)
-        grid.addWidget(self.boton_ProManual)
-
-        self.boton_ProManual.clicked.connect(self.AbrirProc)
-        self.setLayout(grid)
         self.setWindowTitle('ARxCODE')
+        self.home()
+    
+    def home(self):
+        self.CDM_label       = QLabel('No se registran CDM')
+        self.boton_ProManual = QPushButton('Procesamiento Manual',self)
+        self.boton_ProManual.move(100,100)
+        self.boton_ProManual.resize(self.boton_ProManual.minimumSizeHint())
+        self.boton_ProManual.clicked.connect(self.AbrirProc)
         self.show()
+        
+    def close_application(self):
+        sys.exit()
         
     def AbrirProc(self):
         ventana2=ProcManual()
-        ventana2.exec_()
+        ventana2._exec_()
 
-
-class ProcManual(QDialog):
+class ProcManual(QWidget):
     
     def __init__(self):
         super(ProcManual, self).__init__()
-        
         self.filename = ''
         self.sat_id='99999'
         self.tles=0
@@ -133,10 +143,9 @@ class ProcManual(QDialog):
    
         
     def botonNorad(self):
-        frm=ConexionNorad()
-        frm.exec_()
-        
-
+        print "Opening NORAD window..."
+        self.w = ConexionNorad()
+        self.w.show()
 
     def Archivo(self):
     
@@ -182,54 +191,95 @@ class ProcManual(QDialog):
         exit()
         
 class ConexionNorad(QWidget):
-    
     def __init__(self):
-        super(ConexionNorad, self).__init__()
-        
-    def initUI(self):
+        QWidget.__init__(self)
+#         
         self.palette = QPalette()
-        self.palette.setColor(QPalette.Background,Qt.blue)
+        self.palette.setColor(QPalette.Background,Qt.lightGray)
         self.setPalette(self.palette)
-        self.resize(200, 500)
         
-        self.grid = QGridLayout()
-        self.grid.setSpacing(10)
+        """
+        CALENDARIOS
+        """
+        self.cal = QCalendarWidget()
+        self.cal.setGridVisible(True)
+        self.cal.clicked[QDate].connect(self.verFinicio)
+        self.cal1 = QCalendarWidget()
+        self.cal1.setGridVisible(True)
+        self.cal1.clicked[QDate].connect(self.verFfin)
         
         """
         Etiquetas
         """
         self.usuario    = QLabel('Usuario: ')
-        self.clave      = QLabel('Password: ')
+        self.passw      = QLabel('Password: ')
+        self.norad_id   = QLabel('NORAD ID: ')
+        self.stime      = QLabel('Fecha Inicio')
+        self.ftime      = QLabel('Fecha Fin')
         """
         Botones
         """
-        self.boton_cerrar = QPushButton('cerrar')
+        self.boton_request = QPushButton('Enviar Solicitud')
+        self.boton_cerrar  = QPushButton('cerrar')
         """
         Campos de Edicion
         """
-        self.usuario_edit = QLineEdit()
-        self.clave_edit   = QLineEdit()
+        self.usuario_edit  = QLineEdit()
+        self.clave_edit    = QLineEdit()
+        self.clave_edit.setEchoMode(QLineEdit.Password)
+        self.norad_id_edit = QLineEdit()
+        self.st = QLineEdit()
+        self.et = QLineEdit()
+        
+        self.grilla = QGridLayout()
+        self.grilla.setSpacing(2)
+        self.grilla.addWidget(self.usuario,1,1)
+        self.grilla.addWidget(self.usuario_edit,1,2)
+        self.grilla.addWidget(self.passw,2,1)
+        self.grilla.addWidget(self.clave_edit,2,2)
+        self.grilla.addWidget(self.norad_id,3,2)
+        self.grilla.addWidget(self.norad_id_edit,4,2)
+        self.grilla.addWidget(self.stime,5,1)
+        self.grilla.addWidget(self.ftime,5,2)
+        self.grilla.addWidget(self.cal,6,1)
+        self.grilla.addWidget(self.cal1,6,2)
+        self.grilla.addWidget(self.st,7,1)
+        self.grilla.addWidget(self.et,7,2)
+        self.grilla.addWidget(self.boton_request,8,2)
+        self.grilla.addWidget(self.boton_cerrar,8,1)  
+        self.setLayout(self.grilla) 
         
         """
         Acciones
         """
         self.boton_cerrar.clicked.connect(self.cerrar)
+        self.boton_request.clicked.connect(self.iniciaSolicitud)
         
-        self.grid.addWidget(self.usuario)
+        self.setWindowTitle('Conexion con NORAD')
         
+    def iniciaSolicitud(self):
+        self.usu1   = str(self.usuario_edit.text())
+        self.passw1 = str(self.clave_edit.text())
+        self.cat_id = str(self.norad_id_edit.text())
+        print type(self.usu1)
+        importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1)
+            
+    def verFinicio(self):
+        self.date = self.cal.selectedDate()
+        self.pydate = self.date.toPyDate()
+        self.st.setText(self.date.toString())
         
-        self.setLayout(self.grid)
-        self.setWindowTitle('Conexion con NORAD')    
-        self.show()
-        
+    def verFfin(self):
+        self.date1 = self.cal1.selectedDate()
+        self.pydate1 = self.date1.toPyDate()
+        self.et.setText(self.date1.toString())
+            
     def cerrar(self):
-        self.close()
-   
-        
-        
+        self.close()     
+    
         
 def IniciaApp():
-    
+    QApplication.setStyle("plastique")
     app = QApplication(sys.argv)
     ex = ProcARxCODE()
     sys.exit(app.exec_())
