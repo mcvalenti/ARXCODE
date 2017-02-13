@@ -56,7 +56,6 @@ class ProcManual(QWidget):
         self.tleOrdenados={}
         self.diferencias=''
         self.macovarT=''
-        
         self.initUI()
         
         
@@ -122,8 +121,8 @@ class ProcManual(QWidget):
         grid.addWidget(self.estado_proc,10,0)
         grid.addWidget(self.estado_proc_edit,10,2)
         grid.addWidget(self.ma_covar_label,11,0)
-        grid.addWidget(self.tableView,11,1)
-        grid.addWidget(self.boton_ma_covar,11,2)
+        grid.addWidget(self.tableView,12,0,6,2)
+        grid.addWidget(self.boton_ma_covar,12,2)
        
         grid.addWidget(self.boton_salir,17,2)
         
@@ -137,18 +136,33 @@ class ProcManual(QWidget):
         self.boton_procesa.clicked.connect(self.procesar)
         self.boton_ma_covar.clicked.connect(self.Macovar)
         
+        """
+        PRUEBA DIALOGO
+        """
+        btnAbrir = QPushButton("Abrir ventana",None)
+        grid.addWidget(btnAbrir,3,2)
+        btnAbrir.clicked.connect(self.abrir)
+        
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de TLE')    
         self.show()
-   
+        
+    def abrir(self):
+        Secundaria.exec_()
+        print 'Fui aceptado'
+
         
     def botonNorad(self):
         print "Opening NORAD window..."
+        self.boton_equipo.setEnabled(False)
         self.w = ConexionNorad()
         self.w.show()
+#         self.filename=self.w.archTLE
+#         print self.filename
+#         self.arch_cargado.setText(self.filename)
+        
 
-    def Archivo(self):
-    
+    def Archivo(self):    
         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
         nombre=str(fname).split('/')[-1]
         self.filename = nombre
@@ -189,10 +203,56 @@ class ProcManual(QWidget):
     
     def salir(self):
         exit()
+
+class Secundaria(QDialog):
+    def __init__(self, parent=None):
+        QDialog.__init__(self, parent)
+ 
+        self.archivo2='perez'
+ 
+        contenedor = QVBoxLayout()
+        self.setLayout(contenedor)
+        
+        """
+        Etiquetas
+        """
+        self.nomb_arch  = QLabel('Ingrese el nombre de Archivo')
+        """
+        Campos de Edicion
+        """
+        self.arch_edit  = QLineEdit()
+        """
+        Botones
+        """
+        self.boton_cerrar = QPushButton("Cerrar")
+        self.boton_registrar = QPushButton('Registrar')
+#        self.boton_ok = QPushButton("Ok",None)
+        
+        contenedor.addWidget(self.nomb_arch)        
+        contenedor.addWidget(self.arch_edit)
+        contenedor.addWidget(self.boton_registrar)
+        contenedor.addWidget(self.boton_cerrar)
+ #       contenedor.addWidget(self.boton_ok)
+        
+        """
+        Acciones
+        """
+        self.boton_cerrar.clicked.connect(self.cerrar)
+        self.boton_registrar.clicked.connect(self.registro)
+        
+    def registro(self):
+        self.archivo2=self.arch_edit.text()
+        print 'ves que imprimo',self.archivo2
+ 
+    def cerrar(self):
+        QDialog.accept()
+        
         
 class ConexionNorad(QWidget):
     def __init__(self):
         QWidget.__init__(self)
+        
+        self.archTLE=''
 #         
         self.palette = QPalette()
         self.palette.setColor(QPalette.Background,Qt.lightGray)
@@ -216,6 +276,7 @@ class ConexionNorad(QWidget):
         self.norad_id   = QLabel('NORAD ID: ')
         self.stime      = QLabel('Fecha Inicio')
         self.ftime      = QLabel('Fecha Fin')
+        self.arhcivoTLE = QLabel('Ingrese el nombre para guardar el archivo')
         """
         Botones
         """
@@ -228,8 +289,9 @@ class ConexionNorad(QWidget):
         self.clave_edit    = QLineEdit()
         self.clave_edit.setEchoMode(QLineEdit.Password)
         self.norad_id_edit = QLineEdit()
-        self.st = QLineEdit()
-        self.et = QLineEdit()
+        self.st            = QLineEdit()
+        self.et            = QLineEdit()
+        self.nombreTle     = QLineEdit()
         
         self.grilla = QGridLayout()
         self.grilla.setSpacing(2)
@@ -245,8 +307,10 @@ class ConexionNorad(QWidget):
         self.grilla.addWidget(self.cal1,6,2)
         self.grilla.addWidget(self.st,7,1)
         self.grilla.addWidget(self.et,7,2)
-        self.grilla.addWidget(self.boton_request,8,2)
-        self.grilla.addWidget(self.boton_cerrar,8,1)  
+        self.grilla.addWidget(self.arhcivoTLE,8,1)
+        self.grilla.addWidget(self.nombreTle,8,2)
+        self.grilla.addWidget(self.boton_request,11,2)
+        self.grilla.addWidget(self.boton_cerrar,11,1)  
         self.setLayout(self.grilla) 
         
         """
@@ -254,15 +318,15 @@ class ConexionNorad(QWidget):
         """
         self.boton_cerrar.clicked.connect(self.cerrar)
         self.boton_request.clicked.connect(self.iniciaSolicitud)
-        
         self.setWindowTitle('Conexion con NORAD')
         
     def iniciaSolicitud(self):
+        self.nombreTle.setText(self.nombreTle.text())
         self.usu1   = str(self.usuario_edit.text())
         self.passw1 = str(self.clave_edit.text())
         self.cat_id = str(self.norad_id_edit.text())
-        print type(self.usu1)
-        importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1)
+        self.tle=importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
+        self.archTLE=self.tle.f
             
     def verFinicio(self):
         self.date = self.cal.selectedDate()

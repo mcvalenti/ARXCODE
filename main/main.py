@@ -26,10 +26,6 @@ if __name__ == '__main__':
     if not os.path.exists(d3):
         os.mkdir(d3)
 
-#     t1=datetime(2003,04,03)
-#     t0=datetime(2003,03,20)
-#     
-#     arch_tle=importar_tle('8820',t0,t1)
     """
     INICIA LA INTERFAZ
     """
@@ -41,3 +37,6 @@ if __name__ == '__main__':
     
     print '-----------------------------------------------'
     print '--Fin del PROCESAMIENTO--'
+    
+    
+    
