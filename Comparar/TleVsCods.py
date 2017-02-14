@@ -121,10 +121,10 @@ def interpola(l,inferior,superior):
     dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
     dt_int=toTimestamp(dt)
     
-    # Interpolacion en x
     x_array=[di_int,ds_int]
-    fx_array=[float(dicampos[2]),float(dscampos[2])]
     x_new=dt_int
+    # Interpolacion en x
+    fx_array=[float(dicampos[2]),float(dscampos[2])]
     yx_new=barycentric_interpolate(x_array, fx_array, x_new)
 
     # Interpolacion en y
@@ -134,26 +134,25 @@ def interpola(l,inferior,superior):
     # Interpolacion en z
     fz_array=[float(dicampos[4]),float(dscampos[4])]
     yz_new=barycentric_interpolate(x_array, fz_array, x_new)
+#    lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+'\n'
+    
+    # Interpolacion en vx
+    fvx_array=[float(dicampos[5]),float(dscampos[5])]
+    yvx_new=barycentric_interpolate(x_array, fvx_array, x_new)
+ 
+    # Interpolacion en vy
+    fvy_array=[float(dicampos[6]),float(dscampos[6])]
+    yvy_new=barycentric_interpolate(x_array, fvy_array, x_new)
+     
+    # Interpolacion en vz
+    fvz_array=[float(dicampos[7]),float(dscampos[7])]
+    yvz_new=barycentric_interpolate(x_array, fz_array, x_new)
     lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+'\n'
     
-#     # Interpolacion en vx
-#     vx_array=[di_int,ds_int]
-#     fx_array=[float(dicampos[5]),float(dscampos[5])]
-#     x_new=dt_int
-#     yx_new=barycentric_interpolate(x_array, fx_array, x_new)
-# 
-#     # Interpolacion en vy
-#     fy_array=[float(dicampos[3]),float(dscampos[3])]
-#     yy_new=barycentric_interpolate(x_array, fy_array, x_new)
-#     
-#     # Interpolacion en vz
-#     fz_array=[float(dicampos[4]),float(dscampos[4])]
-#     yz_new=barycentric_interpolate(x_array, fz_array, x_new)
-#     lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+'\n'
-    
     return lineaInterpol
-    
-def EjecutaComparacion():   
+ 
+if __name__=='__main__':   
+# def EjecutaComparacion():   
     """
     Borro los archivos generados para otro satelite.
         carpeta de tles: TleAdmin/tle
@@ -212,10 +211,15 @@ def EjecutaComparacion():
         dif_y=yy-float(interpol_ephem[3])
         dif_z=zz-float(interpol_ephem[4])
         df=[dif_x,dif_y,dif_z]
-        info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+'\n'
+        dif_vx=vx-float(interpol_ephem[5])
+        dif_vy=vy-float(interpol_ephem[6])
+        dif_vz=vz-float(interpol_ephem[7])
+        dfv=[dif_vx,dif_vy,dif_vz]
+        info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+' '+str(dif_vx)+' '+str(dif_vy)+' '+str(dif_vz)+'\n'
         difTOD.write(info)
         u,v,w=uvwSis(r,rp,df)
-        info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(u)+' '+str(v)+' '+str(w)+'\n'
+        uu,vv,ww=uvwSis(r, rp, dfv)
+        info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(u)+' '+str(v)+' '+str(w)+' '+str(uu)+' '+str(vv)+' '+str(ww)+'\n'
         difUVW.write(info1)
         
 
