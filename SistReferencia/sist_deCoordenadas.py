@@ -152,7 +152,7 @@ def gaussian_vectors(i,Om,ap):
         
     return P,Q,W
     
-def uvwSis(r,rp,dr):
+def vncSis(r,rp,dr):
     """
     -------------------------------------------------------------
     Transforma las coordenadas del sistema inercial cartesiano,
@@ -180,6 +180,35 @@ def uvwSis(r,rp,dr):
     c=np.dot(ec,dr)
     
     return v,n,c
+
+def ricSis(r,rp,dr):
+    """
+    -------------------------------------------------------------
+    Transforma las coordenadas del sistema inercial cartesiano,
+    al sistema de referecia de la nave. 
+    -------------------------------------------------------------
+    inputs
+        r: posicion en el sistema cartesiano (Vector) - [km]
+        rp: velocidad en el sistema cartesiano (Vector) -[km/s]
+        dr: vector de diferencia en la posicion - (Vector) - [km]
+    outputs
+        rr: direccion radial - (Vector) - [km]
+        i: direccion in track (velocidad) - (Vector) - [km]
+        c: direccion perpendicular al plano - (Vector) - [km]
+    """
+    
+    r_mod=np.sqrt(np.dot(r,r))
+    er=np.dot(1.0/r_mod,r)
+    rxrp_int=np.cross(r,rp)
+    rxrp_mod=np.sqrt(np.dot(rxrp_int,rxrp_int))
+    ec=np.dot(1.0/rxrp_mod,rxrp_int)
+    ei=np.cross(ec,er)
+    
+    rr=np.dot(er,dr)
+    i=np.dot(ei,dr)
+    c=np.dot(ec,dr)
+    
+    return rr,i,c
     
 def lof_qsw(rt,vt):
     """

@@ -190,7 +190,7 @@ class ProcManual(QWidget):
         for filename in files:
             os.unlink(filename)
         difTle(self.tleOrdenados, self.tles)
-        self.diferencias=difPrimario(self.filename,self.tles)
+        self.diferencias=difPrimario(self.filename,self.tles-1)
         self.estado_proc_edit.setText('Finalizado')
         
     def Macovar(self):

@@ -57,9 +57,16 @@ def maCovCODS(uu,vv,ww,uvel,vvel,wvel):
     s2_wwuvel=sigmaCalcCODS(ww,uvel)
     s2_wwvvel=sigmaCalcCODS(ww,vvel)
     s2_wwwvel=sigmaCalcCODS(ww,wvel)
-            
-    maCovarC=np.array([[s2_uu,s2_uv,s2_uw,s2_uuvel,s2_uuvvel,s2_uuwvel],[0,s2_vv,s2_vw,s2_vvuvel,s2_vvvvel,s2_vvwvel],[0,0,s2_ww,s2_wwuvel,s2_wwvvel,s2_wwwvel],[0,0,0,s2_uvel,s2_uvvel,s2_uwvel],[0,0,0,0,s2_vvvel,s2_vwvel],[0,0,0,0,0,s2_wwvel]])
-   
+    
+    linea1=[s2_uu,s2_uv,s2_uw,s2_uuvel,s2_uuvvel,s2_uuwvel]
+    linea2=[s2_uv,s2_vv,s2_vw,s2_vvuvel,s2_vvvvel,s2_vvwvel]
+    linea3=[s2_uw,s2_vw,s2_ww,s2_uuwvel,s2_vvwvel,s2_wwwvel]
+    linea4=[0,0,0,s2_uvel,s2_uvvel,s2_uwvel]
+    linea5=[0,0,0,0,s2_vvvel,s2_vwvel,]
+    linea6=[0,0,0,0,0,s2_wwvel]        
+#    maCovarC=np.array([[s2_uu,s2_uv,s2_uw,s2_uuvel,s2_uuvvel,s2_uuwvel],[0,s2_vv,s2_vw,s2_vvuvel,s2_vvvvel,s2_vvwvel],[0,0,s2_ww,s2_wwuvel,s2_wwvvel,s2_wwwvel],[0,0,0,s2_uvel,s2_uvvel,s2_uwvel],[0,0,0,0,s2_vvvel,s2_vwvel],[0,0,0,0,0,s2_wwvel]])
+    maCovarC=np.array([linea1,linea2,linea3,linea4,linea5,linea6])
+      
     return maCovarC
 
 def maCovTLE(u, v, w, uv, vv, wv):
@@ -70,20 +77,20 @@ def maCovTLE(u, v, w, uv, vv, wv):
     m_vv=np.mean(vv)
     m_wv=np.mean(wv)
     uu=[]
-    vv=[]
+    vx=[]
     ww=[]
     uvuv=[]
     vvvv=[]
     wvwv=[]
     for i in range(len(u)):
         uu.append(u[i]-m_u)
-        vv.append(v[i]-m_v)
+        vx.append(v[i]-m_v)
         ww.append(w[i]-m_w)
         uvuv.append(uv[i]-m_uv)
         vvvv.append(vv[i]-m_vv)
         wvwv.append(wv[i]-m_wv)
         
-    maCovarT=maCovCODS(uu,vv,ww,uvuv,vvvv,wvwv)
+    maCovarT=maCovCODS(uu,vx,ww,uvuv,vvvv,wvwv)
     
     return maCovarT   
 

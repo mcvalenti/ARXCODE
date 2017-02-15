@@ -13,7 +13,7 @@ from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import tle_info
-from SistReferencia.sist_deCoordenadas import uvwSis
+from SistReferencia.sist_deCoordenadas import vncSis, ricSis
 
 def seleccionSat():
     """
@@ -196,7 +196,7 @@ def difTle(tleOrdenados,cantidad_tles):
     for i in range(cantidad_tles-1,0,-1):
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
-        item=range(i-1,0,-1)
+        item=range(i-1,-1,-1)
         print '------------------------------------------------------------------------------------'
         print 'TLE Primario: ', tlepri, ffin, r, rp
         print '------------------------------------------------------------------------------------'
@@ -207,8 +207,10 @@ def difTle(tleOrdenados,cantidad_tles):
             dv=vel-rp
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
-            v,n,c=uvwSis(r, rp, dr)
-            vv,nn,cc=uvwSis(r,rp,dv)
+#            v,n,c=vncSis(r, rp, dr)
+#            vv,nn,cc=vncSis(r,rp,dv)
+            v,n,c=ricSis(r, rp, dr)
+            vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
             inforepo=tlesec+' '+str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
