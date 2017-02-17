@@ -154,7 +154,7 @@ class ProcManual(QWidget):
         
     def botonNorad(self):
         print "Opening NORAD window..."
-        self.boton_equipo.setEnabled(False)
+        #self.boton_equipo.setEnabled(False)
         self.w = ConexionNorad()
         self.w.show()
 #         self.filename=self.w.archTLE

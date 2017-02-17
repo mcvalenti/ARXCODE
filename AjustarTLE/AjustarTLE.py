@@ -169,6 +169,7 @@ def tleSecundario(tlesec,ffin):
     ffin_hora=ffin.hour
     ffin_min=ffin.minute
     ffin_s=ffin.second
+#    pos, vel = sgp4(satrec1,0)
     pos, vel=satrec1.propagate(ffin_anno, ffin_mes, ffin_dia, ffin_hora, ffin_min, ffin_s)
     x,y,z=tuplaFloat(pos)
     vx,vy,vz=tuplaFloat(vel)
@@ -207,16 +208,16 @@ def difTle(tleOrdenados,cantidad_tles):
             dv=vel-rp
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
-#            v,n,c=vncSis(r, rp, dr)
-#            vv,nn,cc=vncSis(r,rp,dv)
-            v,n,c=ricSis(r, rp, dr)
-            vv,nn,cc=ricSis(r,rp,dv)
+            v,n,c=vncSis(r, rp, dr)
+            vv,nn,cc=vncSis(r,rp,dv)
+#             v,n,c=ricSis(r, rp, dr)
+#             vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
-            inforepo=tlesec+' '+str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
-    #        inforepo=tlesec+' '+str(fsec)+' '+str(pos[0])+' '+str(pos[1])+' '+str(pos[2])+str(vel[0])+' '+str(vel[1])+' '+str(vel[2])+'\n'
-            print inforepo
-    
+#             inforepo=tlesec+' '+str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
+#     #        inforepo=tlesec+' '+str(fsec)+' '+str(pos[0])+' '+str(pos[1])+' '+str(pos[2])+str(vel[0])+' '+str(vel[1])+' '+str(vel[2])+'\n'
+#             print inforepo
+#     
     return {}
 
 def difPrimario(nombre,largo):

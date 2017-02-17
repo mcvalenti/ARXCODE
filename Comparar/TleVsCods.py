@@ -13,7 +13,7 @@ from AjustarTLE.AjustarTLE import seleccionSat
 from funcionesUtiles.funciones import toTimestamp
 from TleAdmin.TLE import tle_info
 from visual.gegraf import gegrafTot
-from SistReferencia.sist_deCoordenadas import uvwSis
+from SistReferencia.sist_deCoordenadas import vncSis
 
 """
 Hace las diferencias
@@ -217,8 +217,8 @@ if __name__=='__main__':
         dfv=[dif_vx,dif_vy,dif_vz]
         info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+' '+str(dif_vx)+' '+str(dif_vy)+' '+str(dif_vz)+'\n'
         difTOD.write(info)
-        u,v,w=uvwSis(r,rp,df)
-        uu,vv,ww=uvwSis(r, rp, dfv)
+        u,v,w=vncSis(r,rp,df)
+        uu,vv,ww=vncSis(r, rp, dfv)
         info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(u)+' '+str(v)+' '+str(w)+' '+str(uu)+' '+str(vv)+' '+str(ww)+'\n'
         difUVW.write(info1)
         
