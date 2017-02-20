@@ -7,12 +7,14 @@ import sys
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from Comparar.TleVsCods import generaTEME
+from Comparar.TleVsCods import EjecutaComparacion
+from Estadistica.maCovar import EjecutaMaCovarCODS
 
 class ProcCODS(QWidget):
     
     def __init__(self):
         super(ProcCODS, self).__init__()
-        self.resize(600, 600)
+        self.resize(300, 300)
         self.setWindowTitle('PROCESAMIENTO de DATOS CODS')
        
         self.palette = QPalette()
@@ -20,11 +22,15 @@ class ProcCODS(QWidget):
         self.setPalette(self.palette)
         
         self.grid = QGridLayout()
-        self.grid.setSpacing(15)
+        self.grid.setSpacing(20)
         
+        self.sat_id='37673'
         self.et=''
         self.st=''
         self.archivoTLE='' 
+        self.archivoCODS=''
+        self.diferencias=''
+        self.macovarT=''
     
         """
         Etiquetas
@@ -74,8 +80,15 @@ class ProcCODS(QWidget):
         self.boton_tle_cargado  = QPushButton('Preprocesamiento TLE')
         self.boton_cods_cargado = QPushButton('Preprocesamiento CODS')
         self.boton_cargar_tle   = QPushButton('TLEs para la Comparacion')
+        self.boton_cargar_cods  = QPushButton('CODS para la Comparacion')
+        self.boton_diferencias  = QPushButton('Procesar DIFERENCIAS')
+        self.boton_ma_covar     = QPushButton('Calcular Matriz de Covarianza')
         self.boton_salir        = QPushButton('Salir')
-                
+        """
+        OTROS
+        """
+        self.tableView       = QTableWidget()
+             
         """
         GRILLA
         """
@@ -96,9 +109,12 @@ class ProcCODS(QWidget):
         self.grid.addWidget(self.CODS_label,8,0)
         self.grid.addWidget(self.CODS_edit,8,1)
         self.grid.addWidget(self.boton_cods_cargado,8,2)
-        self.grid.addWidget(self.CODS_comp,9,0)
-        self.grid.addWidget(self.CODS_comp_edit,9,1)
-        self.grid.addWidget(self.boton_salir,10,2)
+        self.grid.addWidget(self.boton_cargar_cods,9,1)
+        self.grid.addWidget(self.CODS_comp_edit,9,2)
+        self.grid.addWidget(self.boton_diferencias,10,2)
+        self.grid.addWidget(self.boton_ma_covar,14,2,2,2)
+        self.grid.addWidget(self.tableView,12,0,8,2)
+        self.grid.addWidget(self.boton_salir,22,2)
         self.setLayout(self.grid)
         self.show()
         
@@ -106,8 +122,11 @@ class ProcCODS(QWidget):
         Acciones
         """
         self.boton_salir.clicked.connect(self.salir)
-        self.boton_tle_cargado.clicked.connect(self.TLEteme)
+     #   self.boton_tle_cargado.clicked.connect(self.TLEteme)
         self.boton_cargar_tle.clicked.connect(self.ArchivoTle)
+        self.boton_cargar_cods.clicked.connect(self.ArchivoCODS)
+        self.boton_diferencias.clicked.connect(self.ProcDif)
+        self.boton_ma_covar.clicked.connect(self.Macovar)
     
     def verFinicio(self):
         self.st = self.cal.selectedDate()
@@ -116,19 +135,38 @@ class ProcCODS(QWidget):
         self.et = self.cal1.selectedDate()  
         
     def ArchivoTle(self):    
-        print 'estoy aca'
         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
         nombre=str(fname).split('/')[-1]
         self.archivoTLE = nombre
+        print 'El archivo TLE es: ',self.archivoTLE
         self.TLE_comp_edit.setText(self.archivoTLE)
         
-    def TLE2sv(self):
-        pass
-#         tles = glob.glob('../TleAdmin/tle/*')
-#         generaTEME(tles)
+    def ArchivoCODS(self):  
+        fname1=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../CodsAdmin/TOD_O/*")
+        nombre1=str(fname1).split('/')[-1]
+        self.archivoCODS = nombre1
+        print 'El archivo CODS es: ', self.archivoCODS
+        self.CODS_comp_edit.setText(self.archivoCODS)
         
-    def TLEteme(self):
-        self.archivoTLE=self.TLE_edit.text()
+    def ProcDif(self):
+        self.diferencias=EjecutaComparacion(self.sat_id, self.archivoTLE, self.archivoCODS)
+        
+    def Macovar(self):
+        self.macovarT=EjecutaMaCovarCODS(self.diferencias)
+        self.tableView.setRowCount(len(self.macovarT))
+        self.tableView.setColumnCount(len(self.macovarT))
+        for i,fila in enumerate(self.macovarT):
+            for j,col in enumerate(fila):
+                self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
+        
+        
+#     def TLE2sv(self):
+#         pass
+# #         tles = glob.glob('../TleAdmin/tle/*')
+# #         generaTEME(tles)
+#         
+#     def TLEteme(self):
+#         self.archivoTLE=self.TLE_edit.text()
         
     def salir(self):
         self.close()

@@ -105,19 +105,41 @@ def EjecutaMaCovar(archivo):
     uv=[]
     vv=[]
     wv=[]
-#     if datoTipo==2:
-#         datos=open('../Ajustar/diferencias/diferenciasUVW','r')
-#         datos1=datos.readlines()
-#         for l in datos1:
-#             campos=l.split()
-#             dt=l[:19]
-#             dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
-#             u.append(float(campos[2]))
-#             v.append(float(campos[3]))
-#             w.append(float(campos[4]))
-#         maCovar=maCovCODS(u,v,w)
-#     else:
     datos=open('../AjustarTLE/diferencias/'+archivo,'r')
+    datos1=datos.readlines()
+    for l in datos1:
+        campos=l.split()
+        dt=l[:19]
+        dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+        u.append(float(campos[2]))
+        v.append(float(campos[3]))
+        w.append(float(campos[4]))
+        uv.append(float(campos[5]))
+        vv.append(float(campos[6]))
+        wv.append(float(campos[7]))
+    maCovar=maCovTLE(u, v, w, uv, vv, wv)
+    
+    
+    csvsalida = open('../main/matrices/'+archivo+'.csv', 'w')
+    salida = csv.writer(csvsalida)
+    salida.writerows(maCovar)
+    
+    print 'Ma. de Covarianza de: ', archivo    
+    print maCovar
+    
+    return maCovar
+
+def EjecutaMaCovarCODS(archivo):
+    files=glob.glob('../main/matrices/*')
+    for filename in files:
+        os.unlink(filename)
+    u=[]
+    v=[]
+    w=[]
+    uv=[]
+    vv=[]
+    wv=[]
+    datos=open('../Ajustar/diferencias/'+archivo,'r')
     datos1=datos.readlines()
     for l in datos1:
         campos=l.split()

@@ -30,13 +30,7 @@ if __name__ == '__main__':
     INICIA LA INTERFAZ
     """
     IniciaApp()    
-    """
-    Calculo de la matriz de Covarianza
-    """    
-    #    EjecutaMaCovar(archivo)
-    
-    print '-----------------------------------------------'
-    print '--Fin del PROCESAMIENTO--'
+
     
     
     

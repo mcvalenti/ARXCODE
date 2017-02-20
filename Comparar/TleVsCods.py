@@ -9,8 +9,8 @@ from datetime import datetime
 from time import time
 from jdcal import gcal2jd, jd2gcal
 from scipy.interpolate import barycentric_interpolate
-from AjustarTLE.AjustarTLE import seleccionSat
 from funcionesUtiles.funciones import toTimestamp
+from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import tle_info
 from visual.gegraf import gegrafTot
 from SistReferencia.sist_deCoordenadas import vncSis
@@ -27,7 +27,7 @@ def generaTEME(tles):
         r,v=tle1.propagaTLE()
         listaTle[fecha]=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
     listaTle=sorted(listaTle.items())
-    salidaTle=open('../TleAdmin/tle/TEME_SGP4_SACD_xyz.txt','a')
+    salidaTle=open('../TleAdmin/crudosTLE/TEME_SGP4_SACD_xyz.txt','w+')
     for k in listaTle:        
         infoa=str(k[0])
         infob=k[1]
@@ -146,13 +146,13 @@ def interpola(l,inferior,superior):
      
     # Interpolacion en vz
     fvz_array=[float(dicampos[7]),float(dscampos[7])]
-    yvz_new=barycentric_interpolate(x_array, fz_array, x_new)
-    lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+'\n'
+    yvz_new=barycentric_interpolate(x_array, fvz_array, x_new)
+    lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+' '+str(yvx_new)+' '+str(yvy_new)+' '+str(yvz_new)+'\n'
     
     return lineaInterpol
  
-if __name__=='__main__':   
-# def EjecutaComparacion():   
+#if __name__=='__main__':   
+def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):   
     """
     Borro los archivos generados para otro satelite.
         carpeta de tles: TleAdmin/tle
@@ -164,8 +164,8 @@ if __name__=='__main__':
     files=glob.glob('../TleAdmin/tle/*')
     for filename in files:
         os.unlink(filename)  
-    seleccionSat()
     
+    setTLE(sat_id, ArchivoTLE)
     tles = glob.glob('../TleAdmin/tle/*')
     generaTEME(tles) 
     
@@ -174,7 +174,7 @@ if __name__=='__main__':
     """
     
     gpsf=open('../CodsAdmin/TOD_O/TOD_CODS_SACD_xyz.txt','r')
-    tlef=open('../TleAdmin/tle/TEME_SGP4_SACD_xyz.txt','r')
+    tlef=open('../TleAdmin/crudosTLE/TEME_SGP4_SACD_xyz.txt','r')
     
     gpslista=gpsf.readlines()
     tlelista=tlef.readlines()
@@ -184,16 +184,13 @@ if __name__=='__main__':
     print 'Total de filas de GPS = ',tot
     print 'Total de Tles = ', len(tlelista)
     print 'Procesando ... '
-    
-    
-    r=[]
+
     difTOD=open('diferenciasTOD','w')
-    difUVW=open('../Ajustar/diferencias/diferenciasUVW','w')
+    archivo='diferenciasVNC'
+    difVNC=open('../Ajustar/diferencias/'+archivo,'w')
     r=[]
     rp=[]
     df=[]
-    d=gcal2jd(2013,6,2.2)
-    d1=gcal2jd(2013, 6, 2.7)
     for l in tlelista:
         tle_ephem=l.split()
         inferior, superior= encuentraBordes(gpslista,l)
@@ -220,11 +217,12 @@ if __name__=='__main__':
         u,v,w=vncSis(r,rp,df)
         uu,vv,ww=vncSis(r, rp, dfv)
         info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(u)+' '+str(v)+' '+str(w)+' '+str(uu)+' '+str(vv)+' '+str(ww)+'\n'
-        difUVW.write(info1)
-        
+        difVNC.write(info1)        
 
     fin=time()  
             
     print 'FIN', 'Tiempo de Ejecucion = ', fin-inicio
+    
+    return archivo
     
     

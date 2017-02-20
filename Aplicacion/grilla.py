@@ -292,6 +292,7 @@ class ConexionNorad(QWidget):
         self.st            = QLineEdit()
         self.et            = QLineEdit()
         self.nombreTle     = QLineEdit()
+ 
         
         self.grilla = QGridLayout()
         self.grilla.setSpacing(2)
