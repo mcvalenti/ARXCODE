@@ -1,0 +1,346 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PAQUETES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%------------------------------------------------------------------------------
+%Paquete para el manejo de gráficos (permite insertar jpg, png, pdf y tif)
+\usepackage{graphicx}
+
+%------------------------------------------------------------------------------
+%Paquete para poder poner subfiguras en una figura (poner dos o mas figuras dentro de una)
+\usepackage{subfigure}
+
+%------------------------------------------------------------------------------
+%Paquete para pegar figuras y tablas en lugares fijo con el comando [H]
+\usepackage{float}
+
+%------------------------------------------------------------------------------
+%Paquete para modificar el caption de las figuras (letra mas chica y en negrita)
+\usepackage[footnotesize,bf,justification=centering]{caption}
+
+%------------------------------------------------------------------------------
+%Paquete para agregar footnotes a las tablas
+\usepackage{threeparttable}
+
+%------------------------------------------------------------------------------
+%Paquete para agregar símbolos no estándares para latex
+\usepackage{gensymb}
+
+%------------------------------------------------------------------------------
+%Paquete para una mejora visual de los capítulos (títulos)
+\usepackage[Lenny]{fncychap}  % Encabezados de capitulos. %Sonny  %Lenny %Bjarne % Glenn %Conny %Rejne %Bjornstrup
+
+%------------------------------------------------------------------------------
+%Paquete fancyhdr para los encabezados y pie de página
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%------------------------------------------------------------------------------
+%Paquete Agregar pdf's al documento
+\usepackage[final]{pdfpages}
+
+%------------------------------------------------------------------------------
+% paquete para incluir imÃ¡genes altas y poder tener texto al lado...
+\usepackage{wrapfig}
+
+%------------------------------------------------------------------------------
+%Paquete para colorear tablas
+\usepackage{tabularx,colortbl}
+\usepackage{xcolor}
+
+%------------------------------------------------------------------------------
+%Paquete footmisc para tunear los footnotes. [bottom] los envia bien abajo en la pagina
+\usepackage[bottom]{footmisc}
+
+%------------------------------------------------------------------------------
+% Pseudocodigo
+%\usepackage{clrscode} 
+
+%------------------------------------------------------------------------------
+% Manejo del titulo.
+%\usepackage{titling}
+
+\usepackage{amsmath}
+\usepackage{upgreek}
+\usepackage{setspace}
+\usepackage{rotating}
+\usepackage{latexsym}
+\usepackage{t1enc}
+\usepackage{times}
+\usepackage{mathptmx}
+\usepackage{multirow}
+\usepackage{lscape}
+\usepackage{pstricks}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{ucs}
+\usepackage[spanish]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+
+%\usepackage{geometry}
+%\usepackage{graphics}
+%\usepackage[spanish,mexico]{babel}
+%\usepackage[amsmath,thmmarks]{ntheorem}
+%\usepackage{proof}
+%\usepackage{latexsym}
+
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+%Paquete para el manejo de acrónimos
+% Generación de acrónimos:	
+%	\acro{label}[acronym]{written out form}  o 
+%	\acro{label}{written out form} si el acrónimo es igual al label usado
+% Uso de los acrónimos:		\ac{label}
+% Otro usos del paquete:
+%	\usepackage{acronym}
+%	\usepackage[printonlyused,withpage]{acronym}  %igual que el 
+%	\usepackage[printonlyused]{acronym} pero además muestra 
+%	la página en la que aparece por primera vez
+%------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\usepackage[printonlyused]{acronym}   %hace que en la lista de acrónimos se muestren solo los utilizados
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Espacio entre párrafos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\parskip 7.2pt
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuración de los márgenes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\geometry{top=2cm, bottom=2cm, left=2.5cm, right=1.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Comentar la siguiente linea para eliminar el nombre de la subseccion activa en el encabezado de pagina
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\fancyhead[R]{\rightmark}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyfoot[R]{\thepage}
+\fancypagestyle{plain}{%
+   \fancyhead{} % get rid of headers
+   \renewcommand{\headrulewidth}{0pt} % and the line
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Renombra algunos elementos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter \: \textsc{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markboth{\thesection \: \textsc{#1}}{}}
+
+\renewcommand{\spanishcontentsname}{Tabla de Contenidos}
+\renewcommand{\spanishpartname}{Parte}
+\renewcommand{\spanishchaptername}{Capítulo}
+\renewcommand{\spanishappendixname}{Apéndice}
+\renewcommand{\bibname}{Bibliografía}
+\renewcommand{\spanishfigurename}{Figura}
+\renewcommand{\spanishlistfigurename}{Índice de figuras}
+\renewcommand{\spanishtablename}{Tabla}
+\renewcommand{\spanishlisttablename}{Índice de tablas}
+
+%\renewcommand{\subsectionmark}[1]{\markright{\textit{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Para enumerar las subsubsecciones
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{secnumdepth}{3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Para agregarlas a la tabla de contenidos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{tocdepth}{3}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Eliminar la linea encima de los footnotes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\renewcommand\footnoterule{\rule{\linewidth}{0pt}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Secuencia de 9 símbolos para footnotes (usa asteriscos y otros símbolos en lugar de números)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definicion de colores personalizados
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\definecolor{celeste}{RGB}{108,166,205}
+
+%\DeclareGraphicsExtensions{.png,.jpg,.pdf}
+\ExecuteOptions{dvips}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=magenta,      
+    urlcolor=black,
+%    bookmarks=true,
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Función Portada
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\portadatesis}[9]{
+ \thispagestyle{empty}
+ \begin{figure}[h]
+  \centering
+ \hspace{1cm}
+ \subfigure{
+  \includegraphics[height=1.6cm,keepaspectratio=true,clip=true]
+  {imagenes/Logos/logo-unlam.jpg}}
+  \hspace{2.5cm} 
+ \subfigure{
+  \includegraphics[height=1.8cm,keepaspectratio=true,clip=true]
+  {imagenes/Logos/logo-conae.png}}
+% \hspace{2.5cm}
+%  \subfigure{
+%  \includegraphics[height=1.6cm,keepaspectratio=true,clip=true]
+%  {imagenes/Logos/logo-asi.png}}
+  \end{figure}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro #1: Título de la tesis 
+%------------------------------------------------------------------------------
+\vspace*{0.3cm}
+\begin{center}
+\bigskip
+\LARGE
+\textsc{\textsl{\textbf{#1}}}\\
+\vspace*{1cm}
+\end{center}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro #2: Autor
+%------------------------------------------------------------------------------
+\begin{center}
+% \vspace*{0.3cm}
+\bigskip
+\large
+Por
+\textsc{\textsl{\textbf{#2}}}\\
+\end{center}
+
+%------------------------------------------------------------------------------
+% Presentado ante... 
+%------------------------------------------------------------------------------
+\begin{center}
+\begin{normalsize}Presentado ante la Universidad Nacional de La Matanza y la Unidad de Formación Superior de la CONAE como parte de los requerimientos para la obtención del grado de\end{normalsize}\\
+\vspace*{1cm}
+\textbf{MAGISTER EN DESARROLLOS INFORMATICOS DE APLICACION ESPACIAL}\\
+% \vspace*{3.5cm}
+\end{center}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro #3: UNIVERSIDAD 
+%------------------------------------------------------------------------------
+\begin{center}
+ \vspace*{0.5cm}
+\normalsize #3\\
+% \vspace*{3cm}
+\end{center}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro #4: Mes, Año 
+%------------------------------------------------------------------------------
+\begin{center}
+ \vspace*{0.5cm}
+\normalsize \textit{\textbf{#4}}\\
+% \vspace*{3cm}
+\end{center}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro 5: Copyright
+%------------------------------------------------------------------------------
+\begin{center}
+\vspace*{0.5cm}
+\textcopyright UFS-CONAE {#5}\\
+\textcopyright UNLAM {#5}\\
+\end{center}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro #6: Director 
+%------------------------------------------------------------------------------
+\begin{center}
+\vspace*{0.5cm}
+\normalsize DIRECTOR\\
+\normalsize\textit{\textbf{#6}}\\
+\end{center}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro #7: Pertenencia Director 
+%------------------------------------------------------------------------------
+\begin{center}
+\vspace*{-0.5cm}
+\small #7
+% \vspace*{3cm}
+\end{center}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro #8: Co-Director
+%------------------------------------------------------------------------------
+%\begin{center}
+%\normalsize CO-DIRECTOR\\
+%\normalsize \textit{\textbf{#8}}\\
+%\end{center}
+
+%------------------------------------------------------------------------------
+% Definición del parámetro #9: Pertenencia Co-Director 
+%------------------------------------------------------------------------------
+\begin{center}
+\vspace*{-0.5cm}
+\small #9
+\end{center}
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TABLA DE CONTENIDOS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\tabladecontenidos}[1]{
+\newpage
+\begin{spacing}{1.2}
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+\end{spacing}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BIBLIOGRAFIA
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{natbib}
+\newcommand{\bibliografia}[1]{
+\clearpage
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliography{#1}
+\bibliographystyle{plainnatesp.bst}
+
+%------------------------------------------------------------------------------
+%	bibliografia al estilo publicaciones de IEEE. Para usar, comentar la linea 
+%	\usepackage{natbib} y todas las citas
+%	se debern realizar con \cite en lugar de \citep
+%\bibliographystyle{ieeetr} 
+}
+
+%------------------------------------------------------------------------------
+%	Paquete para un mejor manejo de las citas de bibliografia 
+%	(tiene algunos problemas utilizando \bibliographystyle{natbib})
+%\usepackage[sort,authoryear]{natbib}
+%\usepackage{multibib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% FUNCIÓN PARA AGREGAR IMÁGENES  
+%	\imagen{escala}{path imagen}{caption}{referencia (fig:"algo") }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\imagen}[4]{
+	\begin{figure}[H]
+		\centering
+		\includegraphics[scale=#1]{#2}
+		\caption{#3}
+		\label{#4}
+	\end{figure}
+}

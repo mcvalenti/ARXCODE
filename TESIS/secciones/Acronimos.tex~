@@ -1,0 +1,43 @@
+\chapter{Lista de Acrónimos}
+\label{ch:ListaAcronimos}
+
+
+%se usa de la siguiente forma:
+%\acro{label}[acrónimo]{descripción} 
+%Si el acrónimo es igual al label no hacen falta el acrónimo.
+
+\begin{acronym}[SAOCOM]
+\acro{AK}[AK]{Aproximación de Kirchhoff}
+\acro{CETT}{Centro Espacial Teófilo Tabanera}
+\acro{CAV}{Contenido de Agua en Vegetación}
+\acro{CONAE}{Comisión Nacional de Actividades Espaciales}
+\acro{CSA}{Agencia Espacial Canadiense}
+\acro{CSK}{COSMO-SkyMed} 
+\acro{EMIS}{Equipo de Mediciones In Situ}
+\acro{ESA}{Agencia Espacial Europea}
+\acro{GCOS}{Sistema Mundial de Observación del Clima}
+\acro{HS}{Humedad del Suelo}
+\acro{IAFE}{Instituto de Astronomía y Física del Espacio}
+\acro{IEM}[MEI]{Modelo de Ecuación Integral}
+\acro{JAXA}{Agencia Japonesa de Exploración Espacial}
+\acro{JPL}[LPC]{Laboratorio de Propulsión a Chorro}
+%\acro{MNA}{Modelo de Nube de Agua}
+\acro{MOG}[MOG]{Modelo de Óptica Geométrica}
+\acro{MOF}[MOF]{Modelo de Óptica Física}
+\acro{MPP}[MPP]{Modelo de Pequeña Perturbación}
+\acro{NASA}{Administración Nacional de Aeronáutica y Espacio de los Estados Unidos}
+\acro{NDVI}[IVDN]{Índice de Vegetación de Diferencia Normalizada}
+\acro{OEM}{Ondas Electromagnéticas}
+\acro{PDF}{Función de Densidad de Probabilidad}
+\acro{PMV}{Principio de Máxima Verosimilitud}
+\acro{Radar}{Radio Detection and Ranging}
+\acro{RAR}{Radar de Apertura Real}
+
+\acro{SAOCOM}{Satélite Argentino de Observación con Microondas}
+\acro{SAR}{Radar de Apertura Sintética}
+\acro{SARAT}{SAR Aerotransportado}
+\acro{SLAR}{Radar Aerotransportado de Visión Lateral}
+
+\acro{USDA}{Departamento de Agricultura de los Estados Unidos}
+\acro{WCM}[MNA]{Modelo de Nube de Agua}
+\end{acronym}

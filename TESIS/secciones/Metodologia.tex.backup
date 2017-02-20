@@ -1,0 +1,29 @@
+\chapter{Metodología}
+\label{chap:metodologia}
+
+ De acuerdo a \cite{Barrett2009}, el modelo WCM...\\
+
+ 
+ 
+ %  Ejemplo para citar otros capítulos o secciones
+  Como dice el capítulo \ref{chap:introduccion}...
+
+\begin{itemize}
+ \item CDM: Recepci\'on.
+ \item Metodolog\'ia Akella \& Alfriend.
+ \item Metodolog\'ia Osweiler.
+\end{itemize}
+
+\subsection{CDM}
+(JAC SW - Laporte)
+
+{\bf{CSM:}} They are made available on Emergency Criteria, wich are Time of Closest Approach whithin 72 hs combined with a miss distance criteria:\\
+LEO:\\
+overall miss distance < 1km\\
+radial miss distance < 200m\\
+GEO/MEO:\\
+Overall miss distance < 10 km.\\
+
+CSM are advisory and informational messages only and are not directly actionable. They don´t provide a direct recommendation to perform an avoidance action and of course they cannot take neither the operational constraints of the asset nor the maneuvers the asset plansor just performed.
+
+

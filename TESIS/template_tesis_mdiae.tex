@@ -1,0 +1,106 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Descripción: Template para la generación de la tesis de la MDIAE
+% Autor: 
+% Fecha: 20/05/2016
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%	PARA INSERTAR FIGURAS USAR LA FUNCION PREDEFINIDA \imagen
+%%
+%%      \imagen{escala}{path imagen}{caption}{referencia}
+%%
+%% donde:
+%% 	* escala: es un valor numérico. Preferentemente usar valores entre 0 y 1.
+%%		(ejemplo: 0.2)
+%% 	* path: imagen es el directorio relativo donde se encuentra la imagen
+%%		(ejemplo: Figures/Logos/conae-logo.png)
+%%	* caption: texto de pie de figura.
+%%	* referencia: texto que sirve para citar la figura. 
+%%		(ejemplo: fig:conaelogo) luego se podrá hacer referencia \ref{fig:conaelogo}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%------------------------------------------------------------------------------
+% Formato del documento
+\documentclass[11pt, a4paper, twoside]{report}
+
+%------------------------------------------------------------------------------
+% TEMPLATE MDIAE (ACÁ SE ENCUETRAN LAS CUSTOMIZACIONES)
+% Remitirse al archivo mdiaedoc.sty
+\usepackage{mdiaedoc}
+
+%Configuración de los márgenes
+\usepackage[top=3cm, bottom=3cm, left=2.5cm, right=1.5cm]{geometry}
+
+
+%------------------------------------------------------------------------------
+% Esto no se usa (YA ESTA DEFINIDO EN EL TEMPLATE)
+%\usepackage{setspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% COMIENZO DEL DOCUMENTO
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\makeatletter
+\author{M. Cecilia Valenti}
+\makeatother
+
+%------------------------------------------------------------------------------
+% PORTADA
+\portadatesis{ARxCODE\\Prototipo de software para el An\'alisis de Riesgo por Colisi\'on con Desechos Espaciales.}{M. Cecilia Valenti.}{UNIVERSIDAD NACIONAL DE LA MATANZA}{Mayo, 2017}{2017}{Marcelo Colazo}{CONAE, Córdoba, Argentina}%{}{}
+
+%------------------------------------------------------------------------------
+% EN CASO DE TENER UN ASESOR CIENTIFICO, DESCOMENTAR LO SIGUIENTE 
+% \begin{center}
+% \normalsize ASESOR CIENTÍFICO:\\
+% \normalsize \textit{\textbf{Nombre del asesor}}\\
+% \end{center}
+
+%------------------------------------------------------------------------------
+% COMPLETAR CON LICENCIA CREATIVE COMMONS SEGÚN CORRESPONDA
+%\begin{center}
+%%%%% Ejemplo %%%%%%
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=3cm, keepaspectratio=true]{imagenes/Logos/creativecommons.png}
+%\end{figure}
+%\vspace*{-0.5cm}
+%Esta obra está bajo una \href{http://creativecommons.org/licenses/by-sa/2.5/ar/}{Licencia Creative Commons Atribución-CompartirIgual 2.5 Argentina.}
+%\end{center}
+
+\pagenumbering{gobble}
+
+\include{secciones/Abstract}
+\include{secciones/Resumen}
+\include{secciones/Agradecimientos} %% OPCIONAL
+
+\tabladecontenidos
+
+\include{secciones/Acronimos}
+%------------------------------------------------------------------------------
+% Numeración arábiga a partir de este punto
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\include{secciones/Introduccion}
+\include{secciones/MarcoTeorico}
+\include{secciones/Metodologia}
+\include{secciones/Resultados}
+\include{secciones/Conclusiones}
+
+\bibliografia{template_tesis_mdiae.bib}
+
+%------------------------------------------------------------------------------
+% EN CASO DE TENER APÉNDICES, DESCOMENTAR A CONTINUACIÓN
+% \appendix
+% \include{secciones/Apendice}
+
+\newpage
+$\ $
+\thispagestyle{empty} % para que no se numere esta pagina
+\newpage
+$\ $
+\thispagestyle{empty}
+ 
+\end{document}
+
