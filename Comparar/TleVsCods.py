@@ -185,7 +185,7 @@ def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):
     print 'Total de Tles = ', len(tlelista)
     print 'Procesando ... '
 
-    difTOD=open('diferenciasTOD','w')
+    difTOD=open('../visual/archivos/diferenciasTOD','w')
     archivo='diferenciasVNC'
     difVNC=open('../Ajustar/diferencias/'+archivo,'w')
     r=[]

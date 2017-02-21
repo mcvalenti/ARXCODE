@@ -9,7 +9,7 @@ from PyQt4.QtCore import *
 from Comparar.TleVsCods import generaTEME
 from Comparar.TleVsCods import EjecutaComparacion
 from Estadistica.maCovar import EjecutaMaCovarCODS
-
+from visual.TlevsCodsGraf import VerGrafico
 class ProcCODS(QWidget):
     
     def __init__(self):
@@ -21,8 +21,12 @@ class ProcCODS(QWidget):
         self.palette.setColor(QPalette.Background,Qt.white)
         self.setPalette(self.palette)
         
-        self.grid = QGridLayout()
-        self.grid.setSpacing(20)
+        self.Hlinea = QFrame()
+        self.Hlinea.setFrameStyle(QFrame.HLine)
+        self.Hlinea.setSizePolicy(QSizePolicy.Minimum,QSizePolicy.Expanding)
+        self.grid   = QGridLayout()
+        self.grid.setSpacing(5)
+             
         
         self.sat_id='37673'
         self.et=''
@@ -41,13 +45,13 @@ class ProcCODS(QWidget):
         self.ff              = QLabel('Hasta')
         self.verif_sol       = QLabel('Verificacion de la Solicitud')
         self.carga_datos     = QLabel('CARGAR LOS ARCHIVOS')
-        self.TLE_label       = QLabel('Datos Crudos TLE')
-        self.CODS_label      = QLabel('Datos Crudos CODS')
 #         self.TLE_comp        = QLabel('TLEs para la Comparacion')
         self.CODS_comp       = QLabel('CODS para la Comparacion')
         """
         Campos de Edicion
         """
+        self.st_edit        = QLineEdit()
+        self.et_edit        = QLineEdit()
         self.TLE_edit       = QLineEdit()
         self.CODS_edit      = QLineEdit()
         self.TLE_comp_edit  = QLineEdit()
@@ -77,12 +81,12 @@ class ProcCODS(QWidget):
         """
         self.boton_solCODS      = QPushButton('Solicitud a CODS')
         self.boton_solNORAD     = QPushButton('Solicitud a NORAD')
-        self.boton_tle_cargado  = QPushButton('Preprocesamiento TLE')
         self.boton_cods_cargado = QPushButton('Preprocesamiento CODS')
         self.boton_cargar_tle   = QPushButton('TLEs para la Comparacion')
         self.boton_cargar_cods  = QPushButton('CODS para la Comparacion')
         self.boton_diferencias  = QPushButton('Procesar DIFERENCIAS')
         self.boton_ma_covar     = QPushButton('Calcular Matriz de Covarianza')
+        self.boton_grafico      = QPushButton('Graficar')
         self.boton_salir        = QPushButton('Salir')
         """
         OTROS
@@ -98,23 +102,26 @@ class ProcCODS(QWidget):
         self.grid.addWidget(self.ff,2,2)
         self.grid.addWidget(self.listaSat,3,0)
         self.grid.addWidget(self.cal,3,1)
+        self.grid.addWidget(self.st_edit,4,1)
         self.grid.addWidget(self.cal1,3,2)
-        self.grid.addWidget(self.boton_solCODS,4,1)
-        self.grid.addWidget(self.boton_solNORAD,4,2)       
-        self.grid.addWidget(self.TLE_label,5,0)
-        self.grid.addWidget(self.TLE_edit,5,1)
-        self.grid.addWidget(self.boton_tle_cargado,5,2)
-        self.grid.addWidget(self.boton_cargar_tle,6,1)
-        self.grid.addWidget(self.TLE_comp_edit,6,2)
-        self.grid.addWidget(self.CODS_label,8,0)
-        self.grid.addWidget(self.CODS_edit,8,1)
-        self.grid.addWidget(self.boton_cods_cargado,8,2)
-        self.grid.addWidget(self.boton_cargar_cods,9,1)
-        self.grid.addWidget(self.CODS_comp_edit,9,2)
-        self.grid.addWidget(self.boton_diferencias,10,2)
-        self.grid.addWidget(self.boton_ma_covar,14,2,2,2)
-        self.grid.addWidget(self.tableView,12,0,8,2)
-        self.grid.addWidget(self.boton_salir,22,2)
+        self.grid.addWidget(self.et_edit,4,2)
+        
+        self.grid.addWidget(self.Hlinea,6,0,1,4)
+        self.grid.addWidget(self.boton_solCODS,7,1)
+        self.grid.addWidget(self.CODS_edit,7,2)
+        self.grid.addWidget(self.boton_solNORAD,8,1)  
+        self.grid.addWidget(self.TLE_edit,8,2)
+        self.grid.addWidget(self.boton_cods_cargado,8,3)
+        self.grid.addWidget(self.Hlinea,9,0,1,4)           
+        self.grid.addWidget(self.boton_cargar_tle,10,1)
+        self.grid.addWidget(self.TLE_comp_edit,10,2)        
+        self.grid.addWidget(self.boton_cargar_cods,11,1)
+        self.grid.addWidget(self.CODS_comp_edit,11,2)
+        self.grid.addWidget(self.boton_diferencias,11,3)
+        self.grid.addWidget(self.boton_ma_covar,15,3)
+        self.grid.addWidget(self.boton_grafico,16,3)
+        self.grid.addWidget(self.tableView,14,1,8,2)
+        self.grid.addWidget(self.boton_salir,26,3)
         self.setLayout(self.grid)
         self.show()
         
@@ -122,17 +129,19 @@ class ProcCODS(QWidget):
         Acciones
         """
         self.boton_salir.clicked.connect(self.salir)
-     #   self.boton_tle_cargado.clicked.connect(self.TLEteme)
         self.boton_cargar_tle.clicked.connect(self.ArchivoTle)
         self.boton_cargar_cods.clicked.connect(self.ArchivoCODS)
         self.boton_diferencias.clicked.connect(self.ProcDif)
         self.boton_ma_covar.clicked.connect(self.Macovar)
+        self.boton_grafico.clicked.connect(self.verGrafico)
     
     def verFinicio(self):
         self.st = self.cal.selectedDate()
+        self.st.setText(self.date.toString())
 
     def verFfin(self):
         self.et = self.cal1.selectedDate()  
+        self.et.setText(self.date1.toString())
         
     def ArchivoTle(self):    
         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
@@ -159,14 +168,8 @@ class ProcCODS(QWidget):
             for j,col in enumerate(fila):
                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
         
-        
-#     def TLE2sv(self):
-#         pass
-# #         tles = glob.glob('../TleAdmin/tle/*')
-# #         generaTEME(tles)
-#         
-#     def TLEteme(self):
-#         self.archivoTLE=self.TLE_edit.text()
+    def verGrafico(self):
+        VerGrafico()
         
     def salir(self):
         self.close()

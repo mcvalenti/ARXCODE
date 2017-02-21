@@ -9,19 +9,19 @@ set datafile separator ' '
 set timefmt '%Y-%m-%d'
 set xrange ['2013-11-01':'2013-12-30']
 set yrange [-1:4]
-set format x "%m-%d"
+set format x "%d-%m"
 set origin 0,0
 h(x)=e*x+f
-fit h(x) '../Comparar/diferenciasTOD' u 1:3 via e,f
-plot '../Comparar/diferenciasTOD' u 1:3 title 'Coordenada X', h(x)
+fit h(x) '../visual/archivos/diferenciasTOD' u 1:3 via e,f
+plot '../visual/archivos/diferenciasTOD' u 1:3 title 'Coordenada X', h(x)
 set origin 0,.3
 g(x)=c*x+d
-fit g(x) '../Comparar/diferenciasTOD' u 1:4 via c,d
-plot '../Comparar/diferenciasTOD' u 1:4 title 'Coordenada Y' , g(x)
+fit g(x) '../visual/archivos/diferenciasTOD' u 1:4 via c,d
+plot '../visual/archivos/diferenciasTOD' u 1:4 title 'Coordenada Y' , g(x)
 set origin 0,.6
 f(x)=a*x+b
-fit f(x) '../Comparar/diferenciasTOD' u 1:5 via a,b
-plot '../Comparar/diferenciasTOD' u 1:5 title 'Coordenada Z', f(x)
+fit f(x) '../visual/archivos/diferenciasTOD' u 1:5 via a,b
+plot '../visual/archivos/diferenciasTOD' u 1:5 title 'Coordenada Z', f(x)
 unset multiplot
 unset output
 set term x11
