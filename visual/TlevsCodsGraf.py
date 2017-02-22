@@ -5,7 +5,9 @@ Created on 19/01/2017
 '''
 
 from os import system
+from numpy.polynomial import Polynomial
 import numpy as np
+from scipy import stats
 import pylab
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
@@ -46,8 +48,8 @@ def AjustePol():
     pass
     
 
-#def VerGrafico():
-if __name__=='__main__':
+def VerGrafico():
+#if __name__=='__main__':
     
     datos=open('../visual/archivos/diferenciasTOD','r')
     listas=datos.readlines()
@@ -60,20 +62,9 @@ if __name__=='__main__':
         linea=l.split(' ')
         data0.append(linea[0])
         data1.append(float(linea[2]))
-        data2.append(linea[3])
-        data3.append(linea[4])
-        
-    """
-    FUNCION DE AJUSTE
-    """
-#     fecha=[]
-#     for dt in data0:
-#         #fecha.append(mktime(dt.timetuple())+1e-6*dt.microsecond)
-#         dt1=datetime.strptime(dt,'%Y-%m-%d')
-#         fecha.append((mktime(dt1.timetuple())+1e-6*dt1.microsecond)/1e+6)
-    
-           
-       
+        data2.append(float(linea[3]))
+        data3.append(float(linea[4]))
+                     
     maxx=float(max(data1))
     minx=float(min(data1))
     maxy=float(max(data2))
@@ -90,14 +81,19 @@ if __name__=='__main__':
     x = [mdates.date2num(i) for i in epoca]
     date_formatter = mdates.DateFormatter('%d-%m-%y')
     """
+    Funcion de Ajuste
     """
-    Polynomial=np.polynomial.Polynomial
-    b,a= Polynomial.fit(x, data1, deg=1)
-    f=[]
-    for t in x:
-        f.append(a+b*(t-x[0]))
-    """
-    """
+    slope1, intercept1, r_value1, p_value1, std_err1 = stats.linregress(x,data1)
+    slope2, intercept2, r_value2, p_value2, std_err2 = stats.linregress(x,data2)
+    slope3, intercept3, r_value3, p_value3, std_err3 = stats.linregress(x,data3)
+
+    g1=np.poly1d([slope1,intercept1])
+    y1=g1(x)
+    g2=np.poly1d([slope2,intercept2])
+    y2=g2(x)
+    g3=np.poly1d([slope3,intercept3])
+    y3=g3(x)
+
     ax1.xaxis.set_major_formatter(date_formatter)
     ax2.xaxis.set_major_formatter(date_formatter)
     ax3.xaxis.set_major_formatter(date_formatter)
@@ -105,9 +101,11 @@ if __name__=='__main__':
     ax2.grid(True)
     ax3.grid(True)
     
+    my_plotter(ax1, x, y1, {'marker':'d'})
     my_plotter(ax1, x, data1, {'marker':'x'})
-    my_plotter(ax1, x, f, {'marker':'d'})
-    my_plotter(ax2, x, data2, {'marker':'o'})
-    my_plotter(ax3, x, data3, {'marker':'d'})
+    my_plotter(ax2, x, data2, {'marker':'x'})
+    my_plotter(ax2, x, y2, {'marker':'v'})
+    my_plotter(ax3, x, data3, {'marker':'x'})
+    my_plotter(ax3, x, y3, {'marker':'o'})
 
     plt.show()

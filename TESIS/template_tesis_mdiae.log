@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.9.3)  20 FEB 2017 11:45
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.9.3)  22 FEB 2017 16:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -892,14 +892,14 @@ LaTeX Info: Redefining \nameref on input line 42.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-<imagenes/Logos/logo-unlam.jpg, id=31, 341.275pt x 195.73125pt>
+<imagenes/Logos/logo-unlam.jpg, id=39, 341.275pt x 195.73125pt>
 File: imagenes/Logos/logo-unlam.jpg Graphic file (type jpg)
 
 <use imagenes/Logos/logo-unlam.jpg>
 Package pdftex.def Info: imagenes/Logos/logo-unlam.jpg used on input line 58.
 (pdftex.def)             Requested size: 79.37164pt x 45.52458pt.
 
-<imagenes/Logos/logo-conae.png, id=33, 803.0pt x 546.04pt>
+<imagenes/Logos/logo-conae.png, id=41, 803.0pt x 546.04pt>
 File: imagenes/Logos/logo-conae.png Graphic file (type png)
 
 <use imagenes/Logos/logo-conae.png>
@@ -1074,46 +1074,46 @@ l.75 \include{secciones/Agradecimientos}
 (./template_tesis_mdiae.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 5.
+LaTeX Font Info:    Try loading font information for OT1+ztmcm on input line 3.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ztmcm.fd
 File: ot1ztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OT1/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 5.
+LaTeX Font Info:    Try loading font information for OML+ztmcm on input line 3.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlztmcm.fd
 File: omlztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OML/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 5.
+LaTeX Font Info:    Try loading font information for OMS+ztmcm on input line 3.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omsztmcm.fd
 File: omsztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMS/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 5.
+LaTeX Font Info:    Try loading font information for OMX+ztmcm on input line 3.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxztmcm.fd
 File: omxztmcm.fd 2000/01/03 Fontinst v1.801 font definitions for OMX/ztmcm.
 )
-LaTeX Font Info:    Try loading font information for U+lasy on input line 5.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 5.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 3.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10.95> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <8> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <6> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 5.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 3.
 )
 \tf@toc=\write5
 \openout5 = `template_tesis_mdiae.toc'.
@@ -1291,7 +1291,27 @@ Package babel Info: Redefining spanish shorthand "?
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 1.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1phv.fd
 File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
-))
+)
+LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
+(Font)              Font shape `T1/ptm/b/n' tried instead on input line 5.
+
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 5.
+
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 5.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 5.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 5.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 5.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 5.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 5.
+)
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 85.
 Package babel Info: Redefining spanish shorthand >>
@@ -1323,8 +1343,7 @@ Package babel Info: Redefining spanish shorthand "?
 ]
 \openout2 = `secciones/MarcoTeorico.aux'.
 
-
-(./secciones/MarcoTeorico.tex
+ (./secciones/MarcoTeorico.tex
 Cap\IeC {\'\i }tulo 2.
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 1.
@@ -1338,6 +1357,37 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 1.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 1.
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 11.
+
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 11.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 11.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 11.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 11.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 11.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 11.
+
+Underfull \hbox (badness 10000) in paragraph at lines 14--20
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 23--24
+
+ []
+
 )
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 86.
@@ -1389,30 +1439,80 @@ Underfull \hbox (badness 10000) in paragraph at lines 4--5
 
  []
 
-LaTeX Font Info:    Font shape `T1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `T1/ptm/b/n' tried instead on input line 17.
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 17.
+(hyperref)                than one, level fixed on input line 11.
 
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 17.
+(babel)             in language  on input line 11.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 17.
+(babel)             in language  on input line 11.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 17.
+(babel)             in language  on input line 11.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 17.
+(babel)             in language  on input line 11.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 17.
+(babel)             in language  on input line 11.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 17.
+(babel)             in language  on input line 11.
 
-Underfull \hbox (badness 10000) in paragraph at lines 20--26
+Underfull \hbox (badness 10000) in paragraph at lines 14--15
 
  []
 
-)
+
+Underfull \hbox (badness 10000) in paragraph at lines 18--19
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 24--27
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--34
+
+ []
+
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 34.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 34.
+[3
+
+
+
+])
+LaTeX Info: Redefining \. on input line 87.
+LaTeX Info: Redefining \% on input line 87.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 13.59999pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 87.
 Package babel Info: Redefining spanish shorthand >>
@@ -1437,11 +1537,7 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 87.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 87.
- [3
-
-
-
-]
+[4]
 \openout2 = `secciones/Resultados.aux'.
 
  (./secciones/Resultados.tex
@@ -1483,7 +1579,7 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 88.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 88.
- [4
+ [5
 
 
 
@@ -1529,7 +1625,7 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 89.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 89.
- [5
+ [6
 
 
 
@@ -1571,7 +1667,7 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 98.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 98.
- [6
+ [7
 
 
 
@@ -1600,7 +1696,7 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 101.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 101.
- [7]
+ [8]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 105.
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 105.
@@ -1626,7 +1722,7 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 105.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 105.
- [8]
+ [9]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 105.
  (./template_tesis_mdiae.aux
 LaTeX Info: Redefining \. on input line 24.
@@ -1640,27 +1736,27 @@ LaTeX Info: Redefining \% on input line 24.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 105.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
 Package rerunfilecheck Info: File `template_tesis_mdiae.out' has not changed.
-(rerunfilecheck)             Checksum: 162242A8B3E038401C5BA86D302E97AD;346.
+(rerunfilecheck)             Checksum: 96F8439F4BFD7689CFA2B2261367D0CE;525.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
  ) 
 Here is how much of TeX's memory you used:
- 14862 strings out of 493304
- 218469 string characters out of 6139872
+ 14872 strings out of 493304
+ 218629 string characters out of 6139872
  349929 words of memory out of 5000000
- 17898 multiletter control sequences out of 15000+600000
- 63966 words of font info for 80 fonts, out of 8000000 for 9000
+ 17901 multiletter control sequences out of 15000+600000
+ 69182 words of font info for 82 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 44i,11n,53p,370b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,11n,53p,412b,579s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/ur
 w/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a
 .pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on template_tesis_mdiae.pdf (16 pages, 531136 bytes).
+Output written on template_tesis_mdiae.pdf (17 pages, 535070 bytes).
 PDF statistics:
- 158 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 79 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 176 PDF objects out of 1000 (max. 8388607)
+ 144 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 95 words of extra memory for PDF output out of 10000 (max. 10000000)
 

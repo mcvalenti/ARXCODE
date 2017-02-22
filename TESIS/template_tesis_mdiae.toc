@@ -1,8 +1,13 @@
 \select@language {spanish}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
+\contentsline {subsection}{\numberline {1.0.1}Regulaciones Nacionales e Internacionales}{1}{subsection.1.0.1}
 \contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{2}{chapter.2}
+\contentsline {subsection}{\numberline {2.0.2}CDM}{2}{subsection.2.0.2}
 \contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a}{3}{chapter.3}
-\contentsline {subsection}{\numberline {3.0.1}CDM}{3}{subsection.3.0.1}
-\contentsline {chapter}{\numberline {4}Resultados}{4}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusiones}{5}{chapter.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{6}{chapter.5}
+\contentsline {subsection}{\numberline {3.0.3}Tratamiento sobre Datos de Misi\'on}{3}{subsection.3.0.3}
+\contentsline {subsubsection}{\numberline {3.0.3.1}Ma. de Covarianza Simplificada}{3}{subsubsection.3.0.3.1}
+\contentsline {subsubsection}{\numberline {3.0.3.2}Ma. de Covarianza Ajustada}{3}{subsubsection.3.0.3.2}
+\contentsline {subsubsection}{\numberline {3.0.3.3}Procedimiento de Ajuste}{3}{subsubsection.3.0.3.3}
+\contentsline {chapter}{\numberline {4}Resultados}{5}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusiones}{6}{chapter.5}
+\contentsline {chapter}{Bibliograf\'{\i }a}{7}{chapter.5}

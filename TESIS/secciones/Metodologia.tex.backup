@@ -8,22 +8,10 @@
  %  Ejemplo para citar otros capítulos o secciones
   Como dice el capítulo \ref{chap:introduccion}...
 
-\begin{itemize}
- \item CDM: Recepci\'on.
- \item Metodolog\'ia Akella \& Alfriend.
- \item Metodolog\'ia Osweiler.
-\end{itemize}
+\subsection{Tratamiento sobre Datos de Misi\'on}
 
-\subsection{CDM}
-(JAC SW - Laporte)
+Consideramos la Misi\'on SAC-D.
 
-{\bf{CSM:}} They are made available on Emergency Criteria, wich are Time of Closest Approach whithin 72 hs combined with a miss distance criteria:\\
-LEO:\\
-overall miss distance < 1km\\
-radial miss distance < 200m\\
-GEO/MEO:\\
-Overall miss distance < 10 km.\\
-
-CSM are advisory and informational messages only and are not directly actionable. They don´t provide a direct recommendation to perform an avoidance action and of course they cannot take neither the operational constraints of the asset nor the maneuvers the asset plansor just performed.
-
-
+Contamos con acceso a los datos de las efem\'erides predichas calculadas por CODS, pero no están publicados en estos archivos los errores asociados al c\'alculo.\\
+Nos proveemos de los TLE de la Misi\'on para la misma \'epoca.
+Evaluamos las diferencias entre los distintos vectores de estado (el predico por CODS y el que resulta de TLE).

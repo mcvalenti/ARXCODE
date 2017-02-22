@@ -468,3 +468,144 @@ correlation matrix of the fit parameters:
                a      b      
 a               1.000 
 b              -1.000  1.000 
+
+
+*******************************************************************************
+Tue Feb 21 11:19:13 2017
+
+
+FIT:    data read from '../visual/archivos/diferenciasTOD' u 1:3
+        format = x:z
+        x range restricted to ["2013-11-01" : "2013-12-30"]
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: h(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 9.83465e+18       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 3.10513e+08
+
+initial set of free parameter values
+
+e               = 1
+f               = 1
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 172.395
+rel. change during last iteration : -4.96676e-08
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.8757
+variance of residuals (reduced chisquare) = WSSR/ndf   : 3.51826
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+e               = -2.22946e-09     +/- 1.78e-07     (7985%)
+f               = 1                +/- 78.17        (7817%)
+
+
+correlation matrix of the fit parameters:
+
+               e      f      
+e               1.000 
+f              -1.000  1.000 
+
+
+*******************************************************************************
+Tue Feb 21 11:19:13 2017
+
+
+FIT:    data read from '../visual/archivos/diferenciasTOD' u 1:4
+        format = x:z
+        x range restricted to ["2013-11-01" : "2013-12-30"]
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: g(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 9.83465e+18       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 3.10513e+08
+
+initial set of free parameter values
+
+c               = 1
+d               = 1
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 76.0195
+rel. change during last iteration : -1.12635e-07
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 1.24556
+variance of residuals (reduced chisquare) = WSSR/ndf   : 1.55142
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+c               = -3.43169e-09     +/- 1.182e-07    (3445%)
+d               = 1                +/- 51.91        (5191%)
+
+
+correlation matrix of the fit parameters:
+
+               c      d      
+c               1.000 
+d              -1.000  1.000 
+
+
+*******************************************************************************
+Tue Feb 21 11:19:13 2017
+
+
+FIT:    data read from '../visual/archivos/diferenciasTOD' u 1:5
+        format = x:z
+        x range restricted to ["2013-11-01" : "2013-12-30"]
+        #datapoints = 51
+        residuals are weighted equally (unit weight)
+
+function used for fitting: f(x)
+fitted parameters initialized with current variable values
+
+
+
+ Iteration 0
+ WSSR        : 9.83465e+18       delta(WSSR)/WSSR   : 0
+ delta(WSSR) : 0                 limit for stopping : 1e-05
+ lambda	  : 3.10513e+08
+
+initial set of free parameter values
+
+a               = 1
+b               = 1
+
+After 4 iterations the fit converged.
+final sum of squares of residuals : 37.5143
+rel. change during last iteration : -2.28245e-07
+
+degrees of freedom    (FIT_NDF)                        : 49
+rms of residuals      (FIT_STDFIT) = sqrt(WSSR/ndf)    : 0.874985
+variance of residuals (reduced chisquare) = WSSR/ndf   : 0.765598
+
+Final set of parameters            Asymptotic Standard Error
+=======================            ==========================
+
+a               = 1.15258e-09      +/- 8.304e-08    (7205%)
+b               = 1                +/- 36.47        (3647%)
+
+
+correlation matrix of the fit parameters:
+
+               a      b      
+a               1.000 
+b              -1.000  1.000 
