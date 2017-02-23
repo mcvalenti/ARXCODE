@@ -198,9 +198,7 @@ def difTle(tleOrdenados,cantidad_tles):
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
         item=range(i-1,-1,-1)
-        print '------------------------------------------------------------------------------------'
-        print 'TLE Primario: ', tlepri, ffin, r, rp
-        print '------------------------------------------------------------------------------------'
+       
         for j in item:
             tlesec=tleOrdenados[j][0]
             pos,vel,fsec=tleSecundario(tlesec, ffin)

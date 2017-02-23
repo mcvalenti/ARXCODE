@@ -19,6 +19,7 @@ import matplotlib.dates as mdates
 import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
+from Comparar.TleVsCods import encuentraBordes, interpola
 
 def filtroAjuste(fi,ff,delta_t):
     a=open('../visual/archivos/diferenciasTOD','r')
@@ -76,6 +77,12 @@ def filtroExtapola(ff,delta_t):
     vxtle=[]
     vytle=[]
     vztle=[]   
+    coordx1=[]
+    coordy1=[]
+    coordz1=[]
+    velx1=[]
+    vely1=[]
+    velz1=[] 
     for l in contenido1:
         d1=l[:19]
         d1=datetime.datetime.strptime(d1,'%Y-%m-%d %H:%M:%S')
@@ -87,28 +94,19 @@ def filtroExtapola(ff,delta_t):
             vxtle.append(float(l.split()[5]))
             vytle.append(float(l.split()[6]))
             vztle.append(float(l.split()[7]))
-            
-    d01=[]
-    coordx1=[]
-    coordy1=[]
-    coordz1=[]
-    velx1=[]
-    vely1=[]
-    velz1=[]    
-    for l in contenido2:
-        d=l[:19]
-        d=datetime.datetime.strptime(d,'%Y/%m/%d %H:%M:%S')
-        if d > ff and d <= ff+datetime.timedelta(days=delta_t):
-            d01.append(d)
-            coordx1.append(float(l.split()[2]))
-            coordy1.append(float(l.split()[3]))
-            coordz1.append(float(l.split()[4]))
-            velx1.append(float(l.split()[5]))
-            vely1.append(float(l.split()[6]))
-            velz1.append(float(l.split()[7]))    
+            inferior, superior= encuentraBordes(contenido2,l)
+            lineaInterpol=interpola(l,inferior,superior)
+            interpol_ephem=lineaInterpol.split()
+            coordx1.append(float(interpol_ephem[2]))
+            coordy1.append(float(interpol_ephem[3]))
+            coordz1.append(float(interpol_ephem[4]))
+            velx1.append(float(interpol_ephem[5]))
+            vely1.append(float(interpol_ephem[6]))
+            velz1.append(float(interpol_ephem[7])) 
+            print interpol_ephem
 
     ephem_tle=[d0tle,xtle,ytle,ztle,vxtle,vytle,vztle]
-    ephem_extrap=[d01,coordx1,coordy1,coordz1,velx1,vely1,velz1]
+    ephem_extrap=[d0tle,coordx1,coordy1,coordz1,velx1,vely1,velz1]
     return ephem_tle, ephem_extrap
 
 def funcionAjuste(x,y,x_extrap):
@@ -127,7 +125,7 @@ if __name__=='__main__':
     """
     fi=datetime.datetime(2013,11,16)
     ff=datetime.datetime(2013,11,30)
-    delta_t=5
+    delta_t=10
     
     ephem_ajuste =  filtroAjuste(fi,ff,delta_t)   
     x_ajuste = [mdates.date2num(i) for i in ephem_ajuste[0]]    
@@ -139,9 +137,9 @@ if __name__=='__main__':
     y_exptrap = funcionAjuste(x_ajuste,ephem_ajuste[2],t)
     z_exptrap = funcionAjuste(x_ajuste,ephem_ajuste[3],t)
     
-    dif_x=ephem_extrap[1]-(ephem_tle[1]+x_exptrap)
-    dif_y=ephem_extrap[1]-(ephem_tle[1]+x_exptrap)
-    dif_z=ephem_extrap[1]-(ephem_tle[1]+x_exptrap)
+    dif_x=ephem_extrap[1]-(ephem_tle[1]-x_exptrap)
+    dif_y=ephem_extrap[2]-(ephem_tle[2]-y_exptrap)
+    dif_z=ephem_extrap[3]-(ephem_tle[3]-z_exptrap)
     
     """
     Grafico

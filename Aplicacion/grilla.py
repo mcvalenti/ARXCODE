@@ -10,6 +10,8 @@ from TleAdmin.TleArchivos import setTLE
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario
 from Estadistica.maCovar import EjecutaMaCovar
+from visual.TleOsweiler import VerGrafico
+from PyQt4.Qt import QDialog
 
 class ProcARxCODE(QMainWindow):
     
@@ -57,7 +59,7 @@ class ProcManual(QWidget):
         self.diferencias=''
         self.macovarT=''
         self.initUI()
-        
+        self.sufijo='dif_'
         
     def initUI(self):
         self.palette = QPalette()
@@ -84,6 +86,7 @@ class ProcManual(QWidget):
         self.boton_equipo    = QPushButton('Directorios')
         self.boton_prepros   = QPushButton('Preprocesamiento')
         self.boton_procesa   = QPushButton('PROCESAR')
+        self.boton_grafica   = QPushButton('Graficar')
         self.boton_salir     = QPushButton('Salir')
         self.boton_ma_covar  = QPushButton('Calcular')
         
@@ -118,6 +121,7 @@ class ProcManual(QWidget):
         grid.addWidget(self.sat_id_line,8,0)
         grid.addWidget(self.cant_tles_edit,8,1)
         grid.addWidget(self.boton_procesa,9,1)
+        grid.addWidget(self.boton_grafica,9,2)
         grid.addWidget(self.estado_proc,10,0)
         grid.addWidget(self.estado_proc_edit,10,2)
         grid.addWidget(self.ma_covar_label,11,0)
@@ -134,6 +138,7 @@ class ProcManual(QWidget):
         self.boton_salir.clicked.connect(self.salir)
         self.boton_prepros.clicked.connect(self.PreProc)
         self.boton_procesa.clicked.connect(self.procesar)
+        self.boton_grafica.clicked.connect(self.Graficar)
         self.boton_ma_covar.clicked.connect(self.Macovar)
         
         """
@@ -141,27 +146,25 @@ class ProcManual(QWidget):
         """
         btnAbrir = QPushButton("Abrir ventana",None)
         grid.addWidget(btnAbrir,3,2)
-        btnAbrir.clicked.connect(self.abrir)
         
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de TLE')    
         self.show()
         
-    def abrir(self):
-        Secundaria.exec_()
-        print 'Fui aceptado'
-
-        
+        self.w = ConexionNorad()
+                
     def botonNorad(self):
         print "Opening NORAD window..."
-        #self.boton_equipo.setEnabled(False)
-        self.w = ConexionNorad()
-        self.w.show()
+        self.w.exec_()
+        value1, value2 = self.w.save()
+        print('Success!', value1, value2)
+        
+        #print self.filename
 #         self.filename=self.w.archTLE
 #         print self.filename
 #         self.arch_cargado.setText(self.filename)
         
-
+        
     def Archivo(self):    
         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
         nombre=str(fname).split('/')[-1]
@@ -173,6 +176,8 @@ class ProcManual(QWidget):
         files=glob.glob('../TleAdmin/tle/*')
         for filename in files:
             os.unlink(filename)
+        if os.stat('../TleAdmin/crudosTLE/'+self.filename).st_size == 0:
+            print('El archivo esta vacio')
         setTLE(self.sat_id, self.filename)
         self.sat_id_line.setText(self.sat_id)
         self.lista=glob.glob('../TleAdmin/tle/*')
@@ -191,7 +196,11 @@ class ProcManual(QWidget):
             os.unlink(filename)
         difTle(self.tleOrdenados, self.tles)
         self.diferencias=difPrimario(self.filename,self.tles-1)
+
         self.estado_proc_edit.setText('Finalizado')
+        
+    def Graficar(self):
+        VerGrafico(self.diferencias)
         
     def Macovar(self):
         self.macovarT=EjecutaMaCovar(self.diferencias)
@@ -204,60 +213,20 @@ class ProcManual(QWidget):
     def salir(self):
         exit()
 
-class Secundaria(QDialog):
-    def __init__(self, parent=None):
-        QDialog.__init__(self, parent)
- 
-        self.archivo2='perez'
- 
-        contenedor = QVBoxLayout()
-        self.setLayout(contenedor)
-        
-        """
-        Etiquetas
-        """
-        self.nomb_arch  = QLabel('Ingrese el nombre de Archivo')
-        """
-        Campos de Edicion
-        """
-        self.arch_edit  = QLineEdit()
-        """
-        Botones
-        """
-        self.boton_cerrar = QPushButton("Cerrar")
-        self.boton_registrar = QPushButton('Registrar')
-#        self.boton_ok = QPushButton("Ok",None)
-        
-        contenedor.addWidget(self.nomb_arch)        
-        contenedor.addWidget(self.arch_edit)
-        contenedor.addWidget(self.boton_registrar)
-        contenedor.addWidget(self.boton_cerrar)
- #       contenedor.addWidget(self.boton_ok)
-        
-        """
-        Acciones
-        """
-        self.boton_cerrar.clicked.connect(self.cerrar)
-        self.boton_registrar.clicked.connect(self.registro)
-        
-    def registro(self):
-        self.archivo2=self.arch_edit.text()
-        print 'ves que imprimo',self.archivo2
- 
-    def cerrar(self):
-        QDialog.accept()
-        
-        
-class ConexionNorad(QWidget):
-    def __init__(self):
-        QWidget.__init__(self)
-        
+class ConexionNorad(QDialog):
+#     def __init__(self):
+    def __init__(self,parent=None):
+        QDialog.__init__(self,parent)
+
+        self.setWindowModality(Qt.ApplicationModal)
         self.archTLE=''
+        self.eta1=''
+        self.eta2=''
 #         
         self.palette = QPalette()
         self.palette.setColor(QPalette.Background,Qt.lightGray)
         self.setPalette(self.palette)
-        
+#         
         """
         CALENDARIOS
         """
@@ -267,7 +236,7 @@ class ConexionNorad(QWidget):
         self.cal1 = QCalendarWidget()
         self.cal1.setGridVisible(True)
         self.cal1.clicked[QDate].connect(self.verFfin)
-        
+         
         """
         Etiquetas
         """
@@ -280,8 +249,11 @@ class ConexionNorad(QWidget):
         """
         Botones
         """
+        self.buttons = QDialogButtonBox(
+            QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
+            Qt.Horizontal, self)
         self.boton_request = QPushButton('Enviar Solicitud')
-        self.boton_cerrar  = QPushButton('cerrar')
+        self.boton_guardar = QPushButton('guardar')
         """
         Campos de Edicion
         """
@@ -292,8 +264,10 @@ class ConexionNorad(QWidget):
         self.st            = QLineEdit()
         self.et            = QLineEdit()
         self.nombreTle     = QLineEdit()
- 
-        
+
+        """
+        Solapas
+        """        
         self.grilla = QGridLayout()
         self.grilla.setSpacing(2)
         self.grilla.addWidget(self.usuario,1,1)
@@ -311,37 +285,42 @@ class ConexionNorad(QWidget):
         self.grilla.addWidget(self.arhcivoTLE,8,1)
         self.grilla.addWidget(self.nombreTle,8,2)
         self.grilla.addWidget(self.boton_request,11,2)
-        self.grilla.addWidget(self.boton_cerrar,11,1)  
+        self.grilla.addWidget(self.boton_guardar,12,2)
+        self.grilla.addWidget(self.buttons,13,2) 
         self.setLayout(self.grilla) 
         
         """
         Acciones
         """
-        self.boton_cerrar.clicked.connect(self.cerrar)
         self.boton_request.clicked.connect(self.iniciaSolicitud)
+        self.buttons.accepted.connect(self.accept)
+        self.buttons.rejected.connect(self.reject)  
+        self.boton_guardar.clicked.connect(self.save)
         self.setWindowTitle('Conexion con NORAD')
-        
+#         
     def iniciaSolicitud(self):
         self.nombreTle.setText(self.nombreTle.text())
         self.usu1   = str(self.usuario_edit.text())
         self.passw1 = str(self.clave_edit.text())
         self.cat_id = str(self.norad_id_edit.text())
         self.tle=importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
-        self.archTLE=self.tle.f
-            
+        self.archTLE=self.nombreTle.text()
+        print self.archTLE
+#             
     def verFinicio(self):
         self.date = self.cal.selectedDate()
         self.pydate = self.date.toPyDate()
         self.st.setText(self.date.toString())
-        
+#         
     def verFfin(self):
         self.date1 = self.cal1.selectedDate()
         self.pydate1 = self.date1.toPyDate()
         self.et.setText(self.date1.toString())
-            
-    def cerrar(self):
-        self.close()     
-    
+        
+    def save(self):
+        self.eta1='Maria'
+        self.eta2='Cecilia'
+        return self.eta1, self.eta2  
         
 def IniciaApp():
     QApplication.setStyle("plastique")
