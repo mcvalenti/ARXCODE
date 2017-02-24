@@ -77,6 +77,7 @@ def VerGrafico(archivo):
     ax3.plot_date(x, y3,'r--')
     ax3.set_ylabel('Km')
     
-    fig.suptitle('Diferencias y Funcion de Ajuste (TLE vs TLE')
+    fig.suptitle('Diferencias y Funcion de Ajuste (TLE vs TLE)')
     plt.xlabel('Epoca')
+    plt.savefig('../visual/archivos/dif_pairwise.png')
     plt.show()

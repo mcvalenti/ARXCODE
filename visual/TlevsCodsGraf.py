@@ -47,10 +47,11 @@ def AjustePol():
     pass
     
 
-def VerGrafico():
+def VerGraficoMision():
 #if __name__=='__main__':
     
-    datos=open('../visual/archivos/diferenciasTOD','r')
+#    datos=open('../visual/archivos/diferenciasTOD','r')
+    datos=open('../visual/archivos/diferenciasVNC','r')
     listas=datos.readlines()
     data0=[]
     data1=[]
@@ -107,4 +108,5 @@ def VerGrafico():
     my_plotter(ax3, x, data3, {'marker':'x'})
     my_plotter(ax3, x, y3, {'marker':'o'})
 
+    plt.savefig('../visual/archivos/dif_mision.png')
     plt.show()

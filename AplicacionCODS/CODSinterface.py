@@ -10,6 +10,7 @@ from Comparar.TleVsCods import generaTEME
 from Comparar.TleVsCods import EjecutaComparacion
 from Estadistica.maCovar import EjecutaMaCovarCODS
 from visual.TlevsCodsGraf import VerGrafico
+
 class ProcCODS(QWidget):
     
     def __init__(self):
@@ -25,12 +26,13 @@ class ProcCODS(QWidget):
         self.Hlinea.setFrameStyle(QFrame.HLine)
         self.Hlinea.setSizePolicy(QSizePolicy.Minimum,QSizePolicy.Expanding)
         self.grid   = QGridLayout()
-        self.grid.setSpacing(5)
+        self.grid.setSpacing(20)
              
-        
-        self.sat_id='37673'
-        self.et=''
+        self.sat_nombre=''
+        self.dic_satelites={}
+        self.sat_id='9999'       
         self.st=''
+        self.et=''
         self.archivoTLE='' 
         self.archivoCODS=''
         self.diferencias=''
@@ -50,6 +52,7 @@ class ProcCODS(QWidget):
         """
         Campos de Edicion
         """
+        self.sat_nom_edit   = QLineEdit()
         self.st_edit        = QLineEdit()
         self.et_edit        = QLineEdit()
         self.TLE_edit       = QLineEdit()
@@ -64,6 +67,7 @@ class ProcCODS(QWidget):
         self.listaSat.addItem("...");
         self.listaSat.addItem("SAC-D"); 
         self.listaSat.addItem("LAGEOS");
+        self.listaSat.addItem("ICESAT");
 
         
         """
@@ -100,12 +104,12 @@ class ProcCODS(QWidget):
         self.grid.addWidget(self.satelite,2,0)
         self.grid.addWidget(self.fi,2,1)
         self.grid.addWidget(self.ff,2,2)
+        self.grid.addWidget(self.sat_nom_edit,4,0)
         self.grid.addWidget(self.listaSat,3,0)
         self.grid.addWidget(self.cal,3,1)
         self.grid.addWidget(self.st_edit,4,1)
         self.grid.addWidget(self.cal1,3,2)
-        self.grid.addWidget(self.et_edit,4,2)
-        
+        self.grid.addWidget(self.et_edit,4,2)       
         self.grid.addWidget(self.Hlinea,6,0,1,4)
         self.grid.addWidget(self.boton_solCODS,7,1)
         self.grid.addWidget(self.CODS_edit,7,2)
@@ -128,12 +132,23 @@ class ProcCODS(QWidget):
         """
         Acciones
         """
+        self.listaSat.currentIndexChanged.connect(self.selectionchange)
+
+        
         self.boton_salir.clicked.connect(self.salir)
         self.boton_cargar_tle.clicked.connect(self.ArchivoTle)
         self.boton_cargar_cods.clicked.connect(self.ArchivoCODS)
         self.boton_diferencias.clicked.connect(self.ProcDif)
         self.boton_ma_covar.clicked.connect(self.Macovar)
         self.boton_grafico.clicked.connect(self.verGrafico)
+        
+    
+    def selectionchange(self,i):
+        self.sat_nombre= self.listaSat.currentText()
+        self.sat_nom_edit.setText(self.sat_nombre)
+        self.dic_satelites={'SAC-D':37673,'LAGEOS':8820,'ICESAT':27642}
+        self.sat_id=self.dic_satelites[str(self.sat_nombre)]
+
     
     def verFinicio(self):
         self.st = self.cal.selectedDate()

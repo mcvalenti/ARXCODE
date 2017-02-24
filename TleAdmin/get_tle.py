@@ -39,6 +39,7 @@ class importar_tle():
         self.tleDato=self.solicitudTle()
         self.f=open('../TleAdmin/crudosTLE/'+archivo,'w')
         self.f.write(self.tleDato)
+        self.f.close()
         
 
     def ConsultaAutentica(self):

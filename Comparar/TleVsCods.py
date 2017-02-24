@@ -4,15 +4,12 @@ Created on 17/01/2017
 @author: mcvalenti
 '''
 import os, glob
-import numpy as np
 from datetime import datetime
 from time import time
-from jdcal import gcal2jd, jd2gcal
 from scipy.interpolate import barycentric_interpolate
 from funcionesUtiles.funciones import toTimestamp
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import tle_info
-from visual.gegraf import gegrafTot
 from SistReferencia.sist_deCoordenadas import vncSis
 
 """
@@ -27,12 +24,15 @@ def generaTEME(tles):
         r,v=tle1.propagaTLE()
         listaTle[fecha]=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
     listaTle=sorted(listaTle.items())
-    salidaTle=open('../TleAdmin/crudosTLE/TEME_SGP4_SACD_xyz.txt','w+')
+    archivo='TEME_SGP4_SACD_xyz.txt'
+    salidaTle=open('../TleAdmin/crudosTLE/'+archivo,'w+')
     for k in listaTle:        
         infoa=str(k[0])
         infob=k[1]
         linea=infoa+' '+infob+'\n'
         salidaTle.write(linea)
+    salidaTle.close()    
+    return archivo
         
 def encuentraBordes(gpslista,l):
     """
@@ -154,20 +154,36 @@ def interpola(l,inferior,superior):
 #if __name__=='__main__':   
 def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):   
     """
+    ---------------------------------------------------------------
+    Toma las epocas de los TLEs e interpola los datos de CODS a las
+    epocas correspondientes. Luego calcula las diferencias. 
+    ---------------------------------------------------------------
+    input:
+        ....
+        ....
+    output:
+        diferenciasTOD: (../visual/archivos/diferenciasTOD)
+        diferenciasVNC: (../visual/archivos/)
+    """
+    
+    
+    
+    
+    """
     Borro los archivos generados para otro satelite.
         carpeta de tles: TleAdmin/tle
         carpeta de diferencias: AjustarTLE/diferencias
         carpeta de graficos: Visual/graficos
     """
     inicio=time()
-    
-    files=glob.glob('../TleAdmin/tle/*')
-    for filename in files:
-        os.unlink(filename)  
-    
-    setTLE(sat_id, ArchivoTLE)
-    tles = glob.glob('../TleAdmin/tle/*')
-    generaTEME(tles) 
+#     
+#     files=glob.glob('../TleAdmin/tle/*')
+#     for filename in files:
+#         os.unlink(filename)  
+#     
+#     setTLE(sat_id, ArchivoTLE)
+#     tles = glob.glob('../TleAdmin/tle/*')
+#     generaTEME(tles) 
     
     """
     Comparacion HARDCODEADO!!!!!
@@ -187,7 +203,7 @@ def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):
 
     difTOD=open('../visual/archivos/diferenciasTOD','w')
     archivo='diferenciasVNC'
-    difVNC=open('../Ajustar/diferencias/'+archivo,'w')
+    difVNC=open('../visual/archivos/'+archivo,'w')
     r=[]
     rp=[]
     df=[]

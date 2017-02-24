@@ -7,11 +7,14 @@ import sys, glob, os
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from TleAdmin.TleArchivos import setTLE
+from TleAdmin.TLE import tle_info
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario
 from Estadistica.maCovar import EjecutaMaCovar
 from visual.TleOsweiler import VerGrafico
 from PyQt4.Qt import QDialog
+from Comparar.TleVsCods import generaTEME, EjecutaComparacion
+from visual.TlevsCodsGraf import VerGraficoMision
 
 class ProcARxCODE(QMainWindow):
     
@@ -22,43 +25,60 @@ class ProcARxCODE(QMainWindow):
         extractAction.setShortcut("Ctrl+Q")
         extractAction.setStatusTip('Leave The App')
         extractAction.triggered.connect(self.close_application)
-
+        
+        """
+        Intento de correr desde el menu
+        """
+#         tleAction= QWidgetAction('TLE',self)
+#         tleAction.setStatusTip('Procesa datos TLE')
+#         tleAction.triggered.connect(self.ProcManual)
         self.statusBar()
-
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&File')
-        fileMenu.addAction(extractAction)  
-        
+        fileMenu.addAction(extractAction)
+                
         self.resize(300, 300)
         self.setWindowTitle('ARxCODE')
         self.home()
     
     def home(self):
+        
         self.CDM_label       = QLabel('No se registran CDM')
-        self.boton_ProManual = QPushButton('Procesamiento Manual',self)
+        self.boton_ProManual = QPushButton('Procesamiento de TLE',self)
+        self.boton_mision    = QPushButton('Procesamiento de Datos de Mision',self)
         self.boton_ProManual.move(100,100)
+        self.boton_mision.move(100,200)
         self.boton_ProManual.resize(self.boton_ProManual.minimumSizeHint())
-        self.boton_ProManual.clicked.connect(self.AbrirProc)
+        self.boton_mision.resize(self.boton_mision.minimumSizeHint())
+        self.boton_ProManual.clicked.connect(self.tleProc)
+        self.boton_mision.clicked.connect(self.misProc)
         self.show()
         
     def close_application(self):
         sys.exit()
         
-    def AbrirProc(self):
+    def tleProc(self):
         ventana2=ProcManual()
-        ventana2._exec_()
+        ventana2.exec_()
+        
+    def misProc(self):
+        ventana3=ProcMision()
+        ventana3.exec_()
 
-class ProcManual(QWidget):
-    
-    def __init__(self):
-        super(ProcManual, self).__init__()
+class ProcManual(QDialog):
+#     def __init__(self):
+    def __init__(self,parent=None):
+        QDialog.__init__(self,parent)
+
+        self.setWindowModality(Qt.ApplicationModal)
+        self.initUI()
+
         self.filename = ''
         self.sat_id='99999'
         self.tles=0
         self.tleOrdenados={}
         self.diferencias=''
-        self.macovarT=''
-        self.initUI()
+        self.macovarT=''        
         self.sufijo='dif_'
         
     def initUI(self):
@@ -120,19 +140,21 @@ class ProcManual(QWidget):
         grid.addWidget(self.cant_tles,7,1)
         grid.addWidget(self.sat_id_line,8,0)
         grid.addWidget(self.cant_tles_edit,8,1)
-        grid.addWidget(self.boton_procesa,9,1)
-        grid.addWidget(self.boton_grafica,9,2)
-        grid.addWidget(self.estado_proc,10,0)
-        grid.addWidget(self.estado_proc_edit,10,2)
+        grid.addWidget(self.boton_procesa,8,2)
+        grid.addWidget(self.estado_proc,9,0)
+        grid.addWidget(self.estado_proc_edit,9,2)
+        grid.addWidget(self.boton_grafica,10,2)
         grid.addWidget(self.ma_covar_label,11,0)
         grid.addWidget(self.tableView,12,0,6,2)
         grid.addWidget(self.boton_ma_covar,12,2)
-       
         grid.addWidget(self.boton_salir,17,2)
         
         """
         Acciones
         """
+        self.boton_procesa.setEnabled(False)
+        self.boton_grafica.setEnabled(False)
+        self.boton_ma_covar.setEnabled(False)
         self.boton_norad.clicked.connect(self.botonNorad)
         self.boton_equipo.clicked.connect(self.Archivo)
         self.boton_salir.clicked.connect(self.salir)
@@ -141,29 +163,21 @@ class ProcManual(QWidget):
         self.boton_grafica.clicked.connect(self.Graficar)
         self.boton_ma_covar.clicked.connect(self.Macovar)
         
-        """
-        PRUEBA DIALOGO
-        """
-        btnAbrir = QPushButton("Abrir ventana",None)
-        grid.addWidget(btnAbrir,3,2)
         
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de TLE')    
         self.show()
         
-        self.w = ConexionNorad()
                 
     def botonNorad(self):
         print "Opening NORAD window..."
+        self.w = ConexionNorad()
         self.w.exec_()
-        value1, value2 = self.w.save()
-        print('Success!', value1, value2)
-        
-        #print self.filename
-#         self.filename=self.w.archTLE
-#         print self.filename
-#         self.arch_cargado.setText(self.filename)
-        
+        self.sat_id, self.filename = self.w.datos()
+        print self.filename
+        self.arch_cargado.setText(self.filename)
+        self.sat_id_line.setText(self.sat_id)
+   
         
     def Archivo(self):    
         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
@@ -188,6 +202,7 @@ class ProcManual(QWidget):
         """
         self.tledic=generadorDatos(self.lista)
         self.tleOrdenados=ordenaTles(self.tledic)
+        self.boton_procesa.setEnabled(True)
         
     
     def procesar(self):
@@ -196,8 +211,9 @@ class ProcManual(QWidget):
             os.unlink(filename)
         difTle(self.tleOrdenados, self.tles)
         self.diferencias=difPrimario(self.filename,self.tles-1)
-
         self.estado_proc_edit.setText('Finalizado')
+        self.boton_grafica.setEnabled(True)
+        self.boton_ma_covar.setEnabled(True)
         
     def Graficar(self):
         VerGrafico(self.diferencias)
@@ -220,8 +236,7 @@ class ConexionNorad(QDialog):
 
         self.setWindowModality(Qt.ApplicationModal)
         self.archTLE=''
-        self.eta1=''
-        self.eta2=''
+        self.cat_id=''
 #         
         self.palette = QPalette()
         self.palette.setColor(QPalette.Background,Qt.lightGray)
@@ -257,8 +272,8 @@ class ConexionNorad(QDialog):
         """
         Campos de Edicion
         """
-        self.usuario_edit  = QLineEdit()
-        self.clave_edit    = QLineEdit()
+        self.usuario_edit  = QLineEdit('macecilia')
+        self.clave_edit    = QLineEdit('MaCeciliaSpace17')
         self.clave_edit.setEchoMode(QLineEdit.Password)
         self.norad_id_edit = QLineEdit()
         self.st            = QLineEdit()
@@ -295,7 +310,7 @@ class ConexionNorad(QDialog):
         self.boton_request.clicked.connect(self.iniciaSolicitud)
         self.buttons.accepted.connect(self.accept)
         self.buttons.rejected.connect(self.reject)  
-        self.boton_guardar.clicked.connect(self.save)
+        self.boton_guardar.clicked.connect(self.datos)
         self.setWindowTitle('Conexion con NORAD')
 #         
     def iniciaSolicitud(self):
@@ -305,7 +320,6 @@ class ConexionNorad(QDialog):
         self.cat_id = str(self.norad_id_edit.text())
         self.tle=importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
         self.archTLE=self.nombreTle.text()
-        print self.archTLE
 #             
     def verFinicio(self):
         self.date = self.cal.selectedDate()
@@ -317,10 +331,95 @@ class ConexionNorad(QDialog):
         self.pydate1 = self.date1.toPyDate()
         self.et.setText(self.date1.toString())
         
-    def save(self):
-        self.eta1='Maria'
-        self.eta2='Cecilia'
-        return self.eta1, self.eta2  
+    def datos(self):
+        return self.cat_id, self.archTLE
+    
+class ProcMision(QDialog):
+
+    def __init__(self,parent=None):
+        QDialog.__init__(self,parent)
+
+        self.setWindowModality(Qt.ApplicationModal)
+        self.initUI()
+        
+        self.sat_id='37673'
+        self.crudo_mision=''
+        self.tlesTeme=''
+        
+    def initUI(self):
+        self.grilla = QGridLayout()
+        self.grilla.setSpacing(2)
+        
+        """
+        Etiquetas
+        """
+        self.mision_lab     = QLabel('Mision')
+        
+        """
+        Botones
+        """
+        self.boton_tle_xyz    = QPushButton('Datos TLE (sist:TEME)')
+        self.boton_datos_mis  = QPushButton('Datos de Mision')
+        self.boton_dif        = QPushButton('Calcular diferencias')
+        self.boton_grafico    = QPushButton('Ver Grafico')
+        self.boton_salir      = QPushButton('Salir')
+        
+        """
+        Campos de Edicion
+        """
+        self.sat_edit       = QLineEdit()
+        self.tle_xyz_edit   = QLineEdit()
+        self.datos_mis_edit = QLineEdit()
+        
+        self.grilla.addWidget(self.mision_lab,1,0)
+        self.grilla.addWidget(self.sat_edit,1,1)
+        self.grilla.addWidget(self.boton_tle_xyz,2,0)
+        self.grilla.addWidget(self.tle_xyz_edit ,2,1)
+        self.grilla.addWidget(self.boton_datos_mis,3,0)
+        self.grilla.addWidget(self.datos_mis_edit,3,1)
+        self.grilla.addWidget(self.boton_dif,4,1)
+        self.grilla.addWidget(self.boton_grafico,5,1)
+        self.grilla.addWidget(self.boton_salir,8,1)
+        
+        """
+        Acciones
+        """
+        self.sat_id=self.sat_edit.text()
+        self.boton_dif.setEnabled(False)
+#        self.boton_grafico.setEnabled(False)
+        self.boton_tle_xyz.clicked.connect(self.tleTeme)
+        self.boton_datos_mis.clicked.connect(self.ArchivoCODS)
+        self.boton_salir.clicked.connect(self.salir)
+        self.boton_dif.clicked.connect(self.calcDif)
+        self.boton_grafico.clicked.connect(self.graficar)
+        
+        
+        self.setWindowTitle('PROCESAMIENTO de DATOS CODS')
+        self.setLayout(self.grilla) 
+        
+    def tleTeme(self):
+        tles = glob.glob('../TleAdmin/tle/*')
+        self.tlesTeme=generaTEME(tles) 
+        self.tle_xyz_edit.setText(str(self.tlesTeme))
+        
+    def ArchivoCODS(self):  
+        fname1=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../CodsAdmin/TOD_O/*")
+        nombre1=str(fname1).split('/')[-1]
+        self.crudo_mision = nombre1
+        self.datos_mis_edit.setText(self.crudo_mision)
+        self.boton_dif.setEnabled(True)
+        
+    def calcDif(self):
+        print self.sat_id
+        EjecutaComparacion(self.sat_id,self.tlesTeme,self.crudo_mision)
+        self.boton_grafico.setEnabled(True)
+        
+    def graficar(self):
+        VerGraficoMision()
+        
+    def salir(self):
+        exit()
+        
         
 def IniciaApp():
     QApplication.setStyle("plastique")
