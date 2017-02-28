@@ -16,7 +16,7 @@ from SistReferencia.sist_deCoordenadas import vncSis
 Hace las diferencias
 Grafica
 """
-def generaTEME(tles):
+def generaTEME(tles,sat_id):
     listaTle={}
     for i in tles:
         tle1=tle_info(i)
@@ -24,7 +24,7 @@ def generaTEME(tles):
         r,v=tle1.propagaTLE()
         listaTle[fecha]=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
     listaTle=sorted(listaTle.items())
-    archivo='TEME_SGP4_SACD_xyz.txt'
+    archivo=str(sat_id)+'_xyz.txt'
     salidaTle=open('../TleAdmin/crudosTLE/'+archivo,'w+')
     for k in listaTle:        
         infoa=str(k[0])
@@ -190,7 +190,7 @@ def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):
     """
     
     gpsf=open('../CodsAdmin/TOD_O/TOD_CODS_SACD_xyz.txt','r')
-    tlef=open('../TleAdmin/crudosTLE/TEME_SGP4_SACD_xyz.txt','r')
+    tlef=open('../TleAdmin/crudosTLE/'+ArchivoTLE,'r')
     
     gpslista=gpsf.readlines()
     tlelista=tlef.readlines()
@@ -200,10 +200,11 @@ def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):
     print 'Total de filas de GPS = ',tot
     print 'Total de Tles = ', len(tlelista)
     print 'Procesando ... '
-
-    difTOD=open('../visual/archivos/diferenciasTOD','w')
-    archivo='diferenciasVNC'
-    difVNC=open('../visual/archivos/'+archivo,'w')
+    
+    #Arhivo de dif en el sistema TOD
+    #difTOD=open('../visual/archivos/diferenciasTOD','w')
+    archivo='difCods_'+str(sat_id)
+    difVNC=open('../Ajustar/diferencias/'+archivo,'w')
     r=[]
     rp=[]
     df=[]
@@ -228,15 +229,16 @@ def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):
         dif_vy=vy-float(interpol_ephem[6])
         dif_vz=vz-float(interpol_ephem[7])
         dfv=[dif_vx,dif_vy,dif_vz]
-        info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+' '+str(dif_vx)+' '+str(dif_vy)+' '+str(dif_vz)+'\n'
-        difTOD.write(info)
         u,v,w=vncSis(r,rp,df)
         uu,vv,ww=vncSis(r, rp, dfv)
         info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(u)+' '+str(v)+' '+str(w)+' '+str(uu)+' '+str(vv)+' '+str(ww)+'\n'
-        difVNC.write(info1)        
+        difVNC.write(info1)   
+        #info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+' '+str(dif_vx)+' '+str(dif_vy)+' '+str(dif_vz)+'\n'
+        #difTOD.write(info)
+             
 
     fin=time()  
-            
+    difVNC.close()       
     print 'FIN', 'Tiempo de Ejecucion = ', fin-inicio
     
     return archivo

@@ -9,7 +9,7 @@ from PyQt4.QtCore import *
 from Comparar.TleVsCods import generaTEME
 from Comparar.TleVsCods import EjecutaComparacion
 from Estadistica.maCovar import EjecutaMaCovarCODS
-from visual.TlevsCodsGraf import VerGrafico
+from visual.TlevsCodsGraf import VerGraficoMision
 
 class ProcCODS(QWidget):
     
@@ -132,8 +132,8 @@ class ProcCODS(QWidget):
         """
         Acciones
         """
-        self.listaSat.currentIndexChanged.connect(self.selectionchange)
 
+        self.listaSat.currentIndexChanged.connect(self.selectionchange)
         
         self.boton_salir.clicked.connect(self.salir)
         self.boton_cargar_tle.clicked.connect(self.ArchivoTle)
@@ -184,7 +184,7 @@ class ProcCODS(QWidget):
                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
         
     def verGrafico(self):
-        VerGrafico()
+        VerGraficoMision()
         
     def salir(self):
         self.close()

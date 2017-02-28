@@ -13,6 +13,7 @@ import datetime as dt
 def VerGrafico(archivo):
     f=open('../AjustarTLE/diferencias/'+archivo,'r')
     listas=f.readlines()
+    archivo_grafico=str('graf_'+archivo.split('_')[-1]+'pw.png')
     
     data0=[]
     data1=[]
@@ -79,5 +80,7 @@ def VerGrafico(archivo):
     
     fig.suptitle('Diferencias y Funcion de Ajuste (TLE vs TLE)')
     plt.xlabel('Epoca')
-    plt.savefig('../visual/archivos/dif_pairwise.png')
+    plt.savefig('../visual/archivos/'+archivo_grafico)
     plt.show()
+    
+    return archivo_grafico

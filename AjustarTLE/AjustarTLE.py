@@ -6,7 +6,7 @@ a fin de obtener una matriz de covarianza con el error.
 
 @author: mcvalenti
 '''
-import glob, os.path, time
+import glob
 import operator
 import numpy as np
 from sgp4.earth_gravity import wgs72
@@ -181,8 +181,9 @@ def tleSecundario(tlesec,ffin):
 def difTle(tleOrdenados,cantidad_tles):
     """
     ---------------------------------------------------------------
+    Diferencias de Osweiler. (Pair-Wise Differencing)
     Calcula las diferencias entre TLE primario y secundarios
-    en el sistema u,v y w. 
+    en el sistema v,n y c;  o (ric). 
     Lo hace en forma iterativa, recorriendo todos los TLE a fin
     de que todos son primarios en algun momento.
     ---------------------------------------------------------------
@@ -212,9 +213,6 @@ def difTle(tleOrdenados,cantidad_tles):
 #             vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
-#             inforepo=tlesec+' '+str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
-#     #        inforepo=tlesec+' '+str(fsec)+' '+str(pos[0])+' '+str(pos[1])+' '+str(pos[2])+str(vel[0])+' '+str(vel[1])+' '+str(vel[2])+'\n'
-#             print inforepo
 #     
     return {}
 

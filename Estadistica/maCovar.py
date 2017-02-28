@@ -119,15 +119,12 @@ def EjecutaMaCovar(archivo):
         wv.append(float(campos[7]))
     maCovar=maCovTLE(u, v, w, uv, vv, wv)
     
-    
-    csvsalida = open('../main/matrices/'+archivo+'.csv', 'w')
+    ma_archivo='ma'+str(archivo.split('_')[-1])
+    csvsalida = open('../main/matrices/'+ma_archivo+'.csv', 'w')
     salida = csv.writer(csvsalida)
     salida.writerows(maCovar)
     
-    print 'Ma. de Covarianza de: ', archivo    
-    print maCovar
-    
-    return maCovar
+    return maCovar, ma_archivo+'.csv'
 
 def EjecutaMaCovarCODS(archivo):
     files=glob.glob('../main/matrices/*')
@@ -158,8 +155,8 @@ def EjecutaMaCovarCODS(archivo):
     salida = csv.writer(csvsalida)
     salida.writerows(maCovar)
     
-    print 'Ma. de Covarianza de: ', archivo    
-    print maCovar
+#     print 'Ma. de Covarianza de: ', archivo    
+#     print maCovar
     
     return maCovar
     

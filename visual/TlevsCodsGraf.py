@@ -47,12 +47,10 @@ def AjustePol():
     pass
     
 
-def VerGraficoMision():
-#if __name__=='__main__':
-    
-#    datos=open('../visual/archivos/diferenciasTOD','r')
-    datos=open('../visual/archivos/diferenciasVNC','r')
-    listas=datos.readlines()
+def VerGraficoMision(archivo):
+    f=open('../Ajustar/diferencias/'+archivo,'r')
+    listas=f.readlines()
+    archivo_graf_cods=str('graf_'+archivo.split('_')[-1]+'cods.png')
     data0=[]
     data1=[]
     data2=[]
@@ -101,12 +99,12 @@ def VerGraficoMision():
     ax2.grid(True)
     ax3.grid(True)
     
-    my_plotter(ax1, x, y1, {'marker':'d'})
-    my_plotter(ax1, x, data1, {'marker':'x'})
-    my_plotter(ax2, x, data2, {'marker':'x'})
-    my_plotter(ax2, x, y2, {'marker':'v'})
-    my_plotter(ax3, x, data3, {'marker':'x'})
-    my_plotter(ax3, x, y3, {'marker':'o'})
+    ax1.plot_date(x, y1,'r--')
+    ax1.plot_date(x, data1,'x')
+    ax2.plot_date(x, data2,'x')
+    ax2.plot_date( x, y2,'r--')
+    ax3.plot_date(x, data3,'x')
+    ax3.plot_date(x, y3,'r--')
 
-    plt.savefig('../visual/archivos/dif_mision.png')
+    plt.savefig('../visual/archivos/'+archivo_graf_cods)
     plt.show()
