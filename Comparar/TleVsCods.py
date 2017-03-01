@@ -1,5 +1,8 @@
 '''
 Created on 17/01/2017
+Compara cada SV, de los TLEs
+con los valores interpolados de los datos CODS.
+Realiza un ajuste y grafica.
 
 @author: mcvalenti
 '''
@@ -9,17 +12,14 @@ from time import time
 from scipy.interpolate import barycentric_interpolate
 from funcionesUtiles.funciones import toTimestamp
 from TleAdmin.TleArchivos import setTLE
-from TleAdmin.TLE import tle_info
+from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis
 
-"""
-Hace las diferencias
-Grafica
-"""
+
 def generaTEME(tles,sat_id):
     listaTle={}
     for i in tles:
-        tle1=tle_info(i)
+        tle1=Tle(i)
         fecha=tle1.epoca()
         r,v=tle1.propagaTLE()
         listaTle[fecha]=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
@@ -162,29 +162,11 @@ def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):
         ....
         ....
     output:
-        diferenciasTOD: (../visual/archivos/diferenciasTOD)
-        diferenciasVNC: (../visual/archivos/)
+        diferenciasVNC: (../visual/archivos/'difCods_'+str(sat_id))
     """
-    
-    
-    
-    
-    """
-    Borro los archivos generados para otro satelite.
-        carpeta de tles: TleAdmin/tle
-        carpeta de diferencias: AjustarTLE/diferencias
-        carpeta de graficos: Visual/graficos
-    """
+
     inicio=time()
-#     
-#     files=glob.glob('../TleAdmin/tle/*')
-#     for filename in files:
-#         os.unlink(filename)  
-#     
-#     setTLE(sat_id, ArchivoTLE)
-#     tles = glob.glob('../TleAdmin/tle/*')
-#     generaTEME(tles) 
-    
+
     """
     Comparacion HARDCODEADO!!!!!
     """
@@ -229,13 +211,12 @@ def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):
         dif_vy=vy-float(interpol_ephem[6])
         dif_vz=vz-float(interpol_ephem[7])
         dfv=[dif_vx,dif_vy,dif_vz]
-        u,v,w=vncSis(r,rp,df)
+        v,n,c=vncSis(r,rp,df)
         uu,vv,ww=vncSis(r, rp, dfv)
-        info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(u)+' '+str(v)+' '+str(w)+' '+str(uu)+' '+str(vv)+' '+str(ww)+'\n'
+        info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(uu)+' '+str(vv)+' '+str(ww)+'\n'
         difVNC.write(info1)   
         #info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+' '+str(dif_vx)+' '+str(dif_vy)+' '+str(dif_vz)+'\n'
-        #difTOD.write(info)
-             
+        #difTOD.write(info)          
 
     fin=time()  
     difVNC.close()       

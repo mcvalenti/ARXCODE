@@ -13,7 +13,7 @@ from sgp4.ext import days2mdhms
 from sgp4.ext import jday
 from datetime import datetime
 
-class tle_info:
+class Tle:
     
     def __init__(self,archivo):
         

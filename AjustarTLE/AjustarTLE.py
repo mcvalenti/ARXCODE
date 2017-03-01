@@ -12,7 +12,7 @@ import numpy as np
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from TleAdmin.TleArchivos import setTLE
-from TleAdmin.TLE import tle_info
+from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis, ricSis
 
 def seleccionSat():
@@ -76,7 +76,7 @@ def generadorDatos(lista):
     datos=[]
     for arch in lista:
         nombre=arch.split('/')[-1]
-        tle=tle_info(arch) # instancia un objeto de la clase  TLE
+        tle=Tle(arch) # instancia un objeto de la clase  TLE
         datos.append(tle.epoca()) # ejecuta un metodo de la clase TLE
         tledic[nombre]= datos
         datos=[]
@@ -131,7 +131,7 @@ def tlePrimario(tlepri):
     """
     whichconst = wgs72
     archivo='../TleAdmin/tle/'+tlepri
-    tle0=tle_info(archivo)
+    tle0=Tle(archivo)
     line1=tle0.linea1
     line2=tle0.linea2
     r,v = tle0.propagaTLE()
@@ -159,7 +159,7 @@ def tleSecundario(tlesec,ffin):
     """
     whichconst = wgs72
     archivo='../TleAdmin/tle/'+tlesec
-    tle1=tle_info(archivo)
+    tle1=Tle(archivo)
     line1=tle1.linea1
     line2=tle1.linea2
     satrec1 = twoline2rv(line1, line2, whichconst)
