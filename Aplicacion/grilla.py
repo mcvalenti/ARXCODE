@@ -61,7 +61,7 @@ class ProcARxCODE(QMainWindow):
         Despliega la ventana para el procesamiento de los TLE,
         mediante el metodo de Osweiler.
         """
-        ventana2=ProcManual()
+        ventana2=ProcTle()
         ventana2.exec_()
         
     def misProc(self):
@@ -72,7 +72,7 @@ class ProcARxCODE(QMainWindow):
         ventana3=ProcMision()
         ventana3.exec_()
 
-class ProcManual(QDialog):
+class ProcTle(QDialog):
 #     def __init__(self):
     def __init__(self,parent=None):
         QDialog.__init__(self,parent)

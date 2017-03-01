@@ -130,13 +130,13 @@ def tlePrimario(tlepri):
         ffin: epoca del TLE primario (datetime)
     """
     whichconst = wgs72
-    archivotle=open('../TleAdmin/tle/'+tlepri,'r')
-    lineas=archivotle.readlines()
-    line1=lineas[0]
-    line2=lineas[1]
+    archivo='../TleAdmin/tle/'+tlepri
+    tle0=tle_info(archivo)
+    line1=tle0.linea1
+    line2=tle0.linea2
+    r,v = tle0.propagaTLE()
     satrec = twoline2rv(line1, line2, whichconst)
     ffin=satrec.epoch
-    r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
 #    r,v = sgp4(satrec,0)
     xf,yf,zf=tuplaFloat(r)
     xv,yv,zv=tuplaFloat(v)
@@ -158,10 +158,10 @@ def tleSecundario(tlesec,ffin):
         fsec: epoca del TLE secundario
     """
     whichconst = wgs72
-    archivotle=open('../TleAdmin/tle/'+tlesec,'r')
-    lineas=archivotle.readlines()
-    line1=lineas[0]
-    line2=lineas[1]
+    archivo='../TleAdmin/tle/'+tlesec
+    tle1=tle_info(archivo)
+    line1=tle1.linea1
+    line2=tle1.linea2
     satrec1 = twoline2rv(line1, line2, whichconst)
     ffin_anno=ffin.year
     ffin_mes=ffin.month
