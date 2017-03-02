@@ -5,6 +5,8 @@ Created on 26/01/2017
 '''
 import os, glob
 from datetime import datetime
+from sgp4.earth_gravity import wgs72
+from sgp4.io import twoline2rv
 from TleAdmin.TLE import Tle
 from Comparar.TleVsCods import EjecutaComparacion, interpola, encuentraBordes
 
@@ -22,22 +24,19 @@ def sv_interpolados(tles):
     del Vector de Estado de CODS interpolado para las fechas
     correspondientes a los TLEs. 
     """
-
     gpsf=open('../CodsAdmin/TOD_O/TOD_CODS_SACD_xyz.txt','r')
     gpslista=gpsf.readlines()
-    
-
-    listaTle={}
+    l_tle=[]
     lineaInterpol=[]
     for i in tles:
         tle1=Tle(i)
         fecha=tle1.epoca()
         r,v=tle1.propagaTLE()
-        l_tle = str(fecha)+' '+str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
+        l_tle.append(str(fecha)+' '+str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2]))
         inferior, superior= encuentraBordes(gpslista,l_tle)
         lineaInterpol.append(interpola(l_tle,inferior,superior))
     
-        return lineaInterpol, tles
+    return lineaInterpol
 
 
 if __name__ == '__main__':
@@ -59,14 +58,21 @@ if __name__ == '__main__':
     if not os.path.exists(d4):
         os.mkdir(d4)
 
+    salida=open('codsOsweiler.dif','w')
     tles=glob.glob('../TleAdmin/tle/*')
     sv_interp=sv_interpolados(tles)
 
     date_fmt = '%Y-%m-%d %H:%M:%S'
+    whichconst=wgs72
     for li in sv_interp:
         fecha=li[:19]
         fecha1=datetime.strptime(fecha, date_fmt)
+        contenido=li.split()
+        r=[contenido[2],contenido[3],contenido[4]]
         for t in tles:
             tle0=Tle(t)
-            tle0.propagaTLE()
-#        pos, vel=satrec1.propagate(ffin_anno, ffin_mes, ffin_dia, ffin_hora, ffin_min, ffin_s)
+            line1=tle0.linea1
+            line2=tle0.linea2
+            satrec = twoline2rv(line1, line2, whichconst)
+            pos, vel=satrec.propagate(fecha1.year, fecha1.month, fecha1.day, fecha1.hour, fecha1.min, fecha1.sec)
+            dif_pos=r-pos
