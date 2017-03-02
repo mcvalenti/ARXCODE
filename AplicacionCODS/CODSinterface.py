@@ -3,13 +3,17 @@ Created on 14/02/2017
 
 @author: mcvalenti
 '''
-import sys
+import sys, random
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from Comparar.TleVsCods import generaTEME
 from Comparar.TleVsCods import EjecutaComparacion
 from Estadistica.maCovar import EjecutaMaCovarCODS
 from visual.TlevsCodsGraf import VerGraficoMision
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
+import matplotlib.pyplot as plt
+
 
 class ProcCODS(QWidget):
     
@@ -96,7 +100,16 @@ class ProcCODS(QWidget):
         OTROS
         """
         self.tableView       = QTableWidget()
-             
+        
+        """
+        FIGURA
+        """
+        # a figure instance to plot on
+        self.figure = plt.figure()
+        # this is the Canvas Widget that displays the `figure`
+        # it takes the `figure` instance as a parameter to __init__
+        self.canvas = FigureCanvas(self.figure)
+
         """
         GRILLA
         """
@@ -140,7 +153,8 @@ class ProcCODS(QWidget):
         self.boton_cargar_cods.clicked.connect(self.ArchivoCODS)
         self.boton_diferencias.clicked.connect(self.ProcDif)
         self.boton_ma_covar.clicked.connect(self.Macovar)
-        self.boton_grafico.clicked.connect(self.verGrafico)
+        #self.boton_grafico.clicked.connect(self.verGrafico)
+        self.boton_grafico.clicked.connect(self.plot)
         
     
     def selectionchange(self,i):
@@ -185,6 +199,22 @@ class ProcCODS(QWidget):
         
     def verGrafico(self):
         VerGraficoMision()
+        
+    def plot(self):
+        # random data
+        data = [random.random() for i in range(10)]
+
+        # create an axis
+        ax = self.figure.add_subplot(111)
+
+        # discards the old graph
+        ax.hold(False)
+
+        # plot data
+        ax.plot(data, '*-')
+
+        # refresh canvas
+        self.canvas.draw()
         
     def salir(self):
         self.close()

@@ -230,6 +230,7 @@ def difPrimario(nombre,largo):
         campos=contenido[c].split(',')
         info=campos[7]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+'\n'
         difP.write(info)
+        
     return salida
 
 #     """
