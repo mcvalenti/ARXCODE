@@ -91,25 +91,27 @@ if __name__ == '__main__':
     date_fmt = '%Y-%m-%d %H:%M:%S'
     whichconst=wgs72
     
+    m=0
     for k in cods_dic_ord:   
-        salida.write('+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n')
         fecha=k[0] 
         sv=k[1]
         r=np.array([float(sv.split()[0]),float(sv.split()[1]),float(sv.split()[2])])
         rp=np.array([float(sv.split()[3]),float(sv.split()[4]),float(sv.split()[5])])
-        for t in tles:
-            tle0=Tle(t)
+        item=range(0,len(tle_ordenados))
+        for j in item:
+            tle0=Tle('../TleAdmin/tle/'+tle_ordenados[j][0])
             fecha_tle=tle0.epoca()
             if fecha_tle <= fecha:
                 line1=tle0.linea1
                 line2=tle0.linea2
                 satrec = twoline2rv(line1, line2, whichconst)
                 pos, vel=satrec.propagate(fecha.year, fecha.month, fecha.day, fecha.hour, fecha.minute, fecha.second)
-                difx=[r[0]-float(pos[0]),r[1]-float(pos[1]),r[2]-float(pos[2])]
+                difx=[float(pos[0])-r[0],float(pos[1])-r[1],float(pos[2])-r[2]]
                 difv=[rp[0]-float(vel[0]),rp[1]-float(vel[1]),rp[2]-float(vel[2])]
                 v,n,c=vncSis(r,rp,difx)
                 vv,nn,cc=vncSis(r,rp,difv)
                 dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
-                salida.write(dato)
-                
+                if m < len(cods_dic_ord):
+                    salida.write(dato)
+                m=m+1
     print 'FIN'
