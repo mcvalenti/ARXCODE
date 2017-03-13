@@ -37,7 +37,8 @@ def sv_interpolados(tles):
         r,v=tle1.propagaTLE()
         fila=str(fecha)+' '+str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
         inferior, superior= encuentraBordes(gpslista,fila)
-        lineaInterpol.append(interpola(fila,inferior,superior))
+        sv_tle=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
+        lineaInterpol.append(interpola(fila,inferior,superior)+' '+sv_tle)
     return lineaInterpol
 
 
@@ -66,33 +67,32 @@ if __name__ == '__main__':
     tle_ordenados=ordenaTles(dic_tles)
     
     sv_interp=sv_interpolados(tles)
+    
 
     """
     Genero un diccionario de efemerides
-    Cods para luego ordenarlas.
+    fecha, SV CODS \n SV TLE.
     """
-    cods_dic={}
+    efem_dic={}
     fecha_int=[]
     m=0
     for li in sv_interp:
-        nombre='cods_ephem_'+str(m)
+        nombre='ephem_'+str(m)
         fecha=li[:19]
         fecha1=datetime.strptime(fecha, '%Y-%m-%d %H:%M:%S')
 #        fecha_int.append(fecha1) # ejecuta un metodo de la clase TLE
-        cods_dic[fecha1]= li[19:]
+        efem_dic[fecha1]= li[19:]
         m=m+1
-    cods_dic_ord=sorted(cods_dic.items(), reverse=True)
+    efem_dic_ord=sorted(efem_dic.items(), reverse=True)
 
-    print cods_dic
-    print '++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++'
-    print cods_dic_ord
-  
-
+    print efem_dic_ord
+   
+ 
     date_fmt = '%Y-%m-%d %H:%M:%S'
     whichconst=wgs72
-    
+     
     m=0
-    for k in cods_dic_ord:   
+    for k in efem_dic_ord:   
         fecha=k[0] 
         sv=k[1]
         r=np.array([float(sv.split()[0]),float(sv.split()[1]),float(sv.split()[2])])
@@ -111,7 +111,7 @@ if __name__ == '__main__':
                 v,n,c=vncSis(r,rp,difx)
                 vv,nn,cc=vncSis(r,rp,difv)
                 dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
-                if m < len(cods_dic_ord):
+                if m < len(efem_dic_ord):
                     salida.write(dato)
                 m=m+1
     print 'FIN'
