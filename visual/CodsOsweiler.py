@@ -1,8 +1,9 @@
 '''
-Created on 23/02/2017
+Created on 14/03/2017
 
 @author: mcvalenti
 '''
+
 import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
@@ -11,7 +12,7 @@ import datetime as dt
 
 
 def VerGrafico(archivo):
-    f=open('../AjustarTLE/diferencias/'+archivo,'r')
+    f=open('../main/'+archivo,'r')
     listas=f.readlines()
     archivo_grafico=str('graf_'+archivo.split('_')[-1]+'pw.png')
     
@@ -68,6 +69,7 @@ def VerGrafico(archivo):
     ax2.grid(True)
     ax3.grid(True)
     
+#    plt.ion()
     ax1.plot_date( x, y1,'r--',label='Coordenada V')
     ax1.plot_date(x, data1,'x')
     ax1.set_ylabel('Km')
@@ -78,7 +80,7 @@ def VerGrafico(archivo):
     ax3.plot_date(x, y3,'r--')
     ax3.set_ylabel('Km')
     
-    fig.suptitle('Diferencias y Funcion de Ajuste (TLE vs TLE + SGP4)')
+    fig.suptitle('Diferencias y Funcion de Ajuste (CODS vs TLE+SGP4)')
     plt.xlabel('Epoca')
     plt.savefig('../visual/archivos/'+archivo_grafico)
     plt.show()

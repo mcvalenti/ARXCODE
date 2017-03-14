@@ -3,7 +3,7 @@ Created on Feb 5, 2017
 
 @author: mcvalenti
 '''
-import sys, glob, os
+import sys, glob, os, re
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from TleAdmin.TleArchivos import setTLE
@@ -108,7 +108,7 @@ class ProcTle(QDialog):
         self.outputs         = QLabel('Outputs')
         self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
         """
-        Botonoes
+        Botones
         """
         self.boton_norad     = QPushButton('Space-Track')
         self.boton_equipo    = QPushButton('Directorios')
@@ -244,7 +244,7 @@ class ProcTle(QDialog):
         self.arch_macovar_edit.setText(self.arch_macovar)        
     
     def salir(self):
-        exit()
+        self.accept()
 
 class ConexionNorad(QDialog):
 #     def __init__(self):
@@ -429,6 +429,7 @@ class ProcMision(QDialog):
         self.boton_dif.clicked.connect(self.calcDif)
         self.boton_grafico.clicked.connect(self.graficar)
         self.boton_macovar.clicked.connect(self.Macovar)
+#        self.datos_mis_edit.textChanged.connect(self.validar_nombre)
                 
         self.setWindowTitle('PROCESAMIENTO de DATOS CODS')
         self.setLayout(self.grilla) 
@@ -450,6 +451,13 @@ class ProcMision(QDialog):
         self.datos_mis_edit.setText(self.crudo_mision)
         self.boton_dif.setEnabled(True)
         
+#     def validar_nombre(self):
+#         nombre = self.nombre.text()
+# 
+#         if nombre == "":
+#             self.nombre.setStyleSheet("border: 1px solid yellow;")
+#             return False
+        
     def calcDif(self):
         self.dif_cvstle=EjecutaComparacion(self.sat_id,self.tlesTeme,self.crudo_mision)
         self.boton_grafico.setEnabled(True)
@@ -466,7 +474,7 @@ class ProcMision(QDialog):
         VerGraficoMision(self.dif_cvstle)
         
     def salir(self):
-        exit()
+        self.accept()
         
         
 #def IniciaApp():
