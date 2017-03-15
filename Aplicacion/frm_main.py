@@ -19,7 +19,8 @@ class ProcARxCODE(QMainWindow):
     
     def __init__(self):
         super(ProcARxCODE, self).__init__()
-
+        
+        
         extractAction = QAction("Salir", self)
         extractAction.setShortcut("Ctrl+Q")
         extractAction.setStatusTip('Leave The App')
@@ -31,26 +32,52 @@ class ProcARxCODE(QMainWindow):
 #         tleAction= QWidgetAction('TLE',self)
 #         tleAction.setStatusTip('Procesa datos TLE')
 #         tleAction.triggered.connect(self.ProcManual)
+        self.center()
         self.statusBar()
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
                 
-        self.resize(300, 300)
+        self.resize(900, 600)
         self.setWindowTitle('ARxCODE')
+        
+        #IMAGEN
+#         palette    = QPalette()
+#         palette.setBrush(QPalette.Background,QBrush(QPixmap('../visual/imagenes/cords_contol.jpg')))
+#         self.setPalette(palette)
+
+                        # SECCIONES
+        
+#        self.setDockOptions(QMainWindow.ForceTabbedDocks )
+
+#        self.dockList = []
+#        for dockName in 'NUEVO_CDM ENCUENTROS_ANTERIORES PROCESAMIENTO_MANUAL'.split():
+        dock = QDockWidget("NUEVO CDM")
+        dock1 = QDockWidget("ENCUENTROS ANTERIORES")
+#             dock.setWidget(QListWidget())
+        dock.setAllowedAreas(Qt.TopDockWidgetArea)
+        self.addDockWidget(Qt.TopDockWidgetArea, dock)
+        self.addDockWidget(Qt.TopDockWidgetArea, dock1)
+
         self.home()
+        
+    
+    def center(self):
+        screen = QDesktopWidget().screenGeometry()
+        size = self.geometry()
+        self.move((screen.width() - size.width())/2, (screen.height() - size.height())/2)
     
     def home(self):
         
-        self.CDM_label       = QLabel('No se registran CDM')
         self.boton_ProManual = QPushButton('Procesamiento de TLE',self)
         self.boton_mision    = QPushButton('Procesamiento de Datos de Mision',self)
-        self.boton_ProManual.move(100,100)
-        self.boton_mision.move(100,200)
-        self.boton_ProManual.resize(self.boton_ProManual.minimumSizeHint())
-        self.boton_mision.resize(self.boton_mision.minimumSizeHint())
+        self.boton_ProManual.move(100,500)
+        self.boton_ProManual.setFixedSize(160,60)
+        self.boton_mision.move(400,500)
+        self.boton_mision.setFixedSize(240,60)
         self.boton_ProManual.clicked.connect(self.tleProc)
         self.boton_mision.clicked.connect(self.misProc)
+        
         self.show()
         
     def close_application(self):
