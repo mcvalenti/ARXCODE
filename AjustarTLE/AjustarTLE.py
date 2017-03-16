@@ -220,6 +220,13 @@ def difPrimario(nombre,largo):
     """
     Tabla para la estimacion de la Ma. de Covarianza.
     archivo: difPrimario 
+    ----------------------------------------------------------------
+    input
+        nombre: nombre de archivo que identifica el procesamiento. (string)
+        largo: cantidad de TLEs en el set, menos  uno. (integer)
+    output
+        salida: nombre del archivo que contiene la diferencias solo contra 
+        el SV de referencia. (string), path: '../AjustarTLE/diferencias/'
     """
      
     difG=open('../AjustarTLE/diferencias/difTotal','r')

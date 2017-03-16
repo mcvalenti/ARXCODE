@@ -10,6 +10,7 @@ en forma ordenada, con un unico sv (state vector) por fecha y epoca.
 
 import os, glob
 from datetime import datetime
+from gi.overrides.keysyms import Pause
 
 
 def ordenaTOD(lista):
@@ -24,8 +25,13 @@ def ordenaTOD(lista):
         codsOrdenados: lista de lista ordenada (fecha, nombre de archivo)
     """
     archCods = {}
+    orden=0
     for nombre in lista:
+        print 'ordenando fila = ', orden
         nombreCode = nombre.split('_')
+        if nombre == lista[1164]:
+             print 'dejame ver nombre', nombre
+             break
         yy=int(nombreCode[2][0:4])
         mes=int(nombreCode[2][4:6])
         dia=int(nombreCode[2][6:8])
@@ -34,16 +40,17 @@ def ordenaTOD(lista):
         seg=int(nombreCode[3][4:6])
         fecha = datetime(yy,mes,dia,hs,mi,seg)
         archCods[fecha]=nombre
+        orden=orden+1
     codsOrdenados=sorted(archCods.items())
     return codsOrdenados
 
-def generaTOD(lista):
-    
+def generaTOD(lista):    
     ephemFile = open('TOD_O/TOD_CODS_SACD_xyz.txt','a')
-    
     listafechas=[]
     claveUnica=' '
+    m=0
     for i in TODlista:
+        print 'Procesando archivo numero = ',m
         f=open(i[1],'r')
         contenido=f.readlines()
         contenido.reverse()
@@ -56,13 +63,13 @@ def generaTOD(lista):
                 continue
             ephemFile.write(c)
             listafechas.append(claveUnica)
-    
+        m=m+1
 
 if __name__ == '__main__':  
     """
     Se listan los archivos TOD de CODS
     """
-    os.remove('TOD_O/TOD_CODS_SACD_xyz.txt')
+#    os.remove('TOD_O/TOD_CODS_SACD_xyz.txt')
     lista=glob.glob('TOD_O/*')
     print ('Cantidad de archivos a procesar= %s' % (len(lista)))
     """
