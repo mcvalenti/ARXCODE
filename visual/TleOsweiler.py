@@ -59,7 +59,7 @@ def VerGrafico(archivo):
     """
     GRAFICO
     """
-    
+     
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
     ax1.xaxis.set_major_formatter(date_formatter)
     ax2.xaxis.set_major_formatter(date_formatter)

@@ -1,14 +1,15 @@
 \select@language {spanish}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
 \contentsline {subsection}{\numberline {1.0.1}Regulaciones Nacionales e Internacionales}{1}{subsection.1.0.1}
-\contentsline {subsection}{\numberline {1.0.2}}{1}{subsection.1.0.2}
+\contentsline {subsection}{\numberline {1.0.2}Planteo del Problema}{1}{subsection.1.0.2}
 \contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{2}{chapter.2}
 \contentsline {subsection}{\numberline {2.0.3}CDM}{2}{subsection.2.0.3}
 \contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a}{3}{chapter.3}
-\contentsline {subsection}{\numberline {3.0.4}Tratamiento sobre Datos de Misi\'on}{3}{subsection.3.0.4}
-\contentsline {subsubsection}{\numberline {3.0.4.1}Ma. de Covarianza Simplificada}{3}{subsubsection.3.0.4.1}
-\contentsline {subsubsection}{\numberline {3.0.4.2}Ma. de Covarianza Ajustada}{3}{subsubsection.3.0.4.2}
-\contentsline {subsubsection}{\numberline {3.0.4.3}Procedimiento de Ajuste}{3}{subsubsection.3.0.4.3}
-\contentsline {chapter}{\numberline {4}Resultados}{5}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusiones}{6}{chapter.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{7}{chapter.5}
+\contentsline {subsection}{\numberline {3.0.4}M\'etodo de Osweiler}{3}{subsection.3.0.4}
+\contentsline {subsection}{\numberline {3.0.5}Tratamiento sobre Datos de Misi\'on}{3}{subsection.3.0.5}
+\contentsline {subsubsection}{\numberline {3.0.5.1}Ma. de Covarianza Simplificada}{4}{subsubsection.3.0.5.1}
+\contentsline {subsubsection}{\numberline {3.0.5.2}Ma. de Covarianza Ajustada}{5}{subsubsection.3.0.5.2}
+\contentsline {subsubsection}{\numberline {3.0.5.3}Procedimiento de Ajuste}{5}{subsubsection.3.0.5.3}
+\contentsline {chapter}{\numberline {4}Resultados}{6}{chapter.4}
+\contentsline {chapter}{\numberline {5}Conclusiones}{7}{chapter.5}
+\contentsline {chapter}{Bibliograf\'{\i }a}{8}{chapter.5}

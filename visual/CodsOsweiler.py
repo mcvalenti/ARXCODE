@@ -12,7 +12,7 @@ import datetime as dt
 
 
 def VerGrafico(archivo):
-    f=open('../main/'+archivo,'r')
+    f=open('../Comparar/'+archivo,'r')
     listas=f.readlines()
     archivo_grafico=str('graf_'+archivo.split('_')[-1]+'pw.png')
     
