@@ -213,7 +213,7 @@ def difTle(tleOrdenados,cantidad_tles):
 #             vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
-#     
+    dtot.close()
     return {}
 
 def difPrimario(nombre,largo):
@@ -231,14 +231,13 @@ def difPrimario(nombre,largo):
      
     difG=open('../AjustarTLE/diferencias/difTotal','r')
     contenido=difG.readlines()
-    salida='dif_'+nombre
-    difP=open('../AjustarTLE/diferencias/'+salida,'w')
+    difP=open('../AjustarTLE/diferencias/'+nombre,'w')
     for c in range(largo):
         campos=contenido[c].split(',')
         info=campos[7]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+'\n'
         difP.write(info)
         
-    return salida
+    return nombre
 
 #     """
 #     Verificacion de generacion del archivo con las diferencias

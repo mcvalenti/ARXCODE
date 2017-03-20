@@ -11,10 +11,10 @@ import matplotlib.dates as mdates
 import datetime as dt
 
 
-def VerGrafico(archivo):
+def VerGraficoCods(archivo):
     f=open('../Comparar/'+archivo,'r')
     listas=f.readlines()
-    archivo_grafico=str('graf_'+archivo.split('_')[-1]+'pw.png')
+    archivo_grafico=str(archivo+'.png')
     
     data0=[]
     data1=[]

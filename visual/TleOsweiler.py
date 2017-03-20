@@ -13,7 +13,7 @@ import datetime as dt
 def VerGrafico(archivo):
     f=open('../AjustarTLE/diferencias/'+archivo,'r')
     listas=f.readlines()
-    archivo_grafico=str('graf_'+archivo.split('_')[-1]+'pw.png')
+    archivo_grafico=str(archivo.split('.')[0]+'_tle.png')
     
     data0=[]
     data1=[]

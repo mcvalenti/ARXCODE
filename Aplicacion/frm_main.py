@@ -11,9 +11,10 @@ from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
+from Comparar.TlevsCodsOSW import ejecutaProceamientoCods
 from visual.TleOsweiler import VerGrafico
-from Comparar.TleVsCods import generaTEME, EjecutaComparacion
-from visual.TlevsCodsGraf import VerGraficoMision
+#from visual.TlevsCodsGraf import VerGraficoMision
+from visual.CodsOsweiler import VerGraficoCods
 
 class ProcARxCODE(QMainWindow):
     
@@ -100,15 +101,18 @@ class ProcARxCODE(QMainWindow):
         ventana3.exec_()
 
 class ProcTle(QDialog):
-#     def __init__(self):
+
     def __init__(self,parent=None):
         QDialog.__init__(self,parent)
 
+        self.resize(1200, 600)
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
 
         self.filename = ''
         self.sat_id='99999'
+        self.fini=''
+        self.ffin=''
         self.tles=0
         self.tleOrdenados={}
         self.diferencias=''
@@ -132,6 +136,7 @@ class ProcTle(QDialog):
         self.verificacion    = QLabel('Verificacion de Datos:')
         self.sat_id_label    = QLabel('NORAD_ID')
         self.cant_tles       = QLabel('Cantidad de TLEs')
+        self.tle_pri         = QLabel('Ultimo TLE del set.')
         self.outputs         = QLabel('Outputs')
         self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
         """
@@ -158,6 +163,7 @@ class ProcTle(QDialog):
         """
         OTROS
         """
+        self.tle_pri_edit    = QTextEdit()
         self.tableView       = QTableWidget()
         
         grid = QGridLayout()
@@ -180,6 +186,8 @@ class ProcTle(QDialog):
         grid.addWidget(self.cant_tles_edit,8,1)
         grid.addWidget(self.boton_procesa,8,2)
         grid.addWidget(self.estado_proc_edit,8,4)
+        grid.addWidget(self.tle_pri,9,0)
+        grid.addWidget(self.tle_pri_edit,9,1,1,4)
         grid.addWidget(self.boton_grafica,10,2)
         grid.addWidget(self.arch_grafico_edit,10,4)
         grid.addWidget(self.ma_covar_label,11,0) 
@@ -212,7 +220,7 @@ class ProcTle(QDialog):
         print "Procesando la Conexion con NORAD para la Descarga..."
         self.w = ConexionNorad()
         self.w.exec_()
-        self.sat_id, self.filename = self.w.datos()
+        self.sat_id, self.fini, self.ffin, self.filename = self.w.datos()
         self.arch_cargado.setText(self.filename)
         self.sat_id_line.setText(self.sat_id)  
         
@@ -245,7 +253,18 @@ class ProcTle(QDialog):
         self.tledic=generadorDatos(self.lista)
         self.tleOrdenados=ordenaTles(self.tledic)
         self.boton_procesa.setEnabled(True)
-        
+        """
+        Impresiones de info de TLEs.
+        """
+        print 'TLE PRIMARIO'
+        print '-----------------------------------------------------'
+        tle_primario = Tle('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
+        linea1= tle_primario.linea1
+        linea2= tle_primario.linea2
+        self.tle_pri_edit.setText(linea1+'\n'+linea2)
+        print linea1
+        print linea2
+        print '-----------------------------------------------------'
     
     def procesar(self):
         files=glob.glob('../AjustarTLE/diferencias/*')
@@ -281,6 +300,8 @@ class ConexionNorad(QDialog):
         self.setWindowModality(Qt.ApplicationModal)
         self.archTLE=''
         self.cat_id=''
+        self.fini=''
+        self.ffin=''
 #         
         self.palette = QPalette()
         self.palette.setColor(QPalette.Background,Qt.lightGray)
@@ -358,10 +379,11 @@ class ConexionNorad(QDialog):
         self.setWindowTitle('Conexion con NORAD')
 #         
     def iniciaSolicitud(self):
-        self.nombreTle.setText(self.nombreTle.text())
+        
         self.usu1   = str(self.usuario_edit.text())
         self.passw1 = str(self.clave_edit.text())
         self.cat_id = str(self.norad_id_edit.text())
+        self.nombreTle.setText(self.cat_id+'_'+self.fini+'_'+self.ffin+'.tle')
         self.tle=importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
         self.archTLE=self.nombreTle.text()
 #             
@@ -369,46 +391,55 @@ class ConexionNorad(QDialog):
         self.date = self.cal.selectedDate()
         self.pydate = self.date.toPyDate()
         self.st.setText(self.date.toString())
+        self.fini=str(self.pydate.year)+str(self.pydate.month)+str(self.pydate.day)
 #         
     def verFfin(self):
         self.date1 = self.cal1.selectedDate()
         self.pydate1 = self.date1.toPyDate()
         self.et.setText(self.date1.toString())
+        self.ffin=str(self.pydate1.year)+str(self.pydate1.month)+str(self.pydate1.day)
         
     def datos(self):
-        return self.cat_id, self.archTLE
+        return self.cat_id, self.fini, self.ffin, self.archTLE
     
 class ProcMision(QDialog):
+    """
+    REQUIERE CORRER PRIMERO EL PROCESAMIENTO TLE!!!
+    Utiliza los datos ya cargados en TleAdmin/tle y los Datos de los archivos CODS.
+    Carga el set de datos TLE y realiza el metodo de Osewiler para estimar las diferenicas
+    """
 
     def __init__(self,parent=None):
         QDialog.__init__(self,parent)
 
         self.setWindowModality(Qt.ApplicationModal)
+        self.resize(1700, 700)
         self.initUI()
         
         self.sat_id='99999'
         self.sat_nombre=''
-        self.crudo_mision=''
-        self.tlesTeme=''
+        self.linea1=''
+        self.linea2=''
+        self.grafico_arch=''
         self.dif_cvstle= ''
         self.macovarT=''
         
     def initUI(self):
         self.grilla = QGridLayout()
-        self.grilla.setSpacing(2)
+        self.grilla.setSpacing(10)
         
         """
         Etiquetas
         """
         self.mision_lab     = QLabel('Mision')
+        self.fechaini_lab   = QLabel('Fecha Inicio')
+        self.fechafin_lab   = QLabel('Fecha Fin')
         self.ma_lab       = QLabel('Ma. Varianza-Covarianza')
         
         """
         Botones
         """
-        self.boton_tle_xyz    = QPushButton('Datos TLE (sist:TEME)')
-        self.boton_datos_mis  = QPushButton('Datos de Mision')
-        self.boton_dif        = QPushButton('Calcular diferencias')
+        self.boton_procesar   = QPushButton('Procesar')
         self.boton_grafico    = QPushButton('Ver Grafico')
         self.boton_macovar    = QPushButton('Calcular Matriz')
         self.boton_salir      = QPushButton('Salir')
@@ -416,9 +447,10 @@ class ProcMision(QDialog):
         """
         Campos de Edicion
         """
-        self.tle_xyz_edit   = QLineEdit()
-        self.datos_mis_edit = QLineEdit()
-        
+        self.fechaini_edit   = QLineEdit()
+        self.fechafin_edit   = QLineEdit()
+        self.tlepri_edit     = QTextEdit()
+                
         """
         Lista desplegada
         """
@@ -434,27 +466,25 @@ class ProcMision(QDialog):
         
         self.grilla.addWidget(self.mision_lab,1,0)
         self.grilla.addWidget(self.listaSat,1,1)
-        self.grilla.addWidget(self.boton_tle_xyz,2,0)
-        self.grilla.addWidget(self.tle_xyz_edit ,2,1)
-        self.grilla.addWidget(self.boton_datos_mis,3,0)
-        self.grilla.addWidget(self.datos_mis_edit,3,1)
-        self.grilla.addWidget(self.boton_dif,4,1)
-        self.grilla.addWidget(self.boton_grafico,5,1)
-        self.grilla.addWidget(self.tableView,6,0,7,1)
-        self.grilla.addWidget(self.boton_macovar,7,1)
-        self.grilla.addWidget(self.boton_salir,15,1)
+        self.grilla.addWidget(self.boton_procesar,2,1)
+        self.grilla.addWidget(self.fechaini_lab,3,0)
+        self.grilla.addWidget(self.fechaini_edit,3,1)
+        self.grilla.addWidget(self.fechafin_lab,4,0)
+        self.grilla.addWidget(self.fechafin_edit,4,1)
+        self.grilla.addWidget(self.tlepri_edit,5,1)
+        self.grilla.addWidget(self.boton_grafico,6,1)
+        self.grilla.addWidget(self.tableView,7,0,7,1)
+        self.grilla.addWidget(self.boton_macovar,8,1)
+        self.grilla.addWidget(self.boton_salir,17,1)
         
         """
         Acciones
         """
         self.listaSat.currentIndexChanged.connect(self.selectionchange)
-        self.boton_dif.setEnabled(False)
+        self.boton_procesar.clicked.connect(self.procesarCods)
         self.boton_grafico.setEnabled(False)
-        self.boton_tle_xyz.clicked.connect(self.tleTeme)
-        self.boton_datos_mis.clicked.connect(self.ArchivoCODS)
         self.boton_salir.clicked.connect(self.salir)
-        self.boton_dif.clicked.connect(self.calcDif)
-        self.boton_grafico.clicked.connect(self.graficar)
+        self.boton_grafico.clicked.connect(self.verGrafico)
         self.boton_macovar.clicked.connect(self.Macovar)
 #        self.datos_mis_edit.textChanged.connect(self.validar_nombre)
                 
@@ -466,17 +496,13 @@ class ProcMision(QDialog):
         self.dic_satelites={'SAC-D':37673,'LAGEOS':8820,'ICESAT':27642}
         self.sat_id=self.dic_satelites[str(self.sat_nombre)]
         
-    def tleTeme(self):
-        tles = glob.glob('../TleAdmin/tle/*')
-        self.tlesTeme=generaTEME(tles,self.sat_id) 
-        self.tle_xyz_edit.setText(str(self.tlesTeme))
+    def procesarCods(self):
+        self.linea1, self.linea2, self.grafico_arch = ejecutaProceamientoCods()
+        self.tlepri_edit.setText(self.linea1+'\n'+self.linea2)
+        self.boton_grafico.setEnabled(True)
         
-    def ArchivoCODS(self):  
-        fname1=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../CodsAdmin/TOD_O/*")
-        nombre1=str(fname1).split('/')[-1]
-        self.crudo_mision = nombre1
-        self.datos_mis_edit.setText(self.crudo_mision)
-        self.boton_dif.setEnabled(True)
+    def verGrafico(self):
+        VerGraficoCods(self.grafico_arch)
         
 #     def validar_nombre(self):
 #         nombre = self.nombre.text()
@@ -485,20 +511,15 @@ class ProcMision(QDialog):
 #             self.nombre.setStyleSheet("border: 1px solid yellow;")
 #             return False
         
-    def calcDif(self):
-        self.dif_cvstle=EjecutaComparacion(self.sat_id,self.tlesTeme,self.crudo_mision)
-        self.boton_grafico.setEnabled(True)
-        
     def Macovar(self):
-        self.macovarT=EjecutaMaCovarCODS(self.dif_cvstle)
+        self.macovarT=EjecutaMaCovarCODS(self.grafico_arch)
+                                         #self.dif_cvstle)
         self.tableView.setRowCount(len(self.macovarT))
         self.tableView.setColumnCount(len(self.macovarT))
         for i,fila in enumerate(self.macovarT):
             for j,col in enumerate(fila):
                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
-        
-    def graficar(self):
-        VerGraficoMision(self.dif_cvstle)
+
         
     def salir(self):
         self.accept()

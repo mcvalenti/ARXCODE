@@ -95,9 +95,9 @@ def maCovTLE(u, v, w, uv, vv, wv):
 
 
 def EjecutaMaCovar(archivo):
-    files=glob.glob('../main/matrices/*')
-    for filename in files:
-        os.unlink(filename)
+#     files=glob.glob('../main/matrices/*')
+#     for filename in files:
+#         os.unlink(filename)
 #    datoTipo=raw_input()
     u=[]
     v=[]
@@ -119,24 +119,24 @@ def EjecutaMaCovar(archivo):
         wv.append(float(campos[7]))
     maCovar=maCovTLE(u, v, w, uv, vv, wv)
     
-    ma_archivo='ma'+str(archivo.split('_')[-1])
-    csvsalida = open('../main/matrices/'+ma_archivo+'.csv', 'w')
+    ma_archivo=str(archivo.split('.')[0])+'_tle.csv'
+    csvsalida = open('../main/matrices/'+ma_archivo, 'w')
     salida = csv.writer(csvsalida)
     salida.writerows(maCovar)
     
-    return maCovar, ma_archivo+'.csv'
+    return maCovar, ma_archivo
 
 def EjecutaMaCovarCODS(archivo):
-    files=glob.glob('../main/matrices/*')
-    for filename in files:
-        os.unlink(filename)
+#     files=glob.glob('../main/matrices/*')
+#     for filename in files:
+#         os.unlink(filename)
     u=[]
     v=[]
     w=[]
     uv=[]
     vv=[]
     wv=[]
-    datos=open('../Ajustar/diferencias/'+archivo,'r')
+    datos=open('../Comparar/'+archivo,'r')
     datos1=datos.readlines()
     for l in datos1:
         campos=l.split()
@@ -151,7 +151,7 @@ def EjecutaMaCovarCODS(archivo):
     maCovar=maCovTLE(u, v, w, uv, vv, wv)
     
     
-    csvsalida = open('../main/matrices/'+archivo+'.csv', 'w')
+    csvsalida = open('../main/matrices/'+archivo.split('.')[0]+'_cods.csv', 'w')
     salida = csv.writer(csvsalida)
     salida.writerows(maCovar)
     

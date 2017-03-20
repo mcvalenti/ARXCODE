@@ -23,3 +23,4 @@ def setTLE(id_sat,crudo):
         doslineas=linea1+linea2
         salida.write(doslineas)
         m=m+1
+        salida.close()

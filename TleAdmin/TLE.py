@@ -30,7 +30,7 @@ class Tle:
         self.n=self.linea2.split()[7]
 
     def catID(self):
-        self.catID=self.linea1[1]
+        self.catID=self.linea1.split(' ')[1]
         return self.catID
         
     def epoca(self):
