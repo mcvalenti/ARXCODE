@@ -195,7 +195,12 @@ def difTle(tleOrdenados,cantidad_tles):
     """
 
     dtot=open('../AjustarTLE/diferencias/difTotal','w')
-    for i in range(cantidad_tles-1,0,-1):
+    
+    bin=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+    for i in range(cantidad_tles-1,0,-1):       
+        print '********************************************'
+        print 'procesando TLE primario numero = ', i
+        print '********************************************'
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
         item=range(i-1,-1,-1)
@@ -213,8 +218,31 @@ def difTle(tleOrdenados,cantidad_tles):
 #             vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
+            """
+            Clasificacion por bin.
+            """
+            rangos=np.array([[0,0.5],[0.5,1.5],[1.5,2.5],[2.5,3.5],[3.5,4.5],
+                     [4.5,5.5],[5.5,6.5],[6.5,7.5],[7.5,8.5],[8.5,9.5],
+                     [9.5,10.5],[10.5,11.5],[11.5,12.5],[12.5,13.5],[13.5,14.5]])
+            for i in range(15):
+                if dtfracdias >= rangos[i][0] and dtfracdias < rangos[i][1]:
+                    bin[i].append(infodiftot)
+            
+        for i in range(15):
+            print bin[i]
     dtot.close()
     return {}
+
+def genera_estadisticaBin(bin):
+    bin_num=[]
+    bin_x=[]
+    bin_y=[]
+    bin_z=[]
+    
+    
+
+    
+    
 
 def difPrimario(nombre,largo):
     """
@@ -238,6 +266,7 @@ def difPrimario(nombre,largo):
         difP.write(info)
         
     return nombre
+       
 
 #     """
 #     Verificacion de generacion del archivo con las diferencias
@@ -254,6 +283,3 @@ def difPrimario(nombre,largo):
         # gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
     
     #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)
-
-    
-
