@@ -4,12 +4,13 @@ Created on Feb 5, 2017
 @author: mcvalenti
 '''
 import sys, glob, os, re
+import numpy as np
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
-from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario
+from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 from Comparar.TlevsCodsOSW import ejecutaProceamientoCods
 from visual.TleOsweiler import VerGrafico
@@ -270,7 +271,8 @@ class ProcTle(QDialog):
         files=glob.glob('../AjustarTLE/diferencias/*')
         for filename in files:
             os.unlink(filename)
-        difTle(self.tleOrdenados, self.tles)
+        self.bin=difTle(self.tleOrdenados, self.tles)
+        genera_estadisticaBin(self.bin)
         self.diferencias=difPrimario(self.filename,self.tles-1)
         self.estado_proc_edit.setText(self.diferencias)
         self.boton_grafica.setEnabled(True)
@@ -484,7 +486,7 @@ class ProcMision(QDialog):
         self.boton_procesar.clicked.connect(self.procesarCods)
         self.boton_grafico.setEnabled(False)
         self.boton_salir.clicked.connect(self.salir)
-        self.boton_grafico.clicked.connect(self.verGrafico)
+#        self.boton_grafico.clicked.connect(self.verGrafico)
         self.boton_macovar.clicked.connect(self.Macovar)
 #        self.datos_mis_edit.textChanged.connect(self.validar_nombre)
                 
@@ -497,12 +499,13 @@ class ProcMision(QDialog):
         self.sat_id=self.dic_satelites[str(self.sat_nombre)]
         
     def procesarCods(self):
-        self.linea1, self.linea2, self.grafico_arch = ejecutaProceamientoCods()
+        ejecutaProceamientoCods()
+       # self.linea1, self.linea2, self.grafico_arch = ejecutaProceamientoCods()
         self.tlepri_edit.setText(self.linea1+'\n'+self.linea2)
         self.boton_grafico.setEnabled(True)
         
-    def verGrafico(self):
-        VerGraficoCods(self.grafico_arch)
+#     def verGrafico(self):
+#         VerGraficoCods(self.grafico_arch)
         
 #     def validar_nombre(self):
 #         nombre = self.nombre.text()
@@ -519,8 +522,7 @@ class ProcMision(QDialog):
         for i,fila in enumerate(self.macovarT):
             for j,col in enumerate(fila):
                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
-
-        
+   
     def salir(self):
         self.accept()
         
@@ -552,5 +554,3 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     ex = ProcARxCODE()
     sys.exit(app.exec_())
-
-

@@ -195,12 +195,12 @@ def difTle(tleOrdenados,cantidad_tles):
     """
 
     dtot=open('../AjustarTLE/diferencias/difTotal','w')
-    
+
     bin=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     for i in range(cantidad_tles-1,0,-1):       
-        print '********************************************'
-        print 'procesando TLE primario numero = ', i
-        print '********************************************'
+#         print '********************************************'
+#         print 'procesando TLE primario numero = ', i
+#         print '********************************************'
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
         item=range(i-1,-1,-1)
@@ -228,20 +228,36 @@ def difTle(tleOrdenados,cantidad_tles):
                 if dtfracdias >= rangos[i][0] and dtfracdias < rangos[i][1]:
                     bin[i].append(infodiftot)
             
-        for i in range(15):
-            print bin[i]
+#         for i in range(15):
+#             print bin[i]
+            
     dtot.close()
-    return {}
+    return bin
 
-def genera_estadisticaBin(bin):
-    bin_num=[]
-    bin_x=[]
-    bin_y=[]
-    bin_z=[]
+def genera_estadisticaBin(bin_lista):
     
-    
-
-    
+    for k in range(len(bin_lista)):
+        bin_x=[]
+        bin_y=[]
+        bin_z=[]
+        for m in bin_lista[k]:
+            campo=m.split(',')
+            bin_x.append(float(campo[1]))
+            bin_y.append(float(campo[2]))
+            bin_z.append(float(campo[3]))
+        media_x=np.mean(bin_x)
+        media_y=np.mean(bin_y)
+        media_z=np.mean(bin_z)
+        
+        prom_x=str(media_x)
+        prom_y=str(media_y)
+        prom_z=str(media_z)
+        
+        info ='BIN'+str(k)+' '+prom_x+' '+prom_y+' '+prom_z+'\n '        
+        print info
+   
+    return{}
+ 
     
 
 def difPrimario(nombre,largo):
@@ -266,7 +282,6 @@ def difPrimario(nombre,largo):
         difP.write(info)
         
     return nombre
-       
 
 #     """
 #     Verificacion de generacion del archivo con las diferencias

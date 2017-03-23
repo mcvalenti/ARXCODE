@@ -16,7 +16,6 @@ from SistReferencia.sist_deCoordenadas import vncSis
 from visual.CodsOsweiler import VerGraficoCods
 from CodsAdmin.EphemCODS import EphemCODS
 
-
 def FiltraArchivos(tle):
     """
     Extrae la fecha del TLE y busca los
@@ -95,10 +94,8 @@ def interpola_3sv(tle,arch3_cods):
             superior = contenido[indice+2]
             print inferior
             print superior
-            m=m+1
-            
-    linea_interpol=interpola(fila,inferior,superior)
-    
+            m=m+1            
+    linea_interpol=interpola(fila,inferior,superior)    
     return linea_interpol
 
 def diferencias_tleCODS(archivo, tles,linea_interpol):
@@ -112,22 +109,35 @@ def diferencias_tleCODS(archivo, tles,linea_interpol):
     for j in item:
         tle0=Tle('../TleAdmin/tle/'+tles[j][0])
         fecha_tle=tle0.epoca()
-        line1=tle0.linea1
-        line2=tle0.linea2
-        satrec = twoline2rv(line1, line2, whichconst)
-        pos, vel=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
-        difx=[float(pos[0])-r[0],float(pos[1])-r[1],float(pos[2])-r[2]]
-        difv=[float(vel[0])-rp[0],float(vel[1])-rp[1],float(vel[2])-rp[2]]
-        v,n,c=vncSis(r,rp,difx)
-        vv,nn,cc=vncSis(r,rp,difv)
-        dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
-        salida.write(dato)
+        if fecha_tle < fecha:
+            line1=tle0.linea1
+            line2=tle0.linea2
+            satrec = twoline2rv(line1, line2, whichconst)
+            pos, vel=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
+            difx=[float(pos[0])-r[0],float(pos[1])-r[1],float(pos[2])-r[2]]
+            difv=[float(vel[0])-rp[0],float(vel[1])-rp[1],float(vel[2])-rp[2]]
+            v,n,c=vncSis(r,rp,difx)
+            vv,nn,cc=vncSis(r,rp,difv)
+            dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
+            salida.write(dato)
     salida.close()
     return archivo
         
 def ejecutaProceamientoCods():
 #if __name__ == '__main__':
-
+    """
+    Lista los nombres de los archivos de la carpeta: TleAdmin/tles.
+    Recupera la informacion del ultimo TLE del set (TLE primario), en particular la epoca.
+    Busca entre los archivos de CODS, la epoca coincidente con la epoca del TLE primario.
+    Interpola para la fecha al nivel del segundo. 
+    Luego propaga todos los TLEs del set a la epoca del CODS interpolado y calcular las 
+    diferencias. 
+    ---------------------------------------------------------------------------------------
+    Nota! LOS DATOS CODS SON SOLO DE LA MISION SAC-D.
+    Luego los tles, previamente procesados y archivados en la carpeta de TleAdmin/tles, deben
+    corresponderse con esa mision.
+    """
+    
     """
     Se crean los directorios necesarios.
     """
@@ -152,43 +162,33 @@ def ejecutaProceamientoCods():
     """
     Impresiones de info de TLEs.
     """
-    print 'TLE PRIMARIO'
-    print '-----------------------------------------------------'
-    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
     tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
-    cat_id = tle_primario.catID()
-    epoca_fin = tle_primario.epoca()
+    cat_id = tle_inicio.catID()
     epoca_ini = tle_inicio.epoca()
-    fecha_ini=str(epoca_ini.year)+str(epoca_ini.month)+str(epoca_ini.day)
-    fecha_fin=str(epoca_fin.year)+str(epoca_fin.month)+str(epoca_fin.day)
-    archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'
-    linea1= tle_primario.linea1
-    linea2= tle_primario.linea2
-    print linea1
-    print linea2
-    print '-----------------------------------------------------'
     
+    for j in range(len(tle_ordenados)-1,0,-1):
+        tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[j][0])
+        epoca_fin = tle_primario.epoca()
+        
+        fecha_ini=str(epoca_ini.year)+str(epoca_ini.month)+str(epoca_ini.day)
+        fecha_fin=str(epoca_fin.year)+str(epoca_fin.month)+str(epoca_fin.day)
+        archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'
+#         linea1= tle_primario.linea1
+#         linea2= tle_primario.linea2
     
-    arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[-1][0])
-    linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[-1][0], arch3_cods)
-    print linea_interpol
+        arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[-j][0])
+        linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[-j][0], arch3_cods)
+    
+        archivo_diferencias = diferencias_tleCODS(archivo, tle_ordenados, linea_interpol)
+        print archivo_diferencias
 
-    
-    archivo_diferencias = diferencias_tleCODS(archivo, tle_ordenados, linea_interpol)
-    print archivo_diferencias
-    
 #    VerGrafico(archivo_diferencias)
-       
 
-    print 'FIN'
-    
-    return linea1, linea2, archivo_diferencias
-
-    
+    return {}# linea1, linea2, archivo_diferencias
     """
     Procedimiento iterativo para el TLE primario.
     """
-    
+
 #     sv_interp=sv_interpolados(tles)
 #     
 #     """
