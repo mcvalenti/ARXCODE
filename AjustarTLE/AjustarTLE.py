@@ -192,6 +192,7 @@ def difTle(tleOrdenados,cantidad_tles):
     output:
         difTotal# : archivo de texto plano (4 columnas) para cada set
         [AjustarTLE/diferencias/difTotal#]
+        bin : lista de listas, con las diferencias por bin. 
     """
 
     dtot=open('../AjustarTLE/diferencias/difTotal','w')
@@ -236,25 +237,64 @@ def difTle(tleOrdenados,cantidad_tles):
 
 def genera_estadisticaBin(bin_lista):
     
+    lista_k=[]
+    mx_list=[]
+    my_list=[]
+    mz_list=[]
+    vx_list=[]
+    vy_list=[]
+    vz_list=[]
+    stdx_list=[]
+    stdy_list=[]
+    stdz_list=[]
     for k in range(len(bin_lista)):
+        lista_k.append(k)
         bin_x=[]
         bin_y=[]
         bin_z=[]
-        for m in bin_lista[k]:
-            campo=m.split(',')
-            bin_x.append(float(campo[1]))
-            bin_y.append(float(campo[2]))
-            bin_z.append(float(campo[3]))
-        media_x=np.mean(bin_x)
-        media_y=np.mean(bin_y)
-        media_z=np.mean(bin_z)
+
         
-        prom_x=str(media_x)
-        prom_y=str(media_y)
-        prom_z=str(media_z)
-        
-        info ='BIN'+str(k)+' '+prom_x+' '+prom_y+' '+prom_z+'\n '        
-        print info
+        if len(bin_lista[k]) > 2:
+            for m in bin_lista[k]:
+                campo=m.split(',')
+                bin_x.append(float(campo[1]))
+                bin_y.append(float(campo[2]))
+                bin_z.append(float(campo[3]))
+                
+            media_x=np.mean(bin_x)
+            mx_list.append(media_x)
+            media_y=np.mean(bin_y)
+            my_list.append(media_y)
+            media_z=np.mean(bin_z)
+            mz_list.append(media_z)
+            
+            varianza_x=np.var(bin_x)
+            vx_list.append(varianza_x)
+            varianza_y=np.var(bin_y)
+            vy_list.append(varianza_y)
+            varianza_z=np.var(bin_z)
+            vz_list.append(varianza_z)
+            
+            desviacion_x=np.std(bin_x)
+            stdx_list.append(desviacion_x)
+            desviacion_y=np.std(bin_y)
+            stdy_list.append(desviacion_y)
+            desviacion_z=np.std(bin_z)
+            stdz_list.append(desviacion_z)
+    
+#             print '********************************************************************************'
+#             print 'BIN'+str(k)
+#             print '********************************************************************************'
+    print lista_k
+    print stdx_list
+    print stdy_list
+    print stdz_list
+#             info ='MEDIA'+' '+str(media_x)+' '+str(media_y)+' '+str(media_z) 
+#             info2 = 'VARIANZA'+' '+str(varianza_x)+' '+str(varianza_y)+' '+str(varianza_z)
+#             info3 = 'Desviacion Standard'+' '+str(desviacion_x)+' '+str(desviacion_y)+' '+str(desviacion_z)+'\n'
+#             print info
+#             print info2
+#             print info3
    
     return{}
  

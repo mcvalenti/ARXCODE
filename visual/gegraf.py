@@ -22,24 +22,21 @@ def gegrafTot(difTot,setID):
         print 'El archivo: '+difTot+' tiene algun problema'
     else:
         for i in lineas:
-            ls = i.split(' ')
-            dt=i[:19]
-            dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
-            dt_int=toTimestamp(dt)
-            dtt.append(dt_int)
-            xx.append(float(ls[2]))
-            yy.append(float(ls[3]))
+            ls = i.split(',')
+            dtt.append(float(ls[0]))
+            xx.append(float(ls[1]))
+            yy.append(float(ls[2]))
             zz.append(float(ls[3]))
-        plt.plot(dtt, xx, 'rx', label='U')
-#         plt.plot(dtt, yy, 'b+', label='V')
-#         plt.plot(dtt, zz, 'g+', label='W')
-#         plt.grid()
-#         plt.title('Diferencias en las Coordenadas U,V,W [km]')
-#         plt.ylabel('Diferencia en Km')
+        plt.plot(dtt, xx, 'rd', label='V')
+        plt.plot(dtt, yy, 'bo', label='N')
+        plt.plot(dtt, zz, 'kx', label='C')
+        plt.grid()
+        plt.title('Diferencias en las Coordenadas V,N,C [km]')
+        plt.ylabel('Diferencia en Km')
 # #         plt.xlim(0,16)
 # #         plt.ylim(-5.0,2.0)
 #         plt.legend(loc=4)
-        plt.savefig('../visual/graficos/difTot'+setID+'.png')
+        plt.savefig('../visual/difTot'+setID+'.png')
         plt.close()
 
 def gegraf(datos,sufijo):  
@@ -51,29 +48,29 @@ def gegraf(datos,sufijo):
     lineas=f1.readlines()
     
     for i in lineas:
-        ls = i.split(' ')
-        fecha=datetime.strptime(ls[0], "%Y-%m-%d")
-        fechas.append(fecha)
-        xx.append(ls[2])
-        yy.append(ls[3])
-        zz.append(ls[4])
+        ls = i.split(',')
+        fechas.append(float(ls[0]))
+        xx.append(ls[1])
+        yy.append(ls[2])
+        zz.append(ls[3])
     
     """
     Coordenada U
     """
 
     fig, ax = plt.subplots()
-    ax.plot(fechas, xx, 'rx', label='U')
-    ax.plot(fechas, yy, 'bs', label='V')
-    ax.plot(fechas, zz, 'g.', label='W')
+    ax.plot(fechas, xx, 'rx', label='V')
+    ax.plot(fechas, yy, 'bs', label='N')
+    ax.plot(fechas, zz, 'g.', label='C')
     plt.grid()
-    plt.title('Diferencias en las Coordenadas U,V,W [km]')
+    plt.title('Diferencias en las Coordenadas V,N,C [km]')
     plt.ylabel('Diferencia en Km')
-    plt.ylim(-20.0,20.0)
-    ax.plot(fechas,xx,'r--',fechas,yy,'bs',fechas,zz,label='U')#,label='modulo de distancia')
-    fig.autofmt_xdate() # rotate and align the tick labels so they look better
-    ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
-    plt.savefig('../visual/graficos/'+sufijo+'.png')
+#     plt.ylim(-20.0,20.0)
+#     ax.plot(fechas,xx,'r--',fechas,yy,'bs',fechas,zz,label='U')#,label='modulo de distancia')
+#     fig.autofmt_xdate() # rotate and align the tick labels so they look better
+#     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
+    plt.savefig('../visual/'+sufijo+'.png')
+    plt.close()
 
     """
     Coordenada V
@@ -104,4 +101,8 @@ def gegraf(datos,sufijo):
 #     plt.savefig('../visual/difcoordenadasW.png')
 #    plt.show()
 
-
+if __name__=='__main__':
+    difTot='../AjustarTLE/diferencias/difTotal'
+    setID=str(8820)
+    gegrafTot(difTot,setID)
+    gegraf(difTot,setID)
