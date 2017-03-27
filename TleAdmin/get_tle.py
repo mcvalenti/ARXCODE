@@ -66,7 +66,7 @@ class importar_tle():
             s.post('https://www.space-track.org/auth/login',data)
             fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+self.f0+'--'+self.f1+'/NORAD_CAT_ID/'+self.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
             r = s.get(fquery1)
-            s.close()
+#            s.close()
             if r.status_code != 200:
                 print 'No pudo completarse la solicitud - Mensaje!'
             else:

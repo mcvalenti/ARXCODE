@@ -22,7 +22,6 @@ class ProcARxCODE(QMainWindow):
     def __init__(self):
         super(ProcARxCODE, self).__init__()
         
-        
         extractAction = QAction("Salir", self)
         extractAction.setShortcut("Ctrl+Q")
         extractAction.setStatusTip('Leave The App')
@@ -40,7 +39,7 @@ class ProcARxCODE(QMainWindow):
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
                 
-        self.resize(900, 600)
+#        self.resize(900, 600)
         self.setWindowTitle('ARxCODE')
         
         #IMAGEN
@@ -48,65 +47,73 @@ class ProcARxCODE(QMainWindow):
 #         palette.setBrush(QPalette.Background,QBrush(QPixmap('../visual/imagenes/cords_contol.jpg')))
 #         self.setPalette(palette)
 
-                        # SECCIONES
-        
-#        self.setDockOptions(QMainWindow.ForceTabbedDocks )
+        self.dock = QDockWidget("NUEVO CDM")
+        self.dock1 = QDockWidget("ENCUENTROS ANTERIORES")
+        self.dock.setAllowedAreas(Qt.LeftDockWidgetArea)
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.dock)
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.dock1)
 
-#        self.dockList = []
-#        for dockName in 'NUEVO_CDM ENCUENTROS_ANTERIORES PROCESAMIENTO_MANUAL'.split():
-        dock = QDockWidget("NUEVO CDM")
-        dock1 = QDockWidget("ENCUENTROS ANTERIORES")
-#             dock.setWidget(QListWidget())
-        dock.setAllowedAreas(Qt.TopDockWidgetArea)
-        self.addDockWidget(Qt.TopDockWidgetArea, dock)
-        self.addDockWidget(Qt.TopDockWidgetArea, dock1)
-
-        self.home()
-        
+        self.centro=self.home()
+        self.setCentralWidget(self.centro)
+        self.show()
     
     def center(self):
         screen = QDesktopWidget().screenGeometry()
         size = self.geometry()
         self.move((screen.width() - size.width())/2, (screen.height() - size.height())/2)
     
-    def home(self):
-        
-        self.boton_ProManual = QPushButton('Procesamiento de TLE',self)
-        self.boton_mision    = QPushButton('Procesamiento de Datos de Mision',self)
-        self.boton_ProManual.move(100,500)
-        self.boton_ProManual.setFixedSize(160,60)
-        self.boton_mision.move(400,500)
-        self.boton_mision.setFixedSize(240,60)
-        self.boton_ProManual.clicked.connect(self.tleProc)
-        self.boton_mision.clicked.connect(self.misProc)
-        
-        self.show()
-        
     def close_application(self):
         sys.exit()
+    
+    class home(QWidget):
+        def __init__(self, *args):
+            QWidget.__init__(self, *args)
+    #     def home(self):
+    #         self.centralwi=QWidget()
+    #         self.setCentralWidget(self.centralwi)
+            self.grid   = QGridLayout()
+            """
+            Botones
+            """
+            self.boton_ProManual = QPushButton('Procesamiento de TLE',self)
+            self.boton_mision    = QPushButton('Procesamiento de Datos de Mision',self)
+#         self.boton_ProManual.move(100,500)
+#         self.boton_ProManual.setFixedSize(160,60)
+#         self.boton_mision.move(400,500)
+#         self.boton_mision.setFixedSize(240,60)
+            self.boton_ProManual.clicked.connect(self.tleProc)
+            self.boton_mision.clicked.connect(self.misProc)
         
-    def tleProc(self):
-        """
-        Despliega la ventana para el procesamiento de los TLE,
-        mediante el metodo de Osweiler.
-        """
-        ventana2=ProcTle()
-        ventana2.exec_()
-        
-    def misProc(self):
-        """
-        Despliega la ventana para el procesamiento de los datos
-        de CODS. 
-        """
-        ventana3=ProcMision()
-        ventana3.exec_()
+            """
+            GRILLA
+            """
+            self.grid.addWidget(self.boton_ProManual,2,2)
+            self.grid.addWidget(self.boton_mision,3,2)
+            self.setLayout(self.grid)
+#            self.show()
+            
+        def tleProc(self):
+            """
+            Despliega la ventana para el procesamiento de los TLE,
+            mediante el metodo de Osweiler.
+            """
+            ventana2=ProcTle()
+            ventana2.exec_()
+            
+        def misProc(self):
+            """
+            Despliega la ventana para el procesamiento de los datos
+            de CODS. 
+            """
+            ventana3=ProcMision()
+            ventana3.exec_()
 
 class ProcTle(QDialog):
 
     def __init__(self,parent=None):
         QDialog.__init__(self,parent)
 
-        self.resize(1200, 600)
+#        self.resize(1200, 600)
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
 
@@ -415,7 +422,8 @@ class ProcMision(QDialog):
         QDialog.__init__(self,parent)
 
         self.setWindowModality(Qt.ApplicationModal)
-        self.resize(1700, 700)
+#       self.resize(1200, 600)
+#        self.resize(1700, 700)
         self.initUI()
         
         self.sat_id='99999'
