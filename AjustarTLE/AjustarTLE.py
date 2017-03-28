@@ -15,6 +15,7 @@ from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis, ricSis
 
+
 def seleccionSat():
     """
     --------------------------------------------------------
@@ -225,7 +226,7 @@ def difTle(tleOrdenados,cantidad_tles):
             rangos=np.array([[0,0.5],[0.5,1.5],[1.5,2.5],[2.5,3.5],[3.5,4.5],
                      [4.5,5.5],[5.5,6.5],[6.5,7.5],[7.5,8.5],[8.5,9.5],
                      [9.5,10.5],[10.5,11.5],[11.5,12.5],[12.5,13.5],[13.5,14.5]])
-            for i in range(15):
+            for i in range(len(rangos)):
                 if dtfracdias >= rangos[i][0] and dtfracdias < rangos[i][1]:
                     bin[i].append(infodiftot)
             
@@ -238,6 +239,7 @@ def difTle(tleOrdenados,cantidad_tles):
 def genera_estadisticaBin(bin_lista):
     
     lista_k=[]
+    cantxbin=[]
     mx_list=[]
     my_list=[]
     mz_list=[]
@@ -247,13 +249,13 @@ def genera_estadisticaBin(bin_lista):
     stdx_list=[]
     stdy_list=[]
     stdz_list=[]
+
     for k in range(len(bin_lista)):
         lista_k.append(k)
         bin_x=[]
         bin_y=[]
         bin_z=[]
-
-        
+        cantxbin.append(len(bin_lista[k]))
         if len(bin_lista[k]) > 2:
             for m in bin_lista[k]:
                 campo=m.split(',')
@@ -295,8 +297,8 @@ def genera_estadisticaBin(bin_lista):
 #             print info
 #             print info2
 #             print info3
-   
-    return{}
+    mediaxbin=[mx_list,my_list,mz_list]
+    return cantxbin, mediaxbin
  
     
 

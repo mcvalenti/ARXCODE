@@ -16,6 +16,9 @@ from Comparar.TlevsCodsOSW import ejecutaProceamientoCods
 from visual.TleOsweiler import VerGrafico
 #from visual.TlevsCodsGraf import VerGraficoMision
 from visual.CodsOsweiler import VerGraficoCods
+from visual.binGraf import histograma_bin, desviacion_standard_graf
+from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+import matplotlib.pyplot as plt
 
 class ProcARxCODE(QMainWindow):
     
@@ -126,12 +129,20 @@ class ProcTle(QDialog):
         self.diferencias=''
         self.grafico_pw=''
         self.arch_macovar=''
-        self.macovarT=''        
+        self.macovarT=''  
+        self.cantxbin=[]
+        self.mediaxbin=[]      
         
     def initUI(self):
         self.palette = QPalette()
         self.palette.setColor(QPalette.Background,Qt.white)
         self.setPalette(self.palette)
+        
+        """
+        Grafico
+        """
+        self.figure = plt.figure()
+        self.canvas = FigureCanvas(self.figure)
         
         """
         Etiquetas
@@ -154,9 +165,10 @@ class ProcTle(QDialog):
         self.boton_equipo    = QPushButton('Directorios')
         self.boton_prepros   = QPushButton('Preprocesamiento')
         self.boton_procesa   = QPushButton('PROCESAR')
-        self.boton_grafica   = QPushButton('Graficar')
-        self.boton_salir     = QPushButton('Salir')
+        self.boton_grafica   = QPushButton('VER Graficos')
         self.boton_ma_covar  = QPushButton('Calcular Matriz')
+        self.boton_salir     = QPushButton('Salir')
+        
         
         """
         Campos de Edicion
@@ -202,6 +214,7 @@ class ProcTle(QDialog):
         grid.addWidget(self.tableView,12,0,6,2)
         grid.addWidget(self.boton_ma_covar,12,2)
         grid.addWidget(self.arch_macovar_edit,12,4)
+
         grid.addWidget(self.boton_salir,17,2)
         
         """
@@ -279,16 +292,25 @@ class ProcTle(QDialog):
         for filename in files:
             os.unlink(filename)
         self.bin=difTle(self.tleOrdenados, self.tles)
-        genera_estadisticaBin(self.bin)
+        self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
         self.diferencias=difPrimario(self.filename,self.tles-1)
         self.estado_proc_edit.setText(self.diferencias)
         self.boton_grafica.setEnabled(True)
         self.boton_ma_covar.setEnabled(True)
         
-    def Graficar(self):
-        self_grafico_pw=VerGrafico(self.diferencias)
-        self.arch_grafico_edit.setText(self_grafico_pw)
         
+#     def Graficar(self):
+#         self_grafico_pw=VerGrafico(self.diferencias)
+#         self.arch_grafico_edit.setText(self_grafico_pw)
+
+        
+    def Graficar(self):
+        self.graf = RepresentacionGrafica(self.cantxbin)
+        self.graf.exec_()
+        
+    def ver_mediasxbin(self):
+        desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin[1], self.mediaxbin[2])
+
     def Macovar(self):
         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
         self.tableView.setRowCount(len(self.macovarT))
@@ -410,6 +432,61 @@ class ConexionNorad(QDialog):
         
     def datos(self):
         return self.cat_id, self.fini, self.ffin, self.archTLE
+    
+class RepresentacionGrafica(QDialog):
+        
+    def __init__(self,data=None,parent=None):
+        QDialog.__init__(self,parent)
+
+        self.data=data
+        
+        self.setWindowModality(Qt.ApplicationModal)
+        layout = QHBoxLayout()
+
+        self.listWidget = QListWidget()
+        self.listWidget.addItem("Diferencias")
+        self.listWidget.addItem("Histograma de Bin")
+        self.listWidget.addItem("Promedios")
+
+        self.figura=plt.figure()
+        self.canvas = FigureCanvas(self.figura)
+        """
+        Boton
+        """
+        self.boton_salir = QPushButton('Salir')
+        
+        """
+        Etiquetas
+        """
+        self.escribir = QTextEdit()
+        
+        """
+        Acciones
+        """
+        self.listWidget.itemClicked.connect(self.item_click)
+        self.boton_salir.clicked.connect(self.salir)
+
+
+        layout.addWidget(self.listWidget)
+        layout.addWidget(self.canvas)
+        layout.addWidget(self.boton_salir)
+        self.setLayout(layout)
+        self.setWindowTitle('Graficos')
+
+#     def add_items(self):
+#         for item_text in ['item1', 'item2', 'item3']:
+#             item = QListWidgetItem(item_text)
+#             self.addItem(item)
+
+    def item_click(self, item):
+        histograma_bin(self.data)
+        self.canvas.draw()
+        
+        
+    def salir(self):
+        self.accept()
+        
+
     
 class ProcMision(QDialog):
     """
