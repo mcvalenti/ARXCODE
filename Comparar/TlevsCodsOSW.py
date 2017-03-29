@@ -85,8 +85,10 @@ def interpola_3sv(tle,arch3_cods):
             c1=c.split(' ')
             if c1[0]=='*HEADER':
                 continue
-            fecha=c[:19]
-            d=datetime.strptime(fecha,'%Y/%m/%d %H:%M:%S')
+            fecha=c[:16]
+            min=fecha[14:16]
+            if min != '24':
+                d=datetime.strptime(fecha,'%Y/%m/%d %H:%M')
             lista_epocas.append(d)
         if fecha_minutos in lista_epocas and m==0:
             indice = lista_epocas.index(fecha_minutos)
@@ -109,7 +111,7 @@ def diferencias_tleCODS(archivo, tles,linea_interpol):
     for j in item:
         tle0=Tle('../TleAdmin/tle/'+tles[j][0])
         fecha_tle=tle0.epoca()
-        if fecha_tle < fecha:
+        if fecha_tle < d:
             line1=tle0.linea1
             line2=tle0.linea2
             satrec = twoline2rv(line1, line2, whichconst)
@@ -162,12 +164,12 @@ def ejecutaProceamientoCods():
     """
     Impresiones de info de TLEs.
     """
-    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
     cat_id = tle_inicio.catID()
     epoca_ini = tle_inicio.epoca()
     
-    for j in range(len(tle_ordenados)-1,0,-1):
-        tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[j][0])
+    for j in range(len(tle_ordenados)):
+        tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
         epoca_fin = tle_primario.epoca()
         
         fecha_ini=str(epoca_ini.year)+str(epoca_ini.month)+str(epoca_ini.day)
@@ -176,8 +178,8 @@ def ejecutaProceamientoCods():
 #         linea1= tle_primario.linea1
 #         linea2= tle_primario.linea2
     
-        arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[-j][0])
-        linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[-j][0], arch3_cods)
+        arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[j][0])
+        linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[j][0], arch3_cods)
     
         archivo_diferencias = diferencias_tleCODS(archivo, tle_ordenados, linea_interpol)
         print archivo_diferencias

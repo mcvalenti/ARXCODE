@@ -178,7 +178,6 @@ class ProcTle(QDialog):
         self.cant_tles_edit     = QLineEdit()
         self.matriz             = QLineEdit()
         self.estado_proc_edit   = QLineEdit()
-        self.arch_grafico_edit  = QLineEdit()
         self.arch_macovar_edit  = QLineEdit()
         """
         OTROS
@@ -208,8 +207,7 @@ class ProcTle(QDialog):
         grid.addWidget(self.estado_proc_edit,8,4)
         grid.addWidget(self.tle_pri,9,0)
         grid.addWidget(self.tle_pri_edit,9,1,1,4)
-        grid.addWidget(self.boton_grafica,10,2)
-        grid.addWidget(self.arch_grafico_edit,10,4)
+        grid.addWidget(self.boton_grafica,10,4)
         grid.addWidget(self.ma_covar_label,11,0) 
         grid.addWidget(self.tableView,12,0,6,2)
         grid.addWidget(self.boton_ma_covar,12,2)
@@ -301,11 +299,12 @@ class ProcTle(QDialog):
         
 #     def Graficar(self):
 #         self_grafico_pw=VerGrafico(self.diferencias)
-#         self.arch_grafico_edit.setText(self_grafico_pw)
+
 
         
     def Graficar(self):
-        self.graf = RepresentacionGrafica(self.cantxbin)
+        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
+        self.graf = RepresentacionGrafica(data)
         self.graf.exec_()
         
     def ver_mediasxbin(self):
@@ -438,7 +437,10 @@ class RepresentacionGrafica(QDialog):
     def __init__(self,data=None,parent=None):
         QDialog.__init__(self,parent)
 
-        self.data=data
+        self.sat_id=data[0]
+        self.diferencias=data[1]
+        self.data=data[2]
+        self.mediaxbin=data[3]
         
         self.setWindowModality(Qt.ApplicationModal)
         layout = QHBoxLayout()
@@ -479,9 +481,17 @@ class RepresentacionGrafica(QDialog):
 #             self.addItem(item)
 
     def item_click(self, item):
-        histograma_bin(self.data)
-        self.canvas.draw()
-        
+        item_str=self.listWidget.currentItem().text()
+        if item_str == 'Histograma de Bin':
+            histograma_bin(self.data)
+ #           self_grafico_pw=VerGrafico(self.diferencias)
+            self.canvas.draw()
+#         elif item_str == 'Histograma de Bin':
+#             histograma_bin(self.data)
+#             self.canvas.draw()
+#         else:
+#             desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin[1], self.mediaxbin[2])
+#             self.canvas.draw()      
         
     def salir(self):
         self.accept()
