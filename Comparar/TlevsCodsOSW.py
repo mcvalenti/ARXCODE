@@ -6,6 +6,8 @@ Created on 16/03/2017
 
 import os, glob
 import numpy as np
+import numpy.polynomial as P
+import matplotlib.pylab as plt
 from datetime import datetime, timedelta
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
@@ -20,13 +22,15 @@ def FiltraArchivos(tle):
     """
     Extrae la fecha del TLE y busca los
     archivos CODS que podrian contener la fecha necesaria.
-    Ordena los archivos CODS y se queda con el dato mas actualizado
-    para realizar la interpolacion.
+    Toma el nombre del archivo cuyo nombre contiene la fecha el TLE
+    primario y agrega a su vez el nombre de los proximos 3 archivos
+    ya que tambien contendran esa fecha y con valores mas actualizados.
     ----------------------------------------------------------------
     input
         tle: nombre del archivo del TLE a procesar (String)
     output
-        lineainterpol: Linea CODS interpolada correspondiente a la fecha del TLE. (String)
+        archivos_datos: nombres de los archivos CODS que contienen la fecha
+                        del TLE primario - (Lista)
     """
     tle1=Tle(tle)
     fecha=tle1.epoca()
@@ -58,7 +62,6 @@ def sv_interpolados(tles):
     gpsf=open('../CodsAdmin/TOD_O/TOD_CODS_SACD_xyz.txt','r')
     gpslista=gpsf.readlines()
     lineaInterpol=[]
-    print 'Procesando ...'
     for i in tles:
         tle1=Tle(i)
         fecha=tle1.epoca()
@@ -69,11 +72,22 @@ def sv_interpolados(tles):
     return lineaInterpol
 
 def interpola_3sv(tle,arch3_cods):
+    """
+    Extrale del tle primario la epoca y luego busca entre los archivos
+    CODS cual de los mas actualizados contiene la epoca del TLE.
+    Luego interpola los valores de CODS para la epoca del TLE 
+    y devuelve el vector de estado interpolado correspondiente a la epoca.
+    ----------------------------------------------------------------------------------------
+    input
+        tle: nombre del archivo del TLE primario (String)
+        arch3_cods: nombre de los archivos CODS que contienen la epoca del TLE. (Lista)
+    output
+        linea_interpol: linea con el vector de estado interpolado a la epoca del TLE. (String)
+    """
     tle1=Tle(tle)
     fecha=tle1.epoca()
     r,v=tle1.propagaTLE()
     fila=str(fecha)+' '+str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
-    print 'Epoca del TLE = ',fecha
     fecha_minutos = datetime(int(fecha.year),int(fecha.month),int(fecha.day),int(fecha.hour),int(fecha.minute),0)
 
     m=0
@@ -86,22 +100,32 @@ def interpola_3sv(tle,arch3_cods):
             if c1[0]=='*HEADER':
                 continue
             fecha=c[:16]
-            min=fecha[14:16]
-            if min != '24':
+            hr=fecha[11:13]
+            if hr != '24':
                 d=datetime.strptime(fecha,'%Y/%m/%d %H:%M')
             lista_epocas.append(d)
         if fecha_minutos in lista_epocas and m==0:
             indice = lista_epocas.index(fecha_minutos)
             inferior = contenido[indice+1]
             superior = contenido[indice+2]
-            print inferior
-            print superior
             m=m+1            
     linea_interpol=interpola(fila,inferior,superior)    
     return linea_interpol
 
-def diferencias_tleCODS(archivo, tles,linea_interpol):
-    salida=open('../Comparar/'+archivo,'w')
+def diferencias_tleCODS(salida,tles,linea_interpol,data):
+    """
+    Toma la lista de archivos TLEs y propaga cada uno hasta la epoca de la
+    linea interpolada. Luego compara los valores de las coordenadas propagadas
+    con los valores de la linea interpolada y genera las diferencias. 
+    Imprime los resultados en el archivo salida.     
+    ----------------------------------------------------------------------------------------------------------
+    input
+        salida: archivo donde se escribe (Instancia de apertura de archivo)
+        tles: lista de nombres de archivos tle (diccionario)
+        linea_interpol: Linea interpolada de los datos CODS para la epoca del TLE primario. (String)
+    output
+        difTot_satId_fini_ffin.cods: Archivo con todas las diferencias ('../Comparar/diferencias/')
+    """
     fecha=linea_interpol[:19]
     d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S')
     r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
@@ -122,8 +146,33 @@ def diferencias_tleCODS(archivo, tles,linea_interpol):
             vv,nn,cc=vncSis(r,rp,difv)
             dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
             salida.write(dato)
-    salida.close()
-    return archivo
+            data[0].append(fecha_tle)
+            data[1].append(v)
+            data[2].append(n)
+            data[3].append(c)
+    return data
+
+def ajustar_diferencias(data):
+    
+    t=data[0]
+    dt=[]
+    dv=data[1]
+    dn=data[2]
+    dc=data[3]
+    
+    for kt in t:
+        dt.append((kt-t[0]).seconds/86400.0)
+    c, b, a = P.polynomial.polyfit(dt, dv, deg=2)
+    print 'Coeficientes = ',c,b,a
+    
+    x=np.linspace(0,1, 60)
+    y=[]
+    for i in x:
+        y.append(-74.9201787613*i*i+80.5462899751*i-33.5691085534)     
+    plt.plot(dt,dv,'x')
+#    plt.plot(x,y,'-')
+    plt.show()
+    return {}
         
 def ejecutaProceamientoCods():
 #if __name__ == '__main__':
@@ -157,6 +206,7 @@ def ejecutaProceamientoCods():
     if not os.path.exists(d4):
         os.mkdir(d4)
 
+    print 'Procesando ...'
     tles=glob.glob('../TleAdmin/tle/*')
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
@@ -164,77 +214,32 @@ def ejecutaProceamientoCods():
     """
     Impresiones de info de TLEs.
     """
-    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
     cat_id = tle_inicio.catID()
     epoca_ini = tle_inicio.epoca()
     
-    for j in range(len(tle_ordenados)):
-        tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    epoca_fin = tle_primario.epoca()
+    fecha_ini=str(epoca_ini.year)+str(epoca_ini.month)+str(epoca_ini.day)
+    fecha_fin=str(epoca_fin.year)+str(epoca_fin.month)+str(epoca_fin.day)
+    t=[]
+    dv=[]
+    du=[]
+    dc=[]
+    data=[t,dv,du,dc]
+    archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
+    salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
+    for m in range(len(tle_ordenados)-1,0,-1):
+        tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_fin = tle_primario.epoca()
-        
-        fecha_ini=str(epoca_ini.year)+str(epoca_ini.month)+str(epoca_ini.day)
-        fecha_fin=str(epoca_fin.year)+str(epoca_fin.month)+str(epoca_fin.day)
-        archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'
-#         linea1= tle_primario.linea1
-#         linea2= tle_primario.linea2
+        arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
+        linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)                   
+        data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
+    salida.close()
     
-        arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[j][0])
-        linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[j][0], arch3_cods)
-    
-        archivo_diferencias = diferencias_tleCODS(archivo, tle_ordenados, linea_interpol)
-        print archivo_diferencias
-
+    ajustar_diferencias(data)
+    print 'Fin del Calculo de Diferencias'
 #    VerGrafico(archivo_diferencias)
 
-    return {}# linea1, linea2, archivo_diferencias
-    """
-    Procedimiento iterativo para el TLE primario.
-    """
+    return data# linea1, linea2, archivo_diferencias
 
-#     sv_interp=sv_interpolados(tles)
-#     
-#     """
-#     cods_dic={}
-#     fecha_int=[]
-#     m=0
-#     for li in sv_interp:
-#         nombre='ephem_'+str(m)
-#         fecha=li[:19]
-#         fecha1=datetime.strptime(fecha, '%Y-%m-%d %H:%M:%S')
-# #        fecha_int.append(fecha1) # ejecuta un metodo de la clase TLE
-#         cods_dic[fecha1]= li[19:]
-#         m=m+1
-#     cods_dic_ord=sorted(cods_dic.items(), reverse=True)
-# 
-#     print cods_dic_ord
-#    
-#  
-#     date_fmt = '%Y-%m-%d %H:%M:%S'
-#     whichconst=wgs72
-#      
-#     m=0
-#     for k in cods_dic_ord:   
-#         fecha=k[0] 
-#         sv=k[1]
-#         r=np.array([float(sv.split()[0]),float(sv.split()[1]),float(sv.split()[2])])
-#         rp=np.array([float(sv.split()[3]),float(sv.split()[4]),float(sv.split()[5])])
-#         item=range(0,len(tle_ordenados))
-#         for j in item:
-#             tle0=Tle('../TleAdmin/tle/'+tle_ordenados[j][0])
-#             fecha_tle=tle0.epoca()
-#             if fecha_tle <= fecha:
-#                 line1=tle0.linea1
-#                 line2=tle0.linea2
-#                 satrec = twoline2rv(line1, line2, whichconst)
-#                 pos, vel=satrec.propagate(fecha.year, fecha.month, fecha.day, fecha.hour, fecha.minute, fecha.second)
-#                 difx=[float(pos[0])-r[0],float(pos[1])-r[1],float(pos[2])-r[2]]
-#                 difv=[float(vel[0])-rp[0],float(vel[1])-rp[1],float(vel[2])-rp[2]]
-#                 v,n,c=vncSis(r,rp,difx)
-#                 vv,nn,cc=vncSis(r,rp,difv)
-#                 dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
-#                 if m < len(cods_dic_ord):
-#                     salida.write(dato)
-#                 m=m+1
-#                 
-#     salida.close()           
-#     VerGrafico('codsOsweiler.dif')

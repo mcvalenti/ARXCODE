@@ -5,11 +5,16 @@
 \contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{2}{chapter.2}
 \contentsline {subsection}{\numberline {2.0.3}CDM}{2}{subsection.2.0.3}
 \contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a}{3}{chapter.3}
-\contentsline {subsection}{\numberline {3.0.4}M\'etodo de Osweiler}{3}{subsection.3.0.4}
-\contentsline {subsection}{\numberline {3.0.5}Tratamiento sobre Datos de Misi\'on}{3}{subsection.3.0.5}
-\contentsline {subsection}{\numberline {3.0.6}Preprocesamiento de los Datos de Misi\'on de CODS}{3}{subsection.3.0.6}
-\contentsline {subsubsection}{\numberline {3.0.6.1}ORBEPHEM}{4}{subsubsection.3.0.6.1}
-\contentsline {subsubsection}{\numberline {3.0.6.2}Archivos Utilizados}{4}{subsubsection.3.0.6.2}
-\contentsline {chapter}{\numberline {4}Resultados}{6}{chapter.4}
-\contentsline {chapter}{\numberline {5}Conclusiones}{7}{chapter.5}
-\contentsline {chapter}{Bibliograf\'{\i }a}{8}{chapter.5}
+\contentsline {section}{\numberline {3.1}M\'etodo de Osweiler}{3}{section.3.1}
+\contentsline {section}{\numberline {3.2}Tratamiento sobre Datos de Misi\'on}{3}{section.3.2}
+\contentsline {section}{\numberline {3.3}Preprocesamiento de los Datos de Misi\'on de CODS}{3}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}ORBEPHEM}{4}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Archivos Utilizados}{4}{subsection.3.3.2}
+\contentsline {section}{\numberline {3.4}Graficos LAGEOS 8820}{6}{section.3.4}
+\contentsline {chapter}{\numberline {4}ARxCODE}{7}{chapter.4}
+\contentsline {section}{\numberline {4.1}Especificaciones}{7}{section.4.1}
+\contentsline {section}{\numberline {4.2}Dise\IeC {\~n}o y Desarrollo}{7}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Arquitectura}{7}{subsection.4.2.1}
+\contentsline {chapter}{\numberline {5}Resultados}{8}{chapter.5}
+\contentsline {chapter}{\numberline {6}Conclusiones}{9}{chapter.6}
+\contentsline {chapter}{Bibliograf\'{\i }a}{10}{chapter.6}

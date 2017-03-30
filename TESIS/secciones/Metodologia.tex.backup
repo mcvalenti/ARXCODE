@@ -32,7 +32,8 @@ Para la comparaci\'on que proponemos, solicitamos acceso a los archivos de efem\
 
 \subsubsection{ORBEPHEM}
 Estos productos son generados luego de un post procesamiento que incluye una propagaci\'on ajustada por una determinaci\'on orbital. 
-Cada archivo contiene un listado cronol\'ogicamente tabulado de posiciones y velocidades, dentro de un periodo de casi 3 d\'ias. \[ref: doc_interfaces\]
+Cada archivo contiene un listado cronol\'ogicamente tabulado de posiciones y velocidades, dentro de un periodo de casi 3 d\'ias. ( doc\_interfaces)
+
 La nomenclatura de los mismos respeta el siguiente formato:\\
 \begin{verbatim}
  CODS_YYYYMMDD_HHMMSS_SACD_ORBEPHEM_TOD_XYZ_O.TXT
@@ -52,8 +53,8 @@ La nomenclatura de los mismos respeta el siguiente formato:\\
 Si bien la nomenclatura de los archivos respeta una estructura, s\'olo se indica en el nombre, la fecha de generaci\'on de los datos y n puede desprenderse del mismo en cu\'al es la \'epoca final e inicial de cada archivo. A su vez, las \'epocas contempladas en cada uno de ellos no está homogeneizada. Es decir, la fecha y hora inicial y final de cada registro es diferente para cada archivo.\\
 Dada esta organizaci\'on, para el punto tres del procedimiento, referente a la localizaci\'on del archivo necesario para la comparaci\'on, la b\'usqueda se realiza de la siguiente manera:\\
 Localizamos en primer lugar el archivo cuyo nombre coincide con la fecha de la \'epoca del TLE primario.
-Como una misma fecha se encuentra en m\'as de un archivo, buscamos el archivo que contenga esa fecha y que adem\'as sea el m\'as actualizado de todos. 
-Luego se enlistan los siguientes dos archivos y se ordenan en orden decreciente, de manera que el primer lugar de la lista lo ocupe el \'ultimo de los archivos seleccionados. Finalmente se comienza el proceso iterativo de abrir los archivos, evaluar el contenido y ver si se encuentran los dos registros que encierren la \'epoca del TLE. 
+Como una misma fecha se encuentra en m\'as de un archivo, buscamos el archivo que contenga esa fecha y que adem\'as sea el m\'as actualizado de todos. Para ello, además del archivo cuyo nombre contiene la fecha del TLE primario, se enlistan los siguientes dos archivos y se ordenan en orden decreciente, de manera que el primer lugar de la lista lo ocupe el \'ultimo de los archivos seleccionados. Finalmente se comienza el proceso iterativo de abrir los archivos, evaluar el contenido y ver si se encuentran los dos registros que encierren la \'epoca del TLE.
+Una vez que se encuentran las l\'ineas de efem\'erides que contienen la \'epoca de inter\'es se interpola, y se termina la iteraci\'on.
 
 \noindent
 Cantidad TOTAL de archivos $=  1454$\\
@@ -81,56 +82,25 @@ Im\'agenes comparativas entre los dos m\'etodos:\\
 % \label{fig:test}
 % \end{figure}
 
+\section{Graficos LAGEOS 8820}
 
+\begin{figure}[H]
+ \centering
+\begin{subfigure}%{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{imagenes/difTot8820.png}
+  \caption{A subfigure}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}%{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{imagenes/vncmultiplot}
+  \caption{A subfigure}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{A figure with two subfigures}
+\label{fig:test}
+\end{figure}
 
-\subsubsection{Ma. de Covarianza Simplificada}
-Se construye a partir de las diferencias entre las efem\'erides predichas por CODS y los vectores de estado que resultan de los TLEs.\\
-
-
-\subsubsection{Ma. de Covarianza Ajustada}
-Se construye a partir de las diferencias recalculadas a partir de los vectores de estado que resultan de los TLEs, corregidos por el ajuste.\\
-
-
-\subsubsection{Procedimiento de Ajuste}
-Consideramos la Misi\'on SAC-D.
-
-Nos preguntamos:\\
-\begin{equation}
- x_{TLE}-x_{cods} > ? (x_{TLE}-x_{e})-x_{i}
-\end{equation}
-\begin{itemize}
- \item $x_{TLE}$: Valor del vector de estado a partir del TLE.\\
- \item $x_{cods}$: Efem\'eride predicha por CODS.\\
- \item $x_{e}$: Valor extrapolado a partir de la funci\'on de ajuste.\\
- \item $x_{i}$: Efem\'eride iterpolada a la \'epoca del TLE del intervalo de extrapolaci\'on.\\
-\end{itemize}
-
-
-Contamos con acceso a los datos de las efem\'erides predichas calculadas por CODS, pero no están publicados en estos archivos los errores asociados al c\'alculo.\\
-Nos proveemos de los TLE de la Misi\'on para la misma \'epoca.\\
-Evaluamos las diferencias entre los distintos vectores de estado (el predico por CODS y el que resulta de TLE).\\
-
-\begin{equation}
- \delta x = x_{TLE}-x_{cods}
-\end{equation}
-
-
-{\bf{M\'etodo para la estimaci\'on del error en los datos extrapolados.}}\\
-Se definen dos intervalos: uno para el ajuste $t_{a}$, otro para la extrapolaci\'on $t_{e}$.\\
-Se ajustan en forma lineal las diferencias y se obtiene una funci\'on de ajuste.\\
-\begin{equation}
- f=a*t+b \qquad a,b\quad par\\'ametros\quad del \quad ajuste.
-\end{equation}
-
-Se eval\'ua la funci\'on de ajuste en las fechas correspondientes a los TLEs del intervalo de extrapolaci\'on.\\
-\begin{equation}
- x_{e}=f(t_{e})
-\end{equation}
-
-{\textcolor{red}{Se interpolan los valores de CODS $x_{int}$ para las fechas de los TLE del intervalo de extrapolaci\'on.}}\\
-Se corrigen los valores de los vectores de estado de los TLE del intervalo de extrapolaci\'on, utilizando los valores que ofrece la funci\'on de ajuste. (En este punto se pretende que las posiciones y velocidades de los TLEs se acerquen a las posiciones y velocidades que ofrece CODS.)\\
-\begin{align}
- x&=x_{e}-f & \delta x_{i}& = x_{i} - x 
-\end{align}
 
 

@@ -9,6 +9,8 @@ a fin de obtener una matriz de covarianza con el error.
 import glob
 import operator
 import numpy as np
+import numpy.polynomial as P
+import matplotlib.pylab as plt
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from TleAdmin.TleArchivos import setTLE
@@ -324,6 +326,36 @@ def difPrimario(nombre,largo):
         difP.write(info)
         
     return nombre
+
+# if __name__=='__main__':
+    
+#     t=[]
+#     dv=[]
+#     dn=[]
+#     dc=[]
+#     
+#     archivo=open('../AjustarTLE/diferencias/difTotal','r')
+#     contenido=archivo.readlines()
+#     
+#     for c in contenido:
+#         campos=c.split(',')
+#         t.append(float(campos[0]))
+#         dv.append(float(campos[1]))
+#         dn.append(float(campos[2]))
+#         dc.append(float(campos[3]))
+#         
+#     c, b, a = P.polynomial.polyfit(t, dv, deg=2)
+#     print c,b,a
+#     
+#     x=np.linspace(0,30, 60)
+#     y=[]
+#     for i in x:
+#         y.append(-0.002373*i*i+0.061160*i-0.077031)
+#     
+#     plt.plot(t,dv,'x')
+#     plt.plot(x,y,'-')
+#     plt.show()
+    
 
 #     """
 #     Verificacion de generacion del archivo con las diferencias

@@ -3,10 +3,10 @@
 
  %De acuerdo a \cite{Barrett2009}, el modelo WCM...\\
 
-\subsection{M\'etodo de Osweiler}
+\section{M\'etodo de Osweiler}
 copiar y pegar de la notebook.
 
-\subsection{Tratamiento sobre Datos de Misi\'on}
+\section{Tratamiento sobre Datos de Misi\'on}
 En esta etapa repetimos el m\'etodo que propone Osweiler considerando los datos de misi\'on generados por el CODS
 como posici\'on verdadera.\\
 La aplicaci\'on del m\'etodo implica:
@@ -25,12 +25,12 @@ La aplicaci\'on del m\'etodo implica:
  \caption{M\'etodo de Osweiler sobre datos CODS}
 \end{figure}
 
-\subsection{Preprocesamiento de los Datos de Misi\'on de CODS}
+\section{Preprocesamiento de los Datos de Misi\'on de CODS}
 Para este trabajo CONAE nos facilit\'o el acceso a los datos orbitales de la misi\'on SAC-D.
 Los datos se ecuentran montados en un servidor que contiene la informaci\'on organizada en archivos con formato ASCII, distribuidos en distintas carpetas seg\'un su clasificaci\'on.\\
 Para la comparaci\'on que proponemos, solicitamos acceso a los archivos de efem\'erides orbitales ORBEPHEM, que ofrecen posiciones y velocidades tabuladas cada un minuto, en el Sistema de Referencia TOD (True of Date), en coordenadas cartesianas.
 
-\subsubsection{ORBEPHEM}
+\subsection{ORBEPHEM}
 Estos productos son generados luego de un post procesamiento que incluye una propagaci\'on ajustada por una determinaci\'on orbital. 
 Cada archivo contiene un listado cronol\'ogicamente tabulado de posiciones y velocidades, dentro de un periodo de casi 3 d\'ias. ( doc\_interfaces)
 
@@ -49,7 +49,7 @@ La nomenclatura de los mismos respeta el siguiente formato:\\
 \end{verbatim}
 
 
-\subsubsection{Archivos Utilizados}
+\subsection{Archivos Utilizados}
 Si bien la nomenclatura de los archivos respeta una estructura, s\'olo se indica en el nombre, la fecha de generaci\'on de los datos y n puede desprenderse del mismo en cu\'al es la \'epoca final e inicial de cada archivo. A su vez, las \'epocas contempladas en cada uno de ellos no está homogeneizada. Es decir, la fecha y hora inicial y final de cada registro es diferente para cada archivo.\\
 Dada esta organizaci\'on, para el punto tres del procedimiento, referente a la localizaci\'on del archivo necesario para la comparaci\'on, la b\'usqueda se realiza de la siguiente manera:\\
 Localizamos en primer lugar el archivo cuyo nombre coincide con la fecha de la \'epoca del TLE primario.
@@ -82,6 +82,24 @@ Im\'agenes comparativas entre los dos m\'etodos:\\
 % \label{fig:test}
 % \end{figure}
 
+\section{Graficos LAGEOS 8820}
 
+\begin{figure}[H]
+ \centering
+\begin{subfigure}%{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{imagenes/difTot8820.png}
+  \caption{A subfigure}
+  \label{fig:sub1}
+\end{subfigure}%
+\begin{subfigure}%{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{imagenes/vncmultiplot}
+  \caption{A subfigure}
+  \label{fig:sub2}
+\end{subfigure}
+\caption{A figure with two subfigures}
+\label{fig:test}
+\end{figure}
 
 
