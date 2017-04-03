@@ -4,13 +4,9 @@ Created on 26/01/2017
 @author: mcvalenti
 '''
 import os
-
-"""
-listar las epocas de todos los tles.
-interpolar el sv de cods para esas fechas
-ordenarlas de mayor a menor
-reproducir el metodo de Osweiler tomando como  dato el sv interpolado
-"""
+import numpy as np
+from TleAdmin.TLE import Tle
+from SistReferencia.sist_deCoordenadas import teme2tod
 
 
 
@@ -33,5 +29,12 @@ if __name__ == '__main__':
     if not os.path.exists(d4):
         os.mkdir(d4)
 
+    tle_archivo='../TleAdmin/tle/37673tle6'
+    tle1=Tle(tle_archivo)
+    epoca=tle1.epoca()
+    r,v=tle1.propagaTLE()    
+    r_tod=teme2tod(epoca, r) 
 
-    print 'FIN'
+    print r
+    print r_tod
+    print r-r_tod

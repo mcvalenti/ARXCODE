@@ -170,12 +170,12 @@ def ajustar_diferencias(data):
     for i in x:
         y.append(-74.9201787613*i*i+80.5462899751*i-33.5691085534)     
     plt.plot(dt,dv,'x')
-#    plt.plot(x,y,'-')
+    plt.plot(x,y,'-')
     plt.show()
     return {}
         
-def ejecutaProceamientoCods():
-#if __name__ == '__main__':
+#def ejecutaProceamientoCods():
+if __name__ == '__main__':
     """
     Lista los nombres de los archivos de la carpeta: TleAdmin/tles.
     Recupera la informacion del ultimo TLE del set (TLE primario), en particular la epoca.
@@ -241,5 +241,5 @@ def ejecutaProceamientoCods():
     print 'Fin del Calculo de Diferencias'
 #    VerGrafico(archivo_diferencias)
 
-    return data# linea1, linea2, archivo_diferencias
+#    return data# linea1, linea2, archivo_diferencias
 

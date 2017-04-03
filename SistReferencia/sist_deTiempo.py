@@ -4,8 +4,17 @@ epoca juliana (J2000): 1ero de Enero de J2000 al mediodia.
 jd(j2000)=2451545.0
 """
 import numpy as np
+from datetime import datetime
 
 def j0(epoch):
+    """
+    Calcula la fecha juliana para 0hs de UT.
+    ---------------------------------------------
+    input
+        epoch: fecha (datetime)
+    output
+        j0: fecha juliana a Ohs de UT (float)
+    """
     y=epoch.year
     m=epoch.month
     d=epoch.day
@@ -16,6 +25,15 @@ def j0(epoch):
     return j0
     
 def jd(epoch):
+    """
+    Calcula la fecha juliana para la epoca.
+    Utiliza la funcion anterior J0
+    ---------------------------------------------
+    input
+        epoch: fecha (datetime)
+    output
+        jd: fecha juliana de la epoca (float)
+    """
     h=epoch.hour
     minu=epoch.minute
     s=epoch.second+epoch.microsecond/1000000.0    
@@ -24,6 +42,11 @@ def jd(epoch):
     jd=j01+ut/24.0
     
     return jd
+
+def calcula_mjd(epoch):
+    jd1=jd(epoch)
+    mjd=jd1-2400000.5   
+    return mjd
     
 def ts_greenwich(epoch):
     """
@@ -106,5 +129,4 @@ def ts_local(epoch,lon):
         vueltass=np.modf(ts/360.0)[1]
         ts=ts-vueltass*360
     return ts  
-    
     

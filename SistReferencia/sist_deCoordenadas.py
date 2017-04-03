@@ -2,6 +2,8 @@
 
 import numpy as np
 from math import pi
+from sist_deTiempo import calcula_mjd
+
 #from newton import newton
 
 def xv2eo(r,v):
@@ -250,57 +252,119 @@ def rot_tierra(x,y,z,minu,ts):
     r_prima=np.dot(ma_rot,pos)
     return r_prima 
 
-def teme2tod(tt,r_teme):
+def teme2tod(epoch,r_teme):
     """
-    Created on Mon Jul 27 09:42:53 2015
+    Transforma las coordenadas de r_teme, en el sistema
+    TEME al sistema TOD.
+    -----------------------------------------------------
+    input
+        epoch: epoca del vector de estado (datetime)
+        r_teme: vector de estado en el sistema TEME (array)
+    output
+        r_tod: vector de estado en el sistema TOD (array)
+    """
     
-    Calculo del TOD
-    
-    @author: mcvalenti
-    """
-    rad = pi/180.0
-    rad1 = 2*pi/86400.0
-    
-    #psi = -0.0522 # para el 28/06/2000 ["]
-    
-    #tt = 0.004904360547
-    #jd=2451724.13115529340
-    #julicen=(jd-2451545.0)/36525 # [Centurias Julianas]
-    #r_teme=np.matrix([[3961.0035498],[6010.7511740],[4619.3009301]])
-    """
-    epsiraya(tt):
-    """
-    a=84381.448
-    b=-46.8150
-    c=-0.00059
-    d=0.001813
-    epsiraya=a+b*tt+c*tt**2+d*tt**3
-
-    """    
-    Omega(tt):
-    """
-    a=125.04452222 # en [grados]
-    b=-6962.8905390
-    c=7.455
-    d=0.008
-    Ome1=b*tt+c*tt**2+d*tt**3
-    Ome2=Ome1/3600.0
-    Omega=a+Ome2
+    arc2rad=np.pi/(180.0*3600.0)    
+    mjd=calcula_mjd(epoch)
+    tt=(mjd-51544.5)/36525.0
     
     """
-    transformacion(tt,r_teme):
+    Parametros [arcseconds / segundos de arco]
     """
-    eps=epsiraya
-    eps1=eps*rad/3600.0
-    Omegaf=Omega*rad#
-    psi =-17.1996*np.sin(Omegaf)
-    eqe=psi*np.cos(eps1)+0.00264*np.sin(Omegaf)+0.000063*np.sin(2*Omegaf)
-    eqe1=eqe*rad/3600.0
-    Q=np.matrix([[np.cos(-eqe1),np.sin(-eqe1),0],[-np.sin(-eqe1),
-                  np.cos(-eqe1),0],[0,0,1]])          
+    M_moon  = 134.96298139*3600.0+1717915922.6330*tt+31.31*tt*tt+0.064*tt*tt*tt
+    M_sun   = 357.52772333*3600.0+12956581.2240*tt-0.577*tt*tt+0.012*tt*tt*tt
+    mu_moon = 93.27191018*3600.0+1739527263.1370*tt-13.257*tt*tt-0.011*tt*tt*tt
+    D_sun   = 297.85036306*3600.0+1602961601.3280*tt-6.891*tt*tt+0.019*tt*tt*tt
+    O_moon  = 125.04452222*3600.0-6962890.5390*tt+7.455*tt*tt+0.0008*tt*tt*tt
+    
+    nutacion=open('../SistReferencia/prenut.dat','r')
+    coef=nutacion.readlines()
+    d_epsi=0
+    d_psi=0
+    
+    for c in coef:
+        tt=0.0
+        an=c.split(',')
+        a1=float(an[0])
+        a2=float(an[1])
+        a3=float(an[2])
+        a4=float(an[3])
+        a5=float(an[4])
+        aphi=float(an[5])
+        aphi_d=float(an[6])
+        aepsi=float(an[7])
+        aepsi_d=float(an[8])
+        
+        phi_i=(a1*M_moon+a2*M_sun+a3*mu_moon+a4*D_sun+a5*O_moon)*arc2rad
+        
+        d_epsi=d_epsi + (aepsi+aepsi_d*tt)*np.cos(phi_i)
+        d_psi=d_psi + (aphi+aphi_d*tt)*np.sin(phi_i)
+        
+    d_epsi=d_epsi*(1.0/10000.0)
+    d_psi=d_psi*(1.0/10000.0)
+    
+    epsi_media = 84381.448-46.8150*tt-0.00059*tt*tt+0.001813*tt*tt*tt # [seg de arco]
+    
+    EQnox = d_psi*np.cos(epsi_media*arc2rad+d_epsi)+0.00264*np.sin(O_moon*arc2rad)+0.000063*np.sin(2*O_moon*arc2rad)
+    
+    Q=np.matrix([[np.cos(-EQnox),np.sin(-EQnox),0],
+                 [-np.sin(-EQnox),np.cos(-EQnox),0],
+                 [0,0,1]])
+    
     r_tod=np.dot(Q,r_teme)
+     
+    return r_tod    
     
-    return r_tod
+#     """
+#     Created on Mon Jul 27 09:42:53 2015
+#     
+#     Calculo del TOD
+#     
+#     @author: mcvalenti
+#     """
+#     rad = pi/180.0
+#     rad1 = 2*pi/86400.0
+#     
+#     #psi = -0.0522 # para el 28/06/2000 ["]
+#     
+#     #tt = 0.004904360547
+#     #jd=2451724.13115529340
+#     #julicen=(jd-2451545.0)/36525 # [Centurias Julianas]
+#     #r_teme=np.matrix([[3961.0035498],[6010.7511740],[4619.3009301]])
+#     """
+#     epsiraya(tt):
+#     """
+#     a=84381.448
+#     b=-46.8150
+#     c=-0.00059
+#     d=0.001813
+#     epsiraya=a+b*tt+c*tt**2+d*tt**3
+# 
+#     """    
+#     Omega(tt):
+#     """
+#     a=125.04452222 # en [grados]
+#     b=-6962.8905390
+#     c=7.455
+#     d=0.008
+#     Ome1=b*tt+c*tt**2+d*tt**3
+#     Ome2=Ome1/3600.0
+#     Omega=a+Ome2
+#     
+#     """
+#     transformacion(tt,r_teme):
+#     """
+#     eps=epsiraya
+#     eps1=eps*rad/3600.0
+#     Omegaf=Omega*rad#
+#     psi =-17.1996*np.sin(Omegaf)
+#     eqe=psi*np.cos(eps1)+0.00264*np.sin(Omegaf)+0.000063*np.sin(2*Omegaf)
+#     eqe1=eqe*rad/3600.0
+#     Q=np.matrix([[np.cos(-eqe1),np.sin(-eqe1),0],[-np.sin(-eqe1),
+#                   np.cos(-eqe1),0],[0,0,1]])          
+#     r_tod=np.dot(Q,r_teme)
+#     
+#    return r_tod
 
 
     

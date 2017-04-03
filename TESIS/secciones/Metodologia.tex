@@ -82,24 +82,33 @@ Im\'agenes comparativas entre los dos m\'etodos:\\
 % \label{fig:test}
 % \end{figure}
 
-\section{Graficos LAGEOS 8820}
+% \section{Graficos LAGEOS 8820}
+% 
+% \begin{figure}[H]
+%  \centering
+% \begin{subfigure}%{0.5\textwidth}
+%   \centering
+%   \includegraphics[width=0.7\linewidth]{imagenes/difTot8820.png}
+%   \caption{A subfigure}
+%   \label{fig:sub1}
+% \end{subfigure}%
+% \begin{subfigure}%{0.5\textwidth}
+%   \centering
+%   \includegraphics[width=0.7\linewidth]{imagenes/vncmultiplot}
+%   \caption{A subfigure}
+%   \label{fig:sub2}
+% \end{subfigure}
+% \caption{A figure with two subfigures}
+% \label{fig:test}
+% \end{figure}
 
-\begin{figure}[H]
- \centering
-\begin{subfigure}%{0.5\textwidth}
-  \centering
-  \includegraphics[width=0.7\linewidth]{imagenes/difTot8820.png}
-  \caption{A subfigure}
-  \label{fig:sub1}
-\end{subfigure}%
-\begin{subfigure}%{0.5\textwidth}
-  \centering
-  \includegraphics[width=0.7\linewidth]{imagenes/vncmultiplot}
-  \caption{A subfigure}
-  \label{fig:sub2}
-\end{subfigure}
-\caption{A figure with two subfigures}
-\label{fig:test}
+\section{Transformaci\'on de Coordenadas}
+
+Para la comparaci\'on de las posiciones en coordenadas cartesianas, es necesario llevar ambos vectores a un mismo sistema de referencia.
+Los datos que provee CODS se publican en el sistema TOD: True of Date (Verdadero de la \'epoca), mientras que los vectores de estado que genera el propagador SGP4 est\'an calculados en el sistema TEME: True Equator Mean Equinox (Ecuador Verdadero y Equinoccio Medio)
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{imagenes/sistReferencias}
 \end{figure}
 
 
