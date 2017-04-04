@@ -14,8 +14,8 @@ from sgp4.io import twoline2rv
 from TleAdmin.TLE import Tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
 from Comparar.TleVsCods import interpola, encuentraBordes
-from SistReferencia.sist_deCoordenadas import vncSis
-from visual.CodsOsweiler import VerGraficoCods
+from SistReferencia.sist_deCoordenadas import vncSis, teme2tod
+from visual.CodsOsweiler import VerGraficoCods, graficar_setcompleto
 from CodsAdmin.EphemCODS import EphemCODS
 
 def FiltraArchivos(tle):
@@ -139,9 +139,12 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             line1=tle0.linea1
             line2=tle0.linea2
             satrec = twoline2rv(line1, line2, whichconst)
-            pos, vel=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
-            difx=[float(pos[0])-r[0],float(pos[1])-r[1],float(pos[2])-r[2]]
-            difv=[float(vel[0])-rp[0],float(vel[1])-rp[1],float(vel[2])-rp[2]]
+            pos1, vel1=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
+            pos=teme2tod(fecha_tle, pos1)
+            vel=teme2tod(fecha_tle, vel1)
+
+            difx=[pos[0,0]-r[0],pos[0,1]-r[1],pos[0,2]-r[2]]
+            difv=[vel[0,0]-rp[0],vel[0,1]-rp[1],vel[0,2]-rp[2]]
             v,n,c=vncSis(r,rp,difx)
             vv,nn,cc=vncSis(r,rp,difv)
             dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
@@ -161,21 +164,18 @@ def ajustar_diferencias(data):
     dc=data[3]
     
     for kt in t:
-        dt.append((kt-t[0]).seconds/86400.0)
+        dt.append((kt-t[0]).total_seconds()/86400.0)
     c, b, a = P.polynomial.polyfit(dt, dv, deg=2)
-    print 'Coeficientes = ',c,b,a
+    c1, b1, a1 = P.polynomial.polyfit(dt, dn, deg=2)
+    c2, b2, a2 = P.polynomial.polyfit(dt, dc, deg=2)
+    coef=[a,b,c,a1,b1,c1,a2,b2,c2]
     
-    x=np.linspace(0,1, 60)
-    y=[]
-    for i in x:
-        y.append(-74.9201787613*i*i+80.5462899751*i-33.5691085534)     
-    plt.plot(dt,dv,'x')
-    plt.plot(x,y,'-')
-    plt.show()
+#    graficar_setcompleto(dt,data,coef)
+
     return {}
         
-#def ejecutaProceamientoCods():
-if __name__ == '__main__':
+def ejecutaProcesamientoCods(sat_id):
+#if __name__ == '__main__':
     """
     Lista los nombres de los archivos de la carpeta: TleAdmin/tles.
     Recupera la informacion del ultimo TLE del set (TLE primario), en particular la epoca.
@@ -229,17 +229,22 @@ if __name__ == '__main__':
     data=[t,dv,du,dc]
     archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
     salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
+    salida1=open('../Comparar/diferencias/'+str(sat_id),'w')
     for m in range(len(tle_ordenados)-1,0,-1):
         tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_fin = tle_primario.epoca()
         arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
         linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)                   
         data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
+        if m == len(tle_ordenados)-1:
+            for k in range(len(data[0])):
+                info = data[0][k].strftime("%Y-%m-%d %H:%M:%S")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+'\n'
+                salida1.write(info)
     salida.close()
     
     ajustar_diferencias(data)
     print 'Fin del Calculo de Diferencias'
-#    VerGrafico(archivo_diferencias)
+    VerGraficoCods('37673')
 
 #    return data# linea1, linea2, archivo_diferencias
 

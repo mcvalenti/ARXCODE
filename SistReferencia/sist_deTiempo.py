@@ -45,7 +45,7 @@ def jd(epoch):
 
 def calcula_mjd(epoch):
     jd1=jd(epoch)
-    mjd=jd1-2400000.5   
+    mjd=jd1-240000.5   
     return mjd
     
 def ts_greenwich(epoch):

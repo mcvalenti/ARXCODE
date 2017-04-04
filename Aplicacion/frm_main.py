@@ -12,7 +12,7 @@ from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
-from Comparar.TlevsCodsOSW import ejecutaProceamientoCods
+from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
 from visual.TleOsweiler import VerGrafico
 #from visual.TlevsCodsGraf import VerGraficoMision
 from visual.CodsOsweiler import VerGraficoCods
@@ -594,7 +594,7 @@ class ProcMision(QDialog):
         self.sat_id=self.dic_satelites[str(self.sat_nombre)]
         
     def procesarCods(self):
-        ejecutaProceamientoCods()
+        ejecutaProcesamientoCods(self.sat_id)
        # self.linea1, self.linea2, self.grafico_arch = ejecutaProceamientoCods()
         self.tlepri_edit.setText(self.linea1+'\n'+self.linea2)
         self.boton_grafico.setEnabled(True)

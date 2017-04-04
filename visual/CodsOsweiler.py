@@ -12,7 +12,7 @@ import datetime as dt
 
 
 def VerGraficoCods(archivo):
-    f=open('../Comparar/'+archivo,'r')
+    f=open('../Comparar/diferencias/'+archivo,'r')
     listas=f.readlines()
     archivo_grafico=str(archivo+'.png')
     
@@ -86,3 +86,55 @@ def VerGraficoCods(archivo):
     plt.show()
     
     return archivo_grafico
+
+def graficar_setcompleto(dt,data,coef):
+
+    a=coef[0]
+    b=coef[1]
+    c=coef[2]
+    a1=coef[3]
+    b1=coef[4]
+    c1=coef[5]
+    a2=coef[6]
+    b2=coef[7]
+    c2=coef[8]
+    dv=data[1]
+    dn=data[2]
+    dc=data[3]
+    largo=np.max(dt)
+    
+    x=np.linspace(0,int(largo), 60)
+    yv=[]
+    yn=[]
+    yc=[]
+    for i in x:
+        yv.append(a*i*i+b*i+c)
+        yn.append(a1*i*i+b1*i+c1) 
+        yc.append(a2*i*i+b2*i+c2)    
+       
+    """
+    GRAFICO
+    """
+    
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+
+    ax1.grid(True)
+    ax2.grid(True)
+    ax3.grid(True)
+    
+#    plt.ion()
+    ax1.plot( x, yv,'r--',label='Coordenada V')
+    ax1.plot(dt, dv,'x')
+    ax1.set_ylabel('Km')
+    ax2.plot(dt, dn,'x',label='Coordenada N')
+    ax2.plot(x, yn,'r--')#
+    ax2.set_ylabel('Km')
+    ax3.plot(dt, dc,'x',label='Coordenada C')
+    ax3.plot(x, yc,'r--')
+    ax3.set_ylabel('Km')
+    
+    fig.suptitle('Diferencias y Funcion de Ajuste (CODS vs TLE+SGP4)')
+    plt.xlabel('Epoca')
+    plt.savefig('../visual/archivos/ajustes.png')
+    plt.show()
+    
