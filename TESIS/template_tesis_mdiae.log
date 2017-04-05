@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.9.3)  30 MAR 2017 14:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.9.3)  5 APR 2017 10:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1531,7 +1531,7 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 9.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 9.
-<imagenes/Osweiler_sobre_Cods.png, id=174, 1062.97125pt x 540.0175pt>
+<imagenes/Osweiler_sobre_Cods.png, id=170, 1062.97125pt x 540.0175pt>
 File: imagenes/Osweiler_sobre_Cods.png Graphic file (type png)
 
 <use imagenes/Osweiler_sobre_Cods.png>
@@ -1665,47 +1665,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 65--66
  []
 
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 85.
+(babel)             in language  on input line 105.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 85.
+(babel)             in language  on input line 105.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 85.
+(babel)             in language  on input line 105.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 85.
+(babel)             in language  on input line 105.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 85.
+(babel)             in language  on input line 105.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 85.
-<imagenes/difTot8820.png, id=185, 578.16pt x 433.62pt>
-File: imagenes/difTot8820.png Graphic file (type png)
+(babel)             in language  on input line 105.
+<imagenes/sistReferencias.png, id=181, 1072.005pt x 653.44125pt>
+File: imagenes/sistReferencias.png Graphic file (type png)
 
-<use imagenes/difTot8820.png>
-Package pdftex.def Info: imagenes/difTot8820.png used on input line 91.
-(pdftex.def)             Requested size: 338.58632pt x 253.93465pt.
-Package epstopdf Info: Source file: <imagenes/vncmultiplot.eps>
-(epstopdf)                    date: 2017-03-29 10:20:30
-(epstopdf)                    size: 33996 bytes
-(epstopdf)             Output file: <imagenes/vncmultiplot-eps-converted-to.pdf
->
-(epstopdf)                    date: 2017-03-29 10:32:19
-(epstopdf)                    size: 15075 bytes
-(epstopdf)             Command: <repstopdf --outfile=imagenes/vncmultiplot-eps-
-converted-to.pdf imagenes/vncmultiplot.eps>
-(epstopdf)             \includegraphics on input line 97.
-Package epstopdf Info: Output file is already uptodate.
-
-<imagenes/vncmultiplot-eps-converted-to.pdf, id=186, 361.35pt x 252.945pt>
-File: imagenes/vncmultiplot-eps-converted-to.pdf Graphic file (type pdf)
-
-<use imagenes/vncmultiplot-eps-converted-to.pdf>
-Package pdftex.def Info: imagenes/vncmultiplot-eps-converted-to.pdf used on inp
-ut line 97.
-(pdftex.def)             Requested size: 338.58632pt x 237.01184pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-LaTeX Info: Redefining \. on input line 104.
-LaTeX Info: Redefining \% on input line 104.
+<use imagenes/sistReferencias.png>
+Package pdftex.def Info: imagenes/sistReferencias.png used on input line 113.
+(pdftex.def)             Requested size: 338.58632pt x 206.38347pt.
+LaTeX Info: Redefining \. on input line 133.
+LaTeX Info: Redefining \% on input line 133.
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1714,30 +1692,42 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  This may cause the page layout to be inconsistent, however.
 
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 104.
+(babel)             in language  on input line 133.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 104.
-[5])
+(babel)             in language  on input line 133.
+[5 <./imagenes/sistReferencias.png>]
+
+LaTeX Warning: Command \textquotedbl invalid in math mode on input line 139.
+
+
+LaTeX Warning: Command \textquotedbl invalid in math mode on input line 139.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 156--157
+
+ []
+
+)
 LaTeX Info: Redefining \. on input line 87.
 LaTeX Info: Redefining \% on input line 87.
 
@@ -1771,11 +1761,10 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 87.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 87.
-[6 <./imagenes/difTot8820.png> <./imagenes/vncmultiplot-eps-converted-to.pdf>]
+[6]
 \openout2 = `secciones/ARxCODE.aux'.
 
-
-(./secciones/ARxCODE.tex
+ (./secciones/ARxCODE.tex
 Cap\IeC {\'\i }tulo 4.
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 1.
@@ -2053,29 +2042,33 @@ LaTeX Info: Redefining \% on input line 24.
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 106.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 106.
 Package rerunfilecheck Info: File `template_tesis_mdiae.out' has not changed.
-(rerunfilecheck)             Checksum: 185FA2DE48FAAD9F7FA2D1412020EE43;1207.
+(rerunfilecheck)             Checksum: A0035EB853AC34B40A2B0050A5A5A7FE;1219.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 106.
  ) 
 Here is how much of TeX's memory you used:
- 14956 strings out of 493304
- 219820 string characters out of 6139872
- 351361 words of memory out of 5000000
- 17932 multiletter control sequences out of 15000+600000
- 81064 words of font info for 96 fonts, out of 8000000 for 9000
+ 14946 strings out of 493304
+ 219605 string characters out of 6139872
+ 352210 words of memory out of 5000000
+ 17923 multiletter control sequences out of 15000+600000
+ 85836 words of font info for 107 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 44i,11n,77p,643b,717s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,12n,77p,643b,717s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
-e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf
--dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/tim
-es/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb><
-/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
-/fonts/type1/urw/times/utmri8a.pfb>
-Output written on template_tesis_mdiae.pdf (21 pages, 642372 bytes).
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
+urw/courier/ucrr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/
+uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts
+/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/time
+s/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on template_tesis_mdiae.pdf (21 pages, 701488 bytes).
 PDF statistics:
- 274 PDF objects out of 1000 (max. 8388607)
- 230 compressed objects within 3 object streams
+ 284 PDF objects out of 1000 (max. 8388607)
+ 238 compressed objects within 3 object streams
  54 named destinations out of 1000 (max. 500000)
- 190 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 185 words of extra memory for PDF output out of 10000 (max. 10000000)
 

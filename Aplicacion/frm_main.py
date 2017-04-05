@@ -299,8 +299,6 @@ class ProcTle(QDialog):
         
 #     def Graficar(self):
 #         self_grafico_pw=VerGrafico(self.diferencias)
-
-
         
     def Graficar(self):
         data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]

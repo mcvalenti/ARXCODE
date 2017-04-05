@@ -1,0 +1,27 @@
+\chapter{Introducción}
+\label{chap:introduccion}
+
+
+\subsection{Regulaciones Nacionales e Internacionales}
+
+
+
+\subsection{Planteo del Problema}
+Llega un CDM que anuncia un riesgo de colisi\'on en el tiempo futuro $t_{ca}$, ¿qu\'e cosas me pregunto?
+
+Preguntas:\\
+
+\begin{enumerate}
+ \item ¿Con qu\'e error conozco la posici\'on de la Misi\'on para la \'epoca actual?\\
+ \item ¿Con qu\'e error conozco la posici\'on del desecho para la \'epoca actual?\\
+ \item ¿Con qu\'e error conozco la posici\'on de la Misi\'on para la \'epoca $t_{ca}$?\\
+ \item ¿Con qu\'e error conozco la posici\'on del desecho para la \'epoca $t_{ca}$?\\
+\end{enumerate}
+
+
+
+\begin{enumerate}
+ \item Error de la Misi\'on en la \'epoca actual: La posici\'on y velocidad se plasma en los productos que genera el CODS, a trav\'es de sus efem\'erides predichas y o precisas. El error asociado ... {\textcolor{red}{¿?}} - Pueden t\\
+ \item 
+ 
+\end{enumerate}

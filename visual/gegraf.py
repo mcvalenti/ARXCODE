@@ -37,6 +37,7 @@ def gegrafTot(difTot,setID):
 # #         plt.ylim(-5.0,2.0)
 #         plt.legend(loc=4)
         plt.savefig('../visual/difTot'+setID+'.png')
+        plt.show()
         plt.close()
 
 def gegraf(datos,sufijo):  
@@ -105,4 +106,4 @@ if __name__=='__main__':
     difTot='../AjustarTLE/diferencias/difTotal'
     setID=str(8820)
     gegrafTot(difTot,setID)
-    gegraf(difTot,setID)
+#    gegraf(difTot,setID)

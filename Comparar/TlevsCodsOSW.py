@@ -170,7 +170,7 @@ def ajustar_diferencias(data):
     c2, b2, a2 = P.polynomial.polyfit(dt, dc, deg=2)
     coef=[a,b,c,a1,b1,c1,a2,b2,c2]
     
-#    graficar_setcompleto(dt,data,coef)
+    graficar_setcompleto(dt,data,coef)
 
     return {}
         
