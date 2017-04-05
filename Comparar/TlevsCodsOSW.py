@@ -142,7 +142,6 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             pos1, vel1=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
             pos=teme2tod(fecha_tle, pos1)
             vel=teme2tod(fecha_tle, vel1)
-
             difx=[pos[0,0]-r[0],pos[0,1]-r[1],pos[0,2]-r[2]]
             difv=[vel[0,0]-rp[0],vel[0,1]-rp[1],vel[0,2]-rp[2]]
             v,n,c=vncSis(r,rp,difx)
@@ -153,6 +152,9 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             data[1].append(v)
             data[2].append(n)
             data[3].append(c)
+            data[4].append(vv)
+            data[5].append(nn)
+            data[6].append(cc)
     return data
 
 def ajustar_diferencias(data):
@@ -162,6 +164,9 @@ def ajustar_diferencias(data):
     dv=data[1]
     dn=data[2]
     dc=data[3]
+    dvv=data[4]
+    dnn=data[5]
+    dcc=data[6]
     
     for kt in t:
         dt.append((kt-t[0]).total_seconds()/86400.0)
@@ -169,12 +174,10 @@ def ajustar_diferencias(data):
     c1, b1, a1 = P.polynomial.polyfit(dt, dn, deg=2)
     c2, b2, a2 = P.polynomial.polyfit(dt, dc, deg=2)
     coef=[a,b,c,a1,b1,c1,a2,b2,c2]
-    
-    graficar_setcompleto(dt,data,coef)
 
-    return {}
+    return dt,coef
         
-def ejecutaProcesamientoCods(sat_id):
+def ejecutaProcesamientoCods():
 #if __name__ == '__main__':
     """
     Lista los nombres de los archivos de la carpeta: TleAdmin/tles.
@@ -219,17 +222,23 @@ def ejecutaProcesamientoCods(sat_id):
     epoca_ini = tle_inicio.epoca()
     
     tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
-    epoca_fin = tle_primario.epoca()
+    epoca_fin  = tle_primario.epoca()
+    epoca_ffin = epoca_fin
+    linea1 = tle_primario.linea1
+    linea2 = tle_primario.linea2
     fecha_ini=str(epoca_ini.year)+str(epoca_ini.month)+str(epoca_ini.day)
     fecha_fin=str(epoca_fin.year)+str(epoca_fin.month)+str(epoca_fin.day)
     t=[]
     dv=[]
     du=[]
     dc=[]
-    data=[t,dv,du,dc]
+    dvv=[]
+    dnn=[]
+    dcc=[]
+    data=[t,dv,du,dc,dvv,dnn,dcc]
     archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
     salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
-    salida1=open('../Comparar/diferencias/'+str(sat_id),'w')
+    salida1=open('../Comparar/diferencias/'+archivo,'w')
     for m in range(len(tle_ordenados)-1,0,-1):
         tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_fin = tle_primario.epoca()
@@ -238,13 +247,15 @@ def ejecutaProcesamientoCods(sat_id):
         data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
         if m == len(tle_ordenados)-1:
             for k in range(len(data[0])):
-                info = data[0][k].strftime("%Y-%m-%d %H:%M:%S")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+'\n'
+                info = data[0][k].strftime("%Y-%m-%d %H:%M:%S")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+' '+str(data[4][k])+' '+str(data[5][k])+' '+str(data[6][k])+'\n'
                 salida1.write(info)
     salida.close()
     
-    ajustar_diferencias(data)
+    dt,coef=ajustar_diferencias(data)
+#    graficar_setcompleto(dt,data,coef)
+    
     print 'Fin del Calculo de Diferencias'
-    VerGraficoCods('37673')
-
-#    return data# linea1, linea2, archivo_diferencias
+#    VerGraficoCods('37673')
+    set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S"),dt,data,coef,archivo]
+    return set_datos
 

@@ -13,12 +13,14 @@ from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
-from visual.TleOsweiler import VerGrafico
-#from visual.TlevsCodsGraf import VerGraficoMision
-from visual.CodsOsweiler import VerGraficoCods
+from visual.ploteos import *
+from visual import ploteos
+# from visual.TleOsweiler import VerGrafico
+# #from visual.TlevsCodsGraf import VerGraficoMision
+# from visual.CodsOsweiler import VerGraficoCods
 from visual.binGraf import histograma_bin, desviacion_standard_graf
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 class ProcARxCODE(QMainWindow):
     
@@ -301,7 +303,8 @@ class ProcTle(QDialog):
 #         self_grafico_pw=VerGrafico(self.diferencias)
         
     def Graficar(self):
-        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
+#        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
+        data=[self.sat_id,self.diferencias]
         self.graf = RepresentacionGrafica(data)
         self.graf.exec_()
         
@@ -432,21 +435,21 @@ class ConexionNorad(QDialog):
     
 class RepresentacionGrafica(QDialog):
         
-    def __init__(self,data=None,parent=None):
+    def __init__(self,set_datos=None,parent=None):
         QDialog.__init__(self,parent)
 
-        self.sat_id=data[0]
-        self.diferencias=data[1]
-        self.data=data[2]
-        self.mediaxbin=data[3]
+        self.sat_id=set_datos[0]
+        self.dt=set_datos[5]
+        self.data=set_datos[6]
+        self.coef=set_datos[7]
         
         self.setWindowModality(Qt.ApplicationModal)
         layout = QHBoxLayout()
 
+        graficos=["Diferencias Totales","Diferencias por Coordenada","Diferencias del Set Principal","Histograma de Bin"]
         self.listWidget = QListWidget()
-        self.listWidget.addItem("Diferencias")
-        self.listWidget.addItem("Histograma de Bin")
-        self.listWidget.addItem("Promedios")
+        self.listWidget.addItems(graficos)
+        
 
         self.figura=plt.figure()
         self.canvas = FigureCanvas(self.figura)
@@ -463,7 +466,8 @@ class RepresentacionGrafica(QDialog):
         """
         Acciones
         """
-        self.listWidget.itemClicked.connect(self.item_click)
+        self.listWidget.itemSelectionChanged.connect(self.itemChanged)
+#        self.listWidget.itemClicked.connect(self.item_click)
         self.boton_salir.clicked.connect(self.salir)
 
 
@@ -478,14 +482,29 @@ class RepresentacionGrafica(QDialog):
 #             item = QListWidgetItem(item_text)
 #             self.addItem(item)
 
-    def item_click(self, item):
-        item_str=self.listWidget.currentItem().text()
-        if item_str == 'Histograma de Bin':
-            histograma_bin(self.data)
- #           self_grafico_pw=VerGrafico(self.diferencias)
+            
+
+    def itemChanged(self):
+        item = QListWidgetItem(self.listWidget.currentItem())
+        item_str=item.text()
+        if item_str == "Diferencias Totales":
+            self.figura = ploteos.grafica_setcompleto(self.dt, self.data, self.coef)
+#            ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data,self.coef)
+            self.canvas = FigureCanvas(self.figura)
             self.canvas.draw()
-#         elif item_str == 'Histograma de Bin':
-#             histograma_bin(self.data)
+    #        elif item_str == 'Diferencias por Coordenada':
+#         else:
+#             ploteos.grafica_setcompleto(self.dt, self.data, self.coef)
+#             self.canvas.draw()
+
+#     def item_click(self, item):
+#         item_str=self.listWidget.currentItem().text()
+#         if item_str == "Diferencias Totales":
+#             ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data,self.coef)
+#             self.canvas.draw()
+# #        elif item_str == 'Diferencias por Coordenada':
+#         else:
+#             ploteos.grafica_setcompleto(self.dt, self.data, self.coef)
 #             self.canvas.draw()
 #         else:
 #             desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin[1], self.mediaxbin[2])
@@ -500,7 +519,7 @@ class ProcMision(QDialog):
     """
     REQUIERE CORRER PRIMERO EL PROCESAMIENTO TLE!!!
     Utiliza los datos ya cargados en TleAdmin/tle y los Datos de los archivos CODS.
-    Carga el set de datos TLE y realiza el metodo de Osewiler para estimar las diferenicas
+    Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las diferenicas
     """
 
     def __init__(self,parent=None):
@@ -518,6 +537,10 @@ class ProcMision(QDialog):
         self.grafico_arch=''
         self.dif_cvstle= ''
         self.macovarT=''
+        self.dt=[]
+        self.data=[]
+        self.coef=[]
+        self.set_datos=[]
         
     def initUI(self):
         self.grilla = QGridLayout()
@@ -535,7 +558,8 @@ class ProcMision(QDialog):
         Botones
         """
         self.boton_procesar   = QPushButton('Procesar')
-        self.boton_grafico    = QPushButton('Ver Grafico')
+        self.boton_dtotales   = QPushButton('Graficar Diferencias Totales')
+        self.boton_dxcoord    = QPushButton('Graficar Diferencias por Coordenadas')
         self.boton_macovar    = QPushButton('Calcular Matriz')
         self.boton_salir      = QPushButton('Salir')
         
@@ -566,8 +590,9 @@ class ProcMision(QDialog):
         self.grilla.addWidget(self.fechaini_edit,3,1)
         self.grilla.addWidget(self.fechafin_lab,4,0)
         self.grilla.addWidget(self.fechafin_edit,4,1)
-        self.grilla.addWidget(self.tlepri_edit,5,1)
-        self.grilla.addWidget(self.boton_grafico,6,1)
+        self.grilla.addWidget(self.tlepri_edit,5,0,1,2)
+        self.grilla.addWidget(self.boton_dtotales,6,0)
+        self.grilla.addWidget(self.boton_dxcoord,6,1)
         self.grilla.addWidget(self.tableView,7,0,7,1)
         self.grilla.addWidget(self.boton_macovar,8,1)
         self.grilla.addWidget(self.boton_salir,17,1)
@@ -577,9 +602,13 @@ class ProcMision(QDialog):
         """
         self.listaSat.currentIndexChanged.connect(self.selectionchange)
         self.boton_procesar.clicked.connect(self.procesarCods)
-        self.boton_grafico.setEnabled(False)
+        self.boton_procesar.setEnabled(False)
+        self.boton_dtotales.setEnabled(False)
+        self.boton_dxcoord.setEnabled(False)
+        self.boton_macovar.setEnabled(False)
         self.boton_salir.clicked.connect(self.salir)
-#        self.boton_grafico.clicked.connect(self.verGrafico)
+        self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
+        self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
         self.boton_macovar.clicked.connect(self.Macovar)
 #        self.datos_mis_edit.textChanged.connect(self.validar_nombre)
                 
@@ -590,26 +619,38 @@ class ProcMision(QDialog):
         self.sat_nombre= self.listaSat.currentText()
         self.dic_satelites={'SAC-D':37673,'LAGEOS':8820,'ICESAT':27642}
         self.sat_id=self.dic_satelites[str(self.sat_nombre)]
+        self.boton_procesar.setEnabled(True)
         
     def procesarCods(self):
-        ejecutaProcesamientoCods(self.sat_id)
-       # self.linea1, self.linea2, self.grafico_arch = ejecutaProceamientoCods()
+        self.set_datos=ejecutaProcesamientoCods()
+        self.sat_id=self.set_datos[0]
+        self.linea1=self.set_datos[1]
+        self.linea2=self.set_datos[2]
+        self.fini=self.set_datos[3]
+        self.ffin=self.set_datos[4]
+        self.dt=self.set_datos[5]
+        self.data=self.set_datos[6]
+        self.coef=self.set_datos[7]
+        self.grafico_arch=self.set_datos[8]
+        self.fechaini_edit.setText(self.fini)
+        self.fechafin_edit.setText(self.ffin)
         self.tlepri_edit.setText(self.linea1+'\n'+self.linea2)
-        self.boton_grafico.setEnabled(True)
+        self.boton_dtotales.setEnabled(True)
+        self.boton_dxcoord.setEnabled(True)
+        self.boton_macovar.setEnabled(True)
         
-#     def verGrafico(self):
-#         VerGraficoCods(self.grafico_arch)
+    def ver_diferencias_totales(self):
+#         self.graf = RepresentacionGrafica(self.set_datos)
+#         self.graf.exec_()
+        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data,self.coef)
         
-#     def validar_nombre(self):
-#         nombre = self.nombre.text()
-# 
-#         if nombre == "":
-#             self.nombre.setStyleSheet("border: 1px solid yellow;")
-#             return False
+    def ver_dif_x_coordenadas(self):
+        ploteos.grafica_setcompleto(self.dt, self.data, self.coef)
+        
         
     def Macovar(self):
         self.macovarT=EjecutaMaCovarCODS(self.grafico_arch)
-                                         #self.dif_cvstle)
+#self.dif_cvstle)
         self.tableView.setRowCount(len(self.macovarT))
         self.tableView.setColumnCount(len(self.macovarT))
         for i,fila in enumerate(self.macovarT):

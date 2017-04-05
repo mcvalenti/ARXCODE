@@ -1,7 +1,0 @@
-<html>
-<body>
-	
-		<p><p>You must be logged in to complete this action</p></p>
-
-</body>
-</html>

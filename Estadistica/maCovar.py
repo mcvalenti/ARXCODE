@@ -136,7 +136,7 @@ def EjecutaMaCovarCODS(archivo):
     uv=[]
     vv=[]
     wv=[]
-    datos=open('../Comparar/'+archivo,'r')
+    datos=open('../Comparar/diferencias/'+archivo,'r')
     datos1=datos.readlines()
     for l in datos1:
         campos=l.split()
