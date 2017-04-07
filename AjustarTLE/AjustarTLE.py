@@ -6,7 +6,7 @@ a fin de obtener una matriz de covarianza con el error.
 
 @author: mcvalenti
 '''
-import glob
+import glob, os
 import operator
 import numpy as np
 import numpy.polynomial as P
@@ -200,28 +200,35 @@ def difTle(tleOrdenados,cantidad_tles):
 
     dtot=open('../AjustarTLE/diferencias/difTotal','w')
 
+    dt_frac=[]
+    dv=[]
+    dn=[]
+    dc=[]
     bin=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     for i in range(cantidad_tles-1,0,-1):       
-#         print '********************************************'
-#         print 'procesando TLE primario numero = ', i
-#         print '********************************************'
+
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
+
         item=range(i-1,-1,-1)
        
         for j in item:
             tlesec=tleOrdenados[j][0]
             pos,vel,fsec=tleSecundario(tlesec, ffin)
             dr=pos-r
-            dv=vel-rp
+            d_v=vel-rp
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
             v,n,c=vncSis(r, rp, dr)
-            vv,nn,cc=vncSis(r,rp,dv)
+            vv,nn,cc=vncSis(r,rp,d_v)
 #             v,n,c=ricSis(r, rp, dr)
 #             vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+str(fsec)+','+tlesec+'\n'
             dtot.write(infodiftot)
+            dt_frac.append(dtfracdias)
+            dv.append(v)
+            dn.append(n)
+            dc.append(c)
             """
             Clasificacion por bin.
             """
@@ -232,11 +239,10 @@ def difTle(tleOrdenados,cantidad_tles):
                 if dtfracdias >= rangos[i][0] and dtfracdias < rangos[i][1]:
                     bin[i].append(infodiftot)
             
-#         for i in range(15):
-#             print bin[i]
+        data=[dt_frac,dv,dn,dc]
             
     dtot.close()
-    return bin
+    return bin, data
 
 def genera_estadisticaBin(bin_lista):
     
@@ -328,11 +334,37 @@ def difPrimario(nombre,largo):
     return nombre
 
 # if __name__=='__main__':
-    
+# #    ejecuta_procesamiento_TLE():
+#     """
+#     Se crean los directorios necesarios.
+#     """
+# 
+#     d1='../TleAdmin/tle'
+#     if not os.path.exists(d1):
+#         os.mkdir(d1)
+#     d2='../AjustarTLE/diferencias'
+#     if not os.path.exists(d2):
+#         os.mkdir(d2)
+#     d3='../main/matrices/'
+#     if not os.path.exists(d3):
+#         os.mkdir(d3)
+#     d4='../visual/archivos'
+#     if not os.path.exists(d4):
+#         os.mkdir(d4)
+#         
+#     files=glob.glob('../AjustarTLE/diferencias/*')
+#     for filename in files:
+#         os.unlink(filename)
+#         
+#     self.bin=difTle(self.tleOrdenados, self.tles)
+#     self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
+#     self.diferencias=difPrimario(self.filename,self.tles-1)
+# 
 #     t=[]
 #     dv=[]
 #     dn=[]
 #     dc=[]
+#     
 #     
 #     archivo=open('../AjustarTLE/diferencias/difTotal','r')
 #     contenido=archivo.readlines()

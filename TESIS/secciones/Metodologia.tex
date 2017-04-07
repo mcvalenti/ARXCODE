@@ -108,7 +108,7 @@ Im\'agenes comparativas entre los dos m\'etodos:\\
 Para la comparaci\'on de las posiciones en coordenadas cartesianas, es necesario llevar ambos vectores a un mismo sistema de referencia.
 La figura (ref) muestra un resumen de los distintos sistemas y las consideraciones de cada uno. 
 
-\begin{figure}
+\begin{figure}[!h]
   \centering
   \includegraphics[width=0.7\textwidth]{imagenes/sistReferencias}
 \end{figure}
@@ -142,12 +142,14 @@ La ecuaci\'on de los equinoccios utiliza el modelo de nutaci\'on IAU-80 que cons
 Donde:
 
 \begin{align*}
+ \epsilon &= {\bar{\epsilon}} + \Delta \epsilon\\
  \Delta \Psi &= (A_{p} + A_{pl} tt) sin(a_{p_{i}})\\
  \Delta \epsilon &= (A_{e} + A_{el} tt) cos(a_{p_{i}})
 \end{align*}
 
 \begin{align*}
  tt &= (jd - 51544.5)/36525.0\\
+ {\bar{\epsilon}} &= 84381.448 \textquotedbl - 46.8150 \textquotedbl tt - 0.00059 \textquotedbl tt^{2} + 0.001813 tt^{3}\\
  a_{p_{i}} &= a_{n1}M_{(}+a_{n2}M_{o}+a_{n3}\mu_{(}+a_{n4}D_{o}+a_{n5}\Omega_{(}
 \end{align*}
 
@@ -162,13 +164,3 @@ Y el resto de los par\'ametros se calcula seg\'un las expresiones:\\
  D_{o} &= D(tt)\\
  \Omega_{(} &= \Omega(tt)
 \end{align*}
-
-
-
-
-
-
-
-
-
-

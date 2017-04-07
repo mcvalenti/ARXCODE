@@ -7,14 +7,72 @@ import numpy as np
 from scipy import stats
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import datetime as dt
+from datetime import datetime 
 
-def grafica_set_principal(archivo):
+def grafica_set_principal(sat_id,path,grafico_arch,data):
     """
     MANDAR SET DE DATOS. 
     """
-    archivo=open('','r')
-    dtt=[]
+    dt_frac=data[0]
+    dv=data[1]
+    dn=data[2]
+    dc=data[3]
+#     archivo=open(path+grafico_arch,'r')
+#     contenido = archivo.readlines()
+#     dt=[]
+#     dt_frac=[]
+#     dv=[]
+#     dn=[]
+#     dc=[]
+# 
+#     for c in contenido:
+#         fecha=c[:19]
+#         anio=fecha[0:4]
+#         mes=fecha[5:7]
+#         dia=fecha[8:10]
+#         hora=fecha[11:13]
+#         minutos=fecha[14:16]
+#         segundos=fecha[17:19]
+#         dt.append(datetime(int(anio),int(mes),int(dia),int(hora),int(minutos),int(segundos)))
+#         campos=c.split(' ')
+#         dv.append(float(campos[2]))
+#         dn.append(float(campos[3]))
+#         dc.append(float(campos[4]))
+# 
+#     for kt in dt:
+#         dt_frac.append((kt-dt[0]).total_seconds()/86400.0)
+        
+#     plt.plot(dt_frac, dv, 'rd', label='V')
+#     plt.plot(dt_frac, dn, 'bo', label='N')
+#     plt.plot(dt_frac, dc, 'kx', label='C')
+#     plt.grid()
+#     plt.title('Diferencias en las Coordenadas V,N,C [km] del set principal')
+#     plt.ylabel('Diferencia en Km')
+#     plt.legend(loc=4)
+#     plt.savefig('../visual/archivos/setPri_cods_'+sat_id+'.png')
+#     plt.show()
+#     plt.close()
+    
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+    ax1.grid(True)
+    ax2.grid(True)
+    ax3.grid(True)
+
+    ax1.plot(dt_frac, dv, 'rd', label='V')
+    ax1.set_ylabel('Km')
+    plt.legend(loc=4)
+    ax2.plot(dt_frac, dn, 'bo', label='N')
+    ax2.set_ylabel('Km')
+    plt.legend(loc=4)
+    ax3.plot(dt_frac, dc, 'kx', label='C')
+    ax3.set_ylabel('Km')
+    fig.suptitle('Diferencias en las Coordenadas V,N,C [km] del set principal')
+    plt.xlabel('Epoca')
+    plt.legend(loc=4)
+    plt.savefig('../visual/archivos/setPri_cods_'+sat_id+'.png')
+    plt.show()
+    plt.close()
+    
 
 def grafica_diferenciasTotales(sat_id,dt,data,coef):
     """
@@ -34,7 +92,7 @@ def grafica_diferenciasTotales(sat_id,dt,data,coef):
     plt.savefig('../visual/difTot'+sat_id+'.png')
     plt.show()
     plt.close()
-    
+
     
 def grafica_setcompleto(dt,data,coef):
     """

@@ -13,14 +13,13 @@ from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
-from visual.ploteos import *
 from visual import ploteos
-# from visual.TleOsweiler import VerGrafico
+from visual.TleOsweiler import VerGrafico
 # #from visual.TlevsCodsGraf import VerGraficoMision
 # from visual.CodsOsweiler import VerGraficoCods
 from visual.binGraf import histograma_bin, desviacion_standard_graf
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 class ProcARxCODE(QMainWindow):
     
@@ -128,6 +127,8 @@ class ProcTle(QDialog):
         self.ffin=''
         self.tles=0
         self.tleOrdenados={}
+        self.data=[]
+        self.path='../AjsutarTLE/diferencias/'
         self.diferencias=''
         self.grafico_pw=''
         self.arch_macovar=''
@@ -143,8 +144,8 @@ class ProcTle(QDialog):
         """
         Grafico
         """
-        self.figure = plt.figure()
-        self.canvas = FigureCanvas(self.figure)
+#         self.figure = plt.figure()
+#         self.canvas = FigureCanvas(self.figure)
         
         """
         Etiquetas
@@ -163,13 +164,16 @@ class ProcTle(QDialog):
         """
         Botones
         """
-        self.boton_norad     = QPushButton('Space-Track')
-        self.boton_equipo    = QPushButton('Directorios')
-        self.boton_prepros   = QPushButton('Preprocesamiento')
-        self.boton_procesa   = QPushButton('PROCESAR')
-        self.boton_grafica   = QPushButton('VER Graficos')
-        self.boton_ma_covar  = QPushButton('Calcular Matriz')
-        self.boton_salir     = QPushButton('Salir')
+        self.boton_norad        = QPushButton('Space-Track')
+        self.boton_equipo       = QPushButton('Directorios')
+        self.boton_prepros      = QPushButton('Preprocesamiento')
+        self.boton_procesa      = QPushButton('PROCESAR')
+        self.boton_grafica      = QPushButton('VER Graficos')
+        self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
+        self.boton_dxcoord      = QPushButton('Graficar Diferencias por Coordenadas')
+        self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set primario')
+        self.boton_ma_covar     = QPushButton('Calcular Matriz')
+        self.boton_salir        = QPushButton('Salir')
         
         
         """
@@ -209,12 +213,14 @@ class ProcTle(QDialog):
         grid.addWidget(self.estado_proc_edit,8,4)
         grid.addWidget(self.tle_pri,9,0)
         grid.addWidget(self.tle_pri_edit,9,1,1,4)
+        grid.addWidget(self.boton_dtotales,10,1)
+        grid.addWidget(self.boton_dxcoord,10,2)
+        grid.addWidget(self.boton_dsetprimario,10,3)
         grid.addWidget(self.boton_grafica,10,4)
         grid.addWidget(self.ma_covar_label,11,0) 
         grid.addWidget(self.tableView,12,0,6,2)
         grid.addWidget(self.boton_ma_covar,12,2)
         grid.addWidget(self.arch_macovar_edit,12,4)
-
         grid.addWidget(self.boton_salir,17,2)
         
         """
@@ -228,7 +234,7 @@ class ProcTle(QDialog):
         self.boton_salir.clicked.connect(self.salir)
         self.boton_prepros.clicked.connect(self.PreProc)
         self.boton_procesa.clicked.connect(self.procesar)
-        self.boton_grafica.clicked.connect(self.Graficar)
+        self.boton_dsetprimario.clicked.connect(self.Graficar)
         self.boton_ma_covar.clicked.connect(self.Macovar)
         
         
@@ -291,7 +297,7 @@ class ProcTle(QDialog):
         files=glob.glob('../AjustarTLE/diferencias/*')
         for filename in files:
             os.unlink(filename)
-        self.bin=difTle(self.tleOrdenados, self.tles)
+        self.bin, self.data=difTle(self.tleOrdenados, self.tles)
         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
         self.diferencias=difPrimario(self.filename,self.tles-1)
         self.estado_proc_edit.setText(self.diferencias)
@@ -299,14 +305,16 @@ class ProcTle(QDialog):
         self.boton_ma_covar.setEnabled(True)
         
         
-#     def Graficar(self):
-#         self_grafico_pw=VerGrafico(self.diferencias)
-        
     def Graficar(self):
-#        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
-        data=[self.sat_id,self.diferencias]
-        self.graf = RepresentacionGrafica(data)
-        self.graf.exec_()
+#         self_grafico_pw=
+#        VerGrafico(self.diferencias)
+        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_pw,self.data)
+        
+#     def Graficar(self):
+# #        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
+#         data=[self.sat_id,self.diferencias]
+#         self.graf = RepresentacionGrafica(data)
+#         self.graf.exec_()
         
     def ver_mediasxbin(self):
         desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin[1], self.mediaxbin[2])
@@ -537,6 +545,7 @@ class ProcMision(QDialog):
         self.grafico_arch=''
         self.dif_cvstle= ''
         self.macovarT=''
+        self.path='../Comparar/diferencias/'
         self.dt=[]
         self.data=[]
         self.coef=[]
@@ -557,11 +566,12 @@ class ProcMision(QDialog):
         """
         Botones
         """
-        self.boton_procesar   = QPushButton('Procesar')
-        self.boton_dtotales   = QPushButton('Graficar Diferencias Totales')
-        self.boton_dxcoord    = QPushButton('Graficar Diferencias por Coordenadas')
-        self.boton_macovar    = QPushButton('Calcular Matriz')
-        self.boton_salir      = QPushButton('Salir')
+        self.boton_procesar     = QPushButton('Procesar')
+        self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
+        self.boton_dxcoord      = QPushButton('Graficar Diferencias por Coordenadas')
+        self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set primario')
+        self.boton_macovar      = QPushButton('Calcular Matriz')
+        self.boton_salir        = QPushButton('Salir')
         
         """
         Campos de Edicion
@@ -593,6 +603,7 @@ class ProcMision(QDialog):
         self.grilla.addWidget(self.tlepri_edit,5,0,1,2)
         self.grilla.addWidget(self.boton_dtotales,6,0)
         self.grilla.addWidget(self.boton_dxcoord,6,1)
+        self.grilla.addWidget(self.boton_dsetprimario,6,2)
         self.grilla.addWidget(self.tableView,7,0,7,1)
         self.grilla.addWidget(self.boton_macovar,8,1)
         self.grilla.addWidget(self.boton_salir,17,1)
@@ -605,10 +616,12 @@ class ProcMision(QDialog):
         self.boton_procesar.setEnabled(False)
         self.boton_dtotales.setEnabled(False)
         self.boton_dxcoord.setEnabled(False)
+        self.boton_dsetprimario.setEnabled(False)
         self.boton_macovar.setEnabled(False)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
+        self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
         self.boton_macovar.clicked.connect(self.Macovar)
 #        self.datos_mis_edit.textChanged.connect(self.validar_nombre)
                 
@@ -637,6 +650,7 @@ class ProcMision(QDialog):
         self.tlepri_edit.setText(self.linea1+'\n'+self.linea2)
         self.boton_dtotales.setEnabled(True)
         self.boton_dxcoord.setEnabled(True)
+        self.boton_dsetprimario.setEnabled(True)
         self.boton_macovar.setEnabled(True)
         
     def ver_diferencias_totales(self):
@@ -646,6 +660,9 @@ class ProcMision(QDialog):
         
     def ver_dif_x_coordenadas(self):
         ploteos.grafica_setcompleto(self.dt, self.data, self.coef)
+        
+    def ver_dif_set_primario(self):
+        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch)
         
         
     def Macovar(self):

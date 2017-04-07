@@ -81,5 +81,6 @@ def VerGrafico(archivo):
     fig.suptitle('Diferencias y Funcion de Ajuste (TLE vs TLE + SGP4)')
     plt.xlabel('Epoca')
     plt.savefig('../visual/archivos/'+archivo_grafico)
+    plt.show()
     
     return archivo_grafico

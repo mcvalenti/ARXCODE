@@ -7,7 +7,6 @@ Created on 16/03/2017
 import os, glob
 import numpy as np
 import numpy.polynomial as P
-import matplotlib.pylab as plt
 from datetime import datetime, timedelta
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
@@ -15,7 +14,6 @@ from TleAdmin.TLE import Tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
 from Comparar.TleVsCods import interpola, encuentraBordes
 from SistReferencia.sist_deCoordenadas import vncSis, teme2tod
-from visual.CodsOsweiler import VerGraficoCods, graficar_setcompleto
 from CodsAdmin.EphemCODS import EphemCODS
 
 def FiltraArchivos(tle):
@@ -130,12 +128,12 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
     d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S')
     r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
     rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
-    item=range(0,len(tles)-1)
+    item=range(0,len(tles))
     whichconst=wgs72
     for j in item:
         tle0=Tle('../TleAdmin/tle/'+tles[j][0])
         fecha_tle=tle0.epoca()
-        if fecha_tle < d:
+        if fecha_tle <= d:
             line1=tle0.linea1
             line2=tle0.linea2
             satrec = twoline2rv(line1, line2, whichconst)
@@ -191,25 +189,8 @@ def ejecutaProcesamientoCods():
     Luego los tles, previamente procesados y archivados en la carpeta de TleAdmin/tles, deben
     corresponderse con esa mision.
     """
-    
-    """
-    Se crean los directorios necesarios.
-    """
-    
-    d1='../TleAdmin/tle'
-    if not os.path.exists(d1):
-        os.mkdir(d1)
-    d2='../AjustarTLE/diferencias'
-    if not os.path.exists(d2):
-        os.mkdir(d2)
-    d3='../main/matrices/'
-    if not os.path.exists(d3):
-        os.mkdir(d3)
-    d4='../visual/archivos'
-    if not os.path.exists(d4):
-        os.mkdir(d4)
 
-    print 'Procesando ...'
+    print 'Procesando datos CODS...'
     tles=glob.glob('../TleAdmin/tle/*')
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
@@ -228,6 +209,12 @@ def ejecutaProcesamientoCods():
     linea2 = tle_primario.linea2
     fecha_ini=str(epoca_ini.year)+str(epoca_ini.month)+str(epoca_ini.day)
     fecha_fin=str(epoca_fin.year)+str(epoca_fin.month)+str(epoca_fin.day)
+    print '------------------------------------------------------------------------'
+    print '-------------------------TLE PRIMARIO-----------------------------------'
+    print linea1
+    print linea2
+    print epoca_ffin
+    print '------------------------------------------------------------------------'
     t=[]
     dv=[]
     du=[]
@@ -252,10 +239,15 @@ def ejecutaProcesamientoCods():
     salida.close()
     
     dt,coef=ajustar_diferencias(data)
-#    graficar_setcompleto(dt,data,coef)
-    
+
+    print 'DIFERENCIAS:'
+    print '-------------------------TLE PRIMARIO-----------------------------------'
+    print 'dv =',data[1][25]
+    print 'dn =',data[2][25]
+    print 'dc =',data[3][25]
+    print '-------------------------TLE PRIMARIO-----------------------------------'
     print 'Fin del Calculo de Diferencias'
-#    VerGraficoCods('37673')
+
     set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S"),dt,data,coef,archivo]
     return set_datos
 
