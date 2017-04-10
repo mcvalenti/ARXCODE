@@ -16,6 +16,7 @@ from sgp4.io import twoline2rv
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis, ricSis
+from Estadistica.ajusteMinCuad import ajustar_diferencias
 
 
 def seleccionSat():
@@ -196,25 +197,43 @@ def difTle(tleOrdenados,cantidad_tles):
         difTotal# : archivo de texto plano (4 columnas) para cada set
         [AjustarTLE/diferencias/difTotal#]
         bin : lista de listas, con las diferencias por bin. 
+        data: lista de listas, [dt_frac,dv,dn,dc]
     """
+    nombre='difTotal_TLE_'
+    dtot=open('../AjustarTLE/diferencias/'+nombre,'w')
+    
+    
+    print 'Procesando datos TLE...'
+    tles=glob.glob('../TleAdmin/tle/*')
+    dic_tles=generadorDatos(tles)
+    tle_ordenados=ordenaTles(dic_tles)
+    
+    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+    cat_id = tle_inicio.catID()
+    epoca_ini = tle_inicio.epoca()
+    
+    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    epoca_fin  = tle_primario.epoca()
+    epoca_ffin = epoca_fin
 
-    dtot=open('../AjustarTLE/diferencias/difTotal','w')
-
+    dt_tle=[]
     dt_frac=[]
     dv=[]
     dn=[]
     dc=[]
+    dvv=[]
+    dnn=[]
+    dcc=[]
     bin=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+    m=0
     for i in range(cantidad_tles-1,0,-1):       
-
         tlepri=tleOrdenados[i][0]
         r,rp,ffin=tlePrimario(tlepri)        
-
-        item=range(i-1,-1,-1)
-       
+        item=range(i-1,-1,-1)       
         for j in item:
             tlesec=tleOrdenados[j][0]
             pos,vel,fsec=tleSecundario(tlesec, ffin)
+            dt_tle.append(fsec)
             dr=pos-r
             d_v=vel-rp
             dt=abs(fsec-ffin)
@@ -229,6 +248,10 @@ def difTle(tleOrdenados,cantidad_tles):
             dv.append(v)
             dn.append(n)
             dc.append(c)
+            dvv.append(vv)
+            dnn.append(nn)
+            dcc.append(cc)
+        
             """
             Clasificacion por bin.
             """
@@ -238,9 +261,15 @@ def difTle(tleOrdenados,cantidad_tles):
             for i in range(len(rangos)):
                 if dtfracdias >= rangos[i][0] and dtfracdias < rangos[i][1]:
                     bin[i].append(infodiftot)
-            
-        data=[dt_frac,dv,dn,dc]
-            
+        m=m+1 
+   
+        
+    data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn]
+    
+    dt,coef=ajustar_diferencias(epoca_ffin,data1,2)
+    
+    data=[dt,data1,coef,nombre]
+        
     dtot.close()
     return bin, data
 
@@ -292,19 +321,6 @@ def genera_estadisticaBin(bin_lista):
             desviacion_z=np.std(bin_z)
             stdz_list.append(desviacion_z)
     
-#             print '********************************************************************************'
-#             print 'BIN'+str(k)
-#             print '********************************************************************************'
-    print lista_k
-    print stdx_list
-    print stdy_list
-    print stdz_list
-#             info ='MEDIA'+' '+str(media_x)+' '+str(media_y)+' '+str(media_z) 
-#             info2 = 'VARIANZA'+' '+str(varianza_x)+' '+str(varianza_y)+' '+str(varianza_z)
-#             info3 = 'Desviacion Standard'+' '+str(desviacion_x)+' '+str(desviacion_y)+' '+str(desviacion_z)+'\n'
-#             print info
-#             print info2
-#             print info3
     mediaxbin=[mx_list,my_list,mz_list]
     return cantxbin, mediaxbin
  
@@ -323,14 +339,14 @@ def difPrimario(nombre,largo):
         el SV de referencia. (string), path: '../AjustarTLE/diferencias/'
     """
      
-    difG=open('../AjustarTLE/diferencias/difTotal','r')
+    difG=open('../AjustarTLE/diferencias/difTotal_TLE_','r')
     contenido=difG.readlines()
     difP=open('../AjustarTLE/diferencias/'+nombre,'w')
     for c in range(largo):
         campos=contenido[c].split(',')
         info=campos[7]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+'\n'
         difP.write(info)
-        
+    difP.close() 
     return nombre
 
 # if __name__=='__main__':

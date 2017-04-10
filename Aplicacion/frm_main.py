@@ -5,6 +5,7 @@ Created on Feb 5, 2017
 '''
 import sys, glob, os, re
 import numpy as np
+from datetime import datetime
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from TleAdmin.TleArchivos import setTLE
@@ -117,7 +118,6 @@ class ProcTle(QDialog):
     def __init__(self,parent=None):
         QDialog.__init__(self,parent)
 
-#        self.resize(1200, 600)
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
 
@@ -125,12 +125,15 @@ class ProcTle(QDialog):
         self.sat_id='99999'
         self.fini=''
         self.ffin=''
+        self.fin_tle=datetime(1957,1,1,0,0,0)
+        self.ini_tle=datetime(1957,1,1,0,0,0)
         self.tles=0
         self.tleOrdenados={}
         self.data=[]
-        self.path='../AjsutarTLE/diferencias/'
+        self.path='../AjustarTLE/diferencias/'
         self.diferencias=''
-        self.grafico_pw=''
+        self.set_data=[]
+        self.set_pri=[]
         self.arch_macovar=''
         self.macovarT=''  
         self.cantxbin=[]
@@ -140,12 +143,6 @@ class ProcTle(QDialog):
         self.palette = QPalette()
         self.palette.setColor(QPalette.Background,Qt.white)
         self.setPalette(self.palette)
-        
-        """
-        Grafico
-        """
-#         self.figure = plt.figure()
-#         self.canvas = FigureCanvas(self.figure)
         
         """
         Etiquetas
@@ -168,7 +165,7 @@ class ProcTle(QDialog):
         self.boton_equipo       = QPushButton('Directorios')
         self.boton_prepros      = QPushButton('Preprocesamiento')
         self.boton_procesa      = QPushButton('PROCESAR')
-        self.boton_grafica      = QPushButton('VER Graficos')
+#        self.boton_grafica      = QPushButton('VER Graficos')
         self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
         self.boton_dxcoord      = QPushButton('Graficar Diferencias por Coordenadas')
         self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set primario')
@@ -216,7 +213,6 @@ class ProcTle(QDialog):
         grid.addWidget(self.boton_dtotales,10,1)
         grid.addWidget(self.boton_dxcoord,10,2)
         grid.addWidget(self.boton_dsetprimario,10,3)
-        grid.addWidget(self.boton_grafica,10,4)
         grid.addWidget(self.ma_covar_label,11,0) 
         grid.addWidget(self.tableView,12,0,6,2)
         grid.addWidget(self.boton_ma_covar,12,2)
@@ -227,14 +223,14 @@ class ProcTle(QDialog):
         Acciones
         """
         self.boton_procesa.setEnabled(False)
-        self.boton_grafica.setEnabled(False)
+ #       self.boton_grafica.setEnabled(False)
         self.boton_ma_covar.setEnabled(False)
         self.boton_norad.clicked.connect(self.botonNorad)
         self.boton_equipo.clicked.connect(self.Archivo)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_prepros.clicked.connect(self.PreProc)
         self.boton_procesa.clicked.connect(self.procesar)
-        self.boton_dsetprimario.clicked.connect(self.Graficar)
+        self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
         self.boton_ma_covar.clicked.connect(self.Macovar)
         
         
@@ -288,9 +284,20 @@ class ProcTle(QDialog):
         tle_primario = Tle('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
         linea1= tle_primario.linea1
         linea2= tle_primario.linea2
+        self.fin_tle=tle_primario.epoca()
+        self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S' )
         self.tle_pri_edit.setText(linea1+'\n'+linea2)
         print linea1
         print linea2
+        print '-----------------------------------------------------'
+        print 'TLE INICIAL DEL SET'
+        print '-----------------------------------------------------'
+        tle_inial = Tle('../TleAdmin/tle/'+self.tleOrdenados[0][0])
+        linea1_0= tle_inial.linea1
+        linea2_0= tle_inial.linea2
+        self.ini_tle=tle_inial.epoca()
+        print linea1_0
+        print linea2_0
         print '-----------------------------------------------------'
     
     def procesar(self):
@@ -298,17 +305,20 @@ class ProcTle(QDialog):
         for filename in files:
             os.unlink(filename)
         self.bin, self.data=difTle(self.tleOrdenados, self.tles)
+        self.dt=self.data[0]
+        self.data1=self.data[1]
+        self.data1=self.data[2]
+        self.nombre_archivo=self.data[3]
         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
         self.diferencias=difPrimario(self.filename,self.tles-1)
         self.estado_proc_edit.setText(self.diferencias)
-        self.boton_grafica.setEnabled(True)
+#        self.boton_grafica.setEnabled(True)
         self.boton_ma_covar.setEnabled(True)
         
-        
-    def Graficar(self):
-#         self_grafico_pw=
-#        VerGrafico(self.diferencias)
-        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_pw,self.data)
+    def ver_diferencias_totales(self):
+        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data1,self.data1) 
+    def ver_dif_set_primario(self):
+        ploteos.grafica_set_principal(self.sat_id,self.path,self.diferencias,self.ffin)
         
 #     def Graficar(self):
 # #        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
@@ -654,20 +664,17 @@ class ProcMision(QDialog):
         self.boton_macovar.setEnabled(True)
         
     def ver_diferencias_totales(self):
-#         self.graf = RepresentacionGrafica(self.set_datos)
-#         self.graf.exec_()
         ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data,self.coef)
         
     def ver_dif_x_coordenadas(self):
         ploteos.grafica_setcompleto(self.dt, self.data, self.coef)
         
     def ver_dif_set_primario(self):
-        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch)
+        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch,self.ffin)
         
         
     def Macovar(self):
         self.macovarT=EjecutaMaCovarCODS(self.grafico_arch)
-#self.dif_cvstle)
         self.tableView.setRowCount(len(self.macovarT))
         self.tableView.setColumnCount(len(self.macovarT))
         for i,fila in enumerate(self.macovarT):

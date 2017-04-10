@@ -30,16 +30,6 @@ if __name__ == '__main__':
     if not os.path.exists(d4):
         os.mkdir(d4)
 
-#     tle_archivo='../TleAdmin/tle/37673tle3'
-#     tle1=Tle(tle_archivo)
-#     epoca=tle1.epoca()
-#     r,v=tle1.propagaTLE()    
-#     r=[3961.0035498,6010.7511740,4619.3009301]
-#     epoca=datetime(2000,06,28,15,8,51)
-#     r_tod=teme2tod(epoca, r) 
-# 
-#     print r
-#     print r_tod
-#     print r-r_tod
+
 
     

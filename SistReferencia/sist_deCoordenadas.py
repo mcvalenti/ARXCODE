@@ -1,8 +1,9 @@
 
 
 import numpy as np
+from datetime import datetime
 from math import pi
-from sist_deTiempo import calcula_mjd
+from sist_deTiempo import calcula_mjd, jd
 
 #from newton import newton
 
@@ -264,9 +265,11 @@ def teme2tod(epoch,r_teme):
         r_tod: vector de estado en el sistema TOD (array)
     """
     
-    arc2rad=np.pi/(180.0*3600.0)    
-    mjd=calcula_mjd(epoch)
-    tt=(mjd-51544.5)/36525.0
+    arc2rad=np.pi/(180.0*3600.0)   
+    jd1=jd(epoch)
+    tt=(jd1-2451545.0)/36525.0 
+#     mjd=calcula_mjd(epoch)
+#     tt=(mjd-51544.5)/36525.0
 
     """
     Parametros [arcseconds / segundos de arco]
@@ -305,10 +308,10 @@ def teme2tod(epoch,r_teme):
     d_epsi=d_epsi*(1.0/10000.0)
     d_psi=d_psi*(1.0/10000.0)
     
-    epsi_media1 = (84381.448-46.8150*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad # [rad]
-    epsi_media=epsi_media1%(2*np.pi)
+    epsi_media = (84381.448-46.815*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad # [rad]
     
-    EQnox = (d_psi*np.cos(epsi_media+d_epsi)+0.00264*arc2rad*np.sin(O_moon*arc2rad%(2*np.pi))+0.000063*arc2rad*np.sin(2*O_moon*arc2rad%(2*np.pi)))%(2*np.pi)
+    EQnox = (d_psi*np.cos(epsi_media+d_epsi)+0.00264*arc2rad*np.sin(O_moon*arc2rad)+0.000063*arc2rad*np.sin(2*O_moon*arc2rad))
+
     
     Q=np.matrix([[np.cos(-EQnox),np.sin(-EQnox),0],
                  [-np.sin(-EQnox),np.cos(-EQnox),0],
@@ -318,56 +321,15 @@ def teme2tod(epoch,r_teme):
     
     return r_tod    
     
-#     """
-#     Created on Mon Jul 27 09:42:53 2015
-#     
-#     Calculo del TOD
-#     
-#     @author: mcvalenti
-#     """
-#     rad = pi/180.0
-#     rad1 = 2*pi/86400.0
-#     
-#     #psi = -0.0522 # para el 28/06/2000 ["]
-#     
-#     #tt = 0.004904360547
-#     #jd=2451724.13115529340
-#     #julicen=(jd-2451545.0)/36525 # [Centurias Julianas]
-#     #r_teme=np.matrix([[3961.0035498],[6010.7511740],[4619.3009301]])
-#     """
-#     epsiraya(tt):
-#     """
-#     a=84381.448
-#     b=-46.8150
-#     c=-0.00059
-#     d=0.001813
-#     epsiraya=a+b*tt+c*tt**2+d*tt**3
-# 
-#     """    
-#     Omega(tt):
-#     """
-#     a=125.04452222 # en [grados]
-#     b=-6962.8905390
-#     c=7.455
-#     d=0.008
-#     Ome1=b*tt+c*tt**2+d*tt**3
-#     Ome2=Ome1/3600.0
-#     Omega=a+Ome2
-#     
-#     """
-#     transformacion(tt,r_teme):
-#     """
-#     eps=epsiraya
-#     eps1=eps*rad/3600.0
-#     Omegaf=Omega*rad#
-#     psi =-17.1996*np.sin(Omegaf)
-#     eqe=psi*np.cos(eps1)+0.00264*np.sin(Omegaf)+0.000063*np.sin(2*Omegaf)
-#     eqe1=eqe*rad/3600.0
-#     Q=np.matrix([[np.cos(-eqe1),np.sin(-eqe1),0],[-np.sin(-eqe1),
-#                   np.cos(-eqe1),0],[0,0,1]])          
-#     r_tod=np.dot(Q,r_teme)
-#     
-#    return r_tod
+if __name__=='__main__':
+    epoca=datetime(2000,6,28,15,8,51,655)
+#     jd=jd(epoca)
+#     tt=(jd-2451545.0)/36525.0
 
+    r_teme=[3961.0035498,6010.7511740,4619.3009301]
+    r_todVal=[3961.4214985,6010.4752688,4619.301531]
+    r_tod=teme2tod(epoca, r_teme)
 
-    
+    print epoca
+    print r_tod
+    print r_todVal-r_tod

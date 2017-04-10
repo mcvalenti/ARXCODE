@@ -15,6 +15,7 @@ from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
 from Comparar.TleVsCods import interpola, encuentraBordes
 from SistReferencia.sist_deCoordenadas import vncSis, teme2tod
 from CodsAdmin.EphemCODS import EphemCODS
+from Estadistica.ajusteMinCuad import ajustar_diferencias
 
 def FiltraArchivos(tle):
     """
@@ -155,25 +156,25 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             data[6].append(cc)
     return data
 
-def ajustar_diferencias(data):
-    
-    t=data[0]
-    dt=[]
-    dv=data[1]
-    dn=data[2]
-    dc=data[3]
-    dvv=data[4]
-    dnn=data[5]
-    dcc=data[6]
-    
-    for kt in t:
-        dt.append((kt-t[0]).total_seconds()/86400.0)
-    c, b, a = P.polynomial.polyfit(dt, dv, deg=2)
-    c1, b1, a1 = P.polynomial.polyfit(dt, dn, deg=2)
-    c2, b2, a2 = P.polynomial.polyfit(dt, dc, deg=2)
-    coef=[a,b,c,a1,b1,c1,a2,b2,c2]
-
-    return dt,coef
+# def ajustar_diferencias(data):
+#     
+#     t=data[0]
+#     dt=[]
+#     dv=data[1]
+#     dn=data[2]
+#     dc=data[3]
+#     dvv=data[4]
+#     dnn=data[5]
+#     dcc=data[6]
+#     
+#     for kt in t:
+#         dt.append((kt-t[0]).total_seconds()/86400.0)
+#     c, b, a = P.polynomial.polyfit(dt, dv, deg=2)
+#     c1, b1, a1 = P.polynomial.polyfit(dt, dn, deg=2)
+#     c2, b2, a2 = P.polynomial.polyfit(dt, dc, deg=2)
+#     coef=[a,b,c,a1,b1,c1,a2,b2,c2]
+# 
+#     return dt,coef
         
 def ejecutaProcesamientoCods():
 #if __name__ == '__main__':
@@ -238,7 +239,7 @@ def ejecutaProcesamientoCods():
                 salida1.write(info)
     salida.close()
     
-    dt,coef=ajustar_diferencias(data)
+    dt,coef=ajustar_diferencias(epoca_ffin,data,2)
 
     print 'DIFERENCIAS:'
     print '-------------------------TLE PRIMARIO-----------------------------------'
