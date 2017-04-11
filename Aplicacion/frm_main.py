@@ -130,6 +130,7 @@ class ProcTle(QDialog):
         self.tles=0
         self.tleOrdenados={}
         self.data=[]
+        self.coef=[]
         self.path='../AjustarTLE/diferencias/'
         self.diferencias=''
         self.set_data=[]
@@ -231,6 +232,8 @@ class ProcTle(QDialog):
         self.boton_prepros.clicked.connect(self.PreProc)
         self.boton_procesa.clicked.connect(self.procesar)
         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
+        self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
+#        self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
         self.boton_ma_covar.clicked.connect(self.Macovar)
         
         
@@ -279,6 +282,7 @@ class ProcTle(QDialog):
         """
         Impresiones de info de TLEs.
         """
+        print '-----------------------------------------------------'
         print 'TLE PRIMARIO'
         print '-----------------------------------------------------'
         tle_primario = Tle('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
@@ -307,16 +311,23 @@ class ProcTle(QDialog):
         self.bin, self.data=difTle(self.tleOrdenados, self.tles)
         self.dt=self.data[0]
         self.data1=self.data[1]
-        self.data1=self.data[2]
+        self.coef=self.data[2]
         self.nombre_archivo=self.data[3]
         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
-        self.diferencias=difPrimario(self.filename,self.tles-1)
+        self.diferencias=difPrimario( self.nombre_archivo,self.tles-1)
         self.estado_proc_edit.setText(self.diferencias)
 #        self.boton_grafica.setEnabled(True)
         self.boton_ma_covar.setEnabled(True)
+        print 'Fin del Procesamiento'
         
+        
+    def ver_dif_x_coordenadas(self):
+        ploteos.grafica_setcompleto(self.dt,self.data1, self.coef)
+    
     def ver_diferencias_totales(self):
-        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data1,self.data1) 
+        pass
+#        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data1,self.coef) 
+        
     def ver_dif_set_primario(self):
         ploteos.grafica_set_principal(self.sat_id,self.path,self.diferencias,self.ffin)
         

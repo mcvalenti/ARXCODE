@@ -198,10 +198,7 @@ def difTle(tleOrdenados,cantidad_tles):
         [AjustarTLE/diferencias/difTotal#]
         bin : lista de listas, con las diferencias por bin. 
         data: lista de listas, [dt_frac,dv,dn,dc]
-    """
-    nombre='difTotal_TLE_'
-    dtot=open('../AjustarTLE/diferencias/'+nombre,'w')
-    
+    """  
     
     print 'Procesando datos TLE...'
     tles=glob.glob('../TleAdmin/tle/*')
@@ -215,6 +212,9 @@ def difTle(tleOrdenados,cantidad_tles):
     tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
     epoca_fin  = tle_primario.epoca()
     epoca_ffin = epoca_fin
+    
+    nombre='difTot_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')
+    dtot=open('../AjustarTLE/diferencias/'+nombre+'','w')
 
     dt_tle=[]
     dt_frac=[]
@@ -242,7 +242,7 @@ def difTle(tleOrdenados,cantidad_tles):
             vv,nn,cc=vncSis(r,rp,d_v)
 #             v,n,c=ricSis(r, rp, dr)
 #             vv,nn,cc=ricSis(r,rp,dv)
-            infodiftot=str(dtfracdias)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+str(fsec)+','+tlesec+'\n'
+            infodiftot=str(fsec)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+tlesec+'\n'
             dtot.write(infodiftot)
             dt_frac.append(dtfracdias)
             dv.append(v)
@@ -338,13 +338,15 @@ def difPrimario(nombre,largo):
         salida: nombre del archivo que contiene la diferencias solo contra 
         el SV de referencia. (string), path: '../AjustarTLE/diferencias/'
     """
-     
-    difG=open('../AjustarTLE/diferencias/difTotal_TLE_','r')
+    nombre1=nombre.split('.')[0]
+    nombre2=nombre1.split('_')
+    nombre3=nombre2[1]+'_'+nombre2[2]+'_'+'.TLE'
+    difG=open('../AjustarTLE/diferencias/'+nombre,'r')
     contenido=difG.readlines()
-    difP=open('../AjustarTLE/diferencias/'+nombre,'w')
+    difP=open('../AjustarTLE/diferencias/'+nombre3,'w')
     for c in range(largo):
         campos=contenido[c].split(',')
-        info=campos[7]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+'\n'
+        info=campos[0]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+'\n'
         difP.write(info)
     difP.close() 
     return nombre

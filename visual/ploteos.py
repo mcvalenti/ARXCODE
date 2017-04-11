@@ -29,13 +29,13 @@ def grafica_set_principal(sat_id,path,grafico_arch,ffin):
     dc=[]
 
     for c in contenido:
-        campos=c.split(' ')
-        fecha=c[:19]
-        t=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S')
+        campos=c.split(',')
+        fecha=campos[0]
+        t=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
         dt_frac.append((fecha_fin-t).total_seconds()/86400.0)
-        dv.append(float(campos[2]))
-        dn.append(float(campos[3]))
-        dc.append(float(campos[4]))
+        dv.append(float(campos[1]))
+        dn.append(float(campos[2]))
+        dc.append(float(campos[3]))
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
     ax1.grid(True)
     ax2.grid(True)
