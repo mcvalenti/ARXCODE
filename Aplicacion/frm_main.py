@@ -243,7 +243,7 @@ class ProcTle(QDialog):
         
                 
     def botonNorad(self):
-        print "Procesando la Conexion con NORAD para la Descarga..."
+        print ("Procesando la Conexion con NORAD para la Descarga...")
         self.w = ConexionNorad()
         self.w.exec_()
         self.sat_id, self.fini, self.ffin, self.filename = self.w.datos()
