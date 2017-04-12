@@ -125,8 +125,8 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
     output
         difTot_satId_fini_ffin.cods: Archivo con todas las diferencias ('../Comparar/diferencias/')
     """
-    fecha=linea_interpol[:19]
-    d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S')
+    fecha=linea_interpol[:26]
+    d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
     r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
     rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
     item=range(0,len(tles))
@@ -235,9 +235,9 @@ def ejecutaProcesamientoCods():
         data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
         if m == len(tle_ordenados)-1:
             for k in range(len(data[0])):
-                info = data[0][k].strftime("%Y-%m-%d %H:%M:%S")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+' '+str(data[4][k])+' '+str(data[5][k])+' '+str(data[6][k])+'\n'
+                info = data[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+' '+str(data[4][k])+' '+str(data[5][k])+' '+str(data[6][k])+'\n'
                 salida1.write(info)
-    salida.close()
+    salida1.close()
     
     dt,coef=ajustar_diferencias(epoca_ffin,data,2)
 
@@ -249,6 +249,6 @@ def ejecutaProcesamientoCods():
     print '-------------------------TLE PRIMARIO-----------------------------------'
     print 'Fin del Calculo de Diferencias'
 
-    set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S"),dt,data,coef,archivo]
+    set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
     return set_datos
 

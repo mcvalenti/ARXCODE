@@ -242,7 +242,7 @@ def difTle(tleOrdenados,cantidad_tles):
             vv,nn,cc=vncSis(r,rp,d_v)
 #             v,n,c=ricSis(r, rp, dr)
 #             vv,nn,cc=ricSis(r,rp,dv)
-            infodiftot=str(fsec)+','+str(v)+','+str(n)+','+str(c)+','+str(vv)+','+str(nn)+','+str(cc)+','+tlesec+'\n'
+            infodiftot=str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+' '+tlesec+'\n'
             dtot.write(infodiftot)
             dt_frac.append(dtfracdias)
             dv.append(v)
@@ -295,10 +295,10 @@ def genera_estadisticaBin(bin_lista):
         cantxbin.append(len(bin_lista[k]))
         if len(bin_lista[k]) > 2:
             for m in bin_lista[k]:
-                campo=m.split(',')
-                bin_x.append(float(campo[1]))
-                bin_y.append(float(campo[2]))
-                bin_z.append(float(campo[3]))
+                campo=m.split(' ')
+                bin_x.append(float(campo[2]))
+                bin_y.append(float(campo[3]))
+                bin_z.append(float(campo[4]))
                 
             media_x=np.mean(bin_x)
             mx_list.append(media_x)
@@ -345,8 +345,8 @@ def difPrimario(nombre,largo):
     contenido=difG.readlines()
     difP=open('../AjustarTLE/diferencias/'+nombre3,'w')
     for c in range(largo):
-        campos=contenido[c].split(',')
-        info=campos[0]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+'\n'
+        campos=contenido[c].split(' ')
+        info=campos[0]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+' '+campos[7]+'\n'
         difP.write(info)
     difP.close() 
     return nombre

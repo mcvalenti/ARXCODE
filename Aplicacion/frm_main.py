@@ -233,7 +233,7 @@ class ProcTle(QDialog):
         self.boton_procesa.clicked.connect(self.procesar)
         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
-#        self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
+        self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
         self.boton_ma_covar.clicked.connect(self.Macovar)
         
         
@@ -289,7 +289,7 @@ class ProcTle(QDialog):
         linea1= tle_primario.linea1
         linea2= tle_primario.linea2
         self.fin_tle=tle_primario.epoca()
-        self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S' )
+        self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S.%f' )
         self.tle_pri_edit.setText(linea1+'\n'+linea2)
         print linea1
         print linea2
@@ -325,8 +325,7 @@ class ProcTle(QDialog):
         ploteos.grafica_setcompleto(self.dt,self.data1, self.coef)
     
     def ver_diferencias_totales(self):
-        pass
-#        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data1,self.coef) 
+        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data1,self.coef) 
         
     def ver_dif_set_primario(self):
         ploteos.grafica_set_principal(self.sat_id,self.path,self.diferencias,self.ffin)
