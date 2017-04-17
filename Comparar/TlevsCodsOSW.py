@@ -84,11 +84,11 @@ def interpola_3sv(tle,arch3_cods):
         linea_interpol: linea con el vector de estado interpolado a la epoca del TLE. (String)
     """
     tle1=Tle(tle)
-    fecha=tle1.epoca()
+    fecha_tle=tle1.epoca()
     r,v=tle1.propagaTLE()
-    fila=str(fecha)+' '+str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
-    fecha_minutos = datetime(int(fecha.year),int(fecha.month),int(fecha.day),int(fecha.hour),int(fecha.minute),0)
-
+    fila=str(fecha_tle)+' '+str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
+    fecha_minutos = datetime(int(fecha_tle.year),int(fecha_tle.month),int(fecha_tle.day),int(fecha_tle.hour),int(fecha_tle.minute),0)
+    inferior = 'NULO' 
     m=0
     for arch in arch3_cods:
         a=open(arch,'r')
@@ -107,9 +107,12 @@ def interpola_3sv(tle,arch3_cods):
             indice = lista_epocas.index(fecha_minutos)
             inferior = contenido[indice+1]
             superior = contenido[indice+2]
-            m=m+1            
-    linea_interpol=interpola(fila,inferior,superior)    
-    return linea_interpol
+            m=m+1   
+    if inferior != 'NULO':         
+        linea_interpol=interpola(fila,inferior,superior)    
+        return linea_interpol
+    else:
+        return None
 
 def diferencias_tleCODS(salida,tles,linea_interpol,data):
     """
@@ -191,7 +194,7 @@ def ejecutaProcesamientoCods():
     corresponderse con esa mision.
     """
 
-    print 'Procesando datos CODS...'
+    print 'PROCESANDO DATOS DE MISION...'
     tles=glob.glob('../TleAdmin/tle/*')
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
@@ -208,8 +211,8 @@ def ejecutaProcesamientoCods():
     epoca_ffin = epoca_fin
     linea1 = tle_primario.linea1
     linea2 = tle_primario.linea2
-    fecha_ini=str(epoca_ini.year)+str(epoca_ini.month)+str(epoca_ini.day)
-    fecha_fin=str(epoca_fin.year)+str(epoca_fin.month)+str(epoca_fin.day)
+    fecha_ini=str(epoca_ini.year)+str(epoca_ini.month).zfill(2)+str(epoca_ini.day).zfill(2)
+    fecha_fin=str(epoca_fin.year)+str(epoca_fin.month).zfill(2)+str(epoca_fin.day).zfill(2)
     print '------------------------------------------------------------------------'
     print '-------------------------TLE PRIMARIO-----------------------------------'
     print linea1
@@ -231,22 +234,30 @@ def ejecutaProcesamientoCods():
         tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_fin = tle_primario.epoca()
         arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
-        linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)                   
-        data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
-        if m == len(tle_ordenados)-1:
-            for k in range(len(data[0])):
-                info = data[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+' '+str(data[4][k])+' '+str(data[5][k])+' '+str(data[6][k])+'\n'
-                salida1.write(info)
+        linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)
+        if linea_interpol != None:                 
+            data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
+            if m == len(tle_ordenados)-1:
+                for k in range(len(data[0])):
+                    info = data[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+' '+str(data[4][k])+' '+str(data[5][k])+' '+str(data[6][k])+'\n'
+                    salida1.write(info)
+        else:
+            continue
     salida1.close()
     
     dt,coef=ajustar_diferencias(epoca_ffin,data,2)
 
+    estadistica_salida=open('../Estadistica/archivos/'+fecha_ini+'_'+fecha_fin+'_difEst.txt','w')
+    info_esta=fecha_fin+' '+str(data[1][len(tles)])+' '+str(data[2][len(tles)])+' '+str(data[3][len(tles)])
+    estadistica_salida.write(info_esta)
+    estadistica_salida.close()
+    
     print 'DIFERENCIAS:'
-    print '-------------------------TLE PRIMARIO-----------------------------------'
-    print 'dv =',data[1][25]
-    print 'dn =',data[2][25]
-    print 'dc =',data[3][25]
-    print '-------------------------TLE PRIMARIO-----------------------------------'
+    print '-------------------------------------------------------------------------'
+    print 'dv =',data[1][len(tles)]
+    print 'dn =',data[2][len(tles)]
+    print 'dc =',data[3][len(tles)]
+    print '-------------------------------------------------------------------------'
     print 'Fin del Calculo de Diferencias'
 
     set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]

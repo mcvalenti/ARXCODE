@@ -282,6 +282,7 @@ class ProcTle(QDialog):
         """
         Impresiones de info de TLEs.
         """
+        print 'PROCESAMIENTO DE TLE'
         print '-----------------------------------------------------'
         print 'TLE PRIMARIO'
         print '-----------------------------------------------------'
@@ -450,13 +451,13 @@ class ConexionNorad(QDialog):
         self.date = self.cal.selectedDate()
         self.pydate = self.date.toPyDate()
         self.st.setText(self.date.toString())
-        self.fini=str(self.pydate.year)+str(self.pydate.month)+str(self.pydate.day)
+        self.fini=str(self.pydate.year)+str(self.pydate.month).zfill(2)+str(self.pydate.day).zfill(2)
 #         
     def verFfin(self):
         self.date1 = self.cal1.selectedDate()
         self.pydate1 = self.date1.toPyDate()
         self.et.setText(self.date1.toString())
-        self.ffin=str(self.pydate1.year)+str(self.pydate1.month)+str(self.pydate1.day)
+        self.ffin=str(self.pydate1.year)+str(self.pydate1.month).zfill(2)+str(self.pydate1.day).zfill(2)
         
     def datos(self):
         return self.cat_id, self.fini, self.ffin, self.archTLE
@@ -714,6 +715,9 @@ if __name__ == '__main__':
     d4='../visual/archivos'
     if not os.path.exists(d4):
         os.mkdir(d4)
+    d5='../Estadistica/archivos'
+    if not os.path.exists(d5):
+        os.mkdir(d5)
     
     """
     INICIA LA INTERFAZ
