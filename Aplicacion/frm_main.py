@@ -314,7 +314,7 @@ class ProcTle(QDialog):
         self.coef=self.data[2]
         self.nombre_archivo=self.data[3]
         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
-        self.diferencias=difPrimario( self.nombre_archivo,self.tles-1)
+        self.diferencias=difPrimario(self.nombre_archivo,self.tles-1)
         self.estado_proc_edit.setText(self.diferencias)
 #        self.boton_grafica.setEnabled(True)
         self.boton_ma_covar.setEnabled(True)

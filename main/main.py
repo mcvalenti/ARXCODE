@@ -10,7 +10,6 @@ from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import teme2tod
 
 
-
 if __name__ == '__main__':
     
     """

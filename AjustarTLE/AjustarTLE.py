@@ -195,7 +195,7 @@ def difTle(tleOrdenados,cantidad_tles):
         tleOrdeandos: lista de TLEs y sus 2-lineas (lista de lista)
     output:
         difTotal# : archivo de texto plano (4 columnas) para cada set
-        [AjustarTLE/diferencias/difTotal#]
+        [AjustarTLE/diferencias/difTotal_satID_fechaIni#]
         bin : lista de listas, con las diferencias por bin. 
         data: lista de listas, [dt_frac,dv,dn,dc]
     """  
@@ -213,7 +213,7 @@ def difTle(tleOrdenados,cantidad_tles):
     epoca_fin  = tle_primario.epoca()
     epoca_ffin = epoca_fin
     
-    nombre='difTot_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')
+    nombre='difTot_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+epoca_ini.strftime('%Y%m%d')
     dtot=open('../AjustarTLE/diferencias/'+nombre+'','w')
 
     dt_tle=[]
@@ -340,7 +340,7 @@ def difPrimario(nombre,largo):
     """
     nombre1=nombre.split('.')[0]
     nombre2=nombre1.split('_')
-    nombre3=nombre2[1]+'_'+nombre2[2]+'_'+'.TLE'
+    nombre3='setPri_'+nombre2[1]+'_'+nombre2[2]+'_'+nombre2[3]+'.TLE'
     difG=open('../AjustarTLE/diferencias/'+nombre,'r')
     contenido=difG.readlines()
     difP=open('../AjustarTLE/diferencias/'+nombre3,'w')
@@ -349,7 +349,7 @@ def difPrimario(nombre,largo):
         info=campos[0]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+' '+campos[7]+'\n'
         difP.write(info)
     difP.close() 
-    return nombre
+    return nombre3
 
 # if __name__=='__main__':
 # #    ejecuta_procesamiento_TLE():
