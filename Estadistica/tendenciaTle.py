@@ -6,8 +6,11 @@ Created on 17/04/2017
 import glob
 import numpy as np
 import matplotlib.pyplot as plt
+import datetime as dt
 from datetime import datetime
 import matplotlib.dates as mdates
+from matplotlib.dates import date2num
+
 
 
 """
@@ -41,33 +44,31 @@ dc_media=np.mean(dc)
 
 """
 GRAFICO
+-----------------
+Gestion de Fechas
 """
-# """
-# Gestion de Fechas
-# """
+
+x = [datetime.strptime(d,'%Y-%m-%d').date() for d in fechas]
+
 # date_fmt = '%Y-%m-%d'
 # epoca=[datetime.strptime(str(i), date_fmt) for i in fechas]
 # x = [mdates.date2num(i) for i in epoca]
 # date_formatter = mdates.DateFormatter('%d-%m-%y')
 # 
-# plt.format_xdata = mdates.DateFormatter('%Y-%m-%d')
-# plt.plot(fechas,dv,label='Coordenada V')
+#plt.format_xdata = mdates.DateFormatter('%Y-%m-%d')
+# plt.plot(x,dv,'o',label='Coordenada V')
 # plt.show()
 # plt.close()
-
 
 fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
 ax1.grid(True)
 ax2.grid(True)
 ax3.grid(True)
-ax1.plot( dv_media)
-ax1.plot(dv,label='Coordenada V')
+ax1.plot(x,dv,'o',label='Coordenada V')
 ax1.set_ylabel('Km')
-ax2.plot(dn,label='Coordenada N')
-ax2.plot(dn_media)#
+ax2.plot(x,dn,'o',label='Coordenada N')
 ax2.set_ylabel('Km')
-ax3.plot(dc,label='Coordenada C')
-ax3.plot(dc_media)
+ax3.plot(x,dc,'o',label='Coordenada C')
 ax3.set_ylabel('Km')
 fig.suptitle('Diferencias CODS vs TLE+SGP4')
 plt.xlabel('Epoca')

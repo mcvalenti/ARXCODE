@@ -27,6 +27,7 @@ class ProcARxCODE(QMainWindow):
     def __init__(self):
         super(ProcARxCODE, self).__init__()
         
+        self.setWindowTitle('ARxCODE')
         extractAction = QAction("Salir", self)
         extractAction.setShortcut("Ctrl+Q")
         extractAction.setStatusTip('Leave The App')
@@ -45,23 +46,57 @@ class ProcARxCODE(QMainWindow):
         fileMenu.addAction(extractAction)
                 
 #        self.resize(900, 600)
-        self.setWindowTitle('ARxCODE')
+
         
         #IMAGEN
 #         palette    = QPalette()
 #         palette.setBrush(QPalette.Background,QBrush(QPixmap('../visual/imagenes/cords_contol.jpg')))
 #         self.setPalette(palette)
+        """
+        DockWidgets
+        """
+        # Lista de Encuentros.
+        self.encuentros = QDockWidget("Registro de Encuentros", self)
+        self.listWidget = QListWidget()
+        self.listWidget.addItem("PROXIMO ENCUENTRO")
+        self.listWidget.addItem("Encuentros Anteriores.")
+        self.encuentros.setWidget(self.listWidget)
+        self.encuentros.setFloating(False)
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros)
+        # Lista de Procesamientos.
+        self.procesamientos = QDockWidget("Procesamientos", self)
+        self.listWidget1 = QListWidget()
+        self.listWidget1.addItem("Procesamiento de un set de TLE")
+        self.listWidget1.addItem("Procesamiento de Datos de Mision")
+        self.procesamientos.setWidget(self.listWidget1)
+        self.procesamientos.setFloating(False)
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.procesamientos)
+        
+        """
+        Acciones
+        """
+        self.listWidget.itemClicked.connect(self.item_click)
+        self.listWidget1.itemClicked.connect(self.item_click1)
 
-        self.dock = QDockWidget("NUEVO CDM")
-        self.dock1 = QDockWidget("ENCUENTROS ANTERIORES")
-        self.dock.setAllowedAreas(Qt.LeftDockWidgetArea)
-        self.addDockWidget(Qt.LeftDockWidgetArea, self.dock)
-        self.addDockWidget(Qt.LeftDockWidgetArea, self.dock1)
-
-        self.centro=self.home()
-        self.setCentralWidget(self.centro)
         self.show()
-    
+
+#         self.centro=
+#         #self.home()
+#         self.setCentralWidget(self.centro)
+#         self.show()
+        
+    def item_click(self):
+        print self.listWidget.currentItem().text()
+    def item_click1(self):
+        c_item=self.listWidget1.currentItem().text()
+        if c_item == 'Procesamiento de un set de TLE':
+            ventana2=ProcTle()
+            self.setCentralWidget(ventana2)
+            ventana2.exec_()
+        else:
+            ventana3=ProcMision()
+            ventana3.exec_()
+                
     def center(self):
         screen = QDesktopWidget().screenGeometry()
         size = self.geometry()
@@ -70,48 +105,34 @@ class ProcARxCODE(QMainWindow):
     def close_application(self):
         sys.exit()
     
-    class home(QWidget):
-        def __init__(self, *args):
-            QWidget.__init__(self, *args)
+#     class home(QWidget):
+#         def __init__(self, *args):
+#             QWidget.__init__(self, *args)
     #     def home(self):
     #         self.centralwi=QWidget()
     #         self.setCentralWidget(self.centralwi)
-            self.grid   = QGridLayout()
-            """
-            Botones
-            """
-            self.boton_ProManual = QPushButton('Procesamiento de TLE',self)
-            self.boton_mision    = QPushButton('Procesamiento de Datos de Mision',self)
-#         self.boton_ProManual.move(100,500)
-#         self.boton_ProManual.setFixedSize(160,60)
-#         self.boton_mision.move(400,500)
-#         self.boton_mision.setFixedSize(240,60)
-            self.boton_ProManual.clicked.connect(self.tleProc)
-            self.boton_mision.clicked.connect(self.misProc)
+    
+#             self.grid   = QGridLayout()
+#             self.boton_ProManual = QPushButton('Procesamiento de TLE',self)
+#             self.boton_mision    = QPushButton('Procesamiento de Datos de Mision',self)
+#             self.boton_ProManual.clicked.connect(self.tleProc)
+#             self.boton_mision.clicked.connect(self.misProc)
         
-            """
-            GRILLA
-            """
-            self.grid.addWidget(self.boton_ProManual,2,2)
-            self.grid.addWidget(self.boton_mision,3,2)
-            self.setLayout(self.grid)
-#            self.show()
+
+#             self.grid.addWidget(self.boton_ProManual,2,2)
+#             self.grid.addWidget(self.boton_mision,3,2)
+#             self.setLayout(self.grid)
+
             
-        def tleProc(self):
-            """
-            Despliega la ventana para el procesamiento de los TLE,
-            mediante el metodo de Osweiler.
-            """
-            ventana2=ProcTle()
-            ventana2.exec_()
+#         def tleProc(self):
+
+#             ventana2=ProcTle()
+#             ventana2.exec_()
             
-        def misProc(self):
-            """
-            Despliega la ventana para el procesamiento de los datos
-            de CODS. 
-            """
-            ventana3=ProcMision()
-            ventana3.exec_()
+#         def misProc(self):
+
+#             ventana3=ProcMision()
+#             ventana3.exec_()
 
 class ProcTle(QDialog):
 
