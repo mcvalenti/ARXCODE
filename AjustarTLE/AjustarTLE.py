@@ -264,7 +264,7 @@ def difTle(tleOrdenados,cantidad_tles):
         m=m+1 
    
         
-    data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn]
+    data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn,dt_frac]
     
     dt,coef=ajustar_diferencias(epoca_ffin,data1,2)
     

@@ -4,7 +4,10 @@
  %De acuerdo a \cite{Barrett2009}, el modelo WCM...\\
 
 \section{M\'etodo de Osweiler}
-copiar y pegar de la notebook.
+Es un m\'etodo que propone una manera de estimar los errores que se comenten en la utilizaci\'on de TLEs para la determinaci\'on de la posici\'on y la velocidad.
+ El mismo consiste en utilizar un set de TLEs de un intervalo de dos semanas, y considerar el TLE m\'as pr\'oximo al tiempo de m\'aximo acercamiento (TLE  {\it{Primario}}) como el valor {\it{real}} o {\it{verdadero}}.\\
+ A partir de esa premisa, propaga los TLEs anteriores hasta la \'epoca del TLE Primario y con las diferencias que resultan de la comparaci\'on, realiza los c\'alculos estad\'idticos de los valores medios y las varianzas, para construir la matriz Varianza Covarianza correpondiente al TLE Primario.\\
+ Para hacer los estudios de validaci\'on de nuestra implementaci\'on del m\'etodo, de los 6 sat\'elites estudiados por Osweiler, dentro de 8 ventanas temporales distintas, nosotros hemos aplicado el m\'etodo a dos de ellos con caracter\'isticas similares a las misiones de CONAE y en particular a la misi\'on SAC-D, que hemos incorporamos como escenario propio de valiaci\'on ya que contamos con datos orbitales reales de mayor precisi\'on que los TLEs.
 
 \section{Tratamiento sobre Datos de Misi\'on}
 En esta etapa repetimos el m\'etodo que propone Osweiler considerando los datos de misi\'on generados por el CODS
@@ -64,23 +67,22 @@ Archivo con el menor n\'umero de registros $=  142$\\
 
 Im\'agenes comparativas entre los dos m\'etodos:\\
 
-% \begin{figure}[H]
-%  \centering
-% \begin{subfigure}%{0.5\textwidth}
-%   \centering
-%   \includegraphics[width=0.7\linewidth]{imagenes/graf_2013pw.png}
-%   \caption{A subfigure}
-%   \label{fig:sub1}
-% \end{subfigure}%
-% \begin{subfigure}%{0.5\textwidth}
-%   \centering
-%   \includegraphics[width=0.7\linewidth]{imagenes/graf_codsOsweiler.png}
-%   \caption{A subfigure}
-%   \label{fig:sub2}
-% \end{subfigure}
-% \caption{A figure with two subfigures}
-% \label{fig:test}
-% \end{figure}
+\begin{figure}[htbp]
+ \centering
+  \subfigure[Procesamiento de Datos de Mision]{\includegraphics[width=0.46\linewidth]{imagenes/CODS_setPri_37673U}}
+  \subfigure[Procesamiento de TLEs]{\includegraphics[width=0.46\linewidth]{imagenes/TLE_setPri_37673}}
+ \caption{Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.}
+ \label{fig:test}
+\end{figure}
+
+\begin{verbatim}
+------------------------------------------------------------------------
+DIFERENCIAS: TLE-CODS
+-------------------------------------------------------------------------
+dv = -39.9348666302
+dn = -4.61164927147
+dc = 0.713128871224
+\end{verbatim}
 
 % \section{Graficos LAGEOS 8820}
 % 
@@ -167,3 +169,14 @@ Y el resto de los par\'ametros se calcula seg\'un las expresiones:\\
 
 \section{Diferencias}
 A partir de los datos de Misión. 
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=\textwidth]{imagenes/sesgoTLE}
+\end{figure}
+
+\begin{itemize}
+ \item Revisar escritura sobre datos CODS.
+ \item Comparar defasaje inicial con defasaje de TLE respecto de GPS. (ver tendencias - empezar a diagramar los apédices)
+ \item Comparar errores lineal vs cuadr\'atico.
+\end{itemize}

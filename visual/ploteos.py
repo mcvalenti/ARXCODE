@@ -16,9 +16,9 @@ def grafica_set_principal(sat_id,path,grafico_arch,ffin):
     """
     salida=path.split('/')[1]
     if salida=='AjustarTLE':
-        archivo1='TLE_setPri_'+sat_id
+        archivo1='TLE/TLE_setPri_'+sat_id
     else:
-        archivo1='CODS_setPri_'+sat_id
+        archivo1='CODS/CODS_setPri_'+sat_id
     
     fecha_fin=datetime.strptime(ffin,'%Y-%m-%d %H:%M:%S.%f' )
     archivo=open(path+grafico_arch,'r')
@@ -58,11 +58,12 @@ def grafica_set_principal(sat_id,path,grafico_arch,ffin):
     
     
 
-def grafica_diferenciasTotales(sat_id,dt,data,coef):
+def grafica_diferenciasTotales(sat_id,data,coef):
     """
     Hace un grafico general con todos los datos.
     Contiene las tres componentes en un unico grafico.
     """
+    dt=data[7]
     xx=data[1]
     yy=data[2]
     zz=data[3]
@@ -72,19 +73,25 @@ def grafica_diferenciasTotales(sat_id,dt,data,coef):
     plt.grid()
     plt.title('Diferencias en las Coordenadas V,N,C [km]')
     plt.ylabel('Diferencia en Km')
-    plt.legend(loc=4)
+    plt.legend(loc=1)
     plt.savefig('../visual/difTot'+sat_id+'.png')
     plt.show()
     plt.close()
 
     
-def grafica_setcompleto(dt,data,coef):
+def grafica_setcompleto(sat_id,path,data,coef):
     """
     Realiza tres graficos, uno por coordenada.
     En cada grafico incorpora la funcion de ajuste,
     cuyos coeficientes fueron previamente calculados y
     se pasan como parametros.
     """
+    salida=path.split('/')[1]
+    if salida=='AjustarTLE':
+        archivo1='TLE/TLE_setCom_'+sat_id
+    else:
+        archivo1='CODS/CODS_setCom_'+sat_id
+        
     a=coef[0]
     b=coef[1]
     c=coef[2]
@@ -94,6 +101,7 @@ def grafica_setcompleto(dt,data,coef):
     a2=coef[6]
     b2=coef[7]
     c2=coef[8]
+    dt=data[7]
     dv=data[1]
     dn=data[2]
     dc=data[3]
@@ -117,17 +125,17 @@ def grafica_setcompleto(dt,data,coef):
     ax2.grid(True)
     ax3.grid(True)
     ax1.plot( x, yv,'r--',label='Coordenada V')
-    ax1.plot(dt, dv,'x')
+    ax1.plot(dt, dv,'o')
     ax1.set_ylabel('Km')
-    ax2.plot(dt, dn,'x',label='Coordenada N')
+    ax2.plot(dt, dn,'o',label='Coordenada N')
     ax2.plot(x, yn,'r--')#
     ax2.set_ylabel('Km')
-    ax3.plot(dt, dc,'x',label='Coordenada C')
+    ax3.plot(dt, dc,'o',label='Coordenada C')
     ax3.plot(x, yc,'r--')
     ax3.set_ylabel('Km')
     fig.suptitle('Diferencias y Funcion de Ajuste (CODS vs TLE+SGP4)')
     plt.xlabel('Epoca')
-    plt.savefig('../visual/archivos/ajustes.png')
+    plt.savefig('../visual/archivos/'+archivo1)
     plt.show()
     plt.close()
     

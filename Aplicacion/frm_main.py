@@ -44,8 +44,11 @@ class ProcARxCODE(QMainWindow):
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
-                
-#        self.resize(900, 600)
+    
+        self.inicio = QLabel() 
+        pixmap = QPixmap('../visual/imagenes/orbitas') #nubeDebris') #cords_contol.jpg')
+        self.inicio.setPixmap(pixmap)
+        self.setCentralWidget(self.inicio)
 
         
         #IMAGEN
@@ -80,10 +83,6 @@ class ProcARxCODE(QMainWindow):
 
         self.show()
 
-#         self.centro=
-#         #self.home()
-#         self.setCentralWidget(self.centro)
-#         self.show()
         
     def item_click(self):
         print self.listWidget.currentItem().text()
@@ -95,6 +94,7 @@ class ProcARxCODE(QMainWindow):
             ventana2.exec_()
         else:
             ventana3=ProcMision()
+            self.setCentralWidget(ventana3)
             ventana3.exec_()
                 
     def center(self):
@@ -105,35 +105,6 @@ class ProcARxCODE(QMainWindow):
     def close_application(self):
         sys.exit()
     
-#     class home(QWidget):
-#         def __init__(self, *args):
-#             QWidget.__init__(self, *args)
-    #     def home(self):
-    #         self.centralwi=QWidget()
-    #         self.setCentralWidget(self.centralwi)
-    
-#             self.grid   = QGridLayout()
-#             self.boton_ProManual = QPushButton('Procesamiento de TLE',self)
-#             self.boton_mision    = QPushButton('Procesamiento de Datos de Mision',self)
-#             self.boton_ProManual.clicked.connect(self.tleProc)
-#             self.boton_mision.clicked.connect(self.misProc)
-        
-
-#             self.grid.addWidget(self.boton_ProManual,2,2)
-#             self.grid.addWidget(self.boton_mision,3,2)
-#             self.setLayout(self.grid)
-
-            
-#         def tleProc(self):
-
-#             ventana2=ProcTle()
-#             ventana2.exec_()
-            
-#         def misProc(self):
-
-#             ventana3=ProcMision()
-#             ventana3.exec_()
-
 class ProcTle(QDialog):
 
     def __init__(self,parent=None):
@@ -344,10 +315,10 @@ class ProcTle(QDialog):
         
         
     def ver_dif_x_coordenadas(self):
-        ploteos.grafica_setcompleto(self.dt,self.data1, self.coef)
+        ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1, self.coef)
     
     def ver_diferencias_totales(self):
-        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data1,self.coef) 
+        ploteos.grafica_diferenciasTotales(self.sat_id,self.data1,self.coef) 
         
     def ver_dif_set_primario(self):
         ploteos.grafica_set_principal(self.sat_id,self.path,self.diferencias,self.ffin)
@@ -696,10 +667,10 @@ class ProcMision(QDialog):
         self.boton_macovar.setEnabled(True)
         
     def ver_diferencias_totales(self):
-        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data,self.coef)
+        ploteos.grafica_diferenciasTotales(self.sat_id,self.data,self.coef)
         
     def ver_dif_x_coordenadas(self):
-        ploteos.grafica_setcompleto(self.dt, self.data, self.coef)
+        ploteos.grafica_setcompleto(self.sat_id,self.path,self.data, self.coef)
         
     def ver_dif_set_primario(self):
         ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch,self.ffin)
@@ -733,17 +704,20 @@ if __name__ == '__main__':
     d3='../main/matrices/'
     if not os.path.exists(d3):
         os.mkdir(d3)
-    d4='../visual/archivos'
+    d4='../visual/archivos/TLE'
     if not os.path.exists(d4):
         os.mkdir(d4)
-    d5='../Estadistica/archivos'
+    d5='../visual/archivos/CODS'
     if not os.path.exists(d5):
-        os.mkdir(d5)
+        os.mkdir(d5) 
+    d6='../Estadistica/archivos'
+    if not os.path.exists(d6):
+        os.mkdir(d6)
     
     """
     INICIA LA INTERFAZ
     """
-    QApplication.setStyle("plastique")
+    QApplication.setStyle("Cleanlooks")
     app = QApplication(sys.argv)
     ex = ProcARxCODE()
     sys.exit(app.exec_())

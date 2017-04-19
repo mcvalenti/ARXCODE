@@ -49,27 +49,19 @@ Gestion de Fechas
 """
 
 x = [datetime.strptime(d,'%Y-%m-%d').date() for d in fechas]
-
-# date_fmt = '%Y-%m-%d'
-# epoca=[datetime.strptime(str(i), date_fmt) for i in fechas]
-# x = [mdates.date2num(i) for i in epoca]
-# date_formatter = mdates.DateFormatter('%d-%m-%y')
-# 
-#plt.format_xdata = mdates.DateFormatter('%Y-%m-%d')
-# plt.plot(x,dv,'o',label='Coordenada V')
-# plt.show()
-# plt.close()
-
 fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
 ax1.grid(True)
 ax2.grid(True)
 ax3.grid(True)
-ax1.plot(x,dv,'o',label='Coordenada V')
+ax1.plot(x,dv,'o',label='V')
 ax1.set_ylabel('Km')
-ax2.plot(x,dn,'o',label='Coordenada N')
+ax1.legend(loc=1)
+ax2.plot(x,dn,'o',label='N')
 ax2.set_ylabel('Km')
-ax3.plot(x,dc,'o',label='Coordenada C')
+ax2.legend(loc=4)
+ax3.plot(x,dc,'o',label='C')
 ax3.set_ylabel('Km')
+ax3.legend(loc=4)
 fig.suptitle('Diferencias CODS vs TLE+SGP4')
 plt.xlabel('Epoca')
 plt.savefig('../Estadistica/ajustes.png')

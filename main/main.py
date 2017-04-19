@@ -25,9 +25,13 @@ if __name__ == '__main__':
     d3='../main/matrices/'
     if not os.path.exists(d3):
         os.mkdir(d3)
-    d4='../visual/archivos'
+    d4='../visual/archivos/TLE'
     if not os.path.exists(d4):
         os.mkdir(d4)
+    d5='../visual/archivos/CODS'
+    if not os.path.exists(d5):
+        os.mkdir(d5)    
+    
 
 
 

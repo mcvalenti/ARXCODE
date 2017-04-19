@@ -138,6 +138,7 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
         tle0=Tle('../TleAdmin/tle/'+tles[j][0])
         fecha_tle=tle0.epoca()
         if fecha_tle <= d:
+            dif_fechas=(d-fecha_tle).total_seconds()/86400.0
             line1=tle0.linea1
             line2=tle0.linea2
             satrec = twoline2rv(line1, line2, whichconst)
@@ -157,6 +158,7 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             data[4].append(vv)
             data[5].append(nn)
             data[6].append(cc)
+            data[7].append(dif_fechas)
     return data
 
 # def ajustar_diferencias(data):
@@ -226,7 +228,8 @@ def ejecutaProcesamientoCods():
     dvv=[]
     dnn=[]
     dcc=[]
-    data=[t,dv,du,dc,dvv,dnn,dcc]
+    dt_frac=[]
+    data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]
     archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
     salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
     salida1=open('../Comparar/diferencias/'+archivo,'w')
@@ -246,6 +249,12 @@ def ejecutaProcesamientoCods():
     salida1.close()
     
     dt,coef=ajustar_diferencias(epoca_ffin,data,2)
+    
+    """
+    Guarda en archivos las diferencias que se corresponden al
+    ultimo TLE del set. (Estadistica/archivos)
+    tendenciaTle.py toma luego esos archivos, y grafica.
+    """
 
     estadistica_salida=open('../Estadistica/archivos/'+fecha_ini+'_'+fecha_fin+'_difEst.txt','w')
     info_esta=fecha_fin+' '+str(data[1][len(tles)])+' '+str(data[2][len(tles)])+' '+str(data[3][len(tles)])
