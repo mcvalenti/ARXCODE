@@ -69,8 +69,8 @@ Im\'agenes comparativas entre los dos m\'etodos:\\
 
 \begin{figure}[htbp]
  \centering
-  \subfigure[Procesamiento de Datos de Mision]{\includegraphics[width=0.46\linewidth]{imagenes/CODS_setPri_37673U}}
-  \subfigure[Procesamiento de TLEs]{\includegraphics[width=0.46\linewidth]{imagenes/TLE_setPri_37673}}
+  \subfigure[Procesamiento de Datos de Mision]{\includegraphics[width=0.46\linewidth]{imagenes/CODS_setCom_37673U_2}}
+  \subfigure[Procesamiento de TLEs]{\includegraphics[width=0.46\linewidth]{imagenes/TLE_setCom_37673_2}}
  \caption{Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.}
  \label{fig:test}
 \end{figure}
@@ -79,9 +79,45 @@ Im\'agenes comparativas entre los dos m\'etodos:\\
 ------------------------------------------------------------------------
 DIFERENCIAS: TLE-CODS
 -------------------------------------------------------------------------
-dv = -39.9348666302
-dn = -4.61164927147
-dc = 0.713128871224
+dv = -46.8489636874
+dn = 2.35761559016
+dc = 0.611728098324
+\end{verbatim}
+
+\begin{figure}[htbp]
+ \centering
+  \subfigure[Procesamiento de Datos de Mision]{\includegraphics[width=0.46\linewidth]{imagenes/CODS_setCom_37673U_3}}
+  \subfigure[Procesamiento de TLEs]{\includegraphics[width=0.46\linewidth]{imagenes/TLE_setCom_37673_3}}
+ \caption{Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.}
+ \label{fig:test}
+\end{figure}
+
+\subsubsection{Ajuste Polyfit}
+
+{\bf{numpy.polynomial.polynomial.polyfit}}
+
+Returns:	
+
+coef : ndarray, shape (deg + 1,) or (deg + 1, K)
+
+    Polynomial coefficients ordered from low to high. If y was 2-D, the coefficients in column k of coef represent the polynomial fit to the data in y‘s k-th column.
+
+residuals, rank, singular\_values, rcond : list
+
+    These values are only returned if full = True
+
+    resid – sum of squared residuals of the least squares fit rank – the numerical rank of the scaled Vandermonde matrix sv – singular values of the scaled Vandermonde matrix rcond – value of rcond.
+
+    For more details, see linalg.lstsq.
+
+\begin{verbatim}
+Procesando datos TLE...
+++++++++++++GRADO 2++++++++++++++++++
+[array([-1.89669503, -0.73973919, -0.06103362])]
+[[array([ 31434.82805686]), 3, array([ 1.68700379,  0.388,  0.056]), 5.1292e-14]]
+++++++++++++GRADO 1++++++++++++++++++
+[array([ 1.93247211, -1.78532883])]
+[[array([ 31556.32886285]), 2, array([ 1.393,  0.24171176]), 5.1292e-14],]
 \end{verbatim}
 
 % \section{Graficos LAGEOS 8820}
@@ -114,8 +150,6 @@ La figura (ref) muestra un resumen de los distintos sistemas y las consideracion
   \centering
   \includegraphics[width=0.7\textwidth]{imagenes/sistReferencias}
 \end{figure}
-
-
 
 En nuestro caso en particular, los datos que provee CODS se publican en el sistema TOD: True of Date (Verdadero de la \'epoca), mientras que los vectores de estado que genera el propagador SGP4 est\'an calculados en el sistema TEME: True Equator Mean Equinox (Ecuador Verdadero y Equinoccio Medio), tambi\'en denominado UOD (Uniform Equinox of Date).
 

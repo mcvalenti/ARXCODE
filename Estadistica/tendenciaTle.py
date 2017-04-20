@@ -15,7 +15,7 @@ from matplotlib.dates import date2num
 
 """
 A partir de las diferencias entre los valores de los TLE
-y los datos GPS, graficar las diferencias. 
+y los datos GPS, graficar. 
 """
 
 lista=glob.glob('../Estadistica/archivos/*')

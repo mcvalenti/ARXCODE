@@ -8,7 +8,14 @@ import numpy.polynomial as P
 
 
 def ajustar_diferencias(epoca_ffin,data,g):
-    
+    """
+    Toma los datos de fechas y coordenadas y realiza
+    un ajuste de minimos cuadrados con la funcion del 
+    grado que se le indica en g.
+    ----------------------------------------------------
+    devuelve la estadistica
+    [residuals, rank, singular_values, rcond] : list
+    """
     t=data[0]
     dt=[]
     dv=data[1]
@@ -18,11 +25,23 @@ def ajustar_diferencias(epoca_ffin,data,g):
     dnn=data[5]
     dcc=data[6]
     
-    for kt in t:
-        dt.append((epoca_ffin-kt).total_seconds()/86400.0)
-    c, b, a = P.polynomial.polyfit(dt, dv, deg=g)
-    c1, b1, a1 = P.polynomial.polyfit(dt, dn, deg=g)
-    c2, b2, a2 = P.polynomial.polyfit(dt, dc, deg=g)
-    coef=[a,b,c,a1,b1,c1,a2,b2,c2]
-
-    return dt,coef
+    if g == 2:    
+        for kt in t:
+            dt.append((epoca_ffin-kt).total_seconds()/86400.0)
+        c, stats = P.polynomial.polyfit(dt, dv, deg=g, full=True)
+        c1, stats1 = P.polynomial.polyfit(dt, dn, deg=g, full=True)
+        c2, stats2 = P.polynomial.polyfit(dt, dc, deg=g, full=True)
+        coef=[c,c1,c2]
+        statsReport=[stats,stats1,stats2] 
+        return dt,coef,statsReport
+    
+    elif g == 1:
+        for kt in t:
+            dt.append((epoca_ffin-kt).total_seconds()/86400.0)
+        c, stats = P.polynomial.polyfit(dt, dv, deg=g, full=True)
+        c1, stats1 = P.polynomial.polyfit(dt, dn, deg=g, full=True)
+        c2, stats2 = P.polynomial.polyfit(dt, dc, deg=g, full=True)
+        coef=[c,c1,c2]
+        statsReport=[stats,stats1,stats2] 
+        return dt,coef,statsReport
+        

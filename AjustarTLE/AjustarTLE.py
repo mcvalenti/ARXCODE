@@ -213,7 +213,7 @@ def difTle(tleOrdenados,cantidad_tles):
     epoca_fin  = tle_primario.epoca()
     epoca_ffin = epoca_fin
     
-    nombre='difTot_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+epoca_ini.strftime('%Y%m%d')
+    nombre='difTot_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+epoca_ini.strftime('%Y%m%d')+'.TLE'
     dtot=open('../AjustarTLE/diferencias/'+nombre+'','w')
 
     dt_tle=[]
@@ -266,7 +266,15 @@ def difTle(tleOrdenados,cantidad_tles):
         
     data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn,dt_frac]
     
-    dt,coef=ajustar_diferencias(epoca_ffin,data1,2)
+    print '++++++++++++GRADO 2++++++++++++++++++'
+    dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data1,2)
+    print coef
+    print statsReport
+    
+    print '++++++++++++GRADO 1++++++++++++++++++'
+    dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data1,1)
+    print coef1
+    print statsReport1
     
     data=[dt,data1,coef,nombre]
         

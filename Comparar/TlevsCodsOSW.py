@@ -161,26 +161,7 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             data[7].append(dif_fechas)
     return data
 
-# def ajustar_diferencias(data):
-#     
-#     t=data[0]
-#     dt=[]
-#     dv=data[1]
-#     dn=data[2]
-#     dc=data[3]
-#     dvv=data[4]
-#     dnn=data[5]
-#     dcc=data[6]
-#     
-#     for kt in t:
-#         dt.append((kt-t[0]).total_seconds()/86400.0)
-#     c, b, a = P.polynomial.polyfit(dt, dv, deg=2)
-#     c1, b1, a1 = P.polynomial.polyfit(dt, dn, deg=2)
-#     c2, b2, a2 = P.polynomial.polyfit(dt, dc, deg=2)
-#     coef=[a,b,c,a1,b1,c1,a2,b2,c2]
-# 
-#     return dt,coef
-        
+       
 def ejecutaProcesamientoCods():
 #if __name__ == '__main__':
     """
@@ -248,8 +229,8 @@ def ejecutaProcesamientoCods():
             continue
     salida1.close()
     
-    dt,coef=ajustar_diferencias(epoca_ffin,data,2)
-    
+    dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data,2)
+    dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data,1)
     """
     Guarda en archivos las diferencias que se corresponden al
     ultimo TLE del set. (Estadistica/archivos)
@@ -272,3 +253,29 @@ def ejecutaProcesamientoCods():
     set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
     return set_datos
 
+if __name__=='__main__':
+#def comparaTodos():
+    
+    tlelista=glob.glob('../TleAdmin/tle/*')
+    t=[]
+    dv=[]
+    du=[]
+    dc=[]
+    dvv=[]
+    dnn=[]
+    dcc=[]
+    dt_frac=[]
+    data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]
+    
+    for tle in tlelista:
+        tres_archivos=FiltraArchivos(tle)
+        linea_interpol=interpola_3sv(tle, tres_archivos)
+        fecha=linea_interpol[:26]
+        d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
+        r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
+        rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
+        tle0=Tle('../TleAdmin/tle/'+tle)
+        line1=tle0.linea1
+        line2=tle0.linea2
+#         satrec = twoline2rv(line1, line2, whichconst)
+#         pos1, vel1=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)

@@ -14,6 +14,7 @@ from funcionesUtiles.funciones import toTimestamp
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis
+from Comparar.TlevsCodsOSW import FiltraArchivos
 
 
 def generaTEME(tles,sat_id):
@@ -164,64 +165,15 @@ def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):
     output:
         diferenciasVNC: (../visual/archivos/'difCods_'+str(sat_id))
     """
-
-    inicio=time()
-
-    """
-    Comparacion HARDCODEADO!!!!!
-    """
-    
-    gpsf=open('../CodsAdmin/TOD_O/TOD_CODS_SACD_xyz.txt','r')
-    tlef=open('../TleAdmin/crudosTLE/'+ArchivoTLE,'r')
-    
-    gpslista=gpsf.readlines()
-    tlelista=tlef.readlines()
-    
-    
-    tot=len(gpslista)
-    print 'Total de filas de GPS = ',tot
-    print 'Total de Tles = ', len(tlelista)
-    print 'Procesando ... '
-    
-    #Arhivo de dif en el sistema TOD
-    #difTOD=open('../visual/archivos/diferenciasTOD','w')
-    archivo='difCods_'+str(sat_id)
-    difVNC=open('../Ajustar/diferencias/'+archivo,'w')
-    r=[]
-    rp=[]
-    df=[]
-    for l in tlelista:
-        tle_ephem=l.split()
-        inferior, superior= encuentraBordes(gpslista,l)
-        lineaInterpol=interpola(l,inferior,superior)
-        interpol_ephem=lineaInterpol.split()
-        xx=float(tle_ephem[2])
-        yy=float(tle_ephem[3])
-        zz=float(tle_ephem[4])
-        r=[xx,yy,zz]
-        vx=float(tle_ephem[5])
-        vy=float(tle_ephem[6])
-        vz=float(tle_ephem[7])
-        rp=[vx,vy,vz]
-        dif_x=xx-float(interpol_ephem[2])
-        dif_y=yy-float(interpol_ephem[3])
-        dif_z=zz-float(interpol_ephem[4])
-        df=[dif_x,dif_y,dif_z]
-        dif_vx=vx-float(interpol_ephem[5])
-        dif_vy=vy-float(interpol_ephem[6])
-        dif_vz=vz-float(interpol_ephem[7])
-        dfv=[dif_vx,dif_vy,dif_vz]
-        v,n,c=vncSis(r,rp,df)
-        uu,vv,ww=vncSis(r, rp, dfv)
-        info1=tle_ephem[0]+' '+tle_ephem[1]+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(uu)+' '+str(vv)+' '+str(ww)+'\n'
-        difVNC.write(info1)   
-        #info=tle_ephem[0]+' '+tle_ephem[1]+' '+str(dif_x)+' '+str(dif_y)+' '+str(dif_z)+' '+str(dif_vx)+' '+str(dif_vy)+' '+str(dif_vz)+'\n'
-        #difTOD.write(info)          
-
-    fin=time()  
-    difVNC.close()       
-    print 'FIN', 'Tiempo de Ejecucion = ', fin-inicio
-    
-    return archivo
-    
-    
+# 
+#     inicio=time()
+# 
+#     tlelista=glob.glob('../TleAdmin/tle/*')
+#     
+#     FiltraArchivos()
+# 
+#     fin=time()  
+#     difVNC.close()       
+#     print 'FIN', 'Tiempo de Ejecucion = ', fin-inicio
+#     
+#     return archivo

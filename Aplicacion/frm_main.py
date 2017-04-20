@@ -318,7 +318,7 @@ class ProcTle(QDialog):
         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1, self.coef)
     
     def ver_diferencias_totales(self):
-        ploteos.grafica_diferenciasTotales(self.sat_id,self.data1,self.coef) 
+        ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data1,self.coef) 
         
     def ver_dif_set_primario(self):
         ploteos.grafica_set_principal(self.sat_id,self.path,self.diferencias,self.ffin)
@@ -648,6 +648,9 @@ class ProcMision(QDialog):
         self.boton_procesar.setEnabled(True)
         
     def procesarCods(self):
+        files=glob.glob('../Comparar/diferencias/*')
+        for filename in files:
+            os.unlink(filename)
         self.set_datos=ejecutaProcesamientoCods()
         self.sat_id=self.set_datos[0]
         self.linea1=self.set_datos[1]
@@ -667,7 +670,7 @@ class ProcMision(QDialog):
         self.boton_macovar.setEnabled(True)
         
     def ver_diferencias_totales(self):
-        ploteos.grafica_diferenciasTotales(self.sat_id,self.data,self.coef)
+        ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data,self.coef)
         
     def ver_dif_x_coordenadas(self):
         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data, self.coef)
@@ -701,6 +704,9 @@ if __name__ == '__main__':
     d2='../AjustarTLE/diferencias'
     if not os.path.exists(d2):
         os.mkdir(d2)
+    d2b='../Comparar/diferencias'
+    if not os.path.exists(d2b):
+        os.mkdir(d2b)
     d3='../main/matrices/'
     if not os.path.exists(d3):
         os.mkdir(d3)
