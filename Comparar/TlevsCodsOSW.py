@@ -7,15 +7,153 @@ Created on 16/03/2017
 import os, glob
 import numpy as np
 import numpy.polynomial as P
+from scipy.interpolate import barycentric_interpolate
 from datetime import datetime, timedelta
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from TleAdmin.TLE import Tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
-from Comparar.TleVsCods import interpola, encuentraBordes
+from funcionesUtiles.funciones import toTimestamp
+#from Comparar.TleVsCods import interpola, encuentraBordes
 from SistReferencia.sist_deCoordenadas import vncSis, teme2tod
 from CodsAdmin.EphemCODS import EphemCODS
 from Estadistica.ajusteMinCuad import ajustar_diferencias
+from Estadistica.tendenciaTle import grafica_tendencia
+
+def generaTEME(tles,sat_id):
+    listaTle={}
+    for i in tles:
+        tle1=Tle(i)
+        fecha=tle1.epoca()
+        r,v=tle1.propagaTLE()
+        listaTle[fecha]=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
+    listaTle=sorted(listaTle.items())
+    archivo=str(sat_id)+'_xyz.txt'
+    salidaTle=open('../TleAdmin/crudosTLE/'+archivo,'w+')
+    for k in listaTle:        
+        infoa=str(k[0])
+        infob=k[1]
+        linea=infoa+' '+infob+'\n'
+        salidaTle.write(linea)
+    salidaTle.close()    
+    return archivo
+        
+def encuentraBordes(gpslista,l):
+    """
+    ------------------------------------------------------------------------------------
+    Dada una linea de efemerides Cartesianas procesadas desde un TLE. 
+    Este metodo se encarga de buscar en la lista de lineas de efemerides que genera CODS
+    cuales son las filas que encierran  la fecha del tle, para que luego se pueda
+    interpolar la informacion, con el metodo Interpola
+    ------------------------------------------------------------------------------------
+    input
+        gpslista: lista de lineas con efemerides [fecha epoca x y z vx vy vz]
+        l: linea con efemerides [fecha epoca x y z vx vy vz]
+    output
+        inferior: linea interpolada inferior (str) [fecha epoca x y z vx vy vz]
+        superior: linea interpolada superior (str) [fecha epoca x y z vx vy vz]
+    """
+    fechasgps=[]
+    for fg in gpslista:
+        campof=fg.split()
+        fechas=campof[0]+' '+campof[1]
+        dg=datetime.strptime(fechas[:19],'%Y/%m/%d %H:%M:%S')
+        fechasgps.append(dg)
+    tot=len(fechasgps)
+    campos=l.split()
+    campos1=campos[0].split('-')
+    yy=int(campos1[0])
+    mm=int(campos1[1])
+    dd=int(campos1[2])
+    campos2=campos[1].split(':')
+    hh=int(campos2[0])
+    minu=int(campos2[1])
+    segu=0
+    d1=datetime(yy,mm,dd,hh,minu,segu)      
+    if d1 < fechasgps[tot/2]:
+        if d1 in fechasgps[:tot/4]:
+            indice=fechasgps.index(d1)
+            inferior=gpslista[indice]
+            superior=gpslista[indice-1]
+        else:
+            indice=fechasgps.index(d1)
+            inferior=gpslista[indice]
+            superior=gpslista[indice-1]
+    else:
+        if d1 in fechasgps[:tot*3/4]:
+            indice=fechasgps.index(d1)
+            inferior=gpslista[indice]
+            superior=gpslista[indice-1]
+        else:
+            indice=fechasgps.index(d1)
+            inferior=gpslista[indice]
+            superior=gpslista[indice-1]
+                
+    return inferior,superior
+             
+
+
+def interpola(l,inferior,superior):
+    """
+    ---------------------------------------------------------------------
+    Recibe las lineas con la informacion a interpolar.
+    La primera linea es el dato TLE y las otras dos son las lineas
+    de los datos CODS cuyas fechas encierran a la fecha del TLE.
+
+    ---------------------------------------------------------------------
+    input
+        l: cadena con fecha hora x y z vx vy vz (str)
+        inferior: cadena con fecha hora x y z vx vy vz (str)
+        superior: cadena con fecha hora x y z vx vy vz (str)
+    output
+        lineaInterpol: cadena con fecha & hora(TLE) + datos interpolados 
+    """
+
+    lcampos=l.split()
+    dicampos=inferior.split()
+    dscampos=superior.split()
+    # fecha inferior
+    di=inferior[:19]
+    di=datetime.strptime(di,'%Y/%m/%d %H:%M:%S')
+    di_int=toTimestamp(di)
+    #fecha superior
+    ds=superior[:19]
+    ds=datetime.strptime(ds,'%Y/%m/%d %H:%M:%S')
+    ds_int=toTimestamp(ds)
+    #fecha tle
+    dt=l[:19]
+    dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+    dt_int=toTimestamp(dt)
+    
+    x_array=[di_int,ds_int]
+    x_new=dt_int
+    # Interpolacion en x
+    fx_array=[float(dicampos[2]),float(dscampos[2])]
+    yx_new=barycentric_interpolate(x_array, fx_array, x_new)
+
+    # Interpolacion en y
+    fy_array=[float(dicampos[3]),float(dscampos[3])]
+    yy_new=barycentric_interpolate(x_array, fy_array, x_new)
+    
+    # Interpolacion en z
+    fz_array=[float(dicampos[4]),float(dscampos[4])]
+    yz_new=barycentric_interpolate(x_array, fz_array, x_new)
+#    lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+'\n'
+    
+    # Interpolacion en vx
+    fvx_array=[float(dicampos[5]),float(dscampos[5])]
+    yvx_new=barycentric_interpolate(x_array, fvx_array, x_new)
+ 
+    # Interpolacion en vy
+    fvy_array=[float(dicampos[6]),float(dscampos[6])]
+    yvy_new=barycentric_interpolate(x_array, fvy_array, x_new)
+     
+    # Interpolacion en vz
+    fvz_array=[float(dicampos[7]),float(dscampos[7])]
+    yvz_new=barycentric_interpolate(x_array, fvz_array, x_new)
+    lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '+str(yz_new)+' '+str(yvx_new)+' '+str(yvy_new)+' '+str(yvz_new)+'\n'
+    
+    return lineaInterpol
 
 def FiltraArchivos(tle):
     """
@@ -47,8 +185,11 @@ def FiltraArchivos(tle):
         lista_fechas.append(fecha_cods_nombre)
 
     for f in fechas_busqueda:
-        indice = lista_fechas.index(f)
-        archivos_datos.append(nombre_archivos[indice])
+        if f in lista_fechas:
+            indice = lista_fechas.index(f)
+            archivos_datos.append(nombre_archivos[indice])
+        else:
+            pass
         
     return archivos_datos
 
@@ -147,6 +288,8 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             vel=teme2tod(fecha_tle, vel1)
             difx=[pos[0,0]-r[0],pos[0,1]-r[1],pos[0,2]-r[2]]
             difv=[vel[0,0]-rp[0],vel[0,1]-rp[1],vel[0,2]-rp[2]]
+#             difx=[pos1[0]-r[0],pos1[1]-r[1],pos1[2]-r[2]]
+#             difv=[vel1[0]-rp[0],vel1[1]-rp[1],vel1[2]-rp[2]]
             v,n,c=vncSis(r,rp,difx)
             vv,nn,cc=vncSis(r,rp,difv)
             dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
@@ -244,9 +387,9 @@ def ejecutaProcesamientoCods():
     
     print 'DIFERENCIAS:'
     print '-------------------------------------------------------------------------'
-    print 'dv =',data[1][len(tles)]
-    print 'dn =',data[2][len(tles)]
-    print 'dc =',data[3][len(tles)]
+    print 'dv =',data[1][len(tles)-1]
+    print 'dn =',data[2][len(tles)-1]
+    print 'dc =',data[3][len(tles)-1]
     print '-------------------------------------------------------------------------'
     print 'Fin del Calculo de Diferencias'
 
@@ -257,25 +400,42 @@ if __name__=='__main__':
 #def comparaTodos():
     
     tlelista=glob.glob('../TleAdmin/tle/*')
+    dic_tle=generadorDatos(tlelista)
+    tle_ord=ordenaTles(dic_tle)
+    lista_tle_ord=tle_ord[1]
     t=[]
     dv=[]
-    du=[]
+    dn=[]
     dc=[]
     dvv=[]
     dnn=[]
     dcc=[]
     dt_frac=[]
-    data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]
+    data=[t,dv,dn,dc,dt_frac]
+    whichconst=wgs72
+    for k in tle_ord:
+        tle=k[0]
+        tres_archivos=FiltraArchivos('../TleAdmin/tle/'+tle)
+        linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle, tres_archivos)
+        if linea_interpol != None:
+            fecha=linea_interpol[:26]
+            d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
+            r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
+            rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
+            tle0=Tle('../TleAdmin/tle/'+tle)        
+            line1=tle0.linea1
+            line2=tle0.linea2
+            satrec = twoline2rv(line1, line2, whichconst)
+            pos1, vel1=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
+            t.append(tle0.epoca())
+            dv.append(pos1[0]-r[0])
+            dn.append(pos1[1]-r[1])
+            dc.append(pos1[2]-r[2])
+        else:
+            pass
     
-    for tle in tlelista:
-        tres_archivos=FiltraArchivos(tle)
-        linea_interpol=interpola_3sv(tle, tres_archivos)
-        fecha=linea_interpol[:26]
-        d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
-        r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
-        rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
-        tle0=Tle('../TleAdmin/tle/'+tle)
-        line1=tle0.linea1
-        line2=tle0.linea2
-#         satrec = twoline2rv(line1, line2, whichconst)
-#         pos1, vel1=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
+    f_ini=np.min(t)
+    for dt in t:
+        dt_frac.append((dt-f_ini).total_seconds()/86400.0)
+        
+    grafica_tendencia(data)
