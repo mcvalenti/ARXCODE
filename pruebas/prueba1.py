@@ -6,12 +6,18 @@
 
 import numpy as np
 
-a=[2,3,1,4]
-b=[3,2,1,4]
-c=[4,5,6,4]
+#r=[5333.99553841,4586.36440955,-3.88337162123]
+r=[-2793.664330,-3461.928704,5439.115375]
 
-ma=np.array([a,b,c])
-print ma
+r_mod=np.sqrt(np.abs(np.dot(r,r)))
+print r_mod
+
+# a=[2,3,1,4]
+# b=[3,2,1,4]
+# c=[4,5,6,4]
+# 
+# ma=np.array([a,b,c])
+# print ma
 
 
 

@@ -52,9 +52,12 @@ class Tle:
 #         self.epoca=datetime(2000+self.a, self.mes, self.dia1, self.hora, self.minuto, self.seg)
         return self.epoca
     
-    def propagaTLE(self):
+    def propagaTLE(self,date=None):
         whichconst = wgs72
         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
-        ffin=satrec.epoch
-        r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
+        if date==None:
+            ffin=satrec.epoch
+            r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
+        else:
+            r,v = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,date.second)
         return r,v

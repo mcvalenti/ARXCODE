@@ -8,7 +8,6 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import matplotlib.dates as mdates
 import datetime as dt
-from Comparar.TleVsCods import generaTEME
 from Comparar.TleVsCods import EjecutaComparacion
 from Estadistica.maCovar import EjecutaMaCovarCODS
 from visual.TlevsCodsGraf import VerGraficoMision

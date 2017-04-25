@@ -15,20 +15,23 @@ from TleAdmin.TLE import Tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
 from funcionesUtiles.funciones import toTimestamp
 #from Comparar.TleVsCods import interpola, encuentraBordes
-from SistReferencia.sist_deCoordenadas import vncSis, teme2tod
+from SistReferencia.sist_deCoordenadas import vncSis, teme2tod, xv2eo
 from CodsAdmin.EphemCODS import EphemCODS
 from Estadistica.ajusteMinCuad import ajustar_diferencias
-from Estadistica.tendenciaTle import grafica_tendencia
+from Estadistica.tendenciaTle import grafica_tendencia, grafica_EO
 
-def generaTEME(tles,sat_id):
+def generaTOD(tles,sat_id):
     listaTle={}
     for i in tles:
         tle1=Tle(i)
         fecha=tle1.epoca()
         r,v=tle1.propagaTLE()
-        listaTle[fecha]=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
+        r_teme=[r[0],r[1],r[2]]
+        r_tod=teme2tod(fecha, r_teme)
+        r_todx=np.array(r_tod[0][0])
+        listaTle[fecha]=str(r_todx[0][0])+' '+str(r_todx[0][1])+' '+str(r_todx[0][2])+'\n'#+str(v[0])+' '+str(v[1])+' '+str(v[2])
     listaTle=sorted(listaTle.items())
-    archivo=str(sat_id)+'_xyz.txt'
+    archivo=str(sat_id)+'_TOD_xyz.txt'
     salidaTle=open('../TleAdmin/crudosTLE/'+archivo,'w+')
     for k in listaTle:        
         infoa=str(k[0])
@@ -403,6 +406,13 @@ if __name__=='__main__':
     dic_tle=generadorDatos(tlelista)
     tle_ord=ordenaTles(dic_tle)
     lista_tle_ord=tle_ord[1]
+    """
+    Validacion con STK de coordenadas TOD.
+    """
+    listar=[]
+    for tle in tle_ord:
+        listar.append('../TleAdmin/tle/'+tle[0])
+    generaTOD(listar, 37673)
     t=[]
     dv=[]
     dn=[]
@@ -411,6 +421,8 @@ if __name__=='__main__':
     dnn=[]
     dcc=[]
     dt_frac=[]
+    a=[]
+    i=[]
     data=[t,dv,dn,dc,dt_frac]
     whichconst=wgs72
     for k in tle_ord:
@@ -426,11 +438,21 @@ if __name__=='__main__':
             line1=tle0.linea1
             line2=tle0.linea2
             satrec = twoline2rv(line1, line2, whichconst)
-            pos1, vel1=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
+            pos1, vel1=tle0.propagaTLE(d)
+            #satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
+            r_teme=[pos1[0],pos1[1],pos1[2]]
+            v_teme=[vel1[0],vel1[1],vel1[2]]
+            semi,e,inc,Omega,w,nu=xv2eo(r,rp)
+            a.append(semi/1000.0)
+            i.append(inc*180.0/(np.pi))
+            r_tod=teme2tod(d,r_teme)
+            r_tod=np.array(r_tod[0])
+            v_tod=teme2tod(d,v_teme)
+            v_tod=np.array(v_tod[0])
             t.append(tle0.epoca())
-            dv.append(pos1[0]-r[0])
-            dn.append(pos1[1]-r[1])
-            dc.append(pos1[2]-r[2])
+            dv.append(r_tod[0][0]-r[0])
+            dn.append(r_tod[0][1]-r[1])
+            dc.append(r_tod[0][2]-r[2])
         else:
             pass
     
@@ -438,4 +460,8 @@ if __name__=='__main__':
     for dt in t:
         dt_frac.append((dt-f_ini).total_seconds()/86400.0)
         
-    grafica_tendencia(data)
+    eo=[t,a,i]
+
+#    grafica_tendencia(data)
+    grafica_EO(eo)
+    

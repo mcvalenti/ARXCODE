@@ -17,23 +17,23 @@ from SistReferencia.sist_deCoordenadas import vncSis
 from Comparar.TlevsCodsOSW import FiltraArchivos
 
 
-def generaTEME(tles,sat_id):
-    listaTle={}
-    for i in tles:
-        tle1=Tle(i)
-        fecha=tle1.epoca()
-        r,v=tle1.propagaTLE()
-        listaTle[fecha]=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
-    listaTle=sorted(listaTle.items())
-    archivo=str(sat_id)+'_xyz.txt'
-    salidaTle=open('../TleAdmin/crudosTLE/'+archivo,'w+')
-    for k in listaTle:        
-        infoa=str(k[0])
-        infob=k[1]
-        linea=infoa+' '+infob+'\n'
-        salidaTle.write(linea)
-    salidaTle.close()    
-    return archivo
+# def generaTEME(tles,sat_id):
+#     listaTle={}
+#     for i in tles:
+#         tle1=Tle(i)
+#         fecha=tle1.epoca()
+#         r,v=tle1.propagaTLE()
+#         listaTle[fecha]=str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
+#     listaTle=sorted(listaTle.items())
+#     archivo=str(sat_id)+'_xyz.txt'
+#     salidaTle=open('../TleAdmin/crudosTLE/'+archivo,'w+')
+#     for k in listaTle:        
+#         infoa=str(k[0])
+#         infob=k[1]
+#         linea=infoa+' '+infob+'\n'
+#         salidaTle.write(linea)
+#     salidaTle.close()    
+#     return archivo
         
 def encuentraBordes(gpslista,l):
     """

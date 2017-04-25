@@ -228,7 +228,7 @@ def difTle(tleOrdenados,cantidad_tles):
     m=0
     for i in range(cantidad_tles-1,0,-1):       
         tlepri=tleOrdenados[i][0]
-        r,rp,ffin=tlePrimario(tlepri)        
+        r,rp,ffin=tlePrimario(tlepri)     
         item=range(i-1,-1,-1)       
         for j in item:
             tlesec=tleOrdenados[j][0]

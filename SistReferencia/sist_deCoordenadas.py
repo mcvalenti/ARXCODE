@@ -85,13 +85,13 @@ def xv2eo(r,v):
     """
     Impresion de salida
     """
-    print 'semieje mayor a= ',a
-    print 'Excentricidad e= ',e
-    print 'Inclinacion i= ',i*deg
-    print 'Longitud del Nodo = ', Omega*deg
-    print 'Argumento del Perigeo w= ',w*deg
-    print 'Anomalia Media ',M*deg
-    print 'Anomalia Verdadera',nu*deg
+#     print 'semieje mayor a= ',a
+#     print 'Excentricidad e= ',e
+#     print 'Inclinacion i= ',i*deg
+#     print 'Longitud del Nodo = ', Omega*deg
+#     print 'Argumento del Perigeo w= ',w*deg
+#     print 'Anomalia Media ',M*deg
+#     print 'Anomalia Verdadera',nu*deg
     return a,e,i,Omega,w,nu
     
 def eo2xv(a,e,i,Omega,w,nu):
