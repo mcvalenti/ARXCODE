@@ -2,22 +2,23 @@
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
 \contentsline {subsection}{\numberline {1.0.1}Regulaciones Nacionales e Internacionales}{1}{subsection.1.0.1}
 \contentsline {subsection}{\numberline {1.0.2}Planteo del Problema}{1}{subsection.1.0.2}
-\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{2}{chapter.2}
-\contentsline {subsection}{\numberline {2.0.3}CDM}{2}{subsection.2.0.3}
-\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a}{3}{chapter.3}
-\contentsline {section}{\numberline {3.1}M\'etodo de Osweiler}{3}{section.3.1}
-\contentsline {section}{\numberline {3.2}Tratamiento sobre Datos de Misi\'on}{3}{section.3.2}
-\contentsline {section}{\numberline {3.3}Preprocesamiento de los Datos de Misi\'on de CODS}{4}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}ORBEPHEM}{4}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Archivos Utilizados}{5}{subsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.2.1}Ajuste Polyfit}{6}{subsubsection.3.3.2.1}
-\contentsline {section}{\numberline {3.4}Transformaci\'on de Coordenadas}{6}{section.3.4}
-\contentsline {section}{\numberline {3.5}Diferencias}{8}{section.3.5}
-\contentsline {chapter}{\numberline {4}ARxCODE}{9}{chapter.4}
-\contentsline {section}{\numberline {4.1}Especificaciones}{9}{section.4.1}
-\contentsline {section}{\numberline {4.2}Dise\IeC {\~n}o y Desarrollo}{9}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Arquitectura}{9}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}parametros globales y nomenclatura de la generacion de archivos}{9}{subsection.4.2.2}
-\contentsline {chapter}{\numberline {5}Resultados}{10}{chapter.5}
-\contentsline {chapter}{\numberline {6}Conclusiones}{11}{chapter.6}
-\contentsline {chapter}{Bibliograf\'{\i }a}{12}{chapter.6}
+\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{5}{chapter.2}
+\contentsline {subsection}{\numberline {2.0.3}CDM}{5}{subsection.2.0.3}
+\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a}{10}{chapter.3}
+\contentsline {section}{\numberline {3.1}M\'etodo de Osweiler}{12}{section.3.1}
+\contentsline {section}{\numberline {3.2}Tratamiento sobre Datos de Misi\'on}{12}{section.3.2}
+\contentsline {section}{\numberline {3.3}Preprocesamiento de los Datos de Misi\'on de CODS}{13}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}ORBEPHEM}{13}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3.3.2}Archivos Utilizados}{13}{subsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.2.1}Ajuste Polyfit}{15}{subsubsection.3.3.2.1}
+\contentsline {section}{\numberline {3.4}Transformaci\'on de Coordenadas}{15}{section.3.4}
+\contentsline {section}{\numberline {3.5}Diferencias}{17}{section.3.5}
+\contentsline {chapter}{\numberline {4}ARxCODE}{18}{chapter.4}
+\contentsline {section}{\numberline {4.1}Especificaciones}{18}{section.4.1}
+\contentsline {section}{\numberline {4.2}Dise\IeC {\~n}o y Desarrollo}{18}{section.4.2}
+\contentsline {subsection}{\numberline {4.2.1}Arquitectura}{18}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4.2.2}parametros globales y nomenclatura de la generacion de archivos}{18}{subsection.4.2.2}
+\contentsline {chapter}{\numberline {5}Resultados}{21}{chapter.5}
+\contentsline {section}{\numberline {5.1}validacion}{21}{section.5.1}
+\contentsline {chapter}{\numberline {6}Conclusiones}{22}{chapter.6}
+\contentsline {chapter}{Bibliograf\'{\i }a}{23}{chapter.6}
