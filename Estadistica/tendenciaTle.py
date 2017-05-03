@@ -12,7 +12,7 @@ import matplotlib.dates as mdates
 from matplotlib.dates import date2num
 
 
-def grafica_tendencia(data):
+def grafica_tendencia(data,c):
     dt=data[4]
     dv=data[1]
     dn=data[2]
@@ -21,6 +21,12 @@ def grafica_tendencia(data):
     f_ini=datetime.strftime(fecha[0],'%Y%m%d')
     f_fin=datetime.strftime(fecha[-1],'%Y%m%d')
     
+    """
+    Funciones de ajuste
+    """
+    y=[]
+    for x in dt:
+        y.append(c[3]*x*x*x+c[2]*x*x+c[1]*x+c[0])
     """
     GRAFICO
     -----------------
@@ -31,7 +37,8 @@ def grafica_tendencia(data):
     ax1.grid(True)
     ax2.grid(True)
     ax3.grid(True)
-    ax1.plot(dt,dv,'r--',label='V')
+    ax1.plot(dt,dv,'x',label='V')
+    ax1.plot(dt,y,'r--',label='ajuste')
     ax1.set_ylabel('Km')
     ax1.legend(loc=1)
     ax2.plot(dt,dn,'r--',label='N')
@@ -50,9 +57,10 @@ def grafica_EO(data):
     t=data[0]
     a=data[1]
     i=data[2]
-    plt.plot(t,a, marker='o', linestyle='--',label='Semieje')
+    plt.plot(t,a,'x',label='Semieje')
 #    plt.plot(t,i, marker='o', linestyle='--',label='Inclinacion')
     plt.legend(loc=1)
+    plt.savefig('../Estadistica/sacD_tend_semieje.png')
     plt.show()
     
 # """

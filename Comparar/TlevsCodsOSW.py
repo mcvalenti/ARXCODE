@@ -19,6 +19,8 @@ from SistReferencia.sist_deCoordenadas import vncSis, teme2tod, xv2eo
 from CodsAdmin.EphemCODS import EphemCODS
 from Estadistica.ajusteMinCuad import ajustar_diferencias
 from Estadistica.tendenciaTle import grafica_tendencia, grafica_EO
+from time import sleep
+import progressbar
 
 def generaTOD(tles,sat_id):
     listaTle={}
@@ -399,131 +401,146 @@ def ejecutaProcesamientoCods():
     set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
     return set_datos
 
-if __name__=='__main__':
+
+def analizaEO():
     """
     Transforma x,y,z a eo, para ver el comportamiento
     en etapas de maniobras. 
     """
     salida=open('eo.txt','w')
     arch3_cods=glob.glob('../CodsAdmin/Validacion/*')
-    tiempo=[]
+    tiempo=[] 
+    prom_a=[]
+    prom_i=[]
     n=0
-    for arch in arch3_cods:
-        n=n+1
-        """
-        parseo nombre del archivo
-        """
-        nombre=arch.split('_')
-        dia=nombre[1]
-        yy=dia[:4]
-        mes=dia[4:6]
-        dd=dia[6:8]
-        hora=nombre[2]
-        fecha_base=datetime(int(yy),int(mes),int(dd))
-        tiempo.append(fecha_base)
-        """
-        Acumulo promedios
-        """
-        a=open(arch,'r')
-        contenido = a.readlines()
-        t=[]
-        a=[]
-        i=[]
-        prom_a=[]
-        prom_i=[]
-        for c in contenido:
-            c1=c.split()
-            if c1[0]=='*HEADER':
-                continue
-            fecha=c[:16]
-            hr=fecha[11:13]
-            if hr != '24':
-                d=datetime.strptime(fecha,'%Y/%m/%d %H:%M')
-                t.append(d)
-                r=[float(c1[2]),float(c1[3]),float(c1[4])]
-                v=[float(c1[5]),float(c1[6]),float(c1[7])]
-                semi,e,inc,Omega,w,nu=xv2eo(r,v)
-                a.append(semi)
-                i.append(inc*180.0/(np.pi))
-        prom_a.append(np.mean(a))
-        prom_i.append(np.mean(i))
-        info=fecha_base.strftime('%Y-%m-%d')+' '+str(np.mean(a))+' '+str(np.mean(i))+'\n'
-        salida.write(info)
-        print 'procesando archivo: ', n
+    with progressbar.ProgressBar(max_value=len(arch3_cods)) as progress:
+        for arch in arch3_cods:
+            sleep(0.1)
+            progress.update(n)
+            n=n+1
+            """
+            parseo nombre del archivo
+            """
+            nombre=arch.split('_')
+            dia=nombre[1]
+            yy=dia[:4]
+            mes=dia[4:6]
+            dd=dia[6:8]
+            hora=nombre[2]
+            fecha_base=datetime(int(yy),int(mes),int(dd))
+            tiempo.append(fecha_base)
+            """
+            Acumulo promedios
+            """
+            a=open(arch,'r')
+            contenido = a.readlines()
+            t=[]
+            a=[]
+            i=[]
+            for c in contenido:
+                c1=c.split()
+                if c1[0]=='*HEADER':
+                    continue
+                fecha=c[:16]
+                hr=fecha[11:13]
+                if hr != '24':
+                    d=datetime.strptime(fecha,'%Y/%m/%d %H:%M')
+                    t.append(d)
+                    r=[float(c1[2]),float(c1[3]),float(c1[4])]
+                    v=[float(c1[5]),float(c1[6]),float(c1[7])]
+                    semi,e,inc,Omega,w,nu=xv2eo(r,v)
+                    a.append(semi)
+                    i.append(inc*180.0/(np.pi))
+            prom_a.append(np.mean(a))
+            prom_i.append(np.mean(i))
+            info=fecha_base.strftime('%Y-%m-%d')+' '+str(np.mean(a))+' '+str(np.mean(i))+'\n'
+            salida.write(info)
+    #        print 'procesando archivo: ', n
     dt_frac=[]            
     f_ini=np.min(t)
     for dt in t:
         dt_frac.append((dt-f_ini).total_seconds()/86400.0)
          
-    eo=[t,a,i]
+    eo=[tiempo,prom_a,prom_i]
  
 #    grafica_tendencia(data)
     grafica_EO(eo)
     print 'fin'
 
-"""
-#def comparaTodos():
-"""    
-#     tlelista=glob.glob('../TleAdmin/tle/*')
-#     dic_tle=generadorDatos(tlelista)
-#     tle_ord=ordenaTles(dic_tle)
-#     lista_tle_ord=tle_ord[1]
-#     """
-#     Validacion con STK de coordenadas TOD.
-#     """
-#     listar=[]
-#     for tle in tle_ord:
-#         listar.append('../TleAdmin/tle/'+tle[0])
-#     generaTOD(listar, 37673)
-#     t=[]
-#     dv=[]
-#     dn=[]
-#     dc=[]
-#     dvv=[]
-#     dnn=[]
-#     dcc=[]
-#     dt_frac=[]
-#     a=[]
-#     i=[]
-#     data=[t,dv,dn,dc,dt_frac]
-#     whichconst=wgs72
-#     for k in tle_ord:
-#         tle=k[0]
-#         tres_archivos=FiltraArchivos('../TleAdmin/tle/'+tle)
-#         linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle, tres_archivos)
-#         if linea_interpol != None:
-#             fecha=linea_interpol[:26]
-#             d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
-#             r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
-#             rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
-#             tle0=Tle('../TleAdmin/tle/'+tle)        
-#             line1=tle0.linea1
-#             line2=tle0.linea2
-#             satrec = twoline2rv(line1, line2, whichconst)
-#             pos1, vel1=tle0.propagaTLE(d)
-#             #satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
-#             r_teme=[pos1[0],pos1[1],pos1[2]]
-#             v_teme=[vel1[0],vel1[1],vel1[2]]
-#             semi,e,inc,Omega,w,nu=xv2eo(r,rp)
-#             a.append(semi/1000.0)
-#             i.append(inc*180.0/(np.pi))
-#             r_tod=teme2tod(d,r_teme)
-#             r_tod=np.array(r_tod[0])
-#             v_tod=teme2tod(d,v_teme)
-#             v_tod=np.array(v_tod[0])
-#             t.append(tle0.epoca())
-#             dv.append(r_tod[0][0]-r[0])
-#             dn.append(r_tod[0][1]-r[1])
-#             dc.append(r_tod[0][2]-r[2])
-#         else:
-#             pass
-#     
-#     f_ini=np.min(t)
-#     for dt in t:
-#         dt_frac.append((dt-f_ini).total_seconds()/86400.0)
-#         
-#     eo=[t,a,i]
-# 
-# #    grafica_tendencia(data)
-#     grafica_EO(eo)
+if __name__=='__main__':
+#    analizaEO()
+    """
+    #def comparaTodos():
+    """    
+    tlelista=glob.glob('../TleAdmin/tle/*')
+    dic_tle=generadorDatos(tlelista)
+    tle_ord=ordenaTles(dic_tle)
+    lista_tle_ord=tle_ord[1]
+    """
+    Validacion con STK de coordenadas TOD.
+    """
+    listar=[]
+    for tle in tle_ord:
+        listar.append('../TleAdmin/tle/'+tle[0])
+    generaTOD(listar, 37673)
+    t=[]
+    dv=[]
+    dn=[]
+    dc=[]
+    dvv=[]
+    dnn=[]
+    dcc=[]
+    dt_frac=[]
+    a=[]
+    i=[]
+    data=[t,dv,dn,dc,dt_frac]
+    whichconst=wgs72
+    n=0
+    with progressbar.ProgressBar(max_value=len(tle_ord)) as progress:
+        for k in tle_ord:
+            sleep(0.1)
+            progress.update(n)
+            n=n+1
+            tle=k[0]
+            tres_archivos=FiltraArchivos('../TleAdmin/tle/'+tle)
+            linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle, tres_archivos)
+            if linea_interpol != None:
+                fecha=linea_interpol[:26]
+                d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
+                r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
+                rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
+                tle0=Tle('../TleAdmin/tle/'+tle)        
+                line1=tle0.linea1
+                line2=tle0.linea2
+                satrec = twoline2rv(line1, line2, whichconst)
+                pos1, vel1=tle0.propagaTLE(d)
+                #satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
+                r_teme=[pos1[0],pos1[1],pos1[2]]
+                v_teme=[vel1[0],vel1[1],vel1[2]]
+                semi,e,inc,Omega,w,nu=xv2eo(r,rp)
+                a.append(semi/1000.0)
+                i.append(inc*180.0/(np.pi))
+                r_tod=teme2tod(d,r_teme)
+                r_tod=np.array(r_tod[0])
+                v_tod=teme2tod(d,v_teme)
+                v_tod=np.array(v_tod[0])
+                t.append(tle0.epoca())
+                dv.append(r_tod[0][0]-r[0])
+                dn.append(r_tod[0][1]-r[1])
+                dc.append(r_tod[0][2]-r[2])
+            else:
+                pass
+         
+    f_ini=np.min(t)
+    for dt in t:
+        dt_frac.append((dt-f_ini).total_seconds()/86400.0)
+    
+    g=3
+    c, stats = P.polynomial.polyfit(dt_frac, dv, deg=g, full=True)
+    print c
+    print stats     
+#    eo=[t,a,i]
+ 
+    grafica_tendencia(data,c)
+#    grafica_EO(eo)
     
