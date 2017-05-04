@@ -55,27 +55,58 @@ En 1978  estudios predictivos hechos por D. Kessler y Cour-Palais\\
 \subsection*{El riesgo de Colisi\'on}
 La primera colisi\'on catastr\'ofica que se registra, ocurri\'o entre el sat\'elite ruso KOSMOS \- 2251 que hab\'ia quedado fuera de servicio y el sat\'elite operativo IRIDUM33 de la constelaci\'on de IRIDIUM en el a\~no 2009.\\
 El evento marc\'o la materializaci\'on de una situaci\'on que se preve\'ia que pod\'ia ocurrir y ofici\'o de catalizador de los estudios vinculados a la predicci\'on, an\'alisis y mitigaci\'on del riesgo de colisi\'on.\\
-Un an\'alisis completo del Riesgo de Colisi\'on, abarca:
+La exitosa Misi\'on SAC-D/AQUARIUS de la CONAE en convenio con la \ac{NASA}, contabiliz\'o del orden de cinco RMM registradas, a lo largo de su vida \'util [10]. Mientras que la \ac{ISS} realiza casi una maniobra de riesgo de colisi\'on por año, dada su envergadura.\\
+CONCEPTO DE MIDDLE MAN.\\
+CONCEPTO DE COLLABORATIVE WORK ENVIRONMENT. (close loop process)
+
+Con el creciente avance de la tecnolog\'ia y el acceso al espacio, aumenta la poblaci\'on de objetos que orbitan la Tierra, ya sean  misiones operativas o desechos espaciales. Con esta perspectiva, varios estudios alertan que las colisiones en \'orbita podr\'ian convertirse en las principales fuentes de generaci\'on de nuevos desechos espaciales. \cite{KlinkradChapter8}\\
+
+Dado el car\'acter global de esta problem\'atica, distintas naciones y agencias internacionales con gran desarrollo y actividad espacial, se han estado organizado en la b\'usqueda de acuerdos y buenas pr\'acticas. Entre los organismos que coordinan las recomendaciones, se encuentran:\\
 
 \begin{itemize}
-\item Identificar las situaciones de encuentro.
-\item Analizar la situaci\'on del encuentro.
-\item Ejecutar maniobras de mitigaci\'on del riesgo si fuera necesario.
-\item Iterar el proceso con minuciocidad para no ofrecer soluciones moment\'aneas que generen nuevos riesgos de colisi\'on.
+\item {\small{COPUOS: Committee of the Peacefull Uses of Outer Space (ONU)}}
+\item {\small{IADC: Inter-Agency Space Debris Coordination Committee}}
+\item {\small{CCSDS: Consultative Committee for Space Data Systems}}
 \end{itemize}
 
-{\bf{Identificaci\'on de las situaciones de encuentros:}} A partir de los datos generados por las redes de rastreo, se propagan las trayectorias orbitales y, bajo ciertos criterios definidos previamente, se detectan los acercamientos no deseados. En esta idea subyace la definici\'on de {\it{Encuentro}}.\\
-Son pocos los organismos y agencias capaces de realizar este procedimiento, incorporando a sus predicciones todos los objetos catalogados y/o rastreados.\\
-En un formato m\'as simplificado, el inter\'es se enfoca en una misi\'on en particular y se desarrollan filtros, para procesar encuentros analizando una menor cantidad de objetos.\\
+As\'i mismo, en lo que respecta a los l\'imites de este trabajo, podemos citar las siguientes Normas, Recomendaciones y Legislaci\'on:\\
 
-El siguiente paso es el {\bf{an\'alisis de la situaci\'on del encuentro: }} El mismo consiste en estudiar el panorama con mayor profundidad y detalle, sumando informaci\'on m\'as confiable en la determinaci\'on orbital, y calculando par\'armetros estad\'isticos, como la Probabilidad de Colisi\'on (PoC).\\
-A medida que se aproxima la fecha en la que se predice el encuentro, se tiene mejor conocimiento de la \'orbita de los objetos involucrados, pero menor tiempo de reacci\'on en la toma de decisiones. Es decir, en el an\'alisis del encuentro se busca un balance entre los tiempos que conlleve el estudio para alcanzar la confiabilidad necesaria, y el margen que se requiere para, por ejemplo, planificar una maniobra.\\
-En este item en particular, se enfoca este trabajo.\\
+\begin{itemize}
+\item {\small{Convenio sobre Responsabilidad Internacional por da\~nos causados por objetos espaciales. ONU - (29-03-72)}}
+\item {\small{Ley 23.335 (19-08-86) - Arg. Suscribe al Convenio de ONU.}}
+\item {\small{Space Debris Mitigation Guidelines - IADC}}
+\item {\small{ISO 24113:2011 {\it{Space Debris mitigation requirements}}}}
+\item {\small{ISO/TR 16158:2013 {\it{Space Systems - Avoiding collision with orbiting objects}}}}
+\item {\small{ISO 19389:2014 {\it{Space data and information transfer Systems}}}}
 
-Si la situaci\'on lo ameritara, la \'unica manera de evitar una colisi\'on es la {\bf{realizaci\'on de una maniobra}}, conocidas como Maniobras de Mitigaci\'on de Riesgo (RMM). No obstante, modificar la trayectoria de un objeto, siempre presupone una evaluaci\'on a priori de que no vaya a producirse una colisi\'on. De manera, que en este punto, se vuelve al item inicial y se repite el proceso iterativamente.\\ 
+\end{itemize}
 
-La exitosa Misi\'on SAC-D/AQUARIUS de la CONAE en convenio con la \ac{NASA}, contabiliz\'o del orden de cinco RMM registradas, a lo largo de su vida \'util [10]. Mientras que la \ac{ISS} realiza casi una maniobra de riesgo de colisi\'on por año, dada su envergadura.\\
 
+En este contexto, ya existen claros antecedentes que abordan la problem\'atica con sus respectivos soportes inform\'aticos. (ver tabla \ref{tab:sisal})
+\begin{table}[!h]
+\centering
+\begin{tabular}{|l|p{5cm}|p{6cm}|}
+\hline
+Herramienta & Desecripci\'on & Proveedor/Agencia\\
+\hline
+{\bf{CARA}} & {\it{Conjunction Assessment Risk Analysis}} & NASA Robotic Conjunction Assessment Risk Analysis group, en convenio con la empresa a.i. solutions, Inc.\\
+\hline
+{\bf{SOCRATES}} & {\it{Satellite Orbital Conjuction Reports Assessing Threatening Encounters in Space}}, servicio web v\'ia Celestrack.com & CSSI (Center for Space Standards \& Innovation) de la agencia AGI: Analytical Graphics, Inc.\\
+\hline
+{\bf{CRASS}} & {\it{Collision Risk Assessment tool}} & Desarrollado por la
+empresa GMV, que presta servicios al Centro Europeo de Operaciones
+Espaciales (ESOC) - Darmstadt, Alemania. \cite{alarconRodriguez}\\
+\hline
+{\bf{CAESAR}} & {\it{Conjuction Analysis and Evaluation Service, Alerts and Recommendations}} & Agencia francesa CNES, que utiliza como soporte el Software JAC {\it{Java for Assessment of Conjunctions}}.\cite{laporte}\\
+%\hline
+%closeap - ant\'on & & ESA\\
+\hline
+{\bf{CRAMS}} & {\it{Collision Risk Assessment and Mitigation System}} & Canadian Space Agency (CSA). \cite{babiker}\\
+\hline
+\end{tabular}
+\caption[Sistemas de Alerta]{Sistemas de Alertas de distintas Naciones y Agencias}
+\label{tab:sisal}
+\end{table}
 
 \subsection*{La Unidad de Desechos Espaciales de la CONAE}
 De acuerdo con el Plan Nacional Espacial: {\bf{ Argentina en el Espacio 2004-2015}} [5], las misiones de la CONAE, fundamentalmente pensadas para observaci\'on de la Tierra, ocupan \'orbitas bajas de dise\~no estrat\'egico. Es decir, se ubican en regiones de mucha demanda y en consecuencia se encuentran expuestas a un alto riesgo de colisi\'on.\\
