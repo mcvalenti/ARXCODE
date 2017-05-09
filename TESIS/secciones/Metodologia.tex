@@ -1,10 +1,12 @@
 \chapter{Metodología}
 \label{chap:metodologia}
 
-
-
  %De acuerdo a \cite{Barrett2009}, el modelo WCM...\\
- 
+
+\section{Diseño}
+En el IDE EClipse
+Funciones enteramente documentadas (Doxigen).
+Control de Versiones (GitHub) - graficos de los tiempos de desarrollo. ¿?
 En esta tesis se dise\~nar\'a el procedimiento y el prototipo de software para el an\'alisis de una situaci\'on de encuentro entre una misi\'on primaria y un desecho espacial.\\
 Partimos de la recepci\'on de un mensaje de alerta, proveniente de un organismo externo (JSpOC), en formato CDM. La primera instancia consiste en extraer la informaci\'on que permita identificar la nave propia, el desecho espacial involucrado y el instante en que se estima el encuentro \ac{TCA}. Ya con esta informaci\'on se puede hacer la solicitud de los TLE a space-track para empezar el an\'alisis de la situaci\'on y se solicitan a Din\'amica Orbital las efem\'erides precisas necesarias.\\
 El siguiente paso implica desarrollar un m\'etodo que ajuste los TLE, mejore la estimaci\'on de la posici\'on del desecho y calcule los errores asociados.\\
@@ -20,18 +22,6 @@ Se listan a continuaci\'on los tres principales m\'odulos a desarrollar:\\
 \item M\'odulo de administraci\'on del CDM.\\
 \item M\'odulo de administraci\'on de los datos provistos por el departamento de Din\'amica Orbital.\\
 \end{itemize}
-
-\section{Especificaciones}
-Python y PyQT
-Donde corre y con que performance.
-....
-
-
-\section{Diseño y Desarrollo}
-En el IDE EClipse
-Funciones enteramente documentadas (Doxigen).
-Control de Versiones (GitHub) - graficos de los tiempos de desarrollo. ¿?
-
 % \begin{figure}[!h]
 % \centering
 % \includegraphics[width=\textwidth]{../imagenes/arxcodencuentros11}
@@ -70,51 +60,11 @@ El mismo ofrecer\'a al operador usuario una visualizaci\'on resumida de la situa
 
 Una vez finalizados y validados los m\'odulos, resta la integraci\'on y la verificaci\'on de las distintas interfaces.\\
 
+\section{Entorno de Desarrollo}
+...
 
-%\subsection*{Ajuste de TLEs - Osweiler}
-%Genera a su vez, una relaci\'on de autocorrelaci\'on, que permite hacer una estimaci\'on del nivel de confiabilidad de la predicci\'on orbital.\\
-%{\bf{Teor\'ia de la Estimaci\'on:}}\\
-%considera: \\
-%\begin{itemize}
-%\item Teorema Central del L\'imite.
-%\item Teor\'ia de probabilidad multidimensional.
-%\item Funciones de Distribuci\'on Gauseana.
-%\item El operador Esperanza.
-%\item T\'ecnicas de linalizaci\'on para sistemas din\'amicos no lineales.
-%\item M\'inimos Cuadradados y Principio de M\'axima Probabilidad.
-%\end{itemize}
-
-%{\bf{Ma. Covarianza:}}\\
-
-%COV[v]=E
-%\[
-%\begin{bmatrix}
-%(x-E[x])(x-E[x]) & (x-E[x])(y-E[y]) & (x-E[x])(z-E[z])\\
-%(y-E[y])(x-E[x]) & (y-E[y])(y-E[y]) & (y-E[y])(z-E[z])\\
-%(z-E[z])(x-E[x]) & (z-E[z])(y-E[y]) & (z-E[z])(z-E[z])
-%\end{bmatrix}
-%\]
-%=
-%\(
-%\begin{pmatrix}
-%Var[x] & Cov[x,y] & Cov[x,z]\\
-%Cov[y,x] & Var[y] & Cov[y,z]\\
-%Cov[z,x] & Cov[z,y] & Var[z]
-%\end{pmatrix}
-%\)
-
-
-%El {\it{Teorema Central del L\'imite}} justifica la consideraci\'on de que el error estad\'istico de las mediciones sea Gauseano.
-
-%\subsubsection*{Ma. de Covarianza}
-%\begin{itemize}
-%\item Se calculan los errores $e$ para las 10 fechas, correspondientes a los TLEs, para cada una de las variables $ex, ey, ez$.\\
-%\item Se calcula la media de los errores $mx, my, mz$.\\
-%\item ...
-%\end{itemize}
-
-
- 
-
+\section{Desarrollo}
+ ...
+  \subsection{Interfaz Gr\'afica}
 
 

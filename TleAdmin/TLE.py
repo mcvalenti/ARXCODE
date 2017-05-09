@@ -57,7 +57,7 @@ class Tle:
         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
         if date==None:
             ffin=satrec.epoch
-            r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
+            r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second,ffin.milliseconds)
         else:
             r,v = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,date.second)
         return r,v

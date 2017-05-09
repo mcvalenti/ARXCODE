@@ -4,7 +4,7 @@
 % Estado del arte general de la temática de estudio. 
 \section{Introducci\'on}
 
-La estimaci\'on de errores en la determinaci\'on orbital en la base de el procedimiento.(redactar mejor)\\
+La estimaci\'on de errores en la determinaci\'on orbital en la base del procedimiento.(redactar mejor)\\
 En un contexto ideal, de una Tierra esf\'erica, homog\'enea y sin rozamiento, los modelos f\'isicos que describen el movimiento de los objetos que orbitan la Tierra, nos permitir\'ian predecir con much\'isima precisi\'on las sitaciones de colisi\'on. Es decir, si conoci\'eramos muy bien la posici\'on de las naves y las condiciones del entorno, y pudi\'eramos modelarlo, podr\'iamos hacer predicciones futuras de las posciones y as\'i determinar si los objetos van a colisionar o no sin ambig\"uedad. Pero esa no es la realidad.\\
 La Tierra no es perfectamente esf\'erica y mucho menos homog\'enea, y si bien es la principal influencia en las \'orbitas de las naves, existen otros cuerpos como la Luna, el Sol y los dem\'as planetas que tambi\'en ejercen fuerzas gravitatorias en mayor o menor medida.\\
 Existen tambi\'en otras fuerzas, que resultan del entorno, como por ejemplo el frenado de la atm\'osfera para los objetos de \'orbitas LEO y la presi\'on de radiaci\'on solar que afecta principalmente a los sat\'elites con grandes paneles.\\
@@ -19,15 +19,17 @@ Por otra parte, distintos estudios realizados (... Foster ¿?), muestran que exi
 El epoca de la colisi\'on y la previsi\'on en los c\'alculos.(redactar)\\
 La determinaci\'on orbital es m\'as f\'acil a posteriori.\\
 
-\section{La determinaci\'on orbital de los objetos involucrados}
 
-En nuestro planteo de riesgos por colisi\'on entre misiones operativas y desechos espaciales, existir\'an dos planteos distintos del problema de la determinaci\'on de las posiciones, ya que cada uno de los objetos involucrados ofrece metodolog\'ias y modelos diferentes.
 
-\subsection{La posici\'on de la misi\'on operativa}
+\section{La Posici\'on de los objetos involucrados}
+
+En nuestro planteo de riesgos por colisi\'on entre misiones operativas y desechos espaciales, existir\'an dos abordajes distintos del problema de la determinaci\'on de las posiciones, ya que cada uno de los objetos involucrados ofrece metodolog\'ias y modelos diferentes.
+
+\subsection*{La posici\'on de la misi\'on operativa}
 Con la misi\'on operativa tenemos contacto y comandado. En gral tiene un GPS o alg\'un otro instrumento de determinaci\'on de la posici\'on, con un cierto error asociado, que es conocido.({\bf{cu\'al?}})\\
 A su vez CONAE tiene su modelo orbital de propagaci\'on y generaci\'on de predicci\'on (PREPHEM), y su propio modelo de ajuste (ORBEPHEM).\\
 
-\subsection{La posici\'on del desecho espacial}
+\subsection*{La posici\'on del desecho espacial}
 El desecho espacial no tiene capacidades operativas, de manera que la \'unica manera de determinar su posici\'on es con redes de rastreo desde Tierra.\\
 Caracter\'istica de las redes de rastreo. error asociado, que es conocido.({\bf{cu\'al?}})\\
 S\'olo usa, rusia y la uni\'on europea cuentan con redes de rastreo. En particular Norad es la que disponibiliza en forma p\'ublica los datos en formato TLE.\\
@@ -40,22 +42,97 @@ Describir:\\
 \item SGP4.
 \end{itemize}
 
+\section{Los TLE}
 
-\section{El riesgo de colisi\'on}
-Un an\'alisis completo del Riesgo de Colisi\'on, abarca: (esquematizar)
+.....TLE FORMAT.
 
+\section{Estimaci\'on de Errores en la posici\'on}
+Metodo de OSW.
+\subsection{M\'etodo de Osweiler}
+Es un m\'etodo que propone una manera de estimar los errores que se comenten en la utilizaci\'on de TLEs para la determinaci\'on de la posici\'on y la velocidad.
+ El mismo consiste en utilizar un set de TLEs de un intervalo de dos semanas, y considerar el TLE m\'as pr\'oximo al tiempo de m\'aximo acercamiento (TLE  {\it{Primario}}) como el valor {\it{real}} o {\it{verdadero}}.\\
+ A partir de esa premisa, propaga los TLEs anteriores hasta la \'epoca del TLE Primario y con las diferencias que resultan de la comparaci\'on, realiza los c\'alculos estad\'idticos de los valores medios y las varianzas, para construir la matriz Varianza Covarianza correpondiente al TLE Primario.\\
+ Para hacer los estudios de validaci\'on de nuestra implementaci\'on del m\'etodo, de los 6 sat\'elites estudiados por Osweiler, dentro de 8 ventanas temporales distintas, nosotros hemos aplicado el m\'etodo a dos de ellos con caracter\'isticas similares a las misiones de CONAE y en particular a la misi\'on SAC-D, que hemos incorporamos como escenario propio de valiaci\'on ya que contamos con datos orbitales reales de mayor precisi\'on que los TLEs.
+
+\subsection{Tratamiento sobre Datos de Misi\'on}
+En esta etapa repetimos el m\'etodo que propone Osweiler considerando los datos de misi\'on generados por el CODS
+como posici\'on verdadera.\\
+La aplicaci\'on del m\'etodo implica:
 \begin{itemize}
-\item Identificar las situaciones de encuentro.
-\item Analizar la situaci\'on del encuentro.
-\item Ejecutar maniobras de mitigaci\'on del riesgo si fuera necesario.
-\item Iterar el proceso con minuciocidad para no ofrecer soluciones moment\'aneas que generen nuevos riesgos de colisi\'on.
+ \item Identificar el \'ultimo TLE del set: {\it{TLE primario.}}
+ \item Extraer la \'epoca del TLE primario.
+ \item Localizar el archivo CODS que contenga las efem\'erides que encierren la \'epoca del TLE primario.
+ \item Interpolar las efem\'erides de CODS para generar una efem\'eride interpolada a la \'epoca del TLE primario.
+ \item Propagar cada uno de los TLEs del set, hasta la \'epoca del TLE primario.
+ \item Comparar los resultados de las propagaciones con los valores de la efem\'erides interpolada.
 \end{itemize}
 
-\subsection*{Identificaci\'on de las situaciones de encuentros:}
-A partir de los datos generados por las redes de rastreo, se propagan las trayectorias orbitales y, bajo ciertos criterios definidos previamente, se detectan los acercamientos no deseados. En esta idea subyace la definici\'on de {\it{Encuentro}}.\\
-Son pocos los organismos y agencias capaces de realizar este procedimiento, incorporando a sus predicciones todos los objetos catalogados y/o rastreados.\\
-En un formato m\'as simplificado, el inter\'es se enfoca en una misi\'on en particular y se desarrollan filtros, para procesar encuentros analizando una menor cantidad de objetos.\\
-\subsubsection*{CDM}
+\begin{figure}[!h]
+ \centering
+ \includegraphics[width=0.7\textwidth]{imagenes/Osweiler_sobre_Cods.png}
+ \caption{M\'etodo de Osweiler sobre datos CODS}
+\end{figure}
+
+\section{La Probabilidad de Colisi\'on}
+{\bf{citar a Klinkrad}}
+Dada la situaci\'on de encuentro, la PoC es el par\'ametro que se utiliza para delimitar m\'argenes operativos.
+Es decir, que en base a ella se tomar\'an decisiones como realizar o no una maniobra.\\
+Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC, y todos ellos comparten las siguientes consideraciones:\\
+\begin{itemize}
+ \item El error en la posici\'on puede representarse por una funci\'on de distribuci\'on Gaussiana 3D, cuya funci\'on de densidad de probabilidad se detalla en la eq...{\bf{bla}} 
+ \item Tanto el objeto primario, como el desecho se mueven en movimiento rectil\'ineo con velocidad constante durante el encuentro.
+ \item Los errores en las velocidades se desprecian.
+ \item Los errores en las posiciones del objeto primario y del desecho no est\'an correlacionados.
+ \item Los errores en las posiciones son constantes durante el encuentro, al igual que la matrices de covarianzas correspondientes al TCA.
+\end{itemize}
+
+\subsection*{M\'etodo de Akella}
+En este trabajo para el c\'alculo de la PoC se utilizar\'a el m\'etodo de Alfriend \& Akella[4] ya que es conceptualmente simple y aunque tiene un alto costo computacional, es realizable por las m\'aquinas actuales en tiempos menores a un segundo.\\
+
+El mismo requiere como entradas:
+\begin{itemize}
+ \item Conocer el instante de m\'aximo acercamiento: TCA (Time of Closest Approach).
+ \item La posici\'on relativa del desecho respecto al objeto primario en el TCA.
+ \item La velocidad relativa del desecho respecto al objeto primario en el TCA.
+ \item Las matrices de error de ambos objetos.
+\end{itemize}
+
+En los momentos pr\'oximos al encuentro, la posici\'on relativa de riesgo $\Delta r$ puede expresarse en funci\'on de un intervalo de tiempo respecto del TCA, es decir, $\Delta t_{tca}=t-t_{tca}$.
+
+\begin{equation}
+ \Delta r(t)=\Delta r_{tca}+\Delta v_{tca}(t-t_{tca})
+\end{equation}
+
+Las matrices de covarianza de los errores que son calculadas para un momento dado t previo al TCA, deben ser propagadas. ({\bf{ver metodolog\'ia}})
+Dado que consideramos que los errores en las posiciones de ambos objetos no est\'an correlacionadas, ambas contribuciones pueden combinarse en una \'unica matriz, a partir de la suma de ambas.
+
+\begin{equation}
+ C=C_{p}+C_{d}
+\end{equation}
+
+De $C$ s\'olo consideraremos la submatriz superior de la izquierda de dimensiones (3x3), que corresponde a los errores en las posiciones, con un $1 \sigma$.\\
+Dado que adem\'as asumimos que los errores en la posici\'on son de distribuci\'on normal en 3D, la funci\'on densidad de probabilidad $p(\Delta r)$ en momentos pr\'oximos al m\'aximo acercamiento queda definida por la expresi\'on {\bf{eq ..bla}}:
+
+\begin{equation}
+ p(\Delta r)=\frac{1}{\sqrt((2 \pi)^3det(C))} exp[-\frac{1}{2}\Delta r^TC^{-1}\Delta r] 
+\end{equation}
+
+
+
+Sean $R_{t}$ y $R_{r}$ los radios de las esferas que encierran a nuestra misi\'on principal y al desecho de riesgo, respectivamente. Se considera una situaci\'on de {\it{encuentro}} o {\it{riesgo de colisi\'on}}, al hecho de que estas esferas se intersecten, o lo que es lo mismo, si ocurre un acercamiento dentro de una esfera de {\it{radio de colisi\'on}} $R_{c}$, secci\'on $A_{c}$,  volumen $V_{c}$.
+
+\begin{equation}
+R_{c}=R_{t}+R_{r} \qquad A_{c}=\pi R_{C}^{2} \qquad V_{c}=\frac{4}{3} \pi R_{c}^{3}
+\end{equation}
+
+La probabilidad de colisi\'on $P_{c}$ se calcula a partir de la integral de volumen de la funci\'on densidad de probabilidad (eq) sobre la regi\'on esf\'erica $V_{c}$, centrada en el desecho de riesgo.
+\begin{equation}
+PoC=\frac{1}{\sqrt((2\pi)^3det(C))} \int \limits_{Vc} exp[-\frac{1}{2}\Delta r^TC^{-1}\Delta r]dV
+\end{equation}
+
+Puede demostrarse que esta integral de volumen puede reducirse a una integral de superficie mapeando el elipsoide  de los errores en la posici\'on, en contornos el\'ipticos de probabilidad constante sobre el B-plane {\bf{(citar a Foster)}}.
+
+\section{El CDM}
 (JAC SW - Laporte)
 {\bf{CSM:}} They are made available on Emergency Criteria, wich are Time of Closest Approach whithin 72 hs combined with a miss distance criteria:\\
 LEO:\\
@@ -67,19 +144,6 @@ Overall miss distance < 10 km.\\
 CSM are advisory and informational messages only and are not directly actionable. They don´t provide a direct recommendation to perform an avoidance action and of course they cannot take neither the operational constraints of the asset nor the maneuvers the asset plansor just performed. (sigue ver apuntes Laporte carpeta...)\\
 
 !!! JSpOC NO CUENTA CON INFORMACI\'ON DE MANIOBRAS PLANIFICADAS, puede haber falsas alarmas.\\
-
-\subsection*{An\'alisis de la situaci\'on del encuentro: }
-El mismo consiste en estudiar el panorama con mayor profundidad y detalle, sumando informaci\'on m\'as confiable en la determinaci\'on orbital, y calculando par\'armetros estad\'isticos, como la Probabilidad de Colisi\'on (PoC).\\
-A medida que se aproxima la fecha en la que se predice el encuentro, se tiene mejor conocimiento de la \'orbita de los objetos involucrados, pero menor tiempo de reacci\'on en la toma de decisiones. Es decir, en el an\'alisis del encuentro se busca un balance entre los tiempos que conlleve el estudio para alcanzar la confiabilidad necesaria, y el margen que se requiere para, por ejemplo, planificar una maniobra.\\
-En este item en particular se enfoca este trabajo.\\
-
-Metodolog\'ia Akella \& Alfriend.\\
-
-\subsection*{realizaci\'on de una maniobra}
-Si la situaci\'on lo ameritara, la \'unica manera de evitar una colisi\'on es la {\bf{realizaci\'on de una maniobra}}, conocidas como Maniobras de Mitigaci\'on de Riesgo (RMM). No obstante, modificar la trayectoria de un objeto, siempre presupone una evaluaci\'on a priori de que no vaya a producirse una colisi\'on. De manera, que en este punto, se vuelve al item inicial y se repite el proceso iterativamente.\\ 
-
-
-
 
 
 

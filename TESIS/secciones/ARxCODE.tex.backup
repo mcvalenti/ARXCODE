@@ -1,1 +1,231 @@
+\chapter{ARxCODE}
+\label{chap:arxcode} 
+
+
+\section{ARxCODE}
+El ARxCODE es una aplicaci\'on de b\'usqueda y detecci\'on de archivos CDM para el procesamiento y an\'alisis de situaciones de riesgo por colisi\'on, que contar\'a con las siguientes capacidades:
+
+\begin{itemize}
+\item Extraer la informaci\'on que provee el CDM.
+\item Propagar la posici\'on del desecho espacial involucrado con un m\'etodo de estimaci\'on del error.
+\item Solicitar al operador/analista experto de Din\'amica Orbital las posiciones precisas de la misi\'on en riesgo.
+\item Calcular la probabilidad de colisi\'on del encuentro.
+\item Permitir al operador/analista experto visualizar el encuentro, generar reportes y notificaciones.
+\end{itemize} 
+
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{imagenes/ARprocedimiento}
+\end{figure}
+
+\subsection{Especificaciones}
+
+\subsection*{Requerimientos}
+\begin{itemize}
+\item La aplicaci\'on detectar\'a la llegada de un CDM y ser\'a capaz de desglosarlo para extraer la informaci\'on que sea necesaria.\\
+\item La aplicaci\'on identificar\'a los objetos y solicitar\'a al operador/analista experto la posici\'on precisa y la matriz varianza-covarianza en el caso de la misi\'on principal\\
+\item La aplicaci\'on extraer\'a los TLEs del intervalo necesario a la p\'agina Space-Track, en el caso del desecho espacial.\\
+\item La aplicaci\'on ajustar\'a la precisi\'on de la posici\'on del desecho espacial y generar\'a la matriz de varianza-covarianza para el mismo.\\
+\item La aplicaci\'on calcular\'a la PoC.\\
+\item La aplicaci\'on tendr\'a la capacidad de generar reportes, notificaciones y visualizaciones para facilitar la comprensi\'on y el an\'alisis del riesgo.
+\item La aplicaci\'on deber\'a funcionar 7x24.
+\end{itemize}
+
+\subsubsection*{Funcionalidades:}
+\begin{itemize}
+\item Detectar la recepi\'on de un nuevo mensaje de alerta.\\
+\item Extraer la informaci\'on del mensaje y adaptarla al formato necesario.\\
+\item Extraer de la web (via spacetrack) los TLE del desecho espacial involucrado.\\
+\item Solicitar al operador/analista experto la posici\'on precisa de la misi\'on primaria y el error asociado.\\
+\item Propagar y ajustar la posici\'on del desecho al instante del acercamiento, con su error asosciado\\
+\item Calcular la PoC.\\
+\item Generar reportes, notificaciones y visualizaciones.\\
+\end{itemize}
+
+\subsection{Arquitectura}
+El prototipo de software para el An\'alisis de Riesgo por Colisi\'on con Desechos Espaciales {\it{ARxCODE}}, ser\'a un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
+Ocupa un rol de intermediario a fin de facilitarle a un operador analista experto, herramientas para la toma de decisiones o el intercambio de informaci\'on con los organismos externos y el centro de control.\\
+{\bf{Interfaces.}}\\
+clases principales: TLE, EphemCODS
+\subsection{parametros globales y nomenclatura de la generacion de archivos}
+Parametros:\\
+\begin{itemize}
+ \item satId
+ \item fechaIni,fechaFin
+ \item TLE/CODS
+\end{itemize}
+
+l prototipo de software para el An\'alisis de Riesgo por Colisi\'on con Desechos Espaciales {\it{ARxCODE}}, ser\'a un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
+El mismo se piensa como un intermediario capaz de: detectar los mensajes de alerta CDM provistos por el JSpOC, procesar los datos, generar mejores estimaciones para la posici\'on del desecho, solicitar datos m\'as precisos para la posici\'on de la misi\'on primaria y calcular la PoC. Todo esto a fin de facilitarle a un a un operador analista experto, herramientas para la toma de decisiones o el intercambio de informaci\'on con los organismos externos y el centro de control.\\
+
+\begin{figure}
+  \includegraphics[width=0.8\textwidth]{imagenes/interfasessistemas}
+\end{figure}
+
+\subsection*{Requerimientos Funcionales}
+\begin{itemize}
+\item El sistema deber\'a funcionar en todo momento.\\
+\item El software detectar\'a la llegada de un CDM y ser\'a capaz de desglozarlo para extraer la informaci\'on que sea necesaria.\\
+\item El software identificar\'a los objetos y solicitar\'a informaci\'on orbital al departamento de Din\'amica Orbital en el caso de la misi\'on principal, y TLEs, en la p\'agina Space-Track, en el caso del desecho.\\
+\item El software ajustar\'a la precisi\'on en la posici\'on del desecho y generar\'a la matriz de varianza-covarianza para el mismo.\\
+\item El software calcular\'a la PoC.\\
+\item El software generar\'a reportes, notificaciones y visualizaciones para facilitar la comprensi\'on y el an\'alisis del riesgo.
+\end{itemize}
+
+\subsubsection*{Funcionalidades:}
+\begin{itemize}
+\item Detectar la recepi\'on de un nuevo mensaje de alerta.\\
+\item Extraer la informaci\'on del mensaje y adaptarla al formato necesario.\\
+\item Extraer de la web (via spacetrack) los TLEs del desecho involucrado.\\
+\item Identificar la misi\'on primaria y solicitar a DO {\color{red}{los datos orbitales precisos necesarios: posici\'on $+$ error}}\\
+\item Propagar y ajustar la posici\'on del desecho al TCA, con su error asosciado\\
+\item Construir las Matrices Varcorvar.\\
+\item Calcular la PoC.\\ 
+\end{itemize}
+
+
+\label{sec:arqydis}
+
+
+
+\section{Preprocesamiento de los Datos de Misi\'on de CODS}
+Para este trabajo CONAE nos facilit\'o el acceso a los datos orbitales de la misi\'on SAC-D.
+Los datos se ecuentran montados en un servidor que contiene la informaci\'on organizada en archivos con formato ASCII, distribuidos en distintas carpetas seg\'un su clasificaci\'on.\\
+Para la comparaci\'on que proponemos, solicitamos acceso a los archivos de efem\'erides orbitales ORBEPHEM, que ofrecen posiciones y velocidades tabuladas cada un minuto, en el Sistema de Referencia TOD (True of Date), en coordenadas cartesianas.
+
+\subsection{ORBEPHEM}
+Estos productos son generados luego de un post procesamiento que incluye una propagaci\'on ajustada por una determinaci\'on orbital. 
+Cada archivo contiene un listado cronol\'ogicamente tabulado de posiciones y velocidades, dentro de un periodo de casi 3 d\'ias. ( doc\_interfaces)
+
+La nomenclatura de los mismos respeta el siguiente formato:\\
+\begin{verbatim}
+ CODS_YYYYMMDD_HHMMSS_SACD_ORBEPHEM_TOD_XYZ_O.TXT
  
+ Donde:
+  CODS = Identifica el Servicio dentro del CUSS que presta la información.
+  YYYYMMDD_HHMMSS = epoca de generación del dato.
+  SACD = Identificación del Satélite.
+  ORBEPHEM = Tipo de Dato, Efeméride Orbital (procesada a posteriori)
+  TOD = Sistema de Referencia True of Date.
+  XYZ = Tipo de efeméride, cartesiana.
+  O = Operacional. 
+\end{verbatim}
+
+
+\subsection{Archivos Utilizados}
+Si bien la nomenclatura de los archivos respeta una estructura, s\'olo se indica en el nombre, la fecha de generaci\'on de los datos y no puede desprenderse del mismo cu\'al es la \'epoca final e inicial de cada archivo, y no existe un registro del los gaps de datos ausentes. A su vez, las \'epocas contempladas en cada uno de ellos no está homogeneizada. Es decir, la fecha y hora inicial y final de cada registro es diferente para cada archivo.\\
+Dada esta organizaci\'on, para el punto tres del procedimiento, referente a la localizaci\'on del archivo necesario para la comparaci\'on, la b\'usqueda se realiza de la siguiente manera:\\
+Localizamos en primer lugar el archivo cuyo nombre coincide con la fecha de la \'epoca del TLE primario.
+Como una misma fecha se encuentra en m\'as de un archivo, buscamos el archivo que contenga esa fecha y que adem\'as sea el m\'as actualizado de todos. Para ello, además del archivo cuyo nombre contiene la fecha del TLE primario, se enlistan los siguientes dos archivos y se ordenan en orden decreciente, de manera que el primer lugar de la lista lo ocupe el \'ultimo de los archivos seleccionados. Finalmente se comienza el proceso iterativo de abrir los archivos, evaluar el contenido y ver si se encuentran los dos registros que encierren la \'epoca del TLE.
+Una vez que se encuentran las l\'ineas de efem\'erides que contienen la \'epoca de inter\'es se interpola, y se termina la iteraci\'on.
+
+\noindent
+Cantidad TOTAL de archivos $=  1454$\\
+Cantidad media de resgistros por archivo $=  2688$\\
+Archivo con el mayor n\'umero de registros $=  3042$\\
+Archivo con el menor n\'umero de registros $=  142$\\
+
+Im\'agenes comparativas entre los dos m\'etodos:\\
+{\bf{Intervalo Estable}}\\
+\begin{figure}[htbp]
+ \centering
+  \subfigure[Procesamiento de Datos de Mision]{\includegraphics[width=0.46\linewidth]{imagenes/CODSsetPri37673U20120414}}
+  \subfigure[Procesamiento de TLEs]{\includegraphics[width=0.46\linewidth]{imagenes/TLEsetPri3767320120414}}
+ \caption{Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.}
+ \label{fig:test}
+\end{figure}
+
+\begin{verbatim}
+------------------------------------------------------------------------
+DIFERENCIAS:
+-------------------------------------------------------------------------
+dv = -0.773155546799
+dn = 1.49461651773
+dc = 0.241331995666
+-------------------------------------------------------------------------
+\end{verbatim}
+
+{\bf{Intervalo de Maniobra}}
+
+\begin{figure}[htbp]
+ \centering
+  \subfigure[Procesamiento de Datos de Mision]{\includegraphics[width=0.46\linewidth]{imagenes/CODSsetPri37673U20120314}}
+  \subfigure[Procesamiento de TLEs]{\includegraphics[width=0.46\linewidth]{imagenes/TLEsetPri3767320120314}}
+ \caption{Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.}
+ \label{fig:test}
+\end{figure}
+
+\begin{verbatim}
+\begin{verbatim}
+------------------------------------------------------------------------
+DIFERENCIAS:
+-------------------------------------------------------------------------
+dv = 0.263912038422
+dn = 3.47362819854
+dc = 0.0366536642778
+-------------------------------------------------------------------------
+\end{verbatim}
+
+\subsubsection{Ajuste Polyfit}
+
+{\bf{numpy.polynomial.polynomial.polyfit}}
+
+Returns:	
+
+coef : ndarray, shape (deg + 1,) or (deg + 1, K)
+
+    Polynomial coefficients ordered from low to high. If y was 2-D, the coefficients in column k of coef represent the polynomial fit to the data in y‘s k-th column.
+
+residuals, rank, singular\_values, rcond : list
+
+    These values are only returned if full = True
+
+    resid – sum of squared residuals of the least squares fit rank – the numerical rank of the scaled Vandermonde matrix sv – singular values of the scaled Vandermonde matrix rcond – value of rcond.
+
+    For more details, see linalg.lstsq.
+
+\begin{verbatim}
+Procesando datos TLE...
+++++++++++++GRADO 2++++++++++++++++++
+[array([-1.89669503, -0.73973919, -0.06103362])]
+[[array([ 31434.82805686]), 3, array([ 1.68700379,  0.388,  0.056]), 5.1292e-14]]
+++++++++++++GRADO 1++++++++++++++++++
+[array([ 1.93247211, -1.78532883])]
+[[array([ 31556.32886285]), 2, array([ 1.393,  0.24171176]), 5.1292e-14],]
+\end{verbatim}
+
+% \section{Graficos LAGEOS 8820}
+% 
+% \begin{figure}[H]
+%  \centering
+% \begin{subfigure}%{0.5\textwidth}
+%   \centering
+%   \includegraphics[width=0.7\linewidth]{imagenes/difTot8820.png}
+%   \caption{A subfigure}
+%   \label{fig:sub1}
+% \end{subfigure}%
+% \begin{subfigure}%{0.5\textwidth}
+%   \centering
+%   \includegraphics[width=0.7\linewidth]{imagenes/vncmultiplot}
+%   \caption{A subfigure}
+%   \label{fig:sub2}
+% \end{subfigure}
+% \caption{A figure with two subfigures}
+% \label{fig:test}
+% \end{figure}
+
+
+\section{Diferencias}
+A partir de los datos de Misión. 
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=\textwidth]{imagenes/sesgoTLE}
+\end{figure}
+
+\begin{itemize}
+ \item Revisar escritura sobre datos CODS.
+ \item Comparar defasaje inicial con defasaje de TLE respecto de GPS. (ver tendencias - empezar a diagramar los apédices)
+ \item Comparar errores lineal vs cuadr\'atico.
+\end{itemize}
