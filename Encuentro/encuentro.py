@@ -89,7 +89,64 @@ def missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA):
         TCA=TCA+timedelta(seconds=1)
     
     return rvnc,vvnc
-    
+
+def generaBplane(dr,dv):
+    """
+    Genera la matriz de Transformacion Rxb,yb
+    -----------------------------------------
+    inputs
+        dr,dv: vectores relativos de posicion y
+               velocidad en TCA. (arrays)
+    output
+        Rb: Matriz de transformacion al B-plane. 
+    """
+    dr_mod=np.sqrt(np.dot(dr,dr))    
+    rxv=np.cross(dr,dv)
+    mod_rxv=np.sqrt(np.dot(rxv,rxv))
+    #--------------------------------
+    xm_b=np.dot(1.0/dr_mod,dr)
+    ym_b=np.dot(1.0/mod_rxv,rxv)
+    Rb=np.array([[xm_b[0],xm_b[1],xm_b[2]],[ym_b[0],ym_b[1],ym_b[2]]])
+    return Rb
+
+
+def calculaElipses_param(C_b, xm_b):
+    """
+    Calcula los semiejes de la elipse y la orientacion
+    --------------------------------------------------
+    inputs
+        C_b:Matriz de covarianza combinada, proyectada en
+            el B-plane. 
+    outputs
+        xb: vector unitario en la direccion del semieje mayor.
+        phi_b: angulo con la direccion del semieje mayor. 
+    """
+    auto_val, auto_vect=np.linalg.eig(C_b)
+    i=np.argmax(auto_val)
+    j=np.argmin(auto_val)
+    a=auto_val[i]
+    b=auto_val[j]
+    e_a=auto_vect[i]
+    e_b=auto_vect[j]
+    ea_mod=np.sqrt(np.dot(e_a,e_a))
+    xb=np.dot(1.0/ea_mod,e_a)
+    phi_b=np.arccos(xb,xm_b)
+        
+    return a,b,xb,phi_b
+
+def calculaPoC():
+    """
+    Calcula la Poc en dos dimensiones.
+    -------------------------------------------------------
+    inputs
+        dr,Cb,xb,Rc
+    outputs
+        PoC
+    """
+    pass
+
+
+
 if __name__=='__main__':
     
     """
@@ -111,7 +168,7 @@ if __name__=='__main__':
 #     sat_id='23560' #ENVISAT
 #     deb_id='16011' #COSMOS
     #-------Request a NORAD.
-    f_ini=TCA-timedelta(days=15)
+    f_ini=TCA-timedelta(days=18)
     f_fin=TCA-timedelta(days=3)
     usuario='macecilia'
     clave='MaCeciliaSpace17'
@@ -145,9 +202,33 @@ if __name__=='__main__':
     else:
         print 'El programa ha detenido su ejecucion.'
         sys.exit()
-        
-        
-    missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA)
+         
+         
+    rvnc,vvnc=missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA)
+
+# 10 de Mayo.
+
+    R_b=generaBplane(rvnc,vvnc)
+    
+    #====================
+    #Matriz de Covarianza
+    #====================
+
+    Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.078011634263035007],
+                 [-0.031437388833697122,0.0025693554190851101,-0.014250096142904997],
+                 [0.078011634263035007,-0.014250096142904997,0.096786625771746529]])
+    
+    Cm=np.array([[4.8247926515782202,0.05994752830943241,0.049526867540809635],
+                 [0.05994752830943241,0.019150349628774828,0.012470649611436152],
+                 [0.049526867540809635,0.012470649611436152,0.012649606483621921]])
 
     
+    C=Cd+Cm
+    
+    C_b=np.dot(C,np.transpose(R_b))
+    C_b=np.dot(R_b,C_b)
+    print C_b
+    
+    w,v=np.linalg.eig(C_b)
+    print w,v
     
