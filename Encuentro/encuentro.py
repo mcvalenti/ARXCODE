@@ -5,6 +5,7 @@ Created on 08/05/2017
 '''
 import sys, os, glob
 import numpy as np
+from scipy.integrate import quad, nquad
 from datetime import datetime, timedelta
 from TleAdmin.get_tle import importar_tle
 from TleAdmin.TleArchivos import setTLE
@@ -61,32 +62,33 @@ def missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA):
     #Calculo de Diferencias
     #========================
     
-    for k in range(8):          
-        r,v=tle_envi.propagaTLE(TCA)
+                 
+    r,v=tle_envi.propagaTLE(TCA)
 #        print 'Envi posicion: ',r,v
-        xf,yf,zf=tuplaFloat(r)
-        xv,yv,zv=tuplaFloat(v)
-        r=np.array([xf,yf,zf])
-        ve=np.array([xv,yv,zv])
+    xf,yf,zf=tuplaFloat(r)
+    xv,yv,zv=tuplaFloat(v)
+    r=np.array([xf,yf,zf])
+    ve=np.array([xv,yv,zv])
 
-        r1,v1=tle_cosmos.propagaTLE(TCA)
+    r1,v1=tle_cosmos.propagaTLE(TCA)
 #        print 'Cosmos posicion: ',r1,v1
-        xf1,yf1,zf1=tuplaFloat(r1)
-        xv1,yv1,zv1=tuplaFloat(v1)
-        r1=np.array([xf1,yf1,zf1])
-        v1=np.array([xv1,yv1,zv1])
+    xf1,yf1,zf1=tuplaFloat(r1)
+    xv1,yv1,zv1=tuplaFloat(v1)
+    r1=np.array([xf1,yf1,zf1])
+    v1=np.array([xv1,yv1,zv1])
 
-        dif_r=r-r1
-        dif_v=ve-v1
-        #---------Sistema V,N,C.
-        v,n,c=vncSis(r, ve, dif_r)
-        vv,nn,cc=vncSis(r, ve, dif_v)
-        rvnc=np.array([v,n,c])
-        vvnc=np.array([vv,nn,cc])
-        mod_dif=np.sqrt(np.dot(rvnc,rvnc))
-        print TCA, mod_dif
-        
-        TCA=TCA+timedelta(seconds=1)
+    dif_r=r-r1
+    dif_v=ve-v1
+    #---------Sistema V,N,C.
+    v,n,c=vncSis(r, ve, dif_r)
+    vv,nn,cc=vncSis(r, ve, dif_v)
+    rvnc=np.array([v,n,c])
+    vvnc=np.array([vv,nn,cc])
+    mod_dif=np.sqrt(np.dot(rvnc,rvnc))
+    print '============================================='
+    print 'Tiempo de maximo acercamiento = ', TCA
+    print 'Miss Distance = ',mod_dif
+
     
     return rvnc,vvnc
 
@@ -110,7 +112,7 @@ def generaBplane(dr,dv):
     return Rb
 
 
-def calculaElipses_param(C_b, xm_b):
+def calculaElipses_param(C_b, xm_b2d):
     """
     Calcula los semiejes de la elipse y la orientacion
     --------------------------------------------------
@@ -130,11 +132,11 @@ def calculaElipses_param(C_b, xm_b):
     e_b=auto_vect[j]
     ea_mod=np.sqrt(np.dot(e_a,e_a))
     xb=np.dot(1.0/ea_mod,e_a)
-    phi_b=np.arccos(xb,xm_b)
+    phi_b=np.arccos(np.dot(xb,xm_b2d))
         
     return a,b,xb,phi_b
 
-def calculaPoC():
+def calculaPoC(r_tca2d,C_b,x_b_mod,Rc):
     """
     Calcula la Poc en dos dimensiones.
     -------------------------------------------------------
@@ -143,9 +145,23 @@ def calculaPoC():
     outputs
         PoC
     """
-    pass
+    C_det=np.linalg.det(C_b)
+    C_inv=np.linalg.inv(C_b)
+    r=np.array([[r_tca2d[0]],[r_tca2d[1]]])
+    rt=r.T
+    p0=np.dot(C_inv,r_tca2d)
+    integrando=(1.0/2.0)*(np.dot(rt,p0))
+    
+    a=np.sqrt(Rc*Rc-x_b_mod*x_b_mod)
+    coef=1.0/(2*np.pi*np.sqrt(C_det))
+    
+    poc=nquad(f, [[-a,a],[-Rc,Rc]],integrando)
+    poc=coef*poc[0]
+    
+    return poc
 
-
+def f(x,y,integrando):
+    return np.exp(integrando)
 
 if __name__=='__main__':
     
@@ -162,7 +178,7 @@ if __name__=='__main__':
         os.unlink(filename)
     
     
-    TCA=datetime(2008,1,9,19,0,27,0)
+    TCA=datetime(2008,1,9,19,0,30,0)
     sat_id='27386' #ENVISAT
     deb_id='15482' #COSMOS
 #     sat_id='23560' #ENVISAT
@@ -205,11 +221,14 @@ if __name__=='__main__':
          
          
     rvnc,vvnc=missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA)
-
-# 10 de Mayo.
-
-    R_b=generaBplane(rvnc,vvnc)
     
+# 10 de Mayo.
+    dr_mod=np.sqrt(np.dot(rvnc,rvnc)) 
+    xm_b=np.dot(1.0/dr_mod,rvnc)
+    R_b=generaBplane(rvnc,vvnc)
+    xm_b2d=np.dot(R_b,xm_b)
+    
+    r_tca2d=np.dot(R_b,rvnc)
     #====================
     #Matriz de Covarianza
     #====================
@@ -231,4 +250,26 @@ if __name__=='__main__':
     
     w,v=np.linalg.eig(C_b)
     print w,v
+    
+    #===========================
+    # Elipse
+    #===========================
+    
+    a,b,xb,phi_b = calculaElipses_param(C_b, xm_b2d)
+    x_b_mod = np.sqrt(np.dot(xb,xb))
+    
+    print '================================================='
+    print 'Elementos de la integral de POC'
+    print '================================================='
+    print 
+    print 'Posicion Relativa r = ', r_tca2d
+    print 'Matriz de Covarianza Cb = ', C_b
+    print 'Vector unitario del SemiejeMayr x_b= ', xb
+    
+    print '============================='
+    print '------POC---------------------'
+    print '============================='
+    Rc=2
+    poc=calculaPoC(r_tca2d,C_b,x_b_mod,Rc)
+    print poc
     
