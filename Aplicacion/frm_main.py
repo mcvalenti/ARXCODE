@@ -13,7 +13,7 @@ from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
-from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
+from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, calculaDif_15dias
 from visual import ploteos
 from visual.TleOsweiler import VerGrafico
 # #from visual.TlevsCodsGraf import VerGraficoMision
@@ -561,6 +561,7 @@ class ProcMision(QDialog):
         self.path='../Comparar/diferencias/'
         self.dt=[]
         self.data=[]
+        self.set_datos15dias=[]
         self.coef=[]
         self.set_datos=[]
         
@@ -651,7 +652,7 @@ class ProcMision(QDialog):
         files=glob.glob('../Comparar/diferencias/*')
         for filename in files:
             os.unlink(filename)
-        self.set_datos=ejecutaProcesamientoCods()
+        self.set_datos, self.set_datos15dias=ejecutaProcesamientoCods()
         self.sat_id=self.set_datos[0]
         self.linea1=self.set_datos[1]
         self.linea2=self.set_datos[2]
@@ -676,7 +677,8 @@ class ProcMision(QDialog):
         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data, self.coef)
         
     def ver_dif_set_primario(self):
-        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch,self.ffin)
+        ploteos.grafica_set15dias(self.set_datos15dias)
+#        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch,self.ffin)
         
         
     def Macovar(self):

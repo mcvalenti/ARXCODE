@@ -214,8 +214,9 @@ def difTle(tleOrdenados,cantidad_tles):
     epoca_ffin = epoca_fin
     
     nombre='difTot_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+epoca_ini.strftime('%Y%m%d')+'.TLE'
+    nombre2='difTot_xyz_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+epoca_ini.strftime('%Y%m%d')+'.TLE'
     dtot=open('../AjustarTLE/diferencias/'+nombre+'','w')
-
+    dtot2=open('../AjustarTLE/diferencias/'+nombre2+'','w')
     dt_tle=[]
     dt_frac=[]
     dv=[]
@@ -224,6 +225,12 @@ def difTle(tleOrdenados,cantidad_tles):
     dvv=[]
     dnn=[]
     dcc=[]
+    dx=[]
+    dy=[]
+    dz=[]
+    dxx=[]
+    dyy=[]
+    dzz=[]
     bin=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
     m=0
     for i in range(cantidad_tles-1,0,-1):       
@@ -236,6 +243,12 @@ def difTle(tleOrdenados,cantidad_tles):
             dt_tle.append(fsec)
             dr=pos-r
             d_v=vel-rp
+            x=dr[0]
+            y=dr[1]
+            z=dr[2]
+            xx=d_v[0]
+            yy=d_v[1]
+            zz=d_v[2]
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
             v,n,c=vncSis(r, rp, dr)
@@ -243,15 +256,28 @@ def difTle(tleOrdenados,cantidad_tles):
 #             v,n,c=ricSis(r, rp, dr)
 #             vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+' '+tlesec+'\n'
+            infodiftot2=str(fsec)+' '+str(x)+' '+str(y)+' '+str(z)+' '+str(xx)+' '+str(yy)+' '+str(zz)+' '+tlesec+'\n'
             dtot.write(infodiftot)
+            dtot2.write(infodiftot2)
             dt_frac.append(dtfracdias)
+            '''
+            Sistema VNC
+            '''
             dv.append(v)
             dn.append(n)
             dc.append(c)
             dvv.append(vv)
             dnn.append(nn)
             dcc.append(cc)
-        
+            '''
+            Sistema TEMA
+            '''
+            dx.append(x)
+            dy.append(y)
+            dz.append(z)
+            dxx.append(xx)
+            dyy.append(yy)
+            dzz.append(zz)
             """
             Clasificacion por bin.
             """
@@ -336,8 +362,8 @@ def genera_estadisticaBin(bin_lista):
 
 def difPrimario(nombre,largo):
     """
-    Tabla para la estimacion de la Ma. de Covarianza.
-    archivo: difPrimario 
+    Compara cada uno de los valores de los TLEs propagados 
+    a la fecha del TLEs final (primario)
     ----------------------------------------------------------------
     input
         nombre: nombre de archivo que identifica el procesamiento. (string)

@@ -19,6 +19,7 @@ from SistReferencia.sist_deCoordenadas import vncSis, teme2tod, xv2eo
 from CodsAdmin.EphemCODS import EphemCODS
 from Estadistica.ajusteMinCuad import ajustar_diferencias
 from Estadistica.tendenciaTle import grafica_tendencia, grafica_EO
+from visual.ploteos import grafica_set15dias
 from time import sleep
 import progressbar
 
@@ -252,7 +253,10 @@ def interpola_3sv(tle,arch3_cods):
         if fecha_minutos in lista_epocas and m==0:
             indice = lista_epocas.index(fecha_minutos)
             inferior = contenido[indice+1]
-            superior = contenido[indice+2]
+            if indice+2 >= len(contenido):
+                superior=contenido[indice]
+            else: 
+                superior = contenido[indice+2]
             m=m+1   
     if inferior != 'NULO':         
         linea_interpol=interpola(fila,inferior,superior)    
@@ -309,11 +313,60 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             data[7].append(dif_fechas)
     return data
 
+def calculaDif_15dias(salida,tles,linea_interpol,data):
+    """
+    Toma la lista de archivos TLEs y propaga cada uno hasta la epoca de la
+    linea interpolada. Luego compara los valores de las coordenadas propagadas
+    con los valores de la linea interpolada y genera las diferencias. 
+    Imprime los resultados en el archivo salida.     
+    ----------------------------------------------------------------------------------------------------------
+    input
+        salida: archivo donde se escribe (Instancia de apertura de archivo)
+        tles: lista de nombres de archivos tle (diccionario)
+        linea_interpol: Linea interpolada de los datos CODS para la epoca del TLE primario. (String)
+    output
+        dif15dias_satId_fini_ffin.cods: Archivo con todas las diferencias ('../Comparar/diferencias/')
+    """
+    fecha=linea_interpol[:26]
+    d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
+    r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
+    rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
+    corte=len(tles)-15
+    item=range(corte,len(tles))
+    whichconst=wgs72
+    for j in item:
+        tle0=Tle('../TleAdmin/tle/'+tles[j][0])
+        fecha_tle=tle0.epoca()
+        if fecha_tle <= d:
+            dif_fechas=(d-fecha_tle).total_seconds()/86400.0
+            line1=tle0.linea1
+            line2=tle0.linea2
+            satrec = twoline2rv(line1, line2, whichconst)
+            pos1, vel1=satrec.propagate(d.year, d.month, d.day,d.hour, d.minute, d.second)
+            pos=teme2tod(fecha_tle, pos1)
+            vel=teme2tod(fecha_tle, vel1)
+            difx=[pos[0,0]-r[0],pos[0,1]-r[1],pos[0,2]-r[2]]
+            difv=[vel[0,0]-rp[0],vel[0,1]-rp[1],vel[0,2]-rp[2]]
+#             difx=[pos1[0]-r[0],pos1[1]-r[1],pos1[2]-r[2]]
+#             difv=[vel1[0]-rp[0],vel1[1]-rp[1],vel1[2]-rp[2]]
+            v,n,c=vncSis(r,rp,difx)
+            vv,nn,cc=vncSis(r,rp,difv)
+            dato=str(fecha_tle)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+'\n'
+            salida.write(dato)
+            data[0].append(fecha_tle)
+            data[1].append(v)
+            data[2].append(n)
+            data[3].append(c)
+            data[4].append(vv)
+            data[5].append(nn)
+            data[6].append(cc)
+            data[7].append(dif_fechas)
+    return data
        
 def ejecutaProcesamientoCods():
 #if __name__ == '__main__':
     """
-    Lista los nombres de los archivos de la carpeta: TleAdmin/tles.
+    Lista y ordena los nombres de los archivos de la carpeta: TleAdmin/tles.
     Recupera la informacion del ultimo TLE del set (TLE primario), en particular la epoca.
     Busca entre los archivos de CODS, la epoca coincidente con la epoca del TLE primario.
     Interpola para la fecha al nivel del segundo. 
@@ -358,10 +411,20 @@ def ejecutaProcesamientoCods():
     dnn=[]
     dcc=[]
     dt_frac=[]
+    t15=[]
+    dv15=[]
+    du15=[]
+    dc15=[]
+    dvv15=[]
+    dnn15=[]
+    dcc15=[]
+    dt_frac15=[]
     data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]
+    data15=[t15,dv15,du15,dc15,dvv15,dnn15,dcc15,dt_frac15]
     archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
     salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
     salida1=open('../Comparar/diferencias/'+archivo,'w')
+    salida15=open('../Comparar/diferencias/dif_15dias-'+archivo,'w')
     for m in range(len(tle_ordenados)-1,0,-1):
         tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_fin = tle_primario.epoca()
@@ -369,6 +432,7 @@ def ejecutaProcesamientoCods():
         linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)
         if linea_interpol != None:                 
             data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
+            data15=calculaDif_15dias(salida15,tle_ordenados,linea_interpol,data15)
             if m == len(tle_ordenados)-1:
                 for k in range(len(data[0])):
                     info = data[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+' '+str(data[4][k])+' '+str(data[5][k])+' '+str(data[6][k])+'\n'
@@ -399,7 +463,7 @@ def ejecutaProcesamientoCods():
     print 'Fin del Calculo de Diferencias'
 
     set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
-    return set_datos
+    return set_datos, data15
 
 
 def analizaEO():
@@ -487,6 +551,9 @@ if __name__=='__main__':
     dv=[]
     dn=[]
     dc=[]
+    dx=[]
+    dy=[]
+    dz=[]
     dvv=[]
     dnn=[]
     dcc=[]
@@ -494,10 +561,14 @@ if __name__=='__main__':
     a=[]
     i=[]
     data=[t,dv,dn,dc,dt_frac]
+    data_xyz=[t,dv,dn,dc,dt_frac]
     whichconst=wgs72
     n=0
+    # set de 15 dias.
+    corte=len(tle_ord)-15
+    tle_15=tle_ord[corte:]
     with progressbar.ProgressBar(max_value=len(tle_ord)) as progress:
-        for k in tle_ord:
+        for k in tle_15:
             sleep(0.1)
             progress.update(n)
             n=n+1
@@ -528,6 +599,9 @@ if __name__=='__main__':
                 dv.append(r_tod[0][0]-r[0])
                 dn.append(r_tod[0][1]-r[1])
                 dc.append(r_tod[0][2]-r[2])
+                dx.append(r_teme[0]-r[0])
+                dy.append(r_teme[0]-r[1])
+                dz.append(r_teme[0]-r[2])
             else:
                 pass
          
@@ -535,12 +609,15 @@ if __name__=='__main__':
     for dt in t:
         dt_frac.append((dt-f_ini).total_seconds()/86400.0)
     
-    g=3
+    g=2
     c, stats = P.polynomial.polyfit(dt_frac, dv, deg=g, full=True)
-    print c
+    c1, stats = P.polynomial.polyfit(dt_frac, dn, deg=g, full=True)
+    c2, stats = P.polynomial.polyfit(dt_frac, dc, deg=g, full=True)
+    coef=[c,c1,c2]
     print stats     
 #    eo=[t,a,i]
  
-    grafica_tendencia(data,c)
+    grafica_set15dias(data,coef)
+#    grafica_tendencia(data,c)
 #    grafica_EO(eo)
     

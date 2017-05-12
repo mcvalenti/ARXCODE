@@ -10,7 +10,7 @@ from SistReferencia.sist_deCoordenadas import teme2tod
 
 if __name__=='__main__':
     path_arch='../TleAdmin/validacion/'
-    tle_arch='37673tle12146.tle'
+    tle_arch='37673tle0'
     tle=Tle(path_arch+tle_arch)
     fecha=tle.epoca()
     salida=open('../TleAdmin/validacion/SacD_TEME.txt','w')

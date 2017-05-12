@@ -173,3 +173,77 @@ def grafica_setcompleto(sat_id,path,data,coef):
     plt.show()
     plt.close()
     
+def grafica_set15dias(data15,coef):
+    """
+    Realiza tres graficos, uno por coordenada.
+    En cada grafico incorpora la funcion de ajuste,
+    cuyos coeficientes fueron previamente calculados y
+    se pasan como parametros.
+    """
+    dt=data15[4]
+    dv=data15[1]
+    dn=data15[2]
+    dc=data15[3]
+    if len(coef[0])==3:
+        a=coef[0][0]
+        b=coef[0][1]
+        c=coef[0][2]
+        a1=coef[1][0]
+        b1=coef[1][1]
+        c1=coef[1][2]
+        a2=coef[2][0]
+        b2=coef[2][1]
+        c2=coef[2][2]
+        largo=np.max(dt)
+        """
+        Funcion de Ajuste.
+        """
+        x=np.linspace(0,int(largo), 60)
+        yv=[]
+        yn=[]
+        yc=[]
+        for i in x:
+            yv.append(c*i*i+b*i+a)
+            yn.append(c1*i*i+b1*i+a1) 
+            yc.append(c2*i*i+b2*i+a2)            
+    elif len(coef[0]) ==2:
+        a=coef[0][0]
+        b=coef[0][1]
+        a1=coef[1][0]
+        b1=coef[1][1]
+        a2=coef[2][0]
+        b2=coef[2][1]
+        largo=np.max(dt)
+        """
+        Funcion de Ajuste.
+        """
+        x=np.linspace(0,int(largo), 60)
+        yv=[]
+        yn=[]
+        yc=[]
+        for i in x:
+            yv.append(b*i+a)
+            yn.append(b1*i+a1) 
+            yc.append(b2*i+a2)    
+           
+    """
+    GRAFICO
+    """
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+    ax1.grid(True)
+    ax2.grid(True)
+    ax3.grid(True)
+    ax1.plot( dt, dv,'o',ls='-.',label='Coordenada V') #'_draw_dotted'
+    ax1.plot(x, yv,'r--')
+    ax1.set_ylabel('Km')
+    ax2.plot(dt, dn,'o',ls='-.',label='Coordenada N')
+    ax2.plot(x, yn,'r--')
+    ax2.set_ylabel('Km')
+    ax3.plot(dt, dc,'o',ls='-.',label='Coordenada C')
+    ax3.plot(x, yc,'r--')
+    ax3.set_ylabel('Km')
+    fig.suptitle('Diferencias y Funcion de Ajuste')
+    plt.xlabel('Epoca')
+    plt.savefig('../visual/archivos/pepe15.png')
+    plt.show()
+    plt.close()
