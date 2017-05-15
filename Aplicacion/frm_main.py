@@ -652,7 +652,7 @@ class ProcMision(QDialog):
         files=glob.glob('../Comparar/diferencias/*')
         for filename in files:
             os.unlink(filename)
-        self.set_datos, self.set_datos15dias=ejecutaProcesamientoCods()
+        self.set_datos =ejecutaProcesamientoCods()
         self.sat_id=self.set_datos[0]
         self.linea1=self.set_datos[1]
         self.linea2=self.set_datos[2]
@@ -677,7 +677,7 @@ class ProcMision(QDialog):
         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data, self.coef)
         
     def ver_dif_set_primario(self):
-        ploteos.grafica_set15dias(self.set_datos15dias)
+        ploteos.grafica_set15dias(self.data, self.coef)
 #        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch,self.ffin)
         
         

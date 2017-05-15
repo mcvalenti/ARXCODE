@@ -441,8 +441,12 @@ def ejecutaProcesamientoCods():
             continue
     salida1.close()
     
-    dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data,2)
-    dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data,1)
+    """
+    AJUSTE Y GENERACION DE COEFICIENTES.
+    """
+    
+    dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data15,2)
+    dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data15,1)
     """
     Guarda en archivos las diferencias que se corresponden al
     ultimo TLE del set. (Estadistica/archivos)
@@ -463,8 +467,8 @@ def ejecutaProcesamientoCods():
     print 'Fin del Calculo de Diferencias'
 
     set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
-    return set_datos, data15
-
+    set_data15=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data15,coef1,archivo]
+    return set_data15
 
 def analizaEO():
     """
