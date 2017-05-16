@@ -313,7 +313,7 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
             data[7].append(dif_fechas)
     return data
 
-def calculaDif_15dias(salida,tles,linea_interpol,data):
+def dif_tleCODS15dias(salida,tles,linea_interpol,data):
     """
     Toma la lista de archivos TLEs y propaga cada uno hasta la epoca de la
     linea interpolada. Luego compara los valores de las coordenadas propagadas
@@ -325,19 +325,19 @@ def calculaDif_15dias(salida,tles,linea_interpol,data):
         tles: lista de nombres de archivos tle (diccionario)
         linea_interpol: Linea interpolada de los datos CODS para la epoca del TLE primario. (String)
     output
-        dif15dias_satId_fini_ffin.cods: Archivo con todas las diferencias ('../Comparar/diferencias/')
+        difTot_satId_fini_ffin.cods: Archivo con todas las diferencias ('../Comparar/diferencias/')
     """
     fecha=linea_interpol[:26]
     d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
+    d15=d-timedelta(days=15)
     r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
     rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
-    corte=len(tles)-15
-    item=range(corte,len(tles))
+    item=range(0,len(tles))
     whichconst=wgs72
     for j in item:
         tle0=Tle('../TleAdmin/tle/'+tles[j][0])
         fecha_tle=tle0.epoca()
-        if fecha_tle <= d:
+        if fecha_tle <= d and fecha_tle > d15:
             dif_fechas=(d-fecha_tle).total_seconds()/86400.0
             line1=tle0.linea1
             line2=tle0.linea2
@@ -362,7 +362,7 @@ def calculaDif_15dias(salida,tles,linea_interpol,data):
             data[6].append(cc)
             data[7].append(dif_fechas)
     return data
-       
+
 def ejecutaProcesamientoCods():
 #if __name__ == '__main__':
     """
@@ -419,12 +419,22 @@ def ejecutaProcesamientoCods():
     dnn15=[]
     dcc15=[]
     dt_frac15=[]
+    #===============
+    # Set de Datos
+    #===============
     data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]
     data15=[t15,dv15,du15,dc15,dvv15,dnn15,dcc15,dt_frac15]
+    #======================
+    # Nomenclatura Archivos
+    #======================
     archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
     salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
     salida1=open('../Comparar/diferencias/'+archivo,'w')
     salida15=open('../Comparar/diferencias/dif_15dias-'+archivo,'w')
+
+    #=================================
+    # Bucle de comparacion total
+    #=================================
     for m in range(len(tle_ordenados)-1,0,-1):
         tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_fin = tle_primario.epoca()
@@ -432,13 +442,34 @@ def ejecutaProcesamientoCods():
         linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)
         if linea_interpol != None:                 
             data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
-            data15=calculaDif_15dias(salida15,tle_ordenados,linea_interpol,data15)
             if m == len(tle_ordenados)-1:
                 for k in range(len(data[0])):
                     info = data[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+' '+str(data[4][k])+' '+str(data[5][k])+' '+str(data[6][k])+'\n'
                     salida1.write(info)
         else:
             continue
+    #================================================== 
+    # Bucle de comparacion del set primario (15 TLEs)
+    #==================================================
+    
+    epoca15=epoca_ffin-timedelta(days=15)
+    for m in range(len(tle_ordenados)-1,0,-1):
+        tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
+        epoca_fin = tle_primario.epoca()
+        if epoca_fin > epoca15:
+            arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
+            linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)
+            if linea_interpol != None:                   
+                data15=dif_tleCODS15dias(salida15,tle_ordenados,linea_interpol,data15)
+                if m == len(tle_ordenados)-1:
+                    for k in range(len(data15[0])):
+                        info = data15[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(data15[1][k])+' '+str(data15[2][k])+' '+str(data15[3][k])+' '+str(data15[4][k])+' '+str(data15[5][k])+' '+str(data15[6][k])+'\n'
+                        salida15.write(info)
+            else:
+                continue 
+        else:
+            continue  
+        
     salida1.close()
     
     """

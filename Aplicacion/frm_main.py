@@ -13,7 +13,7 @@ from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
-from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, calculaDif_15dias
+from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
 from visual import ploteos
 from visual.TleOsweiler import VerGrafico
 # #from visual.TlevsCodsGraf import VerGraficoMision
