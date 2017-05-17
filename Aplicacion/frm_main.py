@@ -140,29 +140,27 @@ class ProcTle(QDialog):
         """
         Etiquetas
         """
-        self.inicio          = QLabel('Inicio del Procedimiento.')
         self.carga           = QLabel('CARGADO DE TLEs')
         self.norad           = QLabel('A partir de NORAD')  
         self.equipo          = QLabel('Desde el Equipo')
         self.arch_prepro     = QLabel('Archivo a Procesar: ')
-        self.verificacion    = QLabel('Verificacion de Datos:')
         self.sat_id_label    = QLabel('NORAD_ID')
         self.cant_tles       = QLabel('Cantidad de TLEs')
         self.tle_pri         = QLabel('Ultimo TLE del set.')
-        self.outputs         = QLabel('Outputs')
+        self.outputs         = QLabel('Output')
         self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
         """
         Botones
         """
         self.boton_norad        = QPushButton('Space-Track')
         self.boton_equipo       = QPushButton('Directorios')
-        self.boton_prepros      = QPushButton('Preprocesamiento')
+#         self.boton_prepros      = QPushButton('Preprocesamiento')
         self.boton_procesa      = QPushButton('PROCESAR')
 #        self.boton_grafica      = QPushButton('VER Graficos')
         self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
         self.boton_dxcoord      = QPushButton('Graficar Diferencias por Coordenadas')
         self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set primario')
-        self.boton_ma_covar     = QPushButton('Calcular Matriz')
+#         self.boton_ma_covar     = QPushButton('Calcular Matriz')
         self.boton_salir        = QPushButton('Salir')
         
         
@@ -174,7 +172,7 @@ class ProcTle(QDialog):
         self.cant_tles_edit     = QLineEdit()
         self.matriz             = QLineEdit()
         self.estado_proc_edit   = QLineEdit()
-        self.arch_macovar_edit  = QLineEdit()
+#        self.arch_macovar_edit  = QLineEdit()
         """
         OTROS
         """
@@ -184,7 +182,7 @@ class ProcTle(QDialog):
         grid = QGridLayout()
         grid.setSpacing(5)
 
-        grid.addWidget(self.inicio, 1, 0)
+
         grid.addWidget(self.carga,2,0)
         grid.addWidget(self.norad,3,0)
         grid.addWidget(self.boton_norad,3,1)
@@ -192,41 +190,40 @@ class ProcTle(QDialog):
         grid.addWidget(self.boton_equipo,4,1)
         grid.addWidget(self.arch_prepro,5,0)
         grid.addWidget(self.arch_cargado,5,1)
-        grid.addWidget(self.boton_prepros,5,2)
-        grid.addWidget(self.verificacion,6,0)
+        grid.addWidget(self.boton_procesa,5,2)
+#         grid.addWidget(self.boton_prepros,5,2)
         grid.addWidget(self.sat_id_label,7,0)
-        grid.addWidget(self.cant_tles,7,1)
-        grid.addWidget(self.outputs,7,4)
-        grid.addWidget(self.sat_id_line,8,0)
-        grid.addWidget(self.cant_tles_edit,8,1)
-        grid.addWidget(self.boton_procesa,8,2)
-        grid.addWidget(self.estado_proc_edit,8,4)
+        grid.addWidget(self.sat_id_line,7,1)
+        grid.addWidget(self.cant_tles,8,0)
+        grid.addWidget(self.cant_tles_edit,8,1)        
         grid.addWidget(self.tle_pri,9,0)
-        grid.addWidget(self.tle_pri_edit,9,1,1,4)
-        grid.addWidget(self.boton_dtotales,10,1)
-        grid.addWidget(self.boton_dxcoord,10,2)
-        grid.addWidget(self.boton_dsetprimario,10,3)
+        grid.addWidget(self.tle_pri_edit,10,0,1,4)
         grid.addWidget(self.ma_covar_label,11,0) 
-        grid.addWidget(self.tableView,12,0,6,2)
-        grid.addWidget(self.boton_ma_covar,12,2)
-        grid.addWidget(self.arch_macovar_edit,12,4)
-        grid.addWidget(self.boton_salir,17,2)
+        grid.addWidget(self.tableView,12,0,2,2)
+#         grid.addWidget(self.boton_ma_covar,12,2)
+#        grid.addWidget(self.arch_macovar_edit,12,4)
+        grid.addWidget(self.outputs,17,1)
+        grid.addWidget(self.estado_proc_edit,17,2)
+        grid.addWidget(self.boton_dsetprimario,19,1)
+        grid.addWidget(self.boton_salir,19,2)
+        grid.addWidget(self.boton_dtotales,20,1)
+        grid.addWidget(self.boton_dxcoord,20,2)
         
         """
         Acciones
         """
         self.boton_procesa.setEnabled(False)
  #       self.boton_grafica.setEnabled(False)
-        self.boton_ma_covar.setEnabled(False)
+#         self.boton_ma_covar.setEnabled(False)
         self.boton_norad.clicked.connect(self.botonNorad)
         self.boton_equipo.clicked.connect(self.Archivo)
         self.boton_salir.clicked.connect(self.salir)
-        self.boton_prepros.clicked.connect(self.PreProc)
+#         self.boton_prepros.clicked.connect(self.PreProc)
         self.boton_procesa.clicked.connect(self.procesar)
         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
-        self.boton_ma_covar.clicked.connect(self.Macovar)
+#         self.boton_ma_covar.clicked.connect(self.Macovar)
         
         
         self.setLayout(grid)
@@ -238,9 +235,10 @@ class ProcTle(QDialog):
         print ("Procesando la Conexion con NORAD para la Descarga...")
         self.w = ConexionNorad()
         self.w.exec_()
-        self.sat_id, self.fini, self.ffin, self.filename = self.w.datos()
+        self.sat_id, self.fini, self.ffin, self.filename = self.w.iniciaSolicitud()
         self.arch_cargado.setText(self.filename)
-        self.sat_id_line.setText(self.sat_id)  
+        self.sat_id_line.setText(self.sat_id) 
+        self.boton_procesa.setEnabled(True) 
         
     def Archivo(self):    
         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
@@ -248,8 +246,57 @@ class ProcTle(QDialog):
         self.filename = nombre
         self.sat_id = nombre.split('_')[0]
         self.arch_cargado.setText(self.filename)
+        self.boton_procesa.setEnabled(True) 
         
-    def PreProc(self):
+#     def PreProc(self):
+#         """
+#         Invoca a la funcion setTLE, para fragmentar
+#         cada uno de los TLE del dato crudo en archivos
+#         individuales; y los guarda en: TleAdmin/tle
+#         """
+#         files=glob.glob('../TleAdmin/tle/*')
+#         for filename in files:
+#             os.unlink(filename)
+#         if os.stat('../TleAdmin/crudosTLE/'+self.filename).st_size == 0:
+#             print('El archivo esta vacio')
+#         setTLE(self.sat_id, self.filename)
+#         self.sat_id_line.setText(self.sat_id)
+#         self.lista=glob.glob('../TleAdmin/tle/*')
+#         self.tles=len(self.lista)
+#         self.cant_tles_edit.setText(str(self.tles))
+#         """
+#         Ordenamiento de los TLEs
+#         """
+#         self.tledic=generadorDatos(self.lista)
+#         self.tleOrdenados=ordenaTles(self.tledic)
+#         self.boton_procesa.setEnabled(True)
+#         """
+#         Impresiones de info de TLEs.
+#         """
+#         print 'PROCESAMIENTO DE TLE'
+#         print '-----------------------------------------------------'
+#         print 'TLE PRIMARIO'
+#         print '-----------------------------------------------------'
+#         tle_primario = Tle('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
+#         linea1= tle_primario.linea1
+#         linea2= tle_primario.linea2
+#         self.fin_tle=tle_primario.epoca()
+#         self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S.%f' )
+#         self.tle_pri_edit.setText(linea1+'\n'+linea2)
+#         print linea1
+#         print linea2
+#         print '-----------------------------------------------------'
+#         print 'TLE INICIAL DEL SET'
+#         print '-----------------------------------------------------'
+#         tle_inial = Tle('../TleAdmin/tle/'+self.tleOrdenados[0][0])
+#         linea1_0= tle_inial.linea1
+#         linea2_0= tle_inial.linea2
+#         self.ini_tle=tle_inial.epoca()
+#         print linea1_0
+#         print linea2_0
+#         print '-----------------------------------------------------'
+    
+    def procesar(self):
         """
         Invoca a la funcion setTLE, para fragmentar
         cada uno de los TLE del dato crudo en archivos
@@ -270,7 +317,7 @@ class ProcTle(QDialog):
         """
         self.tledic=generadorDatos(self.lista)
         self.tleOrdenados=ordenaTles(self.tledic)
-        self.boton_procesa.setEnabled(True)
+
         """
         Impresiones de info de TLEs.
         """
@@ -296,8 +343,10 @@ class ProcTle(QDialog):
         print linea1_0
         print linea2_0
         print '-----------------------------------------------------'
-    
-    def procesar(self):
+        
+        """
+        PROCESAMIENTO.
+        """
         files=glob.glob('../AjustarTLE/diferencias/*')
         for filename in files:
             os.unlink(filename)
@@ -310,9 +359,19 @@ class ProcTle(QDialog):
         self.diferencias=difPrimario(self.nombre_archivo,self.tles-1)
         self.estado_proc_edit.setText(self.diferencias)
 #        self.boton_grafica.setEnabled(True)
-        self.boton_ma_covar.setEnabled(True)
-        print 'Fin del Procesamiento'
+#         self.boton_ma_covar.setEnabled(True)
+
+        """
+        Ma. de Covarianza
+        """
+        self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
+        self.tableView.setRowCount(len(self.macovarT))
+        self.tableView.setColumnCount(len(self.macovarT))
+        for i,fila in enumerate(self.macovarT):
+            for j,col in enumerate(fila):
+                self.tableView.setItem(i,j,QTableWidgetItem(str(col)))    
         
+        print 'Fin del Procesamiento'
         
     def ver_dif_x_coordenadas(self):
         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1, self.coef)
@@ -332,14 +391,14 @@ class ProcTle(QDialog):
     def ver_mediasxbin(self):
         desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin[1], self.mediaxbin[2])
 
-    def Macovar(self):
-        self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
-        self.tableView.setRowCount(len(self.macovarT))
-        self.tableView.setColumnCount(len(self.macovarT))
-        for i,fila in enumerate(self.macovarT):
-            for j,col in enumerate(fila):
-                self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
-        self.arch_macovar_edit.setText(self.arch_macovar)        
+#     def Macovar(self):
+#         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
+#         self.tableView.setRowCount(len(self.macovarT))
+#         self.tableView.setColumnCount(len(self.macovarT))
+#         for i,fila in enumerate(self.macovarT):
+#             for j,col in enumerate(fila):
+#                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
+#         self.arch_macovar_edit.setText(self.arch_macovar)        
     
     def salir(self):
         self.accept()
@@ -377,7 +436,7 @@ class ConexionNorad(QDialog):
         self.norad_id   = QLabel('NORAD ID: ')
         self.stime      = QLabel('Fecha Inicio')
         self.ftime      = QLabel('Fecha Fin')
-        self.arhcivoTLE = QLabel('Ingrese el nombre para guardar el archivo')
+        self.arhcivoTLE = QLabel('Archivo Generado')
         """
         Botones
         """
@@ -385,7 +444,7 @@ class ConexionNorad(QDialog):
             QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
             Qt.Horizontal, self)
         self.boton_request = QPushButton('Enviar Solicitud')
-        self.boton_guardar = QPushButton('guardar')
+
         """
         Campos de Edicion
         """
@@ -414,10 +473,11 @@ class ConexionNorad(QDialog):
         self.grilla.addWidget(self.cal1,6,2)
         self.grilla.addWidget(self.st,7,1)
         self.grilla.addWidget(self.et,7,2)
-        self.grilla.addWidget(self.arhcivoTLE,8,1)
-        self.grilla.addWidget(self.nombreTle,8,2)
-        self.grilla.addWidget(self.boton_request,11,2)
-        self.grilla.addWidget(self.boton_guardar,12,2)
+        self.grilla.addWidget(self.boton_request,8,2)
+        self.grilla.addWidget(self.arhcivoTLE,9,1)
+        self.grilla.addWidget(self.nombreTle,9,2)
+        
+
         self.grilla.addWidget(self.buttons,13,2) 
         self.setLayout(self.grilla) 
         
@@ -427,7 +487,6 @@ class ConexionNorad(QDialog):
         self.boton_request.clicked.connect(self.iniciaSolicitud)
         self.buttons.accepted.connect(self.accept)
         self.buttons.rejected.connect(self.reject)  
-        self.boton_guardar.clicked.connect(self.datos)
         self.setWindowTitle('Conexion con NORAD')
 #         
     def iniciaSolicitud(self):
@@ -438,6 +497,7 @@ class ConexionNorad(QDialog):
         self.nombreTle.setText(self.cat_id+'_'+self.fini+'_'+self.ffin+'.tle')
         self.tle=importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
         self.archTLE=self.nombreTle.text()
+        return self.cat_id, self.fini, self.ffin, self.archTLE
 #             
     def verFinicio(self):
         self.date = self.cal.selectedDate()
@@ -450,9 +510,7 @@ class ConexionNorad(QDialog):
         self.pydate1 = self.date1.toPyDate()
         self.et.setText(self.date1.toString())
         self.ffin=str(self.pydate1.year)+str(self.pydate1.month).zfill(2)+str(self.pydate1.day).zfill(2)
-        
-    def datos(self):
-        return self.cat_id, self.fini, self.ffin, self.archTLE
+
     
 class RepresentacionGrafica(QDialog):
         

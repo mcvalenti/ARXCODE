@@ -97,7 +97,7 @@ def ordenaTles(tledic):
     output
         tleOrdenados: lista de listas
             tleOrdenados[0]: 'tle#', numero de tle (string)
-            tleOrdenados[1]: lista, (fecha, linea1, linea2)
+            tleOrdenados[1]: lista, (fecha)
     """
     ve=open('verif','w')
     ve1=open('verif1','w')
