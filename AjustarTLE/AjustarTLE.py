@@ -11,6 +11,7 @@ import operator
 import numpy as np
 import numpy.polynomial as P
 import matplotlib.pylab as plt
+from datetime import datetime, timedelta
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from TleAdmin.TleArchivos import setTLE
@@ -277,35 +278,38 @@ def difTle(tleOrdenados,cantidad_tles):
             dz.append(z)
             dxx.append(xx)
             dyy.append(yy)
-            dzz.append(zz)
+            dzz.append(zz)           
             """
             Clasificacion por bin.
             """
             rangos=np.array([[0,0.5],[0.5,1.5],[1.5,2.5],[2.5,3.5],[3.5,4.5],
                      [4.5,5.5],[5.5,6.5],[6.5,7.5],[7.5,8.5],[8.5,9.5],
                      [9.5,10.5],[10.5,11.5],[11.5,12.5],[12.5,13.5],[13.5,14.5]])
-            for i in range(len(rangos)):
-                if dtfracdias >= rangos[i][0] and dtfracdias < rangos[i][1]:
-                    bin[i].append(infodiftot)
+            for k in range(len(rangos)):
+                if dtfracdias >= rangos[k][0] and dtfracdias < rangos[k][1]:
+                    bin[k].append(infodiftot)
+                    
+            
         m=m+1 
-   
-        
+            
+    dataPri=[dt_tle[:15],dv[:15],dn[:15],dc[:15],
+             dvv[:15],dnn[:15],dcc[:15],dt_frac[:15]]    
     data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn,dt_frac]
     
     print '++++++++++++GRADO 2++++++++++++++++++'
-    dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data1,2)
+    dt,coef,statsReport=ajustar_diferencias(epoca_ffin,dataPri,2)
     print coef
     print statsReport
     
     print '++++++++++++GRADO 1++++++++++++++++++'
-    dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data1,1)
+    dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,dataPri,1)
     print coef1
     print statsReport1
     
     data=[dt,data1,coef,nombre]
         
     dtot.close()
-    return bin, data
+    return bin, data, dataPri, coef1
 
 def genera_estadisticaBin(bin_lista):
     
@@ -360,7 +364,7 @@ def genera_estadisticaBin(bin_lista):
  
     
 
-def difPrimario(nombre,largo):
+def difPrimario(tleOrdenados,cantidad_tles):
     """
     Compara cada uno de los valores de los TLEs propagados 
     a la fecha del TLEs final (primario)
@@ -369,21 +373,117 @@ def difPrimario(nombre,largo):
         nombre: nombre de archivo que identifica el procesamiento. (string)
         largo: cantidad de TLEs en el set, menos  uno. (integer)
     output
-        salida: nombre del archivo que contiene la diferencias solo contra 
+        salida: nombre del archivo que contiene las diferencias solo contra 
         el SV de referencia. (string), path: '../AjustarTLE/diferencias/'
     """
-    nombre1=nombre.split('.')[0]
-    nombre2=nombre1.split('_')
-    nombre3='setPri_'+nombre2[1]+'_'+nombre2[2]+'_'+nombre2[3]+'.TLE'
-    difG=open('../AjustarTLE/diferencias/'+nombre,'r')
-    contenido=difG.readlines()
-    difP=open('../AjustarTLE/diferencias/'+nombre3,'w')
-    for c in range(largo):
-        campos=contenido[c].split(' ')
-        info=campos[0]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+' '+campos[7]+'\n'
-        difP.write(info)
-    difP.close() 
-    return nombre3
+#     nombre1=nombre.split('.')[0]
+#     nombre2=nombre1.split('_')
+#     nombre3='setPri_'+nombre2[1]+'_'+nombre2[2]+'_'+nombre2[3]+'.TLE'
+#     difG=open('../AjustarTLE/diferencias/'+nombre,'r')
+#     contenido=difG.readlines()
+#     difP=open('../AjustarTLE/diferencias/'+nombre3,'w')
+#     for c in range(largo):
+#         campos=contenido[c].split(' ')
+#         info=campos[0]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+' '+campos[7]+'\n'
+#         difP.write(info)
+#     difP.close() 
+#     return nombre3
+    tles=glob.glob('../TleAdmin/tle/*')
+    dic_tles=generadorDatos(tles)
+    tle_ordenados=ordenaTles(dic_tles)
+    
+    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+    cat_id = tle_inicio.catID()
+    epoca_ini = tle_inicio.epoca()
+    
+    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    epoca_fin  = tle_primario.epoca()
+    epoca_ffin = epoca_fin
+    epoca15dias=epoca_ffin-timedelta(days=15)
+    
+    nombre='difPri_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+epoca_ini.strftime('%Y%m%d')+'.TLE'
+    nombre2='difPri_xyz_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+epoca_ini.strftime('%Y%m%d')+'.TLE'
+    dtot=open('../AjustarTLE/diferencias/'+nombre+'','w')
+    dtot2=open('../AjustarTLE/diferencias/'+nombre2+'','w')
+    
+    dt_tle=[]
+    dt_frac=[]
+    dv=[]
+    dn=[]
+    dc=[]
+    dvv=[]
+    dnn=[]
+    dcc=[]
+    dx=[]
+    dy=[]
+    dz=[]
+    dxx=[]
+    dyy=[]
+    dzz=[]
+
+    tlepri=tleOrdenados[-1][0]
+    r,rp,ffin=tlePrimario(tlepri)     
+    item=range(len(tleOrdenados)-2,-1,-1)       
+    for j in item:
+        tlesec=tleOrdenados[j][0]
+        tle1=Tle('../TleAdmin/tle/'+tlesec)
+        tle1_epoca=tle1.epoca()
+        if tle1_epoca >= epoca15dias:
+            pos,vel,fsec=tleSecundario(tlesec, ffin)
+            dt_tle.append(fsec)
+            dr=pos-r
+            d_v=vel-rp
+            x=dr[0]
+            y=dr[1]
+            z=dr[2]
+            xx=d_v[0]
+            yy=d_v[1]
+            zz=d_v[2]
+            dt=abs(fsec-ffin)
+            dtfracdias=dt.total_seconds()/86400.0
+            v,n,c=vncSis(r, rp, dr)
+            vv,nn,cc=vncSis(r,rp,d_v)
+    #             v,n,c=ricSis(r, rp, dr)
+    #             vv,nn,cc=ricSis(r,rp,dv)
+            infodifpri=str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+' '+tlesec+'\n'
+            infodifpri2=str(fsec)+' '+str(x)+' '+str(y)+' '+str(z)+' '+str(xx)+' '+str(yy)+' '+str(zz)+' '+tlesec+'\n'
+            dtot.write(infodifpri)
+            dtot2.write(infodifpri2)
+            dt_frac.append(dtfracdias)
+            '''
+            Sistema VNC
+            '''
+            dv.append(v)
+            dn.append(n)
+            dc.append(c)
+            dvv.append(vv)
+            dnn.append(nn)
+            dcc.append(cc)
+            '''
+            Sistema TEMA
+            '''
+            dx.append(x)
+            dy.append(y)
+            dz.append(z)
+            dxx.append(xx)
+            dyy.append(yy)
+            dzz.append(zz)       
+            
+    data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn,dt_frac]
+    
+    print '++++++++++++GRADO 2++++++++++++++++++'
+    dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data1,2)
+    print coef
+    print statsReport
+    
+    print '++++++++++++GRADO 1++++++++++++++++++'
+    dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data1,1)
+    print coef1
+    print statsReport1
+
+    data=[dt,data1,coef,nombre]   
+
+    return data     
 
 # if __name__=='__main__':
 # #    ejecuta_procesamiento_TLE():

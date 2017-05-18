@@ -10,53 +10,88 @@ import matplotlib.dates as mdates
 from datetime import datetime 
 
     
-def grafica_set_principal(sat_id,path,grafico_arch,ffin):
+def grafica_set_principal(sat_id,path,data,coef):
     """
-    MANDAR SET DE DATOS. 
+   
     """
     salida=path.split('/')[1]
     if salida=='AjustarTLE':
-        archivo1='TLE/TLE_setPri_'+sat_id
+        archivo1='TLE/TLE_difPri_'+sat_id
     else:
-        archivo1='CODS/CODS_setPri_'+sat_id
+        archivo1='CODS/CODS_difPri_'+sat_id
     
-    fecha_fin=datetime.strptime(ffin,'%Y-%m-%d %H:%M:%S.%f' )
-    archivo=open(path+grafico_arch,'r')
-    contenido = archivo.readlines()
-    dt_frac=[]
-    dv=[]
-    dn=[]
-    dc=[]
+    dt=data[7]
+    dv=data[1]
+    dn=data[2]
+    dc=data[3]
+    largo=np.max(dt)
+    
+    if len(coef[0])==3:
+        a=coef[0][0]
+        b=coef[0][1]
+        c=coef[0][2]
+        a1=coef[1][0]
+        b1=coef[1][1]
+        c1=coef[1][2]
+        a2=coef[2][0]
+        b2=coef[2][1]
+        c2=coef[2][2]
 
-    for c in contenido:
-        campos=c.split(' ')
-        fecha=campos[0]+' '+campos[1]
-        t=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
-        dt_frac.append((fecha_fin-t).total_seconds()/86400.0)
-        dv.append(float(campos[2]))
-        dn.append(float(campos[3]))
-        dc.append(float(campos[4]))
+        """
+        Funcion de Ajuste.
+        """
+        x=np.linspace(0,int(largo), 60)
+        yv=[]
+        yn=[]
+        yc=[]
+        for i in x:
+            yv.append(c*i*i+b*i+a)
+            yn.append(c1*i*i+b1*i+a1) 
+            yc.append(c2*i*i+b2*i+a2)            
+    elif len(coef[0]) ==2:
+        a=coef[0][0]
+        b=coef[0][1]
+        a1=coef[1][0]
+        b1=coef[1][1]
+        a2=coef[2][0]
+        b2=coef[2][1]
+        dt=data[7]
+        dv=data[1]
+        dn=data[2]
+        dc=data[3]
+        largo=np.max(dt)
+        """
+        Funcion de Ajuste.
+        """
+        x=np.linspace(0,int(largo), 60)
+        yv=[]
+        yn=[]
+        yc=[]
+        for i in x:
+            yv.append(b*i+a)
+            yn.append(b1*i+a1) 
+            yc.append(b2*i+a2)    
+    
+    
     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
     ax1.grid(True)
     ax2.grid(True)
     ax3.grid(True)
-
-    ax1.plot(dt_frac, dv, 'rd', label='V')
+    ax1.plot( x, yv,'r--',label='Coordenada V')
+    ax1.plot(dt, dv,'o')
     ax1.set_ylabel('Km')
-    ax1.legend(loc=3)
-    ax2.plot(dt_frac, dn, 'bo', label='N')
+    ax2.plot(dt, dn,'o',label='Coordenada N')
+    ax2.plot(x, yn,'r--')#
     ax2.set_ylabel('Km')
-    ax2.legend(loc=3)
-    ax3.plot(dt_frac, dc, 'kx', label='C')
+    ax3.plot(dt, dc,'o',label='Coordenada C')
+    ax3.plot(x, yc,'r--')
     ax3.set_ylabel('Km')
-    fig.suptitle('Diferencias en las Coordenadas V,N,C [km] del set principal')
+    fig.suptitle('Diferencias y Funcion de Ajuste')
     plt.xlabel('Epoca')
-    ax3.legend(loc=4)
-    plt.savefig('../visual/archivos/'+archivo1+'_'+datetime.strftime(fecha_fin,'%Y-%m-%d')+'.png')
+    plt.savefig('../visual/archivos/'+archivo1+'_'+str(len(coef[0])))
     plt.show()
     plt.close()
-    
-    
+
 
 def grafica_diferenciasTotales(sat_id,path,data,coef):
     """
@@ -74,6 +109,10 @@ def grafica_diferenciasTotales(sat_id,path,data,coef):
     yy=data[2]
     zz=data[3]
     fecha=data[0]
+
+    """
+    Grafico
+    """
     plt.plot(dt, xx, 'rd', label='V')
     plt.plot(dt, yy, 'bo', label='N')
     plt.plot(dt, zz, 'kx', label='C')

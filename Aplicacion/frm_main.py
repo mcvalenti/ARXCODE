@@ -5,7 +5,7 @@ Created on Feb 5, 2017
 '''
 import sys, glob, os, re
 import numpy as np
-from datetime import datetime
+from datetime import datetime, timedelta
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from TleAdmin.TleArchivos import setTLE
@@ -13,7 +13,7 @@ from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
-from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
+from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
 from visual import ploteos
 from visual.TleOsweiler import VerGrafico
 # #from visual.TlevsCodsGraf import VerGraficoMision
@@ -154,16 +154,11 @@ class ProcTle(QDialog):
         """
         self.boton_norad        = QPushButton('Space-Track')
         self.boton_equipo       = QPushButton('Directorios')
-#         self.boton_prepros      = QPushButton('Preprocesamiento')
         self.boton_procesa      = QPushButton('PROCESAR')
-#        self.boton_grafica      = QPushButton('VER Graficos')
         self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
         self.boton_dxcoord      = QPushButton('Graficar Diferencias por Coordenadas')
         self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set primario')
-#         self.boton_ma_covar     = QPushButton('Calcular Matriz')
         self.boton_salir        = QPushButton('Salir')
-        
-        
         """
         Campos de Edicion
         """
@@ -172,7 +167,6 @@ class ProcTle(QDialog):
         self.cant_tles_edit     = QLineEdit()
         self.matriz             = QLineEdit()
         self.estado_proc_edit   = QLineEdit()
-#        self.arch_macovar_edit  = QLineEdit()
         """
         OTROS
         """
@@ -191,7 +185,6 @@ class ProcTle(QDialog):
         grid.addWidget(self.arch_prepro,5,0)
         grid.addWidget(self.arch_cargado,5,1)
         grid.addWidget(self.boton_procesa,5,2)
-#         grid.addWidget(self.boton_prepros,5,2)
         grid.addWidget(self.sat_id_label,7,0)
         grid.addWidget(self.sat_id_line,7,1)
         grid.addWidget(self.cant_tles,8,0)
@@ -199,33 +192,26 @@ class ProcTle(QDialog):
         grid.addWidget(self.tle_pri,9,0)
         grid.addWidget(self.tle_pri_edit,10,0,1,4)
         grid.addWidget(self.ma_covar_label,11,0) 
-        grid.addWidget(self.tableView,12,0,2,2)
-#         grid.addWidget(self.boton_ma_covar,12,2)
-#        grid.addWidget(self.arch_macovar_edit,12,4)
-        grid.addWidget(self.outputs,17,1)
-        grid.addWidget(self.estado_proc_edit,17,2)
-        grid.addWidget(self.boton_dsetprimario,19,1)
-        grid.addWidget(self.boton_salir,19,2)
-        grid.addWidget(self.boton_dtotales,20,1)
-        grid.addWidget(self.boton_dxcoord,20,2)
+        grid.addWidget(self.tableView,12,0,4,4)
+        grid.addWidget(self.outputs,23,1)
+        grid.addWidget(self.estado_proc_edit,23,2)
+        grid.addWidget(self.boton_dsetprimario,24,2)
+        grid.addWidget(self.boton_salir,25,2)
+#         grid.addWidget(self.boton_dtotales,25,1)
+#         grid.addWidget(self.boton_dxcoord,25,2)
         
         """
         Acciones
         """
         self.boton_procesa.setEnabled(False)
- #       self.boton_grafica.setEnabled(False)
-#         self.boton_ma_covar.setEnabled(False)
         self.boton_norad.clicked.connect(self.botonNorad)
         self.boton_equipo.clicked.connect(self.Archivo)
         self.boton_salir.clicked.connect(self.salir)
-#         self.boton_prepros.clicked.connect(self.PreProc)
         self.boton_procesa.clicked.connect(self.procesar)
         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
-        self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
-        self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
-#         self.boton_ma_covar.clicked.connect(self.Macovar)
-        
-        
+#         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
+#         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
+
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de TLE')    
         self.show()
@@ -246,55 +232,8 @@ class ProcTle(QDialog):
         self.filename = nombre
         self.sat_id = nombre.split('_')[0]
         self.arch_cargado.setText(self.filename)
-        self.boton_procesa.setEnabled(True) 
+        self.boton_procesa.setEnabled(True)
         
-#     def PreProc(self):
-#         """
-#         Invoca a la funcion setTLE, para fragmentar
-#         cada uno de los TLE del dato crudo en archivos
-#         individuales; y los guarda en: TleAdmin/tle
-#         """
-#         files=glob.glob('../TleAdmin/tle/*')
-#         for filename in files:
-#             os.unlink(filename)
-#         if os.stat('../TleAdmin/crudosTLE/'+self.filename).st_size == 0:
-#             print('El archivo esta vacio')
-#         setTLE(self.sat_id, self.filename)
-#         self.sat_id_line.setText(self.sat_id)
-#         self.lista=glob.glob('../TleAdmin/tle/*')
-#         self.tles=len(self.lista)
-#         self.cant_tles_edit.setText(str(self.tles))
-#         """
-#         Ordenamiento de los TLEs
-#         """
-#         self.tledic=generadorDatos(self.lista)
-#         self.tleOrdenados=ordenaTles(self.tledic)
-#         self.boton_procesa.setEnabled(True)
-#         """
-#         Impresiones de info de TLEs.
-#         """
-#         print 'PROCESAMIENTO DE TLE'
-#         print '-----------------------------------------------------'
-#         print 'TLE PRIMARIO'
-#         print '-----------------------------------------------------'
-#         tle_primario = Tle('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
-#         linea1= tle_primario.linea1
-#         linea2= tle_primario.linea2
-#         self.fin_tle=tle_primario.epoca()
-#         self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S.%f' )
-#         self.tle_pri_edit.setText(linea1+'\n'+linea2)
-#         print linea1
-#         print linea2
-#         print '-----------------------------------------------------'
-#         print 'TLE INICIAL DEL SET'
-#         print '-----------------------------------------------------'
-#         tle_inial = Tle('../TleAdmin/tle/'+self.tleOrdenados[0][0])
-#         linea1_0= tle_inial.linea1
-#         linea2_0= tle_inial.linea2
-#         self.ini_tle=tle_inial.epoca()
-#         print linea1_0
-#         print linea2_0
-#         print '-----------------------------------------------------'
     
     def procesar(self):
         """
@@ -350,21 +289,20 @@ class ProcTle(QDialog):
         files=glob.glob('../AjustarTLE/diferencias/*')
         for filename in files:
             os.unlink(filename)
-        self.bin, self.data=difTle(self.tleOrdenados, self.tles)
-        self.dt=self.data[0]
-        self.data1=self.data[1]
-        self.coef=self.data[2]
-        self.nombre_archivo=self.data[3]
-        self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
-        self.diferencias=difPrimario(self.nombre_archivo,self.tles-1)
-        self.estado_proc_edit.setText(self.diferencias)
-#        self.boton_grafica.setEnabled(True)
-#         self.boton_ma_covar.setEnabled(True)
+#        self.bin, self.data, self.set_pri, self.coef=difTle(self.tleOrdenados, self.tles)
+        self.set_pri=difPrimario(self.tleOrdenados, self.tles)
+        self.dt=self.set_pri[0]
+        self.data1=self.set_pri[1]
+        self.coef=self.set_pri[2]
+        self.nombre_archivo=self.set_pri[3]
+#         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
+#         self.diferencias=difPrimario(self.nombre_archivo,self.tles-1)
+        self.estado_proc_edit.setText(self.nombre_archivo)
 
         """
         Ma. de Covarianza
         """
-        self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
+        self.macovarT, self.arch_macovar=EjecutaMaCovar(self.nombre_archivo)
         self.tableView.setRowCount(len(self.macovarT))
         self.tableView.setColumnCount(len(self.macovarT))
         for i,fila in enumerate(self.macovarT):
@@ -373,14 +311,14 @@ class ProcTle(QDialog):
         
         print 'Fin del Procesamiento'
         
-    def ver_dif_x_coordenadas(self):
-        ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1, self.coef)
-    
-    def ver_diferencias_totales(self):
-        ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data1,self.coef) 
+#     def ver_dif_x_coordenadas(self):
+#         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1, self.coef)
+#      
+#     def ver_diferencias_totales(self):
+#         ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data1,self.coef) 
         
     def ver_dif_set_primario(self):
-        ploteos.grafica_set_principal(self.sat_id,self.path,self.diferencias,self.ffin)
+        ploteos.grafica_set_principal(self.sat_id,self.path, self.data1,self.coef)
         
 #     def Graficar(self):
 # #        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
@@ -710,7 +648,8 @@ class ProcMision(QDialog):
         files=glob.glob('../Comparar/diferencias/*')
         for filename in files:
             os.unlink(filename)
-        self.set_datos =ejecutaProcesamientoCods()
+#        self.set_datos =ejecutaProcesamientoCods()
+        self.set_datos= dif_tleCODS15dias()
         self.sat_id=self.set_datos[0]
         self.linea1=self.set_datos[1]
         self.linea2=self.set_datos[2]
