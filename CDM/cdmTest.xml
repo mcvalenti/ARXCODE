@@ -1,0 +1,14 @@
+<catalog>   <book id="bk101">
+      <author>Gambardella, Matthew</author>
+      <title>XML Developer's Guide</title>
+      <genre>Computer</genre>
+      text1
+   </book>
+   <!--Comment1-->
+   <book id="bk102">
+      <!--Comment2-->
+      <author>Ralls, Kim</author>
+      <title>Midnight Rain</title>
+      <genre>Fantasy</genre>
+   </book>
+</catalog>
