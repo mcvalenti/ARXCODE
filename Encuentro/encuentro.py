@@ -142,7 +142,7 @@ def calculaPoC(r_tca2d,C_b,x_b_mod,Rc):
     -------------------------------------------------------
     inputs
         dr,Cb,xb,Rc
-    outputs
+    outputs 
         PoC
     """
     C_det=np.linalg.det(C_b)

@@ -28,6 +28,7 @@ class ProcARxCODE(QMainWindow):
         super(ProcARxCODE, self).__init__()
         
         self.setWindowTitle('ARxCODE')
+        self.setWindowIcon(QIcon('nave.png'))
         extractAction = QAction("Salir", self)
         extractAction.setShortcut("Ctrl+Q")
         extractAction.setStatusTip('Leave The App')
@@ -84,8 +85,15 @@ class ProcARxCODE(QMainWindow):
         self.show()
 
         
-    def item_click(self):
-        print self.listWidget.currentItem().text()
+    def item_click(self):       
+        cdm_click=self.listWidget.currentItem().text()
+        if cdm_click == 'PROXIMO ENCUENTRO':
+            cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a Procesar', "../CDM/archivos/*")
+            cdm_nombre=str(cdm_xml).split('/')[-1]
+            ventana1=ProcCDM()
+            self.setCentralWidget(ventana1)
+            ventana1.exec_()
+
     def item_click1(self):
         c_item=self.listWidget1.currentItem().text()
         if c_item == 'Procesamiento de un set de TLE':
@@ -104,6 +112,57 @@ class ProcARxCODE(QMainWindow):
     
     def close_application(self):
         sys.exit()
+    
+class ProcCDM(QDialog):
+    def __init__(self,parent=None):
+        QDialog.__init__(self,parent)
+        
+        self.setWindowModality(Qt.ApplicationModal)
+        self.initUI()
+        
+    def initUI(self):
+        self.palette = QPalette()
+        self.palette.setColor(QPalette.Background,Qt.yellow)
+        self.setPalette(self.palette)
+        
+        """
+        Etiquetas
+        """
+        self.cdm_titulo = QLabel('CDM')      
+        """
+        Botones
+        """
+        self.boton_grafCdm  = QPushButton('Graficos')
+        self.boton_informe  = QPushButton('Generar Informe')
+        self.boton_salirCdm = QPushButton('SALIR')
+        """
+        OTROS
+        """
+        self.CDM_edit    = QTextEdit()
+        self.tablePOC   = QTableWidget()
+        
+        grid = QGridLayout()
+        grid.setSpacing(5)
+        
+        grid.addWidget(self.CDM_edit,2,1)
+        grid.addWidget(self.cdm_titulo,1,1)
+        grid.addWidget(self.boton_grafCdm,2,2)
+        grid.addWidget(self.boton_informe,3,2)
+        grid.addWidget(self.boton_salirCdm,4,2)
+        grid.addWidget(self.tablePOC,3,1)
+        
+        self.setLayout(grid)
+        self.setWindowTitle('Procesamiento de CDM')    
+        self.show()
+        
+        """
+        Acciones
+        """
+        self.boton_salirCdm.clicked.connect(self.salirCdm)
+        
+    def salirCdm(self):
+        self.accept()
+
     
 class ProcTle(QDialog):
 
@@ -173,10 +232,12 @@ class ProcTle(QDialog):
         self.tle_pri_edit    = QTextEdit()
         self.tableView       = QTableWidget()
         
+        """
+        Plantilla
+        """
         grid = QGridLayout()
         grid.setSpacing(5)
-
-
+        
         grid.addWidget(self.carga,2,0)
         grid.addWidget(self.norad,3,0)
         grid.addWidget(self.boton_norad,3,1)
@@ -722,7 +783,7 @@ if __name__ == '__main__':
     """
     INICIA LA INTERFAZ
     """
-    QApplication.setStyle("Cleanlooks")
+    QApplication.setStyle("Windows")
     app = QApplication(sys.argv)
     ex = ProcARxCODE()
     sys.exit(app.exec_())
