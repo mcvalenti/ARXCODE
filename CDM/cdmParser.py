@@ -8,7 +8,7 @@ Parseo del CDM en formato XML.
 import xml.etree.ElementTree as ET
 
 
-def extraeCMD(archivo):
+def extraeCDM(archivo):
     """
     Extrae los datos de un CDM en formato XML.
     inputs
@@ -19,12 +19,17 @@ def extraeCMD(archivo):
         miss_dist: minima distancia (string)
         poc: probabilidad de colision (string)
     """
-    tree = ET.parse(archivo)
+    tree = ET.parse('../CDM/archivos/'+archivo)
     root = tree.getroot()
-    
+
     obj_m=[]
     obj_d=[]
 
+    """
+    ENCUENTRO
+    """
+#     tca_mio=cdm.find('body/relativeMetaData')
+#     print tca_mio.attrib
     for bod in root.iter('body'):
         TCA=bod[0][1].text
         MISS_DISTANCE=bod[0][2].text
@@ -47,7 +52,7 @@ def extraeCMD(archivo):
 if __name__=='__main__':
     
     archivo='cdmTest.xml'
-    TCA,MISS_DISTANCE,POC,obj_list=extraeCMD(archivo)
+    TCA,MISS_DISTANCE,POC,obj_list= extraeCDM(archivo)
     """
     Impresion por pantalla.
     """

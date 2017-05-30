@@ -84,13 +84,8 @@ def missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA):
     vv,nn,cc=vncSis(r, ve, dif_v)
     rvnc=np.array([v,n,c])
     vvnc=np.array([vv,nn,cc])
-    mod_dif=np.sqrt(np.dot(rvnc,rvnc))
-    print '============================================='
-    print 'Tiempo de maximo acercamiento = ', TCA
-    print 'Miss Distance = ',mod_dif
-
-    
-    return rvnc,vvnc
+   
+    return TCA,rvnc,vvnc
 
 def generaBplane(dr,dv):
     """
@@ -163,8 +158,8 @@ def calculaPoC(r_tca2d,C_b,x_b_mod,Rc):
 def f(x,y,integrando):
     return np.exp(integrando)
 
-if __name__=='__main__':
-    
+#if __name__=='__main__':
+def evaluaEncuentro(TCA,sat_id,deb_id,Cd,Cm):   
     """
     Propagacion los datos tle de los objetos
     ENVISAT - NORAD ID: 27386
@@ -176,11 +171,10 @@ if __name__=='__main__':
     files=glob.glob('../TleAdmin/tle/*')
     for filename in files:
         os.unlink(filename)
-    
-    
-    TCA=datetime(2008,1,9,19,0,30,0)
-    sat_id='27386' #ENVISAT
-    deb_id='15482' #COSMOS
+       
+#     TCA=datetime(2008,1,9,19,0,30,0)
+#     sat_id='27386' #ENVISAT
+#     deb_id='15482' #COSMOS
 #     sat_id='23560' #ENVISAT
 #     deb_id='16011' #COSMOS
     #-------Request a NORAD.
@@ -220,7 +214,11 @@ if __name__=='__main__':
         sys.exit()
          
          
-    rvnc,vvnc=missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA)
+    TCAc,rvnc,vvnc=missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA)
+    mod_dif=np.sqrt(np.dot(rvnc,rvnc))
+    print '============================================='
+    print 'Tiempo de maximo acercamiento = ', TCA
+    print 'Miss Distance = ',mod_dif
     
 # 10 de Mayo.
     dr_mod=np.sqrt(np.dot(rvnc,rvnc)) 
@@ -233,13 +231,13 @@ if __name__=='__main__':
     #Matriz de Covarianza
     #====================
 
-    Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.078011634263035007],
-                 [-0.031437388833697122,0.0025693554190851101,-0.014250096142904997],
-                 [0.078011634263035007,-0.014250096142904997,0.096786625771746529]])
-    
-    Cm=np.array([[4.8247926515782202,0.05994752830943241,0.049526867540809635],
-                 [0.05994752830943241,0.019150349628774828,0.012470649611436152],
-                 [0.049526867540809635,0.012470649611436152,0.012649606483621921]])
+#     Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.078011634263035007],
+#                  [-0.031437388833697122,0.0025693554190851101,-0.014250096142904997],
+#                  [0.078011634263035007,-0.014250096142904997,0.096786625771746529]])
+#     
+#     Cm=np.array([[4.8247926515782202,0.05994752830943241,0.049526867540809635],
+#                  [0.05994752830943241,0.019150349628774828,0.012470649611436152],
+#                  [0.049526867540809635,0.012470649611436152,0.012649606483621921]])
 
     
     C=Cd+Cm
@@ -273,3 +271,4 @@ if __name__=='__main__':
     poc=calculaPoC(r_tca2d,C_b,x_b_mod,Rc)
     print poc
     
+    return TCAc,mod_dif,poc

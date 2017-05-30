@@ -8,11 +8,13 @@ import numpy as np
 from datetime import datetime, timedelta
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
+from CDM.cdmParser import extraeCDM
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
+from Encuentro.encuentro import evaluaEncuentro
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
 from visual import ploteos
 from visual.TleOsweiler import VerGrafico
@@ -88,8 +90,6 @@ class ProcARxCODE(QMainWindow):
     def item_click(self):       
         cdm_click=self.listWidget.currentItem().text()
         if cdm_click == 'PROXIMO ENCUENTRO':
-            cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a Procesar', "../CDM/archivos/*")
-            cdm_nombre=str(cdm_xml).split('/')[-1]
             ventana1=ProcCDM()
             self.setCentralWidget(ventana1)
             ventana1.exec_()
@@ -119,16 +119,14 @@ class ProcCDM(QDialog):
         
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
-        
+
+
     def initUI(self):
-        self.palette = QPalette()
-        self.palette.setColor(QPalette.Background,Qt.yellow)
-        self.setPalette(self.palette)
         
         """
         Etiquetas
         """
-        self.cdm_titulo = QLabel('CDM')      
+        self.cdm_titulo = QLabel('Informe CDM')      
         """
         Botones
         """
@@ -140,15 +138,19 @@ class ProcCDM(QDialog):
         """
         self.CDM_edit    = QTextEdit()
         self.tablePOC   = QTableWidget()
+        self.tablePOC.setRowCount(2)
+        self.tablePOC.setColumnCount(8)
+        listaLabels=['Norad Id','Nombre','TCAcdm','TCAarx','MinD cdm','MinD arx','PoC cdm','PoC arx']
+        self.tablePOC.setHorizontalHeaderLabels(listaLabels)
         
         grid = QGridLayout()
         grid.setSpacing(5)
         
         grid.addWidget(self.CDM_edit,2,1)
         grid.addWidget(self.cdm_titulo,1,1)
-        grid.addWidget(self.boton_grafCdm,2,2)
-        grid.addWidget(self.boton_informe,3,2)
-        grid.addWidget(self.boton_salirCdm,4,2)
+        grid.addWidget(self.boton_grafCdm,4,2)
+        grid.addWidget(self.boton_informe,5,2)
+        grid.addWidget(self.boton_salirCdm,6,2)
         grid.addWidget(self.tablePOC,3,1)
         
         self.setLayout(grid)
@@ -160,6 +162,46 @@ class ProcCDM(QDialog):
         """
         self.boton_salirCdm.clicked.connect(self.salirCdm)
         
+        """
+        Carga de Informacion principal
+        """
+        self.cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a Procesar', "../CDM/archivos/*")
+        self.cdm_nombre=str(self.cdm_xml).split('/')[-1]
+        self.TCA, self.MISS_DISTANCE,self.POC,self.obj_list=extraeCDM(self.cdm_nombre)
+        infoCDM='Mision = '+str(self.obj_list[0][0])+'---- ID= '+str(self.obj_list[0][1])+'\n'+'Desecho = '+str(self.obj_list[1][0])+'---- ID= '+str(self.obj_list[1][1])+'\n'+'TCA = '+self.TCA+'\n'+'Minima Distancia [m] = '+self.MISS_DISTANCE+'\n'+'Probabilidad de Colision = '+self.POC                                                          
+        self.CDM_edit.setText(infoCDM)
+                
+        """
+        Pruebas ENVISAT-COSMOS
+        """
+        self.TCA=datetime(2008,1,9,19,0,30,6)
+        TCAstr0=datetime.strftime(self.TCA,'%Y-%m-%dT%H:%M:%S')
+        self.sat_idc='27386' #ENVISAT
+        self.deb_idc='15482' #COSMOS
+        
+        Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.078011634263035007],
+                [-0.031437388833697122,0.0025693554190851101,-0.014250096142904997],
+                [0.078011634263035007,-0.014250096142904997,0.096786625771746529]])
+    
+        Cm=np.array([[4.8247926515782202,0.05994752830943241,0.049526867540809635],
+                [0.05994752830943241,0.019150349628774828,0.012470649611436152],
+                [0.049526867540809635,0.012470649611436152,0.012649606483621921]])
+        
+        TCAc,mod_dif,poc=evaluaEncuentro(self.TCA,self.sat_idc,self.deb_idc,Cd,Cm)
+        TCAstr=datetime.strftime(TCAc,'%Y-%m-%d %H:%M:%S.%f')
+        mod_dif=int(mod_dif*1000.0)
+        # set data self.TCA, self.MISS_DISTANCE,self.POC
+        self.tablePOC.setItem(0,0, QTableWidgetItem('Mision'))
+        self.tablePOC.setItem(1,0, QTableWidgetItem('Debris'))
+        self.tablePOC.setItem(0,1, QTableWidgetItem(self.sat_idc))
+        self.tablePOC.setItem(1,1, QTableWidgetItem(self.deb_idc))
+        self.tablePOC.setItem(0,2, QTableWidgetItem(TCAstr0))
+        self.tablePOC.setItem(0,3, QTableWidgetItem(TCAstr))
+        self.tablePOC.setItem(0,4, QTableWidgetItem(self.MISS_DISTANCE))
+        self.tablePOC.setItem(0,5, QTableWidgetItem(str(mod_dif)))
+        self.tablePOC.setItem(0,6, QTableWidgetItem(self.POC))
+        self.tablePOC.setItem(0,7, QTableWidgetItem(poc))
+
     def salirCdm(self):
         self.accept()
 
@@ -231,7 +273,7 @@ class ProcTle(QDialog):
         """
         self.tle_pri_edit    = QTextEdit()
         self.tableView       = QTableWidget()
-        
+
         """
         Plantilla
         """
@@ -253,7 +295,7 @@ class ProcTle(QDialog):
         grid.addWidget(self.tle_pri,9,0)
         grid.addWidget(self.tle_pri_edit,10,0,1,4)
         grid.addWidget(self.ma_covar_label,11,0) 
-        grid.addWidget(self.tableView,12,0,4,4)
+        grid.addWidget(self.tableView,12,0)
         grid.addWidget(self.outputs,23,1)
         grid.addWidget(self.estado_proc_edit,23,2)
         grid.addWidget(self.boton_dsetprimario,24,2)
