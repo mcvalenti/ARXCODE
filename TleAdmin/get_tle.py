@@ -3,9 +3,8 @@ Created on Tue Jul 12 14:21:56 2016
 
 @author: curso
 """
-
 from requests import session, exceptions
-from datetime import datetime
+from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 
 class importar_tle():

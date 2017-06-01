@@ -93,17 +93,21 @@ class ProcARxCODE(QMainWindow):
             ventana1=ProcCDM()
             self.setCentralWidget(ventana1)
             ventana1.exec_()
+        else:
+            ventana2=ProcEncuentro()
+            self.setCentralWidget(ventana2)
+            ventana2.exec_()
 
     def item_click1(self):
         c_item=self.listWidget1.currentItem().text()
         if c_item == 'Procesamiento de un set de TLE':
-            ventana2=ProcTle()
-            self.setCentralWidget(ventana2)
-            ventana2.exec_()
-        else:
-            ventana3=ProcMision()
+            ventana3=ProcTle()
             self.setCentralWidget(ventana3)
             ventana3.exec_()
+        else:
+            ventana4=ProcMision()
+            self.setCentralWidget(ventana4)
+            ventana4.exec_()
                 
     def center(self):
         screen = QDesktopWidget().screenGeometry()
@@ -204,8 +208,44 @@ class ProcCDM(QDialog):
 
     def salirCdm(self):
         self.accept()
+class ProcEncuentro(QDialog):
+    def __init__(self,parent=None):
+        QDialog.__init__(self,parent)
 
-    
+        self.setWindowModality(Qt.ApplicationModal)
+        self.initUI()
+        
+    def initUI(self):
+        self.palette = QPalette()
+        self.palette.setColor(QPalette.Background,Qt.white)
+        self.setPalette(self.palette)
+        
+        """
+        Botones
+        """
+        self.boton_salir = QPushButton('Salir')
+        
+        """
+        Plantilla
+        """
+        grid = QGridLayout()
+        grid.setSpacing(5)
+        
+        grid.addWidget(self.boton_salir,4,3)
+        
+        """
+        Acciones
+        """
+        self.boton_salir.clicked.connect(self.salir)
+        
+        self.setLayout(grid)
+        self.setWindowTitle('Procesamiento de TLE')    
+        self.show()
+        
+    def salir(self):
+        self.accept()    
+        
+        
 class ProcTle(QDialog):
 
     def __init__(self,parent=None):

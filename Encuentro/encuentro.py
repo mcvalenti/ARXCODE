@@ -27,6 +27,7 @@ Luego de realizar los siguientes pasos:
 # Resuelve la integral de la PoC.
 """
 
+
 def tuplaFloat(tupla):
     """
     transforma las tuplas a sus componentes en flotante
