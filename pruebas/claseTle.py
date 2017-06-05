@@ -13,6 +13,7 @@ from requests import session, exceptions
 from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 import TleAdmin
+from visual.trackencuentro import grafica_track
 
 class Tle:
     
@@ -93,7 +94,7 @@ class Tle:
             ffin=satrec.epoch
             r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
         else:
-            segundos=date.second+date.microsecond/1000000.0
+            segundos=date.second+date.microsecond
             r,v = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,segundos)
         return r,v
 
@@ -111,20 +112,23 @@ class Encuentro():
         objetos.
         (agregar la diferencias en rtn)
         """
+        
         self.dif_r=[]
         self.dif_v=[]
+        self.difr_mod=[]
+        self.difv_mod=[]
         
         self.epoca_ini=self.tca-timedelta(minutes=90)
         self.epoca_fin=self.tca+timedelta(minutes=10)
         self.epoca=self.epoca_ini
-        
+        self.epoca_lista=[self.epoca]
         """
         archivos de salida para graficar.
         """
         self.sat_id=self.tle_sat.catID()
         self.deb_id=self.tle_deb.catID()
-        salida1=open('../Encuentro/archivos/'+self.sat_id,'w')
-        salida2=open('../Encuentro/archivos/'+self.deb_id,'w')
+#         salida1=open('../Encuentro/archivos/'+self.sat_id,'w')
+#         salida2=open('../Encuentro/archivos/'+self.deb_id,'w')
         
         
         while self.epoca < self.epoca_fin:
@@ -137,64 +141,75 @@ class Encuentro():
             self.x1=float(r1[0])
             self.y1=float(r1[1])
             self.z1=float(r1[2])
+            
+            # Transformacion al sistema geodesico 
+#             fila_sat=cart2geod(self.x,self.y,self.z)
+#             salida1.write(fila_sat)
+#             fila_deb=cart2geod(self.x1,self.y1,self.z1)
+#             salida2.write(fila_deb)
 
             r=np.array([self.x,self.y,self.z])
             ve=np.array([float(v[0]),float(v[1]),float(v[2])])
             r1=np.array([self.x1,self.y1,self.z1])
             ve1=np.array([float(v1[0]),float(v1[1]),float(v1[2])])
             
-            fila1=self.cart2geod(self.x,self.y,self.z)
-            fila2=self.cart2geod(self.x1,self.y1,self.z1)
-            salida1.write(fila1)
-            salida2.write(fila2)
-            
+            self.difr_mod.append(np.sqrt(np.dot(r-r1,r-r1)))
             self.dif_r.append(r-r1)
             self.dif_v.append(ve-ve1)
             print self.epoca,np.sqrt(np.dot(r-r1,r-r1))
             self.epoca=self.epoca+timedelta(minutes=1)
+            self.epoca_lista.append(self.epoca)
             
-        
+#         salida1.close()
+#         salida2.close()
         return self.dif_r,self.dif_v
     
-    def cart2geod(self,x,y,z):
-        """
-        Transforma coordenadas del sistem cartesiano (TEME)
-        al sistema geodesico aprox. 
-        """
-        deg=np.divide(180,np.pi)
-        r=np.sqrt(x*x+y*y+z*z)
-        l=np.divide(x,r)
-        m=np.divide(y,r)
-        n=np.divide(z,r)
-        delta=np.arcsin(n)
-        if m>0:
-            alpha = np.arccos(np.divide(l,np.cos(delta)))
-        else:
-            alpha = 2*np.pi-np.arccos(np.divide(l,np.cos(delta)))
-        fila=str(alpha*deg)+' '+str(delta*deg)+'\n'
-    
-        return fila
+#     def cart2geod(self,x,y,z):
+#         """
+#         Transforma coordenadas del sistem cartesiano (TEME)
+#         al sistema geodesico aprox. 
+#         """
+#         deg=np.divide(180,np.pi)
+#         r=np.sqrt(self.x*self.x+self.y*self.y+self.z*self.z)
+#         l=np.divide(self.x,r)
+#         m=np.divide(self.y,r)
+#         n=np.divide(self.z,r)
+#         delta=np.arcsin(n)
+#         if m>0:
+#             alpha = np.arccos(np.divide(l,np.cos(delta)))
+#         else:
+#             alpha = 2*np.pi-np.arccos(np.divide(l,np.cos(delta)))
+#         fila=str(alpha*deg)+' '+str(delta*deg)+'\n'
+#          
+#         return fila
+
     
     def minDistancia(self):
         self.dif_r,self.dif_v=self.svDif()
-        self.minDist=np.sqrt(np.dot(self.dif_r,self.dif_r))
-        return self.minDist
+        self.minDist=np.min(self.difr_mod)
+        self.ind_min=np.argmin(self.difr_mod)
+        return self.epoca_lista[self.ind_min],self.minDist
     
-if __name__=='__main__':
-    
-#     TCA=datetime(2008,1,9,19,0,30)
-#     sat_id='27386' #ENVISAT
-#     deb_id='15482' #COSMOS
-#     usuario='macecilia'
-#     clave='MaCeciliaSpace17'
-# 
-#     tle_sat=Tle(usuario,clave,sat_id,TCA)
-#     tle_deb=Tle(usuario,clave,deb_id,TCA)
+    def grafica(self):
+        
+        grafica_track('../Encuentro/archivos/'+self.sat_id, '../Encuentro/archivos/'+self.deb_id)
+        return {}
 #     
-#     encuentro1=Encuentro(tle_sat,tle_deb,TCA)
-#     dif_r,dif_v=encuentro1.svDif()
-    
-    tle_archivo=Tle.creadoxArchivo(archivo='../TleAdmin/tle/37673tle0')
-    print tle_archivo.epoca()
+# if __name__=='__main__':
+#     
+# #     TCA=datetime(2008,1,9,19,0,30)
+# #     sat_id='27386' #ENVISAT
+# #     deb_id='15482' #COSMOS
+# #     usuario='macecilia'
+# #     clave='MaCeciliaSpace17'
+# # 
+# #     tle_sat=Tle(usuario,clave,sat_id,TCA)
+# #     tle_deb=Tle(usuario,clave,deb_id,TCA)
+# #     
+# #     encuentro1=Encuentro(tle_sat,tle_deb,TCA)
+# #     dif_r,dif_v=encuentro1.svDif()
+#     
+#     tle_archivo=Tle.creadoxArchivo(archivo='../TleAdmin/tle/37673tle0')
+#     print tle_archivo.epoca()
     
     
