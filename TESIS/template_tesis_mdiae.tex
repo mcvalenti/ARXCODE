@@ -30,8 +30,8 @@
 
 %Configuración de los márgenes
 \usepackage[top=3cm, bottom=3cm, left=2.5cm, right=1.5cm]{geometry}
-
-
+\usepackage{subfigure}
+\usepackage{natbib}
 %------------------------------------------------------------------------------
 % Esto no se usa (YA ESTA DEFINIDO EN EL TEMPLATE)
 %\usepackage{setspace}
@@ -89,7 +89,9 @@
 \include{secciones/Resultados}
 \include{secciones/Conclusiones}
 
-\bibliografia{template\_tesis\_mdiae.bib}
+\bibliographystyle{apalike}
+\bibliography{template_tesis_mdiae}
+%\bibliografia{template\_tesis\_mdiae}
 
 % ------------------------------------------------------------------------------
 % EN CASO DE TENER APÉNDICES, DESCOMENTAR A CONTINUACIÓN
