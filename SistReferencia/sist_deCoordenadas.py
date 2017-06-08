@@ -267,23 +267,25 @@ def teme2tod(epoch,r_teme):
     
     arc2rad=np.pi/(180.0*3600.0)   
     jd1=jd(epoch)
-    tt=(jd1-2451545.0)/36525.0 
+    print 'J1 = ', jd1
+    tt=(jd1-2451544.5)/36525.0 
+    print 'TT = ', tt
 #     mjd=calcula_mjd(epoch)
 #     tt=(mjd-51544.5)/36525.0
 
     """
     Parametros [arcseconds / segundos de arco]
     """
-    M_moon  = 134.96298139*3600.0+1717915922.6330*tt+31.31*tt*tt+0.064*tt*tt*tt
-    M_sun   = 357.52772333*3600.0+129596581.2240*tt-0.577*tt*tt+0.012*tt*tt*tt
-    mu_moon = 93.27191028*3600.0+1739527263.1370*tt-13.257*tt*tt-0.011*tt*tt*tt
-    D_sun   = 297.85036306*3600.0+1602961601.3280*tt-6.891*tt*tt+0.019*tt*tt*tt
-    O_moon  = 125.04452222*3600.0-6962890.5390*tt+7.455*tt*tt+0.0008*tt*tt*tt
+    M_moon  = 134.96340251*3600.0+1717915923.2178*tt+31.8792*tt*tt+0.051*tt*tt*tt
+    M_sun   = 357.52910918*3600.0+129596581.0481*tt-0.5532*tt*tt-0.000136*tt*tt*tt
+    mu_moon = 93.27209062*3600.0+1739527262.8478*tt-12.7512*tt*tt-0.00103*tt*tt*tt
+    D_sun   = 297.85019547*3600.0+1602961601.2090*tt-6.3706*tt*tt+0.06593*tt*tt*tt
+    O_moon  = 125.04455501*3600.0-6962890.2665*tt+7.4722*tt*tt+0.007702*tt*tt*tt
     
     nutacion=open('../SistReferencia/prenut.dat','r')
     coef=nutacion.readlines()
-    d_epsi1=0
-    d_psi1=0
+    d_epsi=0
+    d_psi=0
     
     for c in coef:
         an=c.split(',')
@@ -292,25 +294,32 @@ def teme2tod(epoch,r_teme):
         a3=float(an[2])
         a4=float(an[3])
         a5=float(an[4])
-        aphi=float(an[5])*arc2rad
-        aphi_d=float(an[6])*arc2rad
-        aepsi=float(an[7])*arc2rad
-        aepsi_d=float(an[8])*arc2rad
+        aphi=float(an[5])
+        aphi_d=float(an[6])
+        aepsi=float(an[7])
+        aepsi_d=float(an[8])
         
-        phi_i1=(a1*M_moon+a2*M_sun+a3*mu_moon+a4*D_sun+a5*O_moon)*arc2rad
-        phi_i=phi_i1%(2*np.pi)
+        phi_i=(a1*M_moon+a2*M_sun+a3*mu_moon+a4*D_sun+a5*O_moon)*arc2rad
+#        phi_i=phi_i1%(2*np.pi)
         
-        d_epsi1=d_epsi1 + (aepsi+aepsi_d*tt)*np.cos(phi_i)
-        d_epsi=d_epsi1%(2*np.pi)
-        d_psi1=d_psi1 + (aphi+aphi_d*tt)*np.sin(phi_i)
-        d_psi=d_psi1%(2*np.pi)
-        
+        d_epsi=d_epsi + (aepsi+aepsi_d*tt)*np.cos(phi_i)
+#        d_epsi=d_epsi1%(2*np.pi)
+        d_psi=d_psi + (aphi+aphi_d*tt)*np.sin(phi_i)
+#        d_psi=d_psi1%(2*np.pi)
+    
+    print 'epsi = ', d_epsi
+    print 'd_psi =', d_psi  
+      
     d_epsi=d_epsi*(1.0/10000.0)
     d_psi=d_psi*(1.0/10000.0)
+
+    print 'epsi = ', d_epsi
+    print 'd_psi =', d_psi  
+      
     
     epsi_media = (84381.448-46.815*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad # [rad]
     
-    EQnox = (d_psi*np.cos(epsi_media+d_epsi)+0.00264*arc2rad*np.sin(O_moon*arc2rad)+0.000063*arc2rad*np.sin(2*O_moon*arc2rad))
+    EQnox = (d_psi*np.cos(epsi_media)+0.00264*np.sin(O_moon*arc2rad)+0.000063*np.sin(2*O_moon*arc2rad))*arc2rad
 
     
     Q=np.matrix([[np.cos(-EQnox),np.sin(-EQnox),0],
@@ -322,10 +331,8 @@ def teme2tod(epoch,r_teme):
     return r_tod    
     
 if __name__=='__main__':
-    epoca=datetime(2000,6,28,15,8,51,655)
-#     jd=jd(epoca)
-#     tt=(jd-2451545.0)/36525.0
-
+    
+    epoca=datetime(2000,6,28,15,8,51,655*1000)
     r_teme=[3961.0035498,6010.7511740,4619.3009301]
     r_todVal=[3961.4214985,6010.4752688,4619.301531]
     r_tod=teme2tod(epoca, r_teme)

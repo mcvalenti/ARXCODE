@@ -4,6 +4,7 @@ Created on 01/06/2017
 @author: mcvalenti
 '''
 import numpy as np
+import sys
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from sgp4.propagation import sgp4
@@ -13,10 +14,39 @@ from requests import session, exceptions
 from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 import TleAdmin
+from SistReferencia.sist_deCoordenadas import ricSis
 from visual.trackencuentro import grafica_track
 
-class Tle:
+class Posicion:
+
+    def __init__(self,r,v,epoca):   
+        self.r=r
+        self.v=v
+        self.epoca=epoca
+        
+    def getCoordenadasGEOD(self):
+        """
+        Transforma coordenadas del sistem cartesiano (TEME)
+        al sistema geodesico aprox.
+        REVISAR!!! 
+        ---------------
+        outputs
+            alpha, delta: angulos Geodesicos (float) [grados]
+        """
+        deg=np.divide(180,np.pi)
+        r_mod=np.sqrt(self.r[0]*self.r[0]+self.r[1]*self.r[1]+self.r[2]*self.r[2])
+        l=np.divide(self.r[0],r_mod)
+        m=np.divide(self.r[1],r_mod)
+        n=np.divide(self.r[2],r_mod)
+        self.delta=np.arcsin(n)
+        if m>0:
+            self.alpha = np.arccos(np.divide(l,np.cos(self.delta)))
+        else:
+            self.alpha = 2*np.pi-np.arccos(np.divide(l,np.cos(self.delta)))
+         
+        return self.delta*deg, self.alpha*deg
     
+class Tle:  
     
     @classmethod
     def creadoxParam(cls, usuario,clave,sat_id,epoca):
@@ -92,11 +122,13 @@ class Tle:
         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
         if date==None:
             ffin=satrec.epoch
-            r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
+            self.r,self.v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
         else:
             segundos=date.second+date.microsecond
-            r,v = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,segundos)
-        return r,v
+            self.r,self.v = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,segundos)
+        return self.r,self.v
+    
+
 
 class Encuentro():
     
@@ -106,94 +138,61 @@ class Encuentro():
         self.tle_deb=tle_deb
         self.tca=tca
         
-    def svDif(self):
+        """
+        Genera Archivos
+        """
+        sat_id=self.tle_sat.catID()
+        deb_id=self.tle_deb.catID()
+        salida1=open('../Encuentro/archivos/'+str(sat_id),'w+')
+        salida2=open('../Encuentro/archivos/'+str(deb_id),'w+')
+        salida3=open('../Encuentro/archivos/'+str(sat_id)+'_'+str(deb_id)+'_rtn','w+')
+
         """
         Calcula las diferencias relativas entre los dos 
-        objetos.
+        objetos en el sistema RTN.
         (agregar la diferencias en rtn)
         """
-        
-        self.dif_r=[]
-        self.dif_v=[]
-        self.difr_mod=[]
-        self.difv_mod=[]
-        
+
         self.epoca_ini=self.tca-timedelta(minutes=90)
-        self.epoca_fin=self.tca+timedelta(minutes=10)
-        self.epoca=self.epoca_ini
-        self.epoca_lista=[self.epoca]
-        """
-        archivos de salida para graficar.
-        """
-        self.sat_id=self.tle_sat.catID()
-        self.deb_id=self.tle_deb.catID()
-#         salida1=open('../Encuentro/archivos/'+self.sat_id,'w')
-#         salida2=open('../Encuentro/archivos/'+self.deb_id,'w')
+        epoca_fin=self.tca+timedelta(minutes=10)
         
-        
-        while self.epoca < self.epoca_fin:
-            r,v=self.tle_sat.propagaTLE(self.epoca)
-            r1,v1=self.tle_deb.propagaTLE(self.epoca)
-    
-            self.x=float(r[0])
-            self.y=float(r[1])
-            self.z=float(r[2])
-            self.x1=float(r1[0])
-            self.y1=float(r1[1])
-            self.z1=float(r1[2])
+        self.mod_minDist=sys.float_info.max
+        while self.epoca_ini < epoca_fin:
+            r,v=self.tle_sat.propagaTLE(self.epoca_ini)
+            r1,v1=self.tle_deb.propagaTLE(self.epoca_ini)
             
-            # Transformacion al sistema geodesico 
-#             fila_sat=cart2geod(self.x,self.y,self.z)
-#             salida1.write(fila_sat)
-#             fila_deb=cart2geod(self.x1,self.y1,self.z1)
-#             salida2.write(fila_deb)
+            r=np.array([float(r[0]),float(r[1]),float(r[2])])
+            v=np.array([float(v[0]),float(v[1]),float(v[2])])
+            r1=np.array([float(r1[0]),float(r1[1]),float(r1[2])])
+            v1=np.array([float(v1[0]),float(v1[1]),float(v1[2])])
+            
+            pos1=Posicion(r,v,self.epoca_ini)
+            pos2=Posicion(r1,v1,self.epoca_ini)
+            
+            self.DistVector=pos1.r-pos2.r
+            x_ric,y_ric,z_ric=ricSis(pos1.r,pos1.v,self.DistVector)
+            self.DistRic=np.array([x_ric,y_ric,z_ric])
+            self.VelVector=pos1.v-pos2.v
+            self.mod_Dist1=np.sqrt(np.dot(self.DistRic,self.DistRic))
+            if self.mod_Dist1 < self.mod_minDist:
+                self.mod_minDist=self.mod_Dist1
+                self.tca_c=self.epoca_ini
+            self.epoca_ini=self.epoca_ini+timedelta(minutes=1)
+            
+            # Transformo a Coordenadas Geodesicas.
+            delta1, alpha1=pos1.getCoordenadasGEOD()
+            delta2, alpha2=pos2.getCoordenadasGEOD()
+            # GUARDAR EN ARCHIVO Posiciones en TEME.
+            salida1.write(str(alpha1)+' '+str(delta1)+' '+datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
+            salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
+ 
+            # GUARDAR EN ARCHIVO Posiciones en TEME.
+            salida3.write(datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(self.DistRic[0])+' '+str(self.DistRic[1])+' '+str(self.DistRic[2])+'\n')
 
-            r=np.array([self.x,self.y,self.z])
-            ve=np.array([float(v[0]),float(v[1]),float(v[2])])
-            r1=np.array([self.x1,self.y1,self.z1])
-            ve1=np.array([float(v1[0]),float(v1[1]),float(v1[2])])
-            
-            self.difr_mod.append(np.sqrt(np.dot(r-r1,r-r1)))
-            self.dif_r.append(r-r1)
-            self.dif_v.append(ve-ve1)
-            print self.epoca,np.sqrt(np.dot(r-r1,r-r1))
-            self.epoca=self.epoca+timedelta(minutes=1)
-            self.epoca_lista.append(self.epoca)
-            
-#         salida1.close()
-#         salida2.close()
-        return self.dif_r,self.dif_v
-    
-#     def cart2geod(self,x,y,z):
-#         """
-#         Transforma coordenadas del sistem cartesiano (TEME)
-#         al sistema geodesico aprox. 
-#         """
-#         deg=np.divide(180,np.pi)
-#         r=np.sqrt(self.x*self.x+self.y*self.y+self.z*self.z)
-#         l=np.divide(self.x,r)
-#         m=np.divide(self.y,r)
-#         n=np.divide(self.z,r)
-#         delta=np.arcsin(n)
-#         if m>0:
-#             alpha = np.arccos(np.divide(l,np.cos(delta)))
-#         else:
-#             alpha = 2*np.pi-np.arccos(np.divide(l,np.cos(delta)))
-#         fila=str(alpha*deg)+' '+str(delta*deg)+'\n'
-#          
-#         return fila
+        salida1.close()
+        salida2.close()
+        salida3.close()
 
-    
-    def minDistancia(self):
-        self.dif_r,self.dif_v=self.svDif()
-        self.minDist=np.min(self.difr_mod)
-        self.ind_min=np.argmin(self.difr_mod)
-        return self.epoca_lista[self.ind_min],self.minDist
-    
-    def grafica(self):
-        
-        grafica_track('../Encuentro/archivos/'+self.sat_id, '../Encuentro/archivos/'+self.deb_id)
-        return {}
 #     
 # if __name__=='__main__':
 #     

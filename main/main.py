@@ -8,6 +8,7 @@ import numpy as np
 from datetime import datetime
 from pruebas.claseTle import Tle, Encuentro
 from TleAdmin.get_tle import importar_tle
+from visual.trackencuentro import grafica_track
 
 
 def proc_encuentroSimple(sat_id,deb_id,tca):
@@ -20,8 +21,6 @@ def proc_encuentroSimple(sat_id,deb_id,tca):
         Genera archivo lat, long ---> Plotea.
       
     """
-
-
     # Importar los TLE de NORAD.
 
     usuario='macecilia'
@@ -33,9 +32,11 @@ def proc_encuentroSimple(sat_id,deb_id,tca):
     Propagacion hasta el Encuentro
     """
     encuentro1=Encuentro(tle_sat,tle_deb,tca)
-    epoca, minDist=encuentro1.minDistancia()
-    
-    print 'Minima Distancia = ', epoca, minDist
+
+    print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
+    grafica_track('../Encuentro/archivos/'+str(sat_id)+'U', '../Encuentro/archivos/'+str(deb_id)+'U')
+    print 'fin del procesamiento.'
+
     
 def metodoOSWtles():
     """

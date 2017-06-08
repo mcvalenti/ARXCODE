@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from CDM.cdmParser import extraeCDM
+from pruebas.claseTle import Tle, Encuentro
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
@@ -221,17 +222,35 @@ class ProcEncuentro(QDialog):
         self.setPalette(self.palette)
         
         """
+        Etiquetas
+        """
+        self.sat_lab  = QLabel('Satelite NORAD ID')
+        self.deb_lab  = QLabel('Debris NORAD ID')
+        self.time_lab = QLabel('TCA')
+        """
         Botones
         """
-        self.boton_salir = QPushButton('Salir')
-        
+        self.boton_encuetro = QPushButton('Procesar Encuentro')
+        self.boton_salir    = QPushButton('Salir')
+        """
+        Campos de Edicion
+        """
+        self.sat_id_text = QLineEdit()
+        self.deb_id_text = QLineEdit()
+        self.tca_text    = QCalendarWidget()
         """
         Plantilla
         """
         grid = QGridLayout()
         grid.setSpacing(5)
         
-        grid.addWidget(self.boton_salir,4,3)
+        grid.addWidget(self.sat_lab,2,1)
+        grid.addWidget(self.sat_id_text,2,2)
+        grid.addWidget(self.deb_lab,3,1)
+        grid.addWidget(self.deb_id_text,3,2)
+        grid.addWidget(self.time_lab,4,1)
+        grid.addWidget(self.tca_text,4,2)
+        grid.addWidget(self.boton_salir,6,3)
         
         """
         Acciones
@@ -239,8 +258,34 @@ class ProcEncuentro(QDialog):
         self.boton_salir.clicked.connect(self.salir)
         
         self.setLayout(grid)
-        self.setWindowTitle('Procesamiento de TLE')    
+        self.setWindowTitle('Procesamiento de Encuentro')    
         self.show()
+    
+    def procesoSimple(self):
+        """
+        Propaga los objetos involucrados un intervalos [tca-90:tca+20]
+        Calcula:
+            Miss Distance
+            TCA calculado
+            Diferencias en RTN ---> Plotea.
+            Genera archivo lat, long ---> Plotea.
+          
+        """
+        # Importar los TLE de NORAD.
+    
+        usuario='macecilia'
+        clave='MaCeciliaSpace17'
+#         tle_sat=Tle.creadoxParam(usuario, clave, sat_id, tca)
+#         tle_deb=Tle.creadoxParam(usuario, clave, deb_id, tca)
+#         
+#         """
+#         Propagacion hasta el Encuentro
+#         """
+#         encuentro1=Encuentro(tle_sat,tle_deb,tca)
+#     
+#         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
+#         grafica_track('../Encuentro/archivos/'+str(sat_id)+'U', '../Encuentro/archivos/'+str(deb_id)+'U')
+#         print 'fin del procesamiento.'
         
     def salir(self):
         self.accept()    
