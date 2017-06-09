@@ -137,6 +137,7 @@ class Encuentro():
         self.tle_sat=tle_sat
         self.tle_deb=tle_deb
         self.tca=tca
+        self.DistRic=0
         
         """
         Genera Archivos

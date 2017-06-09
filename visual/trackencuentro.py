@@ -13,7 +13,7 @@ def grafica_track(satelite,debris):
     
     gmt.pscoast( R='0/280/-75/75', #g
                  J='M6i', #'G70/-51/5i'
-                 B='15g15',              # grid
+                 B='30g30',              # grid
                  N='1',
                  S=(173,216,230),      # wet fill color 
                  G=(144,238,144),      # dry fill color
@@ -34,6 +34,6 @@ def grafica_track(satelite,debris):
               K='K')
     
     
-    gmt.save('../visual/archivos/track.ps')
+    gmt.save('../visual/archivos/ploteo_track.ps')
     
-    print 'Fin del procesamiento'
+    print 'Grafico Terminado'

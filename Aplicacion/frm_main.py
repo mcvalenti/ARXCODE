@@ -11,7 +11,7 @@ from PyQt4.QtCore import *
 from CDM.cdmParser import extraeCDM
 from pruebas.claseTle import Tle, Encuentro
 from TleAdmin.TleArchivos import setTLE
-from TleAdmin.TLE import Tle
+#from TleAdmin.TLE import Tle
 from TleAdmin.get_tle import importar_tle
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
@@ -24,6 +24,7 @@ from visual.TleOsweiler import VerGrafico
 from visual.binGraf import histograma_bin, desviacion_standard_graf
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
+from oauthlib.oauth2.rfc6749.utils import params_from_uri
 
 class ProcARxCODE(QMainWindow):
     
@@ -215,6 +216,13 @@ class ProcEncuentro(QDialog):
 
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
+    # Parametros
+        self.sat_id=''
+        self.deb_id=''
+        self.tca=''
+        self.min_dist=None
+        self.tca_calc=None
+        
         
     def initUI(self):
         self.palette = QPalette()
@@ -227,6 +235,10 @@ class ProcEncuentro(QDialog):
         self.sat_lab  = QLabel('Satelite NORAD ID')
         self.deb_lab  = QLabel('Debris NORAD ID')
         self.time_lab = QLabel('TCA')
+        self.hs_lab   = QLabel('Hs:')
+        self.min_lab  = QLabel('min:')
+        self.seg_lab  = QLabel('seg')
+        self.mseg_lab = QLabel('mseg')
         """
         Botones
         """
@@ -238,11 +250,27 @@ class ProcEncuentro(QDialog):
         self.sat_id_text = QLineEdit()
         self.deb_id_text = QLineEdit()
         self.tca_text    = QCalendarWidget()
+        self.hs_tex      = QLineEdit()
+        self.min_tex     = QLineEdit()
+        self.seg_tex     = QLineEdit()
+        self.mseg_tex    = QLineEdit()
+        
+        """
+        Otros
+        """
+        self.tableEncuentro   = QTableWidget()
+        self.tableEncuentro.setRowCount(1)
+        self.tableEncuentro.setColumnCount(4)
+        listaLabels=['Norad Id','Nombre','TCAarx','MinD arx']
+        self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
+
         """
         Plantilla
         """
         grid = QGridLayout()
         grid.setSpacing(5)
+        scroll = QScrollArea()
+
         
         grid.addWidget(self.sat_lab,2,1)
         grid.addWidget(self.sat_id_text,2,2)
@@ -250,11 +278,22 @@ class ProcEncuentro(QDialog):
         grid.addWidget(self.deb_id_text,3,2)
         grid.addWidget(self.time_lab,4,1)
         grid.addWidget(self.tca_text,4,2)
-        grid.addWidget(self.boton_salir,6,3)
+        grid.addWidget(self.hs_tex,4,3)
+        grid.addWidget(self.hs_lab,4,4)
+        grid.addWidget(self.min_tex,4,5)
+        grid.addWidget(self.min_lab,4,6)
+        grid.addWidget(self.seg_tex,4,7)
+        grid.addWidget(self.seg_lab,4,8)
+        grid.addWidget(self.mseg_tex,4,9)
+        grid.addWidget(self.mseg_lab,4,10)        
+        grid.addWidget(self.tableEncuentro,5,2,2,5)
+        grid.addWidget(self.boton_encuetro,9,2)
+        grid.addWidget(self.boton_salir,9,3)
         
         """
         Acciones
         """
+        self.boton_encuetro.clicked.connect(self.procesoSimple)
         self.boton_salir.clicked.connect(self.salir)
         
         self.setLayout(grid)
@@ -263,7 +302,7 @@ class ProcEncuentro(QDialog):
     
     def procesoSimple(self):
         """
-        Propaga los objetos involucrados un intervalos [tca-90:tca+20]
+        Propaga los objetos involucrados un intervalos [tca-90:tca+10]
         Calcula:
             Miss Distance
             TCA calculado
@@ -275,14 +314,28 @@ class ProcEncuentro(QDialog):
     
         usuario='macecilia'
         clave='MaCeciliaSpace17'
-#         tle_sat=Tle.creadoxParam(usuario, clave, sat_id, tca)
-#         tle_deb=Tle.creadoxParam(usuario, clave, deb_id, tca)
+        self.sat_id=str(self.sat_id_text.text())
+        self.deb_id=str(self.deb_id_text.text())
+        hs =int(self.hs_tex.text())
+        min=int(self.min_tex.text())
+        seg=int(self.seg_tex.text())
+        fecha = self.tca_text.selectedDate()#.toPyDate()
+        hora = QTime(hs,min,seg)
+        self.tca=QDateTime(fecha,hora).toPyDateTime()
+        tle_sat=Tle.creadoxParam(usuario, clave, self.sat_id, self.tca)
+        tle_deb=Tle.creadoxParam(usuario, clave, self.deb_id, self.tca)
 #         
-#         """
-#         Propagacion hasta el Encuentro
-#         """
-#         encuentro1=Encuentro(tle_sat,tle_deb,tca)
-#     
+        """
+        Propagacion hasta el Encuentro
+        """
+        encuentro1=Encuentro(tle_sat,tle_deb,self.tca)
+        self.min_dist= encuentro1.mod_minDist
+        self.tca_calc= encuentro1.tca_c
+        self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
+        self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
+        self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
+        self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(self.min_dist)))
+#
 #         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
 #         grafica_track('../Encuentro/archivos/'+str(sat_id)+'U', '../Encuentro/archivos/'+str(deb_id)+'U')
 #         print 'fin del procesamiento.'
