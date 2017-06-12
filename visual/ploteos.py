@@ -8,7 +8,40 @@ from scipy import stats
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 from datetime import datetime 
+from matplotlib.dates import datestr2num
 
+
+def grafica_diferenciasRIC(archivo):
+
+    data0=[]
+    dr=[]
+    di=[]
+    dc=[]
+    min_dist=[]
+    archivo=open(archivo,'r')
+    contenido=archivo.readlines()
+
+    for c in contenido:
+        columna=c.split(' ')
+        data0.append(c[0:19])
+        dr.append(columna[2])
+        di.append(columna[3])
+        dc.append(columna[4])
+        min_dist.append(np.sqrt(float(columna[2])*float(columna[2])+float(columna[3])*float(columna[3])+float(columna[4])*float(columna[4])))
+        
+    """
+    Gestion de Fechas
+    """
+    date_fmt = '%Y-%m-%d %H:%M:%S'
+    epoca=[datetime.strptime(str(i), date_fmt) for i in data0]
+    x = [mdates.date2num(i) for i in epoca]
+    date_formatter = mdates.DateFormatter('%Y-%m-%d %H:%M:%S')
+
+    plt.grid()
+    plt.plot_date(x, min_dist, fmt='M')
+    grafico_dif='../Encuentro/archivos/'+'min_dist.png'
+    plt.savefig(grafico_dif)
+    return grafico_dif
     
 def grafica_set_principal(sat_id,path,data,coef):
     """
@@ -263,3 +296,8 @@ def grafica_set15dias(data15,coef):
     plt.savefig('../visual/archivos/pepe15.png')
     plt.show()
     plt.close()
+
+
+# if __name__=='__main__':
+#     archivo='../Encuentro/archivos/27386U_15482U_rtn'
+#     grafica_diferenciasRIC(archivo)

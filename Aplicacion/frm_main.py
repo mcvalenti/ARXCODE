@@ -18,6 +18,7 @@ from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 from Encuentro.encuentro import evaluaEncuentro
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
 from visual import ploteos
+from visual.trackencuentro import grafica_track
 from visual.TleOsweiler import VerGrafico
 # #from visual.TlevsCodsGraf import VerGraficoMision
 # from visual.CodsOsweiler import VerGraficoCods
@@ -233,16 +234,22 @@ class ProcEncuentro(QDialog):
         Etiquetas
         """
         self.sat_lab  = QLabel('Satelite NORAD ID')
-        self.deb_lab  = QLabel('Debris NORAD ID')
+        self.deb_lab  = QLabel('Desecho NORAD ID')
         self.time_lab = QLabel('TCA')
         self.hs_lab   = QLabel('Hs:')
         self.min_lab  = QLabel('min:')
         self.seg_lab  = QLabel('seg')
         self.mseg_lab = QLabel('mseg')
+        # imagen 
+        self.track = QLabel() 
+        self.dif   = QLabel()
+        #track.setPixmap(pixmap)
         """
         Botones
         """
         self.boton_encuetro = QPushButton('Procesar Encuentro')
+        self.boton_dif      = QPushButton('Ver diferencias')
+        self.boton_track    = QPushButton('Track')
         self.boton_salir    = QPushButton('Salir')
         """
         Campos de Edicion
@@ -254,7 +261,7 @@ class ProcEncuentro(QDialog):
         self.min_tex     = QLineEdit()
         self.seg_tex     = QLineEdit()
         self.mseg_tex    = QLineEdit()
-        
+
         """
         Otros
         """
@@ -263,7 +270,6 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro.setColumnCount(4)
         listaLabels=['Norad Id','Nombre','TCAarx','MinD arx']
         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
-
         """
         Plantilla
         """
@@ -286,15 +292,23 @@ class ProcEncuentro(QDialog):
         grid.addWidget(self.seg_lab,4,8)
         grid.addWidget(self.mseg_tex,4,9)
         grid.addWidget(self.mseg_lab,4,10)        
-        grid.addWidget(self.tableEncuentro,5,2,2,5)
-        grid.addWidget(self.boton_encuetro,9,2)
-        grid.addWidget(self.boton_salir,9,3)
+        grid.addWidget(self.tableEncuentro,6,2,2,5)
+        grid.addWidget(self.track,8,2)
+        grid.addWidget(self.dif,8,3)
+        grid.addWidget(self.boton_encuetro,6,10)
+        grid.addWidget(self.boton_dif,7,10)
+        grid.addWidget(self.boton_track,8,10)
+        grid.addWidget(self.boton_salir,9,10)
         
         """
         Acciones
         """
         self.boton_encuetro.clicked.connect(self.procesoSimple)
         self.boton_salir.clicked.connect(self.salir)
+        self.boton_track.clicked.connect(self.mostrarTrack)
+        self.boton_dif.clicked.connect(self.mostrarDif)
+        self.boton_track.setEnabled(False)
+        self.boton_dif.setEnabled(False)
         
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de Encuentro')    
@@ -335,10 +349,25 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
         self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
         self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(self.min_dist)))
-#
-#         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
-#         grafica_track('../Encuentro/archivos/'+str(sat_id)+'U', '../Encuentro/archivos/'+str(deb_id)+'U')
-#         print 'fin del procesamiento.'
+        # archivo de diferencias.
+        self.archivo_dif=encuentro1.archivo_dif
+        
+
+        print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
+        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
+        print 'fin del procesamiento.'
+        
+        self.boton_track.setEnabled(True)
+        self.boton_dif.setEnabled(True)
+    
+    def mostrarDif(self):
+        self.grafico_dif= ploteos.grafica_diferenciasRIC(self.archivo_dif)
+        self.pixmap1 = QPixmap(self.grafico_dif)
+        self.dif.setPixmap(self.pixmap1)
+    
+    def mostrarTrack(self):
+        self.pixmap = QPixmap('../visual/archivos/ploteo_track.ps')
+        self.track.setPixmap(self.pixmap)
         
     def salir(self):
         self.accept()    
@@ -411,7 +440,6 @@ class ProcTle(QDialog):
         """
         self.tle_pri_edit    = QTextEdit()
         self.tableView       = QTableWidget()
-
         """
         Plantilla
         """
@@ -452,12 +480,10 @@ class ProcTle(QDialog):
         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
 #         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
 #         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
-
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de TLE')    
         self.show()
-        
-                
+          
     def botonNorad(self):
         print ("Procesando la Conexion con NORAD para la Descarga...")
         self.w = ConexionNorad()

@@ -267,9 +267,7 @@ def teme2tod(epoch,r_teme):
     
     arc2rad=np.pi/(180.0*3600.0)   
     jd1=jd(epoch)
-    print 'J1 = ', jd1
     tt=(jd1-2451544.5)/36525.0 
-    print 'TT = ', tt
 #     mjd=calcula_mjd(epoch)
 #     tt=(mjd-51544.5)/36525.0
 
@@ -306,17 +304,10 @@ def teme2tod(epoch,r_teme):
 #        d_epsi=d_epsi1%(2*np.pi)
         d_psi=d_psi + (aphi+aphi_d*tt)*np.sin(phi_i)
 #        d_psi=d_psi1%(2*np.pi)
-    
-    print 'epsi = ', d_epsi
-    print 'd_psi =', d_psi  
-      
+
     d_epsi=d_epsi*(1.0/10000.0)
     d_psi=d_psi*(1.0/10000.0)
 
-    print 'epsi = ', d_epsi
-    print 'd_psi =', d_psi  
-      
-    
     epsi_media = (84381.448-46.815*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad # [rad]
     
     EQnox = (d_psi*np.cos(epsi_media)+0.00264*np.sin(O_moon*arc2rad)+0.000063*np.sin(2*O_moon*arc2rad))*arc2rad

@@ -137,16 +137,16 @@ class Encuentro():
         self.tle_sat=tle_sat
         self.tle_deb=tle_deb
         self.tca=tca
-        self.DistRic=0
-        
+        self.DistRic=0         
         """
         Genera Archivos
         """
         sat_id=self.tle_sat.catID()
         deb_id=self.tle_deb.catID()
+        self.archivo_dif ='../Encuentro/archivos/'+str(sat_id)+'_'+str(deb_id)+'_rtn'
         salida1=open('../Encuentro/archivos/'+str(sat_id),'w+')
         salida2=open('../Encuentro/archivos/'+str(deb_id),'w+')
-        salida3=open('../Encuentro/archivos/'+str(sat_id)+'_'+str(deb_id)+'_rtn','w+')
+        salida3=open(self.archivo_dif,'w+')
 
         """
         Calcula las diferencias relativas entre los dos 
@@ -154,8 +154,8 @@ class Encuentro():
         (agregar la diferencias en rtn)
         """
 
-        self.epoca_ini=self.tca-timedelta(minutes=90)
-        epoca_fin=self.tca+timedelta(minutes=10)
+        self.epoca_ini=self.tca-timedelta(minutes=5)
+        epoca_fin=self.tca+timedelta(minutes=5)
         
         self.mod_minDist=sys.float_info.max
         while self.epoca_ini < epoca_fin:
@@ -178,6 +178,7 @@ class Encuentro():
             if self.mod_Dist1 < self.mod_minDist:
                 self.mod_minDist=self.mod_Dist1
                 self.tca_c=self.epoca_ini
+            print self.epoca_ini, self.mod_Dist1
             self.epoca_ini=self.epoca_ini+timedelta(minutes=1)
             
             # Transformo a Coordenadas Geodesicas.

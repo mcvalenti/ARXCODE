@@ -10,6 +10,8 @@ def setTLE(id_sat,crudo):
     Esta funcion particiona el archivo en muchos archivos, uno por cada tle.
     Y los guarda en TleAdmin/tle
     """
+    
+    
     lista=open('../TleAdmin/crudosTLE/'+crudo,'r')
     filas=lista.readlines()
     largo=len(filas) # indicara la cantidad total de lineas
