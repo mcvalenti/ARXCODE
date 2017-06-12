@@ -106,7 +106,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Espacio entre párrafos
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\parskip 7.2pt
+\parskip 6.2pt
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Configuración de los márgenes
@@ -156,7 +156,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Eliminar la linea encima de los footnotes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\renewcommand\footnoterule{\rule{\linewidth}{0pt}}
+\renewcommand\footnoterule{\rule{\linewidth}{0pt}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Secuencia de 9 símbolos para footnotes (usa asteriscos y otros símbolos en lugar de números)
@@ -313,12 +313,14 @@ Por
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BIBLIOGRAFIA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \usepackage{natbib}
-% \newcommand{\biliografia}[1]{
-% \clearpage
-% \addcontentsline{toc}{chapter}{\bibname}
-% \bibliographystyle{apa}
-% \bibliography{#1}
+\usepackage{natbib}
+\newcommand{\bibliografia}[1]{
+%\clearpage
+%\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{apa}
+\bibliography{#1}
+%\nocite{*}
+}
 
 
 %------------------------------------------------------------------------------
