@@ -186,7 +186,7 @@ def FiltraArchivos(tle):
     archivos_datos=[]
     for nom in nombre_archivos:        
         e_CODS=EphemCODS(nom.split('/')[-1])
-        anio, mes, dia, hora, minu, seg = EphemCODS.parsea_epoca(e_CODS)
+        anio, mes, dia, hora, minu, seg = EphemCODS.parsea_epoca_nombre(e_CODS)
         fecha_cods_nombre=datetime(int(anio),int(mes),int(dia))
         lista_fechas.append(fecha_cods_nombre)
 
