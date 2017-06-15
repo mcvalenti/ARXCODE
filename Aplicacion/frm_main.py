@@ -531,7 +531,7 @@ class ProcTle(QDialog):
         print '-----------------------------------------------------'
         print 'TLE PRIMARIO'
         print '-----------------------------------------------------'
-        tle_primario = Tle('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
+        tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
         linea1= tle_primario.linea1
         linea2= tle_primario.linea2
         self.fin_tle=tle_primario.epoca()
@@ -542,7 +542,7 @@ class ProcTle(QDialog):
         print '-----------------------------------------------------'
         print 'TLE INICIAL DEL SET'
         print '-----------------------------------------------------'
-        tle_inial = Tle('../TleAdmin/tle/'+self.tleOrdenados[0][0])
+        tle_inial = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[0][0])
         linea1_0= tle_inial.linea1
         linea2_0= tle_inial.linea2
         self.ini_tle=tle_inial.epoca()

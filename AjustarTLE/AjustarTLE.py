@@ -16,7 +16,7 @@ from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from TleAdmin.TleArchivos import setTLE
 from TleAdmin.TLE import Tle
-from SistReferencia.sist_deCoordenadas import vncSis, ricSis
+from SistReferencia.sist_deCoordenadas import vncSis, ricSis, teme2tod
 from Estadistica.ajusteMinCuad import ajustar_diferencias
 
 
@@ -422,7 +422,17 @@ def difPrimario(tleOrdenados,cantidad_tles):
     dzz=[]
 
     tlepri=tleOrdenados[-1][0]
-    r,rp,ffin=tlePrimario(tlepri)     
+    r,rp,ffin=tlePrimario(tlepri) # En TEME
+    """
+    Transformacion del TEME al TOD.
+    """ 
+    r=teme2tod(ffin, r)
+    r=np.array([r[0,0],r[0,1],r[0,2]])
+    rp=teme2tod(ffin, rp) 
+    rp=np.array([rp[0,0],rp[0,1],rp[0,2]])
+    """
+    fin de la transformacion
+    """
     item=range(len(tleOrdenados)-2,-1,-1)       
     for j in item:
         tlesec=tleOrdenados[j][0]
@@ -430,6 +440,16 @@ def difPrimario(tleOrdenados,cantidad_tles):
         tle1_epoca=tle1.epoca()
         if tle1_epoca >= epoca15dias:
             pos,vel,fsec=tleSecundario(tlesec, ffin)
+            """
+            Transformacion del TEME al TOD.
+            """ 
+            pos=teme2tod(fsec, pos)
+            pos=np.array([pos[0,0],pos[0,1],pos[0,2]])
+            vel=teme2tod(fsec, vel)
+            vel=np.array([vel[0,0],vel[0,1],vel[0,2]])
+            """
+            fin de la transformacion
+            """
             dt_tle.append(fsec)
             dr=pos-r
             d_v=vel-rp
