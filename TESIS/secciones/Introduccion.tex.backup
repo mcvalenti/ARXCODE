@@ -71,7 +71,7 @@ Un claro ejemplo son las constelaciones para comunicaciones anunciadas por OneWe
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{imagenes/satelxlanz}
+  \includegraphics[width=0.6\textwidth]{imagenes/satelxlanz}
   \caption[Proyecci\'on de Sat\'elites 2016-2030]{Proyecci\'on de Sat\'elites 2016-2030. Extra\'ido de \citep{karacalioglu2016impact}}
   \label{fig:satxlanz}
 \end{figure}
@@ -81,7 +81,7 @@ A su vez, aunque ya existen modelos experimentales y en desarrollo en lo que res
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{imagenes/rocketbodies}
+  \includegraphics[width=0.6\textwidth]{imagenes/rocketbodies}
   \caption[Fragmentos de Cohetes 2016-2030]{Fragmentos de Cohetes que permanecer\'an en \'orbita en el periodo 2016-2030. Extra\'ido de \cite{karacalioglu2016impact}}
   \label{fig:rocketbodies}
 \end{figure}
@@ -96,7 +96,7 @@ De los distintos modelos de evoluci\'on y de las descripciones del ambiente espa
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.6\textwidth]{imagenes/numero2014}
+  \includegraphics[width=0.8\textwidth]{imagenes/numero2014}
   \caption[Cantidad de Objetos catalogados al 2014]{Cantidad de Objetos catalogados al 2014 - Se distingue el incremento abrupto producto de las fragmentaciones del Fengyun Chino en 2007 y de la colisi\'on entre el IRIDIUM y el Kosmos en 2009.Extra\'ido de \citep{ODQN14}}
   \label{fig:cantidad2014}
 \end{figure}
@@ -107,7 +107,7 @@ Como puede apreciarse en la Fig. \ref{fig:causadesechos} el porcentaje del reman
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.9\textwidth]{imagenes/breakupsQNews}
+  \includegraphics[width=0.8\textwidth]{imagenes/breakupsQNews}
   \caption[Evoluci\'on de las causas de la generaci\'on de Desechos]{Evoluci\'on de las causas de la generaci\'on de Desechos entre 2007 y 2016. Extra\'ido de \citep{ODQNum}}
   \label{fig:causadesechos}
 \end{figure}
@@ -124,7 +124,7 @@ Conclusiones similares se desprenden del estudio de \citep{karacalioglu2016impac
 Ya en 1978  estudios predictivos hechos por D. Kessler y Cour-Palais
  \cite{kessler0}, anunciaban el riesgo del efecto en cascada que podr\'ian producir las colisiones, aumentando los desechos en un camino catastr\'ofico sin fin y mostrando que los desechos generados por colisiones superar\'ian los impactos por meteoritos.\\
  
- Por su parte los modelos de ingenier\'ia ofrecen una descripci\'on de los distintos efectos que producen los impactos, dependiendo del tama\~no del desecho. Ver tabla \ref{lab:tamanioDanio}\\
+ Por su parte los modelos de ingenier\'ia ofrecen una descripci\'on de los distintos efectos que producen los impactos, dependiendo del tama\~no del desecho. Ver tabla \ref{tamanioDanio}\\
  
  \begin{table}[h]
 \centering
@@ -138,7 +138,7 @@ particula que genera el efecto & \\
 \multirow{ 7}{*}{100 $\mu$m }& * Da\~no significativo en sensores sensibles.\\
 & (Las ventanas del transbordador requieren recambio)\\
 & * Corta ataduras, anclajes y cables.\\
-& * Penetraci\'on de la capa de islamiento (MLI)\\
+& * Penetraci\'on de las multicapas de aislaci\'on (MLI)\\
 & * Penetraci\'on de las paredes con grosores de 300 a 500 $\mu$m.\\
 & * Penetraci\'on de los tubos de calefacci\'on, \textcolor{red}{coolant loops} y radiadores.\\
 & * Penetraci\'on de celdas solares.\\
@@ -150,20 +150,21 @@ particula que genera el efecto & \\
 & *Penetraci\'on de tanques, \textcolor{red}{baffles, sun-shields} y cables externos.\\
 \hline
 \multirow{ 3}{*}{1 cm } & * Da\~no estructural y destrucci\'on de alguna parte impactada.\\
-& * Penetraci\'on de todas las capas, incluyendo modulos tripulados\\
+& * Penetraci\'on de todas las capas\\ %, incluyendo modulos tripulados\\
 & con protecci\'on especial.\\
 \hline
-\multirow{ 2}{*}{10 cm} & * Destrucci\'on total del sat\'elite o del subsistema impactado.\\
+\multirow{ 2}{*}{10 cm } & * Destrucci\'on total del sat\'elite o del subsistema impactado.\\
 & * Interferencia con observaciones astron\'omicas.\\
 \hline
 \multirow{ 2}{*}{1m}& * Partes s\'olidas de la plataforma pueden sobrevivir\\
 & y reingresar a la atmósfera, incluso alcanzando la superficie.\\
 \hline
 \end{tabular}
-\label{lab:tamanioDanio}
+\caption[Da\~no seg\'un el tama\~no del desecho.]{Da\~no seg\'un el tama\~no del desecho. Extra\'ido de IADC 08/03, Version 2.1, Abril 2013}
+\label{tamanioDanio}
 \end{table}
 
- \subsubsection*{El estudio del riesgo de colisi\'on}
+\subsection{El estudio del riesgo de colisi\'on}
 
 Un an\'alisis completo del Riesgo de Colisi\'on Fig. \ref{fig:estudiocolision}, abarca:
 
@@ -203,15 +204,15 @@ Si la situaci\'on lo ameritara, la \'unica manera de evitar una colisi\'on es la
 % CONCEPTO DE MIDDLE MAN.\\
 % CONCEPTO DE COLLABORATIVE WORK ENVIRONMENT. (close loop process)
 
-\subsection*{Rastreo y cat\'alogos}\label{subsec:redes}
+\subsection{Rastreo y cat\'alogos}\label{subsec:redes}
 
 En los catálogos actuales se registran objetos mayores a los 10 cm en las regiones LEO monitoreadas con radares, y mayores a 1 m en las órbitas GEO observadas con telescopios ópticos.\\
  
-La entidad militar US Strategic Command (USSTRATCOM) de EE.UU mantiene un catálogo con 18347 objetos conocidos (al 4 de Abril de 2016). Para su construcci\'on y mantenimiento, utiliza la Space Surveillance Network (SSN), Fig.\ref{fig:usnet}  que posee m\'as de 20 sensores civiles y militares a lo largo de todo el mundo.\\
+La entidad militar US Strategic Command (USSTRATCOM) de EE.UU mantiene un catálogo con 18347 objetos conocidos (al 4 de Abril de 2017). Para su construcci\'on y mantenimiento, utiliza la Space Surveillance Network (SSN), Fig.\ref{fig:usnet}  que posee m\'as de 20 sensores civiles y militares a lo largo de todo el mundo.\\
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.9\textwidth]{imagenes/SpSNet}
+  \includegraphics[width=0.7\textwidth]{imagenes/SpSNet}
   \caption[USSTRATCOM - SSN]{US. Strategic Command Space Surveillance Network. Extra\'ido de https://en.wikipedia.org/wiki/United\_States\_Space\_Surveillance\_Network}
   \label{fig:usnet}
 \end{figure}
@@ -292,10 +293,10 @@ De acuerdo con el Plan Nacional Espacial: {\bf{ Argentina en el Espacio 2004-201
 En nuestro pa\'is, compete a la Unidad de Desechos Espaciales de la Secretaria General de la CONAE; quien tiene la facultad de mantener las relaciones con los organismos internacionales, garantizar que se cumplan los distintos convenios y acuerdos a los que Argentina ha adherido, como por ejemplo el {\it{Convenio sobre la Responsabilidad Internacional por da\~nos causados por objetos espaciales}}, suscripto por la Rep\'ublica Argentina el 29 de marzo de 1972. (LEY N 23.335, sancionada: Julio 30 de 1986 - promulgada: Agosto 19 de 1986.1).\\
 As\'i mismo, como miembro parte de la ONU, responde ante el COPUOS en materia de buenas pr\'acticas para la mitigaci\'on de la generaci\'on de desechos espaciales.\\
 
-En la actualidad, las \'unicas naciones que cuentan con una red de rastreo con capacidad de detectar, rastrear y catalogar objetos son EE.UU y Rusia. De manera que Argentina planifica y ejecuta sus maniobras de riesgo (RMM) a partir de informaci\'on que le proveen servicios externos.\\
+Como ya mencionamos en la [Sec. \ref{subsec:redes}], las \'unicas naciones que cuentan con una red de rastreo con capacidad de detectar, rastrear y catalogar objetos son EE.UU y Rusia. De manera que Argentina planifica y ejecuta sus maniobras de riesgo (RMM) a partir de informaci\'on que le proveen servicios externos.\\
 
-El an\'alisis de posible colisi\'on, es uno de los temas que se abordan con mayor delicadeza dentro del \'area espacial y dado el nivel de riesgo que implica, la CONAE contrata un servicio de asesoramiento y control para la planificaci\'on de las operaciones vinculadas al alerta por colisi\'on.\\
-Ofrecer un servicio que reemplace al que utiliza actualmente en CONAE, es impensado y escapa por mucho a los alcances de este trabajo. No obstante, hemos desarrollado una herramienta que permite una clara caracterizaci\'on de la situaci\'on y un mayor conocimiento en el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento. As\'i mismo, se piensa como un planteo preliminar, con versatilidad para ser testeado, perfeccionado y ampliado a largo plazo.\\
+El an\'alisis de posibles colisiones, es uno de los temas que se abordan con mayor delicadeza dentro del \'area espacial y dado el nivel de riesgo que implica, la CONAE contrata un servicio de asesoramiento y control para la planificaci\'on de las operaciones vinculadas al alerta por colisi\'on.\\
+Ofrecer un servicio que reemplace al que utiliza actualmente en CONAE, es impensado y escapa por mucho a los alcances de este trabajo. No obstante, hemos desarrollado una herramienta que permite una clara caracterizaci\'on de la situaci\'on y un mayor conocimiento para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento. As\'i mismo, se piensa como un planteo preliminar, con versatilidad para ser testeado, perfeccionado y ampliado a largo plazo.\\
 
 \section{Planteo del Problema}
 
