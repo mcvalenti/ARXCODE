@@ -25,7 +25,6 @@ from visual.TleOsweiler import VerGrafico
 from visual.binGraf import histograma_bin, desviacion_standard_graf
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
-from oauthlib.oauth2.rfc6749.utils import params_from_uri
 
 class ProcARxCODE(QMainWindow):
     
