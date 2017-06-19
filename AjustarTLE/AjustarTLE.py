@@ -480,7 +480,7 @@ def difPrimario(tleOrdenados,cantidad_tles):
             dnn.append(nn)
             dcc.append(cc)
             '''
-            Sistema TEMA
+            Sistema TEME
             '''
             dx.append(x)
             dy.append(y)

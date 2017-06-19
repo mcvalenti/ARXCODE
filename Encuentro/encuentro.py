@@ -165,7 +165,6 @@ def evaluaEncuentro(TCA,sat_id,deb_id,Cd,Cm):
     Propagacion los datos tle de los objetos
     ENVISAT - NORAD ID: 27386
     COSMOS  - NORAD ID: 15482
-    A partir de las 18 hs hasta las 20 hs.
     Del dia 09/01/2008 
     """
     

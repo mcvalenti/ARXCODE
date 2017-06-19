@@ -151,7 +151,6 @@ class Encuentro():
         """
         Calcula las diferencias relativas entre los dos 
         objetos en el sistema RTN.
-        (agregar la diferencias en rtn)
         """
 
         self.epoca_ini=self.tca-timedelta(minutes=5)
@@ -175,20 +174,21 @@ class Encuentro():
             self.DistRic=np.array([x_ric,y_ric,z_ric])
             self.VelVector=pos1.v-pos2.v
             self.mod_Dist1=np.sqrt(np.dot(self.DistRic,self.DistRic))
+#            self.mod_Dist1=np.sqrt(np.dot(self.DistVector,self.DistVector))
             if self.mod_Dist1 < self.mod_minDist:
                 self.mod_minDist=self.mod_Dist1
                 self.tca_c=self.epoca_ini
+                self.DistRic_min=np.array([x_ric,y_ric,z_ric])
             print self.epoca_ini, self.mod_Dist1
-            self.epoca_ini=self.epoca_ini+timedelta(minutes=1)
+            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
             
             # Transformo a Coordenadas Geodesicas.
             delta1, alpha1=pos1.getCoordenadasGEOD()
             delta2, alpha2=pos2.getCoordenadasGEOD()
-            # GUARDAR EN ARCHIVO Posiciones en TEME.
+            # GUARDA EN ARCHIVO Posiciones en TEME.
             salida1.write(str(alpha1)+' '+str(delta1)+' '+datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
-            salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
- 
-            # GUARDAR EN ARCHIVO Posiciones en TEME.
+            salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n') 
+            # GUARDA EN ARCHIVO Posiciones en RTN.
             salida3.write(datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(self.DistRic[0])+' '+str(self.DistRic[1])+' '+str(self.DistRic[2])+'\n')
 
         salida1.close()
@@ -197,17 +197,17 @@ class Encuentro():
 
 #     
 # if __name__=='__main__':
-#     
-# #     TCA=datetime(2008,1,9,19,0,30)
-# #     sat_id='27386' #ENVISAT
-# #     deb_id='15482' #COSMOS
-# #     usuario='macecilia'
-# #     clave='MaCeciliaSpace17'
-# # 
-# #     tle_sat=Tle(usuario,clave,sat_id,TCA)
-# #     tle_deb=Tle(usuario,clave,deb_id,TCA)
-# #     
-# #     encuentro1=Encuentro(tle_sat,tle_deb,TCA)
+#      
+#      TCA=datetime(2008,1,9,19,0,30)
+#      sat_id='27386' #ENVISAT
+#      deb_id='15482' #COSMOS
+#      usuario='macecilia'
+#      clave='MaCeciliaSpace17'
+#  
+#      tle_sat=Tle(usuario,clave,sat_id,TCA)
+#      tle_deb=Tle(usuario,clave,deb_id,TCA)
+#      
+#      encuentro1=Encuentro(tle_sat,tle_deb,TCA)
 # #     dif_r,dif_v=encuentro1.svDif()
 #     
 #     tle_archivo=Tle.creadoxArchivo(archivo='../TleAdmin/tle/37673tle0')
