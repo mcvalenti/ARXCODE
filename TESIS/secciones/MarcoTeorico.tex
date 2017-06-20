@@ -1,25 +1,19 @@
 \chapter{Marco Teórico}
 \label{chap:marcoteorico}
-\endinput
+%\endinput
 % Estado del arte general de la temática de estudio. 
 \section{Introducci\'on}
 
-La estimaci\'on de errores en la determinaci\'on orbital en la base del procedimiento.(redactar mejor)\\
-En un contexto ideal, de una Tierra esf\'erica, homog\'enea y sin rozamiento, los modelos f\'isicos que describen el movimiento de los objetos que orbitan la Tierra, nos permitir\'ian predecir con much\'isima precisi\'on las sitaciones de colisi\'on. Es decir, si conoci\'eramos muy bien la posici\'on de las naves y las condiciones del entorno, y pudi\'eramos modelarlo, podr\'iamos hacer predicciones futuras de las posciones y as\'i determinar si los objetos van a colisionar o no sin ambig\"uedad. Pero esa no es la realidad.\\
-La Tierra no es perfectamente esf\'erica y mucho menos homog\'enea, y si bien es la principal influencia en las \'orbitas de las naves, existen otros cuerpos como la Luna, el Sol y los dem\'as planetas que tambi\'en ejercen fuerzas gravitatorias en mayor o menor medida.\\
-Existen tambi\'en otras fuerzas, que resultan del entorno, como por ejemplo el frenado de la atm\'osfera para los objetos de \'orbitas LEO y la presi\'on de radiaci\'on solar que afecta principalmente a los sat\'elites con grandes paneles.\\
+Para el estudio de posibles colisiones es necesario evaluar de forma anticipada las trayectorias de todos los objetos que orbitan la Tierra y detectar los acercamientos de riesgo. Si la predicci\'on de las posiciones fuera los suficientemente precisa, este estudio s\'olo implicar\'ia un esfuerzo computacional a resolver. No obstante, el movimiento orbital de los objetos no es ideal y las posiciones medidas o estimadas siempre acarrean una indeterminaci\'on.\\
 
-Todos estos condimentos, nos muestran que la determinaci\'on de las posiciones de los objetos que orbitan la Tierra, no es una tarea sencilla. Dependiendo de los distintos m\'etodos y modelos de determinaci\'on orbital con los que se cuentan, podremos saber con mejor o peor precisi\'on la posici\'on de los objetos.El estudio de riesgo de colisi\'on se basa en la capacidad de determinar y predecir las \'orbitas de los objetos involucrados en un acercamiento con la mayor precisi\'on posible.\\.
-Esto implica un aspecto crucial en el estudio de las posibles colisiones, ya que cuando se pretenden hacer predicciones orbitales, debemos saber con qu\'e margen de error hemos calculado la sitauci\'on de acercamiento. Y es esta misma raz\'on la que explica por qu\'e en el c\'alculo de colisiones se habla de probabilidad de colisi\'on (PoC)\\
+Las primeras t\'ecnicas de detecci\'ion de encuentros, realizaban propagaciones t\'ipicas de las posiciones una semana hacia el futuro, defin\'ian un volumen seguro rodeando al sat\'elite de inter\'es, y si alg\'un objeto externo se incrustaba dentro del volumen que envolv\'ia al sat\'elite, se consideraba una situaci\'on de colisi\'on. Estas metodolog\'ias no ten\'ian en cuenta los errores en la determinaci\'on de la posici\'on de los objetos, y por lo general derivaban en falsas alarmas, con las que se corr\'ia el riesgo de realizar maniobras innecesarias.\\
+En la actualidad, adem\'as de la m\'inima distancia de acercamiento {\it{miss distance}} entre los objetos, se calcula y se eval\'ua la \ac{PoC}.  Esta \'ultima incorpora los errores en las posiciones a trav\'es de las matrices de covarianza y es un par\'ametro m\'as que es tenido en cuenta en los criterios que definen si debe o no hacerse una maniobra para evitar la colisi\'on.\\
 
-Mejorar estas estimaciones es fundamental, ya que en base a ellas se realizan o no maniobras, que, por un lado interfieren en los experimentos cient\'ificos que se llevan a cabo en las distintas plataformas, las maniobras son siempre operaciones delicadas, y en las misiones con astronautas a bordo (como por ejemplo la Estaci\'on Espacial Internacional (ISS)), una decisi\'on err\'onea pone en riesgo a la tripulaci\'on.\\
+Como ya mencionamos (\textcolor{red}{citar secci\'on}), en este trabajo vamos a enfocarnos en analizar la situaci\'on de encuentro, una vez que el mismo ya fue detectado. En particular nos enfocaremos en las situaciones de encuentro que involucran a misiones operativas, y desechos espaciales.\\
+Para la posici\'on de las misiones operativas, contaremos con los datos orbitales que provee el departamento de din\'amica orbital, con los errores asociados conocidos. Mientras que para la posici\'on de los desechos, utilizaremos los datos p\'ublicos que ofrece NORAD v\'ia space-track. (\textcolor{red}{citar bien}). Los mismos son publicados en formato TLE ((\textcolor{red}{citar secci\'on})), sin errores asociados, y son propagados hasta el momento del encuentro con el modelo SGP4 ((\textcolor{red}{citar secci\'on})), que tampoco ofrece informaci\'on sobre los errores que se acumulan en la propagaci\'on d elas posiciones.\\
 
-Por otra parte, distintos estudios realizados (... Foster ¿?), muestran que existen en varios m\'etodos actuales de c\'alculo de PoC, sobreestimaciones de los acercamientos y los riesgos, generando falsas alarmas que de no ser revisadas con minuciosidad conducen a decisiones de maniobras innecesarias. 
-
-El epoca de la colisi\'on y la previsi\'on en los c\'alculos.(redactar)\\
-La determinaci\'on orbital es m\'as f\'acil a posteriori.\\
-
-
+Primero ofreceremos un m\'etodo de estimaci\'on y propagaci\'on de errores para el desecho. (\textcolor{red}{reescribir})
+Y luego implementaremos el m\'etodo para el c\'alculo de la PoC..\textcolor{red}{cual}
 
 \section{La Posici\'on de los objetos involucrados}
 

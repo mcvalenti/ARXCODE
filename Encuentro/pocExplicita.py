@@ -185,7 +185,7 @@ if __name__ == '__main__':
 #     sat_id='23560' # ERS-2
 #     deb_id='16681'  # COSMOS 1741
 # -------------------------------------------
-#   Escenario ALSAT
+#   Escenario ALSAT I - (No hay datos para el debris)
 # -------------------------------------------
     TCA=datetime(2012,4,29,9,47,28,755)
     sat_id='36798' # ALSAT
@@ -214,7 +214,8 @@ if __name__ == '__main__':
 #    crudo_sat='27386_20040526_20040610.tle' # Escenario 3
 #    crudo_sat='27386_20071226_20080109.tle' #ENVI
 #    crudo_sat='27386_20040819_20040903.tle' # Escenario 4
-    crudo_sat='23560_20040915_20040930.tle' # Escenario 5
+#    crudo_sat='23560_20040915_20040930.tle' # Escenario 5
+    crudo_sat='36798_20120415_20120430.tle' #Escenario ALSAT I
     
     var_rsat,var_ssat,var_wsat=metodoOSWtles(sat_id,crudo_sat,TCA)
     
@@ -224,7 +225,7 @@ if __name__ == '__main__':
 #    crudo_deb='15482_20071226_20080109.tle' #COSMOS 
 #    crudo_deb='12442_20040819_20040903.tle'  # Escenario 4
 #    crudo_deb='16681_20040915_20040930.tle' #Escenario 5
-    crudo_deb='37976_20120415_20120430.tle' #Escenario ALSAT
+    crudo_deb='37976_20120415_20120430.tle' #Escenario ALSAT I
     var_rdeb,var_sdeb,var_wdeb=metodoOSWtles(deb_id,crudo_deb,TCA)
 
     #Calculo los errores combinados proyectados.

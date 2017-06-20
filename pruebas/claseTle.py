@@ -50,16 +50,22 @@ class Tle:
     
     @classmethod
     def creadoxParam(cls, usuario,clave,sat_id,epoca):
+        """
+        Descarga el TLE correspondiente a la epoca que
+        se le ingresa.
+        Nota:toma como epoca final un dia despues por como 
+        ofrece las descargas Space-track.
+        """
         inst1=cls()
         inst1.noradId=sat_id
-        inst1.anio1=epoca.year
-        inst1.mes1=epoca.month
-        inst1.dia1=epoca.day
-        inst1.clave=clave
-        epoca=epoca-timedelta(days=2)
         inst1.anio0=epoca.year
         inst1.mes0=epoca.month
         inst1.dia0=epoca.day
+        inst1.clave=clave
+        epoca=epoca+timedelta(days=1)
+        inst1.anio1=epoca.year
+        inst1.mes1=epoca.month
+        inst1.dia1=epoca.day
         
         try:
             inst1.sincero=[inst1.mes0,inst1.mes1,inst1.dia0,inst1.dia1]
@@ -78,14 +84,15 @@ class Tle:
             r = s.get(fquery1)
             inst1.tle_text=r.text
             inst1.lineas=inst1.tle_text.split('\n')
-            inst1.linea1=inst1.lineas[0]
-            inst1.linea2=inst1.lineas[1]
-            if inst1.tle_text !='' and r.status_code == 200:
-                pass #rint 'Se ha generado el tle'
+            if len(inst1.lineas) > 1 and r.status_code == 200:
+                print 'Se ha generado el tle para el objeto de NORAD_ID= ',inst1.noradId
+                inst1.linea1=inst1.lineas[-3]
+                inst1.linea2=inst1.lineas[-2]
             else:
-                print 'No pudo completarse la solicitud'
+                print 'No pudo completarse la solicitud para el objeto de NORAD_ID= ',inst1.noradId                      
     
         except exceptions.HTTPError as e:
+            print "Error: " + str(e)
             return "Error: " + str(e)
 
         return inst1
@@ -133,6 +140,17 @@ class Tle:
 class Encuentro():
     
     def __init__(self,tle_sat,tle_deb,tca):
+        """
+        Calcula las diferencias en posiciones y velocidades 
+        para dos objetos en situacion de acercamiento, 5 minutos antes
+        y 5 minutos despues del tca.
+        -----------------------------------------------------------
+        outpus:
+            3 archivos.
+            mod_minDist: Minima distancia en modulo en el sistema RTN. (float)
+            tca_c: Instante del maximo acercamiento. (datetime)
+            DistRic_min: coordenadas RTN en el momento de min distancia (array)
+        """
         
         self.tle_sat=tle_sat
         self.tle_deb=tle_deb
@@ -185,7 +203,7 @@ class Encuentro():
             # Transformo a Coordenadas Geodesicas.
             delta1, alpha1=pos1.getCoordenadasGEOD()
             delta2, alpha2=pos2.getCoordenadasGEOD()
-            # GUARDA EN ARCHIVO Posiciones en TEME.
+            # GUARDA EN ARCHIVO Posiciones en ALFA, DELTA (Seudo Geodesicas).
             salida1.write(str(alpha1)+' '+str(delta1)+' '+datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
             salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n') 
             # GUARDA EN ARCHIVO Posiciones en RTN.
