@@ -167,6 +167,12 @@ if __name__ == '__main__':
 #     sat_id='27386' #ENVISAT
 #     deb_id='15482' #COSMOS
 # -------------------------------------------
+#   Escenario 2
+# -------------------------------------------
+#     TCA=datetime(2004,6,5,10,44,39,0)
+#     sat_id='27386' # ENVISAT
+#     deb_id='21798'  # AKM
+# -------------------------------------------
 #   Escenario 3
 # -------------------------------------------
 #     TCA=datetime(2004,6,9,17,46,29,0)
@@ -187,9 +193,15 @@ if __name__ == '__main__':
 # -------------------------------------------
 #   Escenario ALSAT I - (No hay datos para el debris)
 # -------------------------------------------
-    TCA=datetime(2012,4,29,9,47,28,755)
-    sat_id='36798' # ALSAT
-    deb_id='37976'  # COSMOS 2251
+#     TCA=datetime(2012,4,29,9,47,28,755)
+#     sat_id='36798' # ALSAT
+#     deb_id='37976'  # COSMOS 2251
+# -------------------------------------------
+#   Escenario SAC D - 20 DE JUNIO SOCRATES
+# -------------------------------------------
+    TCA=datetime(2017,6,20,15,59,18,9)
+    sat_id='37673' # SAC-D
+    deb_id='14493'  # DELTA 1 DEB
 
     r_sat,v_sat,r_deb,v_deb,vec_rsw=proc_encuentroSimple(sat_id,deb_id,TCA)
     
@@ -210,22 +222,24 @@ if __name__ == '__main__':
     # !!! HARDCODEO ARCHIVO CRUDO!!!
     
     # Ma. satelite.
-
+    crudo_sat='37673_20170605_20170621.tle'
+#    crudo_sat='27386_20040523_20040607.tle'
 #    crudo_sat='27386_20040526_20040610.tle' # Escenario 3
 #    crudo_sat='27386_20071226_20080109.tle' #ENVI
 #    crudo_sat='27386_20040819_20040903.tle' # Escenario 4
 #    crudo_sat='23560_20040915_20040930.tle' # Escenario 5
-    crudo_sat='36798_20120415_20120430.tle' #Escenario ALSAT I
+#    crudo_sat='36798_20120415_20120430.tle' #Escenario ALSAT I
     
     var_rsat,var_ssat,var_wsat=metodoOSWtles(sat_id,crudo_sat,TCA)
     
     # Ma. Debris
-
+    crudo_deb= '14493_20170605_20170621.tle'
+#    crudo_deb='21798_20040523_20040607.tle'
 #    crudo_deb='5395_20040526_20040610.tle' # Escenario 3
 #    crudo_deb='15482_20071226_20080109.tle' #COSMOS 
 #    crudo_deb='12442_20040819_20040903.tle'  # Escenario 4
 #    crudo_deb='16681_20040915_20040930.tle' #Escenario 5
-    crudo_deb='37976_20120415_20120430.tle' #Escenario ALSAT I
+#    crudo_deb='37976_20120415_20120430.tle' #Escenario ALSAT I
     var_rdeb,var_sdeb,var_wdeb=metodoOSWtles(deb_id,crudo_deb,TCA)
 
     #Calculo los errores combinados proyectados.
@@ -236,7 +250,7 @@ if __name__ == '__main__':
     var_x=var_rsat+var_rdeb 
     var_y=var_s*np.cos(phi/2.0)*np.cos(phi/2.0)+var_w*np.sin(phi/2.0)*np.sin(phi/2.0)
     
-    ra=0.01
+    ra=0.02
     PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
     
     print '======================================'
