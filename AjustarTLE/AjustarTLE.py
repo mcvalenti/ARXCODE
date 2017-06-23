@@ -14,7 +14,7 @@ import matplotlib.pylab as plt
 from datetime import datetime, timedelta
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
-from TleAdmin.TleArchivos import setTLE
+from TleAdmin.TleArchivos import divide_setTLE
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis, ricSis, teme2tod
 from Estadistica.ajusteMinCuad import ajustar_diferencias
@@ -53,7 +53,7 @@ def seleccionSat():
         id_sat=crudo.split('_')[0]
          
         if crudo in nombres:
-            setTLE(id_sat, crudo)
+            divide_setTLE(id_sat, crudo)
             condicion=False
         else:
             print '-------------------------------'
@@ -81,7 +81,7 @@ def generadorDatos(lista):
     datos=[]
     for arch in lista:
         nombre=arch.split('/')[-1]
-        tle=Tle(arch) # instancia un objeto de la clase  TLE
+        tle=Tle.creadoxArchivo(arch) # instancia un objeto de la clase  TLE
         datos.append(tle.epoca()) # ejecuta un metodo de la clase TLE
         tledic[nombre]= datos
         datos=[]
@@ -136,7 +136,7 @@ def tlePrimario(tlepri):
     """
     whichconst = wgs72
     archivo='../TleAdmin/tle/'+tlepri
-    tle0=Tle(archivo)
+    tle0=Tle.creadoxArchivo(archivo)
     line1=tle0.linea1
     line2=tle0.linea2
     r,v = tle0.propagaTLE()
@@ -164,7 +164,7 @@ def tleSecundario(tlesec,ffin):
     """
     whichconst = wgs72
     archivo='../TleAdmin/tle/'+tlesec
-    tle1=Tle(archivo)
+    tle1=Tle.creadoxArchivo(archivo)
     line1=tle1.linea1
     line2=tle1.linea2
     satrec1 = twoline2rv(line1, line2, whichconst)
@@ -252,10 +252,10 @@ def difTle(tleOrdenados,cantidad_tles):
             zz=d_v[2]
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
-            v,n,c=vncSis(r, rp, dr)
-            vv,nn,cc=vncSis(r,rp,d_v)
-#             v,n,c=ricSis(r, rp, dr)
-#             vv,nn,cc=ricSis(r,rp,dv)
+#             v,n,c=vncSis(r, rp, dr)
+#             vv,nn,cc=vncSis(r,rp,d_v)
+            v,n,c=ricSis(r, rp, dr)
+            vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+' '+tlesec+'\n'
             infodiftot2=str(fsec)+' '+str(x)+' '+str(y)+' '+str(z)+' '+str(xx)+' '+str(yy)+' '+str(zz)+' '+tlesec+'\n'
             dtot.write(infodiftot)
@@ -392,11 +392,11 @@ def difPrimario(tleOrdenados,cantidad_tles):
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
     
-    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+    tle_inicio = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[0][0])
     cat_id = tle_inicio.catID()
     epoca_ini = tle_inicio.epoca()
     
-    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
     epoca_fin  = tle_primario.epoca()
     epoca_ffin = epoca_fin
     epoca15dias=epoca_ffin-timedelta(days=15)
@@ -436,7 +436,7 @@ def difPrimario(tleOrdenados,cantidad_tles):
     item=range(len(tleOrdenados)-2,-1,-1)       
     for j in item:
         tlesec=tleOrdenados[j][0]
-        tle1=Tle('../TleAdmin/tle/'+tlesec)
+        tle1=Tle.creadoxArchivo('../TleAdmin/tle/'+tlesec)
         tle1_epoca=tle1.epoca()
         if tle1_epoca >= epoca15dias:
             pos,vel,fsec=tleSecundario(tlesec, ffin)

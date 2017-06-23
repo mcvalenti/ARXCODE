@@ -3,7 +3,7 @@ Created on Sep 21, 2016
 @author: mcvalenti
 '''
 
-def setTLE(id_sat,crudo):
+def divide_setTLE(id_sat,crudo):
     """
     Obtiene un dato con un listado de TLEs para todo un intervalo temporal.
     El mismo es para un satelite en particular.

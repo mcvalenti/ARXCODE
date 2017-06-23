@@ -10,12 +10,12 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from CDM.cdmParser import extraeCDM
 from pruebas.claseTle import Tle, Encuentro
-from TleAdmin.TleArchivos import setTLE
+from TleAdmin.TleArchivos import divide_setTLE
 #from TleAdmin.TLE import Tle
-from TleAdmin.get_tle import importar_tle
+from TleAdmin.get_tle import importarSetTLE
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
-from Encuentro.encuentro import evaluaEncuentro
+from Encuentro.akellaPoC import evaluaEncuentro
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
 from visual import ploteos
 from visual.trackencuentro import grafica_track
@@ -503,7 +503,7 @@ class ProcTle(QDialog):
     
     def procesar(self):
         """
-        Invoca a la funcion setTLE, para fragmentar
+        Invoca a la funcion divide_setTLE, para fragmentar
         cada uno de los TLE del dato crudo en archivos
         individuales; y los guarda en: TleAdmin/tle
         """
@@ -512,7 +512,7 @@ class ProcTle(QDialog):
             os.unlink(filename)
         if os.stat('../TleAdmin/crudosTLE/'+self.filename).st_size == 0:
             print('El archivo esta vacio')
-        setTLE(self.sat_id, self.filename)
+        divide_setTLE(self.sat_id, self.filename)
         self.sat_id_line.setText(self.sat_id)
         self.lista=glob.glob('../TleAdmin/tle/*')
         self.tles=len(self.lista)
@@ -699,7 +699,7 @@ class ConexionNorad(QDialog):
         self.passw1 = str(self.clave_edit.text())
         self.cat_id = str(self.norad_id_edit.text())
         self.nombreTle.setText(self.cat_id+'_'+self.fini+'_'+self.ffin+'.tle')
-        self.tle=importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
+        self.tle=importarSetTLE(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
         self.archTLE=self.nombreTle.text()
         return self.cat_id, self.fini, self.ffin, self.archTLE
 #             

@@ -4,7 +4,7 @@ Created on 13/02/2017
 @author: mcvalenti
 '''
 
-from get_tle import importar_tle
+from get_tle import importarSetTLE
 from datetime import datetime
 
 print 'Ingrese fecha de inicio, ej: 2017,5,2'
@@ -24,4 +24,4 @@ tca1=datetime(anio1,mes1,dia1)
 usuario='macecilia'
 clave='MaCeciliaSpace17'
 norad_id='37673'
-resultado=importar_tle(usuario,clave,norad_id,tca0,tca1)
+resultado=importarSetTLE(usuario,clave,norad_id,tca0,tca1)

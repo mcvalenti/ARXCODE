@@ -7,7 +7,7 @@ from requests import session, exceptions
 from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 
-class importar_tle():
+class importarSetTLE():
     
     def __init__(self, usuario,clave, cat_id,tca0,tca1,archivo):
         """

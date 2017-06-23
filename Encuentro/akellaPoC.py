@@ -7,8 +7,8 @@ import sys, os, glob
 import numpy as np
 from scipy.integrate import quad, nquad
 from datetime import datetime, timedelta
-from TleAdmin.get_tle import importar_tle
-from TleAdmin.TleArchivos import setTLE
+from TleAdmin.get_tle import importarSetTLE
+from TleAdmin.TleArchivos import divide_setTLE
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
@@ -184,14 +184,14 @@ def evaluaEncuentro(TCA,sat_id,deb_id,Cd,Cm):
     clave='MaCeciliaSpace17'
     
     #--------------------MISION-----------------------------    
-    importar_tle(usuario,clave, sat_id,f_ini,f_fin,str(sat_id))
+    importarSetTLE(usuario,clave, sat_id,f_ini,f_fin,str(sat_id))
     ark=open('../TleAdmin/crudosTLE/'+str(sat_id))
     contenido=ark.readlines()
     if len(contenido) > 0:
         files=glob.glob('../TleAdmin/tle/*')
         for filename in files:
             os.unlink(filename)
-        setTLE(sat_id,str(sat_id))
+        divide_setTLE(sat_id,str(sat_id))
         tles=glob.glob('../TleAdmin/tle/*')
         tle_dic=generadorDatos(tles)
         tles_ord=ordenaTles(tle_dic)
@@ -200,11 +200,11 @@ def evaluaEncuentro(TCA,sat_id,deb_id,Cd,Cm):
         print 'El programa ha detenido su ejecucion.'
         sys.exit()
     #----------DESECHO----------------------------------------    
-    importar_tle(usuario,clave, deb_id,f_ini,f_fin,str(deb_id))
+    importarSetTLE(usuario,clave, deb_id,f_ini,f_fin,str(deb_id))
     ark1=open('../TleAdmin/crudosTLE/'+str(deb_id))
     contenido1=ark1.readlines()
     if len(contenido) > 0:
-        setTLE(deb_id,str(deb_id))
+        divide_setTLE(deb_id,str(deb_id))
         tles1=glob.glob('../TleAdmin/tle/'+str(deb_id)+'*')
         tle_dic1=generadorDatos(tles1)
         tles_ord1=ordenaTles(tle_dic1)

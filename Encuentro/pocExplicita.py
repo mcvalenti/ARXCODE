@@ -16,7 +16,7 @@ import numpy as np
 from scipy.integrate import quad, dblquad
 from datetime import datetime
 from pruebas.claseTle import Tle, Encuentro
-from TleAdmin.TleArchivos import setTLE
+from TleAdmin.TleArchivos import divide_setTLE
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
 from SistReferencia.sist_deCoordenadas import ricSis
 from visual.trackencuentro import grafica_track
@@ -29,6 +29,7 @@ PASOS.
     Calcular el angulo phi entre los vectores velocidad.
 2 - Ejecutar Osweiler para obtener los errores en R,S,W para ambos objetos.
     Sumarlos y obtener los sigmaR, sigmaS y sigmaW combinados.
+    *Tiene que ejecutar Osweiler con CODS. 
 3 - Calcular los sigmaX, sigmaY
 4 - Reemplazar en PoC y calcular. 
 """
@@ -78,7 +79,7 @@ def metodoOSWtles(sat_id,crudo,tca):
         os.unlink(filename)
    
     
-    setTLE(sat_id, crudo)
+    divide_setTLE(sat_id, crudo)
     tles=glob.glob('../TleAdmin/tle/*')
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
