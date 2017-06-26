@@ -15,7 +15,7 @@ from datetime import datetime, timedelta
 from requests.auth import HTTPBasicAuth
 import TleAdmin
 from SistReferencia.sist_deCoordenadas import ricSis
-from visual.trackencuentro import grafica_track
+#from visual.trackencuentro import grafica_track
 
 class Posicion:
 

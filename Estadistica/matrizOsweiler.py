@@ -7,7 +7,7 @@ import os,glob
 import numpy as np
 from TleAdmin.TLE import Tle, SetTLE
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
-from SistReferencia.sist_deCoordenadas import ricSis
+from SistReferencia.sist_deCoordenadas import ricSis, vncSis
 
 def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
     """
@@ -26,11 +26,11 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
     
     tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
     epoca_primario=tle_primario.epoca()
-    r0,rp=tle_primario.propagaTLE() # En TEME
+    r0,rp0=tle_primario.propagaTLE() # En TEME
     r0=np.array([r0[0],r0[1],r0[2]])
         
-    nombre='difRTN_'+str(cat_id)+'_'+tca1.strftime('%Y%m%d')+'.TLE'
-    archivo_dif_rsw=open('../AjustarTLE/diferencias/'+nombre+'','w')
+    nombre_archivo='difRTN_'+str(cat_id)+'_'+tca1.strftime('%Y%m%d')+'.TLE'
+    archivo_dif_rsw=open('../AjustarTLE/diferencias/'+nombre_archivo+'','w')
     # listas de diferencias (RTN)
     dr=[]
     dt=[]
@@ -48,9 +48,11 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
         vel=np.array([vel[0],vel[1],vel[2]]) 
         # Calculo de Diferencias
         d_r=pos-r0
-        d_v=vel-rp
-        r,t,n=ricSis(r0, rp, d_r)
-        rr,tt,nn=ricSis(r0,rp,d_v)
+        d_v=vel-rp0
+        r,t,n=vncSis(r0, rp0, d_r)
+        rr,tt,nn=vncSis(r0,rp0,d_v)
+#         r,t,n=ricSis(r0, rp0, d_r)
+#         rr,tt,nn=ricSis(r0,rp0,d_v)
         '''
         Sistema RTN
         '''
@@ -61,14 +63,14 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
         dtt.append(tt)
         dnn.append(nn)
         
-        infodifRST=fsec.strftime('%Y%m%d')+' '+str(r)+' '+str(t)+' '+str(n)+' '+str(rr)+' '+str(tt)+' '+str(nn)+'\n'
+        infodifRST=fsec.strftime('%Y-%m-%d %H:%M:%S')+' '+str(r)+' '+str(t)+' '+str(n)+' '+str(rr)+' '+str(tt)+' '+str(nn)+'\n'
         archivo_dif_rsw.write(infodifRST)
     
     var_r=np.var(dr)
     var_t=np.var(dt)
     var_n=np.var(dn)
     
-    return var_r,var_t,var_n
+    return nombre_archivo,var_r,var_t,var_n
 
 def calcula_matriz_mision():
     pass

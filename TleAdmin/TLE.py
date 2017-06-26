@@ -10,11 +10,11 @@ from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from requests import session, exceptions
 from datetime import timedelta
-from Aplicacion.globals import *
+from Aplicacion.varGlobales import clave, usuario
 
 class Tle:
     @classmethod
-    def creadoxParam(cls,sat_id,epoca):
+    def creadoxParam(cls,sat_id,epocaf):
         """
         Descarga el TLE correspondiente a la epoca que
         se le ingresa.
@@ -23,13 +23,13 @@ class Tle:
         """
         inst1=cls()
         inst1.noradId=sat_id
-        inst1.anio0=epoca.year
-        inst1.mes0=epoca.month
-        inst1.dia0=epoca.day
-        epoca=epoca+timedelta(days=1)
-        inst1.anio1=epoca.year
-        inst1.mes1=epoca.month
-        inst1.dia1=epoca.day
+        inst1.anio0=epocaf.year
+        inst1.mes0=epocaf.month
+        inst1.dia0=epocaf.day
+        epocaf=epocaf+timedelta(days=1)
+        inst1.anio1=epocaf.year
+        inst1.mes1=epocaf.month
+        inst1.dia1=epocaf.day
         inst1.usuario=usuario
         inst1.clave=clave
         
@@ -87,8 +87,7 @@ class Tle:
     def epoca(self):
         whichconst = wgs72
         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
-        self.epoca=satrec.epoch
-        return self.epoca
+        return satrec.epoch
     
     def propagaTLE(self,date=None):
         whichconst = wgs72

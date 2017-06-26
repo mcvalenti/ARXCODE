@@ -18,7 +18,7 @@ from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 from Encuentro.akellaPoC import evaluaEncuentro
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
 from visual import ploteos
-from visual.trackencuentro import grafica_track
+#from visual.trackencuentro import grafica_track
 from visual.TleOsweiler import VerGrafico
 # #from visual.TlevsCodsGraf import VerGraficoMision
 # from visual.CodsOsweiler import VerGraficoCods
@@ -353,7 +353,7 @@ class ProcEncuentro(QDialog):
         
 
         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
-        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
+#        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
         print 'fin del procesamiento.'
         
         self.boton_track.setEnabled(True)
