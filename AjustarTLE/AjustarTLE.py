@@ -364,7 +364,7 @@ def genera_estadisticaBin(bin_lista):
  
     
 
-def difPrimario(tleOrdenados,cantidad_tles):
+def difPrimario():
     """
     Compara cada uno de los valores de los TLEs propagados 
     a la fecha del TLEs final (primario)
@@ -421,7 +421,7 @@ def difPrimario(tleOrdenados,cantidad_tles):
     dyy=[]
     dzz=[]
 
-    tlepri=tleOrdenados[-1][0]
+    tlepri=tle_ordenados[-1][0]
     r,rp,ffin=tlePrimario(tlepri) # En TEME
     """
     Transformacion del TEME al TOD.
@@ -433,9 +433,9 @@ def difPrimario(tleOrdenados,cantidad_tles):
     """
     fin de la transformacion
     """
-    item=range(len(tleOrdenados)-2,-1,-1)       
+    item=range(len(tle_ordenados)-2,-1,-1)       
     for j in item:
-        tlesec=tleOrdenados[j][0]
+        tlesec=tle_ordenados[j][0]
         tle1=Tle.creadoxArchivo('../TleAdmin/tle/'+tlesec)
         tle1_epoca=tle1.epoca()
         if tle1_epoca >= epoca15dias:
@@ -490,16 +490,26 @@ def difPrimario(tleOrdenados,cantidad_tles):
             dzz.append(zz)       
             
     data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn,dt_frac]
+    var_v=np.var(dv)
+    var_n=np.var(dn)
+    var_c=np.var(dc)
     
-    print '++++++++++++GRADO 2++++++++++++++++++'
+    print '*******************************************************'
+    print '-----------------Varianzas---------------------------'
+    print '*******************************************************'
+    print 'Var en R = ', var_v
+    print 'Var en T = ', var_n
+    print 'Var en N = ', var_c
+    
+#     print '++++++++++++GRADO 2++++++++++++++++++'
     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data1,2)
-    print coef
-    print statsReport
-    
-    print '++++++++++++GRADO 1++++++++++++++++++'
+#     print coef
+#     print statsReport
+#     
+#     print '++++++++++++GRADO 1++++++++++++++++++'
     dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data1,1)
-    print coef1
-    print statsReport1
+#     print coef1
+#     print statsReport1
 
     data=[dt,data1,coef,nombre]   
 

@@ -4,12 +4,15 @@ Created on 26/01/2017
 @author: mcvalenti
 '''
 import os
+import numpy as np
+from scipy.integrate import quad, dblquad
 from datetime import datetime, timedelta
-#from pruebas.claseTle import Tle, Encuentro
+from Aplicacion.globals import tabla
 from TleAdmin.TLE import Tle, SetTLE
-#from Encuentro.Encuentro import Encuentro
-from Estadistica.matrizOsweiler import calcula_matriz_Tles
-from Estadistica.maCovar import EjecutaMaCovar
+from Encuentro.Encuentro import Encuentro
+from Estadistica.matrizOsweiler import calcula_matriz_Tles, calcula_matriz_OSWcorregido
+from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
+from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 
 
 # def proc_encuentroSimple(sat_id,deb_id,tca):
@@ -51,7 +54,6 @@ from Estadistica.maCovar import EjecutaMaCovar
 #     pass
 
 if __name__ == '__main__':
-    
     """
     Codigo principal.
     Inicia el ciclo de procesamiento. 
@@ -61,8 +63,6 @@ if __name__ == '__main__':
         deb_id: id NORAD del Desecho (String)
         tca: tiempo de maximo acercamiento (datetime)
     """
-    
-
     # Se crean los directorios necesarios.
    
     d1='../TleAdmin/tle'
@@ -80,93 +80,79 @@ if __name__ == '__main__':
     d5='../visual/archivos/CODS'
     if not os.path.exists(d5):
         os.mkdir(d5)    
-    
     """
     Estos procedimientos deben estar en la GUI. 
     """
-    
-    TCA=datetime(2008,1,9,19,1,30,0)
+    TCA=datetime(2004,9,2,19,14,11,0)
     sat_id='27386' #ENVISAT
-    deb_id='15482' #COSMOS
-    
+    deb_id='12442' #COSMOS
+#     TCA=datetime(2008,1,9,19,1,30,0)
+#     sat_id='27386' #ENVISAT
+#     deb_id='15482' #COSMOS
+#     TCA=datetime(2013,1,1)
+#     sat_id='37673' #SAC-D  
+#     deb_id='15482' #COSMOS
     """
-    Prediccion con 3 dias de aticipacion
-    Asumimos que los CDM estaran cargados 3 dias antes del TCA.
+    Prediccion con n dias de aticipacion
     """
-    
-    tle_sat=Tle.creadoxParam(sat_id, TCA-timedelta(days=3))
-    tle_deb=Tle.creadoxParam(deb_id, TCA-timedelta(days=3)) 
- 
+    n=0 # x ejemplo para un CDM que llega 72 hs antes.
+    #===========================================================
+    # Satelite
+    #===========================================================
+    tle_sat=Tle.creadoxParam(sat_id, TCA-timedelta(days=n))
+    #===========================================================
+    # Desecho
+    #===========================================================
+    tle_deb=Tle.creadoxParam(deb_id, TCA-timedelta(days=n)) 
+    #===========================================================
     #    ENCUENTRO
-#     encuentro1=Encuentro(tle_sat,tle_deb,TCA)
-#     
-#     tca_calculado=encuentro1.tca_c
-#     min_distancia=encuentro1.mod_minDist
-#     dif_r=encuentro1.DistRic_min[0]
-#     dif_t=encuentro1.DistRic_min[1]
-#     dif_n=encuentro1.DistRic_min[2] 
-#     
-#     print '*****************************************************'
-#     print '-----------------ENCUENTRO---------------------------'
-#     print '*****************************************************'
-#     print 'TCA calcualdo = ', tca_calculado
-#     print 'Minima Distancia =', min_distancia
-#     print 'Distancia en R = ', dif_r 
-#     print 'Distancia en T = ', dif_t
-#     print 'Distancia en N = ', dif_n
-
-    """
-    1 - Calculo la matriz del desecho x OSW.
-    2 - Calculo la matriz de la mision x OSW (con TLEs).
-    3 - Calculo la matriz de la mision x OSW modificado (TLEs vs CODS).
-    4 - Calculo la diferencia de  las matrices 2 y 3.
-    5 - Calculo la diferencia en la posicion del ultimo r,v vs dato TLE. 
-    """
-    
-    # 1 - MATRIZ DEL DESECHO (calculada para TCA - 3 dias)
-    ini_set_deb=tle_deb.epoca()-timedelta(days=15)
-    fin_set_deb=tle_deb.epoca()
-    archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
-    nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
-    maCovar, ma_archivo=EjecutaMaCovar(nombre_archivo)
-    
-    print '*******************************************************'
-    print '-----------------Varianzas DESECHO---------------------------'
-    print '*******************************************************'
-    print 'Var en R = ', var_r 
-    print 'Var en T = ', var_t
-    print 'Var en N = ', var_n
-    print '*******************************************************'
-    print '-----------------Ma. Desecho---------------------------'
-    print '*******************************************************'
-    for k in maCovar[:3]:
-        print k[:3]
-        
-    # 2 - MATRIZ DE LA MISION (calculada para TCA - 3 dias)
-    ini_set_sat=tle_sat.epoca()-timedelta(days=15)
-    fin_set_sat=tle_sat.epoca()
-    archivo_sat=sat_id+'_'+datetime.strftime(ini_set_sat,'%Y%m%d')+'.crudo'    
-    nombre_archivo_sat,var_r_sat,var_t_sat,var_n_sat=calcula_matriz_Tles(sat_id,ini_set_deb,fin_set_deb,archivo_sat)
-    maCovar_sat, ma_archivo_sat=EjecutaMaCovar(nombre_archivo_sat)
-    
-    print '*******************************************************'
-    print '-----------------Varianzas MISION---------------------------'
-    print '*******************************************************'
-    print 'Var en R = ', var_r_sat
-    print 'Var en T = ', var_t_sat
-    print 'Var en N = ', var_n_sat
-    print '*******************************************************'
-    print '-----------------Ma. MISION---------------------------'
-    print '*******************************************************'
-    for k in maCovar_sat[:3]:
-        print k[:3]
-    
-
-    
-    
+    #===========================================================
+    encuentro1=Encuentro(tle_sat,tle_deb,TCA,n)    
+    tca_calculado=encuentro1.tca_c
+    min_distancia=encuentro1.mod_minDist
+    dif_r=encuentro1.DistRic_min[0]
+    dif_t=encuentro1.DistRic_min[1]
+    dif_n=encuentro1.DistRic_min[2] 
+    #Calculo el angulo entre los vectores velocidad.
+    v_sat=encuentro1.vel_sat_tca
+    v_deb=encuentro1.vel_deb_tca
+    cos_phi=np.dot(v_sat,v_deb)/(np.sqrt(np.dot(v_sat,v_sat))*np.sqrt(np.dot(v_deb,v_deb)))
+    phi=np.arccos(cos_phi)
+         
+    print '*****************************************************'
+    print '-----------------ENCUENTRO---------------------------'
+    print '*****************************************************'
+    print 'TCA calcualdo = ', tca_calculado
+    print 'Minima Distancia =', min_distancia
+    print 'Distancia en R = ', dif_r 
+    print 'Distancia en T = ', dif_t
+    print 'Distancia en N = ', dif_n
+    #===========================================================
     # Matriz Combinada
-    #var_r,var_t,var_n=encuentro1.calculaMacombinada()
+    #===========================================================
+    matriz_combinada=encuentro1.calculaMacombinada()
+    print '*****************************************************'
+    print '-----------------Matriz COMBINADA--------------------'
+    print '*****************************************************'    
+    for k in matriz_combinada[:3]:
+        print k[:3]
+    #===========================================================
+    # PoC
+    #===========================================================
+     
+    mu_x=dif_r
+    mu_y=np.sqrt(dif_t*dif_t+dif_n*dif_n)
+
+    var_s=matriz_combinada[1][1]
+    var_w=matriz_combinada[2][2]
     
+    var_x=matriz_combinada[0][0]
+    var_y=var_s*np.cos(phi/2.0)*np.cos(phi/2.0)+var_w*np.sin(phi/2.0)*np.sin(phi/2.0)
 
-
+    ra=0.01
+    PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
+#    PoC=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/var_x)+(y*y/var_y))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
+    print '======================================================'
+    print 'PoC = ', PoC
+    print '======================================================'
     

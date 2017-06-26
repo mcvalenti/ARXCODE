@@ -4,23 +4,22 @@
 % Estado del arte general de la temática de estudio. 
 \section{Introducci\'on}
 
-Para el an\'alisis de posibles colisiones es necesario evaluar de forma anticipada las trayectorias de todos los objetos que orbitan la Tierra y detectar los acercamientos de riesgo. Si la predicci\'on de las posiciones fuera exacta, este estudio s\'olo implicar\'ia un esfuerzo computacional a resolver. No obstante, el movimiento orbital de los objetos no es ideal y las posiciones medidas o estimadas siempre acarrean una indeterminaci\'on, sobretodo cuando se trata de desechos.\\
+Para el an\'alisis de posibles colisiones es necesario evaluar de forma anticipada las trayectorias de todos los objetos que orbitan la Tierra y detectar los acercamientos de riesgo. Si la predicci\'on de las posiciones fuera exacta, este estudio s\'olo implicar\'ia un esfuerzo computacional a resolver. No obstante, el movimiento orbital de los objetos no es ideal y las posiciones medidas o estimadas siempre acarrean una indeterminaci\'on, y m\'as a\'un cuando se trata de desechos.\\
 
 Las primeras t\'ecnicas de detecci\'on de encuentros, realizaban propagaciones de las posiciones una semana hacia el futuro, defin\'ian un volumen seguro rodeando al sat\'elite de inter\'es, y si alg\'un objeto externo se introduc\'ia dentro del volumen de riesgo, es decir, se acercaba a una distancia m\'inima por debajo del umbral determinado, se consideraba una situaci\'on de acercamiento que deb\'ia ser estudiada. Estas metodolog\'ias no ten\'ian en cuenta los errores en la determinaci\'on de la posici\'on de los objetos, y por lo general derivaban en falsas alarmas, con las que se corr\'ia el riesgo de realizar maniobras innecesarias.\\
 En la actualidad, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la {\bf{probabilidad de colisi\'on}}: PoC.  Esta \'ultima ofrece un panorama m\'as completo de la situaci\'on ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
 
-Como ya mencionamos (\textcolor{red}{citar secci\'on}), en este trabajo nos enfocamos en analizar las situaci\'ones de encuentro que involucran a misiones operativas y desechos espaciales.\\
+Como ya mencionamos (Sec. \ref{subsec:estudiocolison}), en este trabajo nos enfocamos en analizar las situaci\'ones de encuentro ya identificadas y que involucran a misiones operativas y desechos espaciales.\\
 
 La posici\'on de la misi\'on operativa y los errores asociados a la misma, la provee el departamento de din\'amica orbital (Sec. \ref{sec:posMision}).
-La posici\'on de los desechos, s\'olo es posible conocerla, utilizamos los datos p\'ublicos que ofrece \ac{NORAD} a trav\'es de su p\'agina Space-Track \cite{spacetrack}. Las posiciones son publicadas en formato \ac{TLE} (Sec. \ref{sec:tleformat}), sin errores asociados, y son propagadas hasta el momento del encuentro con el modelo SGP4 (Sec. \ref{sec:sgp4model}), que tampoco ofrece informaci\'on sobre los errores de propagaci\'on.\\
+La posici\'on de los desechos, s\'olo es posible conocerla, utilizamos los datos p\'ublicos que ofrece el comando de defensa norteamericano, \ac{NORAD} a trav\'es de su p\'agina Space-Track {\footnote{http://www.space-track.org}}. Las posiciones son publicadas en formato \ac{TLE} (Sec. \ref{sec:tleformat}), sin errores asociados, y son propagadas hasta el momento del encuentro con el modelo SGP4 (Sec. \ref{sec:sgp4model}), que tampoco ofrece informaci\'on sobre los errores de propagaci\'on.\\
 
-
-En este cap\'itulo, en primer lugar presentamos el mensaje de alerta \ac{CDM}. Luego describimos las particularidades de la determinaci\'on de las posiciones de los objetos, los modelos para hacer predicciones de posiciones futuras y las representaciones.\\
-Detallamos el m\'etodo de Osweiler \citep{Osweiler} que utilizamos para la contrucci\'on de las matrices de covarianzas correspondientes a los desechos y la modificaci\'on que proponemos para obtener resultados mejorados, utilizando datos orbitales precisos de la misi\'on operativa. \\
+En este cap\'itulo, en primer lugar presentamos la forma en que se comunican los acercamientos de riesgo (Sec. \ref{sec:anuncio}), por ejemplo mediante \ac{CDM}. Luego describimos las distintas determinaciones en las posiciones y los formatos en que se presentan y el modelo SGP4 para la propagaci\'on de los TLE.\\
+Detallamos el m\'etodo de Osweiler \citep{Osweiler} que utilizamos para la contrucci\'on de las matrices de covarianzas correspondientes a los desechos y la generaci\'on e implementaci\'on de una tabla con valores estad\'isticos inferidos de an\'alisis de datos de misi\'on, para la propagaci\'on de la matriz de covarianza al momento del m\'aximo acercamiento.\\
 Finalmente detallamos el algoritmo para el c\'alculo de la PoC.\\
 
 
-\section{El mensaje de alerta: CDM}
+\section{Comunicaciones de riesgos de colisi\'on}{\label{sec:anuncio}}
 
 El CDM tuvo su precedente en el CSM {\it{Conjunction Summary Message}} (\textcolor{red}{citar bibliograf\'ia que lo describa y si sobra tiempo ampliar}).  es un mensaje enviado por JSpOC a los operadores o due\~nos de misi\'on cuando alguno de sus sat\'elites fue identificado en un acercamiento de riesgo con otro objeto del ambiente espacial.\\
 El mismo fue acordado y promovido por el .... IADC y adoptado por el COPUOS en el a\~no, bajo los est\'andares que se describen en el blue book del CCSDS. \\

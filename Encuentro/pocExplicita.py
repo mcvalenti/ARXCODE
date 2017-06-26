@@ -207,9 +207,9 @@ if __name__ == '__main__':
 # -------------------------------------------
 #   Escenario TerraSAR - PEGASUS DEBRIS
 # -------------------------------------------
-    TCA=datetime(2010,8,7,13,19,35,0)
-    sat_id='31698' # TerraSAR
-    deb_id='24978'  # PEGASUS DEBRIS
+#     TCA=datetime(2010,8,7,13,19,35,0)
+#     sat_id='31698' # TerraSAR
+#     deb_id='24978'  # PEGASUS DEBRIS
 
     r_sat,v_sat,r_deb,v_deb,vec_rsw=proc_encuentroSimple(sat_id,deb_id,TCA)
     
@@ -234,10 +234,10 @@ if __name__ == '__main__':
 #    crudo_sat='27386_20040523_20040607.tle'
 #    crudo_sat='27386_20040526_20040610.tle' # Escenario 3
 #    crudo_sat='27386_20071226_20080109.tle' #ENVI
-#    crudo_sat='27386_20040819_20040903.tle' # Escenario 4
+    crudo_sat='27386_20040819_20040903.tle' # Escenario 4
 #    crudo_sat='23560_20040915_20040930.tle' # Escenario 5
 #    crudo_sat='36798_20120415_20120430.tle' #Escenario ALSAT I
-    crudo_sat='31698_20100725_20100808.tle' # TerraSAR
+#    crudo_sat='31698_20100725_20100808.tle' # TerraSAR
     
     var_rsat,var_ssat,var_wsat=metodoOSWtles(sat_id,crudo_sat,TCA)
     
@@ -246,10 +246,10 @@ if __name__ == '__main__':
 #    crudo_deb='21798_20040523_20040607.tle'
 #    crudo_deb='5395_20040526_20040610.tle' # Escenario 3
 #    crudo_deb='15482_20071226_20080109.tle' #COSMOS 
-#    crudo_deb='12442_20040819_20040903.tle'  # Escenario 4
+    crudo_deb='12442_20040819_20040903.tle'  # Escenario 4
 #    crudo_deb='16681_20040915_20040930.tle' #Escenario 5
 #    crudo_deb='37976_20120415_20120430.tle' #Escenario ALSAT I
-    crudo_deb='24978_20100725_20100808.tle' # Pegasus DEB.
+#    crudo_deb='24978_20100725_20100808.tle' # Pegasus DEB.
 
     var_rdeb,var_sdeb,var_wdeb=metodoOSWtles(deb_id,crudo_deb,TCA)
 
@@ -261,10 +261,10 @@ if __name__ == '__main__':
     var_x=var_rsat+var_rdeb 
     var_y=var_s*np.cos(phi/2.0)*np.cos(phi/2.0)+var_w*np.sin(phi/2.0)*np.sin(phi/2.0)
 
-    ra=0.005
+    ra=0.01
     
-#    PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
-    PoC=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/var_x)+(y*y/var_y))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
+    PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
+#    PoC=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/var_x)+(y*y/var_y))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
     print '======================================'
-    print 'PoC = ', PoC[0]
+    print 'PoC = ', PoC
     print '======================================'

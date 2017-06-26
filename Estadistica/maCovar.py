@@ -150,7 +150,7 @@ def EjecutaMaCovarCODS(archivo):
         wv.append(float(campos[7]))
     maCovar=maCovTLE(u, v, w, uv, vv, wv)
     
-    
+
     csvsalida = open('../main/matrices/'+archivo.split('.')[0]+'_cods.csv', 'w')
     salida = csv.writer(csvsalida)
     salida.writerows(maCovar)

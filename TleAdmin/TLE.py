@@ -10,7 +10,7 @@ from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from requests import session, exceptions
 from datetime import timedelta
-from Aplicacion.varGlobales import clave, usuario
+from Aplicacion.globals import clave, usuario
 
 class Tle:
     @classmethod
@@ -81,8 +81,8 @@ class Tle:
         return inst2
     
     def catID(self):
-        self.catID=self.linea1.split()[1]
-        return self.catID
+#        self.catID=self.linea1.split()[1]
+        return self.linea1.split()[1] #self.catID
         
     def epoca(self):
         whichconst = wgs72

@@ -175,7 +175,7 @@ def FiltraArchivos(tle):
         archivos_datos: nombres de los archivos CODS que contienen la fecha
                         del TLE primario - (Lista)
     """
-    tle1=Tle(tle)
+    tle1=Tle.creadoxArchivo(tle)
     fecha=tle1.epoca()
     fechas_busqueda=[datetime(fecha.year,fecha.month,fecha.day)+timedelta(days=2),
                      datetime(fecha.year,fecha.month,fecha.day)+timedelta(days=1),
@@ -230,7 +230,7 @@ def interpola_3sv(tle,arch3_cods):
     output
         linea_interpol: linea con el vector de estado interpolado a la epoca del TLE. (String)
     """
-    tle1=Tle(tle)
+    tle1=Tle.creadoxArchivo(tle)
     fecha_tle=tle1.epoca()
     r,v=tle1.propagaTLE()
     fila=str(fecha_tle)+' '+str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])+' '+str(v[1])+' '+str(v[2])
@@ -285,7 +285,7 @@ def diferencias_tleCODS(salida,tles,linea_interpol,data):
     item=range(0,len(tles))
     whichconst=wgs72
     for j in item:
-        tle0=Tle('../TleAdmin/tle/'+tles[j][0])
+        tle0=Tle.creadoxArchivo('../TleAdmin/tle/'+tles[j][0])
         fecha_tle=tle0.epoca()
         if fecha_tle <= d:
             dif_fechas=(d-fecha_tle).total_seconds()/86400.0
@@ -328,7 +328,7 @@ def dif_tleCODS15dias():
     #===============
     data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]   
     
-    print 'PROCESANDO DATOS DE MISION...'
+#    print 'PROCESANDO DATOS DE MISION...'
     tles=glob.glob('../TleAdmin/tle/*')
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
@@ -339,14 +339,14 @@ def dif_tleCODS15dias():
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
     
-    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
     epoca_ffin  = tle_primario.epoca()
     cat_id = tle_primario.catID()
     linea1 = tle_primario.linea1
     linea2 = tle_primario.linea2
     epoca15dias=epoca_ffin-timedelta(days=15)
     
-    tle_inicio=Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+    tle_inicio=Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[0][0])
     epoca_ini  = tle_inicio.epoca()
     
     arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[-1][0])
@@ -357,7 +357,7 @@ def dif_tleCODS15dias():
     # Bucle de comparacion total  (tiene sentido?)
     #===============================================
     for m in range(len(tle_ordenados)-1,0,-1):
-        tle0 = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
+        tle0 = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_tle0 = tle0.epoca()
         if epoca_tle0 >= epoca15dias:          
             data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
@@ -369,7 +369,7 @@ def dif_tleCODS15dias():
             continue
     
     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data,2)    
-    print statsReport
+#    print statsReport
     
     
     set_data15=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
@@ -427,6 +427,7 @@ def dif_tleCODS15dias():
 def ejecutaProcesamientoCods():
 #if __name__ == '__main__':
     """
+    REVISAR - FUE MODIFICADO
     Lista y ordena los nombres de los archivos de la carpeta: TleAdmin/tles.
     Recupera la informacion del ultimo TLE del set (TLE primario), en particular la epoca.
     Busca entre los archivos de CODS, la epoca coincidente con la epoca del TLE primario.
@@ -439,20 +440,20 @@ def ejecutaProcesamientoCods():
     corresponderse con esa mision.
     """
 
-    print 'PROCESANDO DATOS DE MISION...'
+#    print 'PROCESANDO DATOS DE MISION...'
     tles=glob.glob('../TleAdmin/tle/*')
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
     
-    tles=glob.glob('../TleAdmin/tle/*')
-    dic_tles=generadorDatos(tles)
-    tle_ordenados=ordenaTles(dic_tles)
+#     tles=glob.glob('../TleAdmin/tle/*')
+#     dic_tles=generadorDatos(tles)
+#     tle_ordenados=ordenaTles(dic_tles)
     
-    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+    tle_inicio = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[0][0])
     cat_id = tle_inicio.catID()
     epoca_ini = tle_inicio.epoca()
     
-    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
     epoca_fin  = tle_primario.epoca()
     epoca_ffin = epoca_fin
     epoca15dias=epoca_ffin-timedelta(days=15)
@@ -460,23 +461,23 @@ def ejecutaProcesamientoCods():
     """
     Impresiones de info de TLEs.
     """
-    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+    tle_inicio = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[0][0])
     cat_id = tle_inicio.catID()
     epoca_ini = tle_inicio.epoca()
     
-    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
     epoca_fin  = tle_primario.epoca()
     epoca_ffin = epoca_fin
     linea1 = tle_primario.linea1
     linea2 = tle_primario.linea2
     fecha_ini=str(epoca_ini.year)+str(epoca_ini.month).zfill(2)+str(epoca_ini.day).zfill(2)
     fecha_fin=str(epoca_fin.year)+str(epoca_fin.month).zfill(2)+str(epoca_fin.day).zfill(2)
-    print '------------------------------------------------------------------------'
-    print '-------------------------TLE PRIMARIO-----------------------------------'
-    print linea1
-    print linea2
-    print epoca_ffin
-    print '------------------------------------------------------------------------'
+#     print '------------------------------------------------------------------------'
+#     print '-------------------------TLE PRIMARIO-----------------------------------'
+#     print linea1
+#     print linea2
+#     print epoca_ffin
+#     print '------------------------------------------------------------------------'
     t=[]
     dv=[]
     du=[]
@@ -504,12 +505,12 @@ def ejecutaProcesamientoCods():
     archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
     salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
     salida1=open('../Comparar/diferencias/'+archivo,'w')
-    salida15=open('../Comparar/diferencias/dif_15dias-'+archivo,'w')
+    salida15=open('../Comparar/diferencias/dif_15dias_'+archivo,'w')
     #===============================================
     # Bucle de comparacion total  (tiene sentido?)
     #===============================================
     for m in range(len(tle_ordenados)-1,0,-1):
-        tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
+        tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_fin = tle_primario.epoca()
         arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
         linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)
@@ -527,16 +528,17 @@ def ejecutaProcesamientoCods():
     
     epoca15=epoca_ffin-timedelta(days=15)
     for m in range(len(tle_ordenados)-1,0,-1):
-        tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
+        tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[m][0])
         epoca_fin = tle_primario.epoca()
         if epoca_fin > epoca15:
             arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
             linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], arch3_cods)
             if linea_interpol != None:                   
-                data15=dif_tleCODS15dias(salida15,tle_ordenados,linea_interpol,data15)
+                data15=dif_tleCODS15dias()
                 if m == len(tle_ordenados)-1:
                     for k in range(len(data15[0])):
-                        info = data15[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(data15[1][k])+' '+str(data15[2][k])+' '+str(data15[3][k])+' '+str(data15[4][k])+' '+str(data15[5][k])+' '+str(data15[6][k])+'\n'
+                        info = data15[0][k]+' '+str(data15[1][k])+' '+str(data15[2][k])+' '+str(data15[3][k])+' '+str(data15[4][k])+' '+str(data15[5][k])+' '+str(data15[6][k])+'\n'
+                       # info = data15[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(data15[1][k])+' '+str(data15[2][k])+' '+str(data15[3][k])+' '+str(data15[4][k])+' '+str(data15[5][k])+' '+str(data15[6][k])+'\n'
                         salida15.write(info)
             else:
                 continue 
@@ -549,8 +551,9 @@ def ejecutaProcesamientoCods():
     AJUSTE Y GENERACION DE COEFICIENTES.
     """
     
-    dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data15,2)
-    dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data15,1)
+#     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data15,2)
+#     dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data15,1)
+    coef1=0
     """
     Guarda en archivos las diferencias que se corresponden al
     ultimo TLE del set. (Estadistica/archivos)
@@ -564,15 +567,16 @@ def ejecutaProcesamientoCods():
     
     print 'DIFERENCIAS:'
     print '-------------------------------------------------------------------------'
+    diferencias=[data[1][len(tles)-1],data[2][len(tles)-1],data[3][len(tles)-1],data[4][len(tles)-1],data[5][len(tles)-1],data[6][len(tles)-1]]
     print 'dv =',data[1][len(tles)-1]
     print 'dn =',data[2][len(tles)-1]
     print 'dc =',data[3][len(tles)-1]
     print '-------------------------------------------------------------------------'
     print 'Fin del Calculo de Diferencias'
 
-    set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
-    set_data15=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data15,coef1,archivo]
-    return set_data15
+#    set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
+    set_data15=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),data15,coef1,archivo]
+    return diferencias,set_data15
 
 def analizaEO():
     """
@@ -688,7 +692,7 @@ if __name__=='__main__':
                 d=datetime.strptime(fecha,'%Y-%m-%d %H:%M:%S.%f')
                 r=np.array([float(linea_interpol.split()[2]),float(linea_interpol.split()[3]),float(linea_interpol.split()[4])])
                 rp=np.array([float(linea_interpol.split()[5]),float(linea_interpol.split()[6]),float(linea_interpol.split()[7])])
-                tle0=Tle('../TleAdmin/tle/'+tle)        
+                tle0=Tle.creadoxArchivo('../TleAdmin/tle/'+tle)        
                 line1=tle0.linea1
                 line2=tle0.linea2
                 satrec = twoline2rv(line1, line2, whichconst)
