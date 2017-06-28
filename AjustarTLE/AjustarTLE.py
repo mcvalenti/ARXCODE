@@ -366,28 +366,14 @@ def genera_estadisticaBin(bin_lista):
 
 def difPrimario():
     """
-    Compara cada uno de los valores de los TLEs propagados 
-    a la fecha del TLEs final (primario)
+    Extrae todos los TLEs que contiene la carpeta tle del administrador
+    de TLEs. Propaga cada TLEs a la epoca del ultimo del set y calcula 
+    las diferencias. (falta que sea opcional el sistema de ref)
+    NOTA: Transforma los resultados al sistema TOD.
     ----------------------------------------------------------------
-    input
-        nombre: nombre de archivo que identifica el procesamiento. (string)
-        largo: cantidad de TLEs en el set, menos  uno. (integer)
-    output
-        salida: nombre del archivo que contiene las diferencias solo contra 
-        el SV de referencia. (string), path: '../AjustarTLE/diferencias/'
+    output:
+        set de datos ... describir. 
     """
-#     nombre1=nombre.split('.')[0]
-#     nombre2=nombre1.split('_')
-#     nombre3='setPri_'+nombre2[1]+'_'+nombre2[2]+'_'+nombre2[3]+'.TLE'
-#     difG=open('../AjustarTLE/diferencias/'+nombre,'r')
-#     contenido=difG.readlines()
-#     difP=open('../AjustarTLE/diferencias/'+nombre3,'w')
-#     for c in range(largo):
-#         campos=contenido[c].split(' ')
-#         info=campos[0]+' '+campos[1]+' '+campos[2]+' '+campos[3]+' '+campos[4]+' '+campos[5]+' '+campos[6]+' '+campos[7]+'\n'
-#         difP.write(info)
-#     difP.close() 
-#     return nombre3
     tles=glob.glob('../TleAdmin/tle/*')
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
@@ -396,6 +382,9 @@ def difPrimario():
     cat_id = tle_inicio.catID()
     epoca_ini = tle_inicio.epoca()
     
+    #=========================
+    # Ultimo TLE del set
+    #=========================
     tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
     epoca_fin  = tle_primario.epoca()
     epoca_ffin = epoca_fin
@@ -511,7 +500,9 @@ def difPrimario():
 #     print coef1
 #     print statsReport1
 
-    data=[dt,data1,coef,nombre]   
+    data=[dt,data1,coef,nombre]  
+    dtot.close()
+    dtot2.close() 
 
     return data     
 

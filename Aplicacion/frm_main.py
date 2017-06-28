@@ -556,7 +556,7 @@ class ProcTle(QDialog):
         for filename in files:
             os.unlink(filename)
 #        self.bin, self.data, self.set_pri, self.coef=difTle(self.tleOrdenados, self.tles)
-        self.set_pri=difPrimario(self.tleOrdenados, self.tles)
+        self.set_pri=difPrimario()
         self.dt=self.set_pri[0]
         self.data1=self.set_pri[1]
         self.coef=self.set_pri[2]

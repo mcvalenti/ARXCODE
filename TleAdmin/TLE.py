@@ -5,7 +5,7 @@ Extrae la informacion de los TLE
 
 @author: mcvalenti
 """
-
+import os,glob
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from requests import session, exceptions
@@ -175,7 +175,9 @@ class SetTLE():
         Esta funcion particiona el archivo en muchos archivos, uno por cada tle.
         Y los guarda en TleAdmin/tle
         """
-        
+        files=glob.glob('../TleAdmin/tle/*')
+        for filename in files:
+            os.unlink(filename)
         
         lista=open('../TleAdmin/crudosTLE/'+self.archivo,'r')
         filas=lista.readlines()

@@ -30,7 +30,7 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
     r0=np.array([r0[0],r0[1],r0[2]])
         
     nombre_archivo='difRTN_'+str(cat_id)+'_'+tca1.strftime('%Y%m%d')+'.TLE'
-    archivo_dif_rsw=open('../AjustarTLE/diferencias/'+nombre_archivo+'','w')
+    archivo_dif_rsw=open('../AjustarTLE/diferencias/'+nombre_archivo,'w')
     # listas de diferencias (RTN)
     dr=[]
     dt=[]
