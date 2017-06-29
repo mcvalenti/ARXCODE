@@ -96,8 +96,8 @@ class Tle:
             ffin=satrec.epoch
             self.r,self.v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
         else:
-            segundos=date.second+date.microsecond
-            self.r,self.v = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,segundos)
+            #segundos=date.second+date.microsecond/100000.0
+            self.r,self.v = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,date.second)
         return self.r,self.v
     
     

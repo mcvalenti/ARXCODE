@@ -11,7 +11,22 @@ from SistReferencia.sist_deCoordenadas import ricSis, vncSis
 
 def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
     """
-    Metodo de Osweiler
+    Metodo de Osweiler.
+    Dado un objeto y un intervalo temporal.
+    Ejecuta el metodo de Osweiler de pair-wisse para comparar las 
+    propagaciones de cada TLE a la epoca del ultimo TLE del set,
+     y generar el archivo de    diferencias.
+    ------------------------------------------------------------------
+    inputs
+        cat_id: identificador NORAD del objetos (String)
+        tca0: epoca de inicio del intervalo (Datetime)
+        tca1: epoca de fin del intervalo (Datetime)
+        crudo: nombre del archivo con el set de TLEs (String)
+               '../TleAdmin/tle/*'
+    outputs
+        nombre_archivo: nombre de archivo donde se imprimen las diferencias
+                       ('../AjustarTle/ diferencias/') (String) 
+        var_x: varianzas en r,t,n (Float)
     """
     files=glob.glob('../TleAdmin/tle/*')
     for filename in files:

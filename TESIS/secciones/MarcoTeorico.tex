@@ -111,35 +111,34 @@ Ejemplo para: ISS (ZARYA)
 2 25544  51.6416 247.4627 0006703 130.5360 325.0288 15.72125391563537
 
 
-\begin{verbatim}
- 
+\begin{verbatim} 
 LINE 1 TLE first row
-1     01–01     Line number     1
-2     03–07     Satellite number     25544
-3     08–08     Classification (U=Unclassified)     U
-4     10–11     International Designator (Last two digits of launch year)     98
-5     12–14     International Designator (Launch number of the year)     067
-6     15–17     International Designator (piece of the launch)     A
-7     19–20     Epoch Year (last two digits of year)     08
-8     21–32     Epoch (day of the year and fractional portion of the day)     264.51782528
-9     34–43     First Time Derivative of the Mean Motion divided by two [10]     −.00002182
-10     45–52     Second Time Derivative of Mean Motion. 00000-0
-11     54–61     BSTAR drag term (decimal point assumed) [10]     -11606-4
-12     63–63     The number 0 (originally this should have been "Ephemeris type")     0
-13     65–68     Element set number. I
-14     69–69     Checksum (modulo 10)     7
+1   01–01   Line number   1
+2   03–07   Satellite number   25544
+3   08–08   Classification (U=Unclassified)   U
+4   10–11   International Designator (Last two digits of launch year)   98
+5   12–14   International Designator (Launch number of the year)   067
+6   15–17   International Designator (piece of the launch)   A
+7   19–20   Epoch Year (last two digits of year)   08
+8   21–32   Epoch (day of the year and fractional portion of the day)   264.51782528
+9   34–43   First Time Derivative of the Mean Motion divided by two [10]   −.00002182
+10  45–52   Second Time Derivative of Mean Motion. 00000-0
+11  54–61   BSTAR drag term (decimal point assumed) [10]   -11606-4
+12  63–63   The number 0 (originally this should have been "Ephemeris type")   0
+13  65–68   Element set number. I
+14  69–69   Checksum (modulo 10)   7
 
 LINE 2 TLE second row
-1     01–01     Line number     2
-2     03–07     Satellite number     25544
-3     09–16     Inclination (degrees)     51.6416
-4     18–25     Right ascension of the ascending node (degrees)     247.4627
-5     27–33     Eccentricity (decimal point assumed)     0006703
-6     35–42     Argument of perigee (degrees)     130.5360
-7     44–51     Mean Anomaly (degrees)     325.0288
-8     53–63     Mean Motion (revolutions per day)     15.72125391
-9     64–68     Revolution number at epoch (revolutions)     56353
-10     69–69     Checksum (modulo 10)     7
+1   01–01   Line number   2
+2   03–07   Satellite number   25544
+3   09–16   Inclination (degrees)   51.6416
+4   18–25   Right ascension of the ascending node (degrees)   247.4627
+5   27–33   Eccentricity (decimal point assumed)   0006703
+6   35–42   Argument of perigee (degrees)   130.5360
+7   44–51   Mean Anomaly (degrees)   325.0288
+8   53–63   Mean Motion (revolutions per day)   15.72125391
+9   64–68   Revolution number at epoch (revolutions)   56353
+10  69–69   Checksum (modulo 10)   7
 \end{verbatim}
 
 \subsection*{SGP4}{\label{subsec:sgp4model}}
@@ -152,8 +151,9 @@ Es un m\'etodo que propone una manera de estimar los errores que se comenten en 
  A partir de esa premisa, propaga los TLEs anteriores hasta la \'epoca del TLE Primario y con las diferencias que resultan de la comparaci\'on, realiza los c\'alculos estad\'idticos de los valores medios y las varianzas, para construir la matriz Varianza Covarianza correpondiente al TLE Primario.\\
  Para hacer los estudios de validaci\'on de nuestra implementaci\'on del m\'etodo, de los 6 sat\'elites estudiados por Osweiler, dentro de 8 ventanas temporales distintas, nosotros hemos aplicado el m\'etodo a dos de ellos con caracter\'isticas similares a las misiones de CONAE y en particular a la misi\'on SAC-D, que hemos incorporamos como escenario propio de valiaci\'on ya que contamos con datos orbitales reales de mayor precisi\'on que los TLEs.
 
- \section{Propagaci\'on de errores}
+ \section{Propagaci\'on de errores}\label{sec:properrores}
  M\'etodo de generaci\'on de la tabla de propagaci\'on de matrices. 
+ Como para encontrarla vamos a utilizar las estimaciones basadas en las comparaciones de TLEs y datos m\'as precisos de la misi\'on primaria, que esta s\'i tiene maniobras, va a ser importante detectar intervalos de maniobras de la misión ({\it{outliers}}) para descartarlos en la estimaci\'on de errores o ajuste y modelado del comportamiento de los TLE.\\
 
 \section{La Probabilidad de Colisi\'on}
 
@@ -307,6 +307,13 @@ A tal fin:\\
  \item Se propagan ambas matrices hasta el TCA utilizando los datos estad\'isticos de las tablas generadas, seg\'un la cantidad de d\'ias que se necesite propagar.
  \item Se re\'une toda la informaci\'on y se calcula la probabilidad de colisi\'on.
 \end{itemize}
+
+\begin{figure}[!h]
+ \centering
+ \includegraphics[width=0.7\textwidth]{imagenes/flujomain}
+ \caption{Flujo Principal de la construcci\'on te\'orica}
+\end{figure}
+
 
 % \subsection{Tratamiento sobre Datos de Misi\'on}
 % En esta etapa repetimos el m\'etodo que propone Osweiler considerando los datos de misi\'on generados por el CODS
