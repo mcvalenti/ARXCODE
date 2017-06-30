@@ -18,11 +18,11 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
      y generar el archivo de    diferencias.
     ------------------------------------------------------------------
     inputs
-        cat_id: identificador NORAD del objetos (String)
+        cat_id: identificador NORAD del objeto (String)
         tca0: epoca de inicio del intervalo (Datetime)
         tca1: epoca de fin del intervalo (Datetime)
         crudo: nombre del archivo con el set de TLEs (String)
-               '../TleAdmin/tle/*'
+               '../TleAdmin/tle/*' - viene vacio.
     outputs
         nombre_archivo: nombre de archivo donde se imprimen las diferencias
                        ('../AjustarTle/ diferencias/') (String) 

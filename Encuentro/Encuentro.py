@@ -12,14 +12,13 @@ from TleAdmin.TLE import Tle, SetTLE
 from Estadistica.matrizOsweiler import calcula_matriz_Tles
 from Estadistica.maCovar import EjecutaMaCovar
 
-
 class Posicion:
 
     def __init__(self,r,v,epoca):   
         self.r=r
         self.v=v
         self.epoca=epoca
-        
+       
     def getCoordenadasGEOD(self):
         """
         Transforma coordenadas del sistem cartesiano (TEME)
@@ -40,8 +39,7 @@ class Posicion:
         else:
             self.alpha = 2*np.pi-np.arccos(np.divide(l,np.cos(self.delta)))
          
-        return self.delta*deg, self.alpha*deg
-    
+        return self.delta*deg, self.alpha*deg   
 
 class Encuentro():
     
@@ -52,10 +50,13 @@ class Encuentro():
         y 5 minutos despues del tca.
         -----------------------------------------------------------
         outpus:
-            3 archivos.
+            3 archivos: (../Encuentro/archivos/)
+                * coordenadas alfa y delta del sat.
+                * coordenadas alfa y delta del deb.
+                * Diferencias relativas en RTN para el intervalo breve.
             mod_minDist: Minima distancia en modulo en el sistema RTN. (float)
             tca_c: Instante del maximo acercamiento. (datetime)
-            DistRic_min: coordenadas RTN en el momento de min distancia (array)
+            DistRic_min: coordenadas RTN relativas en el momento de min distancia (array)
         """
         
         self.tle_sat=tle_sat
@@ -98,6 +99,8 @@ class Encuentro():
             x_ric,y_ric,z_ric=ricSis(pos1.r,pos1.v,self.DistVector)
             self.DistRic=np.array([x_ric,y_ric,z_ric])
             self.VelVector=pos1.v-pos2.v
+            vx_ric,vy_ric,vz_ric=ricSis(pos1.r,pos1.v,self.VelVector)
+            self.VelRic=np.array([vx_ric,vy_ric,vz_ric])
             self.mod_Dist1=np.sqrt(np.dot(self.DistRic,self.DistRic))
 #            self.mod_Dist1=np.sqrt(np.dot(self.DistVector,self.DistVector))
             if self.mod_Dist1 < self.mod_minDist:
@@ -108,20 +111,32 @@ class Encuentro():
                 self.vel_deb_tca=v1
             self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
             
+            #====================================
+            # Distancias relativas en RTN.
+            #====================================
+            self.r_comp=self.DistRic_min[0]
+            self.s_comp=self.DistRic_min[1]
+            self.w_comp=self.DistRic_min[2]
+    
+            #Calculo el angulo entre los vectores velocidad.
+            cos_phi=np.dot(self.vel_sat_tca,self.vel_deb_tca)/(np.sqrt(np.dot(self.vel_sat_tca,self.vel_sat_tca))*np.sqrt(np.dot(self.vel_deb_tca,self.vel_deb_tca)))
+            self.phi=np.arccos(cos_phi)
+            
+            
+            
             # Transformo a Coordenadas Geodesicas.
             delta1, alpha1=pos1.getCoordenadasGEOD()
             delta2, alpha2=pos2.getCoordenadasGEOD()
             # GUARDA EN ARCHIVO Posiciones en ALFA, DELTA (Seudo Geodesicas).
             salida1.write(str(alpha1)+' '+str(delta1)+' '+datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
             salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n') 
-            # GUARDA EN ARCHIVO Posiciones en RTN.
+            # GUARDA EN ARCHIVO Posiciones Relativas en RTN.
             salida3.write(datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(self.DistRic[0])+' '+str(self.DistRic[1])+' '+str(self.DistRic[2])+'\n')
 
         salida1.close()
         salida2.close()
         salida3.close()
-    
-    
+        
     def calculaMacombinada(self):
         """
         1 - Calculo la matriz del desecho x OSW.
@@ -192,11 +207,28 @@ class Encuentro():
         maCovar_sat[2][2]=maCovar_sat[2][2]-var_tab_c 
         #=============================================================
         # 4 - Calculo la matriz combinada, suma de las matrices
-        # anteriores.
+        # anteriores. En el sistema RTN.
         #=============================================================    
-        matriz_combinada=maCovar_sat+maCovar_deb
+        self.matriz_combinada=maCovar_sat+maCovar_deb
 
-        return matriz_combinada
+        return self.matriz_combinada
     
-    def calculaPoC(self):
+    def proyecta_alplano_encuentro(self):
+    #============================================
+    # Calcula los errores combinados proyectados.
+    #============================================
+        mu_x=self.r_comp
+        mu_y=np.sqrt(self.s_comp*self.s_comp+self.w_comp*self.w_comp)
+        var_x=self.matriz_combinada[0][0]
+        var_y=self.matriz_combinada[1][1]*np.cos(self.phi/2.0)*np.cos(self.phi/2.0)+self.matriz_combinada[2][2]*np.sin(self.phi/2.0)*np.sin(self.phi/2.0)
+        
+        return mu_x,mu_y,var_x,var_y
+    
+    def calculaPoC_circ(self):
+        mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro()
+        ra=0.01
+        PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
+        return PoC
+    
+    def calculaPoC_gral(self):
         pass

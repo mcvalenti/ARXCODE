@@ -2,7 +2,7 @@
 Created on 19/06/2017
 
 Utiliza la expresion explicita simplificada para el calculo
-de la Probabilidad de Colision.
+de la Probabilidad de Colision en misiones de orbita circular.
 Requiere: 
 *Las diferencias en el TCA, en R,S,W. 
 *Los errores en el plano x,y (B-plane).
@@ -14,12 +14,15 @@ P=exp[-1/2(mux2/sigmax2 + muy2/sigmay2)]*[1-exp[-(ra2/2*sigmax*sigmay)]]
 import os, glob
 import numpy as np
 from scipy.integrate import quad, dblquad
-from datetime import datetime
-from pruebas.claseTle import Tle, Encuentro
+from datetime import datetime, timedelta
+from TleAdmin.TLE import Tle
+from Estadistica.matrizOsweiler import calcula_matriz_Tles
+#from pruebas.claseTle import Tle, Encuentro
 from TleAdmin.TleArchivos import divide_setTLE
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
 from SistReferencia.sist_deCoordenadas import ricSis
 from visual.trackencuentro import grafica_track
+from Encuentro import Encuentro
 
 """
 PASOS.
@@ -48,8 +51,8 @@ def proc_encuentroSimple(sat_id,deb_id,tca):
 
     usuario='macecilia'
     clave='MaCeciliaSpace17'
-    tle_sat=Tle.creadoxParam(usuario, clave, sat_id, tca)
-    tle_deb=Tle.creadoxParam(usuario, clave, deb_id, tca)
+    tle_sat=Tle.creadoxParam(sat_id, tca)
+    tle_deb=Tle.creadoxParam(deb_id, tca)
     
     """
     Propagacion hasta el Encuentro
@@ -234,27 +237,34 @@ if __name__ == '__main__':
 #    crudo_sat='27386_20040523_20040607.tle'
 #    crudo_sat='27386_20040526_20040610.tle' # Escenario 3
 #    crudo_sat='27386_20071226_20080109.tle' #ENVI
-    crudo_sat='27386_20040819_20040903.tle' # Escenario 4
+#    crudo_sat='27386_20040819_20040903.tle' # Escenario 4
 #    crudo_sat='23560_20040915_20040930.tle' # Escenario 5
 #    crudo_sat='36798_20120415_20120430.tle' #Escenario ALSAT I
 #    crudo_sat='31698_20100725_20100808.tle' # TerraSAR
+
+    tca0=TCA-timedelta(days=15)
+    crudo_sat=sat_id+'_'+datetime.strftime(tca0,'%Y-%m-%d')+'_'+datetime.strftime(TCA,'%Y-%m-%d')+'.tle'
+    crudo_deb=deb_id+'_'+datetime.strftime(tca0,'%Y-%m-%d')+'_'+datetime.strftime(TCA,'%Y-%m-%d')+'.tle'
     
-    var_rsat,var_ssat,var_wsat=metodoOSWtles(sat_id,crudo_sat,TCA)
+    nombre_archivo_sat,var_rsat,var_ssat,var_wsat=calcula_matriz_Tles(sat_id,tca0,TCA,crudo_sat)
+    nombre_archivo_deb,var_rdeb,var_sdeb,var_wdeb=calcula_matriz_Tles(deb_id,tca0,TCA,crudo_deb)
     
+     
+#    var_rsat,var_ssat,var_wsat=metodoOSWtles(sat_id,crudo_sat,TCA) 
     # Ma. Debris
 #    crudo_deb= '14493_20170605_20170621.tle'
 #    crudo_deb='21798_20040523_20040607.tle'
 #    crudo_deb='5395_20040526_20040610.tle' # Escenario 3
 #    crudo_deb='15482_20071226_20080109.tle' #COSMOS 
-    crudo_deb='12442_20040819_20040903.tle'  # Escenario 4
+#    crudo_deb='12442_20040819_20040903.tle'  # Escenario 4
 #    crudo_deb='16681_20040915_20040930.tle' #Escenario 5
 #    crudo_deb='37976_20120415_20120430.tle' #Escenario ALSAT I
 #    crudo_deb='24978_20100725_20100808.tle' # Pegasus DEB.
+#    var_rdeb,var_sdeb,var_wdeb=metodoOSWtles(deb_id,crudo_deb,TCA)
 
-    var_rdeb,var_sdeb,var_wdeb=metodoOSWtles(deb_id,crudo_deb,TCA)
-
+    #============================================
     #Calculo los errores combinados proyectados.
-    
+    #============================================
     var_s=var_ssat+var_sdeb
     var_w=var_wsat+var_wdeb
     

@@ -9,9 +9,10 @@ from datetime import datetime, timedelta
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from CDM.cdmParser import extraeCDM
-from pruebas.claseTle import Tle, Encuentro
+#from pruebas.claseTle import Tle, Encuentro
 from TleAdmin.TleArchivos import divide_setTLE
-#from TleAdmin.TLE import Tle
+from TleAdmin.TLE import Tle
+from Encuentro.Encuentro import Encuentro
 from TleAdmin.get_tle import importarSetTLE
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
@@ -72,19 +73,19 @@ class ProcARxCODE(QMainWindow):
         self.encuentros.setFloating(False)
         self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros)
         # Lista de Procesamientos.
-        self.procesamientos = QDockWidget("Procesamientos", self)
-        self.listWidget1 = QListWidget()
-        self.listWidget1.addItem("Procesamiento de un set de TLE")
-        self.listWidget1.addItem("Procesamiento de Datos de Mision")
-        self.procesamientos.setWidget(self.listWidget1)
-        self.procesamientos.setFloating(False)
-        self.addDockWidget(Qt.LeftDockWidgetArea, self.procesamientos)
+#         self.procesamientos = QDockWidget("Procesamientos", self)
+#         self.listWidget1 = QListWidget()
+#         self.listWidget1.addItem("Procesamiento de un set de TLE")
+#         self.listWidget1.addItem("Procesamiento de Datos de Mision")
+#         self.procesamientos.setWidget(self.listWidget1)
+#         self.procesamientos.setFloating(False)
+#         self.addDockWidget(Qt.LeftDockWidgetArea, self.procesamientos)
         
         """
         Acciones
         """
         self.listWidget.itemClicked.connect(self.item_click)
-        self.listWidget1.itemClicked.connect(self.item_click1)
+#         self.listWidget1.itemClicked.connect(self.item_click1)
 
         self.show()
 
@@ -253,8 +254,8 @@ class ProcEncuentro(QDialog):
         """
         Campos de Edicion
         """
-        self.sat_id_text = QLineEdit()
-        self.deb_id_text = QLineEdit()
+        self.sat_id_text = QLineEdit('27386')
+        self.deb_id_text = QLineEdit('15482')       
         self.tca_text    = QCalendarWidget()
         self.hs_tex      = QLineEdit()
         self.min_tex     = QLineEdit()
@@ -329,14 +330,14 @@ class ProcEncuentro(QDialog):
         clave='MaCeciliaSpace17'
         self.sat_id=str(self.sat_id_text.text())
         self.deb_id=str(self.deb_id_text.text())
-        hs =int(self.hs_tex.text())
-        min=int(self.min_tex.text())
-        seg=int(self.seg_tex.text())
-        fecha = self.tca_text.selectedDate()#.toPyDate()
-        hora = QTime(hs,min,seg)
-        self.tca=QDateTime(fecha,hora).toPyDateTime()
-        tle_sat=Tle.creadoxParam(usuario, clave, self.sat_id, self.tca)
-        tle_deb=Tle.creadoxParam(usuario, clave, self.deb_id, self.tca)
+#         hs =int(self.hs_tex.text())
+#         min=int(self.min_tex.text())
+#         seg=int(self.seg_tex.text())
+#         fecha = self.tca_text.selectedDate()#.toPyDate()
+#         hora = QTime(hs,min,seg)
+        self.tca=datetime(2008,1,9,19,0,30)#QDateTime(fecha,hora).toPyDateTime()
+        tle_sat=Tle.creadoxParam(self.sat_id, self.tca)
+        tle_deb=Tle.creadoxParam(self.deb_id, self.tca)
 #         
         """
         Propagacion hasta el Encuentro

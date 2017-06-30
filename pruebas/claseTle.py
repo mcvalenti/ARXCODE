@@ -80,10 +80,17 @@ class Tle:
             data = {'identity': 'macecilia' , 'password': 'MaCeciliaSpace17'}
             s=session() 
             s.post('https://www.space-track.org/auth/login',data)
-            fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+inst1.f0+'--'+inst1.f1+'/NORAD_CAT_ID/'+inst1.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
-            r = s.get(fquery1)
-            inst1.tle_text=r.text
-            inst1.lineas=inst1.tle_text.split('\n')
+            inst1.tle_text=''
+            cont=0
+            while inst1.tle_text=='':
+                fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+inst1.f0+'--'+inst1.f1+'/NORAD_CAT_ID/'+inst1.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
+                r = s.get(fquery1)
+                inst1.tle_text=r.text
+                inst1.lineas=inst1.tle_text.split('\n')
+                inst1.f0=datetime.strptime(inst1.f0,'%Y-%m-%d')-timedelta(days=1)
+                cont=cont+1
+            if cont > 1:
+                    print 'El proceso cambio la fecha inicial del set = ', inst1.f0
             if len(inst1.lineas) > 1 and r.status_code == 200:
                 print 'Se ha generado el tle para el objeto de NORAD_ID= ',inst1.noradId
                 inst1.linea1=inst1.lineas[-3]

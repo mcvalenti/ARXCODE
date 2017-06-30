@@ -15,44 +15,6 @@ from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 
 
-# def proc_encuentroSimple(sat_id,deb_id,tca):
-#     """
-#     Propaga los objetos involucrados un intervalos [tca-90:tca+20]
-#     Calcula:
-#         Miss Distance
-#         TCA calculado
-#         Diferencias en RTN ---> Plotea.
-#         Genera archivo lat, long ---> Plotea.
-#       
-#     """
-#     # Importar los TLE de NORAD.
-# 
-#     usuario='macecilia'
-#     clave='MaCeciliaSpace17'
-#     tle_sat=Tle.creadoxParam(usuario, clave, sat_id, tca)
-#     tle_deb=Tle.creadoxParam(usuario, clave, deb_id, tca)
-#     
-#     """
-#     Propagacion hasta el Encuentro
-#     """
-#     encuentro1=Encuentro(tle_sat,tle_deb,tca)
-# 
-#     print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
-#     grafica_track('../Encuentro/archivos/'+str(sat_id)+'U', '../Encuentro/archivos/'+str(deb_id)+'U')
-#     print 'fin del procesamiento.'
-# 
-#     
-# def metodoOSWtles():
-#     """
-#      Tanto para el Satelite como para el Desecho:
-#     
-#     * Importar Set de TLEs (importar_tle)
-#     * Implementar OSW con TLEs ---> extrar matriz.
-#     * 
-#     
-#     """
-#     pass
-
 if __name__ == '__main__':
     """
     Codigo principal.
@@ -114,10 +76,10 @@ if __name__ == '__main__':
     dif_t=encuentro1.DistRic_min[1]
     dif_n=encuentro1.DistRic_min[2] 
     #Calculo el angulo entre los vectores velocidad.
-    v_sat=encuentro1.vel_sat_tca
-    v_deb=encuentro1.vel_deb_tca
-    cos_phi=np.dot(v_sat,v_deb)/(np.sqrt(np.dot(v_sat,v_sat))*np.sqrt(np.dot(v_deb,v_deb)))
-    phi=np.arccos(cos_phi)
+#     v_sat=encuentro1.vel_sat_tca
+#     v_deb=encuentro1.vel_deb_tca
+#     cos_phi=np.dot(v_sat,v_deb)/(np.sqrt(np.dot(v_sat,v_sat))*np.sqrt(np.dot(v_deb,v_deb)))
+#     phi=np.arccos(cos_phi)
          
     print '*****************************************************'
     print '-----------------ENCUENTRO---------------------------'
@@ -139,19 +101,20 @@ if __name__ == '__main__':
     #===========================================================
     # PoC
     #===========================================================
-     
-    mu_x=dif_r
-    mu_y=np.sqrt(dif_t*dif_t+dif_n*dif_n)
-
-    var_s=matriz_combinada[1][1]
-    var_w=matriz_combinada[2][2]
-    
-    var_x=matriz_combinada[0][0]
-    var_y=var_s*np.cos(phi/2.0)*np.cos(phi/2.0)+var_w*np.sin(phi/2.0)*np.sin(phi/2.0)
-
-    ra=0.01
-    PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
+#      
+#     mu_x=dif_r
+#     mu_y=np.sqrt(dif_t*dif_t+dif_n*dif_n)
+# 
+#     var_s=matriz_combinada[1][1]
+#     var_w=matriz_combinada[2][2]
+#     
+#     var_x=matriz_combinada[0][0]
+#     var_y=var_s*np.cos(phi/2.0)*np.cos(phi/2.0)+var_w*np.sin(phi/2.0)*np.sin(phi/2.0)
+# 
+#     ra=0.01
+#     PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
 #    PoC=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/var_x)+(y*y/var_y))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
+    PoC=encuentro1.calculaPoC_circ()
     print '======================================================'
     print 'PoC = ', PoC
     print '======================================================'

@@ -6,6 +6,7 @@ Extrae la informacion de los TLE
 @author: mcvalenti
 """
 import os,glob
+from datetime import datetime
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
 from requests import session, exceptions
@@ -46,6 +47,18 @@ class Tle:
             data = {'identity': inst1.usuario , 'password': inst1.clave}
             s=session() 
             s.post('https://www.space-track.org/auth/login',data)
+            inst1.tle_text=''
+            cont=0
+            while inst1.tle_text=='':
+                fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+inst1.f0+'--'+inst1.f1+'/NORAD_CAT_ID/'+inst1.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
+                r = s.get(fquery1)
+                inst1.tle_text=r.text
+                inst1.lineas=inst1.tle_text.split('\n')
+                inst1.f0=datetime.strptime(inst1.f0,'%Y-%m-%d')-timedelta(days=1)
+                inst1.f0=datetime.strftime(inst1.f0,'%Y-%m-%d')
+                cont=cont+1
+            if cont > 1:
+                    print 'El proceso cambio la fecha inicial del set = ', inst1.f0
             fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+inst1.f0+'--'+inst1.f1+'/NORAD_CAT_ID/'+inst1.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
             r = s.get(fquery1)
             inst1.tle_text=r.text
