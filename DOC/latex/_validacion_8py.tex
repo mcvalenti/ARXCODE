@@ -1,0 +1,45 @@
+\section{\-Comparar/\-Validacion.py \-File \-Reference}
+\label{_validacion_8py}\index{\-Comparar/\-Validacion.\-py@{\-Comparar/\-Validacion.\-py}}
+\subsection*{\-Packages}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf \-Comparar\-::\-Validacion}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-Comparar\-::\-Validacion.\-filtro\-Ajuste}
+\item 
+def {\bf \-Comparar\-::\-Validacion.\-filtro\-Extapola}
+\item 
+def {\bf \-Comparar\-::\-Validacion.\-funcion\-Ajuste}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf \-Comparar\-::\-Validacion.\-fi} = datetime.\-datetime(2013,11,16)
+\item 
+tuple {\bf \-Comparar\-::\-Validacion.\-ff} = datetime.\-datetime(2013,11,30)
+\item 
+int {\bf \-Comparar\-::\-Validacion.\-delta\-\_\-t} = 10
+\item 
+tuple {\bf \-Comparar\-::\-Validacion.\-ephem\-\_\-ajuste} = filtro\-Ajuste(fi,ff,delta\-\_\-t)
+\item 
+list {\bf \-Comparar\-::\-Validacion.\-x\-\_\-ajuste} = [mdates.\-date2num(i) for i in ephem\-\_\-ajuste[0]]
+\item 
+list {\bf \-Comparar\-::\-Validacion.\-t} = [mdates.\-date2num(i) for i in ephem\-\_\-tle[0]]
+\item 
+tuple {\bf \-Comparar\-::\-Validacion.\-x\-\_\-exptrap} = funcion\-Ajuste(x\-\_\-ajuste,ephem\-\_\-ajuste[1],t)
+\item 
+tuple {\bf \-Comparar\-::\-Validacion.\-y\-\_\-exptrap} = funcion\-Ajuste(x\-\_\-ajuste,ephem\-\_\-ajuste[2],t)
+\item 
+tuple {\bf \-Comparar\-::\-Validacion.\-z\-\_\-exptrap} = funcion\-Ajuste(x\-\_\-ajuste,ephem\-\_\-ajuste[3],t)
+\item 
+list {\bf \-Comparar\-::\-Validacion.\-dif\-\_\-x} = ephem\-\_\-extrap[1]
+\item 
+list {\bf \-Comparar\-::\-Validacion.\-dif\-\_\-y} = ephem\-\_\-extrap[2]
+\item 
+list {\bf \-Comparar\-::\-Validacion.\-dif\-\_\-z} = ephem\-\_\-extrap[3]
+\item 
+tuple {\bf \-Comparar\-::\-Validacion.\-date\-\_\-formatter} = mdates.\-Date\-Formatter('\%d-\/\%m-\/\%y')
+\end{DoxyCompactItemize}

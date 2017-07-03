@@ -1,0 +1,146 @@
+\section{pruebas.\-clase\-Tle.\-Posicion \-Class \-Reference}
+\label{classpruebas_1_1clase_tle_1_1_posicion}\index{pruebas.\-clase\-Tle.\-Posicion@{pruebas.\-clase\-Tle.\-Posicion}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf get\-Coordenadas\-G\-E\-O\-D}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf r}
+\item 
+{\bf v}
+\item 
+{\bf epoca}
+\item 
+{\bf delta}
+\item 
+{\bf alpha}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 20 of file clase\-Tle.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::clase\-Tle\-::\-Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::claseTle::Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-clase\-Tle.\-Posicion.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{r, }
+\item[{}]{v, }
+\item[{}]{epoca}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1clase_tle_1_1_posicion_a9df8aa97ee8a6ef1b5c12e4ae2d475f6}
+
+
+\-Definition at line 22 of file clase\-Tle.\-py.
+
+
+\begin{DoxyCode}
+22 
+23     def __init__(self,r,v,epoca):   
+24         self.r=r
+25         self.v=v
+26         self.epoca=epoca
+        
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{pruebas\-::clase\-Tle\-::\-Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}!get\-Coordenadas\-G\-E\-O\-D@{get\-Coordenadas\-G\-E\-O\-D}}
+\index{get\-Coordenadas\-G\-E\-O\-D@{get\-Coordenadas\-G\-E\-O\-D}!pruebas::claseTle::Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}}
+\subsubsection[{get\-Coordenadas\-G\-E\-O\-D}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-clase\-Tle.\-Posicion.\-get\-Coordenadas\-G\-E\-O\-D} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1clase_tle_1_1_posicion_accac13786b42ae014392b6ac3d906619}
+\begin{DoxyVerb}
+Transforma coordenadas del sistem cartesiano (TEME)
+al sistema geodesico aprox.
+REVISAR!!! 
+---------------
+outputs
+    alpha, delta: angulos Geodesicos (float) [grados]
+\end{DoxyVerb}
+ 
+
+\-Definition at line 27 of file clase\-Tle.\-py.
+
+
+\begin{DoxyCode}
+27 
+28     def getCoordenadasGEOD(self):
+29         """
+30         Transforma coordenadas del sistem cartesiano (TEME)
+31         al sistema geodesico aprox.
+32         REVISAR!!! 
+33         ---------------
+34         outputs
+35             alpha, delta: angulos Geodesicos (float) [grados]
+36         """
+37         deg=np.divide(180,np.pi)
+38         r_mod=np.sqrt(self.r[0]*self.r[0]+self.r[1]*self.r[1]+self.r[2]*self.r[
+      2])
+39         l=np.divide(self.r[0],r_mod)
+40         m=np.divide(self.r[1],r_mod)
+41         n=np.divide(self.r[2],r_mod)
+42         self.delta=np.arcsin(n)
+43         if m>0:
+44             self.alpha = np.arccos(np.divide(l,np.cos(self.delta)))
+45         else:
+46             self.alpha = 2*np.pi-np.arccos(np.divide(l,np.cos(self.delta)))
+47          
+        return self.delta*deg, self.alpha*deg
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::clase\-Tle\-::\-Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}!alpha@{alpha}}
+\index{alpha@{alpha}!pruebas::claseTle::Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}}
+\subsubsection[{alpha}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Posicion\-::alpha}}\label{classpruebas_1_1clase_tle_1_1_posicion_a7ae32b0580686bfe7b74feec7b108e4b}
+
+
+\-Definition at line 34 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}!delta@{delta}}
+\index{delta@{delta}!pruebas::claseTle::Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}}
+\subsubsection[{delta}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Posicion\-::delta}}\label{classpruebas_1_1clase_tle_1_1_posicion_a5cab5d4f301cb1cdaaf5a81018862fa1}
+
+
+\-Definition at line 34 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}!epoca@{epoca}}
+\index{epoca@{epoca}!pruebas::claseTle::Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}}
+\subsubsection[{epoca}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Posicion\-::epoca}}\label{classpruebas_1_1clase_tle_1_1_posicion_a9f8abd3e757442e5689d9db6b3ffdb48}
+
+
+\-Definition at line 22 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}!r@{r}}
+\index{r@{r}!pruebas::claseTle::Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Posicion\-::r}}\label{classpruebas_1_1clase_tle_1_1_posicion_a3cb8b842b870241366810aa31fbb526c}
+
+
+\-Definition at line 22 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}!v@{v}}
+\index{v@{v}!pruebas::claseTle::Posicion@{pruebas\-::clase\-Tle\-::\-Posicion}}
+\subsubsection[{v}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Posicion\-::v}}\label{classpruebas_1_1clase_tle_1_1_posicion_ada401119d689840f5eb3414394875b16}
+
+
+\-Definition at line 22 of file clase\-Tle.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf clase\-Tle.\-py}\end{DoxyCompactItemize}

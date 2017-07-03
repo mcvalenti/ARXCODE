@@ -1,0 +1,101 @@
+\section{visual\-:\-:\-Tlevs\-Cods\-Graf \-Namespace \-Reference}
+\label{namespacevisual_1_1_tlevs_cods_graf}\index{visual\-::\-Tlevs\-Cods\-Graf@{visual\-::\-Tlevs\-Cods\-Graf}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-Ver\-Grafico\-Mision}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 19/01/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{visual\-::\-Tlevs\-Cods\-Graf@{visual\-::\-Tlevs\-Cods\-Graf}!\-Ver\-Grafico\-Mision@{\-Ver\-Grafico\-Mision}}
+\index{\-Ver\-Grafico\-Mision@{\-Ver\-Grafico\-Mision}!visual::TlevsCodsGraf@{visual\-::\-Tlevs\-Cods\-Graf}}
+\subsubsection[{\-Ver\-Grafico\-Mision}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-Tlevs\-Cods\-Graf.\-Ver\-Grafico\-Mision} (
+\begin{DoxyParamCaption}
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1_tlevs_cods_graf_a7baaf58277c294a608aa1f500005f1c5}
+
+
+\-Definition at line 50 of file \-Tlevs\-Cods\-Graf.\-py.
+
+
+\begin{DoxyCode}
+50 
+51 def VerGraficoMision(archivo):
+52     f=open('../Ajustar/diferencias/'+archivo,'r')
+53     listas=f.readlines()
+54     archivo_graf_cods=str('graf_'+archivo.split('_')[-1]+'cods.png')
+55     data0=[]
+56     data1=[]
+57     data2=[]
+58     data3=[]
+59     
+60     for l in listas:
+61         linea=l.split(' ')
+62         data0.append(linea[0])
+63         data1.append(float(linea[2]))
+64         data2.append(float(linea[3]))
+65         data3.append(float(linea[4]))
+66                      
+67     maxx=float(max(data1))
+68     minx=float(min(data1))
+69     maxy=float(max(data2))
+70     miny=float(min(data2))
+71     plt.ylim([miny,maxy])
+72     plt.xlim([minx,maxx])
+73     
+74     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+75     """
+76     Gestion de Fechas
+77     """
+78     date_fmt = '%Y-%m-%d'
+79     epoca=[dt.datetime.strptime(str(i), date_fmt) for i in data0]
+80     x = [mdates.date2num(i) for i in epoca]
+81     date_formatter = mdates.DateFormatter('%d-%m-%y')
+82     """
+83     Funcion de Ajuste
+84     """
+85     slope1, intercept1, r_value1, p_value1, std_err1 = stats.linregress(x,data1
+      )
+86     slope2, intercept2, r_value2, p_value2, std_err2 = stats.linregress(x,data2
+      )
+87     slope3, intercept3, r_value3, p_value3, std_err3 = stats.linregress(x,data3
+      )
+88 
+89     g1=np.poly1d([slope1,intercept1])
+90     y1=g1(x)
+91     g2=np.poly1d([slope2,intercept2])
+92     y2=g2(x)
+93     g3=np.poly1d([slope3,intercept3])
+94     y3=g3(x)
+95 
+96     ax1.xaxis.set_major_formatter(date_formatter)
+97     ax2.xaxis.set_major_formatter(date_formatter)
+98     ax3.xaxis.set_major_formatter(date_formatter)
+99     ax1.grid(True)
+100     ax2.grid(True)
+101     ax3.grid(True)
+102     
+103     ax1.plot_date(x, y1,'r--')
+104     ax1.plot_date(x, data1,'x')
+105     ax2.plot_date(x, data2,'x')
+106     ax2.plot_date( x, y2,'r--')
+107     ax3.plot_date(x, data3,'x')
+108     ax3.plot_date(x, y3,'r--')
+109 
+110     plt.savefig('../visual/archivos/'+archivo_graf_cods)
+    plt.show()\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+

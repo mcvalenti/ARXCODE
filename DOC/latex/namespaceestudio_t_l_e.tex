@@ -1,0 +1,331 @@
+\section{estudio\-T\-L\-E \-Namespace \-Reference}
+\label{namespaceestudio_t_l_e}\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf procesar}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf sat\-\_\-id} = '37673'
+\item 
+string {\bf archivo\-\_\-crudo\-\_\-tle} = '37673\-\_\-20130721\-\_\-20130804.\-tle'
+\item 
+string {\bf archivo\-\_\-crudo\-\_\-cods} = '\-C\-O\-D\-S\-\_\-20130804\-\_\-135714\-\_\-\-S\-A\-C\-D\-\_\-\-D\-E\-N\-S\-E\-P\-H\-E\-M\-\_\-\-T\-O\-D\-\_\-\-X\-Y\-Z\-\_\-\-O.\-T\-X\-T'
+\item 
+tuple {\bf ephem} = {\bf \-Ephem\-C\-O\-D\-S}('../\-Cods\-Admin/sac\-Ddensos/'+{\bf archivo\-\_\-crudo\-\_\-cods})
+\item 
+tuple {\bf ephem\-\_\-dic} = ephem.\-genera\-\_\-diccionario()
+\item 
+{\bf anio} = tle\-\_\-dia1.\-epoca.\-year
+\item 
+{\bf mes} = tle\-\_\-dia1.\-epoca.\-month
+\item 
+tuple {\bf epoca\-\_\-ini\-\_\-prop} = datetime({\bf anio},{\bf mes},3,0,0,0)
+\item 
+tuple {\bf epoca\-\_\-fin\-\_\-prop} = {\bf epoca\-\_\-ini\-\_\-prop}+timedelta(days=1)
+\item 
+list {\bf dif\-\_\-r} = [$\,$]
+\item 
+list {\bf dif\-\_\-v} = [$\,$]
+\item 
+list {\bf dif\-\_\-n} = [$\,$]
+\item 
+list {\bf dif\-\_\-c} = [$\,$]
+\item 
+tuple {\bf r\-\_\-tod} = teme2tod({\bf epoca\-\_\-ini\-\_\-prop},r)
+\item 
+list {\bf x} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]
+\item 
+list {\bf y} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]
+\item 
+list {\bf z} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]
+\item 
+list {\bf vx} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]
+\item 
+list {\bf vy} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]
+\item 
+list {\bf vz} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]
+\item 
+tuple {\bf r\-\_\-cods} = np.\-array([float({\bf x}),float({\bf y}),float({\bf z})])
+\item 
+tuple {\bf v\-\_\-cods} = np.\-array([float({\bf vx}),float({\bf vy}),float({\bf vz})])
+\item 
+list {\bf resta} = {\bf r\-\_\-cods}[0]
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 12/06/2017
+Voy a generar un crudo TLE con tles para el 1 de los meses de
+Febrero, Abril, Junio, Agosto y Octubre del anio 2013.
+Luego voy a propagar cada TLE por 3 dias (c/1seg) y comparar los resultados con 
+los valores que ofrece cods. 
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!procesar@{procesar}}
+\index{procesar@{procesar}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{procesar}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf estudio\-T\-L\-E.\-procesar} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{archivo\-\_\-crudo\-\_\-tle}
+\end{DoxyParamCaption}
+)}\label{namespaceestudio_t_l_e_a05f5fb07809e9aed4c1d036c20f31d2d}
+\begin{DoxyVerb}
+Invoca a la funcion setTLE, para fragmentar
+cada uno de los TLE del dato crudo en archivos
+individuales; y los guarda en: TleAdmin/tle
+\end{DoxyVerb}
+ 
+
+\-Definition at line 34 of file estudio\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+34 
+35 def procesar(sat_id,archivo_crudo_tle):
+36     """
+37     Invoca a la funcion setTLE, para fragmentar
+38     cada uno de los TLE del dato crudo en archivos
+39     individuales; y los guarda en: TleAdmin/tle
+40     """
+41     files=glob.glob('../TleAdmin/tle/*')
+42     for filename in files:
+43         os.unlink(filename)
+44     if os.stat('../TleAdmin/crudosTLE/'+archivo_crudo_tle).st_size == 0:
+45         print('El archivo esta vacio')
+46     setTLE(sat_id,archivo_crudo_tle )
+47     lista_tles=glob.glob('../TleAdmin/tle/*')
+48     cant_tles=len(lista_tles)
+49     """
+50     Ordenamiento de los TLEs
+51     """
+52     tledic=generadorDatos(lista_tles)
+53     tleOrdenados=ordenaTles(tledic)
+54 
+55     """
+56     Impresiones de info de TLEs.
+57     """
+58     print 'PROCESAMIENTO DE TLE'
+59     print '-----------------------------------------------------'
+60     print 'TLE PRIMARIO'
+61     print '-----------------------------------------------------'
+62     tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tleOrdenados[-1][0])
+63     linea1= tle_primario.linea1
+64     linea2= tle_primario.linea2
+65     fin_tle=tle_primario.epoca()
+66 #    ffin=fin_tle.strftime('%Y-%m-%d %H:%M:%S.%f' )
+67     print linea1
+68     print linea2
+69     print '-----------------------------------------------------'
+70     print 'TLE INICIAL DEL SET'
+71     print '-----------------------------------------------------'
+72     tle_inial = Tle.creadoxArchivo('../TleAdmin/tle/'+tleOrdenados[0][0])
+73     linea1_0= tle_inial.linea1
+74     linea2_0= tle_inial.linea2
+75 #    ini_tle=tle_inial.epoca()
+76     print linea1_0
+77     print linea2_0
+78     print '-----------------------------------------------------'
+79     
+80     """
+81     PROCESAMIENTO.
+82     """
+83     files=glob.glob('../AjustarTLE/diferencias/*')
+84     for filename in files:
+85         os.unlink(filename)
+86     set_pri=difPrimario(tleOrdenados, cant_tles)
+87     nombre_archivo=set_pri[3]
+88 
+89     """
+90     Ma. de Covarianza
+91     """
+92     macovarT, arch_macovar=EjecutaMaCovar(nombre_archivo)
+93     print '================================================='
+94     print '        Ma. de Covarianza                '
+95     print '================================================='
+96     for k in macovarT[:3]:
+97         for j in k[:3]:
+98             print j,
+99         print
+100 #    print macovarT
+101     
+102     tle_dia1 = Tle.creadoxArchivo('../TleAdmin/tle/'+tleOrdenados[-3][0])
+103     print 'Fin del Procesamiento'
+104     return tle_primario, tle_dia1
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\subsection{\-Variable \-Documentation}
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!anio@{anio}}
+\index{anio@{anio}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{anio}]{\setlength{\rightskip}{0pt plus 5cm}{\bf estudio\-T\-L\-E\-::anio} = tle\-\_\-dia1.\-epoca.\-year}\label{namespaceestudio_t_l_e_a504174fa066414d58becbf37540ec5e0}
+
+
+\-Definition at line 157 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!archivo\-\_\-crudo\-\_\-cods@{archivo\-\_\-crudo\-\_\-cods}}
+\index{archivo\-\_\-crudo\-\_\-cods@{archivo\-\_\-crudo\-\_\-cods}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{archivo\-\_\-crudo\-\_\-cods}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf estudio\-T\-L\-E\-::archivo\-\_\-crudo\-\_\-cods} = '\-C\-O\-D\-S\-\_\-20130804\-\_\-135714\-\_\-\-S\-A\-C\-D\-\_\-\-D\-E\-N\-S\-E\-P\-H\-E\-M\-\_\-\-T\-O\-D\-\_\-\-X\-Y\-Z\-\_\-\-O.\-T\-X\-T'}\label{namespaceestudio_t_l_e_a29cb816f50fc278f1fc6b5243c83727d}
+
+
+\-Definition at line 124 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!archivo\-\_\-crudo\-\_\-tle@{archivo\-\_\-crudo\-\_\-tle}}
+\index{archivo\-\_\-crudo\-\_\-tle@{archivo\-\_\-crudo\-\_\-tle}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{archivo\-\_\-crudo\-\_\-tle}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf estudio\-T\-L\-E\-::archivo\-\_\-crudo\-\_\-tle} = '37673\-\_\-20130721\-\_\-20130804.\-tle'}\label{namespaceestudio_t_l_e_ad48154f6ac79cd26dfef93e5cb857045}
+
+
+\-Definition at line 123 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!dif\-\_\-c@{dif\-\_\-c}}
+\index{dif\-\_\-c@{dif\-\_\-c}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{dif\-\_\-c}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::dif\-\_\-c} = [$\,$]}\label{namespaceestudio_t_l_e_afead10cf733b61d1340753bbcdd715f6}
+
+
+\-Definition at line 165 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!dif\-\_\-n@{dif\-\_\-n}}
+\index{dif\-\_\-n@{dif\-\_\-n}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{dif\-\_\-n}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::dif\-\_\-n} = [$\,$]}\label{namespaceestudio_t_l_e_a516ac8d53fecd606ff13b67a800c3c67}
+
+
+\-Definition at line 164 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!dif\-\_\-r@{dif\-\_\-r}}
+\index{dif\-\_\-r@{dif\-\_\-r}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{dif\-\_\-r}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::dif\-\_\-r} = [$\,$]}\label{namespaceestudio_t_l_e_a166a17f127ceb4b7583e66e200a5512a}
+
+
+\-Definition at line 162 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!dif\-\_\-v@{dif\-\_\-v}}
+\index{dif\-\_\-v@{dif\-\_\-v}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{dif\-\_\-v}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::dif\-\_\-v} = [$\,$]}\label{namespaceestudio_t_l_e_a7f3f768198d910d138998f00073d4848}
+
+
+\-Definition at line 163 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!ephem@{ephem}}
+\index{ephem@{ephem}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{ephem}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf estudio\-T\-L\-E\-::ephem} = {\bf \-Ephem\-C\-O\-D\-S}('../\-Cods\-Admin/sac\-Ddensos/'+{\bf archivo\-\_\-crudo\-\_\-cods})}\label{namespaceestudio_t_l_e_a08826f20b82a757bad4d2f07e11d3b33}
+
+
+\-Definition at line 152 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!ephem\-\_\-dic@{ephem\-\_\-dic}}
+\index{ephem\-\_\-dic@{ephem\-\_\-dic}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{ephem\-\_\-dic}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf estudio\-T\-L\-E\-::ephem\-\_\-dic} = ephem.\-genera\-\_\-diccionario()}\label{namespaceestudio_t_l_e_a70df421239bd23b05dbfcc944f5aaeb5}
+
+
+\-Definition at line 153 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!epoca\-\_\-fin\-\_\-prop@{epoca\-\_\-fin\-\_\-prop}}
+\index{epoca\-\_\-fin\-\_\-prop@{epoca\-\_\-fin\-\_\-prop}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{epoca\-\_\-fin\-\_\-prop}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf estudio\-T\-L\-E\-::epoca\-\_\-fin\-\_\-prop} = {\bf epoca\-\_\-ini\-\_\-prop}+timedelta(days=1)}\label{namespaceestudio_t_l_e_a8e8d7ab6b2220b2de3821e828c938898}
+
+
+\-Definition at line 160 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!epoca\-\_\-ini\-\_\-prop@{epoca\-\_\-ini\-\_\-prop}}
+\index{epoca\-\_\-ini\-\_\-prop@{epoca\-\_\-ini\-\_\-prop}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{epoca\-\_\-ini\-\_\-prop}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf estudio\-T\-L\-E\-::epoca\-\_\-ini\-\_\-prop} = datetime({\bf anio},{\bf mes},3,0,0,0)}\label{namespaceestudio_t_l_e_a61370b9373ad741def7ba9794aaa0b6a}
+
+
+\-Definition at line 159 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!mes@{mes}}
+\index{mes@{mes}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{mes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf estudio\-T\-L\-E\-::mes} = tle\-\_\-dia1.\-epoca.\-month}\label{namespaceestudio_t_l_e_a0e597f6e5f7488399ac4c42273aa6615}
+
+
+\-Definition at line 158 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!r\-\_\-cods@{r\-\_\-cods}}
+\index{r\-\_\-cods@{r\-\_\-cods}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{r\-\_\-cods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf estudio\-T\-L\-E\-::r\-\_\-cods} = np.\-array([float({\bf x}),float({\bf y}),float({\bf z})])}\label{namespaceestudio_t_l_e_a1b00721df9da8b35d54765e9f5ffca44}
+
+
+\-Definition at line 178 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!r\-\_\-tod@{r\-\_\-tod}}
+\index{r\-\_\-tod@{r\-\_\-tod}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{r\-\_\-tod}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf estudio\-T\-L\-E\-::r\-\_\-tod} = teme2tod({\bf epoca\-\_\-ini\-\_\-prop},r)}\label{namespaceestudio_t_l_e_a299627ac470b042bc4d26d25aef1a790}
+
+
+\-Definition at line 170 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!resta@{resta}}
+\index{resta@{resta}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{resta}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::resta} = {\bf r\-\_\-cods}[0]}\label{namespaceestudio_t_l_e_ac49c596bc8811ca7fe0415bc0034894a}
+
+
+\-Definition at line 181 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!sat\-\_\-id@{sat\-\_\-id}}
+\index{sat\-\_\-id@{sat\-\_\-id}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf estudio\-T\-L\-E\-::sat\-\_\-id} = '37673'}\label{namespaceestudio_t_l_e_a85ca1771abea931dec7b455964ba32a1}
+
+
+\-Definition at line 115 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!v\-\_\-cods@{v\-\_\-cods}}
+\index{v\-\_\-cods@{v\-\_\-cods}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{v\-\_\-cods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf estudio\-T\-L\-E\-::v\-\_\-cods} = np.\-array([float({\bf vx}),float({\bf vy}),float({\bf vz})])}\label{namespaceestudio_t_l_e_afdeb675739ece4622166417475376aa8}
+
+
+\-Definition at line 179 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!vx@{vx}}
+\index{vx@{vx}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{vx}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::vx} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]}\label{namespaceestudio_t_l_e_a1c80cfb5f136a31fa13abded69a21e9f}
+
+
+\-Definition at line 175 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!vy@{vy}}
+\index{vy@{vy}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{vy}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::vy} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]}\label{namespaceestudio_t_l_e_afa5854431c0e127e4eda621500b33668}
+
+
+\-Definition at line 176 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!vz@{vz}}
+\index{vz@{vz}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{vz}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::vz} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]}\label{namespaceestudio_t_l_e_a05c5779853ecd24fe946bbb0c7af5c88}
+
+
+\-Definition at line 177 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!x@{x}}
+\index{x@{x}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::x} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]}\label{namespaceestudio_t_l_e_a563806c6a8999212459daf08a9226309}
+
+
+\-Definition at line 172 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!y@{y}}
+\index{y@{y}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::y} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]}\label{namespaceestudio_t_l_e_af75e112c996e585da463ace7e180a471}
+
+
+\-Definition at line 173 of file estudio\-T\-L\-E.\-py.
+
+\index{estudio\-T\-L\-E@{estudio\-T\-L\-E}!z@{z}}
+\index{z@{z}!estudioTLE@{estudio\-T\-L\-E}}
+\subsubsection[{z}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf estudio\-T\-L\-E\-::z} = {\bf ephem\-\_\-dic}[{\bf epoca\-\_\-ini\-\_\-prop}]}\label{namespaceestudio_t_l_e_a3ec34a740b736765542eaf20999a4b7a}
+
+
+\-Definition at line 174 of file estudio\-T\-L\-E.\-py.
+

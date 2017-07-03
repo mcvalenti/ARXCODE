@@ -1,0 +1,244 @@
+\section{pruebas.\-clase\-Tle.\-Tle \-Class \-Reference}
+\label{classpruebas_1_1clase_tle_1_1_tle}\index{pruebas.\-clase\-Tle.\-Tle@{pruebas.\-clase\-Tle.\-Tle}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf creadox\-Param}
+\item 
+def {\bf creadox\-Archivo}
+\item 
+def {\bf cat\-I\-D}
+\item 
+def {\bf epoca}
+\item 
+def {\bf propaga\-T\-L\-E}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf cat\-I\-D}
+\item 
+{\bf epoca}
+\item 
+{\bf v}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 49 of file clase\-Tle.\-py.
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!cat\-I\-D@{cat\-I\-D}}
+\index{cat\-I\-D@{cat\-I\-D}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
+\subsubsection[{cat\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-clase\-Tle.\-Tle.\-cat\-I\-D} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1clase_tle_1_1_tle_aee8bbc2bc55783889d5c652807e9f0fd}
+
+
+\-Definition at line 117 of file clase\-Tle.\-py.
+
+
+\begin{DoxyCode}
+117 
+118     def catID(self):
+119         self.catID=self.linea1.split()[1]
+120         return self.catID
+        
+\end{DoxyCode}
+\index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!creadox\-Archivo@{creadox\-Archivo}}
+\index{creadox\-Archivo@{creadox\-Archivo}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
+\subsubsection[{creadox\-Archivo}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-clase\-Tle.\-Tle.\-creadox\-Archivo} (
+\begin{DoxyParamCaption}
+\item[{}]{cls, }
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1clase_tle_1_1_tle_a05b752bee515bfd7246a74bbecfd5899}
+
+
+\-Definition at line 101 of file clase\-Tle.\-py.
+
+
+\begin{DoxyCode}
+101 
+102     def creadoxArchivo(cls, archivo):
+103         inst2=cls()
+104         inst2.tle = open(archivo,'r')
+105         lineas = inst2.tle.readlines()
+106         inst2.linea1 = lineas[0]
+107         inst2.linea2 = lineas[1]
+108         inst2.tle.close() 
+109         inst2.i=inst2.linea2.split()[2]
+110         inst2.Omega=inst2.linea2.split()[3]
+111         inst2.e=inst2.linea2.split()[4]
+112         inst2.ap=inst2.linea2.split()[5]
+113         inst2.m=inst2.linea2.split()[6]
+114         inst2.n=inst2.linea2.split()[7]
+115             
+116         return inst2
+    
+\end{DoxyCode}
+\index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!creadox\-Param@{creadox\-Param}}
+\index{creadox\-Param@{creadox\-Param}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
+\subsubsection[{creadox\-Param}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-clase\-Tle.\-Tle.\-creadox\-Param} (
+\begin{DoxyParamCaption}
+\item[{}]{cls, }
+\item[{}]{usuario, }
+\item[{}]{clave, }
+\item[{}]{sat\-\_\-id, }
+\item[{}]{epoca}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1clase_tle_1_1_tle_aef5f4a1fe006973a71c80062f5604a88}
+\begin{DoxyVerb}
+Descarga el TLE correspondiente a la epoca que
+se le ingresa.
+Nota:toma como epoca final un dia despues por como 
+ofrece las descargas Space-track.
+\end{DoxyVerb}
+ 
+
+\-Definition at line 52 of file clase\-Tle.\-py.
+
+
+\begin{DoxyCode}
+52 
+53     def creadoxParam(cls, usuario,clave,sat_id,epoca):
+54         """
+55         Descarga el TLE correspondiente a la epoca que
+56         se le ingresa.
+57         Nota:toma como epoca final un dia despues por como 
+58         ofrece las descargas Space-track.
+59         """
+60         inst1=cls()
+61         inst1.noradId=sat_id
+62         inst1.anio0=epoca.year
+63         inst1.mes0=epoca.month
+64         inst1.dia0=epoca.day
+65         inst1.clave=clave
+66         epoca=epoca+timedelta(days=1)
+67         inst1.anio1=epoca.year
+68         inst1.mes1=epoca.month
+69         inst1.dia1=epoca.day
+70         
+71         try:
+72             inst1.sincero=[inst1.mes0,inst1.mes1,inst1.dia0,inst1.dia1]
+73             i=0
+74             for i in range(len(inst1.sincero)):           
+75                 if inst1.sincero[i] < 10:
+76                     inst1.sincero[i]='0'+str(inst1.sincero[i])
+77                 i= i+1
+78             inst1.sincero=[str(inst1.sincero[0]),str(inst1.sincero[1]),str(
+      inst1.sincero[2]),str(inst1.sincero[3])]
+79             inst1.f0=str(inst1.anio0)+'-'+inst1.sincero[0]+'-'+inst1.sincero[2]
+80             inst1.f1=str(inst1.anio1)+'-'+inst1.sincero[1]+'-'+inst1.sincero[3]
+81             data = {'identity': 'macecilia' , 'password': 'MaCeciliaSpace17'}
+82             s=session() 
+83             s.post('https://www.space-track.org/auth/login',data)
+84             fquery1='
+      https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+inst1.f0+'--'+inst1.f1+'/NORAD_CAT_ID/'+inst1.noradId+'
+      /orderby/TLE_LINE1 ASC/format/tle'
+85             r = s.get(fquery1)
+86             inst1.tle_text=r.text
+87             inst1.lineas=inst1.tle_text.split('\n')
+88             if len(inst1.lineas) > 1 and r.status_code == 200:
+89                 print 'Se ha generado el tle para el objeto de NORAD_ID= ',
+      inst1.noradId
+90                 inst1.linea1=inst1.lineas[-3]
+91                 inst1.linea2=inst1.lineas[-2]
+92             else:
+93                 print 'No pudo completarse la solicitud para el objeto de
+       NORAD_ID= ',inst1.noradId                      
+94     
+95         except exceptions.HTTPError as e:
+96             print "Error: " + str(e)
+97             return "Error: " + str(e)
+98 
+99         return inst1
+    
+\end{DoxyCode}
+\index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!epoca@{epoca}}
+\index{epoca@{epoca}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
+\subsubsection[{epoca}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-clase\-Tle.\-Tle.\-epoca} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1clase_tle_1_1_tle_a783b5366a1cc97539be2c98eb50663a3}
+
+
+\-Definition at line 121 of file clase\-Tle.\-py.
+
+
+\begin{DoxyCode}
+121 
+122     def epoca(self):
+123         whichconst = wgs72
+124         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+125         self.epoca=satrec.epoch
+126         return self.epoca
+    
+\end{DoxyCode}
+\index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!propaga\-T\-L\-E@{propaga\-T\-L\-E}}
+\index{propaga\-T\-L\-E@{propaga\-T\-L\-E}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
+\subsubsection[{propaga\-T\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-clase\-Tle.\-Tle.\-propaga\-T\-L\-E} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{date = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1clase_tle_1_1_tle_a445a93647d47eb2fbee981daf2034968}
+
+
+\-Definition at line 127 of file clase\-Tle.\-py.
+
+
+\begin{DoxyCode}
+127 
+128     def propagaTLE(self,date=None):
+129         whichconst = wgs72
+130         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+131         if date==None:
+132             ffin=satrec.epoch
+133             self.r,self.v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin
+      .hour,ffin.minute,ffin.second)
+134         else:
+135             segundos=date.second+date.microsecond
+136             self.r,self.v = satrec.propagate(date.year,date.month,date.day,date
+      .hour,date.minute,segundos)
+137         return self.r,self.v
+138     
+139 
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!cat\-I\-D@{cat\-I\-D}}
+\index{cat\-I\-D@{cat\-I\-D}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
+\subsubsection[{cat\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Tle\-::cat\-I\-D}}\label{classpruebas_1_1clase_tle_1_1_tle_aee565d2718311997256022faa3f0553d}
+
+
+\-Definition at line 117 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!epoca@{epoca}}
+\index{epoca@{epoca}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
+\subsubsection[{epoca}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Tle\-::epoca}}\label{classpruebas_1_1clase_tle_1_1_tle_ace8eaeb1b82e456cab188685192175d7}
+
+
+\-Definition at line 121 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!v@{v}}
+\index{v@{v}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
+\subsubsection[{v}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Tle\-::v}}\label{classpruebas_1_1clase_tle_1_1_tle_a23f7b707f9822503842898e4c6f48895}
+
+
+\-Definition at line 127 of file clase\-Tle.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf clase\-Tle.\-py}\end{DoxyCompactItemize}

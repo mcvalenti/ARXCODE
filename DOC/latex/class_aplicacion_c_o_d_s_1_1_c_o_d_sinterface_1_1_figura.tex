@@ -1,0 +1,201 @@
+\section{\-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Figura \-Class \-Reference}
+\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura}\index{\-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Figura@{\-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Figura}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf plot}
+\item 
+def {\bf salir}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf figure}
+\item 
+{\bf canvas}
+\item 
+{\bf toolbar}
+\item 
+{\bf button}
+\item 
+{\bf boton\-\_\-cerrar}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 204 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!AplicacionCODS::CODSinterface::Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Figura.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{parent = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura_a3af94a94086672cc2d67a06813fc9079}
+
+
+\-Definition at line 205 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+205 
+206     def __init__(self, parent=None):
+207         super(Figura, self).__init__(parent)
+208         
+209         # a figure instance to plot on
+210         self.figure = plt.figure()
+211 
+212         # this is the Canvas Widget that displays the `figure`
+213         self.canvas = FigureCanvas(self.figure)
+214 
+215         # this is the Navigation widget
+216         self.toolbar = NavigationToolbar(self.canvas, self)
+217 
+218         # Just some button connected to `plot` method
+219         self.button = QPushButton('Plot')
+220         self.boton_cerrar=QPushButton('Cerrar')
+221         self.button.clicked.connect(self.plot)
+222         self.boton_cerrar.clicked.connect(self.salir)
+223 
+224         # set the layout
+225         layout = QVBoxLayout()
+226         layout.addWidget(self.toolbar)
+227         layout.addWidget(self.canvas)
+228         layout.addWidget(self.button)
+229         layout.addWidget(self.boton_cerrar)
+230         self.setLayout(layout)  
+231 
+     
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}!plot@{plot}}
+\index{plot@{plot}!AplicacionCODS::CODSinterface::Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}}
+\subsubsection[{plot}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Figura.\-plot} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura_a0d671d42c702450e2f2a7f2bb6264487}
+
+
+\-Definition at line 232 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+232 
+233     def plot(self):
+234         f=open('../main/codsOsweiler.dif','r')
+235         listas=f.readlines()
+236     
+237         data0=[]
+238         data1=[]
+239         data2=[]
+240         data3=[]
+241         
+242         for l in listas:
+243             linea=l.split(' ')
+244             data0.append(linea[0])
+245             data1.append(float(linea[2]))
+246             data2.append(float(linea[3]))
+247             data3.append(float(linea[4]))
+248 
+249         """
+250         Gestion de Fechas
+251         """
+252         date_fmt = '%Y-%m-%d'
+253         epoca=[dt.datetime.strptime(str(i), date_fmt) for i in data0]
+254         x = [mdates.date2num(i) for i in epoca]
+255         date_formatter = mdates.DateFormatter('%d-%m-%y')
+256     
+257         # create an axis
+258         ax1 = self.figure.add_subplot(311) 
+259         ax2 = self.figure.add_subplot(312) 
+260         ax3 = self.figure.add_subplot(313) 
+261         ax1.xaxis.set_major_formatter(date_formatter)
+262         ax2.xaxis.set_major_formatter(date_formatter)
+263         ax3.xaxis.set_major_formatter(date_formatter)
+264         ax1.grid(True)
+265         ax2.grid(True)
+266         ax3.grid(True)
+267         
+268         # discards the old graph
+269         #ax.hold(False)
+270         
+271         # plot data
+272         ax1.plot_date(x, data1,'x')
+273         ax2.plot_date(x, data2,'x')
+274         ax3.plot_date(x, data3,'x')
+275 
+276         # refresh canvas
+277         self.canvas.draw() 
+        
+\end{DoxyCode}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}!salir@{salir}}
+\index{salir@{salir}!AplicacionCODS::CODSinterface::Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}}
+\subsubsection[{salir}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Figura.\-salir} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura_a448f006ff4bad5a28c2eb099a8b47de8}
+
+
+\-Definition at line 278 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+278 
+279     def salir(self):
+        self.close()
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}!boton\-\_\-cerrar@{boton\-\_\-cerrar}}
+\index{boton\-\_\-cerrar@{boton\-\_\-cerrar}!AplicacionCODS::CODSinterface::Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}}
+\subsubsection[{boton\-\_\-cerrar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Figura\-::boton\-\_\-cerrar}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura_a35eafa553dffeeff2892550c3ae58c14}
+
+
+\-Definition at line 205 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}!button@{button}}
+\index{button@{button}!AplicacionCODS::CODSinterface::Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}}
+\subsubsection[{button}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Figura\-::button}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura_ae98c6618eac6902cd88d1b7d482bee4f}
+
+
+\-Definition at line 205 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}!canvas@{canvas}}
+\index{canvas@{canvas}!AplicacionCODS::CODSinterface::Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}}
+\subsubsection[{canvas}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Figura\-::canvas}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura_ab992145611364acb282e156da020dbfa}
+
+
+\-Definition at line 205 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}!figure@{figure}}
+\index{figure@{figure}!AplicacionCODS::CODSinterface::Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}}
+\subsubsection[{figure}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Figura\-::figure}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura_ae76c81e26aa4460f5a8ef274dc0f53b4}
+
+
+\-Definition at line 205 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}!toolbar@{toolbar}}
+\index{toolbar@{toolbar}!AplicacionCODS::CODSinterface::Figura@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Figura}}
+\subsubsection[{toolbar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Figura\-::toolbar}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_figura_aa23f26f0a0a76afc16f7568ad5444e32}
+
+
+\-Definition at line 205 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Aplicacion\-C\-O\-D\-S/{\bf \-C\-O\-D\-Sinterface.\-py}\end{DoxyCompactItemize}

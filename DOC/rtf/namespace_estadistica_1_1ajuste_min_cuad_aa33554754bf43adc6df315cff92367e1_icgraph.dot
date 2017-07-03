@@ -1,0 +1,20 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Estadistica.ajusteMinCuad.ajustar_diferencias",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="AjustarTLE.AjustarTLE.difTle",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#a4bebc343b4cce0cb101bd99f5c872b6b"];
+  Node1 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="AjustarTLE.AjustarTLE.difPrimario",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#a55606547afe873c79e7365c980522508"];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="estudioTLE.procesar",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespaceestudio_t_l_e.html#a05f5fb07809e9aed4c1d036c20f31d2d"];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="Comparar.TlevsCodsOSW.dif_tleCODS15dias",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_comparar_1_1_tlevs_cods_o_s_w.html#a6a99a99f88bff2b4a515cba6aa466a88"];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="Aplicacion.frm_main.ProcMision.procesarCods",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_aplicacion_1_1frm__main_1_1_proc_mision.html#a833aec7ff42fabde02e729e5ab5e5a44"];
+  Node5 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="Comparar.TlevsCodsOSW.ejecutaProcesamientoCods",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_comparar_1_1_tlevs_cods_o_s_w.html#aceeb4d968f06abd2e044e25db4fb0585"];
+  Node1 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+}

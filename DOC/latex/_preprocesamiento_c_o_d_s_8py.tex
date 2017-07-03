@@ -1,0 +1,46 @@
+\section{\-Cods\-Admin/\-Preprocesamiento\-C\-O\-D\-S.py \-File \-Reference}
+\label{_preprocesamiento_c_o_d_s_8py}\index{\-Cods\-Admin/\-Preprocesamiento\-C\-O\-D\-S.\-py@{\-Cods\-Admin/\-Preprocesamiento\-C\-O\-D\-S.\-py}}
+\subsection*{\-Packages}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-archivos} = glob.\-glob('../\-Cods\-Admin/\-T\-O\-D\-\_\-\-O/$\ast$\-T\-X\-T')
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-largo} = [$\,$]
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-fila} = [$\,$]
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-linea\-\_\-archivo} = [$\,$]
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-a} = open(arch, 'r')
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-nombre} = arch.\-split('/')
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-fecha\-\_\-nombre} = nombre.\-split('\-\_\-')
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-anio} = fecha\-\_\-nombre[0\-:4]
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-mes} = fecha\-\_\-nombre[4\-:6]
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-dia} = fecha\-\_\-nombre[6\-:8]
+\item 
+string {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-fecha\-\_\-str} = '/'
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-a\-\_\-content} = a.\-readlines()
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-linea\-\_\-ini} = a\-\_\-content[1]
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-fecha\-\_\-ini} = linea\-\_\-ini[\-:19]
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-linea\-\_\-fin} = a\-\_\-content[-\/1]
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-fecha\-\_\-fin} = linea\-\_\-fin[\-:19]
+\item 
+list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-datos} = [nombre,fecha\-\_\-str,fecha\-\_\-ini,fecha\-\_\-fin,len(a\-\_\-content)]
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S.\-writer} = csv.\-writer(f)
+\end{DoxyCompactItemize}

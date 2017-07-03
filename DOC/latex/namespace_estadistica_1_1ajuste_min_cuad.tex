@@ -1,0 +1,85 @@
+\section{\-Estadistica\-:\-:ajuste\-Min\-Cuad \-Namespace \-Reference}
+\label{namespace_estadistica_1_1ajuste_min_cuad}\index{\-Estadistica\-::ajuste\-Min\-Cuad@{\-Estadistica\-::ajuste\-Min\-Cuad}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf ajustar\-\_\-diferencias}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 10/04/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Estadistica\-::ajuste\-Min\-Cuad@{\-Estadistica\-::ajuste\-Min\-Cuad}!ajustar\-\_\-diferencias@{ajustar\-\_\-diferencias}}
+\index{ajustar\-\_\-diferencias@{ajustar\-\_\-diferencias}!Estadistica::ajusteMinCuad@{\-Estadistica\-::ajuste\-Min\-Cuad}}
+\subsubsection[{ajustar\-\_\-diferencias}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Estadistica.\-ajuste\-Min\-Cuad.\-ajustar\-\_\-diferencias} (
+\begin{DoxyParamCaption}
+\item[{}]{epoca\-\_\-ffin, }
+\item[{}]{data, }
+\item[{}]{g}
+\end{DoxyParamCaption}
+)}\label{namespace_estadistica_1_1ajuste_min_cuad_aa33554754bf43adc6df315cff92367e1}
+\begin{DoxyVerb}
+Toma los datos de fechas y coordenadas y realiza
+un ajuste de minimos cuadrados con la funcion del 
+grado que se le indica en g.
+----------------------------------------------------
+devuelve la estadistica
+[residuals, rank, singular_values, rcond] : list
+\end{DoxyVerb}
+ 
+
+\-Definition at line 10 of file ajuste\-Min\-Cuad.\-py.
+
+
+\begin{DoxyCode}
+10 
+11 def ajustar_diferencias(epoca_ffin,data,g):
+12     """
+13     Toma los datos de fechas y coordenadas y realiza
+14     un ajuste de minimos cuadrados con la funcion del 
+15     grado que se le indica en g.
+16     ----------------------------------------------------
+17     devuelve la estadistica
+18     [residuals, rank, singular_values, rcond] : list
+19     """
+20     t=data[0]
+21     dt=[]
+22     dv=data[1]
+23     dn=data[2]
+24     dc=data[3]
+25     dvv=data[4]
+26     dnn=data[5]
+27     dcc=data[6]
+28     
+29     if g == 2:    
+30         for kt in t:
+31             dt.append((epoca_ffin-kt).total_seconds()/86400.0)
+32         c, stats = P.polynomial.polyfit(dt, dv, deg=g, full=True)
+33         c1, stats1 = P.polynomial.polyfit(dt, dn, deg=g, full=True)
+34         c2, stats2 = P.polynomial.polyfit(dt, dc, deg=g, full=True)
+35         coef=[c,c1,c2]
+36         statsReport=[stats,stats1,stats2] 
+37         return dt,coef,statsReport
+38     
+39     elif g == 1:
+40         for kt in t:
+41             dt.append((epoca_ffin-kt).total_seconds()/86400.0)
+42         c, stats = P.polynomial.polyfit(dt, dv, deg=g, full=True)
+43         c1, stats1 = P.polynomial.polyfit(dt, dn, deg=g, full=True)
+44         c2, stats2 = P.polynomial.polyfit(dt, dc, deg=g, full=True)
+45         coef=[c,c1,c2]
+46         statsReport=[stats,stats1,stats2] 
+47         return dt,coef,statsReport
+        \end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+

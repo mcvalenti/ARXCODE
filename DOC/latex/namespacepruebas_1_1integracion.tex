@@ -1,0 +1,115 @@
+\section{pruebas\-:\-:integracion \-Namespace \-Reference}
+\label{namespacepruebas_1_1integracion}\index{pruebas\-::integracion@{pruebas\-::integracion}}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+float {\bf r\-\_\-comp} = 0.\-031731
+\item 
+float {\bf s\-\_\-comp} = 0.\-436476
+\item 
+float {\bf w\-\_\-comp} = 0.\-543785
+\item 
+{\bf mu\-\_\-x} = {\bf r\-\_\-comp}
+\item 
+tuple {\bf mu\-\_\-y} = np.\-sqrt({\bf s\-\_\-comp}$\ast${\bf s\-\_\-comp}+{\bf w\-\_\-comp}$\ast${\bf w\-\_\-comp})
+\item 
+float {\bf sig\-\_\-x} = 0.\-0430576
+\item 
+float {\bf sig\-\_\-y} = 0.\-2941297
+\item 
+float {\bf ra} = 0.\-01
+\item 
+{\bf a} = {\bf mu\-\_\-x}-\/{\bf ra}
+\item 
+{\bf b} = {\bf mu\-\_\-x}+{\bf ra}
+\item 
+tuple {\bf area} = dblquad(lambda y, x\-: (1.\-0/(2.\-0$\ast$np.\-pi$\ast${\bf sig\-\_\-x}$\ast${\bf sig\-\_\-y}))$\ast$np.\-exp((-\/1.\-0/2.\-0)$\ast$((x$\ast$x/({\bf sig\-\_\-x}$\ast${\bf sig\-\_\-x}))+(y$\ast$y/({\bf sig\-\_\-y}$\ast${\bf sig\-\_\-y})))), {\bf a}, {\bf b}, lambda y\-: -\/np.\-sqrt({\bf ra}$\ast${\bf ra}-\/(y-\/{\bf mu\-\_\-x})$\ast$(y-\/{\bf mu\-\_\-x}))+{\bf mu\-\_\-y}, lambda y\-: np.\-sqrt({\bf ra}$\ast${\bf ra}-\/(y-\/{\bf mu\-\_\-x})$\ast$(y-\/{\bf mu\-\_\-x}))+{\bf mu\-\_\-y})
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 11/05/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Variable \-Documentation}
+\index{pruebas\-::integracion@{pruebas\-::integracion}!a@{a}}
+\index{a@{a}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::integracion\-::a} = {\bf mu\-\_\-x}-\/{\bf ra}}\label{namespacepruebas_1_1integracion_a22680fd05f3edddfe252426b176be670}
+
+
+\-Definition at line 21 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!area@{area}}
+\index{area@{area}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{area}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf pruebas\-::integracion\-::area} = dblquad(lambda y, x\-: (1.\-0/(2.\-0$\ast$np.\-pi$\ast${\bf sig\-\_\-x}$\ast${\bf sig\-\_\-y}))$\ast$np.\-exp((-\/1.\-0/2.\-0)$\ast$((x$\ast$x/({\bf sig\-\_\-x}$\ast${\bf sig\-\_\-x}))+(y$\ast$y/({\bf sig\-\_\-y}$\ast${\bf sig\-\_\-y})))), {\bf a}, {\bf b}, lambda y\-: -\/np.\-sqrt({\bf ra}$\ast${\bf ra}-\/(y-\/{\bf mu\-\_\-x})$\ast$(y-\/{\bf mu\-\_\-x}))+{\bf mu\-\_\-y}, lambda y\-: np.\-sqrt({\bf ra}$\ast${\bf ra}-\/(y-\/{\bf mu\-\_\-x})$\ast$(y-\/{\bf mu\-\_\-x}))+{\bf mu\-\_\-y})}\label{namespacepruebas_1_1integracion_a814ab7adb726e9505a5a855c8c6f6c4c}
+
+
+\-Definition at line 28 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!b@{b}}
+\index{b@{b}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{b}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::integracion\-::b} = {\bf mu\-\_\-x}+{\bf ra}}\label{namespacepruebas_1_1integracion_a9623688f3053aae5088a4f221c13aa43}
+
+
+\-Definition at line 22 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!mu\-\_\-x@{mu\-\_\-x}}
+\index{mu\-\_\-x@{mu\-\_\-x}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{mu\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::integracion\-::mu\-\_\-x} = {\bf r\-\_\-comp}}\label{namespacepruebas_1_1integracion_a201744c2ba64dccfa900c34bd93e6ee6}
+
+
+\-Definition at line 13 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!mu\-\_\-y@{mu\-\_\-y}}
+\index{mu\-\_\-y@{mu\-\_\-y}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{mu\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf pruebas\-::integracion\-::mu\-\_\-y} = np.\-sqrt({\bf s\-\_\-comp}$\ast${\bf s\-\_\-comp}+{\bf w\-\_\-comp}$\ast${\bf w\-\_\-comp})}\label{namespacepruebas_1_1integracion_a59d9c884c181869e4dd571fdf653f75f}
+
+
+\-Definition at line 14 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!r\-\_\-comp@{r\-\_\-comp}}
+\index{r\-\_\-comp@{r\-\_\-comp}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{r\-\_\-comp}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf pruebas\-::integracion\-::r\-\_\-comp} = 0.\-031731}\label{namespacepruebas_1_1integracion_a8edbcf6dec3a706693d6398ee5b0bf16}
+
+
+\-Definition at line 9 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!ra@{ra}}
+\index{ra@{ra}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{ra}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf pruebas\-::integracion\-::ra} = 0.\-01}\label{namespacepruebas_1_1integracion_a2e5cf62e4529a81ddbf8647d5eb84931}
+
+
+\-Definition at line 19 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!s\-\_\-comp@{s\-\_\-comp}}
+\index{s\-\_\-comp@{s\-\_\-comp}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{s\-\_\-comp}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf pruebas\-::integracion\-::s\-\_\-comp} = 0.\-436476}\label{namespacepruebas_1_1integracion_a656c6ef6a62a3570244ff05eda25d36b}
+
+
+\-Definition at line 10 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!sig\-\_\-x@{sig\-\_\-x}}
+\index{sig\-\_\-x@{sig\-\_\-x}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{sig\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf pruebas\-::integracion\-::sig\-\_\-x} = 0.\-0430576}\label{namespacepruebas_1_1integracion_a1524cb414daa1812d96bbd1c4399f45d}
+
+
+\-Definition at line 16 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!sig\-\_\-y@{sig\-\_\-y}}
+\index{sig\-\_\-y@{sig\-\_\-y}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{sig\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf pruebas\-::integracion\-::sig\-\_\-y} = 0.\-2941297}\label{namespacepruebas_1_1integracion_a903c337bb731fe5e8c316053ef762155}
+
+
+\-Definition at line 17 of file integracion.\-py.
+
+\index{pruebas\-::integracion@{pruebas\-::integracion}!w\-\_\-comp@{w\-\_\-comp}}
+\index{w\-\_\-comp@{w\-\_\-comp}!pruebas::integracion@{pruebas\-::integracion}}
+\subsubsection[{w\-\_\-comp}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf pruebas\-::integracion\-::w\-\_\-comp} = 0.\-543785}\label{namespacepruebas_1_1integracion_ae121a7c10f227e15e0811eaa8b7f70f8}
+
+
+\-Definition at line 11 of file integracion.\-py.
+

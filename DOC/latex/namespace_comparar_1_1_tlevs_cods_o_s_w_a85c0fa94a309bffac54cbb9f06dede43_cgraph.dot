@@ -1,0 +1,13 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Comparar.TlevsCodsOSW.sv_interpolados",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="Comparar.TlevsCodsOSW.encuentraBordes",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_comparar_1_1_tlevs_cods_o_s_w.html#a6247e26228742556a20f988bc818cb55"];
+  Node1 -> Node3 [color="midnightblue",fontsize="10",style="solid"];
+  Node3 [label="Comparar.TlevsCodsOSW.interpola",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_comparar_1_1_tlevs_cods_o_s_w.html#a489657853bb99b1b74c3abb90af20e62"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid"];
+  Node4 [label="funcionesUtiles.funciones.toTimestamp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespacefunciones_utiles_1_1funciones.html#a3d74c0520a16933699930e2937322d1a"];
+}

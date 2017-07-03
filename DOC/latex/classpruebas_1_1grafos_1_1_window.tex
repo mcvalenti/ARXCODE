@@ -1,0 +1,144 @@
+\section{pruebas.\-grafos.\-Window \-Class \-Reference}
+\label{classpruebas_1_1grafos_1_1_window}\index{pruebas.\-grafos.\-Window@{pruebas.\-grafos.\-Window}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf plot}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf figure}
+\item 
+{\bf canvas}
+\item 
+{\bf toolbar}
+\item 
+{\bf button}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 15 of file grafos.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::grafos\-::\-Window@{pruebas\-::grafos\-::\-Window}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::grafos::Window@{pruebas\-::grafos\-::\-Window}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-grafos.\-Window.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{parent = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1grafos_1_1_window_ad5721b57e5586e0149d36fb1e0791d59}
+
+
+\-Definition at line 16 of file grafos.\-py.
+
+
+\begin{DoxyCode}
+16 
+17     def __init__(self, parent=None):
+18         super(Window, self).__init__(parent)
+19 
+20         # a figure instance to plot on
+21         self.figure = plt.figure()
+22 
+23         # this is the Canvas Widget that displays the `figure`
+24         # it takes the `figure` instance as a parameter to __init__
+25         self.canvas = FigureCanvas(self.figure)
+26 
+27         # this is the Navigation widget
+28         # it takes the Canvas widget and a parent
+29         self.toolbar = NavigationToolbar(self.canvas, self)
+30 
+31         # Just some button connected to `plot` method
+32         self.button = QtGui.QPushButton('Plot')
+33         self.button.clicked.connect(self.plot)
+34 
+35         # set the layout
+36         layout = QtGui.QVBoxLayout()
+37         layout.addWidget(self.toolbar)
+38         layout.addWidget(self.canvas)
+39         layout.addWidget(self.button)
+40         self.setLayout(layout)
+        
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{pruebas\-::grafos\-::\-Window@{pruebas\-::grafos\-::\-Window}!plot@{plot}}
+\index{plot@{plot}!pruebas::grafos::Window@{pruebas\-::grafos\-::\-Window}}
+\subsubsection[{plot}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-grafos.\-Window.\-plot} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1grafos_1_1_window_acfcc31c23ba2fb550397c7eac6f9eb9f}
+\begin{DoxyVerb}plot some random stuff \end{DoxyVerb}
+ 
+
+\-Definition at line 41 of file grafos.\-py.
+
+
+\begin{DoxyCode}
+41 
+42     def plot(self):
+43         ''' plot some random stuff '''
+44         # random data
+45         data = [random.random() for i in range(10)]
+46 
+47         # create an axis
+48         ax = self.figure.add_subplot(111)
+49 
+50         # discards the old graph
+51         ax.hold(False)
+52 
+53         # plot data
+54         ax.plot(data, '*-')
+55 
+56         # refresh canvas
+57         self.canvas.draw()
+58 
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::grafos\-::\-Window@{pruebas\-::grafos\-::\-Window}!button@{button}}
+\index{button@{button}!pruebas::grafos::Window@{pruebas\-::grafos\-::\-Window}}
+\subsubsection[{button}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::grafos.\-Window\-::button}}\label{classpruebas_1_1grafos_1_1_window_a06dba37327493bf499476d8d4c76328c}
+
+
+\-Definition at line 16 of file grafos.\-py.
+
+\index{pruebas\-::grafos\-::\-Window@{pruebas\-::grafos\-::\-Window}!canvas@{canvas}}
+\index{canvas@{canvas}!pruebas::grafos::Window@{pruebas\-::grafos\-::\-Window}}
+\subsubsection[{canvas}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::grafos.\-Window\-::canvas}}\label{classpruebas_1_1grafos_1_1_window_ab0a09eeef94ccf7ff52b80355035820f}
+
+
+\-Definition at line 16 of file grafos.\-py.
+
+\index{pruebas\-::grafos\-::\-Window@{pruebas\-::grafos\-::\-Window}!figure@{figure}}
+\index{figure@{figure}!pruebas::grafos::Window@{pruebas\-::grafos\-::\-Window}}
+\subsubsection[{figure}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::grafos.\-Window\-::figure}}\label{classpruebas_1_1grafos_1_1_window_af82b325672275258e5a12a04a38f31e8}
+
+
+\-Definition at line 16 of file grafos.\-py.
+
+\index{pruebas\-::grafos\-::\-Window@{pruebas\-::grafos\-::\-Window}!toolbar@{toolbar}}
+\index{toolbar@{toolbar}!pruebas::grafos::Window@{pruebas\-::grafos\-::\-Window}}
+\subsubsection[{toolbar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::grafos.\-Window\-::toolbar}}\label{classpruebas_1_1grafos_1_1_window_aefacb50b71d1776f4d5da9b7ade48c24}
+
+
+\-Definition at line 16 of file grafos.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf grafos.\-py}\end{DoxyCompactItemize}

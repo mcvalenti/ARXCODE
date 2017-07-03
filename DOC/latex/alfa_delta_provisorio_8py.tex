@@ -1,0 +1,75 @@
+\section{\-Sist\-Referencia/alfa\-Delta\-Provisorio.py \-File \-Reference}
+\label{alfa_delta_provisorio_8py}\index{\-Sist\-Referencia/alfa\-Delta\-Provisorio.\-py@{\-Sist\-Referencia/alfa\-Delta\-Provisorio.\-py}}
+\subsection*{\-Packages}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-cart2geod}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-in1} = open('desarrollo/envi.\-sal')
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-in2} = open('desarrollo/cosmos.\-sal')
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-out1} = open('alfdelenvi.\-txt','w+')
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-out2} = open('alfadelcosmos.\-txt','w+')
+\item 
+{\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-pi} = np.\-pi
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-deg} = np.\-divide(180,pi)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-lineas1} = in1.\-readlines()
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-lineas2} = in2.\-readlines()
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-datos} = l1.\-split(' ')
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-x} = float(datos[3])
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-y} = float(datos[4])
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-z} = float(datos[5])
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-r\-\_\-prima} = rot\-\_\-tierra(x,y,z)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-r} = np.\-sqrt(x$\ast$x+y$\ast$y+z$\ast$z)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-l} = np.\-divide(x,r)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-m} = np.\-divide(y,r)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-n} = np.\-divide(z,r)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-delta} = np.\-arcsin(n)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-alpha} = np.\-arccos(np.\-divide(l,np.\-cos(delta)))
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-fila} = str(alpha$\ast$deg)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-x2} = float(datos[3])
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-y2} = float(datos[4])
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-z2} = float(datos[5])
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-r2} = np.\-sqrt(x2$\ast$x2+y2$\ast$y2+z2$\ast$z2)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-ll} = np.\-divide(x2,r2)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-mm} = np.\-divide(y2,r2)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-nn} = np.\-divide(z2,r2)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-delta2} = np.\-arcsin(nn)
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-alpha2} = np.\-arccos(np.\-divide(ll,np.\-cos(delta2)))
+\item 
+tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio.\-fila2} = str(alpha2$\ast$deg)
+\end{DoxyCompactItemize}

@@ -1,0 +1,27 @@
+var namespaceestudio_t_l_e =
+[
+    [ "procesar", "namespaceestudio_t_l_e.html#a05f5fb07809e9aed4c1d036c20f31d2d", null ],
+    [ "anio", "namespaceestudio_t_l_e.html#a504174fa066414d58becbf37540ec5e0", null ],
+    [ "archivo_crudo_cods", "namespaceestudio_t_l_e.html#a29cb816f50fc278f1fc6b5243c83727d", null ],
+    [ "archivo_crudo_tle", "namespaceestudio_t_l_e.html#ad48154f6ac79cd26dfef93e5cb857045", null ],
+    [ "dif_c", "namespaceestudio_t_l_e.html#afead10cf733b61d1340753bbcdd715f6", null ],
+    [ "dif_n", "namespaceestudio_t_l_e.html#a516ac8d53fecd606ff13b67a800c3c67", null ],
+    [ "dif_r", "namespaceestudio_t_l_e.html#a166a17f127ceb4b7583e66e200a5512a", null ],
+    [ "dif_v", "namespaceestudio_t_l_e.html#a7f3f768198d910d138998f00073d4848", null ],
+    [ "ephem", "namespaceestudio_t_l_e.html#a08826f20b82a757bad4d2f07e11d3b33", null ],
+    [ "ephem_dic", "namespaceestudio_t_l_e.html#a70df421239bd23b05dbfcc944f5aaeb5", null ],
+    [ "epoca_fin_prop", "namespaceestudio_t_l_e.html#a8e8d7ab6b2220b2de3821e828c938898", null ],
+    [ "epoca_ini_prop", "namespaceestudio_t_l_e.html#a61370b9373ad741def7ba9794aaa0b6a", null ],
+    [ "mes", "namespaceestudio_t_l_e.html#a0e597f6e5f7488399ac4c42273aa6615", null ],
+    [ "r_cods", "namespaceestudio_t_l_e.html#a1b00721df9da8b35d54765e9f5ffca44", null ],
+    [ "r_tod", "namespaceestudio_t_l_e.html#a299627ac470b042bc4d26d25aef1a790", null ],
+    [ "resta", "namespaceestudio_t_l_e.html#ac49c596bc8811ca7fe0415bc0034894a", null ],
+    [ "sat_id", "namespaceestudio_t_l_e.html#a85ca1771abea931dec7b455964ba32a1", null ],
+    [ "v_cods", "namespaceestudio_t_l_e.html#afdeb675739ece4622166417475376aa8", null ],
+    [ "vx", "namespaceestudio_t_l_e.html#a1c80cfb5f136a31fa13abded69a21e9f", null ],
+    [ "vy", "namespaceestudio_t_l_e.html#afa5854431c0e127e4eda621500b33668", null ],
+    [ "vz", "namespaceestudio_t_l_e.html#a05c5779853ecd24fe946bbb0c7af5c88", null ],
+    [ "x", "namespaceestudio_t_l_e.html#a563806c6a8999212459daf08a9226309", null ],
+    [ "y", "namespaceestudio_t_l_e.html#af75e112c996e585da463ace7e180a471", null ],
+    [ "z", "namespaceestudio_t_l_e.html#a3ec34a740b736765542eaf20999a4b7a", null ]
+];

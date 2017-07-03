@@ -1,0 +1,61 @@
+\section{main/estudio\-T\-L\-E.py \-File \-Reference}
+\label{estudio_t_l_e_8py}\index{main/estudio\-T\-L\-E.\-py@{main/estudio\-T\-L\-E.\-py}}
+\subsection*{\-Packages}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf estudio\-T\-L\-E}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf estudio\-T\-L\-E.\-procesar}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf estudio\-T\-L\-E.\-sat\-\_\-id} = '37673'
+\item 
+string {\bf estudio\-T\-L\-E.\-archivo\-\_\-crudo\-\_\-tle} = '37673\-\_\-20130721\-\_\-20130804.\-tle'
+\item 
+string {\bf estudio\-T\-L\-E.\-archivo\-\_\-crudo\-\_\-cods} = '\-C\-O\-D\-S\-\_\-20130804\-\_\-135714\-\_\-\-S\-A\-C\-D\-\_\-\-D\-E\-N\-S\-E\-P\-H\-E\-M\-\_\-\-T\-O\-D\-\_\-\-X\-Y\-Z\-\_\-\-O.\-T\-X\-T'
+\item 
+tuple {\bf estudio\-T\-L\-E.\-ephem} = \-Ephem\-C\-O\-D\-S('../\-Cods\-Admin/sac\-Ddensos/'+archivo\-\_\-crudo\-\_\-cods)
+\item 
+tuple {\bf estudio\-T\-L\-E.\-ephem\-\_\-dic} = ephem.\-genera\-\_\-diccionario()
+\item 
+{\bf estudio\-T\-L\-E.\-anio} = tle\-\_\-dia1.\-epoca.\-year
+\item 
+{\bf estudio\-T\-L\-E.\-mes} = tle\-\_\-dia1.\-epoca.\-month
+\item 
+tuple {\bf estudio\-T\-L\-E.\-epoca\-\_\-ini\-\_\-prop} = datetime(anio,mes,3,0,0,0)
+\item 
+tuple {\bf estudio\-T\-L\-E.\-epoca\-\_\-fin\-\_\-prop} = epoca\-\_\-ini\-\_\-prop+timedelta(days=1)
+\item 
+list {\bf estudio\-T\-L\-E.\-dif\-\_\-r} = [$\,$]
+\item 
+list {\bf estudio\-T\-L\-E.\-dif\-\_\-v} = [$\,$]
+\item 
+list {\bf estudio\-T\-L\-E.\-dif\-\_\-n} = [$\,$]
+\item 
+list {\bf estudio\-T\-L\-E.\-dif\-\_\-c} = [$\,$]
+\item 
+tuple {\bf estudio\-T\-L\-E.\-r\-\_\-tod} = teme2tod(epoca\-\_\-ini\-\_\-prop,r)
+\item 
+list {\bf estudio\-T\-L\-E.\-x} = ephem\-\_\-dic[epoca\-\_\-ini\-\_\-prop]
+\item 
+list {\bf estudio\-T\-L\-E.\-y} = ephem\-\_\-dic[epoca\-\_\-ini\-\_\-prop]
+\item 
+list {\bf estudio\-T\-L\-E.\-z} = ephem\-\_\-dic[epoca\-\_\-ini\-\_\-prop]
+\item 
+list {\bf estudio\-T\-L\-E.\-vx} = ephem\-\_\-dic[epoca\-\_\-ini\-\_\-prop]
+\item 
+list {\bf estudio\-T\-L\-E.\-vy} = ephem\-\_\-dic[epoca\-\_\-ini\-\_\-prop]
+\item 
+list {\bf estudio\-T\-L\-E.\-vz} = ephem\-\_\-dic[epoca\-\_\-ini\-\_\-prop]
+\item 
+tuple {\bf estudio\-T\-L\-E.\-r\-\_\-cods} = np.\-array([float(x),float(y),float(z)])
+\item 
+tuple {\bf estudio\-T\-L\-E.\-v\-\_\-cods} = np.\-array([float(vx),float(vy),float(vz)])
+\item 
+list {\bf estudio\-T\-L\-E.\-resta} = r\-\_\-cods[0]
+\end{DoxyCompactItemize}

@@ -1,0 +1,32 @@
+\section{\-Cods\-Admin/\-Solicitud\-C\-O\-D\-S.py \-File \-Reference}
+\label{_solicitud_c_o_d_s_8py}\index{\-Cods\-Admin/\-Solicitud\-C\-O\-D\-S.\-py@{\-Cods\-Admin/\-Solicitud\-C\-O\-D\-S.\-py}}
+\subsection*{\-Packages}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-directorio} = '../\-Cods\-Admin/\-Dato\-Mision/'
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-lista} = glob.\-glob(directorio+'$\ast$')
+\item 
+list {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-nombre\-Archivo} = lista[0]
+\item 
+list {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-fecha\-Archivo} = nombre\-Archivo[1]
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-year} = int(fecha\-Archivo[\-:4])
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-mes} = int(fecha\-Archivo[4\-:6])
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-dia} = int(fecha\-Archivo[6\-:8])
+\item 
+tuple {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-fecha\-Archivo1} = datetime(year,mes,dia)
+\item 
+string {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-host} = \char`\"{}cods.\-conae.\-gov.\-ar\char`\"{}
+\item 
+string {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-password} = \char`\"{}mcvalenti\char`\"{}
+\item 
+string {\bf \-Cods\-Admin\-::\-Solicitud\-C\-O\-D\-S.\-username} = \char`\"{}9\-Fd3-\/\&(\-N\char`\"{}
+\end{DoxyCompactItemize}

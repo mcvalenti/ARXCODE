@@ -1,0 +1,174 @@
+\section{visual\-:\-:gegraf \-Namespace \-Reference}
+\label{namespacevisual_1_1gegraf}\index{visual\-::gegraf@{visual\-::gegraf}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf gegraf\-Tot}
+\item 
+def {\bf gegraf}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf dif\-Tot} = '../\-Ajustar\-T\-L\-E/diferencias/dif\-Total'
+\item 
+tuple {\bf set\-I\-D} = str(8820)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Thu Nov 12 10:30:56 2015
+
+GEGRAF: Gestor de graficos
+Grafica las diferencias en la posicion.
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{visual\-::gegraf@{visual\-::gegraf}!gegraf@{gegraf}}
+\index{gegraf@{gegraf}!visual::gegraf@{visual\-::gegraf}}
+\subsubsection[{gegraf}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-gegraf.\-gegraf} (
+\begin{DoxyParamCaption}
+\item[{}]{datos, }
+\item[{}]{sufijo}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1gegraf_acdc219aa86e3d5394ec63b4b8751cebd}
+
+
+\-Definition at line 43 of file gegraf.\-py.
+
+
+\begin{DoxyCode}
+43 
+44 def gegraf(datos,sufijo):  
+45     f1=open(datos,'r')
+46     fechas=[]
+47     xx=[]
+48     yy=[]
+49     zz=[]
+50     lineas=f1.readlines()
+51     
+52     for i in lineas:
+53         ls = i.split(',')
+54         fechas.append(float(ls[0]))
+55         xx.append(ls[1])
+56         yy.append(ls[2])
+57         zz.append(ls[3])
+58     
+59     """
+60     Coordenada U
+61     """
+62 
+63     fig, ax = plt.subplots()
+64     ax.plot(fechas, xx, 'rx', label='V')
+65     ax.plot(fechas, yy, 'bs', label='N')
+66     ax.plot(fechas, zz, 'g.', label='C')
+67     plt.grid()
+68     plt.title('Diferencias en las Coordenadas V,N,C [km]')
+69     plt.ylabel('Diferencia en Km')
+70 #     plt.ylim(-20.0,20.0)
+71 #    
+       ax.plot(fechas,xx,'r--',fechas,yy,'bs',fechas,zz,label='U')#,label='modulo de distancia')
+72 #     fig.autofmt_xdate() # rotate and align the tick labels so they look
+       better
+73 #     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
+74     plt.savefig('../visual/'+sufijo+'.png')
+75     plt.close()
+76 
+77     """
+78     Coordenada V
+79     """
+80 #     fig, ax = plt.subplots(1)
+81 #     plt.grid()
+82 #     plt.title('Diferencias en la Coordenada V [km]')
+83 #     plt.ylabel('V [km]')
+84 #     plt.ylim(-2.0,18.0)
+85 #     ax.plot(fechas,yy, label='modulo de distancia')
+86 #     fig.autofmt_xdate() # rotate and align the tick labels so they look
+       better
+87 #     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
+88 #     plt.savefig('../visual/difcoordenadasV.png')
+89 #     plt.show()
+90 
+91     """
+92     COMPONENTE W
+93     """
+94 #     fig, ax = plt.subplots(1)
+95 #     plt.grid()
+96 #     plt.title('Diferencias en la Coordenada W [km]')
+97 #     plt.ylabel('W [km]')
+98 #     plt.ylim(-2.0,18.0)
+99 #     ax.plot(fechas,zz, label='modulo de distancia')
+100 #     fig.autofmt_xdate() # rotate and align the tick labels so they look
+       better
+101 #     ax.xaxis.set_major_formatter(mdates.DateFormatter('%b-%d'))
+102 # 
+103 #     plt.savefig('../visual/difcoordenadasW.png')
+104 #    plt.show()
+
+\end{DoxyCode}
+\index{visual\-::gegraf@{visual\-::gegraf}!gegraf\-Tot@{gegraf\-Tot}}
+\index{gegraf\-Tot@{gegraf\-Tot}!visual::gegraf@{visual\-::gegraf}}
+\subsubsection[{gegraf\-Tot}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-gegraf.\-gegraf\-Tot} (
+\begin{DoxyParamCaption}
+\item[{}]{dif\-Tot, }
+\item[{}]{set\-I\-D}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1gegraf_a1336fe4e44da4d2c3360f4965967c149}
+
+
+\-Definition at line 14 of file gegraf.\-py.
+
+
+\begin{DoxyCode}
+14 
+15 def gegrafTot(difTot,setID):
+16     archivo=open(difTot,'r')
+17     dtt=[]
+18     xx=[]
+19     yy=[]
+20     zz=[]
+21     lineas=archivo.readlines()
+22     if len(lineas)==0:
+23         print 'El archivo: '+difTot+' tiene algun problema'
+24     else:
+25         for i in lineas:
+26             ls = i.split(',')
+27             dtt.append(float(ls[0]))
+28             xx.append(float(ls[1]))
+29             yy.append(float(ls[2]))
+30             zz.append(float(ls[3]))
+31         plt.plot(dtt, xx, 'rd', label='V')
+32         plt.plot(dtt, yy, 'bo', label='N')
+33         plt.plot(dtt, zz, 'kx', label='C')
+34         plt.grid()
+35         plt.title('Diferencias en las Coordenadas V,N,C [km]')
+36         plt.ylabel('Diferencia en Km')
+37 # #         plt.xlim(0,16)
+38 # #         plt.ylim(-5.0,2.0)
+39 #         plt.legend(loc=4)
+40         plt.savefig('../visual/difTot'+setID+'.png')
+41         plt.show()
+42         plt.close()
+
+\end{DoxyCode}
+
+
+\subsection{\-Variable \-Documentation}
+\index{visual\-::gegraf@{visual\-::gegraf}!dif\-Tot@{dif\-Tot}}
+\index{dif\-Tot@{dif\-Tot}!visual::gegraf@{visual\-::gegraf}}
+\subsubsection[{dif\-Tot}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf visual\-::gegraf\-::dif\-Tot} = '../\-Ajustar\-T\-L\-E/diferencias/dif\-Total'}\label{namespacevisual_1_1gegraf_a33ca783c1d8fad77740f5d9112ff86db}
+
+
+\-Definition at line 106 of file gegraf.\-py.
+
+\index{visual\-::gegraf@{visual\-::gegraf}!set\-I\-D@{set\-I\-D}}
+\index{set\-I\-D@{set\-I\-D}!visual::gegraf@{visual\-::gegraf}}
+\subsubsection[{set\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf visual\-::gegraf\-::set\-I\-D} = str(8820)}\label{namespacevisual_1_1gegraf_adffd1211763cd8009907ac8d14910bd9}
+
+
+\-Definition at line 107 of file gegraf.\-py.
+

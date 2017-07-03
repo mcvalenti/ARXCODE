@@ -1,0 +1,282 @@
+\section{\-Sist\-Referencia\-:\-:sist\-\_\-de\-Tiempo \-Namespace \-Reference}
+\label{namespace_sist_referencia_1_1sist__de_tiempo}\index{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf j0}
+\item 
+def {\bf jd}
+\item 
+def {\bf calcula\-\_\-mjd}
+\item 
+def {\bf ts\-\_\-greenwich}
+\item 
+def {\bf ts\-\_\-local}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Calculo del dia juliano (J2000)
+epoca juliana (J2000): 1ero de Enero de J2000 al mediodia.
+jd(j2000)=2451545.0
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}!calcula\-\_\-mjd@{calcula\-\_\-mjd}}
+\index{calcula\-\_\-mjd@{calcula\-\_\-mjd}!SistReferencia::sist_deTiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}}
+\subsubsection[{calcula\-\_\-mjd}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Tiempo.\-calcula\-\_\-mjd} (
+\begin{DoxyParamCaption}
+\item[{}]{epoch}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_tiempo_a9eee590d2ead7f20a9b33ef5b113f19b}
+
+
+\-Definition at line 46 of file sist\-\_\-de\-Tiempo.\-py.
+
+
+\begin{DoxyCode}
+46 
+47 def calcula_mjd(epoch):
+48     jd1=jd(epoch)
+49     mjd=jd1-240000.5   
+50     return mjd
+    
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}!j0@{j0}}
+\index{j0@{j0}!SistReferencia::sist_deTiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}}
+\subsubsection[{j0}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Tiempo.\-j0} (
+\begin{DoxyParamCaption}
+\item[{}]{epoch}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_tiempo_ae2039dacf6ec7bd9234fe7fdd50fa498}
+\begin{DoxyVerb}
+Calcula la fecha juliana para 0hs de UT.
+---------------------------------------------
+input
+    epoch: fecha (datetime)
+output
+    j0: fecha juliana a Ohs de UT (float)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 9 of file sist\-\_\-de\-Tiempo.\-py.
+
+
+\begin{DoxyCode}
+9 
+10 def j0(epoch):
+11     """
+12     Calcula la fecha juliana para 0hs de UT.
+13     ---------------------------------------------
+14     input
+15         epoch: fecha (datetime)
+16     output
+17         j0: fecha juliana a Ohs de UT (float)
+18     """
+19     y=epoch.year
+20     m=epoch.month
+21     d=epoch.day
+22     term1=7*(y+(m+9)/12)/4
+23     term2=275*m/9
+24     j0=367*y-term1+term2+d+1721013.5
+25     
+26     return j0
+    
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}!jd@{jd}}
+\index{jd@{jd}!SistReferencia::sist_deTiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}}
+\subsubsection[{jd}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Tiempo.\-jd} (
+\begin{DoxyParamCaption}
+\item[{}]{epoch}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_tiempo_a4bce296a4c0b68be2d00dd41b0f84198}
+\begin{DoxyVerb}
+Calcula la fecha juliana para la epoca.
+Utiliza la funcion anterior J0
+---------------------------------------------
+input
+    epoch: fecha (datetime)
+output
+    jd: fecha juliana de la epoca (float)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 27 of file sist\-\_\-de\-Tiempo.\-py.
+
+
+\begin{DoxyCode}
+27 
+28 def jd(epoch):
+29     """
+30     Calcula la fecha juliana para la epoca.
+31     Utiliza la funcion anterior J0
+32     ---------------------------------------------
+33     input
+34         epoch: fecha (datetime)
+35     output
+36         jd: fecha juliana de la epoca (float)
+37     """
+38     h=epoch.hour
+39     minu=epoch.minute
+40     s=epoch.second+epoch.microsecond/1000000.0    
+41     j01=j0(epoch)
+42     ut=h+minu/60.0+s/3600.0
+43     jd=j01+ut/24.0
+44     
+45     return jd
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}!ts\-\_\-greenwich@{ts\-\_\-greenwich}}
+\index{ts\-\_\-greenwich@{ts\-\_\-greenwich}!SistReferencia::sist_deTiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}}
+\subsubsection[{ts\-\_\-greenwich}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Tiempo.\-ts\-\_\-greenwich} (
+\begin{DoxyParamCaption}
+\item[{}]{epoch}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_tiempo_aa45ac920a2f9f3fd545721f0bc37b71f}
+\begin{DoxyVerb}
+-------------------------------------------------
+Calcula el Tiempo Sidereo en Greenwichj,
+para una fecha y hora. 
+-------------------------------------------------
+inputs
+    epoca: fecha y hora - (datetime)
+outputs
+    thetaG_xhs: Tiempo Sidereo para la epoca - (float)-[grados]
+\end{DoxyVerb}
+ 
+
+\-Definition at line 51 of file sist\-\_\-de\-Tiempo.\-py.
+
+
+\begin{DoxyCode}
+51 
+52 def ts_greenwich(epoch):
+53     """
+54     -------------------------------------------------
+55     Calcula el Tiempo Sidereo en Greenwichj,
+56     para una fecha y hora. 
+57     -------------------------------------------------
+58     inputs
+59         epoca: fecha y hora - (datetime)
+60     outputs
+61         thetaG_xhs: Tiempo Sidereo para la epoca - (float)-[grados]
+62     """
+63     h1=epoch.hour
+64     minu1=epoch.minute
+65     s1=epoch.second+epoch.microsecond/1000000.0
+66     ut1=h1+minu1/60.0+s1/3600.0
+67     """
+68     Se calcula T0 [centurias julianas]
+69     """
+70     j02=j0(epoch)
+71     dt=(j02-2451545.0)/36525.0 
+72     """
+73     Tiempo sidereo en Greenwich a 0hs UT.
+74     """
+75     a=100.4606184
+76     b=36000.77004
+77     c=0.000387933
+78     d=-2.583*10**(-8)   
+79     thetaG_0hs=a+b*dt+c*dt*dt+d*dt**3 # [grados]
+80     if thetaG_0hs > 360.0:
+81        vueltas=np.modf(thetaG_0hs/360.0)[1]
+82        thetaG_0hs=thetaG_0hs-vueltas*360
+83     """
+84     Tiempo sidereo en Greenwich a una hora particular
+85     """
+86     thetaG_xhs=thetaG_0hs+360.98564724*(ut1/24.0)
+87 
+88     if thetaG_xhs > 360.0:
+89         vueltasx=np.modf(thetaG_xhs/360.0)[1]
+90         thetaG_xhs=thetaG_xhs-vueltasx*360
+91     
+92     return thetaG_xhs
+93     
+    
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}!ts\-\_\-local@{ts\-\_\-local}}
+\index{ts\-\_\-local@{ts\-\_\-local}!SistReferencia::sist_deTiempo@{\-Sist\-Referencia\-::sist\-\_\-de\-Tiempo}}
+\subsubsection[{ts\-\_\-local}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Tiempo.\-ts\-\_\-local} (
+\begin{DoxyParamCaption}
+\item[{}]{epoch, }
+\item[{}]{lon}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_tiempo_a6f330fd6d3f541d61563da4b6675e778}
+
+
+\-Definition at line 94 of file sist\-\_\-de\-Tiempo.\-py.
+
+
+\begin{DoxyCode}
+94 
+95 def ts_local(epoch,lon):
+96     h1=epoch.hour
+97     minu1=epoch.minute
+98     s1=epoch.second+epoch.microsecond/1000000.0
+99     ut1=h1+minu1/60.0+s1/3600.0
+100     """
+101     Se calcula T0 [centurias julianas]
+102     """
+103     j02=j0(epoch)
+104     dt=(j02-2451545.0)/36525.0 
+105     """
+106     Tiempo sidereo en Greenwich a 0hs UT.
+107     """
+108     a=100.4606184
+109     b=36000.77004
+110     c=0.000387933
+111     d=-2.583*10**(-8)   
+112     thetaG_0hs=a+b*dt+c*dt*dt+d*dt**3 # [grados]
+113     if thetaG_0hs > 360.0:
+114        vueltas=np.modf(thetaG_0hs/360.0)[1]
+115        thetaG_0hs=thetaG_0hs-vueltas*360
+116     """
+117     Tiempo sidereo en Greenwich a una hora particular
+118     """
+119     thetaG_xhs=thetaG_0hs+360.98564724*(ut1/24.0)
+120 
+121     if thetaG_xhs > 360.0:
+122         vueltasx=np.modf(thetaG_xhs/360.0)[1]
+123         thetaG_xhs=thetaG_xhs-vueltasx*360
+124     
+125     if lon > 0.0:
+126         ts=thetaG_xhs+lon
+127     else:
+128         ts=thetaG_xhs-lon
+129     if ts > 360.0:
+130         vueltass=np.modf(ts/360.0)[1]
+131         ts=ts-vueltass*360
+132     return ts  
+    \end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+

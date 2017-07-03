@@ -1,0 +1,70 @@
+\section{pruebas.\-estilos.\-Main\-Window \-Class \-Reference}
+\label{classpruebas_1_1estilos_1_1_main_window}\index{pruebas.\-estilos.\-Main\-Window@{pruebas.\-estilos.\-Main\-Window}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf widget}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 11 of file estilos.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::estilos\-::\-Main\-Window@{pruebas\-::estilos\-::\-Main\-Window}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::estilos::MainWindow@{pruebas\-::estilos\-::\-Main\-Window}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-estilos.\-Main\-Window.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1estilos_1_1_main_window_a69d1d9df1f932f133b0029f47cf7bb3d}
+
+
+\-Definition at line 12 of file estilos.\-py.
+
+
+\begin{DoxyCode}
+12 
+13     def __init__(self):
+14         super(MainWindow, self).__init__()
+15 
+16         self.setFixedWidth(800)
+17         self.setFixedHeight(800)
+18 
+19         self.widget = QWidget(self)
+20         layout = QVBoxLayout(self)
+21         layout.addWidget(self.widget)
+22         
+23         self.widget.setStyleSheet("""
+24         .QWidget {
+25             border: 20px solid black;
+26             border-radius: 10px;
+27             background-color: rgb(255, 255, 255);
+28             }
+29         """)
+        
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::estilos\-::\-Main\-Window@{pruebas\-::estilos\-::\-Main\-Window}!widget@{widget}}
+\index{widget@{widget}!pruebas::estilos::MainWindow@{pruebas\-::estilos\-::\-Main\-Window}}
+\subsubsection[{widget}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::estilos.\-Main\-Window\-::widget}}\label{classpruebas_1_1estilos_1_1_main_window_af70f34db95495aaebeaaf27542031d75}
+
+
+\-Definition at line 12 of file estilos.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf estilos.\-py}\end{DoxyCompactItemize}

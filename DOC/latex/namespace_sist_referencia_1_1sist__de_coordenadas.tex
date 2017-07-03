@@ -1,0 +1,652 @@
+\section{\-Sist\-Referencia\-:\-:sist\-\_\-de\-Coordenadas \-Namespace \-Reference}
+\label{namespace_sist_referencia_1_1sist__de_coordenadas}\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf xv2eo}
+\item 
+def {\bf eo2xv}
+\item 
+def {\bf gaussian\-\_\-vectors}
+\item 
+def {\bf vnc\-Sis}
+\item 
+def {\bf ric\-Sis}
+\item 
+def {\bf lof\-\_\-qsw}
+\item 
+def {\bf rot\-\_\-tierra}
+\item 
+def {\bf teme2tod}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf epoca} = datetime(2000,6,28,15,8,51,655$\ast$1000)
+\item 
+list {\bf r\-\_\-teme} = [3961.\-0035498,6010.\-7511740,4619.\-3009301]
+\item 
+list {\bf r\-\_\-tod\-Val} = [3961.\-4214985,6010.\-4752688,4619.\-301531]
+\item 
+tuple {\bf r\-\_\-tod} = {\bf teme2tod}({\bf epoca}, {\bf r\-\_\-teme})
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Function \-Documentation}
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!eo2xv@{eo2xv}}
+\index{eo2xv@{eo2xv}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{eo2xv}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Coordenadas.\-eo2xv} (
+\begin{DoxyParamCaption}
+\item[{}]{a, }
+\item[{}]{e, }
+\item[{}]{i, }
+\item[{}]{\-Omega, }
+\item[{}]{w, }
+\item[{}]{nu}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_a5eba6b3781a45f447b87a291732e30f2}
+\begin{DoxyVerb}
+----------------------------------------------------------------
+Transforma los elementos orbitales a sus coordenadas cartesianas
+inerciales (ECI: Earth Center Inertial)- No rotantes.
+----------------------------------------------------------------
+inputs:
+    a: semieje mayior (float) - [km]
+    e: excentricidad (float)
+    i: inclinacion (float) - [grados]
+    Omega: longitud del Nodo (float) - [grados]
+    w: argumento del perigeo (float) - [grados]
+    nu: anomalia verdadera (float) - [grados]
+outputs:
+    r_eq: posicion en el sistema inercial (ECI) (vector) - [km]
+\end{DoxyVerb}
+ 
+
+\-Definition at line 97 of file sist\-\_\-de\-Coordenadas.\-py.
+
+
+\begin{DoxyCode}
+97 
+98 def eo2xv(a,e,i,Omega,w,nu):
+99     """
+100     ----------------------------------------------------------------
+101     Transforma los elementos orbitales a sus coordenadas cartesianas
+102     inerciales (ECI: Earth Center Inertial)- No rotantes.
+103     ----------------------------------------------------------------
+104     inputs:
+105         a: semieje mayior (float) - [km]
+106         e: excentricidad (float)
+107         i: inclinacion (float) - [grados]
+108         Omega: longitud del Nodo (float) - [grados]
+109         w: argumento del perigeo (float) - [grados]
+110         nu: anomalia verdadera (float) - [grados]
+111     outputs:
+112         r_eq: posicion en el sistema inercial (ECI) (vector) - [km]
+113     """
+114     rad=np.pi/180.0 # grados a radianes
+115     
+116     i=i*rad
+117     Omega=Omega*rad
+118     w=w*rad
+119     nu=nu*rad
+120     r=a*(1.0-e*e)/(1.0+e*np.cos(nu))
+121     r_cos=[np.cos(nu),np.sin(nu),0.0]
+122     r1=np.dot(r,r_cos)
+123     Q=np.array([[-np.sin(Omega)*np.cos(i)*np.sin(w)+np.cos(Omega)*np.cos(w), -
+      np.sin(Omega)*np.cos(i)*np.cos(w)-np.cos(Omega)*np.sin(w), np.sin(Omega)*np.sin(i
+      )],
+124                  [np.cos(Omega)*np.cos(i)*np.sin(w)+np.sin(Omega)*np.cos(w),
+      np.cos(Omega)*np.cos(i)*np.cos(w)-np.sin(Omega)*np.sin(w),np.cos(Omega)*np.sin(i)],
+125                   [np.sin(i)*np.sin(w),np.sin(i)*np.cos(w),np.cos(i)]])
+126 
+127     r_eq=np.dot(Q,r1)   
+128     return r_eq
+    
+\end{DoxyCode}
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!gaussian\-\_\-vectors@{gaussian\-\_\-vectors}}
+\index{gaussian\-\_\-vectors@{gaussian\-\_\-vectors}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{gaussian\-\_\-vectors}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Coordenadas.\-gaussian\-\_\-vectors} (
+\begin{DoxyParamCaption}
+\item[{}]{i, }
+\item[{}]{\-Om, }
+\item[{}]{ap}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_af98e79c50a4e94f1adb463551c3a666a}
+\begin{DoxyVerb}
+--------------------------------------------------------
+Calcula los Vectores Gaussianos P,Q y W,
+para la transformacion entre el sistema perifocal y el
+sistema cartesiano inercial.
+--------------------------------------------------------
+inputs:
+    i: inclinacion (float) - [rad]
+    Om: longitud del nodo (float) - [rad]
+    ap: argumento del perigeo (float) - [rad]
+outputs:
+    P, Q y W: vectores gausianos (vect)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 129 of file sist\-\_\-de\-Coordenadas.\-py.
+
+
+\begin{DoxyCode}
+129 
+130 def gaussian_vectors(i,Om,ap):
+131     """
+132     --------------------------------------------------------
+133     Calcula los Vectores Gaussianos P,Q y W,
+134     para la transformacion entre el sistema perifocal y el
+135     sistema cartesiano inercial.
+136     --------------------------------------------------------
+137     inputs:
+138         i: inclinacion (float) - [rad]
+139         Om: longitud del nodo (float) - [rad]
+140         ap: argumento del perigeo (float) - [rad]
+141     outputs:
+142         P, Q y W: vectores gausianos (vect)
+143     """
+144     
+145     P=np.array([np.cos(ap)*np.cos(Om)-np.sin(ap)*np.cos(i)*np.sin(Om),
+146        np.cos(ap)*np.sin(Om)+np.sin(ap)*np.cos(i)*np.cos(Om),
+147         np.sin(ap)*np.sin(i)])
+148         
+149     Q=np.array([-np.sin(ap)*np.cos(Om)-np.cos(ap)*np.cos(i)*np.sin(Om),
+150        -np.sin(ap)*np.sin(Om)+np.cos(ap)*np.cos(i)*np.cos(Om),
+151         np.cos(Om)*np.sin(i)])
+152         
+153     W=np.array([np.sin(i)*np.sin(Om),
+154        -np.sin(i)*np.cos(Om),
+155         np.cos(i)])
+156         
+157     return P,Q,W
+    
+\end{DoxyCode}
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!lof\-\_\-qsw@{lof\-\_\-qsw}}
+\index{lof\-\_\-qsw@{lof\-\_\-qsw}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{lof\-\_\-qsw}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Coordenadas.\-lof\-\_\-qsw} (
+\begin{DoxyParamCaption}
+\item[{}]{rt, }
+\item[{}]{vt}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_aeabecea1efe147dcf61f5e324b1769d6}
+\begin{DoxyVerb}
+---------------------------------------------------
+Transforma las coordeandas al Local Orbital Frame
+vectores unitarios: q (radial), s (normal a q),
+w (normal al plano)
+----------------------------------------------------
+inputs 
+    r: posicion en el sistema cartesiano (Vector) - [km]
+    v: velocidad en el sistema cartesiano (Vector) -[km/s]
+outputs
+    q: direccion radial - (Vector) - [km]
+    s: direccion transversal - (Vector) - [km]
+    w: direccion perpendicular al plano - (Vector) - [km]      
+\end{DoxyVerb}
+ 
+
+\-Definition at line 216 of file sist\-\_\-de\-Coordenadas.\-py.
+
+
+\begin{DoxyCode}
+216 
+217 def lof_qsw(rt,vt):
+218     """
+219     ---------------------------------------------------
+220     Transforma las coordeandas al Local Orbital Frame
+221     vectores unitarios: q (radial), s (normal a q),
+222     w (normal al plano)
+223     ----------------------------------------------------
+224     inputs 
+225         r: posicion en el sistema cartesiano (Vector) - [km]
+226         v: velocidad en el sistema cartesiano (Vector) -[km/s]
+227     outputs
+228         q: direccion radial - (Vector) - [km]
+229         s: direccion transversal - (Vector) - [km]
+230         w: direccion perpendicular al plano - (Vector) - [km]      
+231     """    
+232     rq=np.sqrt(np.dot(rt,rt))
+233     q=np.dot(1.0/rq,rt)
+234     rxv_mod=np.sqrt(np.abs(np.dot(rt,vt)))
+235     rxv=np.cross(rt,vt)
+236     w=np.dot(1.0/rxv_mod,rxv)
+237     s=np.cross(w,q)    
+238     return q,s,w
+239     
+240 
+    
+\end{DoxyCode}
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!ric\-Sis@{ric\-Sis}}
+\index{ric\-Sis@{ric\-Sis}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{ric\-Sis}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Coordenadas.\-ric\-Sis} (
+\begin{DoxyParamCaption}
+\item[{}]{r, }
+\item[{}]{rp, }
+\item[{}]{dr}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_a8eccb1d3c6c56a4c77b891b1da887dd7}
+\begin{DoxyVerb}
+-------------------------------------------------------------
+Transforma las coordenadas del sistema inercial cartesiano,
+al sistema de referecia de la nave. 
+-------------------------------------------------------------
+inputs
+    r: posicion en el sistema cartesiano (Vector) - [km]
+    rp: velocidad en el sistema cartesiano (Vector) -[km/s]
+    dr: vector de diferencia en la posicion - (Vector) - [km]
+outputs
+    rr: direccion radial - (Vector) - [km]
+    i: direccion in track (velocidad) - (Vector) - [km]
+    c: direccion perpendicular al plano - (Vector) - [km]
+\end{DoxyVerb}
+ 
+
+\-Definition at line 187 of file sist\-\_\-de\-Coordenadas.\-py.
+
+
+\begin{DoxyCode}
+187 
+188 def ricSis(r,rp,dr):
+189     """
+190     -------------------------------------------------------------
+191     Transforma las coordenadas del sistema inercial cartesiano,
+192     al sistema de referecia de la nave. 
+193     -------------------------------------------------------------
+194     inputs
+195         r: posicion en el sistema cartesiano (Vector) - [km]
+196         rp: velocidad en el sistema cartesiano (Vector) -[km/s]
+197         dr: vector de diferencia en la posicion - (Vector) - [km]
+198     outputs
+199         rr: direccion radial - (Vector) - [km]
+200         i: direccion in track (velocidad) - (Vector) - [km]
+201         c: direccion perpendicular al plano - (Vector) - [km]
+202     """
+203     
+204     r_mod=np.sqrt(np.dot(r,r))
+205     er=np.dot(1.0/r_mod,r)
+206     rxrp_int=np.cross(r,rp)
+207     rxrp_mod=np.sqrt(np.dot(rxrp_int,rxrp_int))
+208     ec=np.dot(1.0/rxrp_mod,rxrp_int)
+209     ei=np.cross(ec,er)
+210     
+211     rr=np.dot(er,dr)
+212     i=np.dot(ei,dr)
+213     c=np.dot(ec,dr)
+214     
+215     return rr,i,c
+    
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!rot\-\_\-tierra@{rot\-\_\-tierra}}
+\index{rot\-\_\-tierra@{rot\-\_\-tierra}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{rot\-\_\-tierra}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Coordenadas.\-rot\-\_\-tierra} (
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y, }
+\item[{}]{z, }
+\item[{}]{minu, }
+\item[{}]{ts}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_a36201b49e2dc6085646b89f4f08f197e}
+\begin{DoxyVerb}
+x,y,z (ECI) -----> x,y,z (ECEF)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 241 of file sist\-\_\-de\-Coordenadas.\-py.
+
+
+\begin{DoxyCode}
+241 
+242 def rot_tierra(x,y,z,minu,ts):
+243     """
+244     x,y,z (ECI) -----> x,y,z (ECEF)
+245     """
+246     pos=[x,y,z]
+247     OmegaT=ts#+minu*60.0*15.04/3600.0 # velocidad angular de la tierra [seg]
+248     OmegaT_rad=OmegaT*np.pi/180.0
+249 
+250     ma_rot=np.array([[np.cos(OmegaT_rad), np.sin(OmegaT_rad), 0.0],
+251                        [-np.sin(OmegaT_rad), np.cos(OmegaT_rad), 0.0],
+252                        [0.0, 0.0, 1.0]])
+253                   
+254     r_prima=np.dot(ma_rot,pos)
+255     return r_prima 
+
+\end{DoxyCode}
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!teme2tod@{teme2tod}}
+\index{teme2tod@{teme2tod}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{teme2tod}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Coordenadas.\-teme2tod} (
+\begin{DoxyParamCaption}
+\item[{}]{epoch, }
+\item[{}]{r\-\_\-teme}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_aee17184e86131336dd2574ead19d91cc}
+\begin{DoxyVerb}
+Transforma las coordenadas de r_teme, en el sistema
+TEME al sistema TOD.
+-----------------------------------------------------
+input
+    epoch: epoca del vector de estado (datetime)
+    r_teme: vector de estado en el sistema TEME (array)
+output
+    r_tod: vector de estado en el sistema TOD (array)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 256 of file sist\-\_\-de\-Coordenadas.\-py.
+
+
+\begin{DoxyCode}
+256 
+257 def teme2tod(epoch,r_teme):
+258     """
+259     Transforma las coordenadas de r_teme, en el sistema
+260     TEME al sistema TOD.
+261     -----------------------------------------------------
+262     input
+263         epoch: epoca del vector de estado (datetime)
+264         r_teme: vector de estado en el sistema TEME (array)
+265     output
+266         r_tod: vector de estado en el sistema TOD (array)
+267     """
+268     
+269     arc2rad=np.pi/(180.0*3600.0)   
+270     jd1=jd(epoch)
+271     tt=(jd1-2451544.5)/36525.0 
+272 #     mjd=calcula_mjd(epoch)
+273 #     tt=(mjd-51544.5)/36525.0
+274 
+275     """
+276     Parametros [arcseconds / segundos de arco]
+277     """
+278     M_moon  = 134.96340251*3600.0+1717915923.2178*tt+31.8792*tt*tt+0.051*tt*tt*
+      tt
+279     M_sun   = 357.52910918*3600.0+129596581.0481*tt-0.5532*tt*tt-0.000136*tt*tt
+      *tt
+280     mu_moon = 93.27209062*3600.0+1739527262.8478*tt-12.7512*tt*tt-0.00103*tt*tt
+      *tt
+281     D_sun   = 297.85019547*3600.0+1602961601.2090*tt-6.3706*tt*tt+0.06593*tt*tt
+      *tt
+282     O_moon  = 125.04455501*3600.0-6962890.2665*tt+7.4722*tt*tt+0.007702*tt*tt*
+      tt
+283     
+284     nutacion=open('../SistReferencia/prenut.dat','r')
+285     coef=nutacion.readlines()
+286     d_epsi=0
+287     d_psi=0
+288     
+289     for c in coef:
+290         an=c.split(',')
+291         a1=float(an[0])
+292         a2=float(an[1])
+293         a3=float(an[2])
+294         a4=float(an[3])
+295         a5=float(an[4])
+296         aphi=float(an[5])
+297         aphi_d=float(an[6])
+298         aepsi=float(an[7])
+299         aepsi_d=float(an[8])
+300         
+301         phi_i=(a1*M_moon+a2*M_sun+a3*mu_moon+a4*D_sun+a5*O_moon)*arc2rad
+302 #        phi_i=phi_i1%(2*np.pi)
+303         
+304         d_epsi=d_epsi + (aepsi+aepsi_d*tt)*np.cos(phi_i)
+305 #        d_epsi=d_epsi1%(2*np.pi)
+306         d_psi=d_psi + (aphi+aphi_d*tt)*np.sin(phi_i)
+307 #        d_psi=d_psi1%(2*np.pi)
+308 
+309     d_epsi=d_epsi*(1.0/10000.0)
+310     d_psi=d_psi*(1.0/10000.0)
+311 
+312     epsi_media = (84381.448-46.815*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad 
+      # [rad]
+313     
+314     EQnox = (d_psi*np.cos(epsi_media)+0.00264*np.sin(O_moon*arc2rad)+0.000063*
+      np.sin(2*O_moon*arc2rad))*arc2rad
+315 
+316     
+317     Q=np.matrix([[np.cos(-EQnox),np.sin(-EQnox),0],
+318                  [-np.sin(-EQnox),np.cos(-EQnox),0],
+319                  [0,0,1]])
+320     
+321     r_tod=np.dot(Q,r_teme)
+322     
+323     return r_tod    
+    
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!vnc\-Sis@{vnc\-Sis}}
+\index{vnc\-Sis@{vnc\-Sis}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{vnc\-Sis}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Coordenadas.\-vnc\-Sis} (
+\begin{DoxyParamCaption}
+\item[{}]{r, }
+\item[{}]{rp, }
+\item[{}]{dr}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_a8190e729516e0f1cc25eee08d0303760}
+\begin{DoxyVerb}
+-------------------------------------------------------------
+Transforma las coordenadas del sistema inercial cartesiano,
+al sistema de referecia de la nave. 
+-------------------------------------------------------------
+inputs
+    r: posicion en el sistema cartesiano (Vector) - [km]
+    rp: velocidad en el sistema cartesiano (Vector) -[km/s]
+    dr: vector de diferencia en la posicion - (Vector) - [km]
+outputs
+    v: direccion along track (velocidad) - (Vector) - [km]
+    n: direccion normal/radial - (Vector) - [km]
+    c: direccion perpendicular al plano - (Vector) - [km]
+\end{DoxyVerb}
+ 
+
+\-Definition at line 158 of file sist\-\_\-de\-Coordenadas.\-py.
+
+
+\begin{DoxyCode}
+158 
+159 def vncSis(r,rp,dr):
+160     """
+161     -------------------------------------------------------------
+162     Transforma las coordenadas del sistema inercial cartesiano,
+163     al sistema de referecia de la nave. 
+164     -------------------------------------------------------------
+165     inputs
+166         r: posicion en el sistema cartesiano (Vector) - [km]
+167         rp: velocidad en el sistema cartesiano (Vector) -[km/s]
+168         dr: vector de diferencia en la posicion - (Vector) - [km]
+169     outputs
+170         v: direccion along track (velocidad) - (Vector) - [km]
+171         n: direccion normal/radial - (Vector) - [km]
+172         c: direccion perpendicular al plano - (Vector) - [km]
+173     """
+174     
+175     rv=np.sqrt(np.dot(rp,rp))
+176     ev=np.dot(1.0/rv,rp)
+177     rxrp_int=np.cross(r,rp)
+178     rxrp_mod=np.sqrt(np.dot(rxrp_int,rxrp_int))
+179     ec=np.dot(1.0/rxrp_mod,rxrp_int)
+180     en=np.cross(ev,ec)
+181     
+182     v=np.dot(ev,dr)
+183     n=np.dot(en,dr)
+184     c=np.dot(ec,dr)
+185     
+186     return v,n,c
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!xv2eo@{xv2eo}}
+\index{xv2eo@{xv2eo}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{xv2eo}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-sist\-\_\-de\-Coordenadas.\-xv2eo} (
+\begin{DoxyParamCaption}
+\item[{}]{r, }
+\item[{}]{v}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_ad986ee217f88feb6eb19b36560e14f09}
+\begin{DoxyVerb}
+---------------------------------------------
+Trasformacion de vector de estado x,v
+a elementos orbitales.
+---------------------------------------------
+inputs:
+    x: posicion (vector) - [km]
+    v: velocidad (vector) - [km/s]
+outputs:
+    a: semieje mayor (float) - [km]
+    e: excentricidad (float)
+    i: inclinacion (float) - [rad]
+    Omega: Longitud del Nodo (float) - [rad]
+    w: Argumento del perigeo (float) - [rad]
+    nu: Anomalia verdadera (float) - [rad]
+\end{DoxyVerb}
+ 
+
+\-Definition at line 10 of file sist\-\_\-de\-Coordenadas.\-py.
+
+
+\begin{DoxyCode}
+10 
+11 def xv2eo(r,v):
+12     """
+13     ---------------------------------------------
+14     Trasformacion de vector de estado x,v
+15     a elementos orbitales.
+16     ---------------------------------------------
+17     inputs:
+18         x: posicion (vector) - [km]
+19         v: velocidad (vector) - [km/s]
+20     outputs:
+21         a: semieje mayor (float) - [km]
+22         e: excentricidad (float)
+23         i: inclinacion (float) - [rad]
+24         Omega: Longitud del Nodo (float) - [rad]
+25         w: Argumento del perigeo (float) - [rad]
+26         nu: Anomalia verdadera (float) - [rad]
+27     """
+28 #    Rt=6378.0 #[km]
+29     GM=398600.4405 #[km3/s2]
+30     deg=180.0/np.pi 
+31 #    rad=np.pi/180.0
+32     
+33     rmod=np.sqrt(np.dot(r,r))
+34     vmod=np.sqrt(np.dot(v,v))
+35     """
+36     i,Omega
+37     """
+38     h=np.cross(r,v)
+39     hmod=np.sqrt(np.dot(h,h))
+40     h=np.dot(1./hmod,h)
+41     i=np.arctan(np.sqrt(h[0]*h[0]+h[1]*h[1])/h[2])
+42     if i < 0.0:
+43         i=np.pi+i
+44         
+45     arg=-h[0]/h[1]
+46     Omega=np.arctan(arg)
+47     if np.sign(-h[1]) < 0.0:
+48         Omega=Omega+np.pi
+49 
+50     """
+51      a
+52     """
+53      
+54     a=1.0/((2.0/rmod)-vmod*vmod/GM)
+55     n=np.sqrt(GM/(a*a*a))
+56     
+57     """
+58      e
+59     """
+60     p=hmod*hmod/GM
+61     e=np.sqrt(1-(p/a))
+62     
+63     """
+64      M    
+65     """
+66     E=np.arctan((np.dot(r,v)/(a*a*n))/(1-rmod/a))
+67     if np.sign((1-rmod/a)) < 0.0:
+68         E=E+np.pi
+69     M=E-e*np.sin(E)
+70 
+71     """
+72      w, nu
+73     """
+74 
+75     u=np.arctan(r[2]/(-r[0]*h[1]+r[1]*h[0]))
+76     if np.sign((-r[0]*h[1]+r[1]*h[0])) < 0.0:
+77         u=u+np.pi
+78     nu=np.arctan((np.sin(E)*np.sqrt(1-e*e))/(np.cos(E)-e))
+79     if np.sign((np.cos(E)-e)) < 0.0:
+80         nu=nu+np.pi
+81     if u-nu < 0.0:
+82         w=2*np.pi+(u-nu)
+83     else:
+84         w=u-nu
+85     
+86     """
+87     Impresion de salida
+88     """
+89 #     print 'semieje mayor a= ',a
+90 #     print 'Excentricidad e= ',e
+91 #     print 'Inclinacion i= ',i*deg
+92 #     print 'Longitud del Nodo = ', Omega*deg
+93 #     print 'Argumento del Perigeo w= ',w*deg
+94 #     print 'Anomalia Media ',M*deg
+95 #     print 'Anomalia Verdadera',nu*deg
+96     return a,e,i,Omega,w,nu
+    
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+
+
+\subsection{\-Variable \-Documentation}
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!epoca@{epoca}}
+\index{epoca@{epoca}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{epoca}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas\-::epoca} = datetime(2000,6,28,15,8,51,655$\ast$1000)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_a5b1ef879add4bc0afc576033b8c65bf9}
+
+
+\-Definition at line 326 of file sist\-\_\-de\-Coordenadas.\-py.
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!r\-\_\-teme@{r\-\_\-teme}}
+\index{r\-\_\-teme@{r\-\_\-teme}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{r\-\_\-teme}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas\-::r\-\_\-teme} = [3961.\-0035498,6010.\-7511740,4619.\-3009301]}\label{namespace_sist_referencia_1_1sist__de_coordenadas_afff457861437508005c437a8ca938e69}
+
+
+\-Definition at line 327 of file sist\-\_\-de\-Coordenadas.\-py.
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!r\-\_\-tod@{r\-\_\-tod}}
+\index{r\-\_\-tod@{r\-\_\-tod}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{r\-\_\-tod}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas\-::r\-\_\-tod} = {\bf teme2tod}({\bf epoca}, {\bf r\-\_\-teme})}\label{namespace_sist_referencia_1_1sist__de_coordenadas_a62aae6ec02c7834cb0f5b4aeafb763e3}
+
+
+\-Definition at line 329 of file sist\-\_\-de\-Coordenadas.\-py.
+
+\index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!r\-\_\-tod\-Val@{r\-\_\-tod\-Val}}
+\index{r\-\_\-tod\-Val@{r\-\_\-tod\-Val}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
+\subsubsection[{r\-\_\-tod\-Val}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas\-::r\-\_\-tod\-Val} = [3961.\-4214985,6010.\-4752688,4619.\-301531]}\label{namespace_sist_referencia_1_1sist__de_coordenadas_abfd44e8a22ea6251de2241c7899332e2}
+
+
+\-Definition at line 328 of file sist\-\_\-de\-Coordenadas.\-py.
+

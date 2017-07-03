@@ -1,0 +1,59 @@
+\section{\-Sist\-Referencia\-:\-:rot\-\_\-tierra \-Namespace \-Reference}
+\label{namespace_sist_referencia_1_1rot__tierra}\index{\-Sist\-Referencia\-::rot\-\_\-tierra@{\-Sist\-Referencia\-::rot\-\_\-tierra}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf rot\-\_\-tierra}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Mon Apr 25 15:54:20 2016
+
+Coordenadas fijas a la Tierra
+Rotacion terrestre. 
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Sist\-Referencia\-::rot\-\_\-tierra@{\-Sist\-Referencia\-::rot\-\_\-tierra}!rot\-\_\-tierra@{rot\-\_\-tierra}}
+\index{rot\-\_\-tierra@{rot\-\_\-tierra}!SistReferencia::rot_tierra@{\-Sist\-Referencia\-::rot\-\_\-tierra}}
+\subsubsection[{rot\-\_\-tierra}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-rot\-\_\-tierra.\-rot\-\_\-tierra} (
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y, }
+\item[{}]{z, }
+\item[{}]{minu, }
+\item[{}]{ts}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1rot__tierra_a0268bddf8b941da1b8c81c383de769e6}
+
+
+\-Definition at line 11 of file rot\-\_\-tierra.\-py.
+
+
+\begin{DoxyCode}
+11 
+12 def rot_tierra(x,y,z,minu,ts):
+13     pos=[x,y,z]
+14     OmegaT=ts#+minu*60.0*15.04/3600.0 # velocidad angular de la tierra [seg]
+15     OmegaT_rad=OmegaT*np.pi/180.0
+16 
+17     ma_rot=np.array([[np.cos(OmegaT_rad), np.sin(OmegaT_rad), 0.0],
+18                        [-np.sin(OmegaT_rad), np.cos(OmegaT_rad), 0.0],
+19                        [0.0, 0.0, 1.0]])
+20 #    print ma_rot
+21 #    print pos                   
+22     r_prima=np.dot(ma_rot,pos)
+23     return r_prima 
+24 
+25 
+26 
+27 
+28 
+29 
+30 
+\end{DoxyCode}

@@ -1,0 +1,9 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Aplicacion.frm_main.ProcCDM.__init__",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Aplicacion.frm_main.ProcCDM.initUI",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$class_aplicacion_1_1frm__main_1_1_proc_c_d_m.html#a33b199687fcecc96e4d2912d9f0fbf20"];
+}

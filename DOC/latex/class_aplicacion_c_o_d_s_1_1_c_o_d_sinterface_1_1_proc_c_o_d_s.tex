@@ -1,0 +1,768 @@
+\section{\-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S \-Class \-Reference}
+\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s}\index{\-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf selectionchange}
+\item 
+def {\bf ver\-Finicio}
+\item 
+def {\bf ver\-Ffin}
+\item 
+def {\bf \-Archivo\-Tle}
+\item 
+def {\bf \-Archivo\-C\-O\-D\-S}
+\item 
+def {\bf \-Proc\-Dif}
+\item 
+def {\bf \-Macovar}
+\item 
+def {\bf plotear}
+\item 
+def {\bf ver\-Grafico}
+\item 
+def {\bf salir}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf palette}
+\item 
+{\bf \-Hlinea}
+\item 
+{\bf grid}
+\item 
+{\bf sat\-\_\-nombre}
+\item 
+{\bf dic\-\_\-satelites}
+\item 
+{\bf sat\-\_\-id}
+\item 
+{\bf st}
+\item 
+{\bf et}
+\item 
+{\bf archivo\-T\-L\-E}
+\item 
+{\bf archivo\-C\-O\-D\-S}
+\item 
+{\bf diferencias}
+\item 
+{\bf macovar\-T}
+\item 
+{\bf escenario}
+\item 
+{\bf satelite}
+\item 
+{\bf fi}
+\item 
+{\bf ff}
+\item 
+{\bf verif\-\_\-sol}
+\item 
+{\bf carga\-\_\-datos}
+\item 
+{\bf \-C\-O\-D\-S\-\_\-comp}
+\item 
+{\bf sat\-\_\-nom\-\_\-edit}
+\item 
+{\bf st\-\_\-edit}
+\item 
+{\bf et\-\_\-edit}
+\item 
+{\bf \-T\-L\-E\-\_\-edit}
+\item 
+{\bf \-C\-O\-D\-S\-\_\-edit}
+\item 
+{\bf \-T\-L\-E\-\_\-comp\-\_\-edit}
+\item 
+{\bf \-C\-O\-D\-S\-\_\-comp\-\_\-edit}
+\item 
+{\bf lista\-Sat}
+\item 
+{\bf cal}
+\item 
+{\bf cal1}
+\item 
+{\bf boton\-\_\-sol\-C\-O\-D\-S}
+\item 
+{\bf boton\-\_\-sol\-N\-O\-R\-A\-D}
+\item 
+{\bf boton\-\_\-cods\-\_\-cargado}
+\item 
+{\bf boton\-\_\-cargar\-\_\-tle}
+\item 
+{\bf boton\-\_\-cargar\-\_\-cods}
+\item 
+{\bf boton\-\_\-diferencias}
+\item 
+{\bf boton\-\_\-ma\-\_\-covar}
+\item 
+{\bf boton\-\_\-grafico}
+\item 
+{\bf boton\-\_\-salir}
+\item 
+{\bf table\-View}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 19 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a507e1c13b847caa33fa134e9f8f24bf6}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+21 
+22     def __init__(self):
+23         super(ProcCODS, self).__init__()
+24         self.resize(300, 300)
+25         self.setWindowTitle('PROCESAMIENTO de DATOS CODS')
+26        
+27         self.palette = QPalette()
+28         self.palette.setColor(QPalette.Background,Qt.white)
+29         self.setPalette(self.palette)
+30         
+31         self.Hlinea = QFrame()
+32         self.Hlinea.setFrameStyle(QFrame.HLine)
+33         self.Hlinea.setSizePolicy(QSizePolicy.Minimum,QSizePolicy.Expanding)
+34         self.grid   = QGridLayout()
+35         self.grid.setSpacing(20)
+36              
+37         self.sat_nombre=''
+38         self.dic_satelites={}
+39         self.sat_id='9999'       
+40         self.st=''
+41         self.et=''
+42         self.archivoTLE='' 
+43         self.archivoCODS=''
+44         self.diferencias=''
+45         self.macovarT=''
+46     
+47         """
+48         Etiquetas
+49         """
+50         self.escenario       = QLabel('Escenario de Analisis')
+51         self.satelite        = QLabel('Seleccione la MISION')
+52         self.fi              = QLabel('Desde')
+53         self.ff              = QLabel('Hasta')
+54         self.verif_sol       = QLabel('Verificacion de la Solicitud')
+55         self.carga_datos     = QLabel('CARGAR LOS ARCHIVOS')
+56 #         self.TLE_comp        = QLabel('TLEs para la Comparacion')
+57         self.CODS_comp       = QLabel('CODS para la Comparacion')
+58         """
+59         Campos de Edicion
+60         """
+61         self.sat_nom_edit   = QLineEdit()
+62         self.st_edit        = QLineEdit()
+63         self.et_edit        = QLineEdit()
+64         self.TLE_edit       = QLineEdit()
+65         self.CODS_edit      = QLineEdit()
+66         self.TLE_comp_edit  = QLineEdit()
+67         self.CODS_comp_edit = QLineEdit()
+68         
+69         """
+70         Lista desplegada
+71         """
+72         self.listaSat       = QComboBox()
+73         self.listaSat.addItem("...");
+74         self.listaSat.addItem("SAC-D"); 
+75         self.listaSat.addItem("LAGEOS");
+76         self.listaSat.addItem("ICESAT");
+77 
+78         
+79         """
+80         CALENDARIOS
+81         """
+82         self.cal = QCalendarWidget()
+83         self.cal.setGridVisible(True)
+84         self.cal.clicked[QDate].connect(self.verFinicio)
+85         self.cal1 = QCalendarWidget()
+86         self.cal1.setGridVisible(True)
+87         self.cal1.clicked[QDate].connect(self.verFfin)
+88                 
+89         """
+90         Botones
+91         """
+92         self.boton_solCODS      = QPushButton('Solicitud a CODS')
+93         self.boton_solNORAD     = QPushButton('Solicitud a NORAD')
+94         self.boton_cods_cargado = QPushButton('Preprocesamiento CODS')
+95         self.boton_cargar_tle   = QPushButton('TLEs para la Comparacion')
+96         self.boton_cargar_cods  = QPushButton('CODS para la Comparacion')
+97         self.boton_diferencias  = QPushButton('Procesar DIFERENCIAS')
+98         self.boton_ma_covar     = QPushButton('Calcular Matriz de Covarianza')
+99         self.boton_grafico      = QPushButton('Graficar')
+100         self.boton_salir        = QPushButton('Salir')
+101         """
+102         OTROS
+103         """
+104         self.tableView       = QTableWidget()
+105 
+106         """
+107         GRILLA
+108         """
+109         self.grid.addWidget(self.escenario,1,0)
+110         self.grid.addWidget(self.satelite,2,0)
+111         self.grid.addWidget(self.fi,2,1)
+112         self.grid.addWidget(self.ff,2,2)
+113         self.grid.addWidget(self.sat_nom_edit,4,0)
+114         self.grid.addWidget(self.listaSat,3,0)
+115         self.grid.addWidget(self.cal,3,1)
+116         self.grid.addWidget(self.st_edit,4,1)
+117         self.grid.addWidget(self.cal1,3,2)
+118         self.grid.addWidget(self.et_edit,4,2)       
+119         self.grid.addWidget(self.Hlinea,6,0,1,4)
+120         self.grid.addWidget(self.boton_solCODS,7,1)
+121         self.grid.addWidget(self.CODS_edit,7,2)
+122         self.grid.addWidget(self.boton_solNORAD,8,1)  
+123         self.grid.addWidget(self.TLE_edit,8,2)
+124         self.grid.addWidget(self.boton_cods_cargado,8,3)
+125         self.grid.addWidget(self.Hlinea,9,0,1,4)           
+126         self.grid.addWidget(self.boton_cargar_tle,10,1)
+127         self.grid.addWidget(self.TLE_comp_edit,10,2)        
+128         self.grid.addWidget(self.boton_cargar_cods,11,1)
+129         self.grid.addWidget(self.CODS_comp_edit,11,2)
+130         self.grid.addWidget(self.boton_diferencias,11,3)
+131         self.grid.addWidget(self.boton_ma_covar,15,3)
+132         self.grid.addWidget(self.boton_grafico,16,3)
+133         self.grid.addWidget(self.tableView,14,1,8,2)
+134         self.grid.addWidget(self.boton_salir,26,3)
+135         self.setLayout(self.grid)
+136         self.show()
+137         
+138         """
+139         Acciones
+140         """
+141 
+142         self.listaSat.currentIndexChanged.connect(self.selectionchange)
+143         
+144         self.boton_salir.clicked.connect(self.salir)
+145         self.boton_cargar_tle.clicked.connect(self.ArchivoTle)
+146         self.boton_cargar_cods.clicked.connect(self.ArchivoCODS)
+147         self.boton_diferencias.clicked.connect(self.ProcDif)
+148         self.boton_ma_covar.clicked.connect(self.Macovar)
+149         #self.boton_grafico.clicked.connect(self.verGrafico)
+150         self.boton_grafico.clicked.connect(self.plotear)
+151         
+    
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-Archivo\-C\-O\-D\-S@{\-Archivo\-C\-O\-D\-S}}
+\index{\-Archivo\-C\-O\-D\-S@{\-Archivo\-C\-O\-D\-S}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-Archivo\-C\-O\-D\-S}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-Archivo\-C\-O\-D\-S} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a9ced0a7d41449bc7dd6f8b82264701a7}
+
+
+\-Definition at line 174 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+174 
+175     def ArchivoCODS(self):  
+176         fname1=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a
+       Procesar', "../CodsAdmin/TOD_O/*")
+177         nombre1=str(fname1).split('/')[-1]
+178         self.archivoCODS = nombre1
+179         print 'El archivo CODS es: ', self.archivoCODS
+180         self.CODS_comp_edit.setText(self.archivoCODS)
+        
+\end{DoxyCode}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-Archivo\-Tle@{\-Archivo\-Tle}}
+\index{\-Archivo\-Tle@{\-Archivo\-Tle}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-Archivo\-Tle}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-Archivo\-Tle} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a9b0dce6e20bf950c4e7bea4b79855792}
+
+
+\-Definition at line 167 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+167 
+168     def ArchivoTle(self):    
+169         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a
+       Procesar', "../TleAdmin/crudosTLE/*")
+170         nombre=str(fname).split('/')[-1]
+171         self.archivoTLE = nombre
+172         print 'El archivo TLE es: ',self.archivoTLE
+173         self.TLE_comp_edit.setText(self.archivoTLE)
+        
+\end{DoxyCode}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-Macovar@{\-Macovar}}
+\index{\-Macovar@{\-Macovar}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-Macovar}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-Macovar} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a009abbd9ba955d1b7de2cc12a098dcbf}
+
+
+\-Definition at line 184 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+184 
+185     def Macovar(self):
+186         self.macovarT=EjecutaMaCovarCODS(self.diferencias)
+187         self.tableView.setRowCount(len(self.macovarT))
+188         self.tableView.setColumnCount(len(self.macovarT))
+189         for i,fila in enumerate(self.macovarT):
+190             for j,col in enumerate(fila):
+191                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
+        
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!plotear@{plotear}}
+\index{plotear@{plotear}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{plotear}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-plotear} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a8609f234252e5e04f919d67689d5f87b}
+
+
+\-Definition at line 192 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+192 
+193     def plotear(self):
+194         fig=Figura()
+195         fig.exec_()
+        
+\end{DoxyCode}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-Proc\-Dif@{\-Proc\-Dif}}
+\index{\-Proc\-Dif@{\-Proc\-Dif}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-Proc\-Dif}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-Proc\-Dif} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a8a22327209fa11342d703644d47843c1}
+
+
+\-Definition at line 181 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+181 
+182     def ProcDif(self):
+183         self.diferencias=EjecutaComparacion(self.sat_id, self.archivoTLE, self.
+      archivoCODS)
+        
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!salir@{salir}}
+\index{salir@{salir}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{salir}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-salir} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a6f497afbafd17260dcf10fc7519ce863}
+
+
+\-Definition at line 200 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+200 
+201     def salir(self):
+202         self.close()
+    
+\end{DoxyCode}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!selectionchange@{selectionchange}}
+\index{selectionchange@{selectionchange}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{selectionchange}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-selectionchange} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{i}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a313808e7082abc43c51720ca279a4ab8}
+
+
+\-Definition at line 152 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+152 
+153     def selectionchange(self,i):
+154         self.sat_nombre= self.listaSat.currentText()
+155         self.sat_nom_edit.setText(self.sat_nombre)
+156         self.dic_satelites={'SAC-D':37673,'LAGEOS':8820,'ICESAT':27642}
+157         self.sat_id=self.dic_satelites[str(self.sat_nombre)]
+158 
+    
+\end{DoxyCode}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!ver\-Ffin@{ver\-Ffin}}
+\index{ver\-Ffin@{ver\-Ffin}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{ver\-Ffin}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-ver\-Ffin} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a4ac851fb73f10cfd7460d12da40f892c}
+
+
+\-Definition at line 163 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+163 
+164     def verFfin(self):
+165         self.et = self.cal1.selectedDate()  
+166         self.et.setText(self.date1.toString())
+        
+\end{DoxyCode}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!ver\-Finicio@{ver\-Finicio}}
+\index{ver\-Finicio@{ver\-Finicio}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{ver\-Finicio}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-ver\-Finicio} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_ab49e8718856eebd33901b4439a8da8e0}
+
+
+\-Definition at line 159 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+159 
+160     def verFinicio(self):
+161         self.st = self.cal.selectedDate()
+162         self.st.setText(self.date.toString())
+
+\end{DoxyCode}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!ver\-Grafico@{ver\-Grafico}}
+\index{ver\-Grafico@{ver\-Grafico}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{ver\-Grafico}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion\-C\-O\-D\-S.\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S.\-ver\-Grafico} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a3d13e2f044a04bce0b85755344fc16b2}
+
+
+\-Definition at line 196 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+\begin{DoxyCode}
+196 
+197     def verGrafico(self):
+198         VerGraficoMision()
+199         
+        
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!archivo\-C\-O\-D\-S@{archivo\-C\-O\-D\-S}}
+\index{archivo\-C\-O\-D\-S@{archivo\-C\-O\-D\-S}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{archivo\-C\-O\-D\-S}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::archivo\-C\-O\-D\-S}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a191ec6848b7fd898d205791e2e0fea26}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!archivo\-T\-L\-E@{archivo\-T\-L\-E}}
+\index{archivo\-T\-L\-E@{archivo\-T\-L\-E}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{archivo\-T\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::archivo\-T\-L\-E}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a88334a38e48eb6adfb4dd1cf20a63347}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-cargar\-\_\-cods@{boton\-\_\-cargar\-\_\-cods}}
+\index{boton\-\_\-cargar\-\_\-cods@{boton\-\_\-cargar\-\_\-cods}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-cargar\-\_\-cods}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-cargar\-\_\-cods}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a49b4da47083e055a261072a3f30c8e85}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-cargar\-\_\-tle@{boton\-\_\-cargar\-\_\-tle}}
+\index{boton\-\_\-cargar\-\_\-tle@{boton\-\_\-cargar\-\_\-tle}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-cargar\-\_\-tle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-cargar\-\_\-tle}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_af9dccfbad688bd84b489b3538ad8e784}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-cods\-\_\-cargado@{boton\-\_\-cods\-\_\-cargado}}
+\index{boton\-\_\-cods\-\_\-cargado@{boton\-\_\-cods\-\_\-cargado}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-cods\-\_\-cargado}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-cods\-\_\-cargado}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a3d26eeb2389f9bfcd54df99dd678c756}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-diferencias@{boton\-\_\-diferencias}}
+\index{boton\-\_\-diferencias@{boton\-\_\-diferencias}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-diferencias}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-diferencias}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a0be3ce956a053cf0ba458d04c6643834}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-grafico@{boton\-\_\-grafico}}
+\index{boton\-\_\-grafico@{boton\-\_\-grafico}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-grafico}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-grafico}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a4878bdc46cee6a15db42495148b71e1b}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-ma\-\_\-covar@{boton\-\_\-ma\-\_\-covar}}
+\index{boton\-\_\-ma\-\_\-covar@{boton\-\_\-ma\-\_\-covar}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-ma\-\_\-covar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-ma\-\_\-covar}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a51e3b50249a887356c752d1248ea0e43}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-salir@{boton\-\_\-salir}}
+\index{boton\-\_\-salir@{boton\-\_\-salir}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-salir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-salir}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a2c35157d7acc29c38dc39ee349add7d3}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-sol\-C\-O\-D\-S@{boton\-\_\-sol\-C\-O\-D\-S}}
+\index{boton\-\_\-sol\-C\-O\-D\-S@{boton\-\_\-sol\-C\-O\-D\-S}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-sol\-C\-O\-D\-S}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-sol\-C\-O\-D\-S}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_ae27d84cb619207f128e6d5ce478fb13c}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!boton\-\_\-sol\-N\-O\-R\-A\-D@{boton\-\_\-sol\-N\-O\-R\-A\-D}}
+\index{boton\-\_\-sol\-N\-O\-R\-A\-D@{boton\-\_\-sol\-N\-O\-R\-A\-D}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{boton\-\_\-sol\-N\-O\-R\-A\-D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::boton\-\_\-sol\-N\-O\-R\-A\-D}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_ac6052e31b28d5b9649cd545f9150bf93}
+
+
+\-Definition at line 31 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!cal@{cal}}
+\index{cal@{cal}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{cal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::cal}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a501e6c33ff100be772fd5b3f5cfdb7e8}
+
+
+\-Definition at line 29 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!cal1@{cal1}}
+\index{cal1@{cal1}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{cal1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::cal1}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_adba22bc38ba3ad7924308483e80988c2}
+
+
+\-Definition at line 29 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!carga\-\_\-datos@{carga\-\_\-datos}}
+\index{carga\-\_\-datos@{carga\-\_\-datos}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{carga\-\_\-datos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::carga\-\_\-datos}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_af528050042103dc824c1f87dfa0ef18a}
+
+
+\-Definition at line 23 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-C\-O\-D\-S\-\_\-comp@{\-C\-O\-D\-S\-\_\-comp}}
+\index{\-C\-O\-D\-S\-\_\-comp@{\-C\-O\-D\-S\-\_\-comp}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-C\-O\-D\-S\-\_\-comp}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::\-C\-O\-D\-S\-\_\-comp}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a728abd7e9bcd1ae90e415bb4d5519d7e}
+
+
+\-Definition at line 23 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-C\-O\-D\-S\-\_\-comp\-\_\-edit@{\-C\-O\-D\-S\-\_\-comp\-\_\-edit}}
+\index{\-C\-O\-D\-S\-\_\-comp\-\_\-edit@{\-C\-O\-D\-S\-\_\-comp\-\_\-edit}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-C\-O\-D\-S\-\_\-comp\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::\-C\-O\-D\-S\-\_\-comp\-\_\-edit}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a5a341fd66af1ba08ec2d1d07976e1dcb}
+
+
+\-Definition at line 25 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-C\-O\-D\-S\-\_\-edit@{\-C\-O\-D\-S\-\_\-edit}}
+\index{\-C\-O\-D\-S\-\_\-edit@{\-C\-O\-D\-S\-\_\-edit}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-C\-O\-D\-S\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::\-C\-O\-D\-S\-\_\-edit}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a4959523d91da61c8a9245b31530f86a8}
+
+
+\-Definition at line 25 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!dic\-\_\-satelites@{dic\-\_\-satelites}}
+\index{dic\-\_\-satelites@{dic\-\_\-satelites}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{dic\-\_\-satelites}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::dic\-\_\-satelites}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a47041a01fe6c998e079fe03ee7cfe513}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!diferencias@{diferencias}}
+\index{diferencias@{diferencias}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{diferencias}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::diferencias}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_ae8f413dc004d8915c9fe8d466ec36c3b}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!escenario@{escenario}}
+\index{escenario@{escenario}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{escenario}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::escenario}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a2f6e69204c69a6401a93abea87741371}
+
+
+\-Definition at line 23 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!et@{et}}
+\index{et@{et}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{et}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::et}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a8871a1086f6e74f1144a4e8d06c470ee}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!et\-\_\-edit@{et\-\_\-edit}}
+\index{et\-\_\-edit@{et\-\_\-edit}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{et\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::et\-\_\-edit}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a7abebabb675310cd4067f39abddd0d8a}
+
+
+\-Definition at line 25 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!ff@{ff}}
+\index{ff@{ff}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{ff}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::ff}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_ac845bc7acfb27a2cb7a1433abe467f48}
+
+
+\-Definition at line 23 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!fi@{fi}}
+\index{fi@{fi}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{fi}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::fi}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a138573d4edf38f61974ca119b38c8bc3}
+
+
+\-Definition at line 23 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!grid@{grid}}
+\index{grid@{grid}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{grid}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::grid}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_af9497879a11669c41232db4357fcaed8}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-Hlinea@{\-Hlinea}}
+\index{\-Hlinea@{\-Hlinea}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-Hlinea}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::\-Hlinea}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a12c158d5140445c1a9d40e1f3ee31fc4}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!lista\-Sat@{lista\-Sat}}
+\index{lista\-Sat@{lista\-Sat}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{lista\-Sat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::lista\-Sat}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a4b90a628fd56e7ab325a92dd84040c73}
+
+
+\-Definition at line 27 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!macovar\-T@{macovar\-T}}
+\index{macovar\-T@{macovar\-T}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{macovar\-T}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::macovar\-T}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a37d42707b8b4a0ae221a7f482f40743d}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!palette@{palette}}
+\index{palette@{palette}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{palette}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::palette}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a5007f847e368edf55687e7c47d925095}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!sat\-\_\-id@{sat\-\_\-id}}
+\index{sat\-\_\-id@{sat\-\_\-id}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::sat\-\_\-id}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a9f32120d6c76f0ae2713fc34b0216d70}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!sat\-\_\-nom\-\_\-edit@{sat\-\_\-nom\-\_\-edit}}
+\index{sat\-\_\-nom\-\_\-edit@{sat\-\_\-nom\-\_\-edit}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{sat\-\_\-nom\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::sat\-\_\-nom\-\_\-edit}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_adc19f8ca61cb5b1b9927222bc82bacd3}
+
+
+\-Definition at line 25 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!sat\-\_\-nombre@{sat\-\_\-nombre}}
+\index{sat\-\_\-nombre@{sat\-\_\-nombre}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{sat\-\_\-nombre}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::sat\-\_\-nombre}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a1b713f6042554a16c0d1abef56a4bb6e}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!satelite@{satelite}}
+\index{satelite@{satelite}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{satelite}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::satelite}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_adb65e6a30ffb9f4020eced46d9488b9d}
+
+
+\-Definition at line 23 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!st@{st}}
+\index{st@{st}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{st}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::st}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_ab0e1562b0d48e67e73f6490c14c023aa}
+
+
+\-Definition at line 21 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!st\-\_\-edit@{st\-\_\-edit}}
+\index{st\-\_\-edit@{st\-\_\-edit}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{st\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::st\-\_\-edit}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a95a8a740b515a82c477c03ffc16dc425}
+
+
+\-Definition at line 25 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!table\-View@{table\-View}}
+\index{table\-View@{table\-View}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{table\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::table\-View}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a305c0f65d0874933f991254bef1129fb}
+
+
+\-Definition at line 33 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-T\-L\-E\-\_\-comp\-\_\-edit@{\-T\-L\-E\-\_\-comp\-\_\-edit}}
+\index{\-T\-L\-E\-\_\-comp\-\_\-edit@{\-T\-L\-E\-\_\-comp\-\_\-edit}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-T\-L\-E\-\_\-comp\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::\-T\-L\-E\-\_\-comp\-\_\-edit}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_aef84ea201e60bfb580122ff2bc676e47}
+
+
+\-Definition at line 25 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!\-T\-L\-E\-\_\-edit@{\-T\-L\-E\-\_\-edit}}
+\index{\-T\-L\-E\-\_\-edit@{\-T\-L\-E\-\_\-edit}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{\-T\-L\-E\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::\-T\-L\-E\-\_\-edit}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a709af572baf10d679a3b60416e124374}
+
+
+\-Definition at line 25 of file \-C\-O\-D\-Sinterface.\-py.
+
+\index{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}!verif\-\_\-sol@{verif\-\_\-sol}}
+\index{verif\-\_\-sol@{verif\-\_\-sol}!AplicacionCODS::CODSinterface::ProcCODS@{\-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface\-::\-Proc\-C\-O\-D\-S}}
+\subsubsection[{verif\-\_\-sol}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-C\-O\-D\-S\-::\-C\-O\-D\-Sinterface.\-Proc\-C\-O\-D\-S\-::verif\-\_\-sol}}\label{class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s_a916d666cf19d9c9b5960ef9fae67aeed}
+
+
+\-Definition at line 23 of file \-C\-O\-D\-Sinterface.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Aplicacion\-C\-O\-D\-S/{\bf \-C\-O\-D\-Sinterface.\-py}\end{DoxyCompactItemize}

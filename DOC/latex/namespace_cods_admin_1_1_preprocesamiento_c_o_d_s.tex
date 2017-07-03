@@ -1,0 +1,178 @@
+\section{\-Cods\-Admin\-:\-:\-Preprocesamiento\-C\-O\-D\-S \-Namespace \-Reference}
+\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s}\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf archivos} = glob.\-glob('../\-Cods\-Admin/\-T\-O\-D\-\_\-\-O/$\ast$\-T\-X\-T')
+\item 
+list {\bf largo} = [$\,$]
+\item 
+list {\bf fila} = [$\,$]
+\item 
+list {\bf linea\-\_\-archivo} = [$\,$]
+\item 
+tuple {\bf a} = open(arch, 'r')
+\item 
+tuple {\bf nombre} = arch.\-split('/')
+\item 
+tuple {\bf fecha\-\_\-nombre} = nombre.\-split('\-\_\-')
+\item 
+list {\bf anio} = {\bf fecha\-\_\-nombre}[0\-:4]
+\item 
+list {\bf mes} = {\bf fecha\-\_\-nombre}[4\-:6]
+\item 
+list {\bf dia} = {\bf fecha\-\_\-nombre}[6\-:8]
+\item 
+string {\bf fecha\-\_\-str} = '/'
+\item 
+tuple {\bf a\-\_\-content} = a.\-readlines()
+\item 
+list {\bf linea\-\_\-ini} = {\bf a\-\_\-content}[1]
+\item 
+list {\bf fecha\-\_\-ini} = {\bf linea\-\_\-ini}[\-:19]
+\item 
+list {\bf linea\-\_\-fin} = {\bf a\-\_\-content}[-\/1]
+\item 
+list {\bf fecha\-\_\-fin} = {\bf linea\-\_\-fin}[\-:19]
+\item 
+list {\bf datos} = [{\bf nombre},{\bf fecha\-\_\-str},{\bf fecha\-\_\-ini},{\bf fecha\-\_\-fin},len({\bf a\-\_\-content})]
+\item 
+tuple {\bf writer} = csv.\-writer(f)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 16/03/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Variable \-Documentation}
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!a@{a}}
+\index{a@{a}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::a} = open(arch, 'r')}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a4aeb40831c10a50a211a288dec18225b}
+
+
+\-Definition at line 56 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!a\-\_\-content@{a\-\_\-content}}
+\index{a\-\_\-content@{a\-\_\-content}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{a\-\_\-content}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::a\-\_\-content} = a.\-readlines()}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a5b44e3fc63ef97f1160da9a7b8d9f693}
+
+
+\-Definition at line 63 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!anio@{anio}}
+\index{anio@{anio}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{anio}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::anio} = {\bf fecha\-\_\-nombre}[0\-:4]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_afc0865bd310c1c41355c06b0201d0443}
+
+
+\-Definition at line 59 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!archivos@{archivos}}
+\index{archivos@{archivos}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{archivos}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::archivos} = glob.\-glob('../\-Cods\-Admin/\-T\-O\-D\-\_\-\-O/$\ast$\-T\-X\-T')}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a51e3aca942068c4380b4a39b7b9c3f47}
+
+
+\-Definition at line 51 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!datos@{datos}}
+\index{datos@{datos}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{datos}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::datos} = [{\bf nombre},{\bf fecha\-\_\-str},{\bf fecha\-\_\-ini},{\bf fecha\-\_\-fin},len({\bf a\-\_\-content})]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a540413dfa48c0d29703eef8881cdb4b6}
+
+
+\-Definition at line 69 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!dia@{dia}}
+\index{dia@{dia}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{dia}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::dia} = {\bf fecha\-\_\-nombre}[6\-:8]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a1f7d4aa29c7c972f682929e03289f2b0}
+
+
+\-Definition at line 61 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!fecha\-\_\-fin@{fecha\-\_\-fin}}
+\index{fecha\-\_\-fin@{fecha\-\_\-fin}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{fecha\-\_\-fin}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::fecha\-\_\-fin} = {\bf linea\-\_\-fin}[\-:19]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a936ef6cf493909e4a94482eae416a521}
+
+
+\-Definition at line 68 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!fecha\-\_\-ini@{fecha\-\_\-ini}}
+\index{fecha\-\_\-ini@{fecha\-\_\-ini}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{fecha\-\_\-ini}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::fecha\-\_\-ini} = {\bf linea\-\_\-ini}[\-:19]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_ab01329773dddef17de2a80e7d8a2009d}
+
+
+\-Definition at line 66 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!fecha\-\_\-nombre@{fecha\-\_\-nombre}}
+\index{fecha\-\_\-nombre@{fecha\-\_\-nombre}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{fecha\-\_\-nombre}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::fecha\-\_\-nombre} = nombre.\-split('\-\_\-')}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_ac0a85d1a5a8b5489cc24872c3493e219}
+
+
+\-Definition at line 58 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!fecha\-\_\-str@{fecha\-\_\-str}}
+\index{fecha\-\_\-str@{fecha\-\_\-str}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{fecha\-\_\-str}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::fecha\-\_\-str} = '/'}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a1ccdfa7cd47836fcb3787db1b76b49d8}
+
+
+\-Definition at line 62 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!fila@{fila}}
+\index{fila@{fila}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{fila}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::fila} = [$\,$]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a5fc144d2850ff866d10b3b7493cb33bf}
+
+
+\-Definition at line 53 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!largo@{largo}}
+\index{largo@{largo}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{largo}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::largo} = [$\,$]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_ab2e1f10478ebbd16ccb4fa9d5b90a8bd}
+
+
+\-Definition at line 52 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!linea\-\_\-archivo@{linea\-\_\-archivo}}
+\index{linea\-\_\-archivo@{linea\-\_\-archivo}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{linea\-\_\-archivo}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::linea\-\_\-archivo} = [$\,$]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a657ff951819e00b0a99a03b12e7c7d64}
+
+
+\-Definition at line 54 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!linea\-\_\-fin@{linea\-\_\-fin}}
+\index{linea\-\_\-fin@{linea\-\_\-fin}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{linea\-\_\-fin}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::linea\-\_\-fin} = {\bf a\-\_\-content}[-\/1]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a2a542337422f7b641b1514af533351c3}
+
+
+\-Definition at line 67 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!linea\-\_\-ini@{linea\-\_\-ini}}
+\index{linea\-\_\-ini@{linea\-\_\-ini}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{linea\-\_\-ini}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::linea\-\_\-ini} = {\bf a\-\_\-content}[1]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_afda9d28a3fb0d5dacde75d749c658ece}
+
+
+\-Definition at line 65 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!mes@{mes}}
+\index{mes@{mes}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{mes}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::mes} = {\bf fecha\-\_\-nombre}[4\-:6]}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a9886d545ab54c8e700786ea4b0167b5d}
+
+
+\-Definition at line 60 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!nombre@{nombre}}
+\index{nombre@{nombre}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{nombre}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::nombre} = arch.\-split('/')}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_ab24eb325e3db618f5334a57062c9ca7f}
+
+
+\-Definition at line 57 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}!writer@{writer}}
+\index{writer@{writer}!CodsAdmin::PreprocesamientoCODS@{\-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S}}
+\subsubsection[{writer}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Cods\-Admin\-::\-Preprocesamiento\-C\-O\-D\-S\-::writer} = csv.\-writer(f)}\label{namespace_cods_admin_1_1_preprocesamiento_c_o_d_s_a01b616c59fdd6c42930084b9c9cd9b12}
+
+
+\-Definition at line 72 of file \-Preprocesamiento\-C\-O\-D\-S.\-py.
+

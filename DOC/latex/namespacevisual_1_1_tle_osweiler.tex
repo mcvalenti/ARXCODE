@@ -1,0 +1,109 @@
+\section{visual\-:\-:\-Tle\-Osweiler \-Namespace \-Reference}
+\label{namespacevisual_1_1_tle_osweiler}\index{visual\-::\-Tle\-Osweiler@{visual\-::\-Tle\-Osweiler}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-Ver\-Grafico}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 23/02/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{visual\-::\-Tle\-Osweiler@{visual\-::\-Tle\-Osweiler}!\-Ver\-Grafico@{\-Ver\-Grafico}}
+\index{\-Ver\-Grafico@{\-Ver\-Grafico}!visual::TleOsweiler@{visual\-::\-Tle\-Osweiler}}
+\subsubsection[{\-Ver\-Grafico}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-Tle\-Osweiler.\-Ver\-Grafico} (
+\begin{DoxyParamCaption}
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1_tle_osweiler_ad0ed01e13b5efd1046228eb91cc0a65f}
+
+
+\-Definition at line 13 of file \-Tle\-Osweiler.\-py.
+
+
+\begin{DoxyCode}
+13 
+14 def VerGrafico(archivo):
+15     f=open('../AjustarTLE/diferencias/'+archivo,'r')
+16     listas=f.readlines()
+17     archivo_grafico=str(archivo.split('.')[0]+'_tle.png')
+18     
+19     data0=[]
+20     data1=[]
+21     data2=[]
+22     data3=[]
+23     
+24     for l in listas:
+25         linea=l.split(' ')
+26         data0.append(linea[0])
+27         data1.append(float(linea[2]))
+28         data2.append(float(linea[3]))
+29         data3.append(float(linea[4]))
+30         
+31     maxx=float(max(data1))
+32     minx=float(min(data1))
+33     maxy=float(max(data2))
+34     miny=float(min(data2))
+35     plt.ylim([miny,maxy])
+36     plt.xlim([minx,maxx])
+37     
+38     """
+39     Gestion de Fechas
+40     """
+41     date_fmt = '%Y-%m-%d'
+42     epoca=[dt.datetime.strptime(str(i), date_fmt) for i in data0]
+43     x = [mdates.date2num(i) for i in epoca]
+44     date_formatter = mdates.DateFormatter('%d-%m-%y')
+45     
+46     """
+47     Funcion de Ajuste
+48     """
+49     slope1, intercept1, r_value1, p_value1, std_err1 = stats.linregress(x,data1
+      )
+50     slope2, intercept2, r_value2, p_value2, std_err2 = stats.linregress(x,data2
+      )
+51     slope3, intercept3, r_value3, p_value3, std_err3 = stats.linregress(x,data3
+      )
+52     
+53     g1=np.poly1d([slope1,intercept1])
+54     y1=g1(x)
+55     g2=np.poly1d([slope2,intercept2])
+56     y2=g2(x)
+57     g3=np.poly1d([slope3,intercept3])
+58     y3=g3(x)
+59     
+60     """
+61     GRAFICO
+62     """
+63      
+64     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+65     ax1.xaxis.set_major_formatter(date_formatter)
+66     ax2.xaxis.set_major_formatter(date_formatter)
+67     ax3.xaxis.set_major_formatter(date_formatter)
+68     ax1.grid(True)
+69     ax2.grid(True)
+70     ax3.grid(True)
+71     
+72     ax1.plot_date( x, y1,'r--',label='Coordenada V')
+73     ax1.plot_date(x, data1,'x')
+74     ax1.set_ylabel('Km')
+75     ax2.plot_date(x, data2,'x',label='Coordenada N')
+76     ax2.plot_date(x, y2,'r--')
+77     ax2.set_ylabel('Km')
+78     ax3.plot_date(x, data3,'x',label='Coordenada C')
+79     ax3.plot_date(x, y3,'r--')
+80     ax3.set_ylabel('Km')
+81     
+82     fig.suptitle('Diferencias y Funcion de Ajuste (TLE vs TLE + SGP4)')
+83     plt.xlabel('Epoca')
+84     plt.savefig('../visual/archivos/'+archivo_grafico)
+85     plt.show()
+86     
+    return archivo_grafico\end{DoxyCode}

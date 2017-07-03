@@ -1,0 +1,9 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="SistReferencia.sist_deTiempo.ts_greenwich",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="SistReferencia.sist_deTiempo.j0",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_sist_referencia_1_1sist__de_tiempo.html#ae2039dacf6ec7bd9234fe7fdd50fa498"];
+}

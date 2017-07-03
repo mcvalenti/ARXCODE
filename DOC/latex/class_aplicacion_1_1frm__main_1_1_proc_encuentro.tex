@@ -1,0 +1,586 @@
+\section{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro \-Class \-Reference}
+\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro}\index{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro@{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf init\-U\-I}
+\item 
+def {\bf proceso\-Simple}
+\item 
+def {\bf mostrar\-Dif}
+\item 
+def {\bf mostrar\-Track}
+\item 
+def {\bf salir}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf palette}
+\item 
+{\bf sat\-\_\-lab}
+\item 
+{\bf deb\-\_\-lab}
+\item 
+{\bf time\-\_\-lab}
+\item 
+{\bf hs\-\_\-lab}
+\item 
+{\bf min\-\_\-lab}
+\item 
+{\bf seg\-\_\-lab}
+\item 
+{\bf mseg\-\_\-lab}
+\item 
+{\bf track}
+\item 
+{\bf dif}
+\item 
+{\bf boton\-\_\-encuetro}
+\item 
+{\bf boton\-\_\-dif}
+\item 
+{\bf boton\-\_\-track}
+\item 
+{\bf boton\-\_\-salir}
+\item 
+{\bf sat\-\_\-id\-\_\-text}
+\item 
+{\bf deb\-\_\-id\-\_\-text}
+\item 
+{\bf tca\-\_\-text}
+\item 
+{\bf hs\-\_\-tex}
+\item 
+{\bf min\-\_\-tex}
+\item 
+{\bf seg\-\_\-tex}
+\item 
+{\bf mseg\-\_\-tex}
+\item 
+{\bf table\-Encuentro}
+\item 
+{\bf sat\-\_\-id}
+\item 
+{\bf deb\-\_\-id}
+\item 
+{\bf tca}
+\item 
+{\bf min\-\_\-dist}
+\item 
+{\bf tca\-\_\-calc}
+\item 
+{\bf archivo\-\_\-dif}
+\item 
+{\bf grafico\-\_\-dif}
+\item 
+{\bf pixmap1}
+\item 
+{\bf pixmap}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 213 of file frm\-\_\-main.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{parent = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_abf26f68ed41e5b2a3802baf0dafbace2}
+
+
+\-Definition at line 214 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+214 
+215     def __init__(self,parent=None):
+216         QDialog.__init__(self,parent)
+217 
+218         self.setWindowModality(Qt.ApplicationModal)
+        self.initUI()
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!init\-U\-I@{init\-U\-I}}
+\index{init\-U\-I@{init\-U\-I}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{init\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro.\-init\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a0df5f10ce0e6544ee7996b2ffd32d5c3}
+
+
+\-Definition at line 227 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+227 
+228     def initUI(self):
+229         self.palette = QPalette()
+230         self.palette.setColor(QPalette.Background,Qt.white)
+231         self.setPalette(self.palette)
+232         
+233         """
+234         Etiquetas
+235         """
+236         self.sat_lab  = QLabel('Satelite NORAD ID')
+237         self.deb_lab  = QLabel('Desecho NORAD ID')
+238         self.time_lab = QLabel('TCA')
+239         self.hs_lab   = QLabel('Hs:')
+240         self.min_lab  = QLabel('min:')
+241         self.seg_lab  = QLabel('seg')
+242         self.mseg_lab = QLabel('mseg')
+243         # imagen 
+244         self.track = QLabel() 
+245         self.dif   = QLabel()
+246         #track.setPixmap(pixmap)
+247         """
+248         Botones
+249         """
+250         self.boton_encuetro = QPushButton('Procesar Encuentro')
+251         self.boton_dif      = QPushButton('Ver diferencias')
+252         self.boton_track    = QPushButton('Track')
+253         self.boton_salir    = QPushButton('Salir')
+254         """
+255         Campos de Edicion
+256         """
+257         self.sat_id_text = QLineEdit()
+258         self.deb_id_text = QLineEdit()
+259         self.tca_text    = QCalendarWidget()
+260         self.hs_tex      = QLineEdit()
+261         self.min_tex     = QLineEdit()
+262         self.seg_tex     = QLineEdit()
+263         self.mseg_tex    = QLineEdit()
+264 
+265         """
+266         Otros
+267         """
+268         self.tableEncuentro   = QTableWidget()
+269         self.tableEncuentro.setRowCount(1)
+270         self.tableEncuentro.setColumnCount(4)
+271         listaLabels=['Norad Id','Nombre','TCAarx','MinD arx']
+272         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
+273         """
+274         Plantilla
+275         """
+276         grid = QGridLayout()
+277         grid.setSpacing(5)
+278         scroll = QScrollArea()
+279 
+280         
+281         grid.addWidget(self.sat_lab,2,1)
+282         grid.addWidget(self.sat_id_text,2,2)
+283         grid.addWidget(self.deb_lab,3,1)
+284         grid.addWidget(self.deb_id_text,3,2)
+285         grid.addWidget(self.time_lab,4,1)
+286         grid.addWidget(self.tca_text,4,2)
+287         grid.addWidget(self.hs_tex,4,3)
+288         grid.addWidget(self.hs_lab,4,4)
+289         grid.addWidget(self.min_tex,4,5)
+290         grid.addWidget(self.min_lab,4,6)
+291         grid.addWidget(self.seg_tex,4,7)
+292         grid.addWidget(self.seg_lab,4,8)
+293         grid.addWidget(self.mseg_tex,4,9)
+294         grid.addWidget(self.mseg_lab,4,10)        
+295         grid.addWidget(self.tableEncuentro,6,2,2,5)
+296         grid.addWidget(self.track,8,2)
+297         grid.addWidget(self.dif,8,3)
+298         grid.addWidget(self.boton_encuetro,6,10)
+299         grid.addWidget(self.boton_dif,7,10)
+300         grid.addWidget(self.boton_track,8,10)
+301         grid.addWidget(self.boton_salir,9,10)
+302         
+303         """
+304         Acciones
+305         """
+306         self.boton_encuetro.clicked.connect(self.procesoSimple)
+307         self.boton_salir.clicked.connect(self.salir)
+308         self.boton_track.clicked.connect(self.mostrarTrack)
+309         self.boton_dif.clicked.connect(self.mostrarDif)
+310         self.boton_track.setEnabled(False)
+311         self.boton_dif.setEnabled(False)
+312         
+313         self.setLayout(grid)
+314         self.setWindowTitle('Procesamiento de Encuentro')    
+315         self.show()
+    
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!mostrar\-Dif@{mostrar\-Dif}}
+\index{mostrar\-Dif@{mostrar\-Dif}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{mostrar\-Dif}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro.\-mostrar\-Dif} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a05cf641959fca6add2fc6bd39742c972}
+
+
+\-Definition at line 362 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+362 
+363     def mostrarDif(self):
+364         self.grafico_dif= ploteos.grafica_diferenciasRIC(self.archivo_dif)
+365         self.pixmap1 = QPixmap(self.grafico_dif)
+366         self.dif.setPixmap(self.pixmap1)
+    
+\end{DoxyCode}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!mostrar\-Track@{mostrar\-Track}}
+\index{mostrar\-Track@{mostrar\-Track}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{mostrar\-Track}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro.\-mostrar\-Track} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a48160da57694ee4375e6b0fdd7a99a71}
+
+
+\-Definition at line 367 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+367 
+368     def mostrarTrack(self):
+369         self.pixmap = QPixmap('../visual/archivos/ploteo_track.ps')
+370         self.track.setPixmap(self.pixmap)
+        
+\end{DoxyCode}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!proceso\-Simple@{proceso\-Simple}}
+\index{proceso\-Simple@{proceso\-Simple}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{proceso\-Simple}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro.\-proceso\-Simple} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a361d53a30428a61d5fd92d34d4b4000f}
+\begin{DoxyVerb}
+Propaga los objetos involucrados un intervalos [tca-90:tca+10]
+Calcula:
+    Miss Distance
+    TCA calculado
+    Diferencias en RTN ---> Plotea.
+    Genera archivo lat, long ---> Plotea.
+  
+\end{DoxyVerb}
+ 
+
+\-Definition at line 316 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+316 
+317     def procesoSimple(self):
+318         """
+319         Propaga los objetos involucrados un intervalos [tca-90:tca+10]
+320         Calcula:
+321             Miss Distance
+322             TCA calculado
+323             Diferencias en RTN ---> Plotea.
+324             Genera archivo lat, long ---> Plotea.
+325           
+326         """
+327         # Importar los TLE de NORAD.
+328     
+329         usuario='macecilia'
+330         clave='MaCeciliaSpace17'
+331         self.sat_id=str(self.sat_id_text.text())
+332         self.deb_id=str(self.deb_id_text.text())
+333         hs =int(self.hs_tex.text())
+334         min=int(self.min_tex.text())
+335         seg=int(self.seg_tex.text())
+336         fecha = self.tca_text.selectedDate()#.toPyDate()
+337         hora = QTime(hs,min,seg)
+338         self.tca=QDateTime(fecha,hora).toPyDateTime()
+339         tle_sat=Tle.creadoxParam(usuario, clave, self.sat_id, self.tca)
+340         tle_deb=Tle.creadoxParam(usuario, clave, self.deb_id, self.tca)
+341 #         
+342         """
+343         Propagacion hasta el Encuentro
+344         """
+345         encuentro1=Encuentro(tle_sat,tle_deb,self.tca)
+346         self.min_dist= encuentro1.mod_minDist
+347         self.tca_calc= encuentro1.tca_c
+348         self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
+349         self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
+350         self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(
+      self.tca_calc,'%Y-%m-%d %H:%M:%S')))
+351         self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(self.min_dist)))
+352         # archivo de diferencias.
+353         self.archivo_dif=encuentro1.archivo_dif
+354         
+355 
+356         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.
+      epoca_ini
+357         grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '
+      ../Encuentro/archivos/'+str(self.deb_id)+'U')
+358         print 'fin del procesamiento.'
+359         
+360         self.boton_track.setEnabled(True)
+361         self.boton_dif.setEnabled(True)
+    
+\end{DoxyCode}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!salir@{salir}}
+\index{salir@{salir}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{salir}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro.\-salir} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a58cb9bc6a82da02c73bbee45fce6a4d4}
+
+
+\-Definition at line 371 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+371 
+372     def salir(self):
+373         self.accept()    
+374         
+        
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!archivo\-\_\-dif@{archivo\-\_\-dif}}
+\index{archivo\-\_\-dif@{archivo\-\_\-dif}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{archivo\-\_\-dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::archivo\-\_\-dif}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ad91f138c2d34ec1dddfa274961d9f4b9}
+
+
+\-Definition at line 326 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-dif@{boton\-\_\-dif}}
+\index{boton\-\_\-dif@{boton\-\_\-dif}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{boton\-\_\-dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-dif}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aeb31ca7f82f7239731383b96e7075337}
+
+
+\-Definition at line 231 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-encuetro@{boton\-\_\-encuetro}}
+\index{boton\-\_\-encuetro@{boton\-\_\-encuetro}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{boton\-\_\-encuetro}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-encuetro}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a8644605ee796fee24b6dd923fc266846}
+
+
+\-Definition at line 231 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-salir@{boton\-\_\-salir}}
+\index{boton\-\_\-salir@{boton\-\_\-salir}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{boton\-\_\-salir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-salir}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aca036cbd7f766bf701ae36c2a5a7b3b8}
+
+
+\-Definition at line 231 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-track@{boton\-\_\-track}}
+\index{boton\-\_\-track@{boton\-\_\-track}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{boton\-\_\-track}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-track}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a1941629b003e80f8ded4df0f456c7bd2}
+
+
+\-Definition at line 231 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!deb\-\_\-id@{deb\-\_\-id}}
+\index{deb\-\_\-id@{deb\-\_\-id}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{deb\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::deb\-\_\-id}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a29b4b7477eec45dc43c8420fe57f380b}
+
+
+\-Definition at line 324 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!deb\-\_\-id\-\_\-text@{deb\-\_\-id\-\_\-text}}
+\index{deb\-\_\-id\-\_\-text@{deb\-\_\-id\-\_\-text}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{deb\-\_\-id\-\_\-text}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::deb\-\_\-id\-\_\-text}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a2f2e7ac9884884073150132b5a7fee63}
+
+
+\-Definition at line 233 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!deb\-\_\-lab@{deb\-\_\-lab}}
+\index{deb\-\_\-lab@{deb\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{deb\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::deb\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ab4c6985a68b1ffe2180b3b88489b06aa}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!dif@{dif}}
+\index{dif@{dif}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::dif}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a9bdbd42721fd4c57a52c8370e4d75a8b}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!grafico\-\_\-dif@{grafico\-\_\-dif}}
+\index{grafico\-\_\-dif@{grafico\-\_\-dif}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{grafico\-\_\-dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::grafico\-\_\-dif}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a21cd8515b488cb5a1a7ed05f7a02ac28}
+
+
+\-Definition at line 362 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!hs\-\_\-lab@{hs\-\_\-lab}}
+\index{hs\-\_\-lab@{hs\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{hs\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::hs\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a27ad8a3bf2a7faab4b19e36c1d790dfa}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!hs\-\_\-tex@{hs\-\_\-tex}}
+\index{hs\-\_\-tex@{hs\-\_\-tex}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{hs\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::hs\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a47af2e4568d0c0103808db6f86817885}
+
+
+\-Definition at line 233 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!min\-\_\-dist@{min\-\_\-dist}}
+\index{min\-\_\-dist@{min\-\_\-dist}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{min\-\_\-dist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::min\-\_\-dist}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a8071ddf9f15d916a95ba4937e00c02bc}
+
+
+\-Definition at line 326 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!min\-\_\-lab@{min\-\_\-lab}}
+\index{min\-\_\-lab@{min\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{min\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::min\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a775f0c0c1b4e7d4e68fdf04efa135071}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!min\-\_\-tex@{min\-\_\-tex}}
+\index{min\-\_\-tex@{min\-\_\-tex}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{min\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::min\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ad30a0e55f3288798e84da8aadb8e3bcd}
+
+
+\-Definition at line 233 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!mseg\-\_\-lab@{mseg\-\_\-lab}}
+\index{mseg\-\_\-lab@{mseg\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{mseg\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::mseg\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a35b3a9db8e7eae867df6d9e7762dfea0}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!mseg\-\_\-tex@{mseg\-\_\-tex}}
+\index{mseg\-\_\-tex@{mseg\-\_\-tex}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{mseg\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::mseg\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_afe9a3882b2c5537df85cb18df916f01b}
+
+
+\-Definition at line 233 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!palette@{palette}}
+\index{palette@{palette}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{palette}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::palette}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_acf473733b894ad6506a589a393363799}
+
+
+\-Definition at line 227 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!pixmap@{pixmap}}
+\index{pixmap@{pixmap}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{pixmap}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::pixmap}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a8299df646f0d2694d7dc6fe63bd07f85}
+
+
+\-Definition at line 367 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!pixmap1@{pixmap1}}
+\index{pixmap1@{pixmap1}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{pixmap1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::pixmap1}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_af0da3467b8af9d808e55ff06ef69bdc2}
+
+
+\-Definition at line 362 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!sat\-\_\-id@{sat\-\_\-id}}
+\index{sat\-\_\-id@{sat\-\_\-id}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::sat\-\_\-id}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aa2733a045e28eb7c02115a09d51a836a}
+
+
+\-Definition at line 324 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!sat\-\_\-id\-\_\-text@{sat\-\_\-id\-\_\-text}}
+\index{sat\-\_\-id\-\_\-text@{sat\-\_\-id\-\_\-text}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{sat\-\_\-id\-\_\-text}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::sat\-\_\-id\-\_\-text}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a2007df02bfb5112b366cfc4328c280a7}
+
+
+\-Definition at line 233 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!sat\-\_\-lab@{sat\-\_\-lab}}
+\index{sat\-\_\-lab@{sat\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{sat\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::sat\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a9d2a1d34deb3175ecf73d0dfe65242f6}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!seg\-\_\-lab@{seg\-\_\-lab}}
+\index{seg\-\_\-lab@{seg\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{seg\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::seg\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ab3d01094156d3614f263c6f42d6febd7}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!seg\-\_\-tex@{seg\-\_\-tex}}
+\index{seg\-\_\-tex@{seg\-\_\-tex}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{seg\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::seg\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aa8a995a723c03140e4a348b4ad2ab417}
+
+
+\-Definition at line 233 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!table\-Encuentro@{table\-Encuentro}}
+\index{table\-Encuentro@{table\-Encuentro}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{table\-Encuentro}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::table\-Encuentro}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a8480361e1e7806f47f338b7df37e33bc}
+
+
+\-Definition at line 235 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!tca@{tca}}
+\index{tca@{tca}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{tca}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::tca}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a197eac71261a31914e870a5d4d61c40c}
+
+
+\-Definition at line 324 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!tca\-\_\-calc@{tca\-\_\-calc}}
+\index{tca\-\_\-calc@{tca\-\_\-calc}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{tca\-\_\-calc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::tca\-\_\-calc}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a975e5f4e68911fb69a242157bc1450ab}
+
+
+\-Definition at line 326 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!tca\-\_\-text@{tca\-\_\-text}}
+\index{tca\-\_\-text@{tca\-\_\-text}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{tca\-\_\-text}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::tca\-\_\-text}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a92e586584e7eed72d3aadf7e67695439}
+
+
+\-Definition at line 233 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!time\-\_\-lab@{time\-\_\-lab}}
+\index{time\-\_\-lab@{time\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{time\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::time\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a241a5287aae2adf3fa66aee1ade8ad22}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!track@{track}}
+\index{track@{track}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{track}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::track}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a5aad2c5d4f711da0c77ad9a0e2b4f568}
+
+
+\-Definition at line 229 of file frm\-\_\-main.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Aplicacion/{\bf frm\-\_\-main.\-py}\end{DoxyCompactItemize}

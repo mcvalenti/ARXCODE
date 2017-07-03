@@ -1,0 +1,334 @@
+\section{\-Sist\-Referencia\-:\-:alfa\-Delta\-Provisorio \-Namespace \-Reference}
+\label{namespace_sist_referencia_1_1alfa_delta_provisorio}\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf cart2geod}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf in1} = open('desarrollo/envi.\-sal')
+\item 
+tuple {\bf in2} = open('desarrollo/cosmos.\-sal')
+\item 
+tuple {\bf out1} = open('alfdelenvi.\-txt','w+')
+\item 
+tuple {\bf out2} = open('alfadelcosmos.\-txt','w+')
+\item 
+{\bf pi} = np.\-pi
+\item 
+tuple {\bf deg} = np.\-divide(180,{\bf pi})
+\item 
+tuple {\bf lineas1} = in1.\-readlines()
+\item 
+tuple {\bf lineas2} = in2.\-readlines()
+\item 
+tuple {\bf datos} = l1.\-split(' ')
+\item 
+tuple {\bf x} = float({\bf datos}[3])
+\item 
+tuple {\bf y} = float({\bf datos}[4])
+\item 
+tuple {\bf z} = float({\bf datos}[5])
+\item 
+tuple {\bf r\-\_\-prima} = rot\-\_\-tierra({\bf x},{\bf y},{\bf z})
+\item 
+tuple {\bf r} = np.\-sqrt({\bf x}$\ast${\bf x}+{\bf y}$\ast${\bf y}+{\bf z}$\ast${\bf z})
+\item 
+tuple {\bf l} = np.\-divide({\bf x},{\bf r})
+\item 
+tuple {\bf m} = np.\-divide({\bf y},{\bf r})
+\item 
+tuple {\bf n} = np.\-divide({\bf z},{\bf r})
+\item 
+tuple {\bf delta} = np.\-arcsin({\bf n})
+\item 
+tuple {\bf alpha} = np.\-arccos(np.\-divide({\bf l},np.\-cos({\bf delta})))
+\item 
+tuple {\bf fila} = str({\bf alpha}$\ast${\bf deg})
+\item 
+tuple {\bf x2} = float({\bf datos}[3])
+\item 
+tuple {\bf y2} = float({\bf datos}[4])
+\item 
+tuple {\bf z2} = float({\bf datos}[5])
+\item 
+tuple {\bf r2} = np.\-sqrt({\bf x2}$\ast${\bf x2}+{\bf y2}$\ast${\bf y2}+{\bf z2}$\ast${\bf z2})
+\item 
+tuple {\bf ll} = np.\-divide({\bf x2},{\bf r2})
+\item 
+tuple {\bf mm} = np.\-divide({\bf y2},{\bf r2})
+\item 
+tuple {\bf nn} = np.\-divide({\bf z2},{\bf r2})
+\item 
+tuple {\bf delta2} = np.\-arcsin({\bf nn})
+\item 
+tuple {\bf alpha2} = np.\-arccos(np.\-divide({\bf ll},np.\-cos({\bf delta2})))
+\item 
+tuple {\bf fila2} = str({\bf alpha2}$\ast${\bf deg})
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 09/05/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!cart2geod@{cart2geod}}
+\index{cart2geod@{cart2geod}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{cart2geod}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Sist\-Referencia.\-alfa\-Delta\-Provisorio.\-cart2geod} (
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y, }
+\item[{}]{z}
+\end{DoxyParamCaption}
+)}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a536bde169e74f18847d74c3384e7a48f}
+\begin{DoxyVerb}
+Transforma coordenadas del sistem cartesiano (TEME)
+al sistema geodesico aprox. 
+\end{DoxyVerb}
+ 
+
+\-Definition at line 72 of file alfa\-Delta\-Provisorio.\-py.
+
+
+\begin{DoxyCode}
+72 
+73 def cart2geod(x,y,z):
+74     """
+75     Transforma coordenadas del sistem cartesiano (TEME)
+76     al sistema geodesico aprox. 
+77     """
+78     r=np.sqrt(x*x+y*y+z*z)
+79     l=np.divide(x,r)
+80     m=np.divide(y,r)
+81     n=np.divide(z,r)
+82     delta=np.arcsin(n)
+83     if m>0:
+84         alpha = np.arccos(np.divide(l,np.cos(delta)))
+85     else:
+86         alpha = 2*np.pi-np.arccos(np.divide(l,np.cos(delta)))
+87 #    print alpha*deg
+88     fila=str(alpha*np.divide(180,np.pi))+' '+str(delta*np.divide(180,np.pi))+'
+      \n'
+89     
+90     return fila
+    \end{DoxyCode}
+
+
+\subsection{\-Variable \-Documentation}
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!alpha@{alpha}}
+\index{alpha@{alpha}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{alpha}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::alpha} = np.\-arccos(np.\-divide({\bf l},np.\-cos({\bf delta})))}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a6cd07bf1135e508edb37894f6f91f1e3}
+
+
+\-Definition at line 47 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!alpha2@{alpha2}}
+\index{alpha2@{alpha2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{alpha2}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::alpha2} = np.\-arccos(np.\-divide({\bf ll},np.\-cos({\bf delta2})))}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_afdfe74b34a2eac876285c1a6a364a60b}
+
+
+\-Definition at line 65 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!datos@{datos}}
+\index{datos@{datos}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{datos}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::datos} = l1.\-split(' ')}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a9fc5bced38d4b3ab725c15902c202ce0}
+
+
+\-Definition at line 30 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!deg@{deg}}
+\index{deg@{deg}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{deg}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::deg} = np.\-divide(180,{\bf pi})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_adddeaf63c3fd36147374beaf136b8772}
+
+
+\-Definition at line 23 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!delta@{delta}}
+\index{delta@{delta}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{delta}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::delta} = np.\-arcsin({\bf n})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a3ec472a3eeb3325efdcfd8c4699862f4}
+
+
+\-Definition at line 45 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!delta2@{delta2}}
+\index{delta2@{delta2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{delta2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::delta2} = np.\-arcsin({\bf nn})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_ada67be21affe857188d904fe8f2cfcbf}
+
+
+\-Definition at line 63 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!fila@{fila}}
+\index{fila@{fila}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{fila}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::fila} = str({\bf alpha}$\ast${\bf deg})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_af65cd6cd30bec61d0052cd046e025188}
+
+
+\-Definition at line 51 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!fila2@{fila2}}
+\index{fila2@{fila2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{fila2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::fila2} = str({\bf alpha2}$\ast${\bf deg})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a89e3c6f56888bcf0a30b18c9ad7d11d6}
+
+
+\-Definition at line 69 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!in1@{in1}}
+\index{in1@{in1}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{in1}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::in1} = open('desarrollo/envi.\-sal')}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_ab52198611b87d08e27bcf9dc4011c441}
+
+
+\-Definition at line 18 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!in2@{in2}}
+\index{in2@{in2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{in2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::in2} = open('desarrollo/cosmos.\-sal')}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_abc1c0b55a1d56f18287f4d339f707a24}
+
+
+\-Definition at line 19 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!l@{l}}
+\index{l@{l}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{l}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::l} = np.\-divide({\bf x},{\bf r})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_aa41286ddcfabf19d8091da4d7ac917a6}
+
+
+\-Definition at line 42 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!lineas1@{lineas1}}
+\index{lineas1@{lineas1}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{lineas1}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::lineas1} = in1.\-readlines()}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a8271bcbbf4036aa5e85f067faa33ed10}
+
+
+\-Definition at line 26 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!lineas2@{lineas2}}
+\index{lineas2@{lineas2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{lineas2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::lineas2} = in2.\-readlines()}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_ad5bb1a3169d26d074ae02c7a04b5b841}
+
+
+\-Definition at line 27 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!ll@{ll}}
+\index{ll@{ll}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{ll}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::ll} = np.\-divide({\bf x2},{\bf r2})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a193e22f930abd1c0889811eb50700ec2}
+
+
+\-Definition at line 60 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!m@{m}}
+\index{m@{m}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{m}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::m} = np.\-divide({\bf y},{\bf r})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a42d82d9b93d1348d7472bdd7a843baaa}
+
+
+\-Definition at line 43 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!mm@{mm}}
+\index{mm@{mm}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{mm}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::mm} = np.\-divide({\bf y2},{\bf r2})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a4308407a5a00526a68ba871d63c91e34}
+
+
+\-Definition at line 61 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!n@{n}}
+\index{n@{n}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::n} = np.\-divide({\bf z},{\bf r})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_abbcb03b79899402859cf6f3bee3ccdb6}
+
+
+\-Definition at line 44 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!nn@{nn}}
+\index{nn@{nn}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{nn}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::nn} = np.\-divide({\bf z2},{\bf r2})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_afbb065214c219479a0f6a60267435904}
+
+
+\-Definition at line 62 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!out1@{out1}}
+\index{out1@{out1}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{out1}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::out1} = open('alfdelenvi.\-txt','w+')}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a3efef4e51358166c98f8aee7861d2357}
+
+
+\-Definition at line 20 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!out2@{out2}}
+\index{out2@{out2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{out2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::out2} = open('alfadelcosmos.\-txt','w+')}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a0a12f912ad87c9a4e5c2d170e8ee3b56}
+
+
+\-Definition at line 21 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!pi@{pi}}
+\index{pi@{pi}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{pi}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::pi} = np.\-pi}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a65eb25e87d57ed6dd92ff25404dfef82}
+
+
+\-Definition at line 22 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!r@{r}}
+\index{r@{r}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::r} = np.\-sqrt({\bf x}$\ast${\bf x}+{\bf y}$\ast${\bf y}+{\bf z}$\ast${\bf z})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a83c08c9fc1cebc97f5966b288c47540c}
+
+
+\-Definition at line 41 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!r2@{r2}}
+\index{r2@{r2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{r2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::r2} = np.\-sqrt({\bf x2}$\ast${\bf x2}+{\bf y2}$\ast${\bf y2}+{\bf z2}$\ast${\bf z2})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a57764f30a4796131477bb0690dabe77c}
+
+
+\-Definition at line 59 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!r\-\_\-prima@{r\-\_\-prima}}
+\index{r\-\_\-prima@{r\-\_\-prima}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{r\-\_\-prima}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::r\-\_\-prima} = rot\-\_\-tierra({\bf x},{\bf y},{\bf z})}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a2fe2b8cec89bee512b50c3d5351db23e}
+
+
+\-Definition at line 35 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!x@{x}}
+\index{x@{x}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{x}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::x} = float({\bf datos}[3])}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_aaa162f1570b3039f1dd485359b2e2486}
+
+
+\-Definition at line 31 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!x2@{x2}}
+\index{x2@{x2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{x2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::x2} = float({\bf datos}[3])}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a12c31dad2ad4a1009347bd49b6e4a42c}
+
+
+\-Definition at line 56 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!y@{y}}
+\index{y@{y}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{y}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::y} = float({\bf datos}[4])}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a9f96e6c194746e4d886acb714d0ebd4c}
+
+
+\-Definition at line 32 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!y2@{y2}}
+\index{y2@{y2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{y2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::y2} = float({\bf datos}[4])}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_adfde173e244c1a6083de85a1cc725863}
+
+
+\-Definition at line 57 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!z@{z}}
+\index{z@{z}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{z}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::z} = float({\bf datos}[5])}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a10f724a1d7d5a689a4460dd88719ff7e}
+
+
+\-Definition at line 33 of file alfa\-Delta\-Provisorio.\-py.
+
+\index{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}!z2@{z2}}
+\index{z2@{z2}!SistReferencia::alfaDeltaProvisorio@{\-Sist\-Referencia\-::alfa\-Delta\-Provisorio}}
+\subsubsection[{z2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::alfa\-Delta\-Provisorio\-::z2} = float({\bf datos}[5])}\label{namespace_sist_referencia_1_1alfa_delta_provisorio_a9ccfdc2094ee8763ebb030c8f424df12}
+
+
+\-Definition at line 58 of file alfa\-Delta\-Provisorio.\-py.
+

@@ -1,0 +1,132 @@
+\section{\-Ajustar\-:\-:funcion\-De\-Ajuste \-Namespace \-Reference}
+\label{namespace_ajustar_1_1funcion_de_ajuste}\index{\-Ajustar\-::funcion\-De\-Ajuste@{\-Ajustar\-::funcion\-De\-Ajuste}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf funcion\-De\-Ajuste}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 20/01/2017
+
+Este modulo toma las tablas que contienen las diferencias 
+entre los datos TLE y los datos CODS, para las coordenadas
+u,v y w; hace un ajuste con la funcion Polynomial y luego
+hace las graficas. 
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Ajustar\-::funcion\-De\-Ajuste@{\-Ajustar\-::funcion\-De\-Ajuste}!funcion\-De\-Ajuste@{funcion\-De\-Ajuste}}
+\index{funcion\-De\-Ajuste@{funcion\-De\-Ajuste}!Ajustar::funcionDeAjuste@{\-Ajustar\-::funcion\-De\-Ajuste}}
+\subsubsection[{funcion\-De\-Ajuste}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar.\-funcion\-De\-Ajuste.\-funcion\-De\-Ajuste} (
+\begin{DoxyParamCaption}
+\item[{}]{arch1, }
+\item[{}]{arch2}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_1_1funcion_de_ajuste_a55c33c1a09df7eb90a9ff7f9798b4e1a}
+\begin{DoxyVerb}
+---------------------------------------------------------------------------------
+Lee el archivo diferenciasUVW de la carpeta diferencias y genera 
+el archivo diferenciasAjustadas, que ademas de las diferencias contiene
+las columnas correspondientes al dato evaluado en la funcion de ajuste. 
+---------------------------------------------------------------------------------
+inputs 
+    diferenicasUVW:     archivo de texto plano con las diferencias ya calculadas.
+    ajustesGraf:        texto plano en formato de gnuplot que se invoca para la 
+                        realizacion de los graficos
+outputs
+    diferenciasAjustadas: archivo de texto plano para la escritura de los valores
+                          evaluados en la funcion de ajuste.
+    ajustesUVW.eps: grafico con las diferencias y el ajuste en las 3 componentes.
+    
+\end{DoxyVerb}
+ 
+
+\-Definition at line 18 of file funcion\-De\-Ajuste.\-py.
+
+
+\begin{DoxyCode}
+18 
+19 def funcionDeAjuste(arch1,arch2):
+20     """
+21    
+       ---------------------------------------------------------------------------------
+22     Lee el archivo diferenciasUVW de la carpeta diferencias y genera 
+23     el archivo diferenciasAjustadas, que ademas de las diferencias contiene
+24     las columnas correspondientes al dato evaluado en la funcion de ajuste. 
+25    
+       ---------------------------------------------------------------------------------
+26     inputs 
+27         diferenicasUVW:     archivo de texto plano con las diferencias ya
+       calculadas.
+28         ajustesGraf:        texto plano en formato de gnuplot que se invoca
+       para la 
+29                             realizacion de los graficos
+30     outputs
+31         diferenciasAjustadas: archivo de texto plano para la escritura de los
+       valores
+32                               evaluados en la funcion de ajuste.
+33         ajustesUVW.eps: grafico con las diferencias y el ajuste en las 3
+       componentes.
+34         
+35     """
+36     
+37     datos=open('diferencias/'+arch1,'r')
+38     salida=open('diferencias/diferenciasAjustadas','w')
+39     JD=[]
+40     u=[]
+41     v=[]
+42     w=[]
+43     datos1=datos.readlines()
+44     for l in datos1:
+45         campos=l.split()
+46         dt=l[:19]
+47         dt=Time(dt, format='iso')
+48         juliano1=dt.jd
+49         JD.append(juliano1-2456600)
+50 #         dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+51 #         dt_int=toTimestamp(dt)
+52         u.append(float(campos[2]))
+53         v.append(float(campos[3]))
+54         w.append(float(campos[4]))
+55     # Ajuste lineal, devuelve los coeficientes en orden creciente
+56     a=0.0
+57     c,b = P.polynomial.polyfit(JD, u, deg=1)
+58     print '---------Polinomio para U--------------'
+59     print(c,b,a)
+60     y2=[]
+61     y3=[]
+62     y4=[]
+63     for x in JD:
+64         x=float(x)
+65         y2.append(c+b*x+a*x*x)
+66     print '---------Polinomio para V--------------'
+67     cv,bv= P.polynomial.polyfit(JD, v, deg=1)
+68     av=0.0
+69     print(cv,bv,av)
+70     for y in JD:
+71         y=float(y)
+72         y3.append(cv+bv*y+av*y*y)
+73     print '---------Polinomio para W--------------'
+74     aw=0.0
+75     cw,bw= P.polynomial.polyfit(JD, w, deg=1)
+76     print(cw,bw,aw)
+77     for z in JD:
+78         z=float(z)
+79         y4.append(cw+bw*z+aw*z*z)
+80     for k in range(len(JD)):
+81         info1=str(JD[k])+' '+str(u[k])+' '+str(v[k])+' '+str(w[k])+' '+str(y2[k
+      ])+' '+str(y3[k])+' '+str(y4[k])+'\n'
+82         salida.write(info1)
+83         
+84     """
+85     Grafico
+86     """   
+87     system('gnuplot diferencias/'+arch2)
+    
+\end{DoxyCode}

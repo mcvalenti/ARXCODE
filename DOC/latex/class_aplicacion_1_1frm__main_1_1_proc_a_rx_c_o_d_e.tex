@@ -1,0 +1,252 @@
+\section{\-Aplicacion.\-frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E \-Class \-Reference}
+\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e}\index{\-Aplicacion.\-frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion.\-frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf item\-\_\-click}
+\item 
+def {\bf item\-\_\-click1}
+\item 
+def {\bf center}
+\item 
+def {\bf close\-\_\-application}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf inicio}
+\item 
+{\bf encuentros}
+\item 
+{\bf list\-Widget}
+\item 
+{\bf procesamientos}
+\item 
+{\bf list\-Widget1}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 29 of file frm\-\_\-main.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_a1d4e0476915ff79ff8489dafd5982984}
+
+
+\-Definition at line 31 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+31 
+32     def __init__(self):
+33         super(ProcARxCODE, self).__init__()
+34         
+35         self.setWindowTitle('ARxCODE')
+36         self.setWindowIcon(QIcon('nave.png'))
+37         extractAction = QAction("Salir", self)
+38         extractAction.setShortcut("Ctrl+Q")
+39         extractAction.setStatusTip('Leave The App')
+40         extractAction.triggered.connect(self.close_application)
+41         
+42         """
+43         Intento de correr desde el menu
+44         """
+45 #         tleAction= QWidgetAction('TLE',self)
+46 #         tleAction.setStatusTip('Procesa datos TLE')
+47 #         tleAction.triggered.connect(self.ProcManual)
+48         self.center()
+49         self.statusBar()
+50         mainMenu = self.menuBar()
+51         fileMenu = mainMenu.addMenu('&File')
+52         fileMenu.addAction(extractAction)
+53     
+54         self.inicio = QLabel() 
+55         pixmap = QPixmap('../visual/imagenes/orbitas') #nubeDebris')
+       #cords_contol.jpg')
+56         self.inicio.setPixmap(pixmap)
+57         self.setCentralWidget(self.inicio)
+58 
+59         
+60         #IMAGEN
+61 #         palette    = QPalette()
+62 #        
+       palette.setBrush(QPalette.Background,QBrush(QPixmap('../visual/imagenes/cords_contol.jpg')))
+63 #         self.setPalette(palette)
+64         """
+65         DockWidgets
+66         """
+67         # Lista de Encuentros.
+68         self.encuentros = QDockWidget("Registro de Encuentros", self)
+69         self.listWidget = QListWidget()
+70         self.listWidget.addItem("PROXIMO ENCUENTRO")
+71         self.listWidget.addItem("Encuentros Anteriores.")
+72         self.encuentros.setWidget(self.listWidget)
+73         self.encuentros.setFloating(False)
+74         self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros)
+75         # Lista de Procesamientos.
+76         self.procesamientos = QDockWidget("Procesamientos", self)
+77         self.listWidget1 = QListWidget()
+78         self.listWidget1.addItem("Procesamiento de un set de TLE")
+79         self.listWidget1.addItem("Procesamiento de Datos de Mision")
+80         self.procesamientos.setWidget(self.listWidget1)
+81         self.procesamientos.setFloating(False)
+82         self.addDockWidget(Qt.LeftDockWidgetArea, self.procesamientos)
+83         
+84         """
+85         Acciones
+86         """
+87         self.listWidget.itemClicked.connect(self.item_click)
+88         self.listWidget1.itemClicked.connect(self.item_click1)
+89 
+90         self.show()
+91 
+        
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!center@{center}}
+\index{center@{center}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{center}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E.\-center} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_aad4904ff9934bd271b1de98bf4c2c085}
+
+
+\-Definition at line 114 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+114 
+115     def center(self):
+116         screen = QDesktopWidget().screenGeometry()
+117         size = self.geometry()
+118         self.move((screen.width() - size.width())/2, (screen.height() - 
+      size.height())/2)
+    
+\end{DoxyCode}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!close\-\_\-application@{close\-\_\-application}}
+\index{close\-\_\-application@{close\-\_\-application}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{close\-\_\-application}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E.\-close\-\_\-application} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_a40ef2622d0e65cbe3e057e437723be2b}
+
+
+\-Definition at line 119 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+119 
+120     def close_application(self):
+        sys.exit()
+\end{DoxyCode}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!item\-\_\-click@{item\-\_\-click}}
+\index{item\-\_\-click@{item\-\_\-click}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{item\-\_\-click}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E.\-item\-\_\-click} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_af87775dbdc5c599fd93fbb3a62f84ed0}
+
+
+\-Definition at line 92 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+92 
+93     def item_click(self):       
+94         cdm_click=self.listWidget.currentItem().text()
+95         if cdm_click == 'PROXIMO ENCUENTRO':
+96             ventana1=ProcCDM()
+97             self.setCentralWidget(ventana1)
+98             ventana1.exec_()
+99         else:
+100             ventana2=ProcEncuentro()
+101             self.setCentralWidget(ventana2)
+102             ventana2.exec_()
+
+\end{DoxyCode}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!item\-\_\-click1@{item\-\_\-click1}}
+\index{item\-\_\-click1@{item\-\_\-click1}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{item\-\_\-click1}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E.\-item\-\_\-click1} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_a005c06ede1340e90262cae94f44189b8}
+
+
+\-Definition at line 103 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+103 
+104     def item_click1(self):
+105         c_item=self.listWidget1.currentItem().text()
+106         if c_item == 'Procesamiento de un set de TLE':
+107             ventana3=ProcTle()
+108             self.setCentralWidget(ventana3)
+109             ventana3.exec_()
+110         else:
+111             ventana4=ProcMision()
+112             self.setCentralWidget(ventana4)
+113             ventana4.exec_()
+                
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!encuentros@{encuentros}}
+\index{encuentros@{encuentros}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{encuentros}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E\-::encuentros}}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_a1d8929e1e8a2d316cc757bf551141fe3}
+
+
+\-Definition at line 41 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!inicio@{inicio}}
+\index{inicio@{inicio}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{inicio}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E\-::inicio}}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_adc7f0557ece0bb19955dc79e7f3c1a72}
+
+
+\-Definition at line 36 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!list\-Widget@{list\-Widget}}
+\index{list\-Widget@{list\-Widget}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{list\-Widget}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E\-::list\-Widget}}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_aba9c3be396df199bcf42610cbd4ca031}
+
+
+\-Definition at line 41 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!list\-Widget1@{list\-Widget1}}
+\index{list\-Widget1@{list\-Widget1}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{list\-Widget1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E\-::list\-Widget1}}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_af9e9444bb3f4f193e4bcc8e93070430b}
+
+
+\-Definition at line 41 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}!procesamientos@{procesamientos}}
+\index{procesamientos@{procesamientos}!Aplicacion::frm_main::ProcARxCODE@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-A\-Rx\-C\-O\-D\-E}}
+\subsubsection[{procesamientos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-A\-Rx\-C\-O\-D\-E\-::procesamientos}}\label{class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e_a85ce0263d652b7a2ffb472a4b3c9d1ed}
+
+
+\-Definition at line 41 of file frm\-\_\-main.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Aplicacion/{\bf frm\-\_\-main.\-py}\end{DoxyCompactItemize}

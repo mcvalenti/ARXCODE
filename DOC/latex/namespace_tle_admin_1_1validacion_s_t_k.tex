@@ -1,0 +1,133 @@
+\section{\-Tle\-Admin\-:\-:validacion\-S\-T\-K \-Namespace \-Reference}
+\label{namespace_tle_admin_1_1validacion_s_t_k}\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf path\-\_\-arch} = '../\-Tle\-Admin/validacion/'
+\item 
+string {\bf tle\-\_\-arch} = '37673tle0'
+\item 
+tuple {\bf tle} = {\bf \-Tle}({\bf path\-\_\-arch}+{\bf tle\-\_\-arch})
+\item 
+tuple {\bf fecha} = tle.\-epoca()
+\item 
+tuple {\bf salida} = open('../\-Tle\-Admin/validacion/\-Sac\-D\-\_\-\-T\-E\-M\-E.\-txt','w')
+\item 
+tuple {\bf salida2} = open('../\-Tle\-Admin/validacion/\-Sac\-D\-\_\-\-T\-O\-D.\-txt','w')
+\item 
+tuple {\bf fecha\-\_\-inicio} = datetime(fecha.\-year,fecha.\-month,fecha.\-day,0,0,0)
+\item 
+tuple {\bf info} = fecha\-\_\-inicio.\-strftime('\%\-Y-\/\%m-\/\%d \%\-H\-:\%\-M\-:\%\-S')
+\item 
+list {\bf r\-\_\-teme} = [r\-\_\-f[0],r\-\_\-f[1],r\-\_\-f[2]]
+\item 
+list {\bf v\-\_\-teme} = [v\-\_\-f[0],v\-\_\-f[1],v\-\_\-f[2]]
+\item 
+tuple {\bf r\-\_\-tod} = teme2tod({\bf fecha\-\_\-inicio},{\bf r\-\_\-teme})
+\item 
+tuple {\bf v\-\_\-tod} = teme2tod({\bf fecha\-\_\-inicio},{\bf v\-\_\-teme})
+\item 
+tuple {\bf info2} = fecha\-\_\-inicio.\-strftime('\%\-Y-\/\%m-\/\%d \%\-H\-:\%\-M\-:\%\-S')
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 24/04/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Variable \-Documentation}
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!fecha@{fecha}}
+\index{fecha@{fecha}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{fecha}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::fecha} = tle.\-epoca()}\label{namespace_tle_admin_1_1validacion_s_t_k_a3c95510a9f61dc569d5c276f9912d27d}
+
+
+\-Definition at line 15 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!fecha\-\_\-inicio@{fecha\-\_\-inicio}}
+\index{fecha\-\_\-inicio@{fecha\-\_\-inicio}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{fecha\-\_\-inicio}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::fecha\-\_\-inicio} = datetime(fecha.\-year,fecha.\-month,fecha.\-day,0,0,0)}\label{namespace_tle_admin_1_1validacion_s_t_k_aa9bf3d3224f6e8d39bf9981d8cf37459}
+
+
+\-Definition at line 18 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!info@{info}}
+\index{info@{info}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{info}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::info} = fecha\-\_\-inicio.\-strftime('\%\-Y-\/\%m-\/\%d \%\-H\-:\%\-M\-:\%\-S')}\label{namespace_tle_admin_1_1validacion_s_t_k_a91d21fa5ff5e79bb692a4f5a35d6e464}
+
+
+\-Definition at line 21 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!info2@{info2}}
+\index{info2@{info2}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{info2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::info2} = fecha\-\_\-inicio.\-strftime('\%\-Y-\/\%m-\/\%d \%\-H\-:\%\-M\-:\%\-S')}\label{namespace_tle_admin_1_1validacion_s_t_k_aede181d2bff23480a4a255af2cb84d2b}
+
+
+\-Definition at line 29 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!path\-\_\-arch@{path\-\_\-arch}}
+\index{path\-\_\-arch@{path\-\_\-arch}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{path\-\_\-arch}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::path\-\_\-arch} = '../\-Tle\-Admin/validacion/'}\label{namespace_tle_admin_1_1validacion_s_t_k_adee99245407e6962bc693a4dfca64d82}
+
+
+\-Definition at line 12 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!r\-\_\-teme@{r\-\_\-teme}}
+\index{r\-\_\-teme@{r\-\_\-teme}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{r\-\_\-teme}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::r\-\_\-teme} = [r\-\_\-f[0],r\-\_\-f[1],r\-\_\-f[2]]}\label{namespace_tle_admin_1_1validacion_s_t_k_ab0369222f77fa5c6c6428d58abaf4f8b}
+
+
+\-Definition at line 23 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!r\-\_\-tod@{r\-\_\-tod}}
+\index{r\-\_\-tod@{r\-\_\-tod}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{r\-\_\-tod}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::r\-\_\-tod} = teme2tod({\bf fecha\-\_\-inicio},{\bf r\-\_\-teme})}\label{namespace_tle_admin_1_1validacion_s_t_k_a9735750a3f7bb688f5031e9c5d83992d}
+
+
+\-Definition at line 25 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!salida@{salida}}
+\index{salida@{salida}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{salida}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::salida} = open('../\-Tle\-Admin/validacion/\-Sac\-D\-\_\-\-T\-E\-M\-E.\-txt','w')}\label{namespace_tle_admin_1_1validacion_s_t_k_ac46cb5285a2758b9a64cb5fa19ae3bbc}
+
+
+\-Definition at line 16 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!salida2@{salida2}}
+\index{salida2@{salida2}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{salida2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::salida2} = open('../\-Tle\-Admin/validacion/\-Sac\-D\-\_\-\-T\-O\-D.\-txt','w')}\label{namespace_tle_admin_1_1validacion_s_t_k_a305c49093f20fe9cf3e788ece32cb810}
+
+
+\-Definition at line 17 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!tle@{tle}}
+\index{tle@{tle}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{tle}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::tle} = {\bf \-Tle}({\bf path\-\_\-arch}+{\bf tle\-\_\-arch})}\label{namespace_tle_admin_1_1validacion_s_t_k_ac5816d7b27f0d7a75021c7889d9fc223}
+
+
+\-Definition at line 14 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!tle\-\_\-arch@{tle\-\_\-arch}}
+\index{tle\-\_\-arch@{tle\-\_\-arch}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{tle\-\_\-arch}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::tle\-\_\-arch} = '37673tle0'}\label{namespace_tle_admin_1_1validacion_s_t_k_aef1abd41149b959903df1af7a730fa84}
+
+
+\-Definition at line 13 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!v\-\_\-teme@{v\-\_\-teme}}
+\index{v\-\_\-teme@{v\-\_\-teme}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{v\-\_\-teme}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::v\-\_\-teme} = [v\-\_\-f[0],v\-\_\-f[1],v\-\_\-f[2]]}\label{namespace_tle_admin_1_1validacion_s_t_k_a2436276efed51469366b9d2bdfc3e0fd}
+
+
+\-Definition at line 24 of file validacion\-S\-T\-K.\-py.
+
+\index{\-Tle\-Admin\-::validacion\-S\-T\-K@{\-Tle\-Admin\-::validacion\-S\-T\-K}!v\-\_\-tod@{v\-\_\-tod}}
+\index{v\-\_\-tod@{v\-\_\-tod}!TleAdmin::validacionSTK@{\-Tle\-Admin\-::validacion\-S\-T\-K}}
+\subsubsection[{v\-\_\-tod}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K\-::v\-\_\-tod} = teme2tod({\bf fecha\-\_\-inicio},{\bf v\-\_\-teme})}\label{namespace_tle_admin_1_1validacion_s_t_k_a44ba7e688bc77585aabdaa60c0b1a9d5}
+
+
+\-Definition at line 27 of file validacion\-S\-T\-K.\-py.
+

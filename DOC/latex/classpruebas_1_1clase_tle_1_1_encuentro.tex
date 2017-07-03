@@ -1,0 +1,261 @@
+\section{pruebas.\-clase\-Tle.\-Encuentro \-Class \-Reference}
+\label{classpruebas_1_1clase_tle_1_1_encuentro}\index{pruebas.\-clase\-Tle.\-Encuentro@{pruebas.\-clase\-Tle.\-Encuentro}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf tle\-\_\-sat}
+\item 
+{\bf tle\-\_\-deb}
+\item 
+{\bf tca}
+\item 
+{\bf \-Dist\-Ric}
+\item 
+{\bf archivo\-\_\-dif}
+\item 
+{\bf epoca\-\_\-ini}
+\item 
+{\bf mod\-\_\-min\-Dist}
+\item 
+{\bf \-Dist\-Vector}
+\item 
+{\bf \-Vel\-Vector}
+\item 
+{\bf mod\-\_\-\-Dist1}
+\item 
+{\bf tca\-\_\-c}
+\item 
+{\bf \-Dist\-Ric\-\_\-min}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 140 of file clase\-Tle.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-clase\-Tle.\-Encuentro.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{tle\-\_\-sat, }
+\item[{}]{tle\-\_\-deb, }
+\item[{}]{tca}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1clase_tle_1_1_encuentro_a7e6399999864f7f80bd1b9e4f3c4dee2}
+\begin{DoxyVerb}
+Calcula las diferencias en posiciones y velocidades 
+para dos objetos en situacion de acercamiento, 5 minutos antes
+y 5 minutos despues del tca.
+-----------------------------------------------------------
+outpus:
+    3 archivos.
+    mod_minDist: Minima distancia en modulo en el sistema RTN. (float)
+    tca_c: Instante del maximo acercamiento. (datetime)
+    DistRic_min: coordenadas RTN en el momento de min distancia (array)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 142 of file clase\-Tle.\-py.
+
+
+\begin{DoxyCode}
+142 
+143     def __init__(self,tle_sat,tle_deb,tca):
+144         """
+145         Calcula las diferencias en posiciones y velocidades 
+146         para dos objetos en situacion de acercamiento, 5 minutos antes
+147         y 5 minutos despues del tca.
+148         -----------------------------------------------------------
+149         outpus:
+150             3 archivos.
+151             mod_minDist: Minima distancia en modulo en el sistema RTN. (float)
+152             tca_c: Instante del maximo acercamiento. (datetime)
+153             DistRic_min: coordenadas RTN en el momento de min distancia (array)
+154         """
+155         
+156         self.tle_sat=tle_sat
+157         self.tle_deb=tle_deb
+158         self.tca=tca
+159         self.DistRic=0         
+160         """
+161         Genera Archivos
+162         """
+163         sat_id=self.tle_sat.catID()
+164         deb_id=self.tle_deb.catID()
+165         self.archivo_dif ='../Encuentro/archivos/'+str(sat_id)+'_'+str(deb_id)+
+      '_rtn'
+166         salida1=open('../Encuentro/archivos/'+str(sat_id),'w+')
+167         salida2=open('../Encuentro/archivos/'+str(deb_id),'w+')
+168         salida3=open(self.archivo_dif,'w+')
+169 
+170         """
+171         Calcula las diferencias relativas entre los dos 
+172         objetos en el sistema RTN.
+173         """
+174 
+175         self.epoca_ini=self.tca-timedelta(minutes=5)
+176         epoca_fin=self.tca+timedelta(minutes=5)
+177         
+178         self.mod_minDist=sys.float_info.max
+179         while self.epoca_ini < epoca_fin:
+180             r,v=self.tle_sat.propagaTLE(self.epoca_ini)
+181             r1,v1=self.tle_deb.propagaTLE(self.epoca_ini)
+182             
+183             r=np.array([float(r[0]),float(r[1]),float(r[2])])
+184             v=np.array([float(v[0]),float(v[1]),float(v[2])])
+185             r1=np.array([float(r1[0]),float(r1[1]),float(r1[2])])
+186             v1=np.array([float(v1[0]),float(v1[1]),float(v1[2])])
+187             
+188             pos1=Posicion(r,v,self.epoca_ini)
+189             pos2=Posicion(r1,v1,self.epoca_ini)
+190             
+191             self.DistVector=pos1.r-pos2.r
+192             x_ric,y_ric,z_ric=ricSis(pos1.r,pos1.v,self.DistVector)
+193             self.DistRic=np.array([x_ric,y_ric,z_ric])
+194             self.VelVector=pos1.v-pos2.v
+195             self.mod_Dist1=np.sqrt(np.dot(self.DistRic,self.DistRic))
+196 #            self.mod_Dist1=np.sqrt(np.dot(self.DistVector,self.DistVector))
+197             if self.mod_Dist1 < self.mod_minDist:
+198                 self.mod_minDist=self.mod_Dist1
+199                 self.tca_c=self.epoca_ini
+200                 self.DistRic_min=np.array([x_ric,y_ric,z_ric])
+201             print self.epoca_ini, self.mod_Dist1
+202             self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
+203             
+204             # Transformo a Coordenadas Geodesicas.
+205             delta1, alpha1=pos1.getCoordenadasGEOD()
+206             delta2, alpha2=pos2.getCoordenadasGEOD()
+207             # GUARDA EN ARCHIVO Posiciones en ALFA, DELTA (Seudo Geodesicas).
+208             salida1.write(str(alpha1)+' '+str(delta1)+' '+datetime.strftime(
+      pos1.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
+209             salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(
+      pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n') 
+210             # GUARDA EN ARCHIVO Posiciones en RTN.
+211             salida3.write(datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '
+      +str(self.DistRic[0])+' '+str(self.DistRic[1])+' '+str(self.DistRic[2])+'\n')
+212 
+213         salida1.close()
+214         salida2.close()
+215         salida3.close()
+216 
+217 #     
+218 # if __name__=='__main__':
+219 #      
+220 #      TCA=datetime(2008,1,9,19,0,30)
+221 #      sat_id='27386' #ENVISAT
+222 #      deb_id='15482' #COSMOS
+223 #      usuario='macecilia'
+224 #      clave='MaCeciliaSpace17'
+225 #  
+226 #      tle_sat=Tle(usuario,clave,sat_id,TCA)
+227 #      tle_deb=Tle(usuario,clave,deb_id,TCA)
+228 #      
+229 #      encuentro1=Encuentro(tle_sat,tle_deb,TCA)
+230 # #     dif_r,dif_v=encuentro1.svDif()
+231 #     
+232 #     tle_archivo=Tle.creadoxArchivo(archivo='../TleAdmin/tle/37673tle0')
+233 #     print tle_archivo.epoca()
+234     
+    \end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!archivo\-\_\-dif@{archivo\-\_\-dif}}
+\index{archivo\-\_\-dif@{archivo\-\_\-dif}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{archivo\-\_\-dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::archivo\-\_\-dif}}\label{classpruebas_1_1clase_tle_1_1_encuentro_af72762abc3ab894e7ffc1e5424215eb3}
+
+
+\-Definition at line 154 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!\-Dist\-Ric@{\-Dist\-Ric}}
+\index{\-Dist\-Ric@{\-Dist\-Ric}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{\-Dist\-Ric}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::\-Dist\-Ric}}\label{classpruebas_1_1clase_tle_1_1_encuentro_a9580630b90329c0f138b47a47a4e993a}
+
+
+\-Definition at line 152 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!\-Dist\-Ric\-\_\-min@{\-Dist\-Ric\-\_\-min}}
+\index{\-Dist\-Ric\-\_\-min@{\-Dist\-Ric\-\_\-min}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{\-Dist\-Ric\-\_\-min}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::\-Dist\-Ric\-\_\-min}}\label{classpruebas_1_1clase_tle_1_1_encuentro_ada92cbea7ee81c5f5da61d08cb08acde}
+
+
+\-Definition at line 157 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!\-Dist\-Vector@{\-Dist\-Vector}}
+\index{\-Dist\-Vector@{\-Dist\-Vector}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{\-Dist\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::\-Dist\-Vector}}\label{classpruebas_1_1clase_tle_1_1_encuentro_aedd8a3ee3330aff4d6aea7bd4c30c44b}
+
+
+\-Definition at line 157 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!epoca\-\_\-ini@{epoca\-\_\-ini}}
+\index{epoca\-\_\-ini@{epoca\-\_\-ini}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{epoca\-\_\-ini}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::epoca\-\_\-ini}}\label{classpruebas_1_1clase_tle_1_1_encuentro_a64cc6d8583bccb824569de3dda2efddb}
+
+
+\-Definition at line 157 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!mod\-\_\-\-Dist1@{mod\-\_\-\-Dist1}}
+\index{mod\-\_\-\-Dist1@{mod\-\_\-\-Dist1}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{mod\-\_\-\-Dist1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::mod\-\_\-\-Dist1}}\label{classpruebas_1_1clase_tle_1_1_encuentro_a769750840e1f38038e22ace6a5a6bac7}
+
+
+\-Definition at line 157 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!mod\-\_\-min\-Dist@{mod\-\_\-min\-Dist}}
+\index{mod\-\_\-min\-Dist@{mod\-\_\-min\-Dist}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{mod\-\_\-min\-Dist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::mod\-\_\-min\-Dist}}\label{classpruebas_1_1clase_tle_1_1_encuentro_ad2e2746fd37fe86d659b1c7e5731ba5a}
+
+
+\-Definition at line 157 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!tca@{tca}}
+\index{tca@{tca}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{tca}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::tca}}\label{classpruebas_1_1clase_tle_1_1_encuentro_a6517088d42ceaf01d97ccd1e2c8ccb5c}
+
+
+\-Definition at line 152 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!tca\-\_\-c@{tca\-\_\-c}}
+\index{tca\-\_\-c@{tca\-\_\-c}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{tca\-\_\-c}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::tca\-\_\-c}}\label{classpruebas_1_1clase_tle_1_1_encuentro_aafdda70a8d6f7862b4211f3a9fe49023}
+
+
+\-Definition at line 157 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!tle\-\_\-deb@{tle\-\_\-deb}}
+\index{tle\-\_\-deb@{tle\-\_\-deb}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{tle\-\_\-deb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::tle\-\_\-deb}}\label{classpruebas_1_1clase_tle_1_1_encuentro_ad15cca3ff05d0048906d1d02140fbd7d}
+
+
+\-Definition at line 152 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!tle\-\_\-sat@{tle\-\_\-sat}}
+\index{tle\-\_\-sat@{tle\-\_\-sat}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{tle\-\_\-sat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::tle\-\_\-sat}}\label{classpruebas_1_1clase_tle_1_1_encuentro_acde6947c44e857998bdb3f65b932f8d5}
+
+
+\-Definition at line 152 of file clase\-Tle.\-py.
+
+\index{pruebas\-::clase\-Tle\-::\-Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}!\-Vel\-Vector@{\-Vel\-Vector}}
+\index{\-Vel\-Vector@{\-Vel\-Vector}!pruebas::claseTle::Encuentro@{pruebas\-::clase\-Tle\-::\-Encuentro}}
+\subsubsection[{\-Vel\-Vector}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Encuentro\-::\-Vel\-Vector}}\label{classpruebas_1_1clase_tle_1_1_encuentro_a592e3697e36b946c3945ab10110424df}
+
+
+\-Definition at line 157 of file clase\-Tle.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf clase\-Tle.\-py}\end{DoxyCompactItemize}

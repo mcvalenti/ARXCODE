@@ -1,0 +1,306 @@
+\section{\-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M \-Class \-Reference}
+\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m}\index{\-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M@{\-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf init\-U\-I}
+\item 
+def {\bf salir\-Cdm}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf cdm\-\_\-titulo}
+\item 
+{\bf boton\-\_\-graf\-Cdm}
+\item 
+{\bf boton\-\_\-informe}
+\item 
+{\bf boton\-\_\-salir\-Cdm}
+\item 
+{\bf \-C\-D\-M\-\_\-edit}
+\item 
+{\bf table\-P\-O\-C}
+\item 
+{\bf cdm\-\_\-xml}
+\item 
+{\bf cdm\-\_\-nombre}
+\item 
+{\bf obj\-\_\-list}
+\item 
+{\bf \-T\-C\-A}
+\item 
+{\bf sat\-\_\-idc}
+\item 
+{\bf deb\-\_\-idc}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 122 of file frm\-\_\-main.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{parent = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a9aff53446934408cdfded450b0968f69}
+
+
+\-Definition at line 123 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+123 
+124     def __init__(self,parent=None):
+125         QDialog.__init__(self,parent)
+126         
+127         self.setWindowModality(Qt.ApplicationModal)
+128         self.initUI()
+129 
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!init\-U\-I@{init\-U\-I}}
+\index{init\-U\-I@{init\-U\-I}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{init\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M.\-init\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a33b199687fcecc96e4d2912d9f0fbf20}
+\begin{DoxyVerb}
+Etiquetas
+\end{DoxyVerb}
+ 
+
+\-Definition at line 130 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+130 
+131     def initUI(self):
+132         
+133         """
+134         Etiquetas
+135         """
+136         self.cdm_titulo = QLabel('Informe CDM')      
+137         """
+138         Botones
+139         """
+140         self.boton_grafCdm  = QPushButton('Graficos')
+141         self.boton_informe  = QPushButton('Generar Informe')
+142         self.boton_salirCdm = QPushButton('SALIR')
+143         """
+144         OTROS
+145         """
+146         self.CDM_edit    = QTextEdit()
+147         self.tablePOC   = QTableWidget()
+148         self.tablePOC.setRowCount(2)
+149         self.tablePOC.setColumnCount(8)
+150         listaLabels=['Norad Id','Nombre','TCAcdm','TCAarx','MinD cdm','MinD arx
+      ','PoC cdm','PoC arx']
+151         self.tablePOC.setHorizontalHeaderLabels(listaLabels)
+152         
+153         grid = QGridLayout()
+154         grid.setSpacing(5)
+155         
+156         grid.addWidget(self.CDM_edit,2,1)
+157         grid.addWidget(self.cdm_titulo,1,1)
+158         grid.addWidget(self.boton_grafCdm,4,2)
+159         grid.addWidget(self.boton_informe,5,2)
+160         grid.addWidget(self.boton_salirCdm,6,2)
+161         grid.addWidget(self.tablePOC,3,1)
+162         
+163         self.setLayout(grid)
+164         self.setWindowTitle('Procesamiento de CDM')    
+165         self.show()
+166         
+167         """
+168         Acciones
+169         """
+170         self.boton_salirCdm.clicked.connect(self.salirCdm)
+171         
+172         """
+173         Carga de Informacion principal
+174         """
+175         self.cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a
+       Procesar', "../CDM/archivos/*")
+176         self.cdm_nombre=str(self.cdm_xml).split('/')[-1]
+177         self.TCA, self.MISS_DISTANCE,self.POC,self.obj_list=extraeCDM(self.
+      cdm_nombre)
+178         infoCDM='Mision = '+str(self.obj_list[0][0])+'---- ID= '+str(self.
+      obj_list[0][1])+'\n'+'Desecho = '+str(self.obj_list[1][0])+'---- ID= '+str(
+      self.obj_list[1][1])+'\n'+'TCA = '+self.TCA+'\n'+'Minima Distancia [m] = '+self.
+      MISS_DISTANCE+'\n'+'Probabilidad de Colision = '+self.POC                           
+                                     
+179         self.CDM_edit.setText(infoCDM)
+180                 
+181         """
+182         Pruebas ENVISAT-COSMOS
+183         """
+184         self.TCA=datetime(2008,1,9,19,0,30,6)
+185         TCAstr0=datetime.strftime(self.TCA,'%Y-%m-%dT%H:%M:%S')
+186         self.sat_idc='27386' #ENVISAT
+187         self.deb_idc='15482' #COSMOS
+188         
+189         Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.07801163426303
+      5007],
+190                 [-0.031437388833697122,0.0025693554190851101,-0.014250096142904
+      997],
+191                 [0.078011634263035007,-0.014250096142904997,0.09678662577174652
+      9]])
+192     
+193         Cm=np.array([[4.8247926515782202,0.05994752830943241,0.0495268675408096
+      35],
+194                 [0.05994752830943241,0.019150349628774828,0.012470649611436152]
+      ,
+195                 [0.049526867540809635,0.012470649611436152,0.012649606483621921
+      ]])
+196         
+197         TCAc,mod_dif,poc=evaluaEncuentro(self.TCA,self.sat_idc,self.deb_idc,Cd,
+      Cm)
+198         TCAstr=datetime.strftime(TCAc,'%Y-%m-%d %H:%M:%S.%f')
+199         mod_dif=int(mod_dif*1000.0)
+200         # set data self.TCA, self.MISS_DISTANCE,self.POC
+201         self.tablePOC.setItem(0,0, QTableWidgetItem('Mision'))
+202         self.tablePOC.setItem(1,0, QTableWidgetItem('Debris'))
+203         self.tablePOC.setItem(0,1, QTableWidgetItem(self.sat_idc))
+204         self.tablePOC.setItem(1,1, QTableWidgetItem(self.deb_idc))
+205         self.tablePOC.setItem(0,2, QTableWidgetItem(TCAstr0))
+206         self.tablePOC.setItem(0,3, QTableWidgetItem(TCAstr))
+207         self.tablePOC.setItem(0,4, QTableWidgetItem(self.MISS_DISTANCE))
+208         self.tablePOC.setItem(0,5, QTableWidgetItem(str(mod_dif)))
+209         self.tablePOC.setItem(0,6, QTableWidgetItem(self.POC))
+210         self.tablePOC.setItem(0,7, QTableWidgetItem(poc))
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!salir\-Cdm@{salir\-Cdm}}
+\index{salir\-Cdm@{salir\-Cdm}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{salir\-Cdm}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M.\-salir\-Cdm} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a6078f86c360fc473378c37871bc276c1}
+
+
+\-Definition at line 211 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+211 
+212     def salirCdm(self):
+        self.accept()
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!boton\-\_\-graf\-Cdm@{boton\-\_\-graf\-Cdm}}
+\index{boton\-\_\-graf\-Cdm@{boton\-\_\-graf\-Cdm}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{boton\-\_\-graf\-Cdm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::boton\-\_\-graf\-Cdm}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ac86bc089a875acc78843824ca78d286c}
+
+
+\-Definition at line 134 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!boton\-\_\-informe@{boton\-\_\-informe}}
+\index{boton\-\_\-informe@{boton\-\_\-informe}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{boton\-\_\-informe}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::boton\-\_\-informe}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_acb483334d88f558ace6d2174521dd982}
+
+
+\-Definition at line 134 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!boton\-\_\-salir\-Cdm@{boton\-\_\-salir\-Cdm}}
+\index{boton\-\_\-salir\-Cdm@{boton\-\_\-salir\-Cdm}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{boton\-\_\-salir\-Cdm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::boton\-\_\-salir\-Cdm}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a18aa5750b77a458dbd44a6fe96688186}
+
+
+\-Definition at line 134 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-C\-D\-M\-\_\-edit@{\-C\-D\-M\-\_\-edit}}
+\index{\-C\-D\-M\-\_\-edit@{\-C\-D\-M\-\_\-edit}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{\-C\-D\-M\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::\-C\-D\-M\-\_\-edit}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a4e7b0190497039d0e89b297c27632edb}
+
+
+\-Definition at line 136 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cdm\-\_\-nombre@{cdm\-\_\-nombre}}
+\index{cdm\-\_\-nombre@{cdm\-\_\-nombre}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cdm\-\_\-nombre}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cdm\-\_\-nombre}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ae9b065153b32988b2b7b3f75bd1dee55}
+
+
+\-Definition at line 140 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cdm\-\_\-titulo@{cdm\-\_\-titulo}}
+\index{cdm\-\_\-titulo@{cdm\-\_\-titulo}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cdm\-\_\-titulo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cdm\-\_\-titulo}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a3f0b2faa46ba997ba164f5cdad997d4d}
+
+
+\-Definition at line 132 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cdm\-\_\-xml@{cdm\-\_\-xml}}
+\index{cdm\-\_\-xml@{cdm\-\_\-xml}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cdm\-\_\-xml}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cdm\-\_\-xml}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a92d0f7594213d5cf23a6a8a3b0dcf568}
+
+
+\-Definition at line 140 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!deb\-\_\-idc@{deb\-\_\-idc}}
+\index{deb\-\_\-idc@{deb\-\_\-idc}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{deb\-\_\-idc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::deb\-\_\-idc}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a384ec9c81d0d9c4ff39c18ae3e35a7e1}
+
+
+\-Definition at line 142 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!obj\-\_\-list@{obj\-\_\-list}}
+\index{obj\-\_\-list@{obj\-\_\-list}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{obj\-\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::obj\-\_\-list}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a80c1806f35b86764692f5ff467650b97}
+
+
+\-Definition at line 140 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!sat\-\_\-idc@{sat\-\_\-idc}}
+\index{sat\-\_\-idc@{sat\-\_\-idc}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{sat\-\_\-idc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::sat\-\_\-idc}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a990f4900d518c601adf8ff9988bdc60a}
+
+
+\-Definition at line 142 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!table\-P\-O\-C@{table\-P\-O\-C}}
+\index{table\-P\-O\-C@{table\-P\-O\-C}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{table\-P\-O\-C}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::table\-P\-O\-C}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a00e6ed32fb0248050fb7f5882aa44f26}
+
+
+\-Definition at line 136 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-T\-C\-A@{\-T\-C\-A}}
+\index{\-T\-C\-A@{\-T\-C\-A}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{\-T\-C\-A}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::\-T\-C\-A}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_abe1e1e647122ef84eb86b2707b3bbc79}
+
+
+\-Definition at line 142 of file frm\-\_\-main.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Aplicacion/{\bf frm\-\_\-main.\-py}\end{DoxyCompactItemize}

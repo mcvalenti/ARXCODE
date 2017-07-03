@@ -1,0 +1,889 @@
+\section{\-Ajustar\-T\-L\-E\-:\-:\-Ajustar\-T\-L\-E \-Namespace \-Reference}
+\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e}\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf seleccion\-Sat}
+\item 
+def {\bf generador\-Datos}
+\item 
+def {\bf ordena\-Tles}
+\item 
+def {\bf tupla\-Float}
+\item 
+def {\bf tle\-Primario}
+\item 
+def {\bf tle\-Secundario}
+\item 
+def {\bf dif\-Tle}
+\item 
+def {\bf genera\-\_\-estadistica\-Bin}
+\item 
+def {\bf dif\-Primario}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on Aug 26, 2016
+
+Toma 10 tles de un archivo y realiza un metodo de ajuste,
+a fin de obtener una matriz de covarianza con el error.
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!dif\-Primario@{dif\-Primario}}
+\index{dif\-Primario@{dif\-Primario}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{dif\-Primario}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-dif\-Primario} (
+\begin{DoxyParamCaption}
+\item[{}]{tle\-Ordenados, }
+\item[{}]{cantidad\-\_\-tles}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_a55606547afe873c79e7365c980522508}
+\begin{DoxyVerb}
+Compara cada uno de los valores de los TLEs propagados 
+a la fecha del TLEs final (primario)
+----------------------------------------------------------------
+input
+    nombre: nombre de archivo que identifica el procesamiento. (string)
+    largo: cantidad de TLEs en el set, menos  uno. (integer)
+output
+    salida: nombre del archivo que contiene las diferencias solo contra 
+    el SV de referencia. (string), path: '../AjustarTLE/diferencias/'
+\end{DoxyVerb}
+ 
+
+\-Definition at line 367 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+367 
+368 def difPrimario(tleOrdenados,cantidad_tles):
+369     """
+370     Compara cada uno de los valores de los TLEs propagados 
+371     a la fecha del TLEs final (primario)
+372     ----------------------------------------------------------------
+373     input
+374         nombre: nombre de archivo que identifica el procesamiento. (string)
+375         largo: cantidad de TLEs en el set, menos  uno. (integer)
+376     output
+377         salida: nombre del archivo que contiene las diferencias solo contra 
+378         el SV de referencia. (string), path: '../AjustarTLE/diferencias/'
+379     """
+380 #     nombre1=nombre.split('.')[0]
+381 #     nombre2=nombre1.split('_')
+382 #     nombre3='setPri_'+nombre2[1]+'_'+nombre2[2]+'_'+nombre2[3]+'.TLE'
+383 #     difG=open('../AjustarTLE/diferencias/'+nombre,'r')
+384 #     contenido=difG.readlines()
+385 #     difP=open('../AjustarTLE/diferencias/'+nombre3,'w')
+386 #     for c in range(largo):
+387 #         campos=contenido[c].split(' ')
+388 #         info=campos[0]+' '+campos[1]+' '+campos[2]+' '+campos[3]+'
+       '+campos[4]+' '+campos[5]+' '+campos[6]+' '+campos[7]+'\n'
+389 #         difP.write(info)
+390 #     difP.close() 
+391 #     return nombre3
+392     tles=glob.glob('../TleAdmin/tle/*')
+393     dic_tles=generadorDatos(tles)
+394     tle_ordenados=ordenaTles(dic_tles)
+395     
+396     tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+397     cat_id = tle_inicio.catID()
+398     epoca_ini = tle_inicio.epoca()
+399     
+400     tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+401     epoca_fin  = tle_primario.epoca()
+402     epoca_ffin = epoca_fin
+403     epoca15dias=epoca_ffin-timedelta(days=15)
+404     
+405     nombre='difPri_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+
+      epoca_ini.strftime('%Y%m%d')+'.TLE'
+406     nombre2='difPri_xyz_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+
+      epoca_ini.strftime('%Y%m%d')+'.TLE'
+407     dtot=open('../AjustarTLE/diferencias/'+nombre+'','w')
+408     dtot2=open('../AjustarTLE/diferencias/'+nombre2+'','w')
+409     
+410     dt_tle=[]
+411     dt_frac=[]
+412     dv=[]
+413     dn=[]
+414     dc=[]
+415     dvv=[]
+416     dnn=[]
+417     dcc=[]
+418     dx=[]
+419     dy=[]
+420     dz=[]
+421     dxx=[]
+422     dyy=[]
+423     dzz=[]
+424 
+425     tlepri=tleOrdenados[-1][0]
+426     r,rp,ffin=tlePrimario(tlepri) # En TEME
+427     """
+428     Transformacion del TEME al TOD.
+429     """ 
+430     r=teme2tod(ffin, r)
+431     r=np.array([r[0,0],r[0,1],r[0,2]])
+432     rp=teme2tod(ffin, rp) 
+433     rp=np.array([rp[0,0],rp[0,1],rp[0,2]])
+434     """
+435     fin de la transformacion
+436     """
+437     item=range(len(tleOrdenados)-2,-1,-1)       
+438     for j in item:
+439         tlesec=tleOrdenados[j][0]
+440         tle1=Tle('../TleAdmin/tle/'+tlesec)
+441         tle1_epoca=tle1.epoca()
+442         if tle1_epoca >= epoca15dias:
+443             pos,vel,fsec=tleSecundario(tlesec, ffin)
+444             """
+445             Transformacion del TEME al TOD.
+446             """ 
+447             pos=teme2tod(fsec, pos)
+448             pos=np.array([pos[0,0],pos[0,1],pos[0,2]])
+449             vel=teme2tod(fsec, vel)
+450             vel=np.array([vel[0,0],vel[0,1],vel[0,2]])
+451             """
+452             fin de la transformacion
+453             """
+454             dt_tle.append(fsec)
+455             dr=pos-r
+456             d_v=vel-rp
+457             x=dr[0]
+458             y=dr[1]
+459             z=dr[2]
+460             xx=d_v[0]
+461             yy=d_v[1]
+462             zz=d_v[2]
+463             dt=abs(fsec-ffin)
+464             dtfracdias=dt.total_seconds()/86400.0
+465             v,n,c=vncSis(r, rp, dr)
+466             vv,nn,cc=vncSis(r,rp,d_v)
+467     #             v,n,c=ricSis(r, rp, dr)
+468     #             vv,nn,cc=ricSis(r,rp,dv)
+469             infodifpri=str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+'
+       '+str(nn)+' '+str(cc)+' '+tlesec+'\n'
+470             infodifpri2=str(fsec)+' '+str(x)+' '+str(y)+' '+str(z)+' '+str(xx)+
+      ' '+str(yy)+' '+str(zz)+' '+tlesec+'\n'
+471             dtot.write(infodifpri)
+472             dtot2.write(infodifpri2)
+473             dt_frac.append(dtfracdias)
+474             '''
+475             Sistema VNC
+476             '''
+477             dv.append(v)
+478             dn.append(n)
+479             dc.append(c)
+480             dvv.append(vv)
+481             dnn.append(nn)
+482             dcc.append(cc)
+483             '''
+484             Sistema TEME
+485             '''
+486             dx.append(x)
+487             dy.append(y)
+488             dz.append(z)
+489             dxx.append(xx)
+490             dyy.append(yy)
+491             dzz.append(zz)       
+492             
+493     data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn,dt_frac]
+494     
+495     print '++++++++++++GRADO 2++++++++++++++++++'
+496     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data1,2)
+497     print coef
+498     print statsReport
+499     
+500     print '++++++++++++GRADO 1++++++++++++++++++'
+501     dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data1,1)
+502     print coef1
+503     print statsReport1
+504 
+505     data=[dt,data1,coef,nombre]   
+506 
+507     return data     
+508 
+509 # if __name__=='__main__':
+510 # #    ejecuta_procesamiento_TLE():
+511 #     """
+512 #     Se crean los directorios necesarios.
+513 #     """
+514 # 
+515 #     d1='../TleAdmin/tle'
+516 #     if not os.path.exists(d1):
+517 #         os.mkdir(d1)
+518 #     d2='../AjustarTLE/diferencias'
+519 #     if not os.path.exists(d2):
+520 #         os.mkdir(d2)
+521 #     d3='../main/matrices/'
+522 #     if not os.path.exists(d3):
+523 #         os.mkdir(d3)
+524 #     d4='../visual/archivos'
+525 #     if not os.path.exists(d4):
+526 #         os.mkdir(d4)
+527 #         
+528 #     files=glob.glob('../AjustarTLE/diferencias/*')
+529 #     for filename in files:
+530 #         os.unlink(filename)
+531 #         
+532 #     self.bin=difTle(self.tleOrdenados, self.tles)
+533 #     self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
+534 #     self.diferencias=difPrimario(self.filename,self.tles-1)
+535 # 
+536 #     t=[]
+537 #     dv=[]
+538 #     dn=[]
+539 #     dc=[]
+540 #     
+541 #     
+542 #     archivo=open('../AjustarTLE/diferencias/difTotal','r')
+543 #     contenido=archivo.readlines()
+544 #     
+545 #     for c in contenido:
+546 #         campos=c.split(',')
+547 #         t.append(float(campos[0]))
+548 #         dv.append(float(campos[1]))
+549 #         dn.append(float(campos[2]))
+550 #         dc.append(float(campos[3]))
+551 #         
+552 #     c, b, a = P.polynomial.polyfit(t, dv, deg=2)
+553 #     print c,b,a
+554 #     
+555 #     x=np.linspace(0,30, 60)
+556 #     y=[]
+557 #     for i in x:
+558 #         y.append(-0.002373*i*i+0.061160*i-0.077031)
+559 #     
+560 #     plt.plot(t,dv,'x')
+561 #     plt.plot(x,y,'-')
+562 #     plt.show()
+563     
+564 
+565 #     """
+566 #     Verificacion de generacion del archivo con las diferencias
+567 #     """
+568 #     print
+       '---------------------------------------------------------------------------------'
+569 #     print "Verifiacion de la Generacion del archivo de diferencias: ",salida
+570 #     print "Ultima modificacion %s" %
+       time.ctime(os.path.getmtime('../AjustarTLE/diferencias/difTotal'))
+571 #     print "creado: %s" %
+       time.ctime(os.path.getctime('../AjustarTLE/diferencias/difTotal'))
+572 #     print ' '
+573 #     print ' '
+574 #     """
+575 #     generacion de graficos
+576 #     """ 
+577         # gegrafTot('../AjustarTLE/diferencias/difTotal'+setID,setID)
+578     
+    #     #gegraf('../AjustarTLE/diferencias/diferencias'+tlepri,tlepri)\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!dif\-Tle@{dif\-Tle}}
+\index{dif\-Tle@{dif\-Tle}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{dif\-Tle}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-dif\-Tle} (
+\begin{DoxyParamCaption}
+\item[{}]{tle\-Ordenados, }
+\item[{}]{cantidad\-\_\-tles}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_a4bebc343b4cce0cb101bd99f5c872b6b}
+\begin{DoxyVerb}
+---------------------------------------------------------------
+Diferencias de Osweiler. (Pair-Wise Differencing)
+Calcula las diferencias entre TLE primario y secundarios
+en el sistema v,n y c;  o (ric). 
+Lo hace en forma iterativa, recorriendo todos los TLE a fin
+de que todos son primarios en algun momento.
+---------------------------------------------------------------
+input:
+    tleOrdeandos: lista de TLEs y sus 2-lineas (lista de lista)
+output:
+    difTotal# : archivo de texto plano (4 columnas) para cada set
+    [AjustarTLE/diferencias/difTotal_satID_fechaIni#]
+    bin : lista de listas, con las diferencias por bin. 
+    data: lista de listas, [dt_frac,dv,dn,dc]
+\end{DoxyVerb}
+ 
+
+\-Definition at line 186 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+186 
+187 def difTle(tleOrdenados,cantidad_tles):
+188     """
+189     ---------------------------------------------------------------
+190     Diferencias de Osweiler. (Pair-Wise Differencing)
+191     Calcula las diferencias entre TLE primario y secundarios
+192     en el sistema v,n y c;  o (ric). 
+193     Lo hace en forma iterativa, recorriendo todos los TLE a fin
+194     de que todos son primarios en algun momento.
+195     ---------------------------------------------------------------
+196     input:
+197         tleOrdeandos: lista de TLEs y sus 2-lineas (lista de lista)
+198     output:
+199         difTotal# : archivo de texto plano (4 columnas) para cada set
+200         [AjustarTLE/diferencias/difTotal_satID_fechaIni#]
+201         bin : lista de listas, con las diferencias por bin. 
+202         data: lista de listas, [dt_frac,dv,dn,dc]
+203     """  
+204     
+205     print 'Procesando datos TLE...'
+206     tles=glob.glob('../TleAdmin/tle/*')
+207     dic_tles=generadorDatos(tles)
+208     tle_ordenados=ordenaTles(dic_tles)
+209     
+210     tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+211     cat_id = tle_inicio.catID()
+212     epoca_ini = tle_inicio.epoca()
+213     
+214     tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+215     epoca_fin  = tle_primario.epoca()
+216     epoca_ffin = epoca_fin
+217     
+218     nombre='difTot_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+
+      epoca_ini.strftime('%Y%m%d')+'.TLE'
+219     nombre2='difTot_xyz_'+str(cat_id)+'_'+epoca_ffin.strftime('%Y%m%d')+'_'+
+      epoca_ini.strftime('%Y%m%d')+'.TLE'
+220     dtot=open('../AjustarTLE/diferencias/'+nombre+'','w')
+221     dtot2=open('../AjustarTLE/diferencias/'+nombre2+'','w')
+222     dt_tle=[]
+223     dt_frac=[]
+224     dv=[]
+225     dn=[]
+226     dc=[]
+227     dvv=[]
+228     dnn=[]
+229     dcc=[]
+230     dx=[]
+231     dy=[]
+232     dz=[]
+233     dxx=[]
+234     dyy=[]
+235     dzz=[]
+236     bin=[[],[],[],[],[],[],[],[],[],[],[],[],[],[],[]]
+237     m=0
+238     for i in range(cantidad_tles-1,0,-1):       
+239         tlepri=tleOrdenados[i][0]
+240         r,rp,ffin=tlePrimario(tlepri)     
+241         item=range(i-1,-1,-1)       
+242         for j in item:
+243             tlesec=tleOrdenados[j][0]
+244             pos,vel,fsec=tleSecundario(tlesec, ffin)
+245             dt_tle.append(fsec)
+246             dr=pos-r
+247             d_v=vel-rp
+248             x=dr[0]
+249             y=dr[1]
+250             z=dr[2]
+251             xx=d_v[0]
+252             yy=d_v[1]
+253             zz=d_v[2]
+254             dt=abs(fsec-ffin)
+255             dtfracdias=dt.total_seconds()/86400.0
+256             v,n,c=vncSis(r, rp, dr)
+257             vv,nn,cc=vncSis(r,rp,d_v)
+258 #             v,n,c=ricSis(r, rp, dr)
+259 #             vv,nn,cc=ricSis(r,rp,dv)
+260             infodiftot=str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+'
+       '+str(nn)+' '+str(cc)+' '+tlesec+'\n'
+261             infodiftot2=str(fsec)+' '+str(x)+' '+str(y)+' '+str(z)+' '+str(xx)+
+      ' '+str(yy)+' '+str(zz)+' '+tlesec+'\n'
+262             dtot.write(infodiftot)
+263             dtot2.write(infodiftot2)
+264             dt_frac.append(dtfracdias)
+265             '''
+266             Sistema VNC
+267             '''
+268             dv.append(v)
+269             dn.append(n)
+270             dc.append(c)
+271             dvv.append(vv)
+272             dnn.append(nn)
+273             dcc.append(cc)
+274             '''
+275             Sistema TEMA
+276             '''
+277             dx.append(x)
+278             dy.append(y)
+279             dz.append(z)
+280             dxx.append(xx)
+281             dyy.append(yy)
+282             dzz.append(zz)           
+283             """
+284             Clasificacion por bin.
+285             """
+286             rangos=np.array([[0,0.5],[0.5,1.5],[1.5,2.5],[2.5,3.5],[3.5,4.5],
+287                      [4.5,5.5],[5.5,6.5],[6.5,7.5],[7.5,8.5],[8.5,9.5],
+288                      [9.5,10.5],[10.5,11.5],[11.5,12.5],[12.5,13.5],[13.5,14.5]
+      ])
+289             for k in range(len(rangos)):
+290                 if dtfracdias >= rangos[k][0] and dtfracdias < rangos[k][1]:
+291                     bin[k].append(infodiftot)
+292                     
+293             
+294         m=m+1 
+295             
+296     dataPri=[dt_tle[:15],dv[:15],dn[:15],dc[:15],
+297              dvv[:15],dnn[:15],dcc[:15],dt_frac[:15]]    
+298     data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn,dt_frac]
+299     
+300     print '++++++++++++GRADO 2++++++++++++++++++'
+301     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,dataPri,2)
+302     print coef
+303     print statsReport
+304     
+305     print '++++++++++++GRADO 1++++++++++++++++++'
+306     dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,dataPri,1)
+307     print coef1
+308     print statsReport1
+309     
+310     data=[dt,data1,coef,nombre]
+311         
+312     dtot.close()
+313     return bin, data, dataPri, coef1
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!genera\-\_\-estadistica\-Bin@{genera\-\_\-estadistica\-Bin}}
+\index{genera\-\_\-estadistica\-Bin@{genera\-\_\-estadistica\-Bin}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{genera\-\_\-estadistica\-Bin}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-genera\-\_\-estadistica\-Bin} (
+\begin{DoxyParamCaption}
+\item[{}]{bin\-\_\-lista}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_a0def211e83af5488e0e43a1719d44635}
+
+
+\-Definition at line 314 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+314 
+315 def genera_estadisticaBin(bin_lista):
+316     
+317     lista_k=[]
+318     cantxbin=[]
+319     mx_list=[]
+320     my_list=[]
+321     mz_list=[]
+322     vx_list=[]
+323     vy_list=[]
+324     vz_list=[]
+325     stdx_list=[]
+326     stdy_list=[]
+327     stdz_list=[]
+328 
+329     for k in range(len(bin_lista)):
+330         lista_k.append(k)
+331         bin_x=[]
+332         bin_y=[]
+333         bin_z=[]
+334         cantxbin.append(len(bin_lista[k]))
+335         if len(bin_lista[k]) > 2:
+336             for m in bin_lista[k]:
+337                 campo=m.split(' ')
+338                 bin_x.append(float(campo[2]))
+339                 bin_y.append(float(campo[3]))
+340                 bin_z.append(float(campo[4]))
+341                 
+342             media_x=np.mean(bin_x)
+343             mx_list.append(media_x)
+344             media_y=np.mean(bin_y)
+345             my_list.append(media_y)
+346             media_z=np.mean(bin_z)
+347             mz_list.append(media_z)
+348             
+349             varianza_x=np.var(bin_x)
+350             vx_list.append(varianza_x)
+351             varianza_y=np.var(bin_y)
+352             vy_list.append(varianza_y)
+353             varianza_z=np.var(bin_z)
+354             vz_list.append(varianza_z)
+355             
+356             desviacion_x=np.std(bin_x)
+357             stdx_list.append(desviacion_x)
+358             desviacion_y=np.std(bin_y)
+359             stdy_list.append(desviacion_y)
+360             desviacion_z=np.std(bin_z)
+361             stdz_list.append(desviacion_z)
+362     
+363     mediaxbin=[mx_list,my_list,mz_list]
+364     return cantxbin, mediaxbin
+365  
+366     
+
+\end{DoxyCode}
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!generador\-Datos@{generador\-Datos}}
+\index{generador\-Datos@{generador\-Datos}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{generador\-Datos}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-generador\-Datos} (
+\begin{DoxyParamCaption}
+\item[{}]{lista}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_ac352fb5d30dae7100bfa677e5a33fb7b}
+\begin{DoxyVerb}
+----------------------------------------------------------------------
+Genera un diccionario, cuyas claves son tle1, tle2, tle3...tle10
+y para cada campo, se indica la fecha del tle asociado.
+-----------------------------------------------------------------------
+input
+    lista: lista de nombres de los archivos del directorio 'tle' - (string)
+output
+    tledic: diccionario
+\end{DoxyVerb}
+ 
+
+\-Definition at line 69 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+69 
+70 def generadorDatos(lista):
+71     """
+72     ----------------------------------------------------------------------
+73     Genera un diccionario, cuyas claves son tle1, tle2, tle3...tle10
+74     y para cada campo, se indica la fecha del tle asociado.
+75     -----------------------------------------------------------------------
+76     input
+77         lista: lista de nombres de los archivos del directorio 'tle' - (string)
+78     output
+79         tledic: diccionario
+80     """
+81     tledic={}
+82     datos=[]
+83     for arch in lista:
+84         nombre=arch.split('/')[-1]
+85         tle=Tle(arch) # instancia un objeto de la clase  TLE
+86         datos.append(tle.epoca()) # ejecuta un metodo de la clase TLE
+87         tledic[nombre]= datos
+88         datos=[]
+89     
+90     return tledic
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!ordena\-Tles@{ordena\-Tles}}
+\index{ordena\-Tles@{ordena\-Tles}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{ordena\-Tles}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-ordena\-Tles} (
+\begin{DoxyParamCaption}
+\item[{}]{tledic}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_af6f0f78d827900de034dde2317641d71}
+\begin{DoxyVerb}
+-----------------------------------------------------------------
+Toma el diccionario de TLEs y los ordena de acuerdo a sus fechas.
+-----------------------------------------------------------------
+input
+    tledic: diccionario
+output
+    tleOrdenados: lista de listas
+        tleOrdenados[0]: 'tle#', numero de tle (string)
+        tleOrdenados[1]: lista, (fecha)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 91 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+91 
+92 def ordenaTles(tledic):
+93     """
+94     -----------------------------------------------------------------
+95     Toma el diccionario de TLEs y los ordena de acuerdo a sus fechas.
+96     -----------------------------------------------------------------
+97     input
+98         tledic: diccionario
+99     output
+100         tleOrdenados: lista de listas
+101             tleOrdenados[0]: 'tle#', numero de tle (string)
+102             tleOrdenados[1]: lista, (fecha)
+103     """
+104     ve=open('verif','w')
+105     ve1=open('verif1','w')
+106     for k,v in tledic.iteritems():
+107         info1=str(k)+' '+str(v)+'\n'
+108         ve.write(info1)
+109     tleOrdenados=sorted(tledic.items(), key=operator.itemgetter(1))
+110     for k in tleOrdenados:
+111         info2=str(k)+'\n'
+112         ve1.write(info2)
+113     return tleOrdenados
+114 
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!seleccion\-Sat@{seleccion\-Sat}}
+\index{seleccion\-Sat@{seleccion\-Sat}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{seleccion\-Sat}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-seleccion\-Sat} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_aa379e880455c19bcde9490860b81d4b0}
+\begin{DoxyVerb}
+--------------------------------------------------------
+Preprocesamiento del dato crudo bajado de Space-track
+Preparacion de los archivos TLE, para el procesamiento.
+La funcion busca en la carpeta TleAdmin/crudosTLE.
+(el archivo debe contener solo las lineas de los tle)
+La funcion guarda los archivos tle generados en la carpeta
+TleAdmin/tle
+-------------------------------------------------------------
+input
+    xxxx_fechainicio_fechafin:  archivo de texto plano 
+    (xxxx corresponde al cat_id del satelite de interes)
+output
+    tle#: lista de archivos con 1 TLE por fecha.
+\end{DoxyVerb}
+ 
+
+\-Definition at line 23 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+23 
+24 def seleccionSat():
+25     """
+26     --------------------------------------------------------
+27     Preprocesamiento del dato crudo bajado de Space-track
+28     Preparacion de los archivos TLE, para el procesamiento.
+29     La funcion busca en la carpeta TleAdmin/crudosTLE.
+30     (el archivo debe contener solo las lineas de los tle)
+31     La funcion guarda los archivos tle generados en la carpeta
+32     TleAdmin/tle
+33     -------------------------------------------------------------
+34     input
+35         xxxx_fechainicio_fechafin:  archivo de texto plano 
+36         (xxxx corresponde al cat_id del satelite de interes)
+37     output
+38         tle#: lista de archivos con 1 TLE por fecha.
+39     """
+40     satelites_datos=glob.glob('../TleAdmin/crudosTLE/*')
+41     nombres=[]
+42  
+43     condicion=True
+44      
+45     while(condicion):
+46         for arch in satelites_datos:
+47             nombre_archivo=arch.split('/')[-1]
+48             print nombre_archivo
+49             nombres.append(nombre_archivo)
+50         print "Seleccione el Satelite a analizar"
+51         
+52         
+53         crudo=raw_input()
+54         id_sat=crudo.split('_')[0]
+55          
+56         if crudo in nombres:
+57             setTLE(id_sat, crudo)
+58             condicion=False
+59         else:
+60             print '-------------------------------'
+61             print "Error en el nombre del archivo"
+62             print '--------------------------------'
+63             print '...'
+64          
+65     print 'El archivo seleccionado es = ', crudo
+66     print 'Ud. Selecciono el satelite con ID= ', id_sat  
+67     return crudo
+68 
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!tle\-Primario@{tle\-Primario}}
+\index{tle\-Primario@{tle\-Primario}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{tle\-Primario}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-tle\-Primario} (
+\begin{DoxyParamCaption}
+\item[{}]{tlepri}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_a94aec4b69038ea33ab79eb7889b35f52}
+\begin{DoxyVerb}
+-----------------------------------------------------------------
+Devuelve el vector de estado y la epoca
+correspondiente a la referencia como dato primario
+-----------------------------------------------------------------
+input
+    tlepri: nombre del archivo con el TLE primario (string)
+output
+    r,v: vector posicion y velocidad para el TLE primario (array)
+    ffin: epoca del TLE primario (datetime)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 125 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+125 
+126 def tlePrimario(tlepri):
+127     """
+128     -----------------------------------------------------------------
+129     Devuelve el vector de estado y la epoca
+130     correspondiente a la referencia como dato primario
+131     -----------------------------------------------------------------
+132     input
+133         tlepri: nombre del archivo con el TLE primario (string)
+134     output
+135         r,v: vector posicion y velocidad para el TLE primario (array)
+136         ffin: epoca del TLE primario (datetime)
+137     """
+138     whichconst = wgs72
+139     archivo='../TleAdmin/tle/'+tlepri
+140     tle0=Tle(archivo)
+141     line1=tle0.linea1
+142     line2=tle0.linea2
+143     r,v = tle0.propagaTLE()
+144     satrec = twoline2rv(line1, line2, whichconst)
+145     ffin=satrec.epoch
+146 #    r,v = sgp4(satrec,0)
+147     xf,yf,zf=tuplaFloat(r)
+148     xv,yv,zv=tuplaFloat(v)
+149     r=np.array([xf,yf,zf])
+150     v=np.array([xv,yv,zv])
+151 
+152     return r,v,ffin
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!tle\-Secundario@{tle\-Secundario}}
+\index{tle\-Secundario@{tle\-Secundario}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{tle\-Secundario}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-tle\-Secundario} (
+\begin{DoxyParamCaption}
+\item[{}]{tlesec, }
+\item[{}]{ffin}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_aa9758327fe1e231138181cf4654d0bc3}
+\begin{DoxyVerb}
+---------------------------------------------------------------------------------
+Calcula la posicion del satelite propagada a la fecha del TLE primario.
+---------------------------------------------------------------------------------
+input
+    tlesec: nombre del archivo que contiene el TLE secundario (string)
+output
+    pos,vel: vector posicion y velocidad que resultan de la propagacion del
+            TLE secundario hasta la fecha del TLE primario (array)
+    fsec: epoca del TLE secundario
+\end{DoxyVerb}
+ 
+
+\-Definition at line 153 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+153 
+154 def tleSecundario(tlesec,ffin):
+155     """
+156    
+       ---------------------------------------------------------------------------------
+157     Calcula la posicion del satelite propagada a la fecha del TLE primario.
+158    
+       ---------------------------------------------------------------------------------
+159     input
+160         tlesec: nombre del archivo que contiene el TLE secundario (string)
+161     output
+162         pos,vel: vector posicion y velocidad que resultan de la propagacion del
+163                 TLE secundario hasta la fecha del TLE primario (array)
+164         fsec: epoca del TLE secundario
+165     """
+166     whichconst = wgs72
+167     archivo='../TleAdmin/tle/'+tlesec
+168     tle1=Tle(archivo)
+169     line1=tle1.linea1
+170     line2=tle1.linea2
+171     satrec1 = twoline2rv(line1, line2, whichconst)
+172     ffin_anno=ffin.year
+173     ffin_mes=ffin.month
+174     ffin_dia=ffin.day
+175     ffin_hora=ffin.hour
+176     ffin_min=ffin.minute
+177     ffin_s=ffin.second
+178 #    pos, vel = sgp4(satrec1,0)
+179     pos, vel=satrec1.propagate(ffin_anno, ffin_mes, ffin_dia, ffin_hora, 
+      ffin_min, ffin_s)
+180     x,y,z=tuplaFloat(pos)
+181     vx,vy,vz=tuplaFloat(vel)
+182     pos=np.array([x,y,z])
+183     vel=np.array([vx,vy,vz])
+184     fsec=satrec1.epoch
+185     return pos,vel,fsec
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}!tupla\-Float@{tupla\-Float}}
+\index{tupla\-Float@{tupla\-Float}!AjustarTLE::AjustarTLE@{\-Ajustar\-T\-L\-E\-::\-Ajustar\-T\-L\-E}}
+\subsubsection[{tupla\-Float}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Ajustar\-T\-L\-E.\-Ajustar\-T\-L\-E.\-tupla\-Float} (
+\begin{DoxyParamCaption}
+\item[{}]{tupla}
+\end{DoxyParamCaption}
+)}\label{namespace_ajustar_t_l_e_1_1_ajustar_t_l_e_a8d5188ab96d4fb7e38c637b837e15641}
+\begin{DoxyVerb}
+transforma las tuplas a sus componentes en flotante
+\end{DoxyVerb}
+ 
+
+\-Definition at line 115 of file \-Ajustar\-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+115 
+116 def tuplaFloat(tupla):
+117     """
+118     transforma las tuplas a sus componentes en flotante
+119     """
+120     x=float(tupla[0])
+121     y=float(tupla[1])
+122     z=float(tupla[2])
+123     
+124     return x,y,z
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+

@@ -1,0 +1,137 @@
+\section{\-Estadistica\-:\-:tendencia\-Tle \-Namespace \-Reference}
+\label{namespace_estadistica_1_1tendencia_tle}\index{\-Estadistica\-::tendencia\-Tle@{\-Estadistica\-::tendencia\-Tle}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf grafica\-\_\-tendencia}
+\item 
+def {\bf grafica\-\_\-\-E\-O}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 17/04/2017
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Estadistica\-::tendencia\-Tle@{\-Estadistica\-::tendencia\-Tle}!grafica\-\_\-\-E\-O@{grafica\-\_\-\-E\-O}}
+\index{grafica\-\_\-\-E\-O@{grafica\-\_\-\-E\-O}!Estadistica::tendenciaTle@{\-Estadistica\-::tendencia\-Tle}}
+\subsubsection[{grafica\-\_\-\-E\-O}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Estadistica.\-tendencia\-Tle.\-grafica\-\_\-\-E\-O} (
+\begin{DoxyParamCaption}
+\item[{}]{data}
+\end{DoxyParamCaption}
+)}\label{namespace_estadistica_1_1tendencia_tle_adce7c506886edcf926fb617d7230924a}
+
+
+\-Definition at line 59 of file tendencia\-Tle.\-py.
+
+
+\begin{DoxyCode}
+59 
+60 def grafica_EO(data):
+61     t=data[0]
+62     a=data[1]
+63     i=data[2]
+64     plt.plot(t,a,'x',label='Semieje')
+65 #    plt.plot(t,i, marker='o', linestyle='--',label='Inclinacion')
+66     plt.legend(loc=1)
+67     plt.savefig('../Estadistica/sacD_tend_semieje.png')
+68     plt.show()
+69     
+70 # """
+71 # A partir de las diferencias entre los valores de los TLE
+72 # y los datos GPS, graficar. 
+73 # """
+74 # 
+75 # lista=glob.glob('../Estadistica/archivos/*')
+76 # 
+77 # fechas=[]
+78 # dv=[]
+79 # dn=[]
+80 # dc=[]
+81 # 
+82 # for lis in lista:
+83 #     f=open(lis,'r')
+84 #     contenido=f.readline()
+85 #     campo=contenido.split(' ')
+86 #     yy=int(campo[0][:4])
+87 #     mes=int(campo[0][4:6])
+88 #     dia=int(campo[0][6:8])
+89 #     fecha=datetime(yy,mes,dia)
+90 #     fechas.append(fecha.strftime('%Y-%m-%d'))
+91 #     dv.append(float(campo[1]))
+92 #     dn.append(float(campo[2]))
+93 #     dc.append(float(campo[3]))
+94 # 
+95 # dv_media=np.mean(dv)
+96 # dn_media=np.mean(dn)
+97 # dc_media=np.mean(dc)        
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Estadistica\-::tendencia\-Tle@{\-Estadistica\-::tendencia\-Tle}!grafica\-\_\-tendencia@{grafica\-\_\-tendencia}}
+\index{grafica\-\_\-tendencia@{grafica\-\_\-tendencia}!Estadistica::tendenciaTle@{\-Estadistica\-::tendencia\-Tle}}
+\subsubsection[{grafica\-\_\-tendencia}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Estadistica.\-tendencia\-Tle.\-grafica\-\_\-tendencia} (
+\begin{DoxyParamCaption}
+\item[{}]{data, }
+\item[{}]{c}
+\end{DoxyParamCaption}
+)}\label{namespace_estadistica_1_1tendencia_tle_ae7f6de5e5cb8acd430ef66e090b5fbf3}
+
+
+\-Definition at line 15 of file tendencia\-Tle.\-py.
+
+
+\begin{DoxyCode}
+15 
+16 def grafica_tendencia(data,c):
+17     dt=data[4]
+18     dv=data[1]
+19     dn=data[2]
+20     dc=data[3]
+21     fecha=data[0]    
+22     f_ini=datetime.strftime(fecha[0],'%Y%m%d')
+23     f_fin=datetime.strftime(fecha[-1],'%Y%m%d')
+24     
+25     """
+26     Funciones de ajuste
+27     """
+28     y=[]
+29     for x in dt:
+30         y.append(c[3]*x*x*x+c[2]*x*x+c[1]*x+c[0])
+31     """
+32     GRAFICO
+33     -----------------
+34     Gestion de Fechas
+35     """
+36 #    x = [datetime.strftime(d,'%Y-%m-%d').date() for d in fecha]
+37     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+38     ax1.grid(True)
+39     ax2.grid(True)
+40     ax3.grid(True)
+41     ax1.set_ylim([-30,30])
+42     ax1.plot(dt,dv,'x',label='X')
+43     ax1.plot(dt,y,'r--',label='ajuste')    
+44     ax1.set_ylabel('Km')
+45     ax1.legend(loc=1)
+46     ax2.set_ylim([-20,10])
+47     ax2.plot(dt,dn,'r--',label='Y')    
+48     ax2.set_ylabel('Km')
+49     ax2.legend(loc=4)
+50     ax3.set_ylim([-20,20])
+51     ax3.plot(fecha,dc,'r--',label='Z')
+52     ax3.set_ylabel('Km')   
+53     ax3.legend(loc=4)
+54     fig.suptitle('Diferencias CODS vs TLE+SGP4 (TOD)')
+55     plt.xlabel('Epoca')
+56     plt.savefig('../Estadistica/'+'tend_'+f_ini+'_'+f_fin+'.png')
+57     plt.show()
+58     plt.close()
+
+\end{DoxyCode}

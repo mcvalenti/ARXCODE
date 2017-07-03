@@ -1,0 +1,193 @@
+\section{pruebas.\-P\-R\-U\-E\-B\-A2.\-Example \-Class \-Reference}
+\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example}\index{pruebas.\-P\-R\-U\-E\-B\-A2.\-Example@{pruebas.\-P\-R\-U\-E\-B\-A2.\-Example}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf init\-U\-I}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf layout}
+\item 
+{\bf view\-And\-Table\-Layout}
+\item 
+{\bf dock\-View}
+\item 
+{\bf grview}
+\item 
+{\bf dock\-Table}
+\item 
+{\bf table}
+\item 
+{\bf list\-And\-Tree\-Layout}
+\item 
+{\bf dock\-List}
+\item 
+{\bf list}
+\item 
+{\bf dock\-Tree}
+\item 
+{\bf tree}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 10 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-P\-R\-U\-E\-B\-A2.\-Example.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{parent = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a054339ac7c8614489b28a903d1a0ab26}
+
+
+\-Definition at line 11 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+
+\begin{DoxyCode}
+11 
+12     def __init__(self, parent=None):
+13         QWidget.__init__(self, parent)
+14         self.layout = QVBoxLayout()
+15         self.setLayout(self.layout)
+16         self.initUI()      
+ 
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!init\-U\-I@{init\-U\-I}}
+\index{init\-U\-I@{init\-U\-I}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{init\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-P\-R\-U\-E\-B\-A2.\-Example.\-init\-U\-I} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a3b93d7949e430b851cee0717cc75f5a2}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+
+\begin{DoxyCode}
+17 
+18     def initUI(self):
+19         self.viewAndTableLayout = QHBoxLayout()
+20         self.dockView = QDockWidget("View")
+21         self.grview = QGraphicsView(self.dockView)
+22         self.dockView.setWidget(self.grview)
+23         self.viewAndTableLayout.addWidget(self.dockView)
+24  
+25         self.dockTable = QDockWidget("Table")
+26         self.table = QTableView()
+27         self.dockTable.setWidget(self.table)
+28         self.viewAndTableLayout.addWidget(self.dockTable)
+29         self.layout.addLayout(self.viewAndTableLayout)
+30  
+31  
+32         self.listAndTreeLayout = QHBoxLayout()
+33         self.dockList = QDockWidget("List")
+34         self.list = QListView()
+35         self.dockList.setWidget(self.list)
+36         self.listAndTreeLayout.addWidget(self.dockList)
+37  
+38         self.dockTree = QDockWidget("Tree")
+39         self.tree = QTreeView()
+40         self.listAndTreeLayout.addWidget(self.dockTree)
+        self.layout.addLayout(self.listAndTreeLayout)
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!dock\-List@{dock\-List}}
+\index{dock\-List@{dock\-List}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{dock\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::dock\-List}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_aa105805e3a1fa5b65667547372fcaae3}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!dock\-Table@{dock\-Table}}
+\index{dock\-Table@{dock\-Table}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{dock\-Table}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::dock\-Table}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a75e7df632ddd95619832dec0d9e1ca69}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!dock\-Tree@{dock\-Tree}}
+\index{dock\-Tree@{dock\-Tree}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{dock\-Tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::dock\-Tree}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a2b6ea5e9d359dbf3b6f6c15ad521beb2}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!dock\-View@{dock\-View}}
+\index{dock\-View@{dock\-View}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{dock\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::dock\-View}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a6c74c5ad792aaca37f0299f21d4d3822}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!grview@{grview}}
+\index{grview@{grview}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{grview}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::grview}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_ab484c203281f75c171ac61a73008c8de}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!layout@{layout}}
+\index{layout@{layout}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{layout}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::layout}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_ac78ea661374efc21127b55c07f959227}
+
+
+\-Definition at line 11 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!list@{list}}
+\index{list@{list}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::list}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a1d24349bb3bbcebee510b6fec83bf91e}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!list\-And\-Tree\-Layout@{list\-And\-Tree\-Layout}}
+\index{list\-And\-Tree\-Layout@{list\-And\-Tree\-Layout}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{list\-And\-Tree\-Layout}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::list\-And\-Tree\-Layout}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a7aec15ed10196ad201085064d9a3bc8a}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!table@{table}}
+\index{table@{table}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{table}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::table}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a5d65ff3d9c9c6a1fe5fe5ec416869e56}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!tree@{tree}}
+\index{tree@{tree}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{tree}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::tree}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_ad318ad4264ddec31f117273b46592461}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+\index{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}!view\-And\-Table\-Layout@{view\-And\-Table\-Layout}}
+\index{view\-And\-Table\-Layout@{view\-And\-Table\-Layout}!pruebas::PRUEBA2::Example@{pruebas\-::\-P\-R\-U\-E\-B\-A2\-::\-Example}}
+\subsubsection[{view\-And\-Table\-Layout}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::\-P\-R\-U\-E\-B\-A2.\-Example\-::view\-And\-Table\-Layout}}\label{classpruebas_1_1_p_r_u_e_b_a2_1_1_example_a85d110eae750b892ccc31526a3c2ac22}
+
+
+\-Definition at line 17 of file \-P\-R\-U\-E\-B\-A2.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf \-P\-R\-U\-E\-B\-A2.\-py}\end{DoxyCompactItemize}

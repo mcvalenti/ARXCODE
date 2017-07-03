@@ -1,0 +1,486 @@
+\section{\-Encuentro\-:\-:encuentro \-Namespace \-Reference}
+\label{namespace_encuentro_1_1encuentro}\index{\-Encuentro\-::encuentro@{\-Encuentro\-::encuentro}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf tupla\-Float}
+\item 
+def {\bf miss\-Distance}
+\item 
+def {\bf genera\-Bplane}
+\item 
+def {\bf calcula\-Elipses\-\_\-param}
+\item 
+def {\bf calcula\-Po\-C}
+\item 
+def {\bf f}
+\item 
+def {\bf evalua\-Encuentro}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 08/05/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Encuentro\-::encuentro@{\-Encuentro\-::encuentro}!calcula\-Elipses\-\_\-param@{calcula\-Elipses\-\_\-param}}
+\index{calcula\-Elipses\-\_\-param@{calcula\-Elipses\-\_\-param}!Encuentro::encuentro@{\-Encuentro\-::encuentro}}
+\subsubsection[{calcula\-Elipses\-\_\-param}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-encuentro.\-calcula\-Elipses\-\_\-param} (
+\begin{DoxyParamCaption}
+\item[{}]{\-C\-\_\-b, }
+\item[{}]{xm\-\_\-b2d}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1encuentro_a85cbbc957070397141373dc8f5e535f5}
+\begin{DoxyVerb}
+Calcula los semiejes de la elipse y la orientacion
+--------------------------------------------------
+inputs
+    C_b:Matriz de covarianza combinada, proyectada en
+        el B-plane. 
+outputs
+    xb: vector unitario en la direccion del semieje mayor.
+    phi_b: angulo con la direccion del semieje mayor. 
+\end{DoxyVerb}
+ 
+
+\-Definition at line 111 of file encuentro.\-py.
+
+
+\begin{DoxyCode}
+111 
+112 def calculaElipses_param(C_b, xm_b2d):
+113     """
+114     Calcula los semiejes de la elipse y la orientacion
+115     --------------------------------------------------
+116     inputs
+117         C_b:Matriz de covarianza combinada, proyectada en
+118             el B-plane. 
+119     outputs
+120         xb: vector unitario en la direccion del semieje mayor.
+121         phi_b: angulo con la direccion del semieje mayor. 
+122     """
+123     auto_val, auto_vect=np.linalg.eig(C_b)
+124     i=np.argmax(auto_val)
+125     j=np.argmin(auto_val)
+126     a=auto_val[i]
+127     b=auto_val[j]
+128     e_a=auto_vect[i]
+129     e_b=auto_vect[j]
+130     ea_mod=np.sqrt(np.dot(e_a,e_a))
+131     xb=np.dot(1.0/ea_mod,e_a)
+132     phi_b=np.arccos(np.dot(xb,xm_b2d))
+133         
+134     return a,b,xb,phi_b
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Encuentro\-::encuentro@{\-Encuentro\-::encuentro}!calcula\-Po\-C@{calcula\-Po\-C}}
+\index{calcula\-Po\-C@{calcula\-Po\-C}!Encuentro::encuentro@{\-Encuentro\-::encuentro}}
+\subsubsection[{calcula\-Po\-C}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-encuentro.\-calcula\-Po\-C} (
+\begin{DoxyParamCaption}
+\item[{}]{r\-\_\-tca2d, }
+\item[{}]{\-C\-\_\-b, }
+\item[{}]{x\-\_\-b\-\_\-mod, }
+\item[{}]{\-Rc}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1encuentro_adcc0fb626e8fd10391891e41a2eaee8d}
+\begin{DoxyVerb}
+Calcula la Poc en dos dimensiones.
+-------------------------------------------------------
+inputs
+    dr,Cb,xb,Rc
+outputs 
+    PoC
+\end{DoxyVerb}
+ 
+
+\-Definition at line 135 of file encuentro.\-py.
+
+
+\begin{DoxyCode}
+135 
+136 def calculaPoC(r_tca2d,C_b,x_b_mod,Rc):
+137     """
+138     Calcula la Poc en dos dimensiones.
+139     -------------------------------------------------------
+140     inputs
+141         dr,Cb,xb,Rc
+142     outputs 
+143         PoC
+144     """
+145     C_det=np.linalg.det(C_b)
+146     C_inv=np.linalg.inv(C_b)
+147     r=np.array([[r_tca2d[0]],[r_tca2d[1]]])
+148     rt=r.T
+149     p0=np.dot(C_inv,r_tca2d)
+150     integrando=(1.0/2.0)*(np.dot(rt,p0))
+151     
+152     a=np.sqrt(Rc*Rc-x_b_mod*x_b_mod)
+153     coef=1.0/(2*np.pi*np.sqrt(C_det))
+154     
+155     poc=nquad(f, [[-a,a],[-Rc,Rc]],integrando)
+156     poc=coef*poc[0]
+157     
+158     return poc
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Encuentro\-::encuentro@{\-Encuentro\-::encuentro}!evalua\-Encuentro@{evalua\-Encuentro}}
+\index{evalua\-Encuentro@{evalua\-Encuentro}!Encuentro::encuentro@{\-Encuentro\-::encuentro}}
+\subsubsection[{evalua\-Encuentro}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-encuentro.\-evalua\-Encuentro} (
+\begin{DoxyParamCaption}
+\item[{}]{\-T\-C\-A, }
+\item[{}]{sat\-\_\-id, }
+\item[{}]{deb\-\_\-id, }
+\item[{}]{\-Cd, }
+\item[{}]{\-Cm}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1encuentro_a66b86e3c3dd2cc97e609bc8a21c400b9}
+\begin{DoxyVerb}
+Propagacion los datos tle de los objetos
+ENVISAT - NORAD ID: 27386
+COSMOS  - NORAD ID: 15482
+Del dia 09/01/2008 
+\end{DoxyVerb}
+ 
+
+\-Definition at line 163 of file encuentro.\-py.
+
+
+\begin{DoxyCode}
+163 
+164 def evaluaEncuentro(TCA,sat_id,deb_id,Cd,Cm):   
+165     """
+166     Propagacion los datos tle de los objetos
+167     ENVISAT - NORAD ID: 27386
+168     COSMOS  - NORAD ID: 15482
+169     Del dia 09/01/2008 
+170     """
+171     
+172     files=glob.glob('../TleAdmin/tle/*')
+173     for filename in files:
+174         os.unlink(filename)
+175        
+176 #     TCA=datetime(2008,1,9,19,0,30,0)
+177 #     sat_id='27386' #ENVISAT
+178 #     deb_id='15482' #COSMOS
+179 #     sat_id='23560' #ENVISAT
+180 #     deb_id='16011' #COSMOS
+181     #-------Request a NORAD.
+182     f_ini=TCA-timedelta(days=18)
+183     f_fin=TCA-timedelta(days=3)
+184     usuario='macecilia'
+185     clave='MaCeciliaSpace17'
+186     
+187     #--------------------MISION-----------------------------    
+188     importar_tle(usuario,clave, sat_id,f_ini,f_fin,str(sat_id))
+189     ark=open('../TleAdmin/crudosTLE/'+str(sat_id))
+190     contenido=ark.readlines()
+191     if len(contenido) > 0:
+192         files=glob.glob('../TleAdmin/tle/*')
+193         for filename in files:
+194             os.unlink(filename)
+195         setTLE(sat_id,str(sat_id))
+196         tles=glob.glob('../TleAdmin/tle/*')
+197         tle_dic=generadorDatos(tles)
+198         tles_ord=ordenaTles(tle_dic)
+199         arch_tle=tles_ord[-1][0]
+200     else:
+201         print 'El programa ha detenido su ejecucion.'
+202         sys.exit()
+203     #----------DESECHO----------------------------------------    
+204     importar_tle(usuario,clave, deb_id,f_ini,f_fin,str(deb_id))
+205     ark1=open('../TleAdmin/crudosTLE/'+str(deb_id))
+206     contenido1=ark1.readlines()
+207     if len(contenido) > 0:
+208         setTLE(deb_id,str(deb_id))
+209         tles1=glob.glob('../TleAdmin/tle/'+str(deb_id)+'*')
+210         tle_dic1=generadorDatos(tles1)
+211         tles_ord1=ordenaTles(tle_dic1)
+212         arch_tle1=tles_ord1[-1][0]
+213     else:
+214         print 'El programa ha detenido su ejecucion.'
+215         sys.exit()
+216          
+217          
+218     TCAc,rvnc,vvnc=missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA)
+219     mod_dif=np.sqrt(np.dot(rvnc,rvnc))
+220     print '============================================='
+221     print 'Tiempo de maximo acercamiento = ', TCA
+222     print 'Miss Distance = ',mod_dif
+223     
+224 # 10 de Mayo.
+225     dr_mod=np.sqrt(np.dot(rvnc,rvnc)) 
+226     xm_b=np.dot(1.0/dr_mod,rvnc)
+227     R_b=generaBplane(rvnc,vvnc)
+228     xm_b2d=np.dot(R_b,xm_b)
+229     
+230     r_tca2d=np.dot(R_b,rvnc)
+231     #====================
+232     #Matriz de Covarianza
+233     #====================
+234 
+235 #    
+       Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.078011634263035007],
+236 #                 
+       [-0.031437388833697122,0.0025693554190851101,-0.014250096142904997],
+237 #                 
+       [0.078011634263035007,-0.014250096142904997,0.096786625771746529]])
+238 #     
+239 #    
+       Cm=np.array([[4.8247926515782202,0.05994752830943241,0.049526867540809635],
+240 #                 
+       [0.05994752830943241,0.019150349628774828,0.012470649611436152],
+241 #                 
+       [0.049526867540809635,0.012470649611436152,0.012649606483621921]])
+242 
+243     
+244     C=Cd+Cm
+245     
+246     C_b=np.dot(C,np.transpose(R_b))
+247     C_b=np.dot(R_b,C_b)
+248     print C_b
+249     
+250     w,v=np.linalg.eig(C_b)
+251     print w,v
+252     
+253     #===========================
+254     # Elipse
+255     #===========================
+256     
+257     a,b,xb,phi_b = calculaElipses_param(C_b, xm_b2d)
+258     x_b_mod = np.sqrt(np.dot(xb,xb))
+259     
+260     print '================================================='
+261     print 'Elementos de la integral de POC'
+262     print '================================================='
+263     print 
+264     print 'Posicion Relativa r = ', r_tca2d
+265     print 'Matriz de Covarianza Cb = ', C_b
+266     print 'Vector unitario del SemiejeMayr x_b= ', xb
+267     
+268     print '============================='
+269     print '------POC---------------------'
+270     print '============================='
+271     Rc=2
+272     poc=calculaPoC(r_tca2d,C_b,x_b_mod,Rc)
+273     print poc
+274     
+    return TCAc,mod_dif,poc\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Encuentro\-::encuentro@{\-Encuentro\-::encuentro}!f@{f}}
+\index{f@{f}!Encuentro::encuentro@{\-Encuentro\-::encuentro}}
+\subsubsection[{f}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-encuentro.\-f} (
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y, }
+\item[{}]{integrando}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1encuentro_acfce41ccc0f5bfa402b660338856062b}
+
+
+\-Definition at line 159 of file encuentro.\-py.
+
+
+\begin{DoxyCode}
+159 
+160 def f(x,y,integrando):
+161     return np.exp(integrando)
+162 
+#if __name__=='__main__':
+\end{DoxyCode}
+\index{\-Encuentro\-::encuentro@{\-Encuentro\-::encuentro}!genera\-Bplane@{genera\-Bplane}}
+\index{genera\-Bplane@{genera\-Bplane}!Encuentro::encuentro@{\-Encuentro\-::encuentro}}
+\subsubsection[{genera\-Bplane}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-encuentro.\-genera\-Bplane} (
+\begin{DoxyParamCaption}
+\item[{}]{dr, }
+\item[{}]{dv}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1encuentro_aa045772d63bac71a7f9974ce0b101ba3}
+\begin{DoxyVerb}
+Genera la matriz de Transformacion Rxb,yb
+-----------------------------------------
+inputs
+    dr,dv: vectores relativos de posicion y
+           velocidad en TCA. (arrays)
+output
+    Rb: Matriz de transformacion al B-plane. 
+\end{DoxyVerb}
+ 
+
+\-Definition at line 91 of file encuentro.\-py.
+
+
+\begin{DoxyCode}
+91 
+92 def generaBplane(dr,dv):
+93     """
+94     Genera la matriz de Transformacion Rxb,yb
+95     -----------------------------------------
+96     inputs
+97         dr,dv: vectores relativos de posicion y
+98                velocidad en TCA. (arrays)
+99     output
+100         Rb: Matriz de transformacion al B-plane. 
+101     """
+102     dr_mod=np.sqrt(np.dot(dr,dr))    
+103     rxv=np.cross(dr,dv)
+104     mod_rxv=np.sqrt(np.dot(rxv,rxv))
+105     #--------------------------------
+106     xm_b=np.dot(1.0/dr_mod,dr)
+107     ym_b=np.dot(1.0/mod_rxv,rxv)
+108     Rb=np.array([[xm_b[0],xm_b[1],xm_b[2]],[ym_b[0],ym_b[1],ym_b[2]]])
+109     return Rb
+110 
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Encuentro\-::encuentro@{\-Encuentro\-::encuentro}!miss\-Distance@{miss\-Distance}}
+\index{miss\-Distance@{miss\-Distance}!Encuentro::encuentro@{\-Encuentro\-::encuentro}}
+\subsubsection[{miss\-Distance}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-encuentro.\-miss\-Distance} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{arch\-\_\-tle, }
+\item[{}]{deb\-\_\-id, }
+\item[{}]{arch\-\_\-tle1, }
+\item[{}]{\-T\-C\-A}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1encuentro_af5bf84a05443cd6e86421f26bdc46d43}
+\begin{DoxyVerb}
+Busca los tles de los objetos para una fecha con 3 dias anteriores
+al TCA. 
+Propaga las posiciones hasta el TCA y calcula la distancia entre ellos. 
+Identifica el momento de maximo acercamiento y lo compara con TCA.
+------------------------------------------------------------------
+inputs
+    sat_id: codigo NORAD del satelite (string)
+    arch_tle: archivo TLE del satelite (string)
+    deb_id: codigo NORAD del desecho (string)
+    arch_tle1: archivo TLE del desecho (string)
+    TCA: epoca del maximo acercamiento (datetime)
+outputs
+    dr,dv: distancia relativa al momento del maximo acercaciento. (array)
+    TCA_calc: epoca del maximo acercamiento calculada (datetime)        
+\end{DoxyVerb}
+ 
+
+\-Definition at line 41 of file encuentro.\-py.
+
+
+\begin{DoxyCode}
+41 
+42 def missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA):
+43     """
+44     Busca los tles de los objetos para una fecha con 3 dias anteriores
+45     al TCA. 
+46     Propaga las posiciones hasta el TCA y calcula la distancia entre ellos. 
+47     Identifica el momento de maximo acercamiento y lo compara con TCA.
+48     ------------------------------------------------------------------
+49     inputs
+50         sat_id: codigo NORAD del satelite (string)
+51         arch_tle: archivo TLE del satelite (string)
+52         deb_id: codigo NORAD del desecho (string)
+53         arch_tle1: archivo TLE del desecho (string)
+54         TCA: epoca del maximo acercamiento (datetime)
+55     outputs
+56         dr,dv: distancia relativa al momento del maximo acercaciento. (array)
+57         TCA_calc: epoca del maximo acercamiento calculada (datetime)        
+58     """
+59 
+60     tle_envi=Tle('../TleAdmin/tle/'+arch_tle)
+61     tle_cosmos=Tle('../TleAdmin/tle/'+arch_tle1)
+62     
+63     #========================
+64     #Calculo de Diferencias
+65     #========================
+66     
+67                  
+68     r,v=tle_envi.propagaTLE(TCA)
+69 #        print 'Envi posicion: ',r,v
+70     xf,yf,zf=tuplaFloat(r)
+71     xv,yv,zv=tuplaFloat(v)
+72     r=np.array([xf,yf,zf])
+73     ve=np.array([xv,yv,zv])
+74 
+75     r1,v1=tle_cosmos.propagaTLE(TCA)
+76 #        print 'Cosmos posicion: ',r1,v1
+77     xf1,yf1,zf1=tuplaFloat(r1)
+78     xv1,yv1,zv1=tuplaFloat(v1)
+79     r1=np.array([xf1,yf1,zf1])
+80     v1=np.array([xv1,yv1,zv1])
+81 
+82     dif_r=r-r1
+83     dif_v=ve-v1
+84     #---------Sistema V,N,C.
+85     v,n,c=vncSis(r, ve, dif_r)
+86     vv,nn,cc=vncSis(r, ve, dif_v)
+87     rvnc=np.array([v,n,c])
+88     vvnc=np.array([vv,nn,cc])
+89    
+90     return TCA,rvnc,vvnc
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Encuentro\-::encuentro@{\-Encuentro\-::encuentro}!tupla\-Float@{tupla\-Float}}
+\index{tupla\-Float@{tupla\-Float}!Encuentro::encuentro@{\-Encuentro\-::encuentro}}
+\subsubsection[{tupla\-Float}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-encuentro.\-tupla\-Float} (
+\begin{DoxyParamCaption}
+\item[{}]{tupla}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1encuentro_a2979f0f53dff5bd740e994a10c8f7a11}
+\begin{DoxyVerb}
+transforma las tuplas a sus componentes en flotante
+\end{DoxyVerb}
+ 
+
+\-Definition at line 31 of file encuentro.\-py.
+
+
+\begin{DoxyCode}
+31 
+32 def tuplaFloat(tupla):
+33     """
+34     transforma las tuplas a sus componentes en flotante
+35     """
+36     x=float(tupla[0])
+37     y=float(tupla[1])
+38     z=float(tupla[2])
+39     
+40     return x,y,z
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+

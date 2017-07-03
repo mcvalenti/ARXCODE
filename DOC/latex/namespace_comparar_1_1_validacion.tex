@@ -1,0 +1,304 @@
+\section{\-Comparar\-:\-:\-Validacion \-Namespace \-Reference}
+\label{namespace_comparar_1_1_validacion}\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf filtro\-Ajuste}
+\item 
+def {\bf filtro\-Extapola}
+\item 
+def {\bf funcion\-Ajuste}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf fi} = datetime.\-datetime(2013,11,16)
+\item 
+tuple {\bf ff} = datetime.\-datetime(2013,11,30)
+\item 
+int {\bf delta\-\_\-t} = 10
+\item 
+tuple {\bf ephem\-\_\-ajuste} = {\bf filtro\-Ajuste}({\bf fi},{\bf ff},{\bf delta\-\_\-t})
+\item 
+list {\bf x\-\_\-ajuste} = [mdates.\-date2num(i) for i in {\bf ephem\-\_\-ajuste}[0]]
+\item 
+list {\bf t} = [mdates.\-date2num(i) for i in ephem\-\_\-tle[0]]
+\item 
+tuple {\bf x\-\_\-exptrap} = {\bf funcion\-Ajuste}({\bf x\-\_\-ajuste},{\bf ephem\-\_\-ajuste}[1],{\bf t})
+\item 
+tuple {\bf y\-\_\-exptrap} = {\bf funcion\-Ajuste}({\bf x\-\_\-ajuste},{\bf ephem\-\_\-ajuste}[2],{\bf t})
+\item 
+tuple {\bf z\-\_\-exptrap} = {\bf funcion\-Ajuste}({\bf x\-\_\-ajuste},{\bf ephem\-\_\-ajuste}[3],{\bf t})
+\item 
+list {\bf dif\-\_\-x} = ephem\-\_\-extrap[1]
+\item 
+list {\bf dif\-\_\-y} = ephem\-\_\-extrap[2]
+\item 
+list {\bf dif\-\_\-z} = ephem\-\_\-extrap[3]
+\item 
+tuple {\bf date\-\_\-formatter} = mdates.\-Date\-Formatter('\%d-\/\%m-\/\%y')
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 22/02/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!filtro\-Ajuste@{filtro\-Ajuste}}
+\index{filtro\-Ajuste@{filtro\-Ajuste}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{filtro\-Ajuste}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Comparar.\-Validacion.\-filtro\-Ajuste} (
+\begin{DoxyParamCaption}
+\item[{}]{fi, }
+\item[{}]{ff, }
+\item[{}]{delta\-\_\-t}
+\end{DoxyParamCaption}
+)}\label{namespace_comparar_1_1_validacion_ad10c6644eb44a587ddfb716eebe5551d}
+
+
+\-Definition at line 24 of file \-Validacion.\-py.
+
+
+\begin{DoxyCode}
+24 
+25 def filtroAjuste(fi,ff,delta_t):
+26     a=open('../visual/archivos/diferenciasTOD','r')
+27     """
+28     -------------------------------------------------
+29     Filtro de diferencias en el intervalo de ajuste
+30     -------------------------------------------------
+31     delta_t: (en dias)
+32     """
+33     
+34     contenido=a.readlines()
+35     print 'Procesando'
+36     
+37     """
+38     archivo de Ajuste
+39     """
+40     d0=[]
+41     coordx=[]
+42     coordy=[]
+43     coordz=[]
+44     velx=[]
+45     vely=[]
+46     velz=[]
+47     
+48     for l in contenido:
+49         d=l[:19]
+50         d=datetime.datetime.strptime(d,'%Y-%m-%d %H:%M:%S')
+51         if d >= fi and d <= ff:
+52             d0.append(d)
+53             coordx.append(float(l.split()[2]))
+54             coordy.append(float(l.split()[3]))
+55             coordz.append(float(l.split()[4]))
+56             velx.append(float(l.split()[5]))
+57             vely.append(float(l.split()[6]))
+58             velz.append(float(l.split()[7]))
+59                  
+60     ephem_ajuste=[d0,coordx,coordy,coordz,velx,vely,velz]            
+61     return ephem_ajuste
+62 
+
+\end{DoxyCode}
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!filtro\-Extapola@{filtro\-Extapola}}
+\index{filtro\-Extapola@{filtro\-Extapola}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{filtro\-Extapola}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Comparar.\-Validacion.\-filtro\-Extapola} (
+\begin{DoxyParamCaption}
+\item[{}]{ff, }
+\item[{}]{delta\-\_\-t}
+\end{DoxyParamCaption}
+)}\label{namespace_comparar_1_1_validacion_a856ab2232d511e56492d982a55910817}
+\begin{DoxyVerb}
+Extraccion de datos en el intervalo de Extrapolacion.
+\end{DoxyVerb}
+ 
+
+\-Definition at line 63 of file \-Validacion.\-py.
+
+
+\begin{DoxyCode}
+63 
+64 def filtroExtapola(ff,delta_t):
+65     """
+66     Extraccion de datos en el intervalo de Extrapolacion.
+67     """
+68     
+69     atle=open('../TleAdmin/crudosTLE/TEME_SGP4_SACD_xyz.txt','r')
+70     acods=open('../CodsAdmin/TOD_O/TOD_CODS_SACD_xyz.txt','r')
+71     contenido1=atle.readlines()
+72     contenido2=acods.readlines()
+73     
+74     d0tle=[]
+75     xtle=[]
+76     ytle=[]
+77     ztle=[]
+78     vxtle=[]
+79     vytle=[]
+80     vztle=[]   
+81     coordx1=[]
+82     coordy1=[]
+83     coordz1=[]
+84     velx1=[]
+85     vely1=[]
+86     velz1=[] 
+87     for l in contenido1:
+88         d1=l[:19]
+89         d1=datetime.datetime.strptime(d1,'%Y-%m-%d %H:%M:%S')
+90         if d1 > ff and d1 <= ff+datetime.timedelta(days=delta_t):
+91             d0tle.append(d1)  
+92             xtle.append(float(l.split()[2]))
+93             ytle.append(float(l.split()[3]))
+94             ztle.append(float(l.split()[4]))
+95             vxtle.append(float(l.split()[5]))
+96             vytle.append(float(l.split()[6]))
+97             vztle.append(float(l.split()[7]))
+98             inferior, superior= encuentraBordes(contenido2,l)
+99             lineaInterpol=interpola(l,inferior,superior)
+100             interpol_ephem=lineaInterpol.split()
+101             coordx1.append(float(interpol_ephem[2]))
+102             coordy1.append(float(interpol_ephem[3]))
+103             coordz1.append(float(interpol_ephem[4]))
+104             velx1.append(float(interpol_ephem[5]))
+105             vely1.append(float(interpol_ephem[6]))
+106             velz1.append(float(interpol_ephem[7])) 
+107             print interpol_ephem
+108 
+109     ephem_tle=[d0tle,xtle,ytle,ztle,vxtle,vytle,vztle]
+110     ephem_extrap=[d0tle,coordx1,coordy1,coordz1,velx1,vely1,velz1]
+111     return ephem_tle, ephem_extrap
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!funcion\-Ajuste@{funcion\-Ajuste}}
+\index{funcion\-Ajuste@{funcion\-Ajuste}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{funcion\-Ajuste}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Comparar.\-Validacion.\-funcion\-Ajuste} (
+\begin{DoxyParamCaption}
+\item[{}]{x, }
+\item[{}]{y, }
+\item[{}]{x\-\_\-extrap}
+\end{DoxyParamCaption}
+)}\label{namespace_comparar_1_1_validacion_a2633477a9ea08d446a6f7ba4c87927fd}
+\begin{DoxyVerb}
+Funcion de Ajuste Lineal
+\end{DoxyVerb}
+ 
+
+\-Definition at line 112 of file \-Validacion.\-py.
+
+
+\begin{DoxyCode}
+112 
+113 def funcionAjuste(x,y,x_extrap):
+114     """
+115     Funcion de Ajuste Lineal
+116     """
+117     slope, intercept, r_value, p_value, std_err = stats.linregress(x,y)
+118     g1=np.poly1d([slope,intercept])
+119     y_extrap=g1(x_extrap)
+120     
+121     return y_extrap
+
+\end{DoxyCode}
+
+
+\subsection{\-Variable \-Documentation}
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!date\-\_\-formatter@{date\-\_\-formatter}}
+\index{date\-\_\-formatter@{date\-\_\-formatter}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{date\-\_\-formatter}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Validacion\-::date\-\_\-formatter} = mdates.\-Date\-Formatter('\%d-\/\%m-\/\%y')}\label{namespace_comparar_1_1_validacion_af79aa86a7b977e825e0d1fcd1e4eb0c5}
+
+
+\-Definition at line 149 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!delta\-\_\-t@{delta\-\_\-t}}
+\index{delta\-\_\-t@{delta\-\_\-t}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{delta\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Comparar\-::\-Validacion\-::delta\-\_\-t} = 10}\label{namespace_comparar_1_1_validacion_acd4618f9a819d0cbbd6ff1ffe502bbf2}
+
+
+\-Definition at line 128 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!dif\-\_\-x@{dif\-\_\-x}}
+\index{dif\-\_\-x@{dif\-\_\-x}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{dif\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Validacion\-::dif\-\_\-x} = ephem\-\_\-extrap[1]}\label{namespace_comparar_1_1_validacion_a87897110cb8a4b8db1a08ed8c5318a01}
+
+
+\-Definition at line 140 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!dif\-\_\-y@{dif\-\_\-y}}
+\index{dif\-\_\-y@{dif\-\_\-y}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{dif\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Validacion\-::dif\-\_\-y} = ephem\-\_\-extrap[2]}\label{namespace_comparar_1_1_validacion_a33567b3934faabee8f2d98ba8dc472a4}
+
+
+\-Definition at line 141 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!dif\-\_\-z@{dif\-\_\-z}}
+\index{dif\-\_\-z@{dif\-\_\-z}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{dif\-\_\-z}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Validacion\-::dif\-\_\-z} = ephem\-\_\-extrap[3]}\label{namespace_comparar_1_1_validacion_ac024f04da27ccd64a8e7f43f5ffcf735}
+
+
+\-Definition at line 142 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!ephem\-\_\-ajuste@{ephem\-\_\-ajuste}}
+\index{ephem\-\_\-ajuste@{ephem\-\_\-ajuste}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{ephem\-\_\-ajuste}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Validacion\-::ephem\-\_\-ajuste} = {\bf filtro\-Ajuste}({\bf fi},{\bf ff},{\bf delta\-\_\-t})}\label{namespace_comparar_1_1_validacion_a50893fef7f1b2747da59bc907cca01d2}
+
+
+\-Definition at line 130 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!ff@{ff}}
+\index{ff@{ff}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{ff}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Validacion\-::ff} = datetime.\-datetime(2013,11,30)}\label{namespace_comparar_1_1_validacion_a3f540791acab573ed18988151a6f9743}
+
+
+\-Definition at line 127 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!fi@{fi}}
+\index{fi@{fi}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{fi}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Validacion\-::fi} = datetime.\-datetime(2013,11,16)}\label{namespace_comparar_1_1_validacion_a8cfe3ebc5a1963c7aaca951b94e82ccc}
+
+
+\-Definition at line 126 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!t@{t}}
+\index{t@{t}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{t}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Validacion\-::t} = [mdates.\-date2num(i) for i in ephem\-\_\-tle[0]]}\label{namespace_comparar_1_1_validacion_aaef73be31b8b7b2bdb9a00dd43b9ae47}
+
+
+\-Definition at line 134 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!x\-\_\-ajuste@{x\-\_\-ajuste}}
+\index{x\-\_\-ajuste@{x\-\_\-ajuste}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{x\-\_\-ajuste}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Validacion\-::x\-\_\-ajuste} = [mdates.\-date2num(i) for i in {\bf ephem\-\_\-ajuste}[0]]}\label{namespace_comparar_1_1_validacion_aca12cea5660c813bec7e35242b7fd3ea}
+
+
+\-Definition at line 131 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!x\-\_\-exptrap@{x\-\_\-exptrap}}
+\index{x\-\_\-exptrap@{x\-\_\-exptrap}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{x\-\_\-exptrap}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Validacion\-::x\-\_\-exptrap} = {\bf funcion\-Ajuste}({\bf x\-\_\-ajuste},{\bf ephem\-\_\-ajuste}[1],{\bf t})}\label{namespace_comparar_1_1_validacion_a4524cef3e183e832ba7bd2768c2d9c6d}
+
+
+\-Definition at line 136 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!y\-\_\-exptrap@{y\-\_\-exptrap}}
+\index{y\-\_\-exptrap@{y\-\_\-exptrap}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{y\-\_\-exptrap}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Validacion\-::y\-\_\-exptrap} = {\bf funcion\-Ajuste}({\bf x\-\_\-ajuste},{\bf ephem\-\_\-ajuste}[2],{\bf t})}\label{namespace_comparar_1_1_validacion_a1decdda0bf36d2c48a4ed1ab3a7fe979}
+
+
+\-Definition at line 137 of file \-Validacion.\-py.
+
+\index{\-Comparar\-::\-Validacion@{\-Comparar\-::\-Validacion}!z\-\_\-exptrap@{z\-\_\-exptrap}}
+\index{z\-\_\-exptrap@{z\-\_\-exptrap}!Comparar::Validacion@{\-Comparar\-::\-Validacion}}
+\subsubsection[{z\-\_\-exptrap}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Validacion\-::z\-\_\-exptrap} = {\bf funcion\-Ajuste}({\bf x\-\_\-ajuste},{\bf ephem\-\_\-ajuste}[3],{\bf t})}\label{namespace_comparar_1_1_validacion_afc26cc5b791aa90774c7707c18dcc47f}
+
+
+\-Definition at line 138 of file \-Validacion.\-py.
+

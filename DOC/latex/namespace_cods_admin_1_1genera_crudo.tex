@@ -1,0 +1,140 @@
+\section{\-Cods\-Admin\-:\-:genera\-Crudo \-Namespace \-Reference}
+\label{namespace_cods_admin_1_1genera_crudo}\index{\-Cods\-Admin\-::genera\-Crudo@{\-Cods\-Admin\-::genera\-Crudo}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf ordena\-T\-O\-D}
+\item 
+def {\bf genera\-T\-O\-D}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf lista} = glob.\-glob('\-T\-O\-D\-\_\-\-O/$\ast$')
+\item 
+tuple {\bf \-T\-O\-Dlista} = {\bf ordena\-T\-O\-D}({\bf lista})
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 22/12/2016
+
+Se encarga de ordenar y procesar los archivos TOD de CODS.
+Finalmente genera un unico archivo que lista la informacion
+en forma ordenada, con un unico sv (state vector) por fecha y epoca.
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Cods\-Admin\-::genera\-Crudo@{\-Cods\-Admin\-::genera\-Crudo}!genera\-T\-O\-D@{genera\-T\-O\-D}}
+\index{genera\-T\-O\-D@{genera\-T\-O\-D}!CodsAdmin::generaCrudo@{\-Cods\-Admin\-::genera\-Crudo}}
+\subsubsection[{genera\-T\-O\-D}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Cods\-Admin.\-genera\-Crudo.\-genera\-T\-O\-D} (
+\begin{DoxyParamCaption}
+\item[{}]{lista}
+\end{DoxyParamCaption}
+)}\label{namespace_cods_admin_1_1genera_crudo_a19cd0140702cc8f5594b23be987deb91}
+
+
+\-Definition at line 47 of file genera\-Crudo.\-py.
+
+
+\begin{DoxyCode}
+47 
+48 def generaTOD(lista):    
+49     ephemFile = open('TOD_O/TOD_CODS_SACD_xyz.txt','a')
+50     listafechas=[]
+51     claveUnica=' '
+52     m=0
+53     for i in TODlista:
+54         print 'Procesando archivo numero = ',m
+55         f=open(i[1],'r')
+56         contenido=f.readlines()
+57         contenido.reverse()
+58         for c in contenido:
+59             c1=c.split(' ')
+60             if c1[0]=='*HEADER':
+61                 continue
+62             claveUnica=c1[0]+c1[1]
+63             if claveUnica in listafechas:
+64                 continue
+65             ephemFile.write(c)
+66             listafechas.append(claveUnica)
+67         m=m+1
+
+\end{DoxyCode}
+\index{\-Cods\-Admin\-::genera\-Crudo@{\-Cods\-Admin\-::genera\-Crudo}!ordena\-T\-O\-D@{ordena\-T\-O\-D}}
+\index{ordena\-T\-O\-D@{ordena\-T\-O\-D}!CodsAdmin::generaCrudo@{\-Cods\-Admin\-::genera\-Crudo}}
+\subsubsection[{ordena\-T\-O\-D}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Cods\-Admin.\-genera\-Crudo.\-ordena\-T\-O\-D} (
+\begin{DoxyParamCaption}
+\item[{}]{lista}
+\end{DoxyParamCaption}
+)}\label{namespace_cods_admin_1_1genera_crudo_ab014d75d38796ff56c75ac81ef089685}
+\begin{DoxyVerb}
+----------------------------------------------------------------------
+Recibe la lista de archivos de CODS y genera una lista que los 
+contiene ordenados segun las fechas
+----------------------------------------------------------------------
+input
+    lista: lista de archivos (list)
+output
+    codsOrdenados: lista de lista ordenada (fecha, nombre de archivo)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 16 of file genera\-Crudo.\-py.
+
+
+\begin{DoxyCode}
+16 
+17 def ordenaTOD(lista):
+18     """
+19     ----------------------------------------------------------------------
+20     Recibe la lista de archivos de CODS y genera una lista que los 
+21     contiene ordenados segun las fechas
+22     ----------------------------------------------------------------------
+23     input
+24         lista: lista de archivos (list)
+25     output
+26         codsOrdenados: lista de lista ordenada (fecha, nombre de archivo)
+27     """
+28     archCods = {}
+29     orden=0
+30     for nombre in lista:
+31         print 'ordenando fila = ', orden
+32         nombreCode = nombre.split('_')
+33         if nombre == lista[1164]:
+34              print 'dejame ver nombre', nombre
+35              break
+36         yy=int(nombreCode[2][0:4])
+37         mes=int(nombreCode[2][4:6])
+38         dia=int(nombreCode[2][6:8])
+39         hs=int(nombreCode[3][0:2])
+40         mi=int(nombreCode[3][2:4])
+41         seg=int(nombreCode[3][4:6])
+42         fecha = datetime(yy,mes,dia,hs,mi,seg)
+43         archCods[fecha]=nombre
+44         orden=orden+1
+45     codsOrdenados=sorted(archCods.items())
+46     return codsOrdenados
+
+\end{DoxyCode}
+
+
+\subsection{\-Variable \-Documentation}
+\index{\-Cods\-Admin\-::genera\-Crudo@{\-Cods\-Admin\-::genera\-Crudo}!lista@{lista}}
+\index{lista@{lista}!CodsAdmin::generaCrudo@{\-Cods\-Admin\-::genera\-Crudo}}
+\subsubsection[{lista}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Cods\-Admin\-::genera\-Crudo\-::lista} = glob.\-glob('\-T\-O\-D\-\_\-\-O/$\ast$')}\label{namespace_cods_admin_1_1genera_crudo_a1b142ddd3b0eb9dfbcc9f8fe60e894c9}
+
+
+\-Definition at line 73 of file genera\-Crudo.\-py.
+
+\index{\-Cods\-Admin\-::genera\-Crudo@{\-Cods\-Admin\-::genera\-Crudo}!\-T\-O\-Dlista@{\-T\-O\-Dlista}}
+\index{\-T\-O\-Dlista@{\-T\-O\-Dlista}!CodsAdmin::generaCrudo@{\-Cods\-Admin\-::genera\-Crudo}}
+\subsubsection[{\-T\-O\-Dlista}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Cods\-Admin\-::genera\-Crudo\-::\-T\-O\-Dlista} = {\bf ordena\-T\-O\-D}({\bf lista})}\label{namespace_cods_admin_1_1genera_crudo_aa2885a84c00e50bf5f7bf14d9e50d44c}
+
+
+\-Definition at line 78 of file genera\-Crudo.\-py.
+

@@ -1,0 +1,205 @@
+\section{\-Cods\-Admin.\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S \-Class \-Reference}
+\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s}\index{\-Cods\-Admin.\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin.\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf parsea\-\_\-epoca\-\_\-nombre}
+\item 
+def {\bf genera\-\_\-diccionario}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf nombre\-\_\-arch}
+\item 
+{\bf data}
+\item 
+{\bf anio}
+\item 
+{\bf mes}
+\item 
+{\bf dia}
+\item 
+{\bf hora}
+\item 
+{\bf minu}
+\item 
+{\bf seg}
+\item 
+{\bf epoca\-\_\-ephem}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Facilita la manipulacion de los datos CODS.
+\end{DoxyVerb}
+ 
+
+\-Definition at line 9 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Cods\-Admin.\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{nombre\-\_\-archivo}
+\end{DoxyParamCaption}
+)}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a06e177a3091b9fcfa2c6d4c2322da657}
+\begin{DoxyVerb}
+Constructor
+\end{DoxyVerb}
+ 
+
+\-Definition at line 13 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+
+\begin{DoxyCode}
+13 
+14     def __init__(self, nombre_archivo):
+15         '''
+16         Constructor
+17         '''
+18         self.nombre_arch = nombre_archivo
+19         self.data={}
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!genera\-\_\-diccionario@{genera\-\_\-diccionario}}
+\index{genera\-\_\-diccionario@{genera\-\_\-diccionario}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{genera\-\_\-diccionario}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Cods\-Admin.\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S.\-genera\-\_\-diccionario} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a0817365a5d6b142390fad1886de641a3}
+
+
+\-Definition at line 31 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+
+\begin{DoxyCode}
+31 
+32     def genera_diccionario(self):
+33         archivo=open(self.nombre_arch,'r')
+34         contenido=archivo.readlines()
+35         for c in contenido:
+36             c1=c.split()           
+37             if c1[0]=='*HEADER':
+38                 continue
+39             fecha=c[:26]
+40             x=c1[2]
+41             y=c1[3]
+42             z=c1[4]
+43             vx=c1[5]
+44             vy=c1[6]
+45             vz=c1[7]
+46             self.epoca_ephem=datetime.strptime(fecha,'%Y/%m/%d %H:%M:%S.%f')
+47             self.data[self.epoca_ephem]={'x':x,'y':y,'z':z,'vx':vx,'vy':vy,'vz'
+      :vz}
+48 
+        return self.data
+\end{DoxyCode}
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!parsea\-\_\-epoca\-\_\-nombre@{parsea\-\_\-epoca\-\_\-nombre}}
+\index{parsea\-\_\-epoca\-\_\-nombre@{parsea\-\_\-epoca\-\_\-nombre}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{parsea\-\_\-epoca\-\_\-nombre}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Cods\-Admin.\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S.\-parsea\-\_\-epoca\-\_\-nombre} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a45b17270534648ee350fa97e4841c36b}
+
+
+\-Definition at line 20 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+
+\begin{DoxyCode}
+20 
+21     def parsea_epoca_nombre(self):
+22         campos      = self.nombre_arch.split('_')
+23         self.anio   = campos[1][0:4]
+24         self.mes    = campos[1][4:6]
+25         self.dia    = campos[1][6:8]
+26         self.hora   = campos[2][0:2]
+27         self.minu    = campos[2][2:4]
+28         self.seg    = campos[2][4:6]
+29         
+30         return self.anio, self.mes, self.dia, self.hora, self.minu, self.seg
+    
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!anio@{anio}}
+\index{anio@{anio}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{anio}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::anio}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a1b08c1febcea122ce6cd27a4100c249f}
+
+
+\-Definition at line 20 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!data@{data}}
+\index{data@{data}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::data}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_ab607b9aaf575cf2de6a5742c5f35838f}
+
+
+\-Definition at line 15 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!dia@{dia}}
+\index{dia@{dia}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{dia}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::dia}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_aa8f3adf29ef617ea389ba811aac6a761}
+
+
+\-Definition at line 20 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!epoca\-\_\-ephem@{epoca\-\_\-ephem}}
+\index{epoca\-\_\-ephem@{epoca\-\_\-ephem}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{epoca\-\_\-ephem}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::epoca\-\_\-ephem}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a236275674569fbe2a1ec0db2979d6a95}
+
+
+\-Definition at line 31 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!hora@{hora}}
+\index{hora@{hora}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{hora}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::hora}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a11e554c8144973f26096993f8f409043}
+
+
+\-Definition at line 20 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!mes@{mes}}
+\index{mes@{mes}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{mes}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::mes}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a0d63d7655bbdfa9912799cc0e649b65f}
+
+
+\-Definition at line 20 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!minu@{minu}}
+\index{minu@{minu}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{minu}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::minu}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a0b6c86e2a071560855bf82117f883881}
+
+
+\-Definition at line 20 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!nombre\-\_\-arch@{nombre\-\_\-arch}}
+\index{nombre\-\_\-arch@{nombre\-\_\-arch}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{nombre\-\_\-arch}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::nombre\-\_\-arch}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_ae01bd8c891aa0b84ba03c7100abd87d1}
+
+
+\-Definition at line 15 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+\index{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}!seg@{seg}}
+\index{seg@{seg}!CodsAdmin::EphemCODS::EphemCODS@{\-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S\-::\-Ephem\-C\-O\-D\-S}}
+\subsubsection[{seg}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Cods\-Admin\-::\-Ephem\-C\-O\-D\-S.\-Ephem\-C\-O\-D\-S\-::seg}}\label{class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s_a7e4a03710ca594e5f3aa864012f8af86}
+
+
+\-Definition at line 20 of file \-Ephem\-C\-O\-D\-S.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Cods\-Admin/{\bf \-Ephem\-C\-O\-D\-S.\-py}\end{DoxyCompactItemize}

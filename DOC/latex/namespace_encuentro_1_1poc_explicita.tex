@@ -1,0 +1,400 @@
+\section{\-Encuentro\-:\-:poc\-Explicita \-Namespace \-Reference}
+\label{namespace_encuentro_1_1poc_explicita}\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf proc\-\_\-encuentro\-Simple}
+\item 
+def {\bf metodo\-O\-S\-Wtles}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf d1} = '../\-Tle\-Admin/tle'
+\item 
+string {\bf d2} = '../\-Ajustar\-T\-L\-E/diferencias'
+\item 
+string {\bf d3} = '../main/matrices/'
+\item 
+string {\bf d4} = '../visual/archivos/\-T\-L\-E'
+\item 
+string {\bf d5} = '../visual/archivos/\-C\-O\-D\-S'
+\item 
+tuple {\bf \-T\-C\-A} = datetime(2004,9,2,19,14,11,0)
+\item 
+string {\bf sat\-\_\-id} = '27386'
+\item 
+string {\bf deb\-\_\-id} = '12442'
+\item 
+list {\bf r\-\_\-comp} = vec\-\_\-rsw[0]
+\item 
+list {\bf s\-\_\-comp} = vec\-\_\-rsw[1]
+\item 
+list {\bf w\-\_\-comp} = vec\-\_\-rsw[2]
+\item 
+{\bf mu\-\_\-x} = {\bf r\-\_\-comp}
+\item 
+tuple {\bf mu\-\_\-y} = np.\-sqrt({\bf s\-\_\-comp}$\ast${\bf s\-\_\-comp}+{\bf w\-\_\-comp}$\ast${\bf w\-\_\-comp})
+\item 
+tuple {\bf cos\-\_\-phi} = np.\-dot(v\-\_\-sat,v\-\_\-deb)
+\item 
+tuple {\bf phi} = np.\-arccos({\bf cos\-\_\-phi})
+\item 
+string {\bf crudo\-\_\-sat} = '31698\-\_\-20100725\-\_\-20100808.\-tle'
+\item 
+string {\bf crudo\-\_\-deb} = '24978\-\_\-20100725\-\_\-20100808.\-tle'
+\item 
+{\bf var\-\_\-s} = var\-\_\-ssat+var\-\_\-sdeb
+\item 
+{\bf var\-\_\-w} = var\-\_\-wsat+var\-\_\-wdeb
+\item 
+{\bf var\-\_\-x} = var\-\_\-rsat+var\-\_\-rdeb
+\item 
+tuple {\bf var\-\_\-y} = {\bf var\-\_\-s}$\ast$np.\-cos({\bf phi}/2.\-0)
+\item 
+float {\bf ra} = 0.\-005
+\item 
+tuple {\bf \-Po\-C} = dblquad(lambda y, x\-: (1.\-0/(2.\-0$\ast$np.\-pi$\ast$np.\-sqrt({\bf var\-\_\-x})$\ast$np.\-sqrt({\bf var\-\_\-y})))$\ast$np.\-exp((-\/1.\-0/2.\-0)$\ast$((x$\ast$x/{\bf var\-\_\-x})+(y$\ast$y/{\bf var\-\_\-y}))), {\bf mu\-\_\-x}-\/{\bf ra}, {\bf mu\-\_\-x}+{\bf ra}, lambda y\-: -\/np.\-sqrt({\bf ra}$\ast${\bf ra}-\/(y-\/{\bf mu\-\_\-x})$\ast$(y-\/{\bf mu\-\_\-x}))+{\bf mu\-\_\-y}, lambda y\-: np.\-sqrt({\bf ra}$\ast${\bf ra}-\/(y-\/{\bf mu\-\_\-x})$\ast$(y-\/{\bf mu\-\_\-x}))+{\bf mu\-\_\-y})
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 19/06/2017
+
+Utiliza la expresion explicita simplificada para el calculo
+de la Probabilidad de Colision.
+Requiere: 
+*Las diferencias en el TCA, en R,S,W. 
+*Los errores en el plano x,y (B-plane).
+*El radio de riesgo ra.
+P=exp[-1/2(mux2/sigmax2 + muy2/sigmay2)]*[1-exp[-(ra2/2*sigmax*sigmay)]]
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!metodo\-O\-S\-Wtles@{metodo\-O\-S\-Wtles}}
+\index{metodo\-O\-S\-Wtles@{metodo\-O\-S\-Wtles}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{metodo\-O\-S\-Wtles}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-poc\-Explicita.\-metodo\-O\-S\-Wtles} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{crudo, }
+\item[{}]{tca}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1poc_explicita_a7bbec2a797f8fe066010b01be84f2f8e}
+\begin{DoxyVerb}
+ Tanto para el Satelite como para el Desecho:
+
+* Importar Set de TLEs (importar_tle)
+* Implementar OSW con TLEs ---> extrar matriz.
+* 
+
+\end{DoxyVerb}
+ 
+
+\-Definition at line 67 of file poc\-Explicita.\-py.
+
+
+\begin{DoxyCode}
+67 
+68 def metodoOSWtles(sat_id,crudo,tca):
+69     """
+70      Tanto para el Satelite como para el Desecho:
+71     
+72     * Importar Set de TLEs (importar_tle)
+73     * Implementar OSW con TLEs ---> extrar matriz.
+74     * 
+75     
+76     """
+77     files=glob.glob('../TleAdmin/tle/*')
+78     for filename in files:
+79         os.unlink(filename)
+80    
+81     
+82     setTLE(sat_id, crudo)
+83     tles=glob.glob('../TleAdmin/tle/*')
+84     dic_tles=generadorDatos(tles)
+85     tle_ordenados=ordenaTles(dic_tles)
+86     
+87     
+88     tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
+89     r0,rp=tle_primario.propagaTLE(tca) # En TEME
+90     r0=np.array([r0[0],r0[1],r0[2]])
+91         
+92     nombre='difRSW_'+str(sat_id)+'_'+tca.strftime('%Y%m%d')+'.TLE'
+93     archivo_dif_rsw=open('../AjustarTLE/diferencias/'+nombre+'','w')
+94     # listas de diferencias (RSW)
+95     dr=[]
+96     ds=[]
+97     dw=[]
+98     drr=[]
+99     dss=[]
+100     dww=[]
+101 
+102     item=range(len(tle_ordenados)-2,-1,-1)       
+103     for j in item:
+104         tle1=Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[j][0])
+105         fsec=tle1.epoca()
+106         pos,vel=tle1.propagaTLE(tca)
+107         pos=np.array([pos[0],pos[1],pos[2]])
+108         vel=np.array([vel[0],vel[1],vel[2]]) 
+109         # Calculo de Diferencias
+110         d_r=pos-r0
+111         d_v=vel-rp
+112         r,s,w=ricSis(r0, rp, d_r)
+113         rr,ss,ww=ricSis(r0,rp,d_v)
+114         '''
+115         Sistema RSW
+116         '''
+117         dr.append(r)
+118         ds.append(s)
+119         dw.append(w)
+120         drr.append(rr)
+121         dss.append(ss)
+122         dww.append(ww)
+123         
+124         infodifRST=fsec.strftime('%Y%m%d')+' '+str(r)+' '+str(s)+' '+str(w)+' '
+      +str(rr)+' '+str(ss)+' '+str(ww)+'\n'
+125         archivo_dif_rsw.write(infodifRST)
+126     
+127     var_r=np.var(dr)
+128     var_s=np.var(ds)
+129     var_w=np.var(dw)
+130     
+131     return var_r,var_s,var_w
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!proc\-\_\-encuentro\-Simple@{proc\-\_\-encuentro\-Simple}}
+\index{proc\-\_\-encuentro\-Simple@{proc\-\_\-encuentro\-Simple}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{proc\-\_\-encuentro\-Simple}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Encuentro.\-poc\-Explicita.\-proc\-\_\-encuentro\-Simple} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{deb\-\_\-id, }
+\item[{}]{tca}
+\end{DoxyParamCaption}
+)}\label{namespace_encuentro_1_1poc_explicita_a0ec8439628e67a192bb488d63dadbae9}
+\begin{DoxyVerb}
+Propaga los objetos involucrados un intervalos [tca-90:tca+20]
+Calcula:
+    Miss Distance
+    TCA calculado
+    Diferencias en RTN ---> Plotea.
+    Genera archivo lat, long ---> Plotea.
+  
+\end{DoxyVerb}
+ 
+
+\-Definition at line 36 of file poc\-Explicita.\-py.
+
+
+\begin{DoxyCode}
+36 
+37 def proc_encuentroSimple(sat_id,deb_id,tca):
+38     """
+39     Propaga los objetos involucrados un intervalos [tca-90:tca+20]
+40     Calcula:
+41         Miss Distance
+42         TCA calculado
+43         Diferencias en RTN ---> Plotea.
+44         Genera archivo lat, long ---> Plotea.
+45       
+46     """
+47     # Importar los TLE de NORAD.
+48 
+49     usuario='macecilia'
+50     clave='MaCeciliaSpace17'
+51     tle_sat=Tle.creadoxParam(usuario, clave, sat_id, tca)
+52     tle_deb=Tle.creadoxParam(usuario, clave, deb_id, tca)
+53     
+54     """
+55     Propagacion hasta el Encuentro
+56     """
+57     r_sat,v_sat=tle_sat.propagaTLE(tca)
+58     r_deb,v_deb=tle_deb.propagaTLE(tca)
+59     
+60     encuentro1=Encuentro(tle_sat,tle_deb,tca)
+61     vector_rsw=encuentro1.DistRic_min
+62 
+63     print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.tca_c
+64     grafica_track('../Encuentro/archivos/'+str(sat_id)+'U', '
+      ../Encuentro/archivos/'+str(deb_id)+'U')
+65 
+66     return r_sat,v_sat,r_deb,v_deb,vector_rsw
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\subsection{\-Variable \-Documentation}
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!cos\-\_\-phi@{cos\-\_\-phi}}
+\index{cos\-\_\-phi@{cos\-\_\-phi}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{cos\-\_\-phi}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Encuentro\-::poc\-Explicita\-::cos\-\_\-phi} = np.\-dot(v\-\_\-sat,v\-\_\-deb)}\label{namespace_encuentro_1_1poc_explicita_a6fbfa27437a7064d705ba018ff939eca}
+
+
+\-Definition at line 223 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!crudo\-\_\-deb@{crudo\-\_\-deb}}
+\index{crudo\-\_\-deb@{crudo\-\_\-deb}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{crudo\-\_\-deb}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::crudo\-\_\-deb} = '24978\-\_\-20100725\-\_\-20100808.\-tle'}\label{namespace_encuentro_1_1poc_explicita_a7487a3ac57d1a4d2f320280a0a19d2da}
+
+
+\-Definition at line 251 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!crudo\-\_\-sat@{crudo\-\_\-sat}}
+\index{crudo\-\_\-sat@{crudo\-\_\-sat}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{crudo\-\_\-sat}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::crudo\-\_\-sat} = '31698\-\_\-20100725\-\_\-20100808.\-tle'}\label{namespace_encuentro_1_1poc_explicita_a1deff3b045a916025d1dfd581c6a8378}
+
+
+\-Definition at line 239 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!d1@{d1}}
+\index{d1@{d1}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::d1} = '../\-Tle\-Admin/tle'}\label{namespace_encuentro_1_1poc_explicita_ad28b3a43dc771a37740531eee0c0de0e}
+
+
+\-Definition at line 147 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!d2@{d2}}
+\index{d2@{d2}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{d2}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::d2} = '../\-Ajustar\-T\-L\-E/diferencias'}\label{namespace_encuentro_1_1poc_explicita_a7729370dffef751488eeb7ab37fb3f81}
+
+
+\-Definition at line 150 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!d3@{d3}}
+\index{d3@{d3}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{d3}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::d3} = '../main/matrices/'}\label{namespace_encuentro_1_1poc_explicita_ab944c29b94ff53ca78ef743b475265bb}
+
+
+\-Definition at line 153 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!d4@{d4}}
+\index{d4@{d4}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{d4}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::d4} = '../visual/archivos/\-T\-L\-E'}\label{namespace_encuentro_1_1poc_explicita_a5f1affeb758492584226917f70c3ed2d}
+
+
+\-Definition at line 156 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!d5@{d5}}
+\index{d5@{d5}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{d5}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::d5} = '../visual/archivos/\-C\-O\-D\-S'}\label{namespace_encuentro_1_1poc_explicita_a1af5c083590ce8fe3a0ec7a823fbb886}
+
+
+\-Definition at line 159 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!deb\-\_\-id@{deb\-\_\-id}}
+\index{deb\-\_\-id@{deb\-\_\-id}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{deb\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::deb\-\_\-id} = '12442'}\label{namespace_encuentro_1_1poc_explicita_a588db6ca344e22d20c74848b0e0a969a}
+
+
+\-Definition at line 187 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!mu\-\_\-x@{mu\-\_\-x}}
+\index{mu\-\_\-x@{mu\-\_\-x}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{mu\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Encuentro\-::poc\-Explicita\-::mu\-\_\-x} = {\bf r\-\_\-comp}}\label{namespace_encuentro_1_1poc_explicita_abcf7993ec3b4090b516135d6fd93ef38}
+
+
+\-Definition at line 219 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!mu\-\_\-y@{mu\-\_\-y}}
+\index{mu\-\_\-y@{mu\-\_\-y}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{mu\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Encuentro\-::poc\-Explicita\-::mu\-\_\-y} = np.\-sqrt({\bf s\-\_\-comp}$\ast${\bf s\-\_\-comp}+{\bf w\-\_\-comp}$\ast${\bf w\-\_\-comp})}\label{namespace_encuentro_1_1poc_explicita_a15601a1c8f374b15240d4f1519949fc0}
+
+
+\-Definition at line 220 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!phi@{phi}}
+\index{phi@{phi}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{phi}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Encuentro\-::poc\-Explicita\-::phi} = np.\-arccos({\bf cos\-\_\-phi})}\label{namespace_encuentro_1_1poc_explicita_ab281a7edf7743947b8d936e227f7f0fd}
+
+
+\-Definition at line 224 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!\-Po\-C@{\-Po\-C}}
+\index{\-Po\-C@{\-Po\-C}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{\-Po\-C}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Encuentro\-::poc\-Explicita\-::\-Po\-C} = dblquad(lambda y, x\-: (1.\-0/(2.\-0$\ast$np.\-pi$\ast$np.\-sqrt({\bf var\-\_\-x})$\ast$np.\-sqrt({\bf var\-\_\-y})))$\ast$np.\-exp((-\/1.\-0/2.\-0)$\ast$((x$\ast$x/{\bf var\-\_\-x})+(y$\ast$y/{\bf var\-\_\-y}))), {\bf mu\-\_\-x}-\/{\bf ra}, {\bf mu\-\_\-x}+{\bf ra}, lambda y\-: -\/np.\-sqrt({\bf ra}$\ast${\bf ra}-\/(y-\/{\bf mu\-\_\-x})$\ast$(y-\/{\bf mu\-\_\-x}))+{\bf mu\-\_\-y}, lambda y\-: np.\-sqrt({\bf ra}$\ast${\bf ra}-\/(y-\/{\bf mu\-\_\-x})$\ast$(y-\/{\bf mu\-\_\-x}))+{\bf mu\-\_\-y})}\label{namespace_encuentro_1_1poc_explicita_a54832d160924f6a2ad26bc221960af11}
+
+
+\-Definition at line 266 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!r\-\_\-comp@{r\-\_\-comp}}
+\index{r\-\_\-comp@{r\-\_\-comp}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{r\-\_\-comp}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Encuentro\-::poc\-Explicita\-::r\-\_\-comp} = vec\-\_\-rsw[0]}\label{namespace_encuentro_1_1poc_explicita_a119646b39dd230d6c8dff5c171732d61}
+
+
+\-Definition at line 215 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!ra@{ra}}
+\index{ra@{ra}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{ra}]{\setlength{\rightskip}{0pt plus 5cm}float {\bf \-Encuentro\-::poc\-Explicita\-::ra} = 0.\-005}\label{namespace_encuentro_1_1poc_explicita_a3177812fa5ffa001cb39c70755dbb83a}
+
+
+\-Definition at line 263 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!s\-\_\-comp@{s\-\_\-comp}}
+\index{s\-\_\-comp@{s\-\_\-comp}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{s\-\_\-comp}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Encuentro\-::poc\-Explicita\-::s\-\_\-comp} = vec\-\_\-rsw[1]}\label{namespace_encuentro_1_1poc_explicita_ac1aa96f22c1a67b631ff6640675bf092}
+
+
+\-Definition at line 216 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!sat\-\_\-id@{sat\-\_\-id}}
+\index{sat\-\_\-id@{sat\-\_\-id}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Encuentro\-::poc\-Explicita\-::sat\-\_\-id} = '27386'}\label{namespace_encuentro_1_1poc_explicita_a59c2fc21a0c43f5f8ed341a020272717}
+
+
+\-Definition at line 186 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!\-T\-C\-A@{\-T\-C\-A}}
+\index{\-T\-C\-A@{\-T\-C\-A}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{\-T\-C\-A}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Encuentro\-::poc\-Explicita\-::\-T\-C\-A} = datetime(2004,9,2,19,14,11,0)}\label{namespace_encuentro_1_1poc_explicita_a88b7deb45405de2ec87cd1081fcbcacd}
+
+
+\-Definition at line 185 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!var\-\_\-s@{var\-\_\-s}}
+\index{var\-\_\-s@{var\-\_\-s}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{var\-\_\-s}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Encuentro\-::poc\-Explicita\-::var\-\_\-s} = var\-\_\-ssat+var\-\_\-sdeb}\label{namespace_encuentro_1_1poc_explicita_a94a8d1f873062eb3196a7701ab8b7113}
+
+
+\-Definition at line 257 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!var\-\_\-w@{var\-\_\-w}}
+\index{var\-\_\-w@{var\-\_\-w}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{var\-\_\-w}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Encuentro\-::poc\-Explicita\-::var\-\_\-w} = var\-\_\-wsat+var\-\_\-wdeb}\label{namespace_encuentro_1_1poc_explicita_a8a31f21e186cdd6bfa87b87df65aca9f}
+
+
+\-Definition at line 258 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!var\-\_\-x@{var\-\_\-x}}
+\index{var\-\_\-x@{var\-\_\-x}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{var\-\_\-x}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Encuentro\-::poc\-Explicita\-::var\-\_\-x} = var\-\_\-rsat+var\-\_\-rdeb}\label{namespace_encuentro_1_1poc_explicita_aa689de410595dc4400566796e2ba7d84}
+
+
+\-Definition at line 260 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!var\-\_\-y@{var\-\_\-y}}
+\index{var\-\_\-y@{var\-\_\-y}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{var\-\_\-y}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Encuentro\-::poc\-Explicita\-::var\-\_\-y} = {\bf var\-\_\-s}$\ast$np.\-cos({\bf phi}/2.\-0)}\label{namespace_encuentro_1_1poc_explicita_a9eb0c17d4f6138d6ffa8ed7382520783}
+
+
+\-Definition at line 261 of file poc\-Explicita.\-py.
+
+\index{\-Encuentro\-::poc\-Explicita@{\-Encuentro\-::poc\-Explicita}!w\-\_\-comp@{w\-\_\-comp}}
+\index{w\-\_\-comp@{w\-\_\-comp}!Encuentro::pocExplicita@{\-Encuentro\-::poc\-Explicita}}
+\subsubsection[{w\-\_\-comp}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Encuentro\-::poc\-Explicita\-::w\-\_\-comp} = vec\-\_\-rsw[2]}\label{namespace_encuentro_1_1poc_explicita_afc783f689f82b362d252c91e762ca9b2}
+
+
+\-Definition at line 217 of file poc\-Explicita.\-py.
+

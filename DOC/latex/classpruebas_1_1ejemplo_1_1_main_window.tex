@@ -1,0 +1,300 @@
+\section{pruebas.\-ejemplo.\-Main\-Window \-Class \-Reference}
+\label{classpruebas_1_1ejemplo_1_1_main_window}\index{pruebas.\-ejemplo.\-Main\-Window@{pruebas.\-ejemplo.\-Main\-Window}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf update\-\_\-progress}
+\item 
+def {\bf hide\-\_\-progress\-\_\-bar}
+\item 
+def {\bf about}
+\item 
+def {\bf create\-Actions}
+\item 
+def {\bf create\-Menus}
+\item 
+def {\bf create\-Status\-Bar}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf rw}
+\item 
+{\bf sw}
+\item 
+{\bf pb}
+\item 
+{\bf exit\-Act}
+\item 
+{\bf about\-Act}
+\item 
+{\bf about\-Qt\-Act}
+\item 
+{\bf file\-Menu}
+\item 
+{\bf help\-Menu}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 20 of file ejemplo.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Main\-Window.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_main_window_a8acbdeaed4b6aa1ca5c6091d036fb4c7}
+
+
+\-Definition at line 21 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+21 
+22     def __init__(self):
+23         QMainWindow.__init__(self)
+24 
+25         # create stuff
+26         self.rw = ReportWidget()
+27         self.setCentralWidget(self.rw)
+28         self.sw = StartWindow()
+29         self.createActions()
+30         self.createMenus()
+31         self.createStatusBar()
+32 
+33         # create progress bar
+34         self.pb = QProgressBar(self.statusBar())
+35         self.statusBar().addPermanentWidget(self.pb)
+36 
+37         # connections
+38         self.connect(self.sw, SIGNAL("okClicked"),
+39                     self.rw.create)
+40         self.connect(self.rw.table, SIGNAL("progressChanged"),
+41                      self.update_progress)
+42         self.connect(self.rw.table, SIGNAL("displayFinished"),
+43                      self.hide_progress_bar)
+44 
+45         # format the main window
+46         self.setGeometry(100,100,750,550)
+47 
+48         # show windows
+49         self.show()
+50         self.sw.show()
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!about@{about}}
+\index{about@{about}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{about}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Main\-Window.\-about} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_main_window_a37c42bc9e0c1a391dd1380a87001ec44}
+
+
+\-Definition at line 61 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+61 
+62     def about(self):
+63         QMessageBox.about(self, self.tr("About AIS Audit Tool"),
+64             self.tr("AIS Audit Tool\n\n"
+65                     "%s\n"
+66                     "%s\n"
+67                     "%s" % (__author__, __version__, __date__)))
+
+\end{DoxyCode}
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!create\-Actions@{create\-Actions}}
+\index{create\-Actions@{create\-Actions}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{create\-Actions}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Main\-Window.\-create\-Actions} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_main_window_a0523db8099327476d11b1baad0d1d884}
+
+
+\-Definition at line 68 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+68 
+69     def createActions(self):
+70         self.exitAct = QAction(self.tr("E&xit;"), self)
+71         self.exitAct.setShortcut(self.tr("Ctrl+Q"))
+72         self.exitAct.setStatusTip(self.tr("Exit the application"))
+73         self.connect(self.exitAct, SIGNAL("triggered()"), self, SLOT("close()")
+      )
+74 
+75         self.aboutAct = QAction(self.tr("&About;"), self)
+76         self.aboutAct.setStatusTip(self.tr("Show the application's About box"))
+77         self.connect(self.aboutAct, SIGNAL("triggered()"), self.about)
+78 
+79         self.aboutQtAct = QAction(self.tr("About &Qt;"), self)
+80         self.aboutQtAct.setStatusTip(self.tr("Show the Qt library's About box")
+      )
+81         self.connect(self.aboutQtAct, SIGNAL("triggered()"), qApp, SLOT("
+      aboutQt()"))
+
+\end{DoxyCode}
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!create\-Menus@{create\-Menus}}
+\index{create\-Menus@{create\-Menus}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{create\-Menus}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Main\-Window.\-create\-Menus} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_main_window_a5bffdcee22936064b738b7bd5c5d12e9}
+
+
+\-Definition at line 82 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+82 
+83     def createMenus(self):
+84         self.fileMenu = self.menuBar().addMenu(self.tr("&File;"))
+85         self.fileMenu.addAction(self.exitAct)
+86 
+87         self.helpMenu = self.menuBar().addMenu(self.tr("&Help;"))
+88         self.helpMenu.addAction(self.aboutAct)
+89         self.helpMenu.addAction(self.aboutQtAct)
+
+\end{DoxyCode}
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!create\-Status\-Bar@{create\-Status\-Bar}}
+\index{create\-Status\-Bar@{create\-Status\-Bar}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{create\-Status\-Bar}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Main\-Window.\-create\-Status\-Bar} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_main_window_ade11ed356e510750c282dc2d626211f1}
+
+
+\-Definition at line 90 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+90 
+91     def createStatusBar(self):
+92         sb = QStatusBar()
+93         sb.setFixedHeight(18)
+94         self.setStatusBar(sb)
+95         self.statusBar().showMessage(self.tr("Ready"))
+
+\end{DoxyCode}
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!hide\-\_\-progress\-\_\-bar@{hide\-\_\-progress\-\_\-bar}}
+\index{hide\-\_\-progress\-\_\-bar@{hide\-\_\-progress\-\_\-bar}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{hide\-\_\-progress\-\_\-bar}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Main\-Window.\-hide\-\_\-progress\-\_\-bar} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_main_window_adbd6705630409563ff24cb24736b8161}
+
+
+\-Definition at line 57 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+57 
+58     def hide_progress_bar(self):
+59         self.pb.hide()
+60         self.statusBar().showMessage(self.tr("Finished"))
+
+\end{DoxyCode}
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!update\-\_\-progress@{update\-\_\-progress}}
+\index{update\-\_\-progress@{update\-\_\-progress}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{update\-\_\-progress}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Main\-Window.\-update\-\_\-progress} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{n, }
+\item[{}]{nrows}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_main_window_a62d2740c793ed405ce211128b9959b19}
+
+
+\-Definition at line 51 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+51 
+52     def update_progress(self, n, nrows):
+53         self.pb.show()
+54         self.pb.setRange(0, nrows)
+55         self.pb.setValue(n)
+56         self.statusBar().showMessage(self.tr("Parsing eventlog data..."))
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!about\-Act@{about\-Act}}
+\index{about\-Act@{about\-Act}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{about\-Act}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Main\-Window\-::about\-Act}}\label{classpruebas_1_1ejemplo_1_1_main_window_af8a4c14582c3669ce696fd7bac89f3b6}
+
+
+\-Definition at line 68 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!about\-Qt\-Act@{about\-Qt\-Act}}
+\index{about\-Qt\-Act@{about\-Qt\-Act}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{about\-Qt\-Act}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Main\-Window\-::about\-Qt\-Act}}\label{classpruebas_1_1ejemplo_1_1_main_window_a8d95064b621622fbea64d10d1cea0dcf}
+
+
+\-Definition at line 68 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!exit\-Act@{exit\-Act}}
+\index{exit\-Act@{exit\-Act}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{exit\-Act}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Main\-Window\-::exit\-Act}}\label{classpruebas_1_1ejemplo_1_1_main_window_ac908ffbb4c1b2b4fcbb913c06c290f33}
+
+
+\-Definition at line 68 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!file\-Menu@{file\-Menu}}
+\index{file\-Menu@{file\-Menu}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{file\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Main\-Window\-::file\-Menu}}\label{classpruebas_1_1ejemplo_1_1_main_window_a93177a92313d6cc95421f999e43db74c}
+
+
+\-Definition at line 82 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!help\-Menu@{help\-Menu}}
+\index{help\-Menu@{help\-Menu}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{help\-Menu}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Main\-Window\-::help\-Menu}}\label{classpruebas_1_1ejemplo_1_1_main_window_a9eefde030194eada361f6fd952c2b349}
+
+
+\-Definition at line 82 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!pb@{pb}}
+\index{pb@{pb}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{pb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Main\-Window\-::pb}}\label{classpruebas_1_1ejemplo_1_1_main_window_a71243d6087f172789ed631596a83eb50}
+
+
+\-Definition at line 21 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!rw@{rw}}
+\index{rw@{rw}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{rw}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Main\-Window\-::rw}}\label{classpruebas_1_1ejemplo_1_1_main_window_a0b0d91293dbd8eb6ddbd99789b2d3c16}
+
+
+\-Definition at line 21 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Main\-Window@{pruebas\-::ejemplo\-::\-Main\-Window}!sw@{sw}}
+\index{sw@{sw}!pruebas::ejemplo::MainWindow@{pruebas\-::ejemplo\-::\-Main\-Window}}
+\subsubsection[{sw}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Main\-Window\-::sw}}\label{classpruebas_1_1ejemplo_1_1_main_window_adaeb2bbf0b2eb94c9300b7eae7c8a60e}
+
+
+\-Definition at line 21 of file ejemplo.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf ejemplo.\-py}\end{DoxyCompactItemize}

@@ -1,0 +1,327 @@
+\section{\-Estadistica\-:\-:ma\-Covar \-Namespace \-Reference}
+\label{namespace_estadistica_1_1ma_covar}\index{\-Estadistica\-::ma\-Covar@{\-Estadistica\-::ma\-Covar}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf sigma\-Calc\-C\-O\-D\-S}
+\item 
+def {\bf ma\-Cov\-C\-O\-D\-S}
+\item 
+def {\bf ma\-Cov\-T\-L\-E}
+\item 
+def {\bf \-Ejecuta\-Ma\-Covar}
+\item 
+def {\bf \-Ejecuta\-Ma\-Covar\-C\-O\-D\-S}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 23/01/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Estadistica\-::ma\-Covar@{\-Estadistica\-::ma\-Covar}!\-Ejecuta\-Ma\-Covar@{\-Ejecuta\-Ma\-Covar}}
+\index{\-Ejecuta\-Ma\-Covar@{\-Ejecuta\-Ma\-Covar}!Estadistica::maCovar@{\-Estadistica\-::ma\-Covar}}
+\subsubsection[{\-Ejecuta\-Ma\-Covar}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Estadistica.\-ma\-Covar.\-Ejecuta\-Ma\-Covar} (
+\begin{DoxyParamCaption}
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{namespace_estadistica_1_1ma_covar_aadb6fb862b6976514a1292034a8b0a48}
+
+
+\-Definition at line 97 of file ma\-Covar.\-py.
+
+
+\begin{DoxyCode}
+97 
+98 def EjecutaMaCovar(archivo):
+99 #     files=glob.glob('../main/matrices/*')
+100 #     for filename in files:
+101 #         os.unlink(filename)
+102 #    datoTipo=raw_input()
+103     u=[]
+104     v=[]
+105     w=[]
+106     uv=[]
+107     vv=[]
+108     wv=[]
+109     datos=open('../AjustarTLE/diferencias/'+archivo,'r')
+110     datos1=datos.readlines()
+111     for l in datos1:
+112         campos=l.split()
+113         dt=l[:19]
+114         dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+115         u.append(float(campos[2]))
+116         v.append(float(campos[3]))
+117         w.append(float(campos[4]))
+118         uv.append(float(campos[5]))
+119         vv.append(float(campos[6]))
+120         wv.append(float(campos[7]))
+121     maCovar=maCovTLE(u, v, w, uv, vv, wv)
+122     
+123     ma_archivo=str(archivo.split('.')[0])+'_tle.csv'
+124     csvsalida = open('../main/matrices/'+ma_archivo, 'w')
+125     salida = csv.writer(csvsalida)
+126     salida.writerows(maCovar)
+127     
+128     return maCovar, ma_archivo
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Estadistica\-::ma\-Covar@{\-Estadistica\-::ma\-Covar}!\-Ejecuta\-Ma\-Covar\-C\-O\-D\-S@{\-Ejecuta\-Ma\-Covar\-C\-O\-D\-S}}
+\index{\-Ejecuta\-Ma\-Covar\-C\-O\-D\-S@{\-Ejecuta\-Ma\-Covar\-C\-O\-D\-S}!Estadistica::maCovar@{\-Estadistica\-::ma\-Covar}}
+\subsubsection[{\-Ejecuta\-Ma\-Covar\-C\-O\-D\-S}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Estadistica.\-ma\-Covar.\-Ejecuta\-Ma\-Covar\-C\-O\-D\-S} (
+\begin{DoxyParamCaption}
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{namespace_estadistica_1_1ma_covar_ae50df5102737352392fa1f5ef83ceb6c}
+
+
+\-Definition at line 129 of file ma\-Covar.\-py.
+
+
+\begin{DoxyCode}
+129 
+130 def EjecutaMaCovarCODS(archivo):
+131 #     files=glob.glob('../main/matrices/*')
+132 #     for filename in files:
+133 #         os.unlink(filename)
+134     u=[]
+135     v=[]
+136     w=[]
+137     uv=[]
+138     vv=[]
+139     wv=[]
+140     datos=open('../Comparar/diferencias/'+archivo,'r')
+141     datos1=datos.readlines()
+142     for l in datos1:
+143         campos=l.split()
+144         dt=l[:19]
+145         dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+146         u.append(float(campos[2]))
+147         v.append(float(campos[3]))
+148         w.append(float(campos[4]))
+149         uv.append(float(campos[5]))
+150         vv.append(float(campos[6]))
+151         wv.append(float(campos[7]))
+152     maCovar=maCovTLE(u, v, w, uv, vv, wv)
+153     
+154     
+155     csvsalida = open('../main/matrices/'+archivo.split('.')[0]+'_cods.csv', 'w'
+      )
+156     salida = csv.writer(csvsalida)
+157     salida.writerows(maCovar)
+158     
+159 #     print 'Ma. de Covarianza de: ', archivo    
+160 #     print maCovar
+161     
+162     return maCovar
+163     
+    \end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Estadistica\-::ma\-Covar@{\-Estadistica\-::ma\-Covar}!ma\-Cov\-C\-O\-D\-S@{ma\-Cov\-C\-O\-D\-S}}
+\index{ma\-Cov\-C\-O\-D\-S@{ma\-Cov\-C\-O\-D\-S}!Estadistica::maCovar@{\-Estadistica\-::ma\-Covar}}
+\subsubsection[{ma\-Cov\-C\-O\-D\-S}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Estadistica.\-ma\-Covar.\-ma\-Cov\-C\-O\-D\-S} (
+\begin{DoxyParamCaption}
+\item[{}]{uu, }
+\item[{}]{vv, }
+\item[{}]{ww, }
+\item[{}]{uvel, }
+\item[{}]{vvel, }
+\item[{}]{wvel}
+\end{DoxyParamCaption}
+)}\label{namespace_estadistica_1_1ma_covar_a832b0372f644397fe8a443add309ba1e}
+\begin{DoxyVerb}
+Sigma Posiciones
+\end{DoxyVerb}
+ 
+
+\-Definition at line 29 of file ma\-Covar.\-py.
+
+
+\begin{DoxyCode}
+29 
+30 def maCovCODS(uu,vv,ww,uvel,vvel,wvel):
+31     """
+32     Sigma Posiciones
+33     """
+34     s2_uu=sigmaCalcCODS(uu,uu)
+35     s2_uv=sigmaCalcCODS(uu,vv)
+36     s2_uw=sigmaCalcCODS(uu,ww)
+37     s2_vv=sigmaCalcCODS(vv,vv)
+38     s2_vw=sigmaCalcCODS(vv,ww)
+39     s2_ww=sigmaCalcCODS(ww,ww)
+40     """
+41     Sigma Velocidades
+42     """
+43     s2_uvel=sigmaCalcCODS(uvel,uvel)
+44     s2_uvvel=sigmaCalcCODS(uvel,vvel)
+45     s2_uwvel=sigmaCalcCODS(uvel,wvel)
+46     s2_vvvel=sigmaCalcCODS(vvel,vvel)
+47     s2_vwvel=sigmaCalcCODS(vvel,wvel)
+48     s2_wwvel=sigmaCalcCODS(wvel,wvel)
+49     """
+50     Sigmas de Pos y Vel - cruzados
+51     """
+52     s2_uuvel=sigmaCalcCODS(uu,uvel)
+53     s2_uuvvel=sigmaCalcCODS(uu,vvel)
+54     s2_uuwvel=sigmaCalcCODS(uu,wvel)
+55     s2_vvuvel=sigmaCalcCODS(vv,uvel)
+56     s2_vvvvel=sigmaCalcCODS(vv,vvel)
+57     s2_vvwvel=sigmaCalcCODS(vv,wvel)
+58     s2_wwuvel=sigmaCalcCODS(ww,uvel)
+59     s2_wwvvel=sigmaCalcCODS(ww,vvel)
+60     s2_wwwvel=sigmaCalcCODS(ww,wvel)
+61     
+62     linea1=[s2_uu,s2_uv,s2_uw,s2_uuvel,s2_uuvvel,s2_uuwvel]
+63     linea2=[s2_uv,s2_vv,s2_vw,s2_vvuvel,s2_vvvvel,s2_vvwvel]
+64     linea3=[s2_uw,s2_vw,s2_ww,s2_wwuvel,s2_wwvvel,s2_wwwvel]
+65     linea4=[s2_uuvel,s2_uuvvel,s2_uuwvel,s2_uvel,s2_uvvel,s2_uwvel]
+66     linea5=[s2_vvuvel,s2_vvvvel,s2_vvwvel,s2_uvvel,s2_vvvel,s2_vwvel,]
+67     linea6=[s2_wwuvel,s2_wwvvel,s2_wwwvel,s2_uwvel,s2_vwvel,s2_wwvel]        
+68     maCovarC=np.array([linea1,linea2,linea3,linea4,linea5,linea6])
+69       
+70     return maCovarC
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Estadistica\-::ma\-Covar@{\-Estadistica\-::ma\-Covar}!ma\-Cov\-T\-L\-E@{ma\-Cov\-T\-L\-E}}
+\index{ma\-Cov\-T\-L\-E@{ma\-Cov\-T\-L\-E}!Estadistica::maCovar@{\-Estadistica\-::ma\-Covar}}
+\subsubsection[{ma\-Cov\-T\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Estadistica.\-ma\-Covar.\-ma\-Cov\-T\-L\-E} (
+\begin{DoxyParamCaption}
+\item[{}]{u, }
+\item[{}]{v, }
+\item[{}]{w, }
+\item[{}]{uv, }
+\item[{}]{vv, }
+\item[{}]{wv}
+\end{DoxyParamCaption}
+)}\label{namespace_estadistica_1_1ma_covar_aa48123d0e8657fa1dd0847526bf613b3}
+
+
+\-Definition at line 71 of file ma\-Covar.\-py.
+
+
+\begin{DoxyCode}
+71 
+72 def maCovTLE(u, v, w, uv, vv, wv):
+73     m_u=np.mean(u)
+74     m_v=np.mean(v)
+75     m_w=np.mean(w)
+76     m_uv=np.mean(uv)
+77     m_vv=np.mean(vv)
+78     m_wv=np.mean(wv)
+79     uu=[]
+80     vx=[]
+81     ww=[]
+82     uvuv=[]
+83     vvvv=[]
+84     wvwv=[]
+85     for i in range(len(u)):
+86         uu.append(u[i]-m_u)
+87         vx.append(v[i]-m_v)
+88         ww.append(w[i]-m_w)
+89         uvuv.append(uv[i]-m_uv)
+90         vvvv.append(vv[i]-m_vv)
+91         wvwv.append(wv[i]-m_wv)
+92         
+93     maCovarT=maCovCODS(uu,vx,ww,uvuv,vvvv,wvwv)
+94     
+95     return maCovarT   
+96 
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Estadistica\-::ma\-Covar@{\-Estadistica\-::ma\-Covar}!sigma\-Calc\-C\-O\-D\-S@{sigma\-Calc\-C\-O\-D\-S}}
+\index{sigma\-Calc\-C\-O\-D\-S@{sigma\-Calc\-C\-O\-D\-S}!Estadistica::maCovar@{\-Estadistica\-::ma\-Covar}}
+\subsubsection[{sigma\-Calc\-C\-O\-D\-S}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Estadistica.\-ma\-Covar.\-sigma\-Calc\-C\-O\-D\-S} (
+\begin{DoxyParamCaption}
+\item[{}]{x\-\_\-vect, }
+\item[{}]{y\-\_\-vect}
+\end{DoxyParamCaption}
+)}\label{namespace_estadistica_1_1ma_covar_a3343dc68ba49032b874357a6c4fca628}
+\begin{DoxyVerb}
+--------------------------------------------------------------------------------------
+Calcula el cuadrado de la varianza - sigma2 y las varianzas cruzadas.
+--------------------------------------------------------------------------------------
+inputs
+    x_vect: contiene las diferencias tomando como valor esperado el valor CODS. (vect)
+    y_vect: contiene las diferencias tomando como valor esperado el valor CODS. (vect)
+output
+    sigma2: varianza al cuadrado (float)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 11 of file ma\-Covar.\-py.
+
+
+\begin{DoxyCode}
+11 
+12 def sigmaCalcCODS(x_vect,y_vect):
+13     """
+14    
+       --------------------------------------------------------------------------------------
+15     Calcula el cuadrado de la varianza - sigma2 y las varianzas cruzadas.
+16    
+       --------------------------------------------------------------------------------------
+17     inputs
+18         x_vect: contiene las diferencias tomando como valor esperado el valor
+       CODS. (vect)
+19         y_vect: contiene las diferencias tomando como valor esperado el valor
+       CODS. (vect)
+20     output
+21         sigma2: varianza al cuadrado (float)
+22     """
+23     y_vect=np.transpose(y_vect)
+24     prod=np.dot(x_vect,y_vect)
+25     l=len(x_vect)
+26     sigma2=prod/l
+27     
+28     return sigma2
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+

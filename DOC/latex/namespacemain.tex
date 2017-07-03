@@ -1,0 +1,191 @@
+\section{main \-Namespace \-Reference}
+\label{namespacemain}\index{main@{main}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf proc\-\_\-encuentro\-Simple}
+\item 
+def {\bf metodo\-O\-S\-Wtles}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf d1} = '../\-Tle\-Admin/tle'
+\item 
+string {\bf d2} = '../\-Ajustar\-T\-L\-E/diferencias'
+\item 
+string {\bf d3} = '../main/matrices/'
+\item 
+string {\bf d4} = '../visual/archivos/\-T\-L\-E'
+\item 
+string {\bf d5} = '../visual/archivos/\-C\-O\-D\-S'
+\item 
+tuple {\bf \-T\-C\-A} = datetime(2008,1,9,19,1,30,0)
+\item 
+string {\bf sat\-\_\-id} = '27386'
+\item 
+string {\bf deb\-\_\-id} = '15482'
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 26/01/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{main@{main}!metodo\-O\-S\-Wtles@{metodo\-O\-S\-Wtles}}
+\index{metodo\-O\-S\-Wtles@{metodo\-O\-S\-Wtles}!main@{main}}
+\subsubsection[{metodo\-O\-S\-Wtles}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf main.\-metodo\-O\-S\-Wtles} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{namespacemain_ad14f0cd8de2be1f0f4c3d61166c258cc}
+\begin{DoxyVerb}
+ Tanto para el Satelite como para el Desecho:
+
+* Importar Set de TLEs (importar_tle)
+* Implementar OSW con TLEs ---> extrar matriz.
+* 
+
+\end{DoxyVerb}
+ 
+
+\-Definition at line 41 of file main.\-py.
+
+
+\begin{DoxyCode}
+41 
+42 def metodoOSWtles():
+43     """
+44      Tanto para el Satelite como para el Desecho:
+45     
+46     * Importar Set de TLEs (importar_tle)
+47     * Implementar OSW con TLEs ---> extrar matriz.
+48     * 
+49     
+50     """
+51     pass
+
+\end{DoxyCode}
+\index{main@{main}!proc\-\_\-encuentro\-Simple@{proc\-\_\-encuentro\-Simple}}
+\index{proc\-\_\-encuentro\-Simple@{proc\-\_\-encuentro\-Simple}!main@{main}}
+\subsubsection[{proc\-\_\-encuentro\-Simple}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf main.\-proc\-\_\-encuentro\-Simple} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{deb\-\_\-id, }
+\item[{}]{tca}
+\end{DoxyParamCaption}
+)}\label{namespacemain_adf9132d84025b4be604470e924d23125}
+\begin{DoxyVerb}
+Propaga los objetos involucrados un intervalos [tca-90:tca+20]
+Calcula:
+    Miss Distance
+    TCA calculado
+    Diferencias en RTN ---> Plotea.
+    Genera archivo lat, long ---> Plotea.
+  
+\end{DoxyVerb}
+ 
+
+\-Definition at line 14 of file main.\-py.
+
+
+\begin{DoxyCode}
+14 
+15 def proc_encuentroSimple(sat_id,deb_id,tca):
+16     """
+17     Propaga los objetos involucrados un intervalos [tca-90:tca+20]
+18     Calcula:
+19         Miss Distance
+20         TCA calculado
+21         Diferencias en RTN ---> Plotea.
+22         Genera archivo lat, long ---> Plotea.
+23       
+24     """
+25     # Importar los TLE de NORAD.
+26 
+27     usuario='macecilia'
+28     clave='MaCeciliaSpace17'
+29     tle_sat=Tle.creadoxParam(usuario, clave, sat_id, tca)
+30     tle_deb=Tle.creadoxParam(usuario, clave, deb_id, tca)
+31     
+32     """
+33     Propagacion hasta el Encuentro
+34     """
+35     encuentro1=Encuentro(tle_sat,tle_deb,tca)
+36 
+37     print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
+38     grafica_track('../Encuentro/archivos/'+str(sat_id)+'U', '
+      ../Encuentro/archivos/'+str(deb_id)+'U')
+39     print 'fin del procesamiento.'
+40 
+    
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\subsection{\-Variable \-Documentation}
+\index{main@{main}!d1@{d1}}
+\index{d1@{d1}!main@{main}}
+\subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf main\-::d1} = '../\-Tle\-Admin/tle'}\label{namespacemain_af589f10551d2ceaba530da9678b5199b}
+
+
+\-Definition at line 67 of file main.\-py.
+
+\index{main@{main}!d2@{d2}}
+\index{d2@{d2}!main@{main}}
+\subsubsection[{d2}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf main\-::d2} = '../\-Ajustar\-T\-L\-E/diferencias'}\label{namespacemain_a0fe8679407d5e2fcc95a91ba59171afa}
+
+
+\-Definition at line 70 of file main.\-py.
+
+\index{main@{main}!d3@{d3}}
+\index{d3@{d3}!main@{main}}
+\subsubsection[{d3}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf main\-::d3} = '../main/matrices/'}\label{namespacemain_a5acea98c221a36122a1bffd8ea3650dd}
+
+
+\-Definition at line 73 of file main.\-py.
+
+\index{main@{main}!d4@{d4}}
+\index{d4@{d4}!main@{main}}
+\subsubsection[{d4}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf main\-::d4} = '../visual/archivos/\-T\-L\-E'}\label{namespacemain_a8b8ad98130c101c2c7c337a0d5830482}
+
+
+\-Definition at line 76 of file main.\-py.
+
+\index{main@{main}!d5@{d5}}
+\index{d5@{d5}!main@{main}}
+\subsubsection[{d5}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf main\-::d5} = '../visual/archivos/\-C\-O\-D\-S'}\label{namespacemain_a5076ee750428395679d87a775c18fcd2}
+
+
+\-Definition at line 79 of file main.\-py.
+
+\index{main@{main}!deb\-\_\-id@{deb\-\_\-id}}
+\index{deb\-\_\-id@{deb\-\_\-id}!main@{main}}
+\subsubsection[{deb\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf main\-::deb\-\_\-id} = '15482'}\label{namespacemain_adb87a2d89ba6d7829f3855626103e536}
+
+
+\-Definition at line 87 of file main.\-py.
+
+\index{main@{main}!sat\-\_\-id@{sat\-\_\-id}}
+\index{sat\-\_\-id@{sat\-\_\-id}!main@{main}}
+\subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf main\-::sat\-\_\-id} = '27386'}\label{namespacemain_a0ebd80e2cb4fe9bd351655d1e5894622}
+
+
+\-Definition at line 86 of file main.\-py.
+
+\index{main@{main}!\-T\-C\-A@{\-T\-C\-A}}
+\index{\-T\-C\-A@{\-T\-C\-A}!main@{main}}
+\subsubsection[{\-T\-C\-A}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf main\-::\-T\-C\-A} = datetime(2008,1,9,19,1,30,0)}\label{namespacemain_a4222f1aa5b3addda5565ccfb4076c84e}
+
+
+\-Definition at line 85 of file main.\-py.
+

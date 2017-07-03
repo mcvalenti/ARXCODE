@@ -1,0 +1,181 @@
+\section{visual\-:\-:\-Cods\-Osweiler \-Namespace \-Reference}
+\label{namespacevisual_1_1_cods_osweiler}\index{visual\-::\-Cods\-Osweiler@{visual\-::\-Cods\-Osweiler}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-Ver\-Grafico\-Cods}
+\item 
+def {\bf graficar\-\_\-setcompleto}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 14/03/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{visual\-::\-Cods\-Osweiler@{visual\-::\-Cods\-Osweiler}!graficar\-\_\-setcompleto@{graficar\-\_\-setcompleto}}
+\index{graficar\-\_\-setcompleto@{graficar\-\_\-setcompleto}!visual::CodsOsweiler@{visual\-::\-Cods\-Osweiler}}
+\subsubsection[{graficar\-\_\-setcompleto}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-Cods\-Osweiler.\-graficar\-\_\-setcompleto} (
+\begin{DoxyParamCaption}
+\item[{}]{dt, }
+\item[{}]{data, }
+\item[{}]{coef}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1_cods_osweiler_a804bf3be2b45cfca353c555ebac41f99}
+
+
+\-Definition at line 90 of file \-Cods\-Osweiler.\-py.
+
+
+\begin{DoxyCode}
+90 
+91 def graficar_setcompleto(dt,data,coef):
+92 
+93     a=coef[0]
+94     b=coef[1]
+95     c=coef[2]
+96     a1=coef[3]
+97     b1=coef[4]
+98     c1=coef[5]
+99     a2=coef[6]
+100     b2=coef[7]
+101     c2=coef[8]
+102     dv=data[1]
+103     dn=data[2]
+104     dc=data[3]
+105     largo=np.max(dt)
+106     
+107     x=np.linspace(0,int(largo), 60)
+108     yv=[]
+109     yn=[]
+110     yc=[]
+111     for i in x:
+112         yv.append(a*i*i+b*i+c)
+113         yn.append(a1*i*i+b1*i+c1) 
+114         yc.append(a2*i*i+b2*i+c2)    
+115        
+116     """
+117     GRAFICO
+118     """
+119     
+120     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+121 
+122     ax1.grid(True)
+123     ax2.grid(True)
+124     ax3.grid(True)
+125     
+126 #    plt.ion()
+127     ax1.plot( x, yv,'r--',label='Coordenada V')
+128     ax1.plot(dt, dv,'x')
+129     ax1.set_ylabel('Km')
+130     ax2.plot(dt, dn,'x',label='Coordenada N')
+131     ax2.plot(x, yn,'r--')#
+132     ax2.set_ylabel('Km')
+133     ax3.plot(dt, dc,'x',label='Coordenada C')
+134     ax3.plot(x, yc,'r--')
+135     ax3.set_ylabel('Km')
+136     
+137     fig.suptitle('Diferencias y Funcion de Ajuste (CODS vs TLE+SGP4)')
+138     plt.xlabel('Epoca')
+139     plt.savefig('../visual/archivos/ajustes.png')
+140     plt.show()
+    \end{DoxyCode}
+\index{visual\-::\-Cods\-Osweiler@{visual\-::\-Cods\-Osweiler}!\-Ver\-Grafico\-Cods@{\-Ver\-Grafico\-Cods}}
+\index{\-Ver\-Grafico\-Cods@{\-Ver\-Grafico\-Cods}!visual::CodsOsweiler@{visual\-::\-Cods\-Osweiler}}
+\subsubsection[{\-Ver\-Grafico\-Cods}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-Cods\-Osweiler.\-Ver\-Grafico\-Cods} (
+\begin{DoxyParamCaption}
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1_cods_osweiler_a89700c76b9674e923946619a2958991b}
+
+
+\-Definition at line 14 of file \-Cods\-Osweiler.\-py.
+
+
+\begin{DoxyCode}
+14 
+15 def VerGraficoCods(archivo):
+16     f=open('../Comparar/diferencias/'+archivo,'r')
+17     listas=f.readlines()
+18     archivo_grafico=str(archivo+'.png')
+19     
+20     data0=[]
+21     data1=[]
+22     data2=[]
+23     data3=[]
+24     
+25     for l in listas:
+26         linea=l.split(' ')
+27         data0.append(linea[0])
+28         data1.append(float(linea[2]))
+29         data2.append(float(linea[3]))
+30         data3.append(float(linea[4]))
+31         
+32     maxx=float(max(data1))
+33     minx=float(min(data1))
+34     maxy=float(max(data2))
+35     miny=float(min(data2))
+36     plt.ylim([miny,maxy])
+37     plt.xlim([minx,maxx])
+38     
+39     """
+40     Gestion de Fechas
+41     """
+42     date_fmt = '%Y-%m-%d'
+43     epoca=[dt.datetime.strptime(str(i), date_fmt) for i in data0]
+44     x = [mdates.date2num(i) for i in epoca]
+45     date_formatter = mdates.DateFormatter('%d-%m-%y')
+46     
+47     """
+48     Funcion de Ajuste
+49     """
+50     slope1, intercept1, r_value1, p_value1, std_err1 = stats.linregress(x,data1
+      )
+51     slope2, intercept2, r_value2, p_value2, std_err2 = stats.linregress(x,data2
+      )
+52     slope3, intercept3, r_value3, p_value3, std_err3 = stats.linregress(x,data3
+      )
+53     
+54     g1=np.poly1d([slope1,intercept1])
+55     y1=g1(x)
+56     g2=np.poly1d([slope2,intercept2])
+57     y2=g2(x)
+58     g3=np.poly1d([slope3,intercept3])
+59     y3=g3(x)
+60     
+61     """
+62     GRAFICO
+63     """
+64     
+65     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+66     ax1.xaxis.set_major_formatter(date_formatter)
+67     ax2.xaxis.set_major_formatter(date_formatter)
+68     ax3.xaxis.set_major_formatter(date_formatter)
+69     ax1.grid(True)
+70     ax2.grid(True)
+71     ax3.grid(True)
+72     
+73 #    plt.ion()
+74     ax1.plot_date( x, y1,'r--',label='Coordenada V')
+75     ax1.plot_date(x, data1,'x')
+76     ax1.set_ylabel('Km')
+77     ax2.plot_date(x, data2,'x',label='Coordenada N')
+78     ax2.plot_date(x, y2,'r--')
+79     ax2.set_ylabel('Km')
+80     ax3.plot_date(x, data3,'x',label='Coordenada C')
+81     ax3.plot_date(x, y3,'r--')
+82     ax3.set_ylabel('Km')
+83     
+84     fig.suptitle('Diferencias y Funcion de Ajuste (CODS vs TLE+SGP4)')
+85     plt.xlabel('Epoca')
+86     plt.savefig('../visual/archivos/'+archivo_grafico)
+87     plt.show()
+88     
+89     return archivo_grafico
+
+\end{DoxyCode}

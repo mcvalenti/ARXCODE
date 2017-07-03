@@ -1,0 +1,250 @@
+\section{\-Tle\-Admin.\-T\-L\-E.\-Tle \-Class \-Reference}
+\label{class_tle_admin_1_1_t_l_e_1_1_tle}\index{\-Tle\-Admin.\-T\-L\-E.\-Tle@{\-Tle\-Admin.\-T\-L\-E.\-Tle}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf cat\-I\-D}
+\item 
+def {\bf epoca}
+\item 
+def {\bf propaga\-T\-L\-E}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf tle}
+\item 
+{\bf linea1}
+\item 
+{\bf linea2}
+\item 
+{\bf i}
+\item 
+{\bf \-Omega}
+\item 
+{\bf e}
+\item 
+{\bf ap}
+\item 
+{\bf m}
+\item 
+{\bf n}
+\item 
+{\bf cat\-I\-D}
+\item 
+{\bf epoca}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 16 of file \-T\-L\-E.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Tle\-Admin.\-T\-L\-E.\-Tle.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a01e9ddda7a8fc7c6e2f3723449f9b38c}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+18 
+19     def __init__(self,archivo):
+20         
+21         self.tle = open(archivo,'r')
+22         lineas = self.tle.readlines()
+23         self.linea1 = lineas[0]
+24         self.linea2 = lineas[1]
+25         self.tle.close() 
+26         self.i=self.linea2.split()[2]
+27         self.Omega=self.linea2.split()[3]
+28         self.e=self.linea2.split()[4]
+29         self.ap=self.linea2.split()[5]
+30         self.m=self.linea2.split()[6]
+31         self.n=self.linea2.split()[7]
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!cat\-I\-D@{cat\-I\-D}}
+\index{cat\-I\-D@{cat\-I\-D}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{cat\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Tle\-Admin.\-T\-L\-E.\-Tle.\-cat\-I\-D} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a56e19c50a3b3340e1ef800dbe1dbb83c}
+
+
+\-Definition at line 32 of file \-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+32 
+33     def catID(self):
+34         self.catID=self.linea1.split(' ')[1]
+35         return self.catID
+        
+\end{DoxyCode}
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!epoca@{epoca}}
+\index{epoca@{epoca}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{epoca}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Tle\-Admin.\-T\-L\-E.\-Tle.\-epoca} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_tle_admin_1_1_t_l_e_1_1_tle_aea0c1bb6a08ac6b4aadfb74d0ccabef9}
+
+
+\-Definition at line 36 of file \-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+36 
+37     def epoca(self):
+38         whichconst = wgs72
+39         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+40         self.epoca=satrec.epoch
+41 #         self.fecha = str(self.linea1.split()[3])  # Extraemos fecha del TLE
+42 #         self.anio = str(self.fecha[0:2])
+43 #         self.dias = str(self.fecha[2:14])
+44 #         self.a = int(self.anio)
+45 #         self.d = float(self.dias)
+46 #         self.mon, self.day, self.hr, self.minu, self.sec =
+       days2mdhms(self.a,self.d)
+47 #         self.mes=int(self.mon)
+48 #         self.dia1=int(self.day)
+49 #         self.hora=int(self.hr)
+50 #         self.minuto=int(self.minu)
+51 #         self.seg=int(self.sec)
+52 #         self.jd1 = jday(self.a, self.mon, self.d, self.hr, self.minu,
+       self.sec)
+53 #         self.epoca=datetime(2000+self.a, self.mes, self.dia1, self.hora,
+       self.minuto, self.seg)
+54         return self.epoca
+    
+\end{DoxyCode}
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!propaga\-T\-L\-E@{propaga\-T\-L\-E}}
+\index{propaga\-T\-L\-E@{propaga\-T\-L\-E}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{propaga\-T\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Tle\-Admin.\-T\-L\-E.\-Tle.\-propaga\-T\-L\-E} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{date = {\ttfamily \-None}}
+\end{DoxyParamCaption}
+)}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a71f3f0506951d9b2846ee23fe26274be}
+
+
+\-Definition at line 55 of file \-T\-L\-E.\-py.
+
+
+\begin{DoxyCode}
+55 
+56     def propagaTLE(self,date=None):
+57         whichconst = wgs72
+58         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+59         if date==None:
+60             ffin=satrec.epoch
+61             r,v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin
+      .minute,ffin.second)
+62         else:
+63             segundos=date.second+date.microsecond/1000000.0
+64             r,v = satrec.propagate(date.year,date.month,date.day,date.hour,date
+      .minute,segundos)
+65         return r,v
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!ap@{ap}}
+\index{ap@{ap}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{ap}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::ap}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a1b415ca046b6ce1bf8fc2604eea15256}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!cat\-I\-D@{cat\-I\-D}}
+\index{cat\-I\-D@{cat\-I\-D}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{cat\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::cat\-I\-D}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_af51beef664c23e20552a16b34573ec5f}
+
+
+\-Definition at line 32 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!e@{e}}
+\index{e@{e}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{e}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::e}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a1c42d8620d9966d30a40d5fe87e09363}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!epoca@{epoca}}
+\index{epoca@{epoca}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{epoca}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::epoca}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_ada2d6513eca8918681822c8663a1581a}
+
+
+\-Definition at line 36 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!i@{i}}
+\index{i@{i}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{i}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::i}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a1b43fddf9df054e764b869e03044621d}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!linea1@{linea1}}
+\index{linea1@{linea1}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{linea1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::linea1}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a5564c5a5d235b9c1c4c745fd45babf74}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!linea2@{linea2}}
+\index{linea2@{linea2}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{linea2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::linea2}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a0884704904f95db22272c64bb16f8690}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!m@{m}}
+\index{m@{m}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{m}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::m}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a18508b289ecb3eb07333756779bef2ca}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!n@{n}}
+\index{n@{n}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::n}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_aaef43e4aa6b89e0536d1d0da469f896f}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!\-Omega@{\-Omega}}
+\index{\-Omega@{\-Omega}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{\-Omega}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::\-Omega}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a39d89be3ab6c7896d6b2e14930b1d48a}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+\index{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}!tle@{tle}}
+\index{tle@{tle}!TleAdmin::TLE::Tle@{\-Tle\-Admin\-::\-T\-L\-E\-::\-Tle}}
+\subsubsection[{tle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::\-T\-L\-E.\-Tle\-::tle}}\label{class_tle_admin_1_1_t_l_e_1_1_tle_a1c624348a36071c3277ff5c6e7eabf89}
+
+
+\-Definition at line 18 of file \-T\-L\-E.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Tle\-Admin/{\bf \-T\-L\-E.\-py}\end{DoxyCompactItemize}

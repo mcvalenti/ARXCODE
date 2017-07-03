@@ -1,0 +1,282 @@
+\section{\-Comparar\-:\-:\-Tle\-Vs\-Cods \-Namespace \-Reference}
+\label{namespace_comparar_1_1_tle_vs_cods}\index{\-Comparar\-::\-Tle\-Vs\-Cods@{\-Comparar\-::\-Tle\-Vs\-Cods}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf encuentra\-Bordes}
+\item 
+def {\bf interpola}
+\item 
+def {\bf \-Ejecuta\-Comparacion}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 17/01/2017
+Compara cada SV, de los TLEs
+con los valores interpolados de los datos CODS.
+Realiza un ajuste y grafica.
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{\-Comparar\-::\-Tle\-Vs\-Cods@{\-Comparar\-::\-Tle\-Vs\-Cods}!\-Ejecuta\-Comparacion@{\-Ejecuta\-Comparacion}}
+\index{\-Ejecuta\-Comparacion@{\-Ejecuta\-Comparacion}!Comparar::TleVsCods@{\-Comparar\-::\-Tle\-Vs\-Cods}}
+\subsubsection[{\-Ejecuta\-Comparacion}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Comparar.\-Tle\-Vs\-Cods.\-Ejecuta\-Comparacion} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{\-Archivo\-T\-L\-E, }
+\item[{}]{\-Archivo\-C\-O\-D\-S}
+\end{DoxyParamCaption}
+)}\label{namespace_comparar_1_1_tle_vs_cods_a32ab2015e872ee683a372933bf55fcf6}
+\begin{DoxyVerb}
+---------------------------------------------------------------
+Toma las epocas de los TLEs e interpola los datos de CODS a las
+epocas correspondientes. Luego calcula las diferencias. 
+---------------------------------------------------------------
+input:
+    ....
+    ....
+output:
+    diferenciasVNC: (../visual/archivos/'difCods_'+str(sat_id))
+\end{DoxyVerb}
+ 
+
+\-Definition at line 156 of file \-Tle\-Vs\-Cods.\-py.
+
+
+\begin{DoxyCode}
+156 
+157 def EjecutaComparacion(sat_id,ArchivoTLE,ArchivoCODS):   
+158     """
+159     ---------------------------------------------------------------
+160     Toma las epocas de los TLEs e interpola los datos de CODS a las
+161     epocas correspondientes. Luego calcula las diferencias. 
+162     ---------------------------------------------------------------
+163     input:
+164         ....
+165         ....
+166     output:
+167         diferenciasVNC: (../visual/archivos/'difCods_'+str(sat_id))
+168     """
+169 # 
+170 #     inicio=time()
+171 # 
+172 #     tlelista=glob.glob('../TleAdmin/tle/*')
+173 #     
+174 #     FiltraArchivos()
+175 # 
+176 #     fin=time()  
+177 #     difVNC.close()       
+178 #     print 'FIN', 'Tiempo de Ejecucion = ', fin-inicio
+179 #     
+180 #     return archivo
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Comparar\-::\-Tle\-Vs\-Cods@{\-Comparar\-::\-Tle\-Vs\-Cods}!encuentra\-Bordes@{encuentra\-Bordes}}
+\index{encuentra\-Bordes@{encuentra\-Bordes}!Comparar::TleVsCods@{\-Comparar\-::\-Tle\-Vs\-Cods}}
+\subsubsection[{encuentra\-Bordes}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Comparar.\-Tle\-Vs\-Cods.\-encuentra\-Bordes} (
+\begin{DoxyParamCaption}
+\item[{}]{gpslista, }
+\item[{}]{l}
+\end{DoxyParamCaption}
+)}\label{namespace_comparar_1_1_tle_vs_cods_aa9499334396f57d3b3be2f9544468394}
+\begin{DoxyVerb}
+------------------------------------------------------------------------------------
+Dada una linea de efemerides Cartesianas procesadas desde un TLE. 
+Este metodo se encarga de buscar en la lista de lineas de efemerides que genera CODS
+cuales son las filas que encierran  la fecha del tle, para que luego se pueda
+interpolar la informacion, con el metodo Interpola
+------------------------------------------------------------------------------------
+input
+    gpslista: lista de lineas con efemerides [fecha epoca x y z vx vy vz]
+    l: linea con efemerides [fecha epoca x y z vx vy vz]
+output
+    inferior: linea interpolada inferior (str) [fecha epoca x y z vx vy vz]
+    superior: linea interpolada superior (str) [fecha epoca x y z vx vy vz]
+\end{DoxyVerb}
+ 
+
+\-Definition at line 38 of file \-Tle\-Vs\-Cods.\-py.
+
+
+\begin{DoxyCode}
+38 
+39 def encuentraBordes(gpslista,l):
+40     """
+41    
+       ------------------------------------------------------------------------------------
+42     Dada una linea de efemerides Cartesianas procesadas desde un TLE. 
+43     Este metodo se encarga de buscar en la lista de lineas de efemerides que
+       genera CODS
+44     cuales son las filas que encierran  la fecha del tle, para que luego se
+       pueda
+45     interpolar la informacion, con el metodo Interpola
+46    
+       ------------------------------------------------------------------------------------
+47     input
+48         gpslista: lista de lineas con efemerides [fecha epoca x y z vx vy vz]
+49         l: linea con efemerides [fecha epoca x y z vx vy vz]
+50     output
+51         inferior: linea interpolada inferior (str) [fecha epoca x y z vx vy vz]
+52         superior: linea interpolada superior (str) [fecha epoca x y z vx vy vz]
+53     """
+54     fechasgps=[]
+55     for fg in gpslista:
+56         campof=fg.split()
+57         fechas=campof[0]+' '+campof[1]
+58         dg=datetime.strptime(fechas[:19],'%Y/%m/%d %H:%M:%S')
+59         fechasgps.append(dg)
+60     tot=len(fechasgps)
+61     campos=l.split()
+62     campos1=campos[0].split('-')
+63     yy=int(campos1[0])
+64     mm=int(campos1[1])
+65     dd=int(campos1[2])
+66     campos2=campos[1].split(':')
+67     hh=int(campos2[0])
+68     minu=int(campos2[1])
+69     segu=0
+70     d1=datetime(yy,mm,dd,hh,minu,segu)      
+71     if d1 < fechasgps[tot/2]:
+72         if d1 in fechasgps[:tot/4]:
+73             indice=fechasgps.index(d1)
+74             inferior=gpslista[indice]
+75             superior=gpslista[indice-1]
+76         else:
+77             indice=fechasgps.index(d1)
+78             inferior=gpslista[indice]
+79             superior=gpslista[indice-1]
+80     else:
+81         if d1 in fechasgps[:tot*3/4]:
+82             indice=fechasgps.index(d1)
+83             inferior=gpslista[indice]
+84             superior=gpslista[indice-1]
+85         else:
+86             indice=fechasgps.index(d1)
+87             inferior=gpslista[indice]
+88             superior=gpslista[indice-1]
+89                 
+90     return inferior,superior
+91              
+92 
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Comparar\-::\-Tle\-Vs\-Cods@{\-Comparar\-::\-Tle\-Vs\-Cods}!interpola@{interpola}}
+\index{interpola@{interpola}!Comparar::TleVsCods@{\-Comparar\-::\-Tle\-Vs\-Cods}}
+\subsubsection[{interpola}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Comparar.\-Tle\-Vs\-Cods.\-interpola} (
+\begin{DoxyParamCaption}
+\item[{}]{l, }
+\item[{}]{inferior, }
+\item[{}]{superior}
+\end{DoxyParamCaption}
+)}\label{namespace_comparar_1_1_tle_vs_cods_af0f232600c72342c3dfd7b3d3583dbbf}
+\begin{DoxyVerb}
+---------------------------------------------------------------------
+Recibe las lineas con la informacion a interpolar.
+La primera linea es el dato TLE y las otras dos son las lineas
+de los datos CODS cuyas fechas encierran a la fecha del TLE.
+
+---------------------------------------------------------------------
+input
+    l: cadena con fecha hora x y z vx vy vz (str)
+    inferior: cadena con fecha hora x y z vx vy vz (str)
+    superior: cadena con fecha hora x y z vx vy vz (str)
+output
+    lineaInterpol: cadena con fecha & hora(TLE) + datos interpolados 
+\end{DoxyVerb}
+ 
+
+\-Definition at line 93 of file \-Tle\-Vs\-Cods.\-py.
+
+
+\begin{DoxyCode}
+93 
+94 def interpola(l,inferior,superior):
+95     """
+96     ---------------------------------------------------------------------
+97     Recibe las lineas con la informacion a interpolar.
+98     La primera linea es el dato TLE y las otras dos son las lineas
+99     de los datos CODS cuyas fechas encierran a la fecha del TLE.
+100 
+101     ---------------------------------------------------------------------
+102     input
+103         l: cadena con fecha hora x y z vx vy vz (str)
+104         inferior: cadena con fecha hora x y z vx vy vz (str)
+105         superior: cadena con fecha hora x y z vx vy vz (str)
+106     output
+107         lineaInterpol: cadena con fecha & hora(TLE) + datos interpolados 
+108     """
+109 
+110     lcampos=l.split()
+111     dicampos=inferior.split()
+112     dscampos=superior.split()
+113     # fecha inferior
+114     di=inferior[:19]
+115     di=datetime.strptime(di,'%Y/%m/%d %H:%M:%S')
+116     di_int=toTimestamp(di)
+117     #fecha superior
+118     ds=superior[:19]
+119     ds=datetime.strptime(ds,'%Y/%m/%d %H:%M:%S')
+120     ds_int=toTimestamp(ds)
+121     #fecha tle
+122     dt=l[:19]
+123     dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
+124     dt_int=toTimestamp(dt)
+125     
+126     x_array=[di_int,ds_int]
+127     x_new=dt_int
+128     # Interpolacion en x
+129     fx_array=[float(dicampos[2]),float(dscampos[2])]
+130     yx_new=barycentric_interpolate(x_array, fx_array, x_new)
+131 
+132     # Interpolacion en y
+133     fy_array=[float(dicampos[3]),float(dscampos[3])]
+134     yy_new=barycentric_interpolate(x_array, fy_array, x_new)
+135     
+136     # Interpolacion en z
+137     fz_array=[float(dicampos[4]),float(dscampos[4])]
+138     yz_new=barycentric_interpolate(x_array, fz_array, x_new)
+139 #    lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+'
+       '+str(yz_new)+'\n'
+140     
+141     # Interpolacion en vx
+142     fvx_array=[float(dicampos[5]),float(dscampos[5])]
+143     yvx_new=barycentric_interpolate(x_array, fvx_array, x_new)
+144  
+145     # Interpolacion en vy
+146     fvy_array=[float(dicampos[6]),float(dscampos[6])]
+147     yvy_new=barycentric_interpolate(x_array, fvy_array, x_new)
+148      
+149     # Interpolacion en vz
+150     fvz_array=[float(dicampos[7]),float(dscampos[7])]
+151     yvz_new=barycentric_interpolate(x_array, fvz_array, x_new)
+152     lineaInterpol=lcampos[0]+' '+lcampos[1]+' '+str(yx_new)+' '+str(yy_new)+' '
+      +str(yz_new)+' '+str(yvx_new)+' '+str(yvy_new)+' '+str(yvz_new)+'\n'
+153     
+154     return lineaInterpol
+155  
+#if __name__=='__main__':   
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\-Here is the caller graph for this function\-:
+
+

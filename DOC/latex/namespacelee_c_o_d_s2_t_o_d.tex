@@ -1,0 +1,179 @@
+\section{lee\-C\-O\-D\-S2\-T\-O\-D \-Namespace \-Reference}
+\label{namespacelee_c_o_d_s2_t_o_d}\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf f} = open('tlesacd.\-txt','r')
+\item 
+tuple {\bf g} = open('cods05jun2013.\-txt','r')
+\item 
+tuple {\bf cods} = g.\-readlines()
+\item 
+tuple {\bf line1} = f.\-readline()
+\item 
+tuple {\bf line2} = f.\-readline()
+\item 
+tuple {\bf satellite} = twoline2rv({\bf line1}, {\bf line2}, wgs72)
+\item 
+{\bf t0} = satellite.\-epoch
+\item 
+tuple {\bf dif} = ()
+\item 
+tuple {\bf poscods} = ()
+\item 
+tuple {\bf velcods} = ()
+\item 
+list {\bf datos} = {\bf cods}[segundo + minuto $\ast$ 60 + hora $\ast$ 3600]
+\item 
+tuple {\bf xcods} = float({\bf datos}[2])
+\item 
+tuple {\bf ycods} = float({\bf datos}[3])
+\item 
+tuple {\bf zcods} = float({\bf datos}[4])
+\item 
+tuple {\bf xpcods} = float({\bf datos}[5])
+\item 
+tuple {\bf ypcods} = float({\bf datos}[6])
+\item 
+tuple {\bf zpcods} = float({\bf datos}[7])
+\item 
+tuple {\bf fechahora} = datetime(t0.\-year,t0.\-month,t0.\-day,hora,minuto,segundo)
+\item 
+tuple {\bf r\-\_\-tod} = teme2tod({\bf fechahora},position)
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Variable \-Documentation}
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!cods@{cods}}
+\index{cods@{cods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{cods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::cods} = g.\-readlines()}\label{namespacelee_c_o_d_s2_t_o_d_a1091d58ce26082e7b7c4e94c12fd4dcb}
+
+
+\-Definition at line 8 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!datos@{datos}}
+\index{datos@{datos}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{datos}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::datos} = {\bf cods}[segundo + minuto $\ast$ 60 + hora $\ast$ 3600]}\label{namespacelee_c_o_d_s2_t_o_d_a75950e762348f5e054dc20db515efd08}
+
+
+\-Definition at line 23 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!dif@{dif}}
+\index{dif@{dif}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{dif}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::dif} = ()}\label{namespacelee_c_o_d_s2_t_o_d_a3003dfb96400176e1801d8044dd46508}
+
+
+\-Definition at line 14 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!f@{f}}
+\index{f@{f}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{f}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::f} = open('tlesacd.\-txt','r')}\label{namespacelee_c_o_d_s2_t_o_d_a740e14d90ddcc32bacf32d97dda0bbaa}
+
+
+\-Definition at line 6 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!fechahora@{fechahora}}
+\index{fechahora@{fechahora}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{fechahora}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::fechahora} = datetime(t0.\-year,t0.\-month,t0.\-day,hora,minuto,segundo)}\label{namespacelee_c_o_d_s2_t_o_d_aa1cf671423328901493feb4800332d89}
+
+
+\-Definition at line 32 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!g@{g}}
+\index{g@{g}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{g}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::g} = open('cods05jun2013.\-txt','r')}\label{namespacelee_c_o_d_s2_t_o_d_a051f7c8bd96880e125811c42d6a99bf1}
+
+
+\-Definition at line 7 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!line1@{line1}}
+\index{line1@{line1}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{line1}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::line1} = f.\-readline()}\label{namespacelee_c_o_d_s2_t_o_d_a6820889e577a8ead537dd26d1bc3f5d8}
+
+
+\-Definition at line 10 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!line2@{line2}}
+\index{line2@{line2}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{line2}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::line2} = f.\-readline()}\label{namespacelee_c_o_d_s2_t_o_d_aa9da18aac2648ee4b8c7128bab915b6d}
+
+
+\-Definition at line 11 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!poscods@{poscods}}
+\index{poscods@{poscods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{poscods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::poscods} = ()}\label{namespacelee_c_o_d_s2_t_o_d_a6e8af16ef718dcba41b65542a5300627}
+
+
+\-Definition at line 15 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!r\-\_\-tod@{r\-\_\-tod}}
+\index{r\-\_\-tod@{r\-\_\-tod}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{r\-\_\-tod}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::r\-\_\-tod} = teme2tod({\bf fechahora},position)}\label{namespacelee_c_o_d_s2_t_o_d_a776a728821127f201bf781cd7239e101}
+
+
+\-Definition at line 34 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!satellite@{satellite}}
+\index{satellite@{satellite}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{satellite}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::satellite} = twoline2rv({\bf line1}, {\bf line2}, wgs72)}\label{namespacelee_c_o_d_s2_t_o_d_adff2085c41374c2d193eb362a619b756}
+
+
+\-Definition at line 12 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!t0@{t0}}
+\index{t0@{t0}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{t0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::t0} = satellite.\-epoch}\label{namespacelee_c_o_d_s2_t_o_d_aaf8bb3c739d63ab92175a480a306ec53}
+
+
+\-Definition at line 13 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!velcods@{velcods}}
+\index{velcods@{velcods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{velcods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::velcods} = ()}\label{namespacelee_c_o_d_s2_t_o_d_ad2b8ba71b75c2557c042962449eb098f}
+
+
+\-Definition at line 16 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!xcods@{xcods}}
+\index{xcods@{xcods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{xcods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::xcods} = float({\bf datos}[2])}\label{namespacelee_c_o_d_s2_t_o_d_a7af23be84bda27bd85366ffe50e81fde}
+
+
+\-Definition at line 24 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!xpcods@{xpcods}}
+\index{xpcods@{xpcods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{xpcods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::xpcods} = float({\bf datos}[5])}\label{namespacelee_c_o_d_s2_t_o_d_a1420af9db9f5bc92ef64ca4146dc7419}
+
+
+\-Definition at line 27 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!ycods@{ycods}}
+\index{ycods@{ycods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{ycods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::ycods} = float({\bf datos}[3])}\label{namespacelee_c_o_d_s2_t_o_d_a4dc06da1afe86e15a8541604012ced44}
+
+
+\-Definition at line 25 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!ypcods@{ypcods}}
+\index{ypcods@{ypcods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{ypcods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::ypcods} = float({\bf datos}[6])}\label{namespacelee_c_o_d_s2_t_o_d_a8e3465da035af5b9d8c5c6b2a064009d}
+
+
+\-Definition at line 28 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!zcods@{zcods}}
+\index{zcods@{zcods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{zcods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::zcods} = float({\bf datos}[4])}\label{namespacelee_c_o_d_s2_t_o_d_a87d5152953643aa2d84c9a4b6c1671fd}
+
+
+\-Definition at line 26 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+
+\index{lee\-C\-O\-D\-S2\-T\-O\-D@{lee\-C\-O\-D\-S2\-T\-O\-D}!zpcods@{zpcods}}
+\index{zpcods@{zpcods}!leeCODS2TOD@{lee\-C\-O\-D\-S2\-T\-O\-D}}
+\subsubsection[{zpcods}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D\-::zpcods} = float({\bf datos}[7])}\label{namespacelee_c_o_d_s2_t_o_d_acc6dd5aece84a1663e0bc18c5ef9ff58}
+
+
+\-Definition at line 29 of file lee\-C\-O\-D\-S2\-T\-O\-D.\-py.
+

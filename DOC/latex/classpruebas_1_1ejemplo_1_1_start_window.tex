@@ -1,0 +1,132 @@
+\section{pruebas.\-ejemplo.\-Start\-Window \-Class \-Reference}
+\label{classpruebas_1_1ejemplo_1_1_start_window}\index{pruebas.\-ejemplo.\-Start\-Window@{pruebas.\-ejemplo.\-Start\-Window}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf ok\-\_\-clicked}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf label\-\_\-date}
+\item 
+{\bf datebox}
+\item 
+{\bf button\-\_\-ok}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 97 of file ejemplo.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Start\-Window@{pruebas\-::ejemplo\-::\-Start\-Window}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::ejemplo::StartWindow@{pruebas\-::ejemplo\-::\-Start\-Window}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Start\-Window.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{args}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_start_window_a45f6dc624f1c40322d64289d1487b8ba}
+
+
+\-Definition at line 98 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+98 
+99     def __init__(self, *args):
+100         QWidget.__init__(self, *args)
+101 
+102         # date box
+103         self.label_date = QLabel()
+104         self.label_date.setText("Set date of last audit:")
+105         default = datetime.date.today() - datetime.timedelta(
+      DEFAULT_DAYS_FROM_LAST_AUDIT)
+106         self.datebox = QDateEdit(QDate(default.year, default.month, default.day
+      ))
+107 
+108         # buttons
+109         spacer = QSpacerItem(20,40,QSizePolicy.Minimum,QSizePolicy.Expanding)
+110         self.button_ok = QPushButton()
+111         self.button_ok.setText("OK")
+112         self.button_ok.setDefault(True)
+113         button_cancel = QPushButton()
+114         button_cancel.setText("Cancel")
+115 
+116         # layout
+117         layout_right = QVBoxLayout(self)
+118         layout_right.addWidget(self.label_date)
+119         layout_right.addWidget(self.datebox)
+120         layout_right.addItem(spacer)
+121         layout_right.addWidget(self.button_ok)
+122         layout_right.addWidget(button_cancel)
+123 
+124         # connections
+125         self.connect(button_cancel, SIGNAL("clicked(bool)"),
+126                     self.close)
+127         self.connect(self.button_ok, SIGNAL("clicked(bool)"),
+128                     self.ok_clicked)
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Start\-Window@{pruebas\-::ejemplo\-::\-Start\-Window}!ok\-\_\-clicked@{ok\-\_\-clicked}}
+\index{ok\-\_\-clicked@{ok\-\_\-clicked}!pruebas::ejemplo::StartWindow@{pruebas\-::ejemplo\-::\-Start\-Window}}
+\subsubsection[{ok\-\_\-clicked}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Start\-Window.\-ok\-\_\-clicked} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_start_window_abd48bdbcac03f215477a4dfb72ab520c}
+
+
+\-Definition at line 129 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+129 
+130     def ok_clicked(self):
+131         self.close()
+132         year = self.datebox.date().year()
+133         month = self.datebox.date().month()
+134         day = self.datebox.date().day()
+135         dateobj = datetime.date(int(year),int(month),int(day))
+136         self.emit(SIGNAL("okClicked"), dateobj)
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Start\-Window@{pruebas\-::ejemplo\-::\-Start\-Window}!button\-\_\-ok@{button\-\_\-ok}}
+\index{button\-\_\-ok@{button\-\_\-ok}!pruebas::ejemplo::StartWindow@{pruebas\-::ejemplo\-::\-Start\-Window}}
+\subsubsection[{button\-\_\-ok}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Start\-Window\-::button\-\_\-ok}}\label{classpruebas_1_1ejemplo_1_1_start_window_a342f62dd43765977c85c60a9d2daf14b}
+
+
+\-Definition at line 98 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Start\-Window@{pruebas\-::ejemplo\-::\-Start\-Window}!datebox@{datebox}}
+\index{datebox@{datebox}!pruebas::ejemplo::StartWindow@{pruebas\-::ejemplo\-::\-Start\-Window}}
+\subsubsection[{datebox}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Start\-Window\-::datebox}}\label{classpruebas_1_1ejemplo_1_1_start_window_a0fb72a48582156c7362baa9d37f94f58}
+
+
+\-Definition at line 98 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Start\-Window@{pruebas\-::ejemplo\-::\-Start\-Window}!label\-\_\-date@{label\-\_\-date}}
+\index{label\-\_\-date@{label\-\_\-date}!pruebas::ejemplo::StartWindow@{pruebas\-::ejemplo\-::\-Start\-Window}}
+\subsubsection[{label\-\_\-date}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Start\-Window\-::label\-\_\-date}}\label{classpruebas_1_1ejemplo_1_1_start_window_a45fed6596c3f2d33b1a7eb2c408dc198}
+
+
+\-Definition at line 98 of file ejemplo.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf ejemplo.\-py}\end{DoxyCompactItemize}

@@ -1,0 +1,420 @@
+\section{visual\-:\-:ploteos \-Namespace \-Reference}
+\label{namespacevisual_1_1ploteos}\index{visual\-::ploteos@{visual\-::ploteos}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf grafica\-\_\-diferencias\-R\-I\-C}
+\item 
+def {\bf grafica\-\_\-set\-\_\-principal}
+\item 
+def {\bf grafica\-\_\-diferencias\-Totales}
+\item 
+def {\bf grafica\-\_\-setcompleto}
+\item 
+def {\bf grafica\-\_\-set15dias}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 05/04/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{visual\-::ploteos@{visual\-::ploteos}!grafica\-\_\-diferencias\-R\-I\-C@{grafica\-\_\-diferencias\-R\-I\-C}}
+\index{grafica\-\_\-diferencias\-R\-I\-C@{grafica\-\_\-diferencias\-R\-I\-C}!visual::ploteos@{visual\-::ploteos}}
+\subsubsection[{grafica\-\_\-diferencias\-R\-I\-C}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-ploteos.\-grafica\-\_\-diferencias\-R\-I\-C} (
+\begin{DoxyParamCaption}
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1ploteos_ad130adab92c89f4f234cabf8765144a8}
+
+
+\-Definition at line 14 of file ploteos.\-py.
+
+
+\begin{DoxyCode}
+14 
+15 def grafica_diferenciasRIC(archivo):
+16 
+17     data0=[]
+18     dr=[]
+19     di=[]
+20     dc=[]
+21     min_dist=[]
+22     archivo=open(archivo,'r')
+23     contenido=archivo.readlines()
+24 
+25     for c in contenido:
+26         columna=c.split(' ')
+27         data0.append(c[0:19])
+28         dr.append(columna[2])
+29         di.append(columna[3])
+30         dc.append(columna[4])
+31         min_dist.append(np.sqrt(float(columna[2])*float(columna[2])+float(
+      columna[3])*float(columna[3])+float(columna[4])*float(columna[4])))
+32         
+33     """
+34     Gestion de Fechas
+35     """
+36     date_fmt = '%Y-%m-%d %H:%M:%S'
+37     epoca=[datetime.strptime(str(i), date_fmt) for i in data0]
+38     x = [mdates.date2num(i) for i in epoca]
+39     date_formatter = mdates.DateFormatter('%Y-%m-%d %H:%M:%S')
+40 
+41     plt.grid()
+42     plt.plot_date(x, min_dist, fmt='M')
+43     grafico_dif='../Encuentro/archivos/'+'min_dist.png'
+44     plt.savefig(grafico_dif)
+45     return grafico_dif
+    
+\end{DoxyCode}
+\index{visual\-::ploteos@{visual\-::ploteos}!grafica\-\_\-diferencias\-Totales@{grafica\-\_\-diferencias\-Totales}}
+\index{grafica\-\_\-diferencias\-Totales@{grafica\-\_\-diferencias\-Totales}!visual::ploteos@{visual\-::ploteos}}
+\subsubsection[{grafica\-\_\-diferencias\-Totales}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-ploteos.\-grafica\-\_\-diferencias\-Totales} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{path, }
+\item[{}]{data, }
+\item[{}]{coef}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1ploteos_a73b9c849261d081585acbca29d41f452}
+\begin{DoxyVerb}
+Hace un grafico general con todos los datos.
+Contiene las tres componentes en un unico grafico.
+\end{DoxyVerb}
+ 
+
+\-Definition at line 129 of file ploteos.\-py.
+
+
+\begin{DoxyCode}
+129 
+130 def grafica_diferenciasTotales(sat_id,path,data,coef):
+131     """
+132     Hace un grafico general con todos los datos.
+133     Contiene las tres componentes en un unico grafico.
+134     """
+135     salida=path.split('/')[1]
+136     if salida=='AjustarTLE':
+137         archivo1='TLE/TLE_difTot_'+sat_id
+138     else:
+139         archivo1='CODS/CODS_difTot_'+sat_id
+140     
+141     dt=data[7]
+142     xx=data[1]
+143     yy=data[2]
+144     zz=data[3]
+145     fecha=data[0]
+146 
+147     """
+148     Grafico
+149     """
+150     plt.plot(dt, xx, 'rd', label='V')
+151     plt.plot(dt, yy, 'bo', label='N')
+152     plt.plot(dt, zz, 'kx', label='C')
+153     plt.grid()
+154     plt.title('Diferencias en las Coordenadas V,N,C [km]')
+155     plt.ylabel('Diferencia en Km')
+156     plt.legend(loc=1)
+157     f_ini=datetime.strftime(fecha[0],'%Y-%m-%d')
+158     f_fin=datetime.strftime(fecha[len(data[0])-1],'%Y-%m-%d')
+159     plt.savefig('../visual/archivos/'+archivo1+'_'+f_ini+'_'+f_fin+'.png')
+160     plt.show()
+161     plt.close()
+162 
+    
+\end{DoxyCode}
+\index{visual\-::ploteos@{visual\-::ploteos}!grafica\-\_\-set15dias@{grafica\-\_\-set15dias}}
+\index{grafica\-\_\-set15dias@{grafica\-\_\-set15dias}!visual::ploteos@{visual\-::ploteos}}
+\subsubsection[{grafica\-\_\-set15dias}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-ploteos.\-grafica\-\_\-set15dias} (
+\begin{DoxyParamCaption}
+\item[{}]{data15, }
+\item[{}]{coef}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1ploteos_a0032f0a50502cabb96d4aa3bf1873283}
+\begin{DoxyVerb}
+Realiza tres graficos, uno por coordenada.
+En cada grafico incorpora la funcion de ajuste,
+cuyos coeficientes fueron previamente calculados y
+se pasan como parametros.
+\end{DoxyVerb}
+ 
+
+\-Definition at line 248 of file ploteos.\-py.
+
+
+\begin{DoxyCode}
+248 
+249 def grafica_set15dias(data15,coef):
+250     """
+251     Realiza tres graficos, uno por coordenada.
+252     En cada grafico incorpora la funcion de ajuste,
+253     cuyos coeficientes fueron previamente calculados y
+254     se pasan como parametros.
+255     """
+256     dt=data15[7]
+257     dv=data15[1]
+258     dn=data15[2]
+259     dc=data15[3]
+260 
+261     a=coef[0][0]
+262     b=coef[0][1]
+263     a1=coef[1][0]
+264     b1=coef[1][1]
+265     a2=coef[2][0]
+266     b2=coef[2][1]
+267     """
+268     Funcion de Ajuste.
+269     """
+270     x=np.linspace(0,int(np.max(dt)), 60)
+271     yv=[]
+272     yn=[]
+273     yc=[]
+274     for i in x:
+275         yv.append(b*i+a)
+276         yn.append(b1*i+a1) 
+277         yc.append(b2*i+a2)    
+278            
+279     """
+280     GRAFICO
+281     """
+282     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+283     ax1.grid(True)
+284     ax2.grid(True)
+285     ax3.grid(True)
+286     ax1.plot( dt, dv,'o',label='Coordenada V') #'_draw_dotted'
+287     ax1.plot(x, yv,'r--')
+288     ax1.set_ylabel('Km')
+289     ax2.plot(dt, dn,'o',label='Coordenada N')
+290     ax2.plot(x, yn,'r--')
+291     ax2.set_ylabel('Km')
+292     ax3.plot(dt, dc,'o',label='Coordenada C')
+293     ax3.plot(x, yc,'r--')
+294     ax3.set_ylabel('Km')
+295     fig.suptitle('Diferencias y Funcion de Ajuste')
+296     plt.xlabel('Epoca')
+297     plt.savefig('../visual/archivos/pepe15.png')
+298     plt.show()
+299     plt.close()
+300 
+301 
+302 # if __name__=='__main__':
+303 #     archivo='../Encuentro/archivos/27386U_15482U_rtn'
+#     grafica_diferenciasRIC(archivo)\end{DoxyCode}
+\index{visual\-::ploteos@{visual\-::ploteos}!grafica\-\_\-set\-\_\-principal@{grafica\-\_\-set\-\_\-principal}}
+\index{grafica\-\_\-set\-\_\-principal@{grafica\-\_\-set\-\_\-principal}!visual::ploteos@{visual\-::ploteos}}
+\subsubsection[{grafica\-\_\-set\-\_\-principal}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-ploteos.\-grafica\-\_\-set\-\_\-principal} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{path, }
+\item[{}]{data, }
+\item[{}]{coef}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1ploteos_adc104ec76900b8ea84a258af86a3e52c}
+\begin{DoxyVerb}
+   
+\end{DoxyVerb}
+ 
+
+\-Definition at line 46 of file ploteos.\-py.
+
+
+\begin{DoxyCode}
+46 
+47 def grafica_set_principal(sat_id,path,data,coef):
+48     """
+49    
+50     """
+51     salida=path.split('/')[1]
+52     if salida=='AjustarTLE':
+53         archivo1='TLE/TLE_difPri_'+sat_id
+54     else:
+55         archivo1='CODS/CODS_difPri_'+sat_id
+56     
+57     dt=data[7]
+58     dv=data[1]
+59     dn=data[2]
+60     dc=data[3]
+61     largo=np.max(dt)
+62     
+63     if len(coef[0])==3:
+64         a=coef[0][0]
+65         b=coef[0][1]
+66         c=coef[0][2]
+67         a1=coef[1][0]
+68         b1=coef[1][1]
+69         c1=coef[1][2]
+70         a2=coef[2][0]
+71         b2=coef[2][1]
+72         c2=coef[2][2]
+73 
+74         """
+75         Funcion de Ajuste.
+76         """
+77         x=np.linspace(0,int(largo), 60)
+78         yv=[]
+79         yn=[]
+80         yc=[]
+81         for i in x:
+82             yv.append(c*i*i+b*i+a)
+83             yn.append(c1*i*i+b1*i+a1) 
+84             yc.append(c2*i*i+b2*i+a2)            
+85     elif len(coef[0]) ==2:
+86         a=coef[0][0]
+87         b=coef[0][1]
+88         a1=coef[1][0]
+89         b1=coef[1][1]
+90         a2=coef[2][0]
+91         b2=coef[2][1]
+92         dt=data[7]
+93         dv=data[1]
+94         dn=data[2]
+95         dc=data[3]
+96         largo=np.max(dt)
+97         """
+98         Funcion de Ajuste.
+99         """
+100         x=np.linspace(0,int(largo), 60)
+101         yv=[]
+102         yn=[]
+103         yc=[]
+104         for i in x:
+105             yv.append(b*i+a)
+106             yn.append(b1*i+a1) 
+107             yc.append(b2*i+a2)    
+108     
+109     
+110     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+111     ax1.grid(True)
+112     ax2.grid(True)
+113     ax3.grid(True)
+114     ax1.plot( x, yv,'r--',label='Coordenada V')
+115     ax1.plot(dt, dv,'o')
+116     ax1.set_ylabel('Km')
+117     ax2.plot(dt, dn,'o',label='Coordenada N')
+118     ax2.plot(x, yn,'r--')#
+119     ax2.set_ylabel('Km')
+120     ax3.plot(dt, dc,'o',label='Coordenada C')
+121     ax3.plot(x, yc,'r--')
+122     ax3.set_ylabel('Km')
+123     fig.suptitle('Diferencias y Funcion de Ajuste')
+124     plt.xlabel('Epoca')
+125     plt.savefig('../visual/archivos/'+archivo1+'_'+str(len(coef[0])))
+126     plt.show()
+127     plt.close()
+128 
+
+\end{DoxyCode}
+\index{visual\-::ploteos@{visual\-::ploteos}!grafica\-\_\-setcompleto@{grafica\-\_\-setcompleto}}
+\index{grafica\-\_\-setcompleto@{grafica\-\_\-setcompleto}!visual::ploteos@{visual\-::ploteos}}
+\subsubsection[{grafica\-\_\-setcompleto}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-ploteos.\-grafica\-\_\-setcompleto} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{path, }
+\item[{}]{data, }
+\item[{}]{coef}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1ploteos_ace4cf838bf1a51e874a46b4488a29a63}
+\begin{DoxyVerb}
+Realiza tres graficos, uno por coordenada.
+En cada grafico incorpora la funcion de ajuste,
+cuyos coeficientes fueron previamente calculados y
+se pasan como parametros.
+\end{DoxyVerb}
+ 
+
+\-Definition at line 163 of file ploteos.\-py.
+
+
+\begin{DoxyCode}
+163 
+164 def grafica_setcompleto(sat_id,path,data,coef):
+165     """
+166     Realiza tres graficos, uno por coordenada.
+167     En cada grafico incorpora la funcion de ajuste,
+168     cuyos coeficientes fueron previamente calculados y
+169     se pasan como parametros.
+170     """
+171     salida=path.split('/')[1]
+172     if salida=='AjustarTLE':
+173         archivo1='TLE/TLE_setCom_'+sat_id
+174     else:
+175         archivo1='CODS/CODS_setCom_'+sat_id
+176     
+177     if len(coef[0])==3:
+178         a=coef[0][0]
+179         b=coef[0][1]
+180         c=coef[0][2]
+181         a1=coef[1][0]
+182         b1=coef[1][1]
+183         c1=coef[1][2]
+184         a2=coef[2][0]
+185         b2=coef[2][1]
+186         c2=coef[2][2]
+187         dt=data[7]
+188         dv=data[1]
+189         dn=data[2]
+190         dc=data[3]
+191         largo=np.max(dt)
+192         """
+193         Funcion de Ajuste.
+194         """
+195         x=np.linspace(0,int(largo), 60)
+196         yv=[]
+197         yn=[]
+198         yc=[]
+199         for i in x:
+200             yv.append(c*i*i+b*i+a)
+201             yn.append(c1*i*i+b1*i+a1) 
+202             yc.append(c2*i*i+b2*i+a2)            
+203     elif len(coef[0]) ==2:
+204         a=coef[0][0]
+205         b=coef[0][1]
+206         a1=coef[1][0]
+207         b1=coef[1][1]
+208         a2=coef[2][0]
+209         b2=coef[2][1]
+210         dt=data[7]
+211         dv=data[1]
+212         dn=data[2]
+213         dc=data[3]
+214         largo=np.max(dt)
+215         """
+216         Funcion de Ajuste.
+217         """
+218         x=np.linspace(0,int(largo), 60)
+219         yv=[]
+220         yn=[]
+221         yc=[]
+222         for i in x:
+223             yv.append(b*i+a)
+224             yn.append(b1*i+a1) 
+225             yc.append(b2*i+a2)    
+226            
+227     """
+228     GRAFICO
+229     """
+230     fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+231     ax1.grid(True)
+232     ax2.grid(True)
+233     ax3.grid(True)
+234     ax1.plot( x, yv,'r--',label='Coordenada V')
+235     ax1.plot(dt, dv,'o')
+236     ax1.set_ylabel('Km')
+237     ax2.plot(dt, dn,'o',label='Coordenada N')
+238     ax2.plot(x, yn,'r--')#
+239     ax2.set_ylabel('Km')
+240     ax3.plot(dt, dc,'o',label='Coordenada C')
+241     ax3.plot(x, yc,'r--')
+242     ax3.set_ylabel('Km')
+243     fig.suptitle('Diferencias y Funcion de Ajuste')
+244     plt.xlabel('Epoca')
+245     plt.savefig('../visual/archivos/'+archivo1+'_'+str(len(coef[0])))
+246     plt.show()
+247     plt.close()
+    
+\end{DoxyCode}

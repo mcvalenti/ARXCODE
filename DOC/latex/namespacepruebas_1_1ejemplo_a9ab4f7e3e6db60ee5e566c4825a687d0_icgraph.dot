@@ -1,0 +1,9 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="pruebas.ejemplo.main",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid"];
+  Node2 [label="pruebas.ejemplo.MyTable.display_data",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classpruebas_1_1ejemplo_1_1_my_table.html#a0cb080c9e74ab1dca0c9b21e1e0b9b8a"];
+}

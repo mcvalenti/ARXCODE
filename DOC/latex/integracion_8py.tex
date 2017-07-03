@@ -1,0 +1,32 @@
+\section{pruebas/integracion.py \-File \-Reference}
+\label{integracion_8py}\index{pruebas/integracion.\-py@{pruebas/integracion.\-py}}
+\subsection*{\-Packages}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf pruebas\-::integracion}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+float {\bf pruebas\-::integracion.\-r\-\_\-comp} = 0.\-031731
+\item 
+float {\bf pruebas\-::integracion.\-s\-\_\-comp} = 0.\-436476
+\item 
+float {\bf pruebas\-::integracion.\-w\-\_\-comp} = 0.\-543785
+\item 
+{\bf pruebas\-::integracion.\-mu\-\_\-x} = r\-\_\-comp
+\item 
+tuple {\bf pruebas\-::integracion.\-mu\-\_\-y} = np.\-sqrt(s\-\_\-comp$\ast$s\-\_\-comp+w\-\_\-comp$\ast$w\-\_\-comp)
+\item 
+float {\bf pruebas\-::integracion.\-sig\-\_\-x} = 0.\-0430576
+\item 
+float {\bf pruebas\-::integracion.\-sig\-\_\-y} = 0.\-2941297
+\item 
+float {\bf pruebas\-::integracion.\-ra} = 0.\-01
+\item 
+{\bf pruebas\-::integracion.\-a} = mu\-\_\-x-\/ra
+\item 
+{\bf pruebas\-::integracion.\-b} = mu\-\_\-x+ra
+\item 
+tuple {\bf pruebas\-::integracion.\-area} = dblquad(lambda y, x\-: (1.\-0/(2.\-0$\ast$np.\-pi$\ast$sig\-\_\-x$\ast$sig\-\_\-y))$\ast$np.\-exp((-\/1.\-0/2.\-0)$\ast$((x$\ast$x/(sig\-\_\-x$\ast$sig\-\_\-x))+(y$\ast$y/(sig\-\_\-y$\ast$sig\-\_\-y)))), a, b, lambda y\-: -\/np.\-sqrt(ra$\ast$ra-\/(y-\/mu\-\_\-x)$\ast$(y-\/mu\-\_\-x))+mu\-\_\-y, lambda y\-: np.\-sqrt(ra$\ast$ra-\/(y-\/mu\-\_\-x)$\ast$(y-\/mu\-\_\-x))+mu\-\_\-y)
+\end{DoxyCompactItemize}

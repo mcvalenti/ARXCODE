@@ -1,0 +1,61 @@
+\section{funciones\-Utiles\-:\-:funciones \-Namespace \-Reference}
+\label{namespacefunciones_utiles_1_1funciones}\index{funciones\-Utiles\-::funciones@{funciones\-Utiles\-::funciones}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf to\-Timestamp}
+\item 
+def {\bf ensure\-\_\-dir}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 19/01/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{funciones\-Utiles\-::funciones@{funciones\-Utiles\-::funciones}!ensure\-\_\-dir@{ensure\-\_\-dir}}
+\index{ensure\-\_\-dir@{ensure\-\_\-dir}!funcionesUtiles::funciones@{funciones\-Utiles\-::funciones}}
+\subsubsection[{ensure\-\_\-dir}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf funciones\-Utiles.\-funciones.\-ensure\-\_\-dir} (
+\begin{DoxyParamCaption}
+\item[{}]{f}
+\end{DoxyParamCaption}
+)}\label{namespacefunciones_utiles_1_1funciones_a1854030cf379d8770bd7222edca3f61a}
+
+
+\-Definition at line 13 of file funciones.\-py.
+
+
+\begin{DoxyCode}
+13 
+14 def ensure_dir(f):
+15     d = os.path.dirname(f)
+16     if not os.path.exists(d):
+        os.makedirs(d)\end{DoxyCode}
+\index{funciones\-Utiles\-::funciones@{funciones\-Utiles\-::funciones}!to\-Timestamp@{to\-Timestamp}}
+\index{to\-Timestamp@{to\-Timestamp}!funcionesUtiles::funciones@{funciones\-Utiles\-::funciones}}
+\subsubsection[{to\-Timestamp}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf funciones\-Utiles.\-funciones.\-to\-Timestamp} (
+\begin{DoxyParamCaption}
+\item[{}]{d}
+\end{DoxyParamCaption}
+)}\label{namespacefunciones_utiles_1_1funciones_a3d74c0520a16933699930e2937322d1a}
+
+
+\-Definition at line 10 of file funciones.\-py.
+
+
+\begin{DoxyCode}
+10 
+11 def toTimestamp(d):
+12     return calendar.timegm(d.timetuple())
+
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+

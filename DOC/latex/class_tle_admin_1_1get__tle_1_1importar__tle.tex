@@ -1,0 +1,326 @@
+\section{\-Tle\-Admin.\-get\-\_\-tle.\-importar\-\_\-tle \-Class \-Reference}
+\label{class_tle_admin_1_1get__tle_1_1importar__tle}\index{\-Tle\-Admin.\-get\-\_\-tle.\-importar\-\_\-tle@{\-Tle\-Admin.\-get\-\_\-tle.\-importar\-\_\-tle}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf \-Consulta\-Autentica}
+\item 
+def {\bf solicitud\-Tle}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf norad\-Id}
+\item 
+{\bf anio0}
+\item 
+{\bf mes0}
+\item 
+{\bf dia0}
+\item 
+{\bf anio1}
+\item 
+{\bf mes1}
+\item 
+{\bf dia1}
+\item 
+{\bf usuario}
+\item 
+{\bf clave}
+\item 
+{\bf archivo}
+\item 
+{\bf tle\-Dato}
+\item 
+{\bf f}
+\item 
+{\bf sincero}
+\item 
+{\bf f0}
+\item 
+{\bf f1}
+\end{DoxyCompactItemize}
+\subsection*{\-Static \-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+tuple {\bf s} = session()
+\item 
+string {\bf fquery1} = 'https\-://www.\-space-\/track.\-org/basicspacedata/query/class/tle/\-E\-P\-O\-C\-H/'
+\item 
+tuple {\bf r} = s.\-get({\bf fquery1})
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 10 of file get\-\_\-tle.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Tle\-Admin.\-get\-\_\-tle.\-importar\-\_\-tle.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{usuario, }
+\item[{}]{clave, }
+\item[{}]{cat\-\_\-id, }
+\item[{}]{tca0, }
+\item[{}]{tca1, }
+\item[{}]{archivo}
+\end{DoxyParamCaption}
+)}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a742e7f570983e3b139758231647ee890}
+\begin{DoxyVerb}
+----------------------------------------------------------------------
+Hace el Request de los TLEs a Space-Track de NORAD.
+----------------------------------------------------------------------
+input:
+    usuario: usuario del operador en Space-Track - (string)
+    clave: clave del operador en Space-Track - (string)
+    cat_id: numero de catalogo del Objeto en la base NORAD -(string)
+    tca0: fecha de inicio del intervalo de analisis - (datetime)
+    tca1: fecha de fin del intervalo de analisis - (datetime)
+output:
+    xxxx.txt: archivo con los datos crudos (TleAdmin/crudosTLE/.)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 12 of file get\-\_\-tle.\-py.
+
+
+\begin{DoxyCode}
+12 
+13     def __init__(self, usuario,clave, cat_id,tca0,tca1,archivo):
+14         """
+15         ----------------------------------------------------------------------
+16         Hace el Request de los TLEs a Space-Track de NORAD.
+17         ----------------------------------------------------------------------
+18         input:
+19             usuario: usuario del operador en Space-Track - (string)
+20             clave: clave del operador en Space-Track - (string)
+21             cat_id: numero de catalogo del Objeto en la base NORAD -(string)
+22             tca0: fecha de inicio del intervalo de analisis - (datetime)
+23             tca1: fecha de fin del intervalo de analisis - (datetime)
+24         output:
+25             xxxx.txt: archivo con los datos crudos (TleAdmin/crudosTLE/.)
+26         """
+27         
+28         self.noradId=cat_id
+29         self.anio0=tca0.year
+30         self.mes0=tca0.month
+31         self.dia0=tca0.day
+32         self.anio1=tca1.year
+33         self.mes1=tca1.month
+34         self.dia1=tca1.day
+35         self.usuario=usuario
+36         self.clave=clave
+37         self.archivo=archivo
+38 
+39         self.tleDato=self.solicitudTle()
+40         self.f=open('../TleAdmin/crudosTLE/'+archivo,'w')
+41         self.f.write(self.tleDato)
+42         self.f.close()
+43         
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!\-Consulta\-Autentica@{\-Consulta\-Autentica}}
+\index{\-Consulta\-Autentica@{\-Consulta\-Autentica}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{\-Consulta\-Autentica}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Tle\-Admin.\-get\-\_\-tle.\-importar\-\_\-tle.\-Consulta\-Autentica} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a03d59029d91dab8740515cf15f7e712a}
+
+
+\-Definition at line 44 of file get\-\_\-tle.\-py.
+
+
+\begin{DoxyCode}
+44 
+45     def ConsultaAutentica(self):
+46         usuario=self.usuario
+47         clave=self.clave
+48         data = {'identity': usuario , 'password': clave}
+49         return data
+    
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!solicitud\-Tle@{solicitud\-Tle}}
+\index{solicitud\-Tle@{solicitud\-Tle}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{solicitud\-Tle}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Tle\-Admin.\-get\-\_\-tle.\-importar\-\_\-tle.\-solicitud\-Tle} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a3a563b39f7026b507afd3924438fd3b5}
+
+
+\-Definition at line 50 of file get\-\_\-tle.\-py.
+
+
+\begin{DoxyCode}
+50 
+51     def solicitudTle(self):
+52         try:
+53             self.sincero=[self.mes0,self.mes1,self.dia0,self.dia1]
+54             i=0
+55             for i in range(len(self.sincero)):           
+56                 if self.sincero[i] < 10:
+57                     self.sincero[i]='0'+str(self.sincero[i])
+58                 i= i+1
+59             self.sincero=[str(self.sincero[0]),str(self.sincero[1]),str(self.
+      sincero[2]),str(self.sincero[3])]
+60             self.f0=str(self.anio0)+'-'+self.sincero[0]+'-'+self.sincero[2]
+61             self.f1=str(self.anio1)+'-'+self.sincero[1]+'-'+self.sincero[3]
+62             print self.f0, self.f1
+            data = self.ConsultaAutentica()
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!anio0@{anio0}}
+\index{anio0@{anio0}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{anio0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::anio0}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a08d048da30ecec7871227bb84eacc97c}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!anio1@{anio1}}
+\index{anio1@{anio1}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{anio1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::anio1}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a37a98d4b204530d42a2c04f7dcef348e}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!archivo@{archivo}}
+\index{archivo@{archivo}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{archivo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::archivo}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a27133bceecf2ee8167c2914737341da2}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!clave@{clave}}
+\index{clave@{clave}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{clave}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::clave}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a676e94817275bc94ae7b76d8b5d1cab0}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!dia0@{dia0}}
+\index{dia0@{dia0}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{dia0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::dia0}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a5ceec2f77a48721f2c7f73a815a722ed}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!dia1@{dia1}}
+\index{dia1@{dia1}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{dia1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::dia1}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_acd287a73294b87956c6dce7efdb32ce6}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!f@{f}}
+\index{f@{f}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{f}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::f}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a5373d9cfdd80c65794ea9adf5cedbaa5}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!f0@{f0}}
+\index{f0@{f0}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{f0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::f0}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_aa38742a590a63832b8cd460c09d7afda}
+
+
+\-Definition at line 50 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!f1@{f1}}
+\index{f1@{f1}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{f1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::f1}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a5afb2c542c837e057d95959fc450a1cd}
+
+
+\-Definition at line 50 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!fquery1@{fquery1}}
+\index{fquery1@{fquery1}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{fquery1}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::fquery1} = 'https\-://www.\-space-\/track.\-org/basicspacedata/query/class/tle/\-E\-P\-O\-C\-H/'\hspace{0.3cm}{\ttfamily  [static]}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_ac877cb5ad2ae3cdb9ebf0ae3ec844974}
+
+
+\-Definition at line 66 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!mes0@{mes0}}
+\index{mes0@{mes0}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{mes0}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::mes0}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a91be520e0d9517b01328cf1c8892aa62}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!mes1@{mes1}}
+\index{mes1@{mes1}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{mes1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::mes1}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a7c836598432090b9f505dbce09e72888}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!norad\-Id@{norad\-Id}}
+\index{norad\-Id@{norad\-Id}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{norad\-Id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::norad\-Id}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_aded4f953271585d3900084b74b11c219}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!r@{r}}
+\index{r@{r}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::r} = s.\-get({\bf fquery1})\hspace{0.3cm}{\ttfamily  [static]}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_aa2b30c448459f92fa54819fc9be5f0d7}
+
+
+\-Definition at line 67 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!s@{s}}
+\index{s@{s}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{s}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::s} = session()\hspace{0.3cm}{\ttfamily  [static]}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a214227c0aa506be398e2c7ebed93c029}
+
+
+\-Definition at line 64 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!sincero@{sincero}}
+\index{sincero@{sincero}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{sincero}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::sincero}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_a5b9e15c9f69bb09deca0e885160d709d}
+
+
+\-Definition at line 50 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!tle\-Dato@{tle\-Dato}}
+\index{tle\-Dato@{tle\-Dato}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{tle\-Dato}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::tle\-Dato}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_abde23afb4f8339dbf5de306a34141701}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+\index{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}!usuario@{usuario}}
+\index{usuario@{usuario}!TleAdmin::get_tle::importar_tle@{\-Tle\-Admin\-::get\-\_\-tle\-::importar\-\_\-tle}}
+\subsubsection[{usuario}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Tle\-Admin\-::get\-\_\-tle.\-importar\-\_\-tle\-::usuario}}\label{class_tle_admin_1_1get__tle_1_1importar__tle_ad24132d6ac9d9a66f021129b17883587}
+
+
+\-Definition at line 24 of file get\-\_\-tle.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\-Tle\-Admin/{\bf get\-\_\-tle.\-py}\end{DoxyCompactItemize}

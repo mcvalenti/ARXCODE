@@ -1,0 +1,175 @@
+\section{pruebas.\-ejemplo.\-My\-Table \-Class \-Reference}
+\label{classpruebas_1_1ejemplo_1_1_my_table}\index{pruebas.\-ejemplo.\-My\-Table@{pruebas.\-ejemplo.\-My\-Table}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf hide\-\_\-system\-\_\-users}
+\item 
+def {\bf show\-\_\-system\-\_\-users}
+\item 
+def {\bf display\-\_\-data}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf other\-\_\-users\-\_\-list}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}Creates a custom table widget \end{DoxyVerb}
+ 
+
+\-Definition at line 183 of file ejemplo.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::ejemplo\-::\-My\-Table@{pruebas\-::ejemplo\-::\-My\-Table}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::ejemplo::MyTable@{pruebas\-::ejemplo\-::\-My\-Table}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-My\-Table.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{args}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_my_table_acd5fafc7627c9a8be944a69d8c223aa1}
+
+
+\-Definition at line 185 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+185 
+186     def __init__(self, *args):
+187         QTableWidget.__init__(self, *args)
+188         self.setSelectionMode(self.ContiguousSelection)
+189         self.setGeometry(0,0,700,400)
+190         self.setShowGrid(False)
+191         self.other_users_list = []
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{pruebas\-::ejemplo\-::\-My\-Table@{pruebas\-::ejemplo\-::\-My\-Table}!display\-\_\-data@{display\-\_\-data}}
+\index{display\-\_\-data@{display\-\_\-data}!pruebas::ejemplo::MyTable@{pruebas\-::ejemplo\-::\-My\-Table}}
+\subsubsection[{display\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-My\-Table.\-display\-\_\-data} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{dateobj}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_my_table_a0cb080c9e74ab1dca0c9b21e1e0b9b8a}
+\begin{DoxyVerb}Reads in data as a 2D list and formats and displays it in
+    the table \end{DoxyVerb}
+ 
+
+\-Definition at line 200 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+200 
+201     def display_data(self, dateobj):
+202         """ Reads in data as a 2D list and formats and displays it in
+203             the table """
+204 
+205         print "Fetching data..."
+206         ep = EventlogParser()
+207         data = ep.parse_log(dateobj)
+208         print "Done."
+209 
+210         if len(data)==0:
+211             data = ["No data for this date range."]
+212 
+213         nrows = len(data)
+214         ncols = len(data[0])
+215         self.setRowCount(nrows)
+216         self.setColumnCount(ncols)
+217         self.setHorizontalHeaderLabels(['No.', 'Date','Time','Type','Event','
+      User','Computer'])
+218 
+219         for i in xrange(len(data)):
+220             # update progress dialog
+221             if (i%20) == 0:
+222                 self.emit(SIGNAL("progressChanged"), i, nrows)
+223                 qApp.processEvents()
+224 
+225             # set each cell to be a QTableWidgetItem from the _process_row
+       method
+226             items = self._process_row(data[i])
+227             for j in range(len(items)):
+228                 self.setItem(i, j, items[j])
+229             self.setRowHeight(i, 16)
+230 
+231             # set column width first time through
+232             if i == 0:
+233                 self.resizeColumnsToContents()
+234                 self.setColumnWidth(4, 250)
+235 
+236         # format column width
+237         self.resizeColumnsToContents()
+238         self.setColumnWidth(4, 250)
+239 
+240         # emit signal for finished processing
+241         self.emit(SIGNAL("displayFinished"))
+
+\end{DoxyCode}
+
+
+\-Here is the call graph for this function\-:
+
+
+\index{pruebas\-::ejemplo\-::\-My\-Table@{pruebas\-::ejemplo\-::\-My\-Table}!hide\-\_\-system\-\_\-users@{hide\-\_\-system\-\_\-users}}
+\index{hide\-\_\-system\-\_\-users@{hide\-\_\-system\-\_\-users}!pruebas::ejemplo::MyTable@{pruebas\-::ejemplo\-::\-My\-Table}}
+\subsubsection[{hide\-\_\-system\-\_\-users}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-My\-Table.\-hide\-\_\-system\-\_\-users} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_my_table_a07399f97c1d2c0007f7b671820294c56}
+
+
+\-Definition at line 192 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+192 
+193     def hide_system_users(self):
+194         for n in self.other_users_list:
+195             self.setRowHidden(n, True)
+
+\end{DoxyCode}
+\index{pruebas\-::ejemplo\-::\-My\-Table@{pruebas\-::ejemplo\-::\-My\-Table}!show\-\_\-system\-\_\-users@{show\-\_\-system\-\_\-users}}
+\index{show\-\_\-system\-\_\-users@{show\-\_\-system\-\_\-users}!pruebas::ejemplo::MyTable@{pruebas\-::ejemplo\-::\-My\-Table}}
+\subsubsection[{show\-\_\-system\-\_\-users}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-My\-Table.\-show\-\_\-system\-\_\-users} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_my_table_ab50826f5bb21590875b1520b3edc3d62}
+
+
+\-Definition at line 196 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+196 
+197     def show_system_users(self):
+198         for n in self.other_users_list:
+199             self.setRowHidden(n, False)
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::ejemplo\-::\-My\-Table@{pruebas\-::ejemplo\-::\-My\-Table}!other\-\_\-users\-\_\-list@{other\-\_\-users\-\_\-list}}
+\index{other\-\_\-users\-\_\-list@{other\-\_\-users\-\_\-list}!pruebas::ejemplo::MyTable@{pruebas\-::ejemplo\-::\-My\-Table}}
+\subsubsection[{other\-\_\-users\-\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-My\-Table\-::other\-\_\-users\-\_\-list}}\label{classpruebas_1_1ejemplo_1_1_my_table_a95f13a9c0f91be2f1be9e7e2335afd8b}
+
+
+\-Definition at line 185 of file ejemplo.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf ejemplo.\-py}\end{DoxyCompactItemize}

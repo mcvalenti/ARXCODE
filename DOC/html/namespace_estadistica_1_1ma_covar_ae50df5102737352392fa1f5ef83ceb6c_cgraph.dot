@@ -1,0 +1,13 @@
+digraph G
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node1 [label="Estadistica.maCovar.EjecutaMaCovarCODS",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled" fontcolor="black"];
+  Node1 -> Node2 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="Estadistica.maCovar.maCovTLE",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_estadistica_1_1ma_covar.html#aa48123d0e8657fa1dd0847526bf613b3"];
+  Node2 -> Node3 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="Estadistica.maCovar.maCovCODS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_estadistica_1_1ma_covar.html#a832b0372f644397fe8a443add309ba1e"];
+  Node3 -> Node4 [color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="Estadistica.maCovar.sigmaCalcCODS",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$namespace_estadistica_1_1ma_covar.html#a3343dc68ba49032b874357a6c4fca628"];
+}

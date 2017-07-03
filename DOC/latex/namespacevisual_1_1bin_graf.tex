@@ -1,0 +1,155 @@
+\section{visual\-:\-:bin\-Graf \-Namespace \-Reference}
+\label{namespacevisual_1_1bin_graf}\index{visual\-::bin\-Graf@{visual\-::bin\-Graf}}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf desviacion\-\_\-standard\-\_\-graf}
+\item 
+def {\bf histograma\-\_\-bin}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\begin{DoxyVerb}
+Created on 27/03/2017
+
+@author: mcvalenti
+\end{DoxyVerb}
+ 
+
+\subsection{\-Function \-Documentation}
+\index{visual\-::bin\-Graf@{visual\-::bin\-Graf}!desviacion\-\_\-standard\-\_\-graf@{desviacion\-\_\-standard\-\_\-graf}}
+\index{desviacion\-\_\-standard\-\_\-graf@{desviacion\-\_\-standard\-\_\-graf}!visual::binGraf@{visual\-::bin\-Graf}}
+\subsubsection[{desviacion\-\_\-standard\-\_\-graf}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-bin\-Graf.\-desviacion\-\_\-standard\-\_\-graf} (
+\begin{DoxyParamCaption}
+\item[{}]{sat\-\_\-id, }
+\item[{}]{x, }
+\item[{}]{y, }
+\item[{}]{z}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1bin_graf_ad9005ef0437e18d8df7bc3bf8463f354}
+\begin{DoxyVerb}
+Toma los valores de los bins para cada coordenada V,N,C.
+Grafica una sola figura con los tres ploteos de Bin vs Coordenada.
+------------------------------------------------------------------
+input
+    sat_id: NORAD ID del objeto (String)
+    x,y,z: valores (Vectores)
+output
+    sat_id_bin.pnt: nombre del archivo del grafico generado en
+                    (visual/archivos)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 10 of file bin\-Graf.\-py.
+
+
+\begin{DoxyCode}
+10 
+11 def desviacion_standard_graf(sat_id,x,y,z):
+12     """
+13     Toma los valores de los bins para cada coordenada V,N,C.
+14     Grafica una sola figura con los tres ploteos de Bin vs Coordenada.
+15     ------------------------------------------------------------------
+16     input
+17         sat_id: NORAD ID del objeto (String)
+18         x,y,z: valores (Vectores)
+19     output
+20         sat_id_bin.pnt: nombre del archivo del grafico generado en
+21                         (visual/archivos)
+22     """   
+23     
+24     t=np.linspace(0, len(x), len(x))
+25     lx=len(x)
+26     ly=len(y)
+27     lz=len(z)
+28     
+29     # Two subplots, unpack the axes array immediately
+30     fig = plt.figure()
+31     plt.suptitle('Desviaciones Standard')
+32     ax1 = fig.add_subplot(311)
+33     ax1.grid()
+34     ax1.set_ylabel('Km')    
+35     ax2 = fig.add_subplot(312)
+36     ax2.grid()
+37     ax2.set_ylabel('Km')
+38     ax3 = fig.add_subplot(313)
+39     ax3.grid()
+40     ax3.set_ylabel('Km')
+41     ax3.set_xlabel('BIN')
+42     
+43     ax1.plot(t,x,label='Coord V')
+44     ax2.plot(t,y,label='Coord N')
+45     ax3.plot(t,z,label='Coord C')
+46     legend = ax1.legend(loc='upper center', shadow=True)
+47     legend = ax2.legend(loc='upper center', shadow=True)
+48     legend = ax3.legend(loc='upper center', shadow=True)
+49     
+50     plt.savefig('../visual/archivos/'+sat_id+'_bin.png')
+    
+\end{DoxyCode}
+
+
+\-Here is the caller graph for this function\-:
+
+
+\index{visual\-::bin\-Graf@{visual\-::bin\-Graf}!histograma\-\_\-bin@{histograma\-\_\-bin}}
+\index{histograma\-\_\-bin@{histograma\-\_\-bin}!visual::binGraf@{visual\-::bin\-Graf}}
+\subsubsection[{histograma\-\_\-bin}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf visual.\-bin\-Graf.\-histograma\-\_\-bin} (
+\begin{DoxyParamCaption}
+\item[{}]{cantidad}
+\end{DoxyParamCaption}
+)}\label{namespacevisual_1_1bin_graf_a6e397fe056e14123c813db6e74cbafa6}
+\begin{DoxyVerb}
+Realiza un grafico de barras con la cantidad de
+registros por intervalo temporal
+------------------------------------------------
+input
+    cantidad: numero de registros (Vector)
+\end{DoxyVerb}
+ 
+
+\-Definition at line 51 of file bin\-Graf.\-py.
+
+
+\begin{DoxyCode}
+51 
+52 def histograma_bin(cantidad):
+53     """
+54     Realiza un grafico de barras con la cantidad de
+55     registros por intervalo temporal
+56     ------------------------------------------------
+57     input
+58         cantidad: numero de registros (Vector)
+59     """
+60     N = len(cantidad)
+61     x = range(N)
+62     width = 1/2.5
+63     plt.bar(x, cantidad, width, color="blue")
+64 #    plt.show()
+65     
+66 # if __name__=='__main__':
+67 
+68     """
+69     grafico de barras
+70     """
+71 #     cantidad = [3,17,15,16,15,13,11,10,9,8,6,5,4,3]
+72 #     histograma_bin(cantidad)
+73 #     
+74     """
+75     grafico de bins
+76     """
+77 #     sat_id=str(8820)
+78 #     x=[0.15531948383281455, 0.35208799139462987, 0.48735055684593348,
+       0.53655846595379852, 0.50416605421406502, 0.47271063165972399, 0.36993826186181894,
+       0.31618958882447445, 0.24121794450504946, 0.48202060158683524, 0.646876913769725,
+       0.41151881448685795, 0.098299360497055691, 0.069155690160713421]
+79 #     y=[0.01261001256989118, 0.053985065818310002, 0.069754938211084944,
+       0.081556639046680895, 0.076935961292938781, 0.074010283401508489,
+       0.05387677772665516, 0.059940609952919999, 0.038014182287047255, 0.044055822822065757,
+       0.051215530306746485, 0.042827868937743832, 0.030871523454211208, 0.0088974321311783931]
+80 #     z=[0.034044496501183651, 0.072488375082016568, 0.10191851628568856,
+       0.10054505875369606, 0.09733437177247832, 0.10847543102729051, 0.13753228181056895,
+       0.12950158521380925, 0.11980347298368454, 0.13369423771900754,
+       0.12911766888769602, 0.10197599440861053, 0.044421303898966986, 0.060285949366608423]
+#     desviacion_standard_graf(sat_id,x,y,z)\end{DoxyCode}

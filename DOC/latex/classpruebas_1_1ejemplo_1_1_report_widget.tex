@@ -1,0 +1,180 @@
+\section{pruebas.\-ejemplo.\-Report\-Widget \-Class \-Reference}
+\label{classpruebas_1_1ejemplo_1_1_report_widget}\index{pruebas.\-ejemplo.\-Report\-Widget@{pruebas.\-ejemplo.\-Report\-Widget}}
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
+\item 
+def {\bf create}
+\item 
+def {\bf cb\-Users\-Changed}
+\item 
+def {\bf cb\-Sorting\-Changed}
+\end{DoxyCompactItemize}
+\subsection*{\-Public \-Attributes}
+\begin{DoxyCompactItemize}
+\item 
+{\bf cb\-Users}
+\item 
+{\bf cb\-Sorting}
+\item 
+{\bf table}
+\item 
+{\bf textbrowser}
+\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+
+
+\-Definition at line 138 of file ejemplo.\-py.
+
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Report\-Widget@{pruebas\-::ejemplo\-::\-Report\-Widget}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!pruebas::ejemplo::ReportWidget@{pruebas\-::ejemplo\-::\-Report\-Widget}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Report\-Widget.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{args}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_report_widget_adaa5d30ac6e72ee9ffe057ef671cb639}
+
+
+\-Definition at line 139 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+139 
+140     def __init__(self, *args):
+141         QWidget.__init__(self, *args)
+142         self.cbUsers = QCheckBox("Hide SYSTEM users")
+143         self.cbSorting = QCheckBox("Sorting enabled")
+144         self.table = MyTable()
+145         self.textbrowser = QTextBrowser()
+146         self.textbrowser.setFontFamily("Courier")
+147         self.textbrowser.setFontPointSize(10)
+148         hlayout = QHBoxLayout()
+149         hlayout.addWidget(self.cbUsers)
+150         hlayout.addWidget(self.cbSorting)
+151         vlayout = QVBoxLayout()
+152         vlayout.setMargin(2)
+153         vlayout.addLayout(hlayout)
+154         vlayout.addWidget(self.table)
+155         self.setLayout(vlayout)
+156         self.setGeometry(100,100,750,550)
+157 
+158         # connections
+159         self.connect(self.cbUsers, SIGNAL("stateChanged(int)"),
+160                      self.cbUsersChanged)
+161         self.connect(self.cbSorting, SIGNAL("stateChanged(int)"),
+162                      self.cbSortingChanged)
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Report\-Widget@{pruebas\-::ejemplo\-::\-Report\-Widget}!cb\-Sorting\-Changed@{cb\-Sorting\-Changed}}
+\index{cb\-Sorting\-Changed@{cb\-Sorting\-Changed}!pruebas::ejemplo::ReportWidget@{pruebas\-::ejemplo\-::\-Report\-Widget}}
+\subsubsection[{cb\-Sorting\-Changed}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Report\-Widget.\-cb\-Sorting\-Changed} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_report_widget_a7b7076eef6f6c109b13c801c55492bf2}
+
+
+\-Definition at line 175 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+175 
+176     def cbSortingChanged(self):
+177         state = self.cbSorting.checkState()
+178         if state == 0:
+179             self.table.setSortingEnabled(False)
+180         elif state == 2:
+181             self.table.setSortingEnabled(True)
+
+\end{DoxyCode}
+\index{pruebas\-::ejemplo\-::\-Report\-Widget@{pruebas\-::ejemplo\-::\-Report\-Widget}!cb\-Users\-Changed@{cb\-Users\-Changed}}
+\index{cb\-Users\-Changed@{cb\-Users\-Changed}!pruebas::ejemplo::ReportWidget@{pruebas\-::ejemplo\-::\-Report\-Widget}}
+\subsubsection[{cb\-Users\-Changed}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Report\-Widget.\-cb\-Users\-Changed} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_report_widget_adc08bfb0ab0a6cf05a62c0e66d819c7d}
+
+
+\-Definition at line 168 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+168 
+169     def cbUsersChanged(self):
+170         state = self.cbUsers.checkState()
+171         if state == 0:
+172             self.table.show_system_users()
+173         elif state == 2:
+174             self.table.hide_system_users()
+
+\end{DoxyCode}
+\index{pruebas\-::ejemplo\-::\-Report\-Widget@{pruebas\-::ejemplo\-::\-Report\-Widget}!create@{create}}
+\index{create@{create}!pruebas::ejemplo::ReportWidget@{pruebas\-::ejemplo\-::\-Report\-Widget}}
+\subsubsection[{create}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf pruebas.\-ejemplo.\-Report\-Widget.\-create} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{dateobj}
+\end{DoxyParamCaption}
+)}\label{classpruebas_1_1ejemplo_1_1_report_widget_ae0441dc9f19c080a2694b30dce41c35f}
+\begin{DoxyVerb}Parses the eventlog data, displays it in a table, and
+    displays the user login/logout also \end{DoxyVerb}
+ 
+
+\-Definition at line 163 of file ejemplo.\-py.
+
+
+\begin{DoxyCode}
+163 
+164     def create(self, dateobj):
+165         """ Parses the eventlog data, displays it in a table, and
+166             displays the user login/logout also """
+167         self.table.display_data(dateobj)
+
+\end{DoxyCode}
+
+
+\subsection{\-Member \-Data \-Documentation}
+\index{pruebas\-::ejemplo\-::\-Report\-Widget@{pruebas\-::ejemplo\-::\-Report\-Widget}!cb\-Sorting@{cb\-Sorting}}
+\index{cb\-Sorting@{cb\-Sorting}!pruebas::ejemplo::ReportWidget@{pruebas\-::ejemplo\-::\-Report\-Widget}}
+\subsubsection[{cb\-Sorting}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Report\-Widget\-::cb\-Sorting}}\label{classpruebas_1_1ejemplo_1_1_report_widget_ac9afd56e128c12cab607b399caa63a00}
+
+
+\-Definition at line 139 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Report\-Widget@{pruebas\-::ejemplo\-::\-Report\-Widget}!cb\-Users@{cb\-Users}}
+\index{cb\-Users@{cb\-Users}!pruebas::ejemplo::ReportWidget@{pruebas\-::ejemplo\-::\-Report\-Widget}}
+\subsubsection[{cb\-Users}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Report\-Widget\-::cb\-Users}}\label{classpruebas_1_1ejemplo_1_1_report_widget_a3a5d0f848cb9c5ad0449388dbf144d6f}
+
+
+\-Definition at line 139 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Report\-Widget@{pruebas\-::ejemplo\-::\-Report\-Widget}!table@{table}}
+\index{table@{table}!pruebas::ejemplo::ReportWidget@{pruebas\-::ejemplo\-::\-Report\-Widget}}
+\subsubsection[{table}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Report\-Widget\-::table}}\label{classpruebas_1_1ejemplo_1_1_report_widget_aa02f4070202e7341527e690b24035d1d}
+
+
+\-Definition at line 139 of file ejemplo.\-py.
+
+\index{pruebas\-::ejemplo\-::\-Report\-Widget@{pruebas\-::ejemplo\-::\-Report\-Widget}!textbrowser@{textbrowser}}
+\index{textbrowser@{textbrowser}!pruebas::ejemplo::ReportWidget@{pruebas\-::ejemplo\-::\-Report\-Widget}}
+\subsubsection[{textbrowser}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::ejemplo.\-Report\-Widget\-::textbrowser}}\label{classpruebas_1_1ejemplo_1_1_report_widget_a93a8dacc714fa2a197f52b00cbb0a124}
+
+
+\-Definition at line 139 of file ejemplo.\-py.
+
+
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+pruebas/{\bf ejemplo.\-py}\end{DoxyCompactItemize}
