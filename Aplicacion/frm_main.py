@@ -184,7 +184,7 @@ class ProcCDM(QDialog):
         self.TCA=datetime(2008,1,9,19,0,30,6)
         TCAstr0=datetime.strftime(self.TCA,'%Y-%m-%dT%H:%M:%S')
         self.sat_idc='27386' #ENVISAT
-        self.deb_idc='15482' #COSMOS
+        self.deb_idc='12442' #COSMOS
         
         Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.078011634263035007],
                 [-0.031437388833697122,0.0025693554190851101,-0.014250096142904997],
@@ -255,7 +255,7 @@ class ProcEncuentro(QDialog):
         Campos de Edicion
         """
         self.sat_id_text = QLineEdit('27386')
-        self.deb_id_text = QLineEdit('15482')       
+        self.deb_id_text = QLineEdit('12442')       
         self.tca_text    = QCalendarWidget()
         self.hs_tex      = QLineEdit()
         self.min_tex     = QLineEdit()
@@ -267,8 +267,8 @@ class ProcEncuentro(QDialog):
         """
         self.tableEncuentro   = QTableWidget()
         self.tableEncuentro.setRowCount(1)
-        self.tableEncuentro.setColumnCount(4)
-        listaLabels=['Norad Id','Nombre','TCAarx','MinD arx']
+        self.tableEncuentro.setColumnCount(5)
+        listaLabels=['Norad Id','Nombre','TCAarx','MinD arx','PoC']
         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
         """
         Plantilla
@@ -292,7 +292,7 @@ class ProcEncuentro(QDialog):
         grid.addWidget(self.seg_lab,4,8)
         grid.addWidget(self.mseg_tex,4,9)
         grid.addWidget(self.mseg_lab,4,10)        
-        grid.addWidget(self.tableEncuentro,6,2,2,5)
+        grid.addWidget(self.tableEncuentro,6,2,3,7)
         grid.addWidget(self.track,8,2)
         grid.addWidget(self.dif,8,3)
         grid.addWidget(self.boton_encuetro,6,10)
@@ -335,23 +335,31 @@ class ProcEncuentro(QDialog):
 #         seg=int(self.seg_tex.text())
 #         fecha = self.tca_text.selectedDate()#.toPyDate()
 #         hora = QTime(hs,min,seg)
-        self.tca=datetime(2008,1,9,19,0,30)#QDateTime(fecha,hora).toPyDateTime()
+        self.tca=datetime(2004,9,2,19,14,11)#QDateTime(fecha,hora).toPyDateTime()
         tle_sat=Tle.creadoxParam(self.sat_id, self.tca)
         tle_deb=Tle.creadoxParam(self.deb_id, self.tca)
 #         
         """
         Propagacion hasta el Encuentro
         """
-        encuentro1=Encuentro(tle_sat,tle_deb,self.tca)
+        self.n=3
+        encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.n)
         self.min_dist= encuentro1.mod_minDist
         self.tca_calc= encuentro1.tca_c
+        self.poc_arx=encuentro1.calculaPoC_circ()
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
         self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
-        self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(self.min_dist)))
+        self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(round(self.min_dist,7))))
+        self.tableEncuentro.setItem(0,4, QTableWidgetItem(str(round(self.poc_arx,7))))
+        # formato de tabla
+        header = self.tableEncuentro.horizontalHeader()
+        header.setResizeMode(0,QHeaderView.Stretch)
+        header.setResizeMode(1,QHeaderView.ResizeToContents)
+        header.setResizeMode(2,QHeaderView.ResizeToContents)
+        header.setResizeMode(3,QHeaderView.ResizeToContents)
         # archivo de diferencias.
         self.archivo_dif=encuentro1.archivo_dif
-        
 
         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
 #        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')

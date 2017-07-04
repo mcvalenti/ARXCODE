@@ -207,9 +207,15 @@ def ricSis(r,rp,dr):
     ec=np.dot(1.0/rxrp_mod,rxrp_int)
     ei=np.cross(ec,er)
     
-    rr=np.dot(er,dr)
-    i=np.dot(ei,dr)
-    c=np.dot(ec,dr)
+#     matriz=np.array([[er],[ei],[ec]])
+#     dif_ric=np.dot(matriz,dr)  
+#     rr=np.abs(dif_ric[0])
+#     i=np.abs(dif_ric[1])
+#     c=np.abs(dif_ric[2])
+
+    rr=np.abs(np.dot(er,dr))
+    i=np.abs(np.dot(ei,dr))
+    c=np.abs(np.dot(ec,dr))
     
     return rr,i,c
     

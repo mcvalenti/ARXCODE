@@ -1,0 +1,36 @@
+\section{\-Tle\-Admin/validacion\-S\-T\-K.py \-File \-Reference}
+\label{validacion_s_t_k_8py}\index{\-Tle\-Admin/validacion\-S\-T\-K.\-py@{\-Tle\-Admin/validacion\-S\-T\-K.\-py}}
+\subsection*{\-Packages}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf \-Tle\-Admin\-::validacion\-S\-T\-K}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-path\-\_\-arch} = '../\-Tle\-Admin/validacion/'
+\item 
+string {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-tle\-\_\-arch} = '37673tle0'
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-tle} = \-Tle(path\-\_\-arch+tle\-\_\-arch)
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-fecha} = tle.\-epoca()
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-salida} = open('../\-Tle\-Admin/validacion/\-Sac\-D\-\_\-\-T\-E\-M\-E.\-txt','w')
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-salida2} = open('../\-Tle\-Admin/validacion/\-Sac\-D\-\_\-\-T\-O\-D.\-txt','w')
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-fecha\-\_\-inicio} = datetime(fecha.\-year,fecha.\-month,fecha.\-day,0,0,0)
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-info} = fecha\-\_\-inicio.\-strftime('\%\-Y-\/\%m-\/\%d \%\-H\-:\%\-M\-:\%\-S')
+\item 
+list {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-r\-\_\-teme} = [r\-\_\-f[0],r\-\_\-f[1],r\-\_\-f[2]]
+\item 
+list {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-v\-\_\-teme} = [v\-\_\-f[0],v\-\_\-f[1],v\-\_\-f[2]]
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-r\-\_\-tod} = teme2tod(fecha\-\_\-inicio,r\-\_\-teme)
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-v\-\_\-tod} = teme2tod(fecha\-\_\-inicio,v\-\_\-teme)
+\item 
+tuple {\bf \-Tle\-Admin\-::validacion\-S\-T\-K.\-info2} = fecha\-\_\-inicio.\-strftime('\%\-Y-\/\%m-\/\%d \%\-H\-:\%\-M\-:\%\-S')
+\end{DoxyCompactItemize}

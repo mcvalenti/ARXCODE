@@ -1,0 +1,63 @@
+\section{\-Encuentro/poc\-Explicita.py \-File \-Reference}
+\label{poc_explicita_8py}\index{\-Encuentro/poc\-Explicita.\-py@{\-Encuentro/poc\-Explicita.\-py}}
+\subsection*{\-Packages}
+\begin{DoxyCompactItemize}
+\item 
+namespace {\bf \-Encuentro\-::poc\-Explicita}
+\end{DoxyCompactItemize}
+\subsection*{\-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def {\bf \-Encuentro\-::poc\-Explicita.\-proc\-\_\-encuentro\-Simple}
+\item 
+def {\bf \-Encuentro\-::poc\-Explicita.\-metodo\-O\-S\-Wtles}
+\end{DoxyCompactItemize}
+\subsection*{\-Variables}
+\begin{DoxyCompactItemize}
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-d1} = '../\-Tle\-Admin/tle'
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-d2} = '../\-Ajustar\-T\-L\-E/diferencias'
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-d3} = '../main/matrices/'
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-d4} = '../visual/archivos/\-T\-L\-E'
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-d5} = '../visual/archivos/\-C\-O\-D\-S'
+\item 
+tuple {\bf \-Encuentro\-::poc\-Explicita.\-T\-C\-A} = datetime(2004,9,2,19,14,11,0)
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-sat\-\_\-id} = '27386'
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-deb\-\_\-id} = '12442'
+\item 
+list {\bf \-Encuentro\-::poc\-Explicita.\-r\-\_\-comp} = vec\-\_\-rsw[0]
+\item 
+list {\bf \-Encuentro\-::poc\-Explicita.\-s\-\_\-comp} = vec\-\_\-rsw[1]
+\item 
+list {\bf \-Encuentro\-::poc\-Explicita.\-w\-\_\-comp} = vec\-\_\-rsw[2]
+\item 
+{\bf \-Encuentro\-::poc\-Explicita.\-mu\-\_\-x} = r\-\_\-comp
+\item 
+tuple {\bf \-Encuentro\-::poc\-Explicita.\-mu\-\_\-y} = np.\-sqrt(s\-\_\-comp$\ast$s\-\_\-comp+w\-\_\-comp$\ast$w\-\_\-comp)
+\item 
+tuple {\bf \-Encuentro\-::poc\-Explicita.\-cos\-\_\-phi} = np.\-dot(v\-\_\-sat,v\-\_\-deb)
+\item 
+tuple {\bf \-Encuentro\-::poc\-Explicita.\-phi} = np.\-arccos(cos\-\_\-phi)
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-crudo\-\_\-sat} = '31698\-\_\-20100725\-\_\-20100808.\-tle'
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-crudo\-\_\-deb} = '24978\-\_\-20100725\-\_\-20100808.\-tle'
+\item 
+{\bf \-Encuentro\-::poc\-Explicita.\-var\-\_\-s} = var\-\_\-ssat+var\-\_\-sdeb
+\item 
+{\bf \-Encuentro\-::poc\-Explicita.\-var\-\_\-w} = var\-\_\-wsat+var\-\_\-wdeb
+\item 
+{\bf \-Encuentro\-::poc\-Explicita.\-var\-\_\-x} = var\-\_\-rsat+var\-\_\-rdeb
+\item 
+tuple {\bf \-Encuentro\-::poc\-Explicita.\-var\-\_\-y} = var\-\_\-s$\ast$np.\-cos(phi/2.\-0)
+\item 
+float {\bf \-Encuentro\-::poc\-Explicita.\-ra} = 0.\-005
+\item 
+tuple {\bf \-Encuentro\-::poc\-Explicita.\-Po\-C} = dblquad(lambda y, x\-: (1.\-0/(2.\-0$\ast$np.\-pi$\ast$np.\-sqrt(var\-\_\-x)$\ast$np.\-sqrt(var\-\_\-y)))$\ast$np.\-exp((-\/1.\-0/2.\-0)$\ast$((x$\ast$x/var\-\_\-x)+(y$\ast$y/var\-\_\-y))), mu\-\_\-x-\/ra, mu\-\_\-x+ra, lambda y\-: -\/np.\-sqrt(ra$\ast$ra-\/(y-\/mu\-\_\-x)$\ast$(y-\/mu\-\_\-x))+mu\-\_\-y, lambda y\-: np.\-sqrt(ra$\ast$ra-\/(y-\/mu\-\_\-x)$\ast$(y-\/mu\-\_\-x))+mu\-\_\-y)
+\end{DoxyCompactItemize}

@@ -230,10 +230,36 @@ En 2004 Hoots et al. public\'o un documento completo con todas las ecuaciones (i
 El SGP4 es actualmente, el \'unico modelo para el mantenimiento del cat\'alogo de objetos a bajas alturas que orbitan la Tierra. 
 
 \subsection*{Sistemas de Referencia}
-\noindent*TEME para las propagaciones con sgp4\\
-*TOD para las efem\'erides de misi\'on.\\
+\subsubsection*{TEME}
+ Es un sistema inercial con origen en el centro de la Tierra. Sus siglas hacen referencia a un ecuador verdader y un equinoccio medio, aunque el equinoccio medio no est\'a definido en la forma convencional. Es el sistema que se utiliza NORAD para la generaci\'on y propagaci\'on de los TLEs. 
+\subsubsection*{TOD}
+ Es im sistema quasi inercial definido con origen en el centro de la Tierra, con un ecuador y equinoccio verdadero de la fecha, es decir, que contempla correcciones por efectos de la nutaci\'on.
+\subsubsection{RSW y VNC}
+ RSW and NTW coordinate systems [2] are the two common types of the satellite-based
+orbit coordinate system.\\
+The origin of RSW coordinate system is located at the centroid of the space
+object. The R axis (radial) always points from the Earth’s center along the radius
+vector toward the satellite as it moves through the orbit; the S axis (along-track or
+transverse) points in the direction of (but not necessarily parallel to) the velocity
+vector and is perpendicular to the radius vector; the W axis (cross-track) is normal to
+the orbital plane. Refer to Fig. 2.1 for details.
+Sometimes, the coordinate system is also marked as RTN (radial, transverse, and
+normal) coordinate system or UVW coordinate system [3]. RSW coordinate system
+is decided by its position and velocity vectors, which vary with time. Its Axis S does
+not always coincide with the velocity direction. This kind of coordinate system is
+mainly used to describe orbital errors, relative position, and satellite orbital transfer
+of circular orbit.
+In an ECI coordinate system, the unit vectors of the three axes of RSW
+
+\begin{figure}[!h]
+\centering
+\fbox{\includegraphics[width=0.8\textwidth]{imagenes/sistref}}
+\caption[Sistemas de Referencia centrados en el Sat\'elite]{Sistemas de Referencia centrados en el Sat\'elite}
+\label{fig:sistref}
+\end{figure}
+
 * alfa \& delta para el track en Tierra.\\
-*RTN para el estudio del encuentro.\\
+
 
 \section{El tratamiento de los Errores en la posici\'on}
 

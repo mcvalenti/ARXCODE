@@ -1,0 +1,90 @@
+/* [wxMaxima batch file version 1] [ DO NOT EDIT BY HAND! ]*/
+/* [ Created with wxMaxima version 13.04.2 ] */
+
+/* [wxMaxima: title   start ]
+Calculo de la Integral de superficie de Probabilidad de Colisión.
+   [wxMaxima: title   end   ] */
+
+/* [wxMaxima: input   start ] */
+numer:true;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+load("vect");
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Datos.
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+r_tca:matrix([7.72399682e-01],[-1.38777878e-17]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+C_b:matrix([ 3.64942069,-0.08802068],[-0.08802068,0.02698636]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x_b:matrix([ 0.99970526,0.02427728]);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Precalculos.
+Coeficiente e integrando.
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+r_tca_t:transpose(r_tca);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+det_C:determinant(C_b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+inv_C:invert(C_b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+coef: 1/(2*%pi*sqrt(det_C));
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integ0:inv_C.r_tca;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+integrando:(1/2)*(r_tca_t.integ0);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: section start ]
+Calculo de la Integral.
+   [wxMaxima: section end   ] */
+
+/* [wxMaxima: input   start ] */
+Rc:2;
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+x_b_mod:sqrt(x_b.x_b);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+ext:sqrt(Rc*Rc-x_b_mod*x_b_mod);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+i0:integrate(%e**(-integrando),x,-ext,ext);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+i1:integrate(i0,x,-Rc,Rc);
+/* [wxMaxima: input   end   ] */
+
+/* [wxMaxima: input   start ] */
+Pc:coef*i1;
+/* [wxMaxima: input   end   ] */
+
+/* Maxima can't load/batch files which end with a comment! */
+"Created with wxMaxima"$

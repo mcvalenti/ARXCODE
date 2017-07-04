@@ -227,7 +227,7 @@ class Encuentro():
     def calculaPoC_circ(self):
         mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro()
         ra=0.01
-        PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
+        PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra*ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
         return PoC
     
     def calculaPoC_gral(self):
