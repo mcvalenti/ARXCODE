@@ -346,6 +346,7 @@ class ProcEncuentro(QDialog):
         encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.n)
         self.min_dist= encuentro1.mod_minDist
         self.tca_calc= encuentro1.tca_c
+        self.ma_comb= encuentro1.calculaMacombinada()
         self.poc_arx=encuentro1.calculaPoC_circ()
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
