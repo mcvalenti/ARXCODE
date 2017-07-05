@@ -8,7 +8,7 @@ import numpy as np
 from datetime import datetime, timedelta
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from CDM.cdmParser import extraeCDM
+from CDM.cdmParser import CDM,extraeCDM
 #from pruebas.claseTle import Tle, Encuentro
 from TleAdmin.TleArchivos import divide_setTLE
 from TleAdmin.TLE import Tle
@@ -52,8 +52,8 @@ class ProcARxCODE(QMainWindow):
         fileMenu.addAction(extractAction)
     
         self.inicio = QLabel() 
-        pixmap = QPixmap('../visual/imagenes/orbitas') #nubeDebris') #cords_contol.jpg')
-        self.inicio.setPixmap(pixmap)
+        figura_inicio = QPixmap('../visual/imagenes/orbitas') #nubeDebris') #cords_contol.jpg')
+        self.inicio.setPixmap(figura_inicio)
         self.setCentralWidget(self.inicio)
 
         
@@ -67,11 +67,11 @@ class ProcARxCODE(QMainWindow):
         # Lista de Encuentros.
         self.encuentros = QDockWidget("Registro de Encuentros", self)
         self.listWidget = QListWidget()
-        self.listWidget.addItem("PROXIMO ENCUENTRO")
-        self.listWidget.addItem("Encuentros Anteriores.")
+        self.listWidget.addItem("CARGAR CDM")
+        self.listWidget.addItem("Carga Manual")
         self.encuentros.setWidget(self.listWidget)
         self.encuentros.setFloating(False)
-        self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros)
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros) #
         # Lista de Procesamientos.
 #         self.procesamientos = QDockWidget("Procesamientos", self)
 #         self.listWidget1 = QListWidget()
@@ -92,7 +92,7 @@ class ProcARxCODE(QMainWindow):
         
     def item_click(self):       
         cdm_click=self.listWidget.currentItem().text()
-        if cdm_click == 'PROXIMO ENCUENTRO':
+        if cdm_click == 'CARGAR CDM':
             ventana1=ProcCDM()
             self.setCentralWidget(ventana1)
             ventana1.exec_()
@@ -119,6 +119,7 @@ class ProcARxCODE(QMainWindow):
     
     def close_application(self):
         sys.exit()
+
     
 class ProcCDM(QDialog):
     def __init__(self,parent=None):
@@ -126,39 +127,61 @@ class ProcCDM(QDialog):
         
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
+        
+        # Construccion
+        self.TCA=None
+        self.MISS_DISTANCE='aca esta'
+        self.POC='aca esta'
 
 
     def initUI(self):
+        self.palette = QPalette()
+        self.palette.setColor(QPalette.Background,Qt.white)
+        self.setPalette(self.palette)
         
         """
         Etiquetas
         """
-        self.cdm_titulo = QLabel('Informe CDM')      
+        self.cdm_archivo = QLabel('Archivo CDM: ')   
+        self.opciones   = QLabel('Opciones')
+        """
+        Campos de Edicion
+        """   
+        self.archivo_tex=QLineEdit('cdmEnviCosmos08.xml') # seteo el archivo para las pruebas
         """
         Botones
         """
+        self.boton_dir      = QPushButton('Directorios')
+        self.boton_cargar   = QPushButton('CARGAR')
         self.boton_grafCdm  = QPushButton('Graficos')
         self.boton_informe  = QPushButton('Generar Informe')
         self.boton_salirCdm = QPushButton('SALIR')
         """
         OTROS
-        """
-        self.CDM_edit    = QTextEdit()
-        self.tablePOC   = QTableWidget()
+        """                
+        moods = [QCheckBox("Posiciones Relativas en RTN"), QCheckBox("Procesamiento ARxCODE")] # botones de seleccion
+        self.tablePOC   = QTableWidget() # Tabla con los resultados
         self.tablePOC.setRowCount(2)
         self.tablePOC.setColumnCount(8)
         listaLabels=['Norad Id','Nombre','TCAcdm','TCAarx','MinD cdm','MinD arx','PoC cdm','PoC arx']
         self.tablePOC.setHorizontalHeaderLabels(listaLabels)
+
         
         grid = QGridLayout()
         grid.setSpacing(5)
         
-        grid.addWidget(self.CDM_edit,2,1)
-        grid.addWidget(self.cdm_titulo,1,1)
-        grid.addWidget(self.boton_grafCdm,4,2)
-        grid.addWidget(self.boton_informe,5,2)
-        grid.addWidget(self.boton_salirCdm,6,2)
-        grid.addWidget(self.tablePOC,3,1)
+        grid.addWidget(self.cdm_archivo,2,1)
+        grid.addWidget(self.archivo_tex,2,2)
+        grid.addWidget(self.boton_dir,2,3)
+        grid.addWidget( self.opciones,3,1)
+        grid.addWidget(moods[0],4,2)     
+        grid.addWidget(moods[1],5,2)
+        grid.addWidget(self.boton_cargar,6,3)
+#         grid.addWidget(self.boton_grafCdm,4,2)
+#         grid.addWidget(self.boton_informe,5,2)
+        grid.addWidget(self.boton_salirCdm,18,2)
+        grid.addWidget(self.tablePOC,8,1,3,7)
+
         
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de CDM')    
@@ -167,50 +190,64 @@ class ProcCDM(QDialog):
         """
         Acciones
         """
+        self.boton_dir.clicked.connect(self.Archivo)
+        self.boton_cargar.clicked.connect(self.Carga_CDM)
         self.boton_salirCdm.clicked.connect(self.salirCdm)
         
+
+#         TCAc,mod_dif,poc=evaluaEncuentro(self.TCA,self.sat_idc,self.deb_idc,Cd,Cm)
+#         TCAstr=datetime.strftime(TCAc,'%Y-%m-%d %H:%M:%S.%f')
+#         mod_dif=int(mod_dif*1000.0)
+#         # set data self.TCA, self.MISS_DISTANCE,self.POC
+
+
+    def Archivo(self):    
+        self.cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a Procesar', "../CDM/archivos/*")
+        self.cdm_nombre=str(self.cdm_xml).split('/')[-1]
+        self.archivo_tex.setText(self.cdm_nombre)
+        
+        
+    def Carga_CDM(self):
+        self.cdm_nombre='cdmEnviCosmos08.xml' # seteo el archivo para las pruebas
+        self.CDM=CDM(self.cdm_nombre)
+        self.TCA=self.CDM.TCA
+        self.MISS_DISTANCE=self.CDM.MISS_DISTANCE
+        self.POC=self.CDM.POC
+        self.mision_name=self.CDM.mision_name
+        self.noradID_mision=self.CDM.noradID_mision
+        self.deb_name=self.CDM.deb_name
+        self.noradID_deb=self.CDM.noradID_deb
+
         """
         Carga de Informacion principal
         """
-        self.cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a Procesar', "../CDM/archivos/*")
-        self.cdm_nombre=str(self.cdm_xml).split('/')[-1]
-        self.TCA, self.MISS_DISTANCE,self.POC,self.obj_list=extraeCDM(self.cdm_nombre)
-        infoCDM='Mision = '+str(self.obj_list[0][0])+'---- ID= '+str(self.obj_list[0][1])+'\n'+'Desecho = '+str(self.obj_list[1][0])+'---- ID= '+str(self.obj_list[1][1])+'\n'+'TCA = '+self.TCA+'\n'+'Minima Distancia [m] = '+self.MISS_DISTANCE+'\n'+'Probabilidad de Colision = '+self.POC                                                          
-        self.CDM_edit.setText(infoCDM)
-                
-        """
-        Pruebas ENVISAT-COSMOS
-        """
-        self.TCA=datetime(2008,1,9,19,0,30,6)
-        TCAstr0=datetime.strftime(self.TCA,'%Y-%m-%dT%H:%M:%S')
-        self.sat_idc='27386' #ENVISAT
-        self.deb_idc='12442' #COSMOS
-        
-        Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.078011634263035007],
-                [-0.031437388833697122,0.0025693554190851101,-0.014250096142904997],
-                [0.078011634263035007,-0.014250096142904997,0.096786625771746529]])
-    
-        Cm=np.array([[4.8247926515782202,0.05994752830943241,0.049526867540809635],
-                [0.05994752830943241,0.019150349628774828,0.012470649611436152],
-                [0.049526867540809635,0.012470649611436152,0.012649606483621921]])
-        
-        TCAc,mod_dif,poc=evaluaEncuentro(self.TCA,self.sat_idc,self.deb_idc,Cd,Cm)
-        TCAstr=datetime.strftime(TCAc,'%Y-%m-%d %H:%M:%S.%f')
-        mod_dif=int(mod_dif*1000.0)
-        # set data self.TCA, self.MISS_DISTANCE,self.POC
-        self.tablePOC.setItem(0,0, QTableWidgetItem('Mision'))
-        self.tablePOC.setItem(1,0, QTableWidgetItem('Debris'))
-        self.tablePOC.setItem(0,1, QTableWidgetItem(self.sat_idc))
-        self.tablePOC.setItem(1,1, QTableWidgetItem(self.deb_idc))
-        self.tablePOC.setItem(0,2, QTableWidgetItem(TCAstr0))
-        self.tablePOC.setItem(0,3, QTableWidgetItem(TCAstr))
+        # Cargar la tabla
+        self.tablePOC.setItem(0,0, QTableWidgetItem( self.mision_name))
+        self.tablePOC.setItem(1,0, QTableWidgetItem(self.deb_name))
+        self.tablePOC.setItem(0,1, QTableWidgetItem(self.noradID_mision))
+        self.tablePOC.setItem(1,1, QTableWidgetItem(self.noradID_deb))
+        self.tablePOC.setItem(0,2, QTableWidgetItem(self.TCA))
+        self.tablePOC.setItem(0,3, QTableWidgetItem('TCA arx'))
         self.tablePOC.setItem(0,4, QTableWidgetItem(self.MISS_DISTANCE))
-        self.tablePOC.setItem(0,5, QTableWidgetItem(str(mod_dif)))
+        self.tablePOC.setItem(0,5, QTableWidgetItem('M_dist arx'))
         self.tablePOC.setItem(0,6, QTableWidgetItem(self.POC))
-        self.tablePOC.setItem(0,7, QTableWidgetItem(poc))
-
+        self.tablePOC.setItem(0,7, QTableWidgetItem('POC arx'))
+        # formato de tabla
+        header = self.tablePOC.horizontalHeader()
+        header.setResizeMode(0,QHeaderView.Stretch)
+        header.setResizeMode(1,QHeaderView.ResizeToContents)
+        header.setResizeMode(2,QHeaderView.ResizeToContents)
+        header.setResizeMode(3,QHeaderView.ResizeToContents)
+        header.setResizeMode(4,QHeaderView.ResizeToContents)
+        header.setResizeMode(5,QHeaderView.ResizeToContents)
+        header.setResizeMode(6,QHeaderView.ResizeToContents)        
+        header.setResizeMode(7,QHeaderView.ResizeToContents)
+        print 'FIN DE LA CARGA'
+        
     def salirCdm(self):
         self.accept()
+
+        
 class ProcEncuentro(QDialog):
     def __init__(self,parent=None):
         QDialog.__init__(self,parent)
@@ -243,10 +280,10 @@ class ProcEncuentro(QDialog):
         # imagen 
         self.track = QLabel() 
         self.dif   = QLabel()
-        #track.setPixmap(pixmap)
         """
         Botones
         """
+        self.boton_calpick  = QPushButton('...')
         self.boton_encuetro = QPushButton('Procesar Encuentro')
         self.boton_dif      = QPushButton('Ver diferencias')
         self.boton_track    = QPushButton('Track')
@@ -255,7 +292,8 @@ class ProcEncuentro(QDialog):
         Campos de Edicion
         """
         self.sat_id_text = QLineEdit('27386')
-        self.deb_id_text = QLineEdit('12442')       
+        self.deb_id_text = QLineEdit('12442')   
+#        self.tca_text    = QDateEdit()  
         self.tca_text    = QCalendarWidget()
         self.hs_tex      = QLineEdit()
         self.min_tex     = QLineEdit()
@@ -270,6 +308,14 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro.setColumnCount(5)
         listaLabels=['Norad Id','Nombre','TCAarx','MinD arx','PoC']
         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
+        # calendario
+        # nice widget for editing the date
+        self.date = QDateEdit()
+        self.date.setCalendarPopup(True)
+        self.date.setDate(QDate.currentDate())
+        # Fecha y Hora
+        self.hora = QTimeEdit()
+        self.hora.setTime(QTime.currentTime())
         """
         Plantilla
         """
@@ -283,26 +329,29 @@ class ProcEncuentro(QDialog):
         grid.addWidget(self.deb_lab,3,1)
         grid.addWidget(self.deb_id_text,3,2)
         grid.addWidget(self.time_lab,4,1)
-        grid.addWidget(self.tca_text,4,2)
-        grid.addWidget(self.hs_tex,4,3)
-        grid.addWidget(self.hs_lab,4,4)
-        grid.addWidget(self.min_tex,4,5)
-        grid.addWidget(self.min_lab,4,6)
-        grid.addWidget(self.seg_tex,4,7)
-        grid.addWidget(self.seg_lab,4,8)
-        grid.addWidget(self.mseg_tex,4,9)
-        grid.addWidget(self.mseg_lab,4,10)        
-        grid.addWidget(self.tableEncuentro,6,2,3,7)
-        grid.addWidget(self.track,8,2)
-        grid.addWidget(self.dif,8,3)
-        grid.addWidget(self.boton_encuetro,6,10)
-        grid.addWidget(self.boton_dif,7,10)
-        grid.addWidget(self.boton_track,8,10)
-        grid.addWidget(self.boton_salir,9,10)
-        
+#        grid.addWidget(self.tca_text,4,2)
+        grid.addWidget(self.date,4,2)
+        grid.addWidget(self.hora,5,2)
+#         grid.addWidget(self.boton_calpick,13,10)
+#         grid.addWidget(self.hs_tex,4,3)
+#         grid.addWidget(self.hs_lab,4,4)
+#         grid.addWidget(self.min_tex,4,5)
+#         grid.addWidget(self.min_lab,4,6)
+#         grid.addWidget(self.seg_tex,4,7)
+#         grid.addWidget(self.seg_lab,4,8)
+#         grid.addWidget(self.mseg_tex,4,9)
+#         grid.addWidget(self.mseg_lab,4,10)        
+        grid.addWidget(self.tableEncuentro,8,1,2,5)
+        grid.addWidget(self.track,2,3,5,3)
+        grid.addWidget(self.dif,12,4)
+        grid.addWidget(self.boton_encuetro,10,10)
+        grid.addWidget(self.boton_dif,11,10)
+        grid.addWidget(self.boton_track,12,10)
+        grid.addWidget(self.boton_salir,13,10)
         """
         Acciones
         """
+        self.boton_calpick.clicked.connect(self.cal_picker)
         self.boton_encuetro.clicked.connect(self.procesoSimple)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_track.clicked.connect(self.mostrarTrack)
@@ -314,6 +363,13 @@ class ProcEncuentro(QDialog):
         self.setWindowTitle('Procesamiento de Encuentro')    
         self.show()
     
+    def cal_picker(self):
+        print 'HOLA MUNDO'
+        self.cal=QCalendarWidget()
+        self.cal.show()
+        fecha = self.tca_text.selectedDate()
+        print fecha
+#     
     def procesoSimple(self):
         """
         Propaga los objetos involucrados un intervalos [tca-90:tca+10]
@@ -321,13 +377,9 @@ class ProcEncuentro(QDialog):
             Miss Distance
             TCA calculado
             Diferencias en RTN ---> Plotea.
-            Genera archivo lat, long ---> Plotea.
-          
+            Genera archivo lat, long ---> Plotea.          
         """
-        # Importar los TLE de NORAD.
-    
-        usuario='macecilia'
-        clave='MaCeciliaSpace17'
+        # Importar los TLE de NORAD.    
         self.sat_id=str(self.sat_id_text.text())
         self.deb_id=str(self.deb_id_text.text())
 #         hs =int(self.hs_tex.text())
@@ -361,11 +413,10 @@ class ProcEncuentro(QDialog):
         header.setResizeMode(3,QHeaderView.ResizeToContents)
         # archivo de diferencias.
         self.archivo_dif=encuentro1.archivo_dif
-
         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
 #        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
         print 'fin del procesamiento.'
-        
+       
         self.boton_track.setEnabled(True)
         self.boton_dif.setEnabled(True)
     
@@ -375,8 +426,8 @@ class ProcEncuentro(QDialog):
         self.dif.setPixmap(self.pixmap1)
     
     def mostrarTrack(self):
-        self.pixmap = QPixmap('../visual/archivos/ploteo_track.ps')
-        self.track.setPixmap(self.pixmap)
+        self.track_graf = QPixmap('../visual/archivos/ploteo_track.ps')
+        self.track.setPixmap( self.track_graf)
         
     def salir(self):
         self.accept()    

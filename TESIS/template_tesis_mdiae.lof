@@ -1,14 +1,28 @@
 \select@language {spanish}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Objetos en \'Orbita}}{3}{figure.caption.13}
+\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Objetos en \'Orbita al 4 de Abril de 2017.}}}{3}{figure.caption.13}
+\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Porcentaje de Objetos en \'Orbita seg\'un su clasificaci\'on.}}}{3}{figure.caption.13}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Distribuci\'on de objetos en funci\'on del semieje mayor.}}{4}{figure.caption.14}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Proyecci\'on de Sat\'elites 2016-2030}}{4}{figure.caption.15}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Fragmentos de Cohetes 2016-2030}}{5}{figure.caption.16}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Cantidad de Objetos catalogados al 2014}}{6}{figure.caption.17}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Evoluci\'on de las causas de la generaci\'on de Desechos}}{6}{figure.caption.18}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces N\'umero de Desechos en las \'orbitas LEO desde 2015 al 2065}}{7}{figure.caption.19}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Estudio de Colisi\'on}}{9}{figure.caption.21}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces USSTRATCOM - SSN}}{9}{figure.caption.22}
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Interfaces del ARxCODE}}{13}{figure.caption.25}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Sistemas de Referencia centrados en el Sat\'elite}}{22}{figure.caption.42}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces M\'etodo de Osweiler para la generaci\'on de la matriz de covarianza}}{24}{figure.caption.43}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Descripci\'on del m\'etodo propuesto para la propagaci\'on de errores}}{25}{figure.caption.44}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Fracci\'on de tabla con el total de datos calculados para la estimaci\'on estad\'istica. Se muestran s\'olo algunos d\'ias (primera columna de cada set) de los 6 meses, y los agrupamientos seg\'un sean respecto a propagaciones $< 1$ d\'ia, $= 1$ d\'ia o $= 2$ d\'ias\relax }}{25}{figure.caption.45}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces B-plane (Adaptado de ....)\relax }}{29}{figure.caption.48}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{30}{figure.caption.50}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces M\'etodo de Osweiler sobre datos CODS\relax }}{4}{figure.caption.9}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.\relax }}{5}{figure.caption.10}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Procesamiento de Datos de Mision}}}{5}{figure.caption.10}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Procesamiento de TLEs}}}{5}{figure.caption.10}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.\relax }}{6}{figure.caption.11}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Procesamiento de Datos de Mision}}}{6}{figure.caption.11}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Procesamiento de TLEs}}}{6}{figure.caption.11}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Casos de Uso de ARxCODE\relax }}{36}{figure.caption.55}
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{43}{figure.caption.70}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

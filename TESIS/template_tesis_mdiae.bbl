@@ -1,14 +1,112 @@
-\begin{thebibliography}{1}
-\providecommand{\natexlab}[1]{#1}
-\providecommand{\url}[1]{\texttt{#1}}
-\expandafter\ifx\csname urlstyle\endcsname\relax
-  \providecommand{\doi}[1]{doi: #1}\else
-  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+\begin{thebibliography}{}
 
-\bibitem[Barrett et~al.(2009)Barrett, E., y Whelan]{Barrett2009}
-B.~Barrett, Dwyer. E., y P.~Whelan.
-\newblock {Soil Moisture Retrieval from Active Spaceborne Microwave
-  Observations: An evaluation of current techniques}.
-\newblock \emph{Remote Sensing}, 1:\penalty0 210--242, 2009.
+\bibitem[\protect\astroncite{{Analytical Graphics, Inc.}}{}]{stk}
+{Analytical Graphics, Inc.}
+\newblock System tool kit - stk 11x64.
+
+\bibitem[\protect\astroncite{{Babiker} et~al.}{2012}]{babiker}
+{Babiker}, F., {Doyon}, M., and {Abbasi}, V. (2012).
+\newblock The canadian space agency (csa) collision risk assessment and
+  mitigation system (crams): Sharing the development and the operational
+  challenges.
+\newblock In {\em SpaceOps Conference}.
+
+\bibitem[\protect\astroncite{{Brandon Rhodes}}{}]{sgp4python}
+{Brandon Rhodes}.
+\newblock sgp4-1.4.
+
+\bibitem[\protect\astroncite{Consultative Committee~for Space
+  Data~Systems}{2013}]{CDMstd}
+Consultative Committee~for Space Data~Systems, C. (2013).
+\newblock Conjunction data message standard.
+\newblock Technical report, CCSDS.
+
+\bibitem[\protect\astroncite{ESA}{2013}]{esaSD}
+ESA (2013).
+\newblock {Space Debris}.
+\newblock http://www.esa.int/Our\_Activities/Operations/Space\_Debris.
+
+\bibitem[\protect\astroncite{Hoots and Roehrich}{1980a}]{hoots1980models}
+Hoots, F.~R. and Roehrich, R.~L. (1980a).
+\newblock Models for propagation of norad element sets.
+\newblock Technical report, AEROSPACE DEFENSE COMMAND PETERSON AFB CO OFFICE OF
+  ASTRODYNAMICS.
+
+\bibitem[\protect\astroncite{Hoots and Roehrich}{1980b}]{spacetrackreport3}
+Hoots, F.~R. and Roehrich, R.~L. (1980b).
+\newblock Spacetrack report no. 3 models for propagation of norad element sets.
+\newblock Technical report, Project Spacetrack Reports, Office of
+  Astrodynamics, Aerospace Defense Center.
+
+\bibitem[\protect\astroncite{Hoots and Roehrich}{1998}]{hootshistoria}
+Hoots, F.~R. and Roehrich, R.~L. (1998).
+\newblock {A History of Analytical Orbit Modeling in the United States Space
+  Surveillance System}.
+\newblock Third US-Russian Space Surveillance Workshop. Washington, D.C.
+
+\bibitem[\protect\astroncite{IADC}{2007}]{iadcguide}
+IADC (2007).
+\newblock {\em Space Debris Mitigation Guidelines}.
+\newblock IADC.
+
+\bibitem[\protect\astroncite{J.R.
+  Alarc\'on~Rodr\'iguez}{2004}]{alarconRodriguez}
+J.R. Alarc\'on~Rodr\'iguez, F.M. Mart\'inez-Fadrique, H.~K. (2004).
+\newblock Development of a collision risk assessment tool.
+\newblock {\em Advances in Space Research}, 34:1120--1124.
+
+\bibitem[\protect\astroncite{Karacalioglu and
+  Stupl}{2016}]{karacalioglu2016impact}
+Karacalioglu, A.~G. and Stupl, J. (2016).
+\newblock The impact of new trends in satellite launches on the orbital debris
+  environment.
+
+\bibitem[\protect\astroncite{Kessler and Cour-Palais}{1978}]{kessler0}
+Kessler, D. and Cour-Palais, B. (1978).
+\newblock Collision frequency of artificial satellites: The creation of a
+  debris belt.
+\newblock {\em Journal of Geophysical Research}, 83:2637--2646.
+
+\bibitem[\protect\astroncite{Klinkrad}{2006a}]{KlinkradChapter8}
+Klinkrad, H. (2006a).
+\newblock {\em Space Debris. Models and Risk Analysis}, chapter~8, pages
+  215--241.
+\newblock Springer.
+
+\bibitem[\protect\astroncite{Klinkrad}{2006b}]{Klinkrad}
+Klinkrad, H. (2006b).
+\newblock {\em Space Debris. Models and Risk Analysis}.
+\newblock Springer.
+
+\bibitem[\protect\astroncite{Laporte}{2014}]{laporte}
+Laporte, F. (2014).
+\newblock Jac software, dedicated to the analysis of conjunction messages.
+\newblock {\em AIAA}, 1774.
+
+\bibitem[\protect\astroncite{NASA}{}]{nasaprogramme}
+NASA.
+\newblock {Orbital Debris Program Office}.
+\newblock https://orbitaldebris.jsc.nasa.gov/.
+
+\bibitem[\protect\astroncite{NASA}{2014}]{ODQN14}
+NASA (2014).
+\newblock Space missions and satellite box score.
+\newblock {\em Orbital Debris Quarterly News}, 18.
+
+\bibitem[\protect\astroncite{NASA}{2017a}]{ODQNum}
+NASA (2017a).
+\newblock The od environment in numbers.
+\newblock {\em Orbital Debris Quarterly News}, 21.
+
+\bibitem[\protect\astroncite{NASA}{2017b}]{ODQN}
+NASA (2017b).
+\newblock Space missions and satellite box score.
+\newblock {\em Orbital Debris Quarterly News}, 21.
+
+\bibitem[\protect\astroncite{{Osweiler}}{2006}]{Osweiler}
+{Osweiler}, V.~P. (2006).
+\newblock Covariance estimation and autocorrelation of norad two-line element
+  sets.
+\newblock Master's thesis, Air Force Institute of Technology, USA.
 
 \end{thebibliography}

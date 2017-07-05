@@ -56,8 +56,8 @@ def missDistance(sat_id,arch_tle, deb_id,arch_tle1,TCA):
         TCA_calc: epoca del maximo acercamiento calculada (datetime)        
     """
 
-    tle_envi=Tle('../TleAdmin/tle/'+arch_tle)
-    tle_cosmos=Tle('../TleAdmin/tle/'+arch_tle1)
+    tle_envi=Tle.creadoxArchivo('../TleAdmin/tle/'+arch_tle)
+    tle_cosmos=Tle.creadoxArchivo('../TleAdmin/tle/'+arch_tle1)
     
     #========================
     #Calculo de Diferencias

@@ -1,21 +1,39 @@
 \BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 1
-\BOOKMARK [1][-]{subsection.1.0.1}{Regulaciones Nacionales e Internacionales}{chapter.1}% 2
-\BOOKMARK [2][-]{subsection.1.0.2}{Planteo del Problema}{subsection.1.0.1}% 3
-\BOOKMARK [0][-]{chapter.2}{Marco Te\363rico}{}% 4
-\BOOKMARK [1][-]{subsection.2.0.3}{CDM}{chapter.2}% 5
-\BOOKMARK [0][-]{chapter.3}{Metodolog\355a}{}% 6
-\BOOKMARK [1][-]{section.3.1}{M\351todo de Osweiler}{chapter.3}% 7
-\BOOKMARK [1][-]{section.3.2}{Tratamiento sobre Datos de Misi\363n}{chapter.3}% 8
-\BOOKMARK [1][-]{section.3.3}{Preprocesamiento de los Datos de Misi\363n de CODS}{chapter.3}% 9
-\BOOKMARK [2][-]{subsection.3.3.1}{ORBEPHEM}{section.3.3}% 10
-\BOOKMARK [2][-]{subsection.3.3.2}{Archivos Utilizados}{section.3.3}% 11
-\BOOKMARK [1][-]{section.3.4}{Transformaci\363n de Coordenadas}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.5}{Diferencias}{chapter.3}% 13
-\BOOKMARK [0][-]{chapter.4}{ARxCODE}{}% 14
-\BOOKMARK [1][-]{section.4.1}{Especificaciones}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.2}{Dise\361o y Desarrollo}{chapter.4}% 16
-\BOOKMARK [2][-]{subsection.4.2.1}{Arquitectura}{section.4.2}% 17
-\BOOKMARK [2][-]{subsection.4.2.2}{parametros globales y nomenclatura de la generacion de archivos}{section.4.2}% 18
-\BOOKMARK [0][-]{chapter.5}{Resultados}{}% 19
-\BOOKMARK [0][-]{chapter.6}{Conclusiones}{}% 20
-\BOOKMARK [0][-]{chapter.6}{Bibliograf\355a}{}% 21
+\BOOKMARK [1][-]{section.1.1}{Los Desechos Espaciales}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{El Riesgo de Colisi\363n}{chapter.1}% 3
+\BOOKMARK [2][-]{subsection.1.2.1}{El estudio del riesgo de colisi\363n}{section.1.2}% 4
+\BOOKMARK [2][-]{subsection.1.2.2}{Rastreo y cat\341logos}{section.1.2}% 5
+\BOOKMARK [1][-]{section.1.3}{Las Regulaciones Nacionales e Internacionales}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.4}{Antecedentes}{chapter.1}% 7
+\BOOKMARK [1][-]{section.1.5}{La Unidad de Desechos Espaciales de la CONAE}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.6}{Planteo del Problema}{chapter.1}% 9
+\BOOKMARK [1][-]{section.1.7}{Objetivos}{chapter.1}% 10
+\BOOKMARK [0][-]{chapter.2}{Marco Te\363rico}{}% 11
+\BOOKMARK [1][-]{section.2.1}{Introducci\363n}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.2}{Comunicaciones de riesgo de colisi\363n}{chapter.2}% 13
+\BOOKMARK [2][-]{subsection.2.2.1}{El CDM}{section.2.2}% 14
+\BOOKMARK [1][-]{section.2.3}{La posici\363n de los objetos involucrados}{chapter.2}% 15
+\BOOKMARK [2][-]{subsection.2.3.1}{SGP4}{section.2.3}% 16
+\BOOKMARK [1][-]{section.2.4}{El tratamiento de los Errores en la posici\363n}{chapter.2}% 17
+\BOOKMARK [2][-]{subsection.2.4.1}{M\351todo de Osweiler}{section.2.4}% 18
+\BOOKMARK [2][-]{subsection.2.4.2}{Propagaci\363n de errores}{section.2.4}% 19
+\BOOKMARK [1][-]{section.2.5}{La Probabilidad de Colisi\363n}{chapter.2}% 20
+\BOOKMARK [0][-]{chapter.3}{Metodolog\355a de Desarrollo}{}% 21
+\BOOKMARK [0][-]{chapter.4}{ARxCODE}{}% 22
+\BOOKMARK [1][-]{section.4.1}{Especificaciones}{chapter.4}% 23
+\BOOKMARK [1][-]{section.4.2}{Requerimientos}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.3}{Arquitectura}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.4}{Interfaces}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.5}{Entradas y Salidas}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.6}{Casos de Uso}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.7}{C\341lculo de la Probabilidad de Colisi\363n}{chapter.4}% 29
+\BOOKMARK [0][-]{chapter.5}{Validaci\363n y Resultados}{}% 30
+\BOOKMARK [1][-]{section.5.1}{Introducci\363n}{chapter.5}% 31
+\BOOKMARK [1][-]{section.5.2}{Implentenaci\363n del modelo SGP4 en Python}{chapter.5}% 32
+\BOOKMARK [1][-]{section.5.3}{Implementaci\363n del M\351todo de Osweiler}{chapter.5}% 33
+\BOOKMARK [1][-]{section.5.4}{Metodolog\355a de Estimaci\363n de Errores}{chapter.5}% 34
+\BOOKMARK [0][-]{chapter.6}{Conclusiones}{}% 35
+\BOOKMARK [0][-]{chapter.7}{Ap\351ndice}{}% 36
+\BOOKMARK [1][-]{section.7.1}{Appendix 1}{chapter.7}% 37
+\BOOKMARK [1][-]{section.7.2}{Transformaci\363n de Coordenadas}{chapter.7}% 38
+\BOOKMARK [1][-]{section.7.3}{Appendix 2}{chapter.7}% 39

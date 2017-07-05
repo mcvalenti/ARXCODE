@@ -1,24 +1,42 @@
 \select@language {spanish}
 \contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
-\contentsline {subsection}{\numberline {1.0.1}Regulaciones Nacionales e Internacionales}{1}{subsection.1.0.1}
-\contentsline {subsection}{\numberline {1.0.2}Planteo del Problema}{1}{subsection.1.0.2}
-\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{5}{chapter.2}
-\contentsline {subsection}{\numberline {2.0.3}CDM}{5}{subsection.2.0.3}
-\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a}{10}{chapter.3}
-\contentsline {section}{\numberline {3.1}M\'etodo de Osweiler}{12}{section.3.1}
-\contentsline {section}{\numberline {3.2}Tratamiento sobre Datos de Misi\'on}{12}{section.3.2}
-\contentsline {section}{\numberline {3.3}Preprocesamiento de los Datos de Misi\'on de CODS}{13}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}ORBEPHEM}{13}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Archivos Utilizados}{13}{subsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.2.1}Ajuste Polyfit}{15}{subsubsection.3.3.2.1}
-\contentsline {section}{\numberline {3.4}Transformaci\'on de Coordenadas}{15}{section.3.4}
-\contentsline {section}{\numberline {3.5}Diferencias}{17}{section.3.5}
-\contentsline {chapter}{\numberline {4}ARxCODE}{18}{chapter.4}
-\contentsline {section}{\numberline {4.1}Especificaciones}{18}{section.4.1}
-\contentsline {section}{\numberline {4.2}Dise\IeC {\~n}o y Desarrollo}{18}{section.4.2}
-\contentsline {subsection}{\numberline {4.2.1}Arquitectura}{18}{subsection.4.2.1}
-\contentsline {subsection}{\numberline {4.2.2}parametros globales y nomenclatura de la generacion de archivos}{18}{subsection.4.2.2}
-\contentsline {chapter}{\numberline {5}Resultados}{21}{chapter.5}
-\contentsline {section}{\numberline {5.1}validacion}{21}{section.5.1}
-\contentsline {chapter}{\numberline {6}Conclusiones}{22}{chapter.6}
-\contentsline {chapter}{Bibliograf\'{\i }a}{23}{chapter.6}
+\contentsline {section}{\numberline {1.1}Los Desechos Espaciales}{1}{section.1.1}
+\contentsline {section}{\numberline {1.2}El Riesgo de Colisi\'on}{5}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}El estudio del riesgo de colisi\'on}{7}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Rastreo y cat\'alogos}{8}{subsection.1.2.2}
+\contentsline {section}{\numberline {1.3}Las Regulaciones Nacionales e Internacionales}{10}{section.1.3}
+\contentsline {section}{\numberline {1.4}Antecedentes}{11}{section.1.4}
+\contentsline {section}{\numberline {1.5}La Unidad de Desechos Espaciales de la CONAE}{11}{section.1.5}
+\contentsline {section}{\numberline {1.6}Planteo del Problema}{12}{section.1.6}
+\contentsline {section}{\numberline {1.7}Objetivos}{13}{section.1.7}
+\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{14}{chapter.2}
+\contentsline {section}{\numberline {2.1}Introducci\'on}{14}{section.2.1}
+\contentsline {section}{\numberline {2.2}Comunicaciones de riesgo de colisi\'on}{15}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}El CDM}{15}{subsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.1.1}Ejemplo de CDM}{17}{subsubsection.2.2.1.1}
+\contentsline {section}{\numberline {2.3}La posici\'on de los objetos involucrados}{18}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}SGP4}{20}{subsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.1.1}RSW y VNC}{21}{subsubsection.2.3.1.1}
+\contentsline {section}{\numberline {2.4}El tratamiento de los Errores en la posici\'on}{22}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}M\'etodo de Osweiler}{23}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Propagaci\'on de errores}{23}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}La Probabilidad de Colisi\'on}{26}{section.2.5}
+\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de Desarrollo}{31}{chapter.3}
+\contentsline {chapter}{\numberline {4}ARxCODE}{32}{chapter.4}
+\contentsline {section}{\numberline {4.1}Especificaciones}{32}{section.4.1}
+\contentsline {section}{\numberline {4.2}Requerimientos}{33}{section.4.2}
+\contentsline {section}{\numberline {4.3}Arquitectura}{34}{section.4.3}
+\contentsline {section}{\numberline {4.4}Interfaces}{34}{section.4.4}
+\contentsline {section}{\numberline {4.5}Entradas y Salidas}{35}{section.4.5}
+\contentsline {section}{\numberline {4.6}Casos de Uso}{35}{section.4.6}
+\contentsline {section}{\numberline {4.7}C\'alculo de la Probabilidad de Colisi\'on}{39}{section.4.7}
+\contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{40}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introducci\'on}{40}{section.5.1}
+\contentsline {section}{\numberline {5.2}Implentenaci\'on del modelo SGP4 en Python}{41}{section.5.2}
+\contentsline {section}{\numberline {5.3}Implementaci\'on del M\'etodo de Osweiler}{41}{section.5.3}
+\contentsline {section}{\numberline {5.4}Metodolog\'ia de Estimaci\'on de Errores}{42}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusiones}{44}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ap\'endice}{45}{chapter.7}
+\contentsline {section}{\numberline {7.1}Appendix 1}{45}{section.7.1}
+\contentsline {section}{\numberline {7.2}Transformaci\'on de Coordenadas}{45}{section.7.2}
+\contentsline {section}{\numberline {7.3}Appendix 2}{46}{section.7.3}
