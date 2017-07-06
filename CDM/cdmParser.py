@@ -16,14 +16,19 @@ class CDM():
         self.POC=None
         self.mision_name=None
         self.noradID_mision=None
+        self.r_sat=None
         self.deb_name=None
         self.noradID_deb=None
+        self.dr=None
+        self.ds=None
+        self.dw=None
+        self.cr_r=None
+        self.ct_r=None
+        self_cr_t=None
+        self.cn_r=None
+        self.cn_t=None
+        self.cn_n=None
         
-        for bod in root.iter('body'):
-            self.TCA=bod[0][1].text
-            self.MISS_DISTANCE=bod[0][2].text
-            self.POC=bod[0][14].text
-            
         n=0    
         for meta in root.iter('metadata'):
             if n == 0:
@@ -33,8 +38,36 @@ class CDM():
                 self.deb_name=meta[1].text
                 self.noradID_deb=meta[2].text
             n=n+1
-      
+            
+        k=0    
+        for data in root.iter('stateVector'):
+            if k == 0:
+                self.r_sat=[float(data[1].text),float(data[2].text),float(data[3].text)]
+                self.v_sat=[float(data[4].text),float(data[5].text),float(data[6].text)]
+            else:
+                self.r_deb=[float(data[1].text),float(data[2].text),float(data[3].text)]
+                self.v_deb=[float(data[4].text),float(data[5].text),float(data[6].text)]
+            k=k+1
         
+        for bod in root.iter('body'):
+            self.TCA=bod[0][1].text
+            self.MISS_DISTANCE=bod[0][2].text
+            self.POC=bod[0][14].text
+
+        
+        for rel in root.iter('relativeStateVector'):
+            self.dr=rel[0].text
+            self.ds=rel[1].text
+            self.dw=rel[2].text
+#             
+        for cov in root.iter('covarianceMatrix'):
+            self.cr_r=cov[1].text
+            self.ct_r=cov[2].text
+            self.ct_t=cov[3].text
+            self.cn_r=cov[4].text
+            self.cn_t=cov[5].text
+            self.cn_n=cov[6].text
+      
         
 def extraeCDM(archivo):
     """

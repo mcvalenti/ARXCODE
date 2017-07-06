@@ -13,22 +13,37 @@ import numpy as np
 from scipy.integrate import quad, dblquad
 from SistReferencia.sist_deCoordenadas import ricSis
 
-def proyecta_plano_de_encuentro(rsw_vect,sig_rsw_sat,sig_rsw_deb,phi):
+def calcula_Poc_manual(mu_x,mu_y,sig2_xc,sig2_yc):
+    #-----------------------------------------------
+    # CAlculo de la PoC
+    #-----------------------------------------------
+    ra=0.01
+    exp_c=np.exp(-ra*ra/(2*np.sqrt(sig2_xc)*np.sqrt(sig2_yc)))
+    PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/(sig2_xc))+(mu_y*mu_y/(sig2_yc))))*(1-exp_c)
+    PoC_int=dblquad(lambda y, x: (1.0/(2*np.sqrt(sig2_xc)*np.sqrt(sig2_yc)))*np.exp((-1.0/2.0)*((x*x/(sig2_xc))+(y*y/(sig2_yc)))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
+
+    return PoC, PoC_int
+
+
+def proyecta_plano_de_encuentro(rsw_vect,cov_rsw,phi):
     """
     Proyecta los valores del encuentro al plano de encuentro (x,y)
     -----------------------------------------------------------------
     inputs
         rsw_vect: vector con las posciones relativas en el sistema
                     (RSW) - [numpy array]
-        sig_rsw_xxx: vector con las desviaciones estandar en el sistema
-                    del satelite y el desecho respectivamente
-                    (RSW) - [numpy array]
-        phi: angulo entre los vectores de velocidad [grados]
+        cov_rsw: ma. de Covarianza - [numpy array (matrix)]
+        
+        phi: angulo entre los vectores velocidad.
     """
+    phi_rad=phi*np.pi/180.0  
     mu_x=rsw_vect[0]
     mu_y=np.sqrt(rsw_vect[1]*rsw_vect[1]+rsw_vect[2]*rsw_vect[2])
     
-    return mu_x,mu_y
+    sig2_xc=cov_rsw[0][0]
+    sig2_yc=cov_rsw[1][1]*np.cos(phi_rad/2.0)*np.cos(phi_rad/2.0)+cov_rsw[2][2]*np.sin(phi_rad/2.0)*np.sin(phi_rad/2.0)
+    
+    return mu_x,mu_y,sig2_xc,sig2_yc
 
 if __name__=='__main__':
     """
@@ -54,7 +69,10 @@ if __name__=='__main__':
     dw=0.543785
     # angulo entre velocidades relativas phi [grados]
     phi=102.458
-    phi_rad=phi*np.pi/180.0   
+    phi_rad=phi*np.pi/180.0  
+    #Calculo el angulo entre los vectores velocidad.
+#     cos_phi=np.dot(v_sat,v_deb)/(np.sqrt(np.dot(v_sat,v_sat))*np.sqrt(np.dot(v_deb,v_deb)))
+#     phi=np.arccos(cos_phi) 
     #-----------------------------------------------
     # Estadistica
     #-----------------------------------------------
@@ -79,11 +97,11 @@ if __name__=='__main__':
     sig2_xc=sig_r_sat*sig_r_sat+sig_r_deb*sig_r_deb 
     sig2_yc=sig_s_comb*sig_s_comb*np.cos(phi_rad/2.0)*np.cos(phi_rad/2.0)+sig_w_comb*sig_w_comb*np.sin(phi_rad/2.0)*np.sin(phi_rad/2.0)
     
-    print'=========================================='
-    print 'varianzas de bibliog = ', sig_x,sig_y
-    print 'varianzas calculadas = ', round(np.sqrt(sig2_xc),7), round(np.sqrt(sig2_yc),7)
+#     print'=========================================='
+#     print 'varianzas de bibliog = ', sig_x,sig_y
+#     print 'varianzas calculadas = ', round(np.sqrt(sig2_xc),7), round(np.sqrt(sig2_yc),7)
     
-    ra=0.01
+    ra=0.009
     #-----------------------------------------------
     # CAlculo de la PoC
     #-----------------------------------------------
@@ -103,14 +121,14 @@ if __name__=='__main__':
     #===============================================
     # Posicion relativa calculada a partir de r,v
     #===============================================
-    dif_r=r_sat-r_deb
-    rr,i,c=ricSis(r_deb,v_deb, dif_r)
-#     dif_r=r_deb-r_sat
-#     rr,i,c=ricSis(r_sat,v_sat, dif_r)
+    dif_r=r_deb-r_sat
+    rr,i,c=ricSis(r_sat,v_sat, dif_r)
+    dif_r1=r_sat-r_deb
+    rr1,i1,c1=ricSis(r_deb,v_deb, dif_r1)
     
     print'=========================================='
     print 'Posicion relativa bibliografia = ', dr,ds,dw
-    print 'Posicion relativa calculada    = ', round(rr,7), round(i,7), round(c,7)
-
+    print 'Posicion relativa calculada  satelite  = ', round(rr,7), round(i,7), round(c,7), np.sqrt(rr*rr+i*i+c*c)
+    print 'Posicion relativa calculada  deb  = ', round(rr1,7), round(i1,7), round(c1,7) , np.sqrt(rr1*rr1+i1*i1+c1*c1) 
 
 

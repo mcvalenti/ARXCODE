@@ -19,13 +19,14 @@ from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 from Encuentro.akellaPoC import evaluaEncuentro
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
 from visual import ploteos
-#from visual.trackencuentro import grafica_track
+from visual.trackencuentro import grafica_track
 from visual.TleOsweiler import VerGrafico
 # #from visual.TlevsCodsGraf import VerGraficoMision
 # from visual.CodsOsweiler import VerGraficoCods
 from visual.binGraf import histograma_bin, desviacion_standard_graf
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
+from Validaciones.valida_PoC import proyecta_plano_de_encuentro, calcula_Poc_manual
 
 class ProcARxCODE(QMainWindow):
     
@@ -65,13 +66,37 @@ class ProcARxCODE(QMainWindow):
         DockWidgets
         """
         # Lista de Encuentros.
-        self.encuentros = QDockWidget("Registro de Encuentros", self)
+        self.encuentros = QDockWidget("Carga de Encuentros", self)
         self.listWidget = QListWidget()
         self.listWidget.addItem("CARGAR CDM")
         self.listWidget.addItem("Carga Manual")
-        self.encuentros.setWidget(self.listWidget)
+#        self.encuentros.setWidget(self.listWidget)
+
         self.encuentros.setFloating(False)
         self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros) #
+        #Lista de Botones en el Dock
+        midock = QWidget()
+        self.boton_cargarCDM = QPushButton('CARGAR CDM')
+        self.boton_carga_manual = QPushButton('Carga Manual')
+        self.boton_cargarCDM.setStyleSheet("QPushButton { background-color: white; border:3px solid blue;font: bold 14px;height: 78px;width: 120px; }")
+        self.boton_carga_manual.setStyleSheet("QPushButton { background-color: white; border:3px solid blue;font: bold 14px;height: 78px;width: 120px; }")
+        # plantilla
+        stylesheet = \
+        ".QWidget {\n" \
+        + "border: 5px solid gray;\n" \
+        + "border-radius: 4px;\n" \
+        + "background-color: rgb(255, 255, 255);\n" \
+        + "}"
+        midock.setStyleSheet(stylesheet)
+        layout=QVBoxLayout()
+        layout.addWidget(self.boton_cargarCDM)
+        layout.addWidget(self.boton_carga_manual)
+        midock.setLayout(layout)
+        self.encuentros.setWidget(midock)
+        # Acciones
+        self.boton_cargarCDM.clicked.connect(self.cargar_CDM)
+        self.boton_carga_manual.clicked.connect(self.carga_manual)
+
         # Lista de Procesamientos.
 #         self.procesamientos = QDockWidget("Procesamientos", self)
 #         self.listWidget1 = QListWidget()
@@ -84,33 +109,41 @@ class ProcARxCODE(QMainWindow):
         """
         Acciones
         """
-        self.listWidget.itemClicked.connect(self.item_click)
+#        self.listWidget.itemClicked.connect(self.item_click)
 #         self.listWidget1.itemClicked.connect(self.item_click1)
 
         self.show()
 
+    def cargar_CDM(self):
+        ventana1=ProcCDM()
+        self.setCentralWidget(ventana1)
+        ventana1.exec_()
+    def carga_manual(self):
+        ventana2=ProcEncuentro()
+        self.setCentralWidget(ventana2)
+        ventana2.exec_()
         
-    def item_click(self):       
-        cdm_click=self.listWidget.currentItem().text()
-        if cdm_click == 'CARGAR CDM':
-            ventana1=ProcCDM()
-            self.setCentralWidget(ventana1)
-            ventana1.exec_()
-        else:
-            ventana2=ProcEncuentro()
-            self.setCentralWidget(ventana2)
-            ventana2.exec_()
-
-    def item_click1(self):
-        c_item=self.listWidget1.currentItem().text()
-        if c_item == 'Procesamiento de un set de TLE':
-            ventana3=ProcTle()
-            self.setCentralWidget(ventana3)
-            ventana3.exec_()
-        else:
-            ventana4=ProcMision()
-            self.setCentralWidget(ventana4)
-            ventana4.exec_()
+#     def item_click(self):       
+#         cdm_click=self.listWidget.currentItem().text()
+#         if cdm_click == 'CARGAR CDM':
+#             ventana1=ProcCDM()
+#             self.setCentralWidget(ventana1)
+#             ventana1.exec_()
+#         else:
+#             ventana2=ProcEncuentro()
+#             self.setCentralWidget(ventana2)
+#             ventana2.exec_()
+# 
+#     def item_click1(self):
+#         c_item=self.listWidget1.currentItem().text()
+#         if c_item == 'Procesamiento de un set de TLE':
+#             ventana3=ProcTle()
+#             self.setCentralWidget(ventana3)
+#             ventana3.exec_()
+#         else:
+#             ventana4=ProcMision()
+#             self.setCentralWidget(ventana4)
+#             ventana4.exec_()
                 
     def center(self):
         screen = QDesktopWidget().screenGeometry()
@@ -147,7 +180,7 @@ class ProcCDM(QDialog):
         """
         Campos de Edicion
         """   
-        self.archivo_tex=QLineEdit('cdmEnviCosmos08.xml') # seteo el archivo para las pruebas
+        self.archivo_tex=QLineEdit('cdmTerraPegasus10.xml') # seteo el archivo para las pruebas
         """
         Botones
         """
@@ -208,18 +241,56 @@ class ProcCDM(QDialog):
         
         
     def Carga_CDM(self):
-        self.cdm_nombre='cdmEnviCosmos08.xml' # seteo el archivo para las pruebas
+#        self.cdm_nombre='cdmEnviCosmos08.xml' # seteo el archivo para las pruebas
+        self.cdm_nombre='cdmTerraPegasus10.xml' # seteo el archivo para las pruebas
         self.CDM=CDM(self.cdm_nombre)
         self.TCA=self.CDM.TCA
         self.MISS_DISTANCE=self.CDM.MISS_DISTANCE
         self.POC=self.CDM.POC
         self.mision_name=self.CDM.mision_name
         self.noradID_mision=self.CDM.noradID_mision
+        self.r_sat=self.CDM.r_sat
+        self.v_sat=self.CDM.v_sat
         self.deb_name=self.CDM.deb_name
         self.noradID_deb=self.CDM.noradID_deb
-
+        self.r_deb=self.CDM.r_deb
+        self.v_deb=self.CDM.v_deb
+        # Posiciones Relativas.
+        self.dr=float(self.CDM.dr)/1000.0
+        self.ds=float(self.CDM.ds)/1000.0
+        self.dw=float(self.CDM.dw)/1000.0
+        self.rsw_vect=[self.dr,self.ds,self.dw]
+        # Estadistica 
+        self.cr_r=float(self.CDM.cr_r)*(0.001*0.001)
+        self.ct_r=float(self.CDM.ct_r)*(0.001*0.001)
+        self.ct_t=float(self.CDM.ct_t)*(0.001*0.001)
+        self.cn_r=float(self.CDM.cn_r)*(0.001*0.001)
+        self.cn_t=float(self.CDM.cn_t)*(0.001*0.001)
+        self.cn_n=float(self.CDM.cn_n)*(0.001*0.001) 
+        self.cov_rtn=np.array([[self.cr_r,self.ct_r,self.cn_r],[self.ct_r,self.ct_t,self.cn_t],[self.cn_r,self.cn_t,self.cn_n]])     
+        print'**********************'
+        print 'r_sat = ',self.r_sat
+        print 'v_sat = ',self.v_sat
+        print 'r_deb = ',self.r_deb
+        print 'v_deb = ',self.v_deb
+        print self.dr,self.ds,self.dw
+        print '*********************'
+        print self.cr_r
+        print self.ct_r,self.ct_t
+        print self.cn_r,self.cn_t,self.cn_n        
+        #Calculo el angulo entre los vectores velocidad.
+        cos_phi=np.dot(self.v_sat,self.v_deb)/(np.sqrt(np.dot(self.v_sat,self.v_sat))*np.sqrt(np.dot(self.v_deb,self.v_deb)))
+        phi=np.arccos(cos_phi) 
+    
+        #Validacion del calculo POC a partir de datos CDM.
+        mu_x,mu_y,sig2_xc,sig2_yc=proyecta_plano_de_encuentro(self.rsw_vect,self.cov_rtn,phi)
+        poc, poc_int=calcula_Poc_manual(mu_x, mu_y, sig2_xc, sig2_yc)
+        print '======================'
+        print '------POC-------------'
+        print '======================'
+        print poc, poc_int[0]
         """
-        Carga de Informacion principal
+        Carga de Informacion 
         """
         # Cargar la tabla
         self.tablePOC.setItem(0,0, QTableWidgetItem( self.mision_name))
@@ -312,10 +383,11 @@ class ProcEncuentro(QDialog):
         # nice widget for editing the date
         self.date = QDateEdit()
         self.date.setCalendarPopup(True)
-        self.date.setDate(QDate.currentDate())
+        fecha_ej4=datetime(2004,9,2)
+        self.date.setDate(fecha_ej4)
         # Fecha y Hora
         self.hora = QTimeEdit()
-        self.hora.setTime(QTime.currentTime())
+        self.hora.setTime(QTime(19,14,11))
         """
         Plantilla
         """
@@ -414,7 +486,7 @@ class ProcEncuentro(QDialog):
         # archivo de diferencias.
         self.archivo_dif=encuentro1.archivo_dif
         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
-#        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
+        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
         print 'fin del procesamiento.'
        
         self.boton_track.setEnabled(True)
@@ -1049,7 +1121,7 @@ if __name__ == '__main__':
     """
     INICIA LA INTERFAZ
     """
-    QApplication.setStyle("Windows")
+    QApplication.setStyle("mac") # plastique, cde, motif, sgi, windows, cleanlooks, mac
     app = QApplication(sys.argv)
     ex = ProcARxCODE()
     sys.exit(app.exec_())

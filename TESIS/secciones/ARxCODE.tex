@@ -5,15 +5,6 @@
 \section{Especificaciones}
 El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros con riesgo de colisi\'on.\\
 
-\begin{itemize}
-\item Extraer la informaci\'on que provee el CDM.
-\item Propagar la posici\'on del desecho espacial involucrado, con un m\'etodo de propagaci\'on de errores.
-\item Utilizar los productos orbitales de la misi\'on o realizar el mismo procedimiento que se aplica al desecho, a la misi\'on.
-\item Cacular la m\'inima distancia, total o en la coordenada radial.
-\item Calcular la probabilidad de colisi\'on del encuentro.
-\item Permitir al operador/analista experto visualizar el encuentro, generar reportes y notificaciones.
-\end{itemize} 
-
 \subsubsection*{Funcionalidades:}
 \begin{itemize}
 \item Procesar la informaci\'on de los mensajes CDM.\\
@@ -26,6 +17,80 @@ El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros 
 \end{itemize}
 
 \section{Requerimientos}
+
+\begin{table}
+ \resizebox{\linewidth}{!}{
+ \begin{tabular}{|l|l|l|}
+ \hline \hline
+  Req. ID & Descripci\'on & Comentario \\
+  \hline \hline
+  1 & Requerimientos FUNCIONALES & \\
+  \hline
+  ARR-010 & ARxCODE debe calcular la probabilidad de colisi\'on de un acercamiento de riesgo. & \\
+  \hline
+  ARR-020 & \makecell{ARxCODE debe  aceptar como inputs: un mensaje de alerta (CDM),\\ o los identificadores de NORAD de ambos objetos y\\ el tiempo de m\'aximo acercamiento (TCA) .}&\\
+  \hline
+  ARR-030 & \makecell{ARxCODE debe utilizar los productos orbitales de la misi\'on o realizar \\el mismo procedimiento que se aplica al desecho, a la misi\'on.}&\\
+  \hline
+  ARR-040 & ARxCODE debe cacular la m\'inima distancia, total y en la coordenada radial.&\\
+  \hline
+  ARR-050 & ARxCODE debe manipular los sistemas de referencia: TEME, TOD, VNC y RTN. &\\
+  \hline
+  ARR-060 & \makecell{ARxCODE debe permitir al operador/analista experto visualizar\\ el encuentro, generar reportes y notificaciones.}&\\
+  \hline
+  ARR-070 & \makecell{ARxCODE debe extraer el set de TLEs de los objetos involucrados \\ de los \'ultimos 15 d\'ias anteriores al TCA.}&\\
+  \hline
+  2 & Requerimientos de INTERFACES & \\
+  \hline
+  ...&...&...\\
+  \hline
+  3 & Requerimientos de RENDIMIENTO y/o PERFORMANCE & \\
+  \hline
+  ...&...&...\\
+  \hline
+  4 & Requerimientos de OPERACIONES & \\
+  \hline
+  ...&...&...\\
+  \hline
+  5 & Requerimientos de VALIDACI\'ON & \\
+  \hline
+  ...&...&...\\
+  \hline
+  6 & Requerimientos de DISE\~NO& \\
+  \hline
+  ...&...&...\\
+  \hline
+  7 & Requerimientos de CALIDAD& \\
+  \hline
+  ...&...&...\\
+  \hline
+  8 & Requerimientos de REUSABILIDAD & \\
+  \hline
+  ...&...&...\\
+  \hline
+  9 & Requerimientos de SEGURIDAD & \\
+  \hline
+  ...&...&...\\
+  \hline
+  10 & Requerimientos de SEGURIDAD & \\
+  \hline
+    ...&...&...\\
+  \hline
+  11 & Requerimientos de CONFIABILIDAD & \\
+  \hline
+  ...&...&...\\
+  \hline
+  12 & Requerimientos de MANTENIMIENTO & \\
+  \hline
+ \end{tabular}
+ }
+ \caption[Tabla de Requerimientos]{Tabla de especificaci\'on de requerimientos del ARxCODE}
+\end{table}
+
+
+
+
+
 \begin{itemize}
 \item La aplicaci\'on detectar\'a la llegada de un CDM y ser\'a capaz de desglosarlo para extraer la informaci\'on que sea necesaria.\\
 \item La aplicaci\'on identificar\'a los objetos y solicitar\'a al operador/analista experto la posici\'on precisa y la matriz varianza-covarianza en el caso de la misi\'on principal\\

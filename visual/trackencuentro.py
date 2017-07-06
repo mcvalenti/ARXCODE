@@ -24,14 +24,16 @@ def grafica_track(satelite,debris):
                J='',
                O='-',
                S='t0.05',
-               K='K')
+               K='K',
+               G='red')
                 
     gmt.psxy( debris,  #'../Encuentro/archivos/27386U',
                R='',
                J='',
                O='',
                S='t0.05',
-               K='K')
+               K='K',
+               G='blue')
      
      
     gmt.save('../visual/archivos/ploteo_track.ps')
