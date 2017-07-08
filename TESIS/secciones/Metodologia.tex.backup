@@ -1,8 +1,21 @@
 \chapter{Metodología de Desarrollo}
 \label{chap:metodologia}
-
+%\endinput
  %De acuerdo a \cite{Barrett2009}, el modelo WCM...\\
-Para el desarrollo de este trabajo se opt\'o por una metodolog\'ia del tipo incremental.
+Para el desarrollo de este trabajo se opt\'o por un modelo de desarrollo de tipo incremental (que resulta iterativo por naturaleza).
+En cada iteraci\'on, se optimiz\'o el dise\~no y se fueron agregando nuevas funcionalidades y capacidades al sistema.\\
+
+Se opt\'o por este modelo, ya que:
+\begin{itemize}
+\item En el desarrollo de este modelo se da la retroalimentaci\'on muy temprano a los usuarios, en mi caso mis directores y tutores.
+\item Permite separar la complejidad del proyecto, gracias a su desarrollo por parte de cada iteraci\'on o bloque.
+\item El producto es consistente y puntual en el desarrollo.
+\item Los productos desarrollados con este modelo tienen una menor probabilidad de fallar.
+\item Se obtiene un aprendizaje en cada iteraci\'on que es aplicado en el desarrollo del producto y aumenta las experiencias para pr\'oximos proyectos.
+\end{itemize}
+
+Facilit\'o el estudio y an\'alisis de los resultados parciales de la implementaci\'on de los distintos m\'etodos y algoritmos en etapas tempranas.
+
 
 \section{Inicializaci\'on}
 En esta primera etapa evaluamos  el concepto del ARxCODE en el contexto de la Unidad de Desarrollo de Desechos Espaciales de CONAE. Fundamentalmente la vinculaci\'on con el departamento de Din\'amica Orbital y los procedimientos actuales que se realizan en realaci\'on a los riesgos de colisi\'on con desechos. Hicimos un estudio de las estructuras org\'anicas existentes y los sistemas asociados. Los distintos tipos de productos y usuarios, las interfaces que existen y el acceso a los datos reales con los que podr\'iamos contar.\\
@@ -39,8 +52,6 @@ Lenguaje Python y PyQT.\\
 Hablar de Python y de QT.\\
 librerias instaladas y reutilizaci\'on. (SGP4)\\
 Control de Versiones Git.\\
-
-\subsection{Interfaz Gr\'afica}
-
+Unitest y escenarios de validaci\'on.
 
 

@@ -22,21 +22,26 @@
 \contentsline {subsection}{\numberline {2.4.2}Propagaci\'on de errores}{23}{subsection.2.4.2}
 \contentsline {section}{\numberline {2.5}La Probabilidad de Colisi\'on}{26}{section.2.5}
 \contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de Desarrollo}{31}{chapter.3}
-\contentsline {chapter}{\numberline {4}ARxCODE}{32}{chapter.4}
-\contentsline {section}{\numberline {4.1}Especificaciones}{32}{section.4.1}
-\contentsline {section}{\numberline {4.2}Requerimientos}{34}{section.4.2}
-\contentsline {section}{\numberline {4.3}Arquitectura}{35}{section.4.3}
-\contentsline {section}{\numberline {4.4}Interfaces}{35}{section.4.4}
-\contentsline {section}{\numberline {4.5}Entradas y Salidas}{35}{section.4.5}
-\contentsline {section}{\numberline {4.6}Casos de Uso}{36}{section.4.6}
-\contentsline {section}{\numberline {4.7}C\'alculo de la Probabilidad de Colisi\'on}{39}{section.4.7}
-\contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{40}{chapter.5}
-\contentsline {section}{\numberline {5.1}Introducci\'on}{40}{section.5.1}
-\contentsline {section}{\numberline {5.2}Implentenaci\'on del modelo SGP4 en Python}{41}{section.5.2}
-\contentsline {section}{\numberline {5.3}Implementaci\'on del M\'etodo de Osweiler}{41}{section.5.3}
-\contentsline {section}{\numberline {5.4}Metodolog\'ia de Estimaci\'on de Errores}{42}{section.5.4}
-\contentsline {chapter}{\numberline {6}Conclusiones}{44}{chapter.6}
-\contentsline {chapter}{\numberline {7}Ap\'endice}{45}{chapter.7}
-\contentsline {section}{\numberline {7.1}Appendix 1}{45}{section.7.1}
-\contentsline {section}{\numberline {7.2}Transformaci\'on de Coordenadas}{45}{section.7.2}
-\contentsline {section}{\numberline {7.3}Appendix 2}{46}{section.7.3}
+\contentsline {section}{\numberline {3.1}Inicializaci\'on}{31}{section.3.1}
+\contentsline {section}{\numberline {3.2}Iteraci\'on}{32}{section.3.2}
+\contentsline {section}{\numberline {3.3}Control}{33}{section.3.3}
+\contentsline {section}{\numberline {3.4}Entorno de Desarrollo}{33}{section.3.4}
+\contentsline {chapter}{\numberline {4}ARxCODE}{34}{chapter.4}
+\contentsline {section}{\numberline {4.1}Especificaciones}{34}{section.4.1}
+\contentsline {section}{\numberline {4.2}ARQ}{34}{section.4.2}
+\contentsline {section}{\numberline {4.3}Requerimientos}{35}{section.4.3}
+\contentsline {section}{\numberline {4.4}Arquitectura}{37}{section.4.4}
+\contentsline {section}{\numberline {4.5}Interfaces}{38}{section.4.5}
+\contentsline {section}{\numberline {4.6}Entradas y Salidas}{38}{section.4.6}
+\contentsline {section}{\numberline {4.7}Casos de Uso}{39}{section.4.7}
+\contentsline {section}{\numberline {4.8}C\'alculo de la Probabilidad de Colisi\'on}{42}{section.4.8}
+\contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{43}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introducci\'on}{43}{section.5.1}
+\contentsline {section}{\numberline {5.2}Implentenaci\'on del modelo SGP4 en Python}{44}{section.5.2}
+\contentsline {section}{\numberline {5.3}Implementaci\'on del M\'etodo de Osweiler}{44}{section.5.3}
+\contentsline {section}{\numberline {5.4}Metodolog\'ia de Estimaci\'on de Errores}{45}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusiones}{47}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ap\'endice}{48}{chapter.7}
+\contentsline {section}{\numberline {7.1}Appendix 1}{48}{section.7.1}
+\contentsline {section}{\numberline {7.2}Transformaci\'on de Coordenadas}{48}{section.7.2}
+\contentsline {section}{\numberline {7.3}Appendix 2}{49}{section.7.3}

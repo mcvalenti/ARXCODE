@@ -4,6 +4,30 @@
 %\endinput
 \section{Especificaciones}
 El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros con riesgo de colisi\'on.\\
+Dise\~nado para .... tiene como objetivo fundamental ...\\
+Es una aplicaci\'on de escritorio ¿?. BackEnd ¿?.\\
+Cuenta con una interfaz amigable.\\
+Su arquitectura permite agregar funciones, es extensible. Flexibilidad en la adici\'on de funcionalidades, filosof\'ia de expansi\'on.\\
+Describir:
+\begin{itemize}
+ \item  M\'odulos Fundamentales.
+ \item Flujo de Pantallas.
+ \item Diagrama de Componentes.
+ \item Requerimientos.
+ \item Casos de USO.
+ \item Entidades (diagrama de clases)
+ \item Diagrama de Secuencia.
+ \item Dise\~no de interfaces.
+\end{itemize}
+
+\section{ARQ}
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.5\textwidth]{imagenes/componentesAR}
+  \label{fig:componentes}
+  \caption{Componentes de ARxCODE}
+\end{figure}
+
 
 \subsubsection*{Funcionalidades:}
 \begin{itemize}
@@ -87,10 +111,6 @@ El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros 
  \caption[Tabla de Requerimientos]{Tabla de especificaci\'on de requerimientos del ARxCODE}
 \end{table}
 
-
-
-
-
 \begin{itemize}
 \item La aplicaci\'on detectar\'a la llegada de un CDM y ser\'a capaz de desglosarlo para extraer la informaci\'on que sea necesaria.\\
 \item La aplicaci\'on identificar\'a los objetos y solicitar\'a al operador/analista experto la posici\'on precisa y la matriz varianza-covarianza en el caso de la misi\'on principal\\
@@ -112,10 +132,11 @@ El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros 
 \end{itemize}
 
 
-
 \section{Arquitectura}
 El prototipo de software para el An\'alisis de Riesgo por Colisi\'on con Desechos Espaciales {\it{ARxCODE}}, ser\'a un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
 Ocupa un rol de intermediario a fin de facilitarle a un operador analista experto, herramientas para la toma de decisiones o el intercambio de informaci\'on con los organismos externos y el centro de control.\\
+Prototipo de un software modular, reusable, modificables. 
+nota: Caption para el diagrama de componentes {\it{Dise\~no conceptual, con un alto grado de abstracci\'on de los principales m\'odulos de la aplicaci\'on y c\'omo se relacionan.}}
 {\bf{Interfaces.}}\\
 clases principales: TLE, EphemCODS
 \subsection*{parametros globales y nomenclatura de la generacion de archivos}
@@ -151,7 +172,7 @@ Identificamos dos clases de uso Fig. \ref{fig:casosuso} :\\
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=.5\textwidth]{imagenes/casosUsos}
+  \includegraphics[width=.5\textwidth]{imagenes/usecaseAR}
   \label{fig:casosuso}
   \caption{Casos de Uso de ARxCODE}
 \end{figure}
@@ -177,7 +198,9 @@ Actor  &    Operador de Din\'amica Orbital con Autorizaci\'on\\
 \hline
 Requerimientos  &    \\
 \hline
-Precondiciones  &  El operador debe estar registrado en la p\'agina space-track de NORAD.  \\
+\multirow{ 3}{*}{Precondiciones}  &  El operador debe estar registrado en la p\'agina space-track de NORAD.  \\
+& Los archivos CDM deben estar previamente cargados en el Directorio de b\'usqueda.\\
+& El operador debe conocer el encuentro que desea analizar y sus datos en caso del ingreso manual.\\
 \hline
 \multirow{ 3}{*}{Flujo Principal} & 1 - El operador selecciona un archivo CDM \\
 & 2 - El operador oprime el bot\'on {\it{Track}} para visualizar el encuentro proyectado en la superficie terrestre (opcional)\\
@@ -186,6 +209,8 @@ Precondiciones  &  El operador debe estar registrado en la p\'agina space-track 
 \multirow{ 3}{*}{Flujo Alternativo} & 1 - El operador ingresa los n\'umeros de identificaci\'on de los objetos (NORAD\_ID) \\
 & 2 - El operador ingresa la fecha y hora del m\'aximo acercamiento (TCA)\\
 & 3 - El operador oprime el bot\'on {\it{Procesar}} para procesar el encuentro\\
+\hline
+Postcondiciones & El informe de an\'alisis de riesgo fue generado y almacenado.\\
 \hline
 \end{tabular}}
 \caption[Caso de Uso: Procesar Encuentro]{Tabla con la descripci\'on del caso de uso: \it{Procesar Encuentro}}
