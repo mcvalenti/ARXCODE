@@ -163,8 +163,8 @@ class ProcCDM(QDialog):
         
         # Construccion
         self.TCA=None
-        self.MISS_DISTANCE='aca esta'
-        self.POC='aca esta'
+        self.MISS_DISTANCE=''
+        self.POC=''
 
 
     def initUI(self):
@@ -242,7 +242,7 @@ class ProcCDM(QDialog):
         
     def Carga_CDM(self):
 #        self.cdm_nombre='cdmEnviCosmos08.xml' # seteo el archivo para las pruebas
-        self.cdm_nombre='cdmTerraPegasus10.xml' # seteo el archivo para las pruebas
+#        self.cdm_nombre='cdmTerraPegasus10.xml' # seteo el archivo para las pruebas
         self.CDM=CDM(self.cdm_nombre)
         self.TCA=self.CDM.TCA
         self.MISS_DISTANCE=self.CDM.MISS_DISTANCE
@@ -330,8 +330,7 @@ class ProcEncuentro(QDialog):
         self.deb_id=''
         self.tca=''
         self.min_dist=None
-        self.tca_calc=None
-        
+        self.tca_calc=None       
         
     def initUI(self):
         self.palette = QPalette()
@@ -354,7 +353,7 @@ class ProcEncuentro(QDialog):
         """
         Botones
         """
-        self.boton_calpick  = QPushButton('...')
+        self.boton_carga_fecha  = QPushButton('Cargar')
         self.boton_encuetro = QPushButton('Procesar Encuentro')
         self.boton_dif      = QPushButton('Ver diferencias')
         self.boton_track    = QPushButton('Track')
@@ -362,15 +361,19 @@ class ProcEncuentro(QDialog):
         """
         Campos de Edicion
         """
-        self.sat_id_text = QLineEdit('27386')
-        self.deb_id_text = QLineEdit('12442')   
-#        self.tca_text    = QDateEdit()  
-        self.tca_text    = QCalendarWidget()
+        self.sat_id_text = QLineEdit()
+        self.deb_id_text = QLineEdit() 
+        # calendario
+        # nice widget for editing the date  
+        self.tca_text    = QDateEdit()  
+        self.tca_text.setCalendarPopup(True)
+
+#         self.fecha = self.tca_text.selectedDate()
+#        self.tca_text    = QCalendarWidget()
         self.hs_tex      = QLineEdit()
         self.min_tex     = QLineEdit()
         self.seg_tex     = QLineEdit()
         self.mseg_tex    = QLineEdit()
-
         """
         Otros
         """
@@ -378,16 +381,10 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro.setRowCount(1)
         self.tableEncuentro.setColumnCount(5)
         listaLabels=['Norad Id','Nombre','TCAarx','MinD arx','PoC']
-        self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
-        # calendario
-        # nice widget for editing the date
-        self.date = QDateEdit()
-        self.date.setCalendarPopup(True)
-        fecha_ej4=datetime(2004,9,2)
-        self.date.setDate(fecha_ej4)
-        # Fecha y Hora
+        self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)      
+#       # Fecha y Hora
         self.hora = QTimeEdit()
-        self.hora.setTime(QTime(19,14,11))
+#       self.hora.setTime(QTime(19,14,11))
         """
         Plantilla
         """
@@ -395,16 +392,15 @@ class ProcEncuentro(QDialog):
         grid.setSpacing(5)
         scroll = QScrollArea()
 
-        
         grid.addWidget(self.sat_lab,2,1)
         grid.addWidget(self.sat_id_text,2,2)
         grid.addWidget(self.deb_lab,3,1)
         grid.addWidget(self.deb_id_text,3,2)
         grid.addWidget(self.time_lab,4,1)
 #        grid.addWidget(self.tca_text,4,2)
-        grid.addWidget(self.date,4,2)
+        grid.addWidget(self.tca_text,4,2)
         grid.addWidget(self.hora,5,2)
-#         grid.addWidget(self.boton_calpick,13,10)
+        grid.addWidget(self.boton_carga_fecha,5,1)
 #         grid.addWidget(self.hs_tex,4,3)
 #         grid.addWidget(self.hs_lab,4,4)
 #         grid.addWidget(self.min_tex,4,5)
@@ -423,25 +419,18 @@ class ProcEncuentro(QDialog):
         """
         Acciones
         """
-        self.boton_calpick.clicked.connect(self.cal_picker)
+
         self.boton_encuetro.clicked.connect(self.procesoSimple)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_track.clicked.connect(self.mostrarTrack)
         self.boton_dif.clicked.connect(self.mostrarDif)
         self.boton_track.setEnabled(False)
         self.boton_dif.setEnabled(False)
-        
+
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de Encuentro')    
         self.show()
-    
-    def cal_picker(self):
-        print 'HOLA MUNDO'
-        self.cal=QCalendarWidget()
-        self.cal.show()
-        fecha = self.tca_text.selectedDate()
-        print fecha
-#     
+
     def procesoSimple(self):
         """
         Propaga los objetos involucrados un intervalos [tca-90:tca+10]
@@ -451,7 +440,13 @@ class ProcEncuentro(QDialog):
             Diferencias en RTN ---> Plotea.
             Genera archivo lat, long ---> Plotea.          
         """
-        # Importar los TLE de NORAD.    
+        print 'HOLA MUNDO'
+        self.cal = self.tca_text.calendarWidget()
+        self.fecha = self.cal.selectedDate().toPyDate()
+        self.horas = self.hora.time()
+        self.tca = QDateTime(self.fecha,self.horas).toPyDateTime()
+
+#         # Importar los TLE de NORAD.    
         self.sat_id=str(self.sat_id_text.text())
         self.deb_id=str(self.deb_id_text.text())
 #         hs =int(self.hs_tex.text())
@@ -459,7 +454,7 @@ class ProcEncuentro(QDialog):
 #         seg=int(self.seg_tex.text())
 #         fecha = self.tca_text.selectedDate()#.toPyDate()
 #         hora = QTime(hs,min,seg)
-        self.tca=datetime(2004,9,2,19,14,11)#QDateTime(fecha,hora).toPyDateTime()
+#        self.tca=datetime(2004,9,2,19,14,11)#QDateTime(fecha,hora).toPyDateTime()
         tle_sat=Tle.creadoxParam(self.sat_id, self.tca)
         tle_deb=Tle.creadoxParam(self.deb_id, self.tca)
 #         

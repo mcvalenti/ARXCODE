@@ -252,6 +252,14 @@ booktitle = {Space Debris},
   date = {2015-01-15},
 }
 
+@misc{stk,
+  author = {{Analytical Graphics, Inc.}},
+  title = {System Tool Kit - STK 11x64},
+  url = {http://www.agi.com/resources},
+  version = {11.1},
+  date = {2016},
+}
+
 @article{karacalioglu2016impact,
   title={The Impact of New Trends in Satellite Launches on the Orbital Debris Environment},
   author={Karacalioglu, Arif Goektug and Stupl, Jan},
@@ -266,3 +274,29 @@ booktitle = {Space Debris},
   year = {},
 }
 
+@techreport{hoots1980models,
+  title={Models for propagation of NORAD element sets},
+  author={Hoots, Felix R and Roehrich, Ronald L},
+  year={1980},
+  institution={AEROSPACE DEFENSE COMMAND PETERSON AFB CO OFFICE OF ASTRODYNAMICS}
+}
+
+@techreport{CDMstd,
+  title={Conjunction Data Message Standard},
+  author={Consultative Committee for Space Data Systems, CCSDS},
+  year={2013},
+  institution={CCSDS}
+}
+@techreport{spacetrackreport3,
+  title={SPACETRACK REPORT NO. 3 Models for Propagation of NORAD Element Sets},
+  author={Hoots, Felix R and Roehrich, Ronald L},
+  year={1980},
+  institution={Project Spacetrack Reports, Office of Astrodynamics, Aerospace Defense Center}
+}
+
+@unpublished{hootshistoria,
+title={{A History of Analytical Orbit Modeling in the United States Space Surveillance System}},
+author = {Hoots, Felix R and Roehrich, Ronald L},
+year = {1998},
+note= {Third US-Russian Space Surveillance Workshop. Washington, D.C},
+}

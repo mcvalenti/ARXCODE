@@ -26,7 +26,7 @@ El {\it{CCSDS 508.0-B-1, Conjunction Data Message Recommended Standard}} describ
 
 (\textcolor{red}{se puede ampliar en contexto historico, mencionando a NASA y al CSM})\\
 
-\subsection{El CDM}
+\subsection{El CDM}\label{subsec:cdm}
 
 Es un mensaje estandarizado para el intercambio de informaci\'on entre los organismos capaces de detectar acercamientos y los due\~nos y operadores de los objetos involucrados en el encuentro.\\
 Los CDM se env\'ian 72 horas antes del encuentro a los operadores a cargo y/o se disponibilizan en la p\'agina de space-track para usuarios con permisos especiales.\\
@@ -236,7 +236,27 @@ El SGP4 es actualmente, el \'unico modelo para el mantenimiento del cat\'alogo d
  Es im sistema quasi inercial definido con origen en el centro de la Tierra, con un ecuador y equinoccio verdadero de la fecha, es decir, que contempla correcciones por efectos de la nutaci\'on.
 \subsubsection{RSW y VNC}
  RSW and NTW coordinate systems [2] are the two common types of the satellite-based
-orbit coordinate system.
+orbit coordinate system.\\
+The origin of RSW coordinate system is located at the centroid of the space
+object. The R axis (radial) always points from the Earth’s center along the radius
+vector toward the satellite as it moves through the orbit; the S axis (along-track or
+transverse) points in the direction of (but not necessarily parallel to) the velocity
+vector and is perpendicular to the radius vector; the W axis (cross-track) is normal to
+the orbital plane. Refer to Fig. 2.1 for details.
+Sometimes, the coordinate system is also marked as RTN (radial, transverse, and
+normal) coordinate system or UVW coordinate system [3]. RSW coordinate system
+is decided by its position and velocity vectors, which vary with time. Its Axis S does
+not always coincide with the velocity direction. This kind of coordinate system is
+mainly used to describe orbital errors, relative position, and satellite orbital transfer
+of circular orbit.
+In an ECI coordinate system, the unit vectors of the three axes of RSW
+
+\begin{figure}[!h]
+\centering
+\fbox{\includegraphics[width=0.8\textwidth]{imagenes/sistref}}
+\caption[Sistemas de Referencia centrados en el Sat\'elite]{Sistemas de Referencia centrados en el Sat\'elite}
+\label{fig:sistref}
+\end{figure}
 
 * alfa \& delta para el track en Tierra.\\
 
@@ -339,6 +359,43 @@ Luego se agrupan los valores seg\'un el intervalo de propagaci\'on, es decir, si
 
 \vspace{7cm}
 \section{La Probabilidad de Colisi\'on}
+
+Dados dos objetos, en nuestro caso una misi\'on operativa: {\it{sat}}, y un desecho: {\it{deb}}, de los cuales conocemos su posici\'on $P_{sat}$ y $P_{deb}$ y las matrices de error asociadas a esas posiciones para un tiempo inicial: $t_{0}$. Todo referenciado al mismo sistema inercial de referencia, ya sea un sistema geoc\'entrico (\ac{ECI}) o el propio sistema del sat\'elite (\ac{RTN}).\\
+Sea TCA el instante de m\'aximo acercamiento entre ellos. Bajo ciertos criterios (ej: Sec. \ref{subsec:cdm})estos objetos estar\'an en una situaci\'on de encuentro.\\
+
+Los encuentros pueden clasificarse seg\'un sean:
+
+\begin{itemize}
+ \item Encuentros cortos: se asume que movimiento relativo presenta comportamiento lineal durante el breve lapsus del encuentro.
+ \item Encuentros largos: el encuentro no es lo suficientemente corto como para considerar movimiento relativo lineal.
+\end{itemize}
+
+En particular en este trabajo, analizamos las situaciones de encuentros cortos.\\
+En los encuentros cortos puede asumirse que:\\
+
+\begin{itemize}
+ \item El movimiento relativo lineal.
+ \item Los errores en la posici\'on durante el encuentro son constantes e iguales al del error en TCA.
+ \item No hay errores en la velocidad.
+ \item Los errores en la posici\'on se representan por distribuciones gaussiana de tres dimensiones.
+\end{itemize}
+
+De acuerdo al estudio del libro de \citep{leichen}, la {\it{probabilidad de colisi\'on}} ser\'a:
+
+\resizebox{15cm}{!}{\fbox{La probabilidad de que la m\'inima distancia entre los objetos sea menor a la suma de sus radios seguros.}}\\
+
+En un c\'alculo simplificado de la probabilidad de colisi\'on, las incertezas se combinan y los radios se suman en el TCA. Los resultados se proyectan en un plano perpendicular al vector velocidad relativa y en este plano, la probabilidad de colisi\'on se calcula como una integral doble de la funci\'on densidad de probabilidad sobre el \'area de corte circular.\\
+Esta integral no tiene  soluci\'on anal\'itica y se resuelve mediante m\'etodos num\'ericos de alta precisi\'on y bajo costo.\\
+
+Los resultados del c\'alculo son sensibles a:
+
+\begin{itemize}
+ \item La geometr\'ia del encuentro.
+ \item La matriz de covarianza.
+ \item El tamaño de los objetos.
+\end{itemize}
+
+
 
 Como ya hemos mencionado, el an\'alisis de una situaci\'on de riesgo puede realizarse tomando como par\'ametro:\\
 (\textcolor{red}{Introducir un p\'arrafo para la idea general})
