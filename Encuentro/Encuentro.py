@@ -95,7 +95,7 @@ class Encuentro():
             pos1=Posicion(r,v,self.epoca_ini)
             pos2=Posicion(r1,v1,self.epoca_ini)
             
-            self.DistVector=pos1.r-pos2.r
+            self.DistVector=pos2.r-pos1.r
             x_ric,y_ric,z_ric=ricSis(pos1.r,pos1.v,self.DistVector)
             self.DistRic=np.array([x_ric,y_ric,z_ric])
             self.VelVector=pos1.v-pos2.v
@@ -109,8 +109,8 @@ class Encuentro():
                 self.DistRic_min=np.array([x_ric,y_ric,z_ric])
                 self.vel_sat_tca=v
                 self.vel_deb_tca=v1
+#                print self.tca_c, self.mod_minDist
             self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
-            
             #====================================
             # Distancias relativas en RTN.
             #====================================
@@ -121,9 +121,6 @@ class Encuentro():
             #Calculo el angulo entre los vectores velocidad.
             cos_phi=np.dot(self.vel_sat_tca,self.vel_deb_tca)/(np.sqrt(np.dot(self.vel_sat_tca,self.vel_sat_tca))*np.sqrt(np.dot(self.vel_deb_tca,self.vel_deb_tca)))
             self.phi=np.arccos(cos_phi)
-            
-            
-            
             # Transformo a Coordenadas Geodesicas.
             delta1, alpha1=pos1.getCoordenadasGEOD()
             delta2, alpha2=pos2.getCoordenadasGEOD()
@@ -133,6 +130,7 @@ class Encuentro():
             # GUARDA EN ARCHIVO Posiciones Relativas en RTN.
             salida3.write(datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(self.DistRic[0])+' '+str(self.DistRic[1])+' '+str(self.DistRic[2])+'\n')
 
+        print 'Fin del procesamiento de Encuentro'
         salida1.close()
         salida2.close()
         salida3.close()

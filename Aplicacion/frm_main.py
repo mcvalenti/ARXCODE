@@ -163,8 +163,8 @@ class ProcCDM(QDialog):
         
         # Construccion
         self.TCA=None
-        self.MISS_DISTANCE=''
-        self.POC=''
+        self.MISS_DISTANCE=None
+        self.POC=None
 
 
     def initUI(self):
@@ -419,7 +419,6 @@ class ProcEncuentro(QDialog):
         """
         Acciones
         """
-
         self.boton_encuetro.clicked.connect(self.procesoSimple)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_track.clicked.connect(self.mostrarTrack)
@@ -440,7 +439,7 @@ class ProcEncuentro(QDialog):
             Diferencias en RTN ---> Plotea.
             Genera archivo lat, long ---> Plotea.          
         """
-        print 'HOLA MUNDO'
+
         self.cal = self.tca_text.calendarWidget()
         self.fecha = self.cal.selectedDate().toPyDate()
         self.horas = self.hora.time()

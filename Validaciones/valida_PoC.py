@@ -10,7 +10,11 @@ de la PoC son correctos.
 '''
 
 import numpy as np
+from datetime import datetime
 from scipy.integrate import quad, dblquad
+from CDM.cdmParser import CDM
+from TleAdmin.TLE import Tle
+from Encuentro.Encuentro import Encuentro
 from SistReferencia.sist_deCoordenadas import ricSis
 
 def calcula_Poc_manual(mu_x,mu_y,sig2_xc,sig2_yc):
@@ -45,7 +49,7 @@ def proyecta_plano_de_encuentro(rsw_vect,cov_rsw,phi):
     
     return mu_x,mu_y,sig2_xc,sig2_yc
 
-if __name__=='__main__':
+def valida_bibl():
     """
     Evalua los valores del ejemplo de la bibliografia
     tanto para la formula de PoC explicita en RSW, 
@@ -70,9 +74,7 @@ if __name__=='__main__':
     # angulo entre velocidades relativas phi [grados]
     phi=102.458
     phi_rad=phi*np.pi/180.0  
-    #Calculo el angulo entre los vectores velocidad.
-#     cos_phi=np.dot(v_sat,v_deb)/(np.sqrt(np.dot(v_sat,v_sat))*np.sqrt(np.dot(v_deb,v_deb)))
-#     phi=np.arccos(cos_phi) 
+ 
     #-----------------------------------------------
     # Estadistica
     #-----------------------------------------------
@@ -101,7 +103,7 @@ if __name__=='__main__':
 #     print 'varianzas de bibliog = ', sig_x,sig_y
 #     print 'varianzas calculadas = ', round(np.sqrt(sig2_xc),7), round(np.sqrt(sig2_yc),7)
     
-    ra=0.009
+    ra=0.01
     #-----------------------------------------------
     # CAlculo de la PoC
     #-----------------------------------------------
@@ -128,7 +130,67 @@ if __name__=='__main__':
     
     print'=========================================='
     print 'Posicion relativa bibliografia = ', dr,ds,dw
-    print 'Posicion relativa calculada  satelite  = ', round(rr,7), round(i,7), round(c,7), np.sqrt(rr*rr+i*i+c*c)
-    print 'Posicion relativa calculada  deb  = ', round(rr1,7), round(i1,7), round(c1,7) , np.sqrt(rr1*rr1+i1*i1+c1*c1) 
+    print 'Posicion relativa calculada  satelite  = ', round(rr,7), round(i,7), round(c,7)
+    print 'Posicion relativa calculada  deb  = ', round(rr1,7), round(i1,7), round(c1,7)
 
+def valida_cdm(cdm_archivo):
+    """
+    Extrae datos del CDM y calcula la PoC con el metodo
+    de formula explicita de Lei Chen.
+    """      
+    cdm=CDM(cdm_archivo)
+    #=================
+    # Desgloce del CDM
+    #=================
+    sat_id=cdm.noradID_mision
+    deb_id=cdm.noradID_deb
+    TCA=cdm.TCA
+    v_sat=cdm.v_sat
+    v_deb=cdm.v_deb
+    dr=float(cdm.dr)/1000.0
+    ds=float(cdm.ds)/1000.0
+    dw=float(cdm.dw)/1000.0
+    var_r=float(cdm.cr_r)*0.000001
+    var_s=float(cdm.ct_t)*0.000001
+    var_w=float(cdm.cn_n)*0.000001
+    poc_cdm=float(cdm.POC)
+    #===============================================
+    #Calculo el angulo entre los vectores velocidad.
+    #===============================================
+    cos_phi=np.dot(v_sat,v_deb)/(np.sqrt(np.dot(v_sat,v_sat))*np.sqrt(np.dot(v_deb,v_deb)))
+    phi=np.arccos(cos_phi)
+    #===============================================
+    #Calculo la Probabilidad de Colision.
+    #===============================================
+    rsw_vect=[dr,ds,dw]
+    cov_rsw=np.array([[var_r,0,0],[0,var_s,0],[0,0,var_w]])
+    mu_x,mu_y,sig2_xc,sig2_yc=proyecta_plano_de_encuentro(rsw_vect,cov_rsw,phi)
+    PoC,PoC_int=calcula_Poc_manual(mu_x,mu_y,sig2_xc,sig2_yc)
+#     print '=========================================='
+#     print 'Proyeccion al Plano'
+#     print mu_x,mu_y,sig2_xc,sig2_yc
+    print '=========================================='
+    print 'PoC del CDM    = ','%.7e' % round(poc_cdm,11)
+    print 'PoC calculada en forma explicita    = ','%.7e' % round(PoC,11)
+    print 'PoC calculada mediante una integral = ','%.7e' % round(PoC_int[0],11)
+    #===============================================
+    #Calculo del Encuentro.
+    #===============================================
+    tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M:%S.%f")
+    tle_sat=Tle.creadoxParam(sat_id, tca_epoca)
+    tle_deb=Tle.creadoxParam(deb_id, tca_epoca)
+    n=0
+    encuentro = Encuentro(tle_sat,tle_deb,tca_epoca,n)
+    print 'Min distancia Calculada = ', encuentro.mod_minDist
+    print 'TCA calculado = ', encuentro.tca_c
+    print 'Componentes RTN del CDM: ', dr, ds, dw
+    print 'Componentes RTN calculadas: ', encuentro.r_comp, encuentro.s_comp, encuentro.w_comp
+if __name__=='__main__':
+    
+#    valida_bibl() # CARGA LOS PARAMETROS DE LA BIBLIOGRAFIA Y CALCULA PoC.
+    cdm_archivo='cdmTerraPegasus10.xml'
+#    cdm_archivo='24903_conj_33759_JAN_2013010_1322.xml'
+    valida_cdm(cdm_archivo) # CARGA vel, dif RTN, varianzas RTN y calcula PoC
 
+    
+    
