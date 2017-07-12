@@ -95,11 +95,11 @@ class Encuentro():
             pos1=Posicion(r,v,self.epoca_ini)
             pos2=Posicion(r1,v1,self.epoca_ini)
             
-            self.DistVector=pos2.r-pos1.r
+            self.DistVector=pos1.r-pos2.r
             x_ric,y_ric,z_ric=ricSis(pos1.r,pos1.v,self.DistVector)
             self.DistRic=np.array([x_ric,y_ric,z_ric])
             self.VelVector=pos1.v-pos2.v
-            vx_ric,vy_ric,vz_ric=ricSis(pos1.r,pos1.v,self.VelVector)
+            vx_ric,vy_ric,vz_ric=ricSis(pos2.r,pos2.v,self.VelVector)
             self.VelRic=np.array([vx_ric,vy_ric,vz_ric])
             self.mod_Dist1=np.sqrt(np.dot(self.DistRic,self.DistRic))
 #            self.mod_Dist1=np.sqrt(np.dot(self.DistVector,self.DistVector))

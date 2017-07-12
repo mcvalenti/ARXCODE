@@ -3,22 +3,30 @@
 
 %\endinput
 \section{Especificaciones}
-El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros con riesgo de colisi\'on.\\
+Prototipo de un software modular, reusable, modificables. 
 
-\subsubsection*{Funcionalidades:}
+El ARxCODE es un prototipo de software dise\~ado para el procesamiento y an\'alisis de encuentros con riesgo de colisi\'on, entre misiones operativas y desechos espaciales.\\
+Tiene como objetivo principal procesar la informaci\'on, proveniente de los organismos internacionales de alerta, o cargada manualmente, para facilitar al operador los par\'ametros de la situaci\'on en forma clara para su correcta interpretaci\'on y comunicaci\'on.\\
+Es una aplicaci\'on de escritorio ¿?. BackEnd ¿?.\\
+Cuenta con una interfaz amigable.\\
+Su arquitectura permite agregar funciones, es extensible. Flexibilidad en la adici\'on de funcionalidades, filosof\'ia de expansi\'on.\\
+Describir:
 \begin{itemize}
-\item Procesar la informaci\'on de los mensajes CDM.\\
-\item Permitir la carga manual de la situaci\'on de encuentro.\\
-\item Extraer de la web (via spacetrack) los TLE de los objetos involucrados.\\
-\item .\\
-\item Propagar y ajustar la posici\'on del desecho al instante del acercamiento, con su error asociado\\
-\item Calcular la PoC.\\
-\item Generar reportes, notificaciones y visualizaciones.\\
+\itemsep0em
+ \item  M\'odulos Fundamentales.
+ \item Flujo de Pantallas.
+ \item Diagrama de Componentes.
+ \item Requerimientos.
+ \item Casos de USO.
+ \item Entidades (diagrama de clases)
+ \item Diagrama de Secuencia.
+ \item Dise\~no de interfaces.
 \end{itemize}
 
 \section{Requerimientos}
+Se listan a continuaci\'on los requerimientos del sistema.
 
-\begin{table}
+\begin{table}[!h]
  \resizebox{\linewidth}{!}{
  \begin{tabular}{|l|l|l|}
  \hline \hline
@@ -28,11 +36,11 @@ El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros 
   \hline
   ARR-010 & ARxCODE debe calcular la probabilidad de colisi\'on de un acercamiento de riesgo. & \\
   \hline
-  ARR-020 & \makecell{ARxCODE debe  aceptar como inputs: un mensaje de alerta (CDM),\\ o los identificadores de NORAD de ambos objetos y\\ el tiempo de m\'aximo acercamiento (TCA) .}&\\
+  ARR-020 & \makecell{ARxCODE debe  aceptar como inputs: un mensaje de alerta (CDM),\\ o los identificadores de NORAD de ambos objetos y\\ el tiempo de m\'aximo acercamiento (TCA).}&\\
   \hline
   ARR-030 & \makecell{ARxCODE debe utilizar los productos orbitales de la misi\'on o realizar \\el mismo procedimiento que se aplica al desecho, a la misi\'on.}&\\
   \hline
-  ARR-040 & ARxCODE debe cacular la m\'inima distancia, total y en la coordenada radial.&\\
+  ARR-040 & ARxCODE debe calcular la m\'inima distancia, total y en la coordenada radial.&\\
   \hline
   ARR-050 & ARxCODE debe manipular los sistemas de referencia: TEME, TOD, VNC y RTN. &\\
   \hline
@@ -40,47 +48,53 @@ El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros 
   \hline
   ARR-070 & \makecell{ARxCODE debe extraer el set de TLEs de los objetos involucrados \\ de los \'ultimos 15 d\'ias anteriores al TCA.}&\\
   \hline
+  ARR-080 & ARxCODE debe estimar los errores en la posici\'on incial del desecho y de la misi\'on opeartiva.& \\
+  \hline
+  ARR-090 & ARxCODE debe propagar los errores de la posici\'on incial al TCA& \\
+  \hline
   2 & Requerimientos de INTERFACES & \\
   \hline
-  ...&...&...\\
+  ARR-100 & ARxCODE deber\'a permitir la carga manual de la situaci\'on de encuentro.\\
+  \hline
+  ARR-110 & ARxCODE deber\'a descargar los TLE de Space-Track.\\
+  \hline
+  ARR-120 & ARxCODE deber\'a manipular los CDM con formato xml.\\
   \hline
   3 & Requerimientos de RENDIMIENTO y/o PERFORMANCE & \\
   \hline
-  ...&...&...\\
+  ARR-210 & ARxCODE deber\'a ofrecer el reporte de la situaci\'on en no m\'as de 1 minuto &...\\
   \hline
-  4 & Requerimientos de OPERACIONES & \\
+  4 & Requerimientos de VALIDACI\'ON & \\
   \hline
-  ...&...&...\\
+  ARR-300 & \makecell{Los m\'odulos de implementaci\'on de metodolog\'ias de ARxCODE\\ ser\'an validados con los resultados de las publicaciones pertinentes y la bibliograf\'ia} &...\\
   \hline
-  5 & Requerimientos de VALIDACI\'ON & \\
+  ARR-310 & Las propagaciones realizadas con el SGP4 ser\'an validadas con el software STK &...\\
   \hline
-  ...&...&...\\
+  5 & Requerimientos de DISE\~NO& \\
   \hline
-  6 & Requerimientos de DISE\~NO& \\
+  ARR-400 & ARxCODE tendr\'a un dise\~no modular&...\\
+   \hline
+  ARR-410 & ARxCODE se desarrollar\'a como una librer\'ia &...\\
   \hline
-  ...&...&...\\
+  ARR-420 & ARxCODE contar\'a con una interfaz gr\'afica &...\\
   \hline
-  7 & Requerimientos de CALIDAD& \\
+  6 & Requerimientos de IMPLEMENTACI\'ON& \\
   \hline
-  ...&...&...\\
+  ARR-500& ARxCODE ser\'a implementado en python 2.7&...\\
   \hline
-  8 & Requerimientos de REUSABILIDAD & \\
+  ARR-510& ARxCODE ser\'a implementado en el entorno de desarrollo Eclipse&...\\
   \hline
-  ...&...&...\\
+  ARR-520& El control de versiones ser realizar\'a con Git&...\\
   \hline
-  9 & Requerimientos de SEGURIDAD & \\
+  7 & Requerimientos de REUSABILIDAD & \\
   \hline
-  ...&...&...\\
+  ARR-600 & ARxCODE utilizar\'a la librer\'ia de SGP4 en Python &...\\
   \hline
-  10 & Requerimientos de SEGURIDAD & \\
+  ARR-610 & ARxCODE utilizar\'a la librer\'ia de Element Tree para el parseo del CDM &...\\
   \hline
-    ...&...&...\\
-  \hline
-  11 & Requerimientos de CONFIABILIDAD & \\
-  \hline
-  ...&...&...\\
-  \hline
-  12 & Requerimientos de MANTENIMIENTO & \\
+  ARR-620 & ARxCODE utilizar\'a la librer\'ia de ..bla..para la conexi\'on con Space-Track &...\\
+   \hline
+  ARR-630 & ARxCODE utilizar\'a la librer\'ia de ..bla..para los c\'alculos estad\'isticos y de integrac\'ion &...\\
   \hline
  \end{tabular}
  }
@@ -88,35 +102,46 @@ El ARxCODE es una aplicaci\'on para el procesamiento y an\'alisis de encuentros 
 \end{table}
 
 
+\section{Interfaces}
+ARxCODE fue pensado para ser un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
+Ocupa un rol de intermediario a fin de facilitarle a un operador analista experto, herramientas para el intercambio de informaci\'on con los organismos externos y el centro de control.\\
+El dise\~no completo, contempla un acceso directo al servidor de la base de datos de los productos de Din\'amica Orbital para la obtenci\'on de: las efem\'erides propagadas de la misi\'on operativa, y los mensajes de alerta (CDM). Estos \'ultimos tambi\'en podr\'an ser recibidos por mail de los organismos internacionales de alerta, como por ejemplo JSpOC o mediante una solicitud a la p\'agina Space-track, previa notificaci\'on y registro autorizado del operador a cargo. (Ver Fig. \ref{fig:interfaces})\\
 
+\begin{figure}
+\centering
+  \includegraphics[width=0.8\textwidth]{imagenes/interfasessistemas}
+  \caption[Diagrama de Interfaces del Sistema]{Diagrama de Interfaces del Sistema}
+  \label{fig:interfaces}
+\end{figure}
 
+No obstante, las interfaces implementadas son:\\
 
 \begin{itemize}
-\item La aplicaci\'on detectar\'a la llegada de un CDM y ser\'a capaz de desglosarlo para extraer la informaci\'on que sea necesaria.\\
-\item La aplicaci\'on identificar\'a los objetos y solicitar\'a al operador/analista experto la posici\'on precisa y la matriz varianza-covarianza en el caso de la misi\'on principal\\
-\item La aplicaci\'on extraer\'a los TLEs del intervalo necesario a la p\'agina Space-Track, en el caso del desecho espacial.\\
-\item La aplicaci\'on ajustar\'a la precisi\'on de la posici\'on del desecho espacial y generar\'a la matriz de varianza-covarianza para el mismo.\\
-\item La aplicaci\'on calcular\'a la PoC.\\
-\item La aplicaci\'on tendr\'a la capacidad de generar reportes, notificaciones y visualizaciones para facilitar la comprensi\'on y el an\'alisis del riesgo.
-\item La aplicaci\'on deber\'a funcionar 7x24.
+\itemsep0em
+ \item Conexi\'on a Space-Track para la solicitud de TLEs.
+ \item Administraci\'on de las efem\'erides orbitales de los directorios de CodsAdmin
+ \item Administraci\'on de los CDM del directorio CDM, a trav\'es de la intervenci\'on del operador.
+ \item Carga Manual de datos de un encuentro realizada por el operador.
 \end{itemize}
 
-\subsection*{Requerimientos Funcionales}
-\begin{itemize}
-\item El sistema deber\'a funcionar en todo momento.\\
-\item El software detectar\'a la llegada de un CDM y ser\'a capaz de desglozarlo para extraer la informaci\'on que sea necesaria.\\
-\item El software identificar\'a los objetos y solicitar\'a informaci\'on orbital al departamento de Din\'amica Orbital en el caso de la misi\'on principal, y TLEs, en la p\'agina Space-Track, en el caso del desecho.\\
-\item El software ajustar\'a la precisi\'on en la posici\'on del desecho y generar\'a la matriz de varianza-covarianza para el mismo.\\
-\item El software calcular\'a la PoC.\\
-\item El software generar\'a reportes, notificaciones y visualizaciones para facilitar la comprensi\'on y el an\'alisis del riesgo.
-\end{itemize}
+(Ver Fig. \ref{fig:interfacesImpl})
 
-
+\begin{figure}
+\centering
+  \includegraphics[width=0.8\textwidth]{imagenes/interfazImplementada}
+  \caption[Diagrama de Interfaces Implementadas en ARxCODE]{Diagrama de Interfaces Implementadas en ARxCODE}
+  \label{fig:interfacesImpl}
+\end{figure}
 
 \section{Arquitectura}
-El prototipo de software para el An\'alisis de Riesgo por Colisi\'on con Desechos Espaciales {\it{ARxCODE}}, ser\'a un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
-Ocupa un rol de intermediario a fin de facilitarle a un operador analista experto, herramientas para la toma de decisiones o el intercambio de informaci\'on con los organismos externos y el centro de control.\\
-{\bf{Interfaces.}}\\
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.8\textwidth]{imagenes/componentesAR}
+  \label{fig:componentes}
+  \caption{Componentes de ARxCODE}
+\end{figure}
+
+{\it{Dise\~no conceptual, con un alto grado de abstracci\'on de los principales m\'odulos de la aplicaci\'on y c\'omo se relacionan.}}
 clases principales: TLE, EphemCODS
 \subsection*{parametros globales y nomenclatura de la generacion de archivos}
 Parametros:\\
@@ -129,18 +154,7 @@ Parametros:\\
 l prototipo de software para el An\'alisis de Riesgo por Colisi\'on con Desechos Espaciales {\it{ARxCODE}}, ser\'a un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
 El mismo se piensa como un intermediario capaz de: detectar los mensajes de alerta CDM provistos por el JSpOC, procesar los datos, generar mejores estimaciones para la posici\'on del desecho, solicitar datos m\'as precisos para la posici\'on de la misi\'on primaria y calcular la PoC. Todo esto a fin de facilitarle a un a un operador analista experto, herramientas para la toma de decisiones o el intercambio de informaci\'on con los organismos externos y el centro de control.\\
 
-\begin{figure}
-  \includegraphics[width=0.8\textwidth]{imagenes/interfasessistemas}
-\end{figure}
-
-\section{Interfaces}
-
-...ICD
-\section{Entradas y Salidas}
-
-archivos y demases
-
-\section{Casos de Uso}
+\subsection{Casos de Uso}
 
 Este trabajo se pens\'o como un adicional, o un \textcolor{red}{agregado}, al software principal del departamento de din\'amica orbital. En este sentdio, no existe gran complejidad en la estrucutura del prototipo, ya que su valor, radica en la correcta implementaci\'on de los algoritmos que procesan la informaci\'on del encuentro.\\
 Identificamos dos clases de uso Fig. \ref{fig:casosuso} :\\
@@ -151,7 +165,7 @@ Identificamos dos clases de uso Fig. \ref{fig:casosuso} :\\
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=.5\textwidth]{imagenes/casosUsos}
+  \includegraphics[width=.5\textwidth]{imagenes/usecaseAR}
   \label{fig:casosuso}
   \caption{Casos de Uso de ARxCODE}
 \end{figure}
@@ -196,6 +210,17 @@ Postcondiciones & El informe de an\'alisis de riesgo fue generado y almacenado.\
 \label{tab:usoproceso}
 \end{table}
 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{imagenes/actdiagAR}
+  \label{fig:actdiag}
+  \caption{Diagrama de Actividades de ARxCODE}
+\end{figure}
+
+\section{Entradas y Salidas}
+
+archivos y demases
+
 \subsection*{Preprocesamiento de los Datos de Misi\'on de CODS}
 Para este trabajo CONAE nos facilit\'o el acceso a los datos orbitales de la misi\'on SAC-D.
 Los datos se ecuentran montados en un servidor que contiene la informaci\'on organizada en archivos con formato ASCII, distribuidos en distintas carpetas seg\'un su clasificaci\'on.\\
@@ -233,115 +258,11 @@ Cantidad media de resgistros por archivo $=  2688$\\
 Archivo con el mayor n\'umero de registros $=  3042$\\
 Archivo con el menor n\'umero de registros $=  142$\\
 
-Im\'agenes comparativas entre los dos m\'etodos:\\
-{\bf{Intervalo Estable}}\\
-% \begin{figure}[htbp]
-%  \centering
-%   \subfigure[Procesamiento de Datos de Mision]{\includegraphics[width=0.46\linewidth]{imagenes/CODSsetPri37673U20120414}}
-%   \subfigure[Procesamiento de TLEs]{\includegraphics[width=0.46\linewidth]{imagenes/TLEsetPri3767320120414}}
-%  \caption{Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.}
-%  \label{fig:test}
-% \end{figure}
-
-\begin{verbatim}
-------------------------------------------------------------------------
-DIFERENCIAS:
--------------------------------------------------------------------------
-dv = -0.773155546799
-dn = 1.49461651773
-dc = 0.241331995666
--------------------------------------------------------------------------
-\end{verbatim}
-
-{\bf{Intervalo de Maniobra}}
-
-% \begin{figure}[htbp]
-%  \centering
-%   \subfigure[Procesamiento de Datos de Mision]{\includegraphics[width=0.46\linewidth]{imagenes/CODSsetPri37673U20120314}}
-%   \subfigure[Procesamiento de TLEs]{\includegraphics[width=0.46\linewidth]{imagenes/TLEsetPri3767320120314}}
-%  \caption{Resultado del m\'etodo de Pair-Wise Differencing considerando TLEs y Datos de Misi\'on.}
-%  \label{fig:test}
-% \end{figure}
-
-\begin{verbatim}
-\begin{verbatim}
-------------------------------------------------------------------------
-DIFERENCIAS:
--------------------------------------------------------------------------
-dv = 0.263912038422
-dn = 3.47362819854
-dc = 0.0366536642778
--------------------------------------------------------------------------
-\end{verbatim}
-
-\subsubsection*{Ajuste Polyfit}
-
-{\bf{numpy.polynomial.polynomial.polyfit}}
-
-Returns:	
-
-coef : ndarray, shape (deg + 1,) or (deg + 1, K)
-
-    Polynomial coefficients ordered from low to high. If y was 2-D, the coefficients in column k of coef represent the polynomial fit to the data in y‘s k-th column.
-
-residuals, rank, singular\_values, rcond : list
-
-    These values are only returned if full = True
-
-    resid – sum of squared residuals of the least squares fit rank – the numerical rank of the scaled Vandermonde matrix sv – singular values of the scaled Vandermonde matrix rcond – value of rcond.
-
-    For more details, see linalg.lstsq.
-
-\begin{verbatim}
-Procesando datos TLE...
-++++++++++++GRADO 2++++++++++++++++++
-[array([-1.89669503, -0.73973919, -0.06103362])]
-[[array([ 31434.82805686]), 3, array([ 1.68700379,  0.388,  0.056]), 5.1292e-14]]
-++++++++++++GRADO 1++++++++++++++++++
-[array([ 1.93247211, -1.78532883])]
-[[array([ 31556.32886285]), 2, array([ 1.393,  0.24171176]), 5.1292e-14],]
-\end{verbatim}
-
-% \section{Graficos LAGEOS 8820}
-% 
-% \begin{figure}[H]
-%  \centering
-% \begin{subfigure}%{0.5\textwidth}
-%   \centering
-%   \includegraphics[width=0.7\linewidth]{imagenes/difTot8820.png}
-%   \caption{A subfigure}
-%   \label{fig:sub1}
-% \end{subfigure}%
-% \begin{subfigure}%{0.5\textwidth}
-%   \centering
-%   \includegraphics[width=0.7\linewidth]{imagenes/vncmultiplot}
-%   \caption{A subfigure}
-%   \label{fig:sub2}
-% \end{subfigure}
-% \caption{A figure with two subfigures}
-% \label{fig:test}
-% \end{figure}
-
 
 \section*{Diferencias}
-A partir de los datos de Misión. 
-
-\begin{figure}[!h]
-  \centering
-  \includegraphics[width=\textwidth]{imagenes/sesgoTLE}
-\end{figure}
 
 \begin{itemize}
  \item Revisar escritura sobre datos CODS.
  \item Comparar defasaje inicial con defasaje de TLE respecto de GPS. (ver tendencias - empezar a diagramar los apédices)
  \item Comparar errores lineal vs cuadr\'atico.
 \end{itemize}
-
-\section{C\'alculo de la Probabilidad de Colisi\'on}
-metodo ARxCODE ¿?¿?
-% \begin{figure}[!h]
-% \centering
-%  \includegraphics[width=0.5\textwidth]{imagenes/metodoARxCODE}
-%  \caption{Metodolog\'ia Propuesta}
-%  \label{fig:metodoARxCODE}
-% \end{figure}

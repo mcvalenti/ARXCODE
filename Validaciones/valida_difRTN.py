@@ -17,7 +17,7 @@ RTN, para verificar la transformacion.
 # Escenario I - (EUMETSAT)
 # sat_id='29499'
 # deb_id='29096'
-# TCA=datetime(2010,11,20,18,30,12,421*1000)
+# tca_epoca=datetime(2010,11,20,18,30,12,421*1000)
 # min_d=0.187
 # dr=0.0103
 # dt=0.1028
@@ -48,7 +48,7 @@ RTN, para verificar la transformacion.
 
 tabla_mails=open('../CDM/mails/tabla_mails','r')
 contenido=tabla_mails.readlines()
-n=3
+n=0
 mail=contenido[n]
 linea_data=mail.split()
 sat_id=linea_data[0]
@@ -64,17 +64,23 @@ var_n_sat=linea_data[9]
 var_r_deb=linea_data[10]
 var_t_deb=linea_data[11]
 var_n_deb=linea_data[12]
-
+#  
 tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M")
 tle_sat=Tle.creadoxParam(sat_id, tca_epoca)
 tle_deb=Tle.creadoxParam(deb_id, tca_epoca)
 
 n=0
 encuentro=Encuentro(tle_sat,tle_deb,tca_epoca,n)
+print '**************************************************'
+print 'Calculado'
+print '**************************************************'
 print 'TCA calculado = ', encuentro.tca_c
 print 'Minima distancia total = ', encuentro.mod_minDist
 print 'Minima Distancia RTN = ', encuentro.DistRic_min
-
-
-
+# print '**************************************************'
+# print 'Publicado'
+# print '**************************************************'
+# print 'TCA publicado = ',tca_epoca
+# print 'Minima distancia total = ',min_d
+# print 'Minima Distancia RTN = ',dr,dt,dn
 

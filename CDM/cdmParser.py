@@ -53,7 +53,7 @@ class CDM():
         for bod in root.iter('body'):
             self.TCA=bod[0][1].text
             self.MISS_DISTANCE=bod[0][2].text
-            self.POC=bod[0][14].text
+#            self.POC=bod[0][14].text
 
         
         for rel in root.iter('relativeStateVector'):

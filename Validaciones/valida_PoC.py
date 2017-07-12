@@ -153,7 +153,7 @@ def valida_cdm(cdm_archivo):
     var_r=float(cdm.cr_r)*0.000001
     var_s=float(cdm.ct_t)*0.000001
     var_w=float(cdm.cn_n)*0.000001
-    poc_cdm=float(cdm.POC)
+#    poc_cdm=float(cdm.POC)
     #===============================================
     #Calculo el angulo entre los vectores velocidad.
     #===============================================
@@ -170,9 +170,10 @@ def valida_cdm(cdm_archivo):
 #     print 'Proyeccion al Plano'
 #     print mu_x,mu_y,sig2_xc,sig2_yc
     print '=========================================='
-    print 'PoC del CDM    = ','%.7e' % round(poc_cdm,11)
+#    print 'PoC del CDM    = ','%.7e' % round(poc_cdm,11)
     print 'PoC calculada en forma explicita    = ','%.7e' % round(PoC,11)
     print 'PoC calculada mediante una integral = ','%.7e' % round(PoC_int[0],11)
+    print '=========================================='
     #===============================================
     #Calculo del Encuentro.
     #===============================================
@@ -181,6 +182,7 @@ def valida_cdm(cdm_archivo):
     tle_deb=Tle.creadoxParam(deb_id, tca_epoca)
     n=0
     encuentro = Encuentro(tle_sat,tle_deb,tca_epoca,n)
+    print '=========================================='
     print 'Min distancia Calculada = ', encuentro.mod_minDist
     print 'TCA calculado = ', encuentro.tca_c
     print 'Componentes RTN del CDM: ', dr, ds, dw
@@ -188,7 +190,9 @@ def valida_cdm(cdm_archivo):
 if __name__=='__main__':
     
 #    valida_bibl() # CARGA LOS PARAMETROS DE LA BIBLIOGRAFIA Y CALCULA PoC.
-    cdm_archivo='cdmTerraPegasus10.xml'
+    cdm_archivo='cdmxmlBluebook.xml'
+#    cdm_archivo='cdmTerraPegasus10.xml'
+#    cdm_archivo='25922_conj_23270_JAN_2013010_1603.xml'
 #    cdm_archivo='24903_conj_33759_JAN_2013010_1322.xml'
     valida_cdm(cdm_archivo) # CARGA vel, dif RTN, varianzas RTN y calcula PoC
 

@@ -9,32 +9,30 @@
 \contentsline {section}{\numberline {1.5}La Unidad de Desechos Espaciales de la CONAE}{11}{section.1.5}
 \contentsline {section}{\numberline {1.6}Planteo del Problema}{12}{section.1.6}
 \contentsline {section}{\numberline {1.7}Objetivos}{13}{section.1.7}
-\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{14}{chapter.2}
-\contentsline {section}{\numberline {2.1}Introducci\'on}{14}{section.2.1}
-\contentsline {section}{\numberline {2.2}Comunicaciones de riesgo de colisi\'on}{15}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}El CDM}{15}{subsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.1.1}Ejemplo de CDM}{17}{subsubsection.2.2.1.1}
-\contentsline {section}{\numberline {2.3}La posici\'on de los objetos involucrados}{18}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}SGP4}{20}{subsection.2.3.1}
-\contentsline {subsubsection}{\numberline {2.3.1.1}RSW y VNC}{21}{subsubsection.2.3.1.1}
-\contentsline {section}{\numberline {2.4}El tratamiento de los Errores en la posici\'on}{22}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}M\'etodo de Osweiler}{23}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Propagaci\'on de errores}{23}{subsection.2.4.2}
-\contentsline {section}{\numberline {2.5}La Probabilidad de Colisi\'on}{26}{section.2.5}
-\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de Desarrollo}{32}{chapter.3}
-\contentsline {section}{\numberline {3.1}Inicializaci\'on}{32}{section.3.1}
-\contentsline {section}{\numberline {3.2}Iteraci\'on}{33}{section.3.2}
-\contentsline {section}{\numberline {3.3}Control}{34}{section.3.3}
-\contentsline {section}{\numberline {3.4}Entorno de Desarrollo}{34}{section.3.4}
-\contentsline {chapter}{\numberline {4}ARxCODE}{35}{chapter.4}
-\contentsline {section}{\numberline {4.1}Especificaciones}{35}{section.4.1}
-\contentsline {section}{\numberline {4.2}ARQ}{35}{section.4.2}
-\contentsline {section}{\numberline {4.3}Requerimientos}{36}{section.4.3}
-\contentsline {section}{\numberline {4.4}Arquitectura}{38}{section.4.4}
-\contentsline {section}{\numberline {4.5}Interfaces}{39}{section.4.5}
-\contentsline {section}{\numberline {4.6}Entradas y Salidas}{39}{section.4.6}
-\contentsline {section}{\numberline {4.7}Casos de Uso}{40}{section.4.7}
-\contentsline {section}{\numberline {4.8}C\'alculo de la Probabilidad de Colisi\'on}{43}{section.4.8}
+\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{15}{chapter.2}
+\contentsline {section}{\numberline {2.1}Introducci\'on}{15}{section.2.1}
+\contentsline {section}{\numberline {2.2}Comunicaciones de riesgo de colisi\'on}{16}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}El CDM}{16}{subsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.1.1}Ejemplo de CDM}{18}{subsubsection.2.2.1.1}
+\contentsline {section}{\numberline {2.3}La posici\'on de los objetos involucrados}{19}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}SGP4}{21}{subsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.1.1}RSW y VNC}{22}{subsubsection.2.3.1.1}
+\contentsline {section}{\numberline {2.4}El tratamiento de los Errores en la posici\'on}{23}{section.2.4}
+\contentsline {subsection}{\numberline {2.4.1}M\'etodo de Osweiler}{24}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.2}Propagaci\'on de errores}{24}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}La Probabilidad de Colisi\'on}{27}{section.2.5}
+\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de Desarrollo}{33}{chapter.3}
+\contentsline {section}{\numberline {3.1}Inicializaci\'on}{33}{section.3.1}
+\contentsline {section}{\numberline {3.2}Iteraci\'on}{34}{section.3.2}
+\contentsline {section}{\numberline {3.3}Control}{35}{section.3.3}
+\contentsline {section}{\numberline {3.4}Entorno de Desarrollo}{35}{section.3.4}
+\contentsline {chapter}{\numberline {4}ARxCODE}{36}{chapter.4}
+\contentsline {section}{\numberline {4.1}Especificaciones}{36}{section.4.1}
+\contentsline {section}{\numberline {4.2}Requerimientos}{36}{section.4.2}
+\contentsline {section}{\numberline {4.3}Interfaces}{37}{section.4.3}
+\contentsline {section}{\numberline {4.4}Arquitectura}{37}{section.4.4}
+\contentsline {subsection}{\numberline {4.4.1}Casos de Uso}{40}{subsection.4.4.1}
+\contentsline {section}{\numberline {4.5}Entradas y Salidas}{40}{section.4.5}
 \contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{44}{chapter.5}
 \contentsline {section}{\numberline {5.1}Introducci\'on}{44}{section.5.1}
 \contentsline {section}{\numberline {5.2}Implentenaci\'on del modelo SGP4 en Python}{45}{section.5.2}
