@@ -128,94 +128,94 @@ Created on Feb 5, 2017
 )}\label{namespace_aplicacion_1_1frm__main_a6ce95408fde91ae744714c4201615d27}
 
 
-\-Definition at line 612 of file frm\-\_\-main.\-py.
+\-Definition at line 739 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-612 
-613     def __init__(self,parent=None):
-614         QDialog.__init__(self,parent)
-615 
-616         self.setWindowModality(Qt.ApplicationModal)
-617         self.archTLE=''
-618         self.cat_id=''
-619         self.fini=''
-620         self.ffin=''
-621 #         
-622         self.palette = QPalette()
-623         self.palette.setColor(QPalette.Background,Qt.lightGray)
-624         self.setPalette(self.palette)
-625 #         
-626         """
-627         CALENDARIOS
-628         """
-629         self.cal = QCalendarWidget()
-630         self.cal.setGridVisible(True)
-631         self.cal.clicked[QDate].connect(self.verFinicio)
-632         self.cal1 = QCalendarWidget()
-633         self.cal1.setGridVisible(True)
-634         self.cal1.clicked[QDate].connect(self.verFfin)
-635          
-636         """
-637         Etiquetas
-638         """
-639         self.usuario    = QLabel('Usuario: ')
-640         self.passw      = QLabel('Password: ')
-641         self.norad_id   = QLabel('NORAD ID: ')
-642         self.stime      = QLabel('Fecha Inicio')
-643         self.ftime      = QLabel('Fecha Fin')
-644         self.arhcivoTLE = QLabel('Archivo Generado')
-645         """
-646         Botones
-647         """
-648         self.buttons = QDialogButtonBox(
-649             QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
-650             Qt.Horizontal, self)
-651         self.boton_request = QPushButton('Enviar Solicitud')
-652 
-653         """
-654         Campos de Edicion
-655         """
-656         self.usuario_edit  = QLineEdit('macecilia')
-657         self.clave_edit    = QLineEdit('MaCeciliaSpace17')
-658         self.clave_edit.setEchoMode(QLineEdit.Password)
-659         self.norad_id_edit = QLineEdit()
-660         self.st            = QLineEdit()
-661         self.et            = QLineEdit()
-662         self.nombreTle     = QLineEdit()
-663 
-664         """
-665         Solapas
-666         """        
-667         self.grilla = QGridLayout()
-668         self.grilla.setSpacing(2)
-669         self.grilla.addWidget(self.usuario,1,1)
-670         self.grilla.addWidget(self.usuario_edit,1,2)
-671         self.grilla.addWidget(self.passw,2,1)
-672         self.grilla.addWidget(self.clave_edit,2,2)
-673         self.grilla.addWidget(self.norad_id,3,2)
-674         self.grilla.addWidget(self.norad_id_edit,4,2)
-675         self.grilla.addWidget(self.stime,5,1)
-676         self.grilla.addWidget(self.ftime,5,2)
-677         self.grilla.addWidget(self.cal,6,1)
-678         self.grilla.addWidget(self.cal1,6,2)
-679         self.grilla.addWidget(self.st,7,1)
-680         self.grilla.addWidget(self.et,7,2)
-681         self.grilla.addWidget(self.boton_request,8,2)
-682         self.grilla.addWidget(self.arhcivoTLE,9,1)
-683         self.grilla.addWidget(self.nombreTle,9,2)
-684         
-685 
-686         self.grilla.addWidget(self.buttons,13,2) 
-687         self.setLayout(self.grilla) 
-688         
-689         """
-690         Acciones
-691         """
-692         self.boton_request.clicked.connect(self.iniciaSolicitud)
-693         self.buttons.accepted.connect(self.accept)
-694         self.buttons.rejected.connect(self.reject)  
-695         self.setWindowTitle('Conexion con NORAD')
+739 
+740     def __init__(self,parent=None):
+741         QDialog.__init__(self,parent)
+742 
+743         self.setWindowModality(Qt.ApplicationModal)
+744         self.archTLE=''
+745         self.cat_id=''
+746         self.fini=''
+747         self.ffin=''
+748 #         
+749         self.palette = QPalette()
+750         self.palette.setColor(QPalette.Background,Qt.lightGray)
+751         self.setPalette(self.palette)
+752 #         
+753         """
+754         CALENDARIOS
+755         """
+756         self.cal = QCalendarWidget()
+757         self.cal.setGridVisible(True)
+758         self.cal.clicked[QDate].connect(self.verFinicio)
+759         self.cal1 = QCalendarWidget()
+760         self.cal1.setGridVisible(True)
+761         self.cal1.clicked[QDate].connect(self.verFfin)
+762          
+763         """
+764         Etiquetas
+765         """
+766         self.usuario    = QLabel('Usuario: ')
+767         self.passw      = QLabel('Password: ')
+768         self.norad_id   = QLabel('NORAD ID: ')
+769         self.stime      = QLabel('Fecha Inicio')
+770         self.ftime      = QLabel('Fecha Fin')
+771         self.arhcivoTLE = QLabel('Archivo Generado')
+772         """
+773         Botones
+774         """
+775         self.buttons = QDialogButtonBox(
+776             QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
+777             Qt.Horizontal, self)
+778         self.boton_request = QPushButton('Enviar Solicitud')
+779 
+780         """
+781         Campos de Edicion
+782         """
+783         self.usuario_edit  = QLineEdit('macecilia')
+784         self.clave_edit    = QLineEdit('MaCeciliaSpace17')
+785         self.clave_edit.setEchoMode(QLineEdit.Password)
+786         self.norad_id_edit = QLineEdit()
+787         self.st            = QLineEdit()
+788         self.et            = QLineEdit()
+789         self.nombreTle     = QLineEdit()
+790 
+791         """
+792         Solapas
+793         """        
+794         self.grilla = QGridLayout()
+795         self.grilla.setSpacing(2)
+796         self.grilla.addWidget(self.usuario,1,1)
+797         self.grilla.addWidget(self.usuario_edit,1,2)
+798         self.grilla.addWidget(self.passw,2,1)
+799         self.grilla.addWidget(self.clave_edit,2,2)
+800         self.grilla.addWidget(self.norad_id,3,2)
+801         self.grilla.addWidget(self.norad_id_edit,4,2)
+802         self.grilla.addWidget(self.stime,5,1)
+803         self.grilla.addWidget(self.ftime,5,2)
+804         self.grilla.addWidget(self.cal,6,1)
+805         self.grilla.addWidget(self.cal1,6,2)
+806         self.grilla.addWidget(self.st,7,1)
+807         self.grilla.addWidget(self.et,7,2)
+808         self.grilla.addWidget(self.boton_request,8,2)
+809         self.grilla.addWidget(self.arhcivoTLE,9,1)
+810         self.grilla.addWidget(self.nombreTle,9,2)
+811         
+812 
+813         self.grilla.addWidget(self.buttons,13,2) 
+814         self.setLayout(self.grilla) 
+815         
+816         """
+817         Acciones
+818         """
+819         self.boton_request.clicked.connect(self.iniciaSolicitud)
+820         self.buttons.accepted.connect(self.accept)
+821         self.buttons.rejected.connect(self.reject)  
+822         self.setWindowTitle('Conexion con NORAD')
 #         
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!inicia\-Solicitud@{inicia\-Solicitud}}
@@ -227,21 +227,21 @@ Created on Feb 5, 2017
 )}\label{namespace_aplicacion_1_1frm__main_a0696013537081d2b63a55c27d8f4b55d}
 
 
-\-Definition at line 696 of file frm\-\_\-main.\-py.
+\-Definition at line 823 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-696 
-697     def iniciaSolicitud(self):
-698         
-699         self.usu1   = str(self.usuario_edit.text())
-700         self.passw1 = str(self.clave_edit.text())
-701         self.cat_id = str(self.norad_id_edit.text())
-702         self.nombreTle.setText(self.cat_id+'_'+self.fini+'_'+self.ffin+'.tle')
-703         self.tle=importar_tle(self.usu1,self.passw1,self.cat_id,self.pydate,
+823 
+824     def iniciaSolicitud(self):
+825         
+826         self.usu1   = str(self.usuario_edit.text())
+827         self.passw1 = str(self.clave_edit.text())
+828         self.cat_id = str(self.norad_id_edit.text())
+829         self.nombreTle.setText(self.cat_id+'_'+self.fini+'_'+self.ffin+'.tle')
+830         self.tle=importarSetTLE(self.usu1,self.passw1,self.cat_id,self.pydate,
       self.pydate1,self.nombreTle.text())
-704         self.archTLE=self.nombreTle.text()
-705         return self.cat_id, self.fini, self.ffin, self.archTLE
+831         self.archTLE=self.nombreTle.text()
+832         return self.cat_id, self.fini, self.ffin, self.archTLE
 #             
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!ver\-Ffin@{ver\-Ffin}}
@@ -253,18 +253,18 @@ Created on Feb 5, 2017
 )}\label{namespace_aplicacion_1_1frm__main_a8aa3828fdbbbc44f17295f70419a6549}
 
 
-\-Definition at line 712 of file frm\-\_\-main.\-py.
+\-Definition at line 839 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-712 
-713     def verFfin(self):
-714         self.date1 = self.cal1.selectedDate()
-715         self.pydate1 = self.date1.toPyDate()
-716         self.et.setText(self.date1.toString())
-717         self.ffin=str(self.pydate1.year)+str(self.pydate1.month).zfill(2)+str(
+839 
+840     def verFfin(self):
+841         self.date1 = self.cal1.selectedDate()
+842         self.pydate1 = self.date1.toPyDate()
+843         self.et.setText(self.date1.toString())
+844         self.ffin=str(self.pydate1.year)+str(self.pydate1.month).zfill(2)+str(
       self.pydate1.day).zfill(2)
-718 
+845 
     
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!ver\-Finicio@{ver\-Finicio}}
@@ -276,16 +276,16 @@ Created on Feb 5, 2017
 )}\label{namespace_aplicacion_1_1frm__main_a289620b76befe2678dd10039ec0e81c3}
 
 
-\-Definition at line 706 of file frm\-\_\-main.\-py.
+\-Definition at line 833 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-706 
-707     def verFinicio(self):
-708         self.date = self.cal.selectedDate()
-709         self.pydate = self.date.toPyDate()
-710         self.st.setText(self.date.toString())
-711         self.fini=str(self.pydate.year)+str(self.pydate.month).zfill(2)+str(
+833 
+834     def verFinicio(self):
+835         self.date = self.cal.selectedDate()
+836         self.pydate = self.date.toPyDate()
+837         self.st.setText(self.date.toString())
+838         self.fini=str(self.pydate.year)+str(self.pydate.month).zfill(2)+str(
       self.pydate.day).zfill(2)
 #         
 \end{DoxyCode}
@@ -297,264 +297,264 @@ Created on Feb 5, 2017
 \subsubsection[{app}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Aplicacion\-::frm\-\_\-main\-::app} = \-Q\-Application(sys.\-argv)}\label{namespace_aplicacion_1_1frm__main_a34b599b249eb32c401ba7199bfacd5f7}
 
 
-\-Definition at line 992 of file frm\-\_\-main.\-py.
+\-Definition at line 1119 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!arch\-T\-L\-E@{arch\-T\-L\-E}}
 \index{arch\-T\-L\-E@{arch\-T\-L\-E}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{arch\-T\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::arch\-T\-L\-E}}\label{namespace_aplicacion_1_1frm__main_abe23dffb0dbe766b336416030c34a3c9}
 
 
-\-Definition at line 612 of file frm\-\_\-main.\-py.
+\-Definition at line 739 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!arhcivo\-T\-L\-E@{arhcivo\-T\-L\-E}}
 \index{arhcivo\-T\-L\-E@{arhcivo\-T\-L\-E}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{arhcivo\-T\-L\-E}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::arhcivo\-T\-L\-E}}\label{namespace_aplicacion_1_1frm__main_ac9b974a87ba0faaca53191cae0e3c854}
 
 
-\-Definition at line 617 of file frm\-\_\-main.\-py.
+\-Definition at line 744 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!boton\-\_\-request@{boton\-\_\-request}}
 \index{boton\-\_\-request@{boton\-\_\-request}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{boton\-\_\-request}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::boton\-\_\-request}}\label{namespace_aplicacion_1_1frm__main_a2333c344b16eec25bdbffa5afa9f242d}
 
 
-\-Definition at line 619 of file frm\-\_\-main.\-py.
+\-Definition at line 746 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!buttons@{buttons}}
 \index{buttons@{buttons}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{buttons}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::buttons}}\label{namespace_aplicacion_1_1frm__main_a3e8b156da5148a751d4e574e34309e4a}
 
 
-\-Definition at line 619 of file frm\-\_\-main.\-py.
+\-Definition at line 746 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!cal@{cal}}
 \index{cal@{cal}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{cal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::cal}}\label{namespace_aplicacion_1_1frm__main_a9c120567913bae5268f7400da38b029c}
 
 
-\-Definition at line 615 of file frm\-\_\-main.\-py.
+\-Definition at line 742 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!cal1@{cal1}}
 \index{cal1@{cal1}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{cal1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::cal1}}\label{namespace_aplicacion_1_1frm__main_ae83fa09eff48d46074a8e2a5b2833e01}
 
 
-\-Definition at line 615 of file frm\-\_\-main.\-py.
+\-Definition at line 742 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!cat\-\_\-id@{cat\-\_\-id}}
 \index{cat\-\_\-id@{cat\-\_\-id}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{cat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::cat\-\_\-id}}\label{namespace_aplicacion_1_1frm__main_affe3263488e8197d94bb8a87c54cc624}
 
 
-\-Definition at line 612 of file frm\-\_\-main.\-py.
+\-Definition at line 739 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!clave\-\_\-edit@{clave\-\_\-edit}}
 \index{clave\-\_\-edit@{clave\-\_\-edit}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{clave\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::clave\-\_\-edit}}\label{namespace_aplicacion_1_1frm__main_aa9f299c0ca71c021bc1849f92b246876}
 
 
-\-Definition at line 621 of file frm\-\_\-main.\-py.
+\-Definition at line 748 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!d1@{d1}}
 \index{d1@{d1}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{d1}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Aplicacion\-::frm\-\_\-main\-::d1} = '../\-Tle\-Admin/{\bf tle}'}\label{namespace_aplicacion_1_1frm__main_afe2ba811a99cee260110f9e27c43f5d0}
 
 
-\-Definition at line 966 of file frm\-\_\-main.\-py.
+\-Definition at line 1093 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!d2@{d2}}
 \index{d2@{d2}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{d2}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Aplicacion\-::frm\-\_\-main\-::d2} = '../\-Ajustar\-T\-L\-E/diferencias'}\label{namespace_aplicacion_1_1frm__main_a5b795ba5921a46666c1e779b05cdf3ee}
 
 
-\-Definition at line 969 of file frm\-\_\-main.\-py.
+\-Definition at line 1096 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!d2b@{d2b}}
 \index{d2b@{d2b}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{d2b}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Aplicacion\-::frm\-\_\-main\-::d2b} = '../\-Comparar/diferencias'}\label{namespace_aplicacion_1_1frm__main_acb7b8e20c51ef31840addd2e2be958da}
 
 
-\-Definition at line 972 of file frm\-\_\-main.\-py.
+\-Definition at line 1099 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!d3@{d3}}
 \index{d3@{d3}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{d3}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Aplicacion\-::frm\-\_\-main\-::d3} = '../main/matrices/'}\label{namespace_aplicacion_1_1frm__main_a4c4a18684da308be545ba0446c9df47e}
 
 
-\-Definition at line 975 of file frm\-\_\-main.\-py.
+\-Definition at line 1102 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!d4@{d4}}
 \index{d4@{d4}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{d4}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Aplicacion\-::frm\-\_\-main\-::d4} = '../visual/archivos/\-T\-L\-E'}\label{namespace_aplicacion_1_1frm__main_a46e1aa80ab023f60c5e61deac06222f5}
 
 
-\-Definition at line 978 of file frm\-\_\-main.\-py.
+\-Definition at line 1105 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!d5@{d5}}
 \index{d5@{d5}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{d5}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Aplicacion\-::frm\-\_\-main\-::d5} = '../visual/archivos/\-C\-O\-D\-S'}\label{namespace_aplicacion_1_1frm__main_a1e9ba875dab2043707f99766fe83d957}
 
 
-\-Definition at line 981 of file frm\-\_\-main.\-py.
+\-Definition at line 1108 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!d6@{d6}}
 \index{d6@{d6}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{d6}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-Aplicacion\-::frm\-\_\-main\-::d6} = '../\-Estadistica/archivos'}\label{namespace_aplicacion_1_1frm__main_afcb3f41cea2438b0ef197abe8cd1452f}
 
 
-\-Definition at line 984 of file frm\-\_\-main.\-py.
+\-Definition at line 1111 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!date@{date}}
 \index{date@{date}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{date}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::date}}\label{namespace_aplicacion_1_1frm__main_adc107e1889e323a029585aa50f282494}
 
 
-\-Definition at line 706 of file frm\-\_\-main.\-py.
+\-Definition at line 833 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!date1@{date1}}
 \index{date1@{date1}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{date1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::date1}}\label{namespace_aplicacion_1_1frm__main_ac7e1d8aa36a6e413bd3f38e8dfb8d146}
 
 
-\-Definition at line 712 of file frm\-\_\-main.\-py.
+\-Definition at line 839 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!et@{et}}
 \index{et@{et}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{et}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::et}}\label{namespace_aplicacion_1_1frm__main_ae3b62e3e15c7a936d6079ac89c566f62}
 
 
-\-Definition at line 621 of file frm\-\_\-main.\-py.
+\-Definition at line 748 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!ex@{ex}}
 \index{ex@{ex}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{ex}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Aplicacion\-::frm\-\_\-main\-::ex} = {\bf \-Proc\-A\-Rx\-C\-O\-D\-E}()}\label{namespace_aplicacion_1_1frm__main_adf4d7ef2634cc5cc152a251ee169f5ff}
 
 
-\-Definition at line 993 of file frm\-\_\-main.\-py.
+\-Definition at line 1120 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!ffin@{ffin}}
 \index{ffin@{ffin}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{ffin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::ffin}}\label{namespace_aplicacion_1_1frm__main_a0ff11ef9964c0ceaf71d4e64811e27ba}
 
 
-\-Definition at line 612 of file frm\-\_\-main.\-py.
+\-Definition at line 739 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!fini@{fini}}
 \index{fini@{fini}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{fini}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::fini}}\label{namespace_aplicacion_1_1frm__main_aca71229c12209595ea2e3cfa6dc9e0ed}
 
 
-\-Definition at line 612 of file frm\-\_\-main.\-py.
+\-Definition at line 739 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!ftime@{ftime}}
 \index{ftime@{ftime}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{ftime}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::ftime}}\label{namespace_aplicacion_1_1frm__main_a313c2a5e7e7df7afa43a8d2aab2370a1}
 
 
-\-Definition at line 617 of file frm\-\_\-main.\-py.
+\-Definition at line 744 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!grilla@{grilla}}
 \index{grilla@{grilla}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{grilla}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::grilla}}\label{namespace_aplicacion_1_1frm__main_a288f45f26b999c26949165730d99278a}
 
 
-\-Definition at line 623 of file frm\-\_\-main.\-py.
+\-Definition at line 750 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!nombre\-Tle@{nombre\-Tle}}
 \index{nombre\-Tle@{nombre\-Tle}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{nombre\-Tle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::nombre\-Tle}}\label{namespace_aplicacion_1_1frm__main_a248574a1547cb399c26c82a6c4ad52d8}
 
 
-\-Definition at line 621 of file frm\-\_\-main.\-py.
+\-Definition at line 748 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!norad\-\_\-id@{norad\-\_\-id}}
 \index{norad\-\_\-id@{norad\-\_\-id}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{norad\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::norad\-\_\-id}}\label{namespace_aplicacion_1_1frm__main_a4ae765ac6735f993b49ddc92cd50d6d5}
 
 
-\-Definition at line 617 of file frm\-\_\-main.\-py.
+\-Definition at line 744 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!norad\-\_\-id\-\_\-edit@{norad\-\_\-id\-\_\-edit}}
 \index{norad\-\_\-id\-\_\-edit@{norad\-\_\-id\-\_\-edit}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{norad\-\_\-id\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::norad\-\_\-id\-\_\-edit}}\label{namespace_aplicacion_1_1frm__main_acab9f233f8be28ba8393438741073c4d}
 
 
-\-Definition at line 621 of file frm\-\_\-main.\-py.
+\-Definition at line 748 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!palette@{palette}}
 \index{palette@{palette}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{palette}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::palette}}\label{namespace_aplicacion_1_1frm__main_aac877611e691e00884dd8a03a80e87b6}
 
 
-\-Definition at line 613 of file frm\-\_\-main.\-py.
+\-Definition at line 740 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!passw@{passw}}
 \index{passw@{passw}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{passw}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::passw}}\label{namespace_aplicacion_1_1frm__main_a4c43b90b0a5292e027bb251686859618}
 
 
-\-Definition at line 617 of file frm\-\_\-main.\-py.
+\-Definition at line 744 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!passw1@{passw1}}
 \index{passw1@{passw1}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{passw1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::passw1}}\label{namespace_aplicacion_1_1frm__main_ae0a3a0c802703c050cfc01c96c2090bc}
 
 
-\-Definition at line 696 of file frm\-\_\-main.\-py.
+\-Definition at line 823 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!pydate@{pydate}}
 \index{pydate@{pydate}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{pydate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::pydate}}\label{namespace_aplicacion_1_1frm__main_aa0b05ee0440eb9ff3d58ad77b34edd22}
 
 
-\-Definition at line 706 of file frm\-\_\-main.\-py.
+\-Definition at line 833 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!pydate1@{pydate1}}
 \index{pydate1@{pydate1}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{pydate1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::pydate1}}\label{namespace_aplicacion_1_1frm__main_a1d46acb2523c911e9800c665893e0bff}
 
 
-\-Definition at line 712 of file frm\-\_\-main.\-py.
+\-Definition at line 839 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!st@{st}}
 \index{st@{st}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{st}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::st}}\label{namespace_aplicacion_1_1frm__main_aaf8df4a7716056655201a8e52b6e7300}
 
 
-\-Definition at line 621 of file frm\-\_\-main.\-py.
+\-Definition at line 748 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!stime@{stime}}
 \index{stime@{stime}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{stime}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::stime}}\label{namespace_aplicacion_1_1frm__main_acf2f2ec1bc3c17c24597d4f41247deaf}
 
 
-\-Definition at line 617 of file frm\-\_\-main.\-py.
+\-Definition at line 744 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!tle@{tle}}
 \index{tle@{tle}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{tle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::tle}}\label{namespace_aplicacion_1_1frm__main_aba0dc9e145bddd527691b84289ec4106}
 
 
-\-Definition at line 696 of file frm\-\_\-main.\-py.
+\-Definition at line 823 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!usu1@{usu1}}
 \index{usu1@{usu1}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{usu1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::usu1}}\label{namespace_aplicacion_1_1frm__main_a175971e6657c70f60cd4061808cdcd09}
 
 
-\-Definition at line 696 of file frm\-\_\-main.\-py.
+\-Definition at line 823 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!usuario@{usuario}}
 \index{usuario@{usuario}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{usuario}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::usuario}}\label{namespace_aplicacion_1_1frm__main_a80eb15c0bf9bc1a1cf642231198d9613}
 
 
-\-Definition at line 617 of file frm\-\_\-main.\-py.
+\-Definition at line 744 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main@{\-Aplicacion\-::frm\-\_\-main}!usuario\-\_\-edit@{usuario\-\_\-edit}}
 \index{usuario\-\_\-edit@{usuario\-\_\-edit}!Aplicacion::frm_main@{\-Aplicacion\-::frm\-\_\-main}}
 \subsubsection[{usuario\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main\-::usuario\-\_\-edit}}\label{namespace_aplicacion_1_1frm__main_ae187876b094717a7cca7c408dc15f65e}
 
 
-\-Definition at line 621 of file frm\-\_\-main.\-py.
+\-Definition at line 748 of file frm\-\_\-main.\-py.
 

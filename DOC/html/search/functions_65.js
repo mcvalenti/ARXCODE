@@ -8,6 +8,6 @@ var searchData=
   ['ensure_5fdir',['ensure_dir',['../namespacefunciones_utiles_1_1funciones.html#a1854030cf379d8770bd7222edca3f61a',1,'funcionesUtiles::funciones']]],
   ['eo2xv',['eo2xv',['../namespace_sist_referencia_1_1sist__de_coordenadas.html#a5eba6b3781a45f447b87a291732e30f2',1,'SistReferencia::sist_deCoordenadas']]],
   ['epoca',['epoca',['../classpruebas_1_1clase_tle_1_1_tle.html#a783b5366a1cc97539be2c98eb50663a3',1,'pruebas::claseTle::Tle.epoca()'],['../class_tle_admin_1_1_t_l_e_1_1_tle.html#aea0c1bb6a08ac6b4aadfb74d0ccabef9',1,'TleAdmin::TLE::Tle.epoca()']]],
-  ['evaluaencuentro',['evaluaEncuentro',['../namespace_encuentro_1_1encuentro.html#a66b86e3c3dd2cc97e609bc8a21c400b9',1,'Encuentro::encuentro']]],
+  ['evaluaencuentro',['evaluaEncuentro',['../namespace_encuentro_1_1akella_po_c.html#a573cdd4f8cf8c5bcb3dbc85ecf35b591',1,'Encuentro::akellaPoC']]],
   ['extraecdm',['extraeCDM',['../namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506',1,'CDM::cdmParser']]]
 ];

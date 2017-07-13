@@ -24,6 +24,18 @@ RTN, para verificar la transformacion.
 # dn=0.1566
 # poc=0.00343
 
+# Escenario LAPORTE.
+sat_id='36036'
+deb_id='34907'
+TCA='2015-02-21T7:07'
+min_d=0.944
+dr=0.003
+dt=0.849
+dn=0.413
+poc=0.0014
+
+
+
 # Escenario II - (MAIL 1 )
 # sat_id='32789'
 # deb_id='23657'
@@ -45,25 +57,25 @@ RTN, para verificar la transformacion.
 #==========================
 # Valida Mails
 #==========================
-
-tabla_mails=open('../CDM/mails/tabla_mails','r')
-contenido=tabla_mails.readlines()
-n=0
-mail=contenido[n]
-linea_data=mail.split()
-sat_id=linea_data[0]
-deb_id=linea_data[1]
-TCA=linea_data[2]
-dr=linea_data[3]
-dt=linea_data[4]
-dn=linea_data[5]
-min_dist=linea_data[6]
-var_r_sat=linea_data[7]
-var_t_sat=linea_data[8]
-var_n_sat=linea_data[9]
-var_r_deb=linea_data[10]
-var_t_deb=linea_data[11]
-var_n_deb=linea_data[12]
+# 
+# tabla_mails=open('../CDM/mails/tabla_mails','r')
+# contenido=tabla_mails.readlines()
+# n=0
+# mail=contenido[n]
+# linea_data=mail.split()
+# sat_id=linea_data[0]
+# deb_id=linea_data[1]
+# TCA=linea_data[2]
+# dr=linea_data[3]
+# dt=linea_data[4]
+# dn=linea_data[5]
+# min_dist=linea_data[6]
+# var_r_sat=linea_data[7]
+# var_t_sat=linea_data[8]
+# var_n_sat=linea_data[9]
+# var_r_deb=linea_data[10]
+# var_t_deb=linea_data[11]
+# var_n_deb=linea_data[12]
 #  
 tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M")
 tle_sat=Tle.creadoxParam(sat_id, tca_epoca)
@@ -77,10 +89,10 @@ print '**************************************************'
 print 'TCA calculado = ', encuentro.tca_c
 print 'Minima distancia total = ', encuentro.mod_minDist
 print 'Minima Distancia RTN = ', encuentro.DistRic_min
-# print '**************************************************'
-# print 'Publicado'
-# print '**************************************************'
-# print 'TCA publicado = ',tca_epoca
-# print 'Minima distancia total = ',min_d
-# print 'Minima Distancia RTN = ',dr,dt,dn
+print '**************************************************'
+print 'Publicado'
+print '**************************************************'
+print 'TCA publicado = ',tca_epoca
+print 'Minima distancia total = ',min_d
+print 'Minima Distancia RTN = ',dr,dt,dn
 

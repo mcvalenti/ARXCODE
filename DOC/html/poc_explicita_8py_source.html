@@ -102,7 +102,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00002"></a>00002 <span class="stringliteral">Created on 19/06/2017</span>
 <a name="l00003"></a>00003 <span class="stringliteral"></span>
 <a name="l00004"></a>00004 <span class="stringliteral">Utiliza la expresion explicita simplificada para el calculo</span>
-<a name="l00005"></a>00005 <span class="stringliteral">de la Probabilidad de Colision.</span>
+<a name="l00005"></a>00005 <span class="stringliteral">de la Probabilidad de Colision en misiones de orbita circular.</span>
 <a name="l00006"></a>00006 <span class="stringliteral">Requiere: </span>
 <a name="l00007"></a>00007 <span class="stringliteral">*Las diferencias en el TCA, en R,S,W. </span>
 <a name="l00008"></a>00008 <span class="stringliteral">*Los errores en el plano x,y (B-plane).</span>
@@ -114,259 +114,270 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00014"></a>00014 <span class="keyword">import</span> os, glob
 <a name="l00015"></a>00015 <span class="keyword">import</span> numpy <span class="keyword">as</span> np
 <a name="l00016"></a>00016 <span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> quad, dblquad
-<a name="l00017"></a>00017 <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
-<a name="l00018"></a>00018 <span class="keyword">from</span> pruebas.claseTle <span class="keyword">import</span> Tle, Encuentro
-<a name="l00019"></a>00019 <span class="keyword">from</span> TleAdmin.TleArchivos <span class="keyword">import</span> setTLE
-<a name="l00020"></a>00020 <span class="keyword">from</span> AjustarTLE.AjustarTLE <span class="keyword">import</span> generadorDatos, ordenaTles
-<a name="l00021"></a>00021 <span class="keyword">from</span> SistReferencia.sist_deCoordenadas <span class="keyword">import</span> ricSis
-<a name="l00022"></a>00022 <span class="keyword">from</span> visual.trackencuentro <span class="keyword">import</span> grafica_track
-<a name="l00023"></a>00023 
-<a name="l00024"></a>00024 <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00025"></a>00025 <span class="stringliteral">PASOS.</span>
-<a name="l00026"></a>00026 <span class="stringliteral">----------------------------</span>
-<a name="l00027"></a>00027 <span class="stringliteral">1 - Ejecutar el encuentro para obtener las diferencias en R,S,W.</span>
-<a name="l00028"></a>00028 <span class="stringliteral">    Calcular muX, muY.</span>
-<a name="l00029"></a>00029 <span class="stringliteral">    Calcular el angulo phi entre los vectores velocidad.</span>
-<a name="l00030"></a>00030 <span class="stringliteral">2 - Ejecutar Osweiler para obtener los errores en R,S,W para ambos objetos.</span>
-<a name="l00031"></a>00031 <span class="stringliteral">    Sumarlos y obtener los sigmaR, sigmaS y sigmaW combinados.</span>
-<a name="l00032"></a>00032 <span class="stringliteral">3 - Calcular los sigmaX, sigmaY</span>
-<a name="l00033"></a>00033 <span class="stringliteral">4 - Reemplazar en PoC y calcular. </span>
-<a name="l00034"></a>00034 <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00035"></a>00035 
-<a name="l00036"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a0ec8439628e67a192bb488d63dadbae9">00036</a> <span class="keyword">def </span><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a0ec8439628e67a192bb488d63dadbae9">proc_encuentroSimple</a>(sat_id,deb_id,tca):
-<a name="l00037"></a>00037     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00038"></a>00038 <span class="stringliteral">    Propaga los objetos involucrados un intervalos [tca-90:tca+20]</span>
-<a name="l00039"></a>00039 <span class="stringliteral">    Calcula:</span>
-<a name="l00040"></a>00040 <span class="stringliteral">        Miss Distance</span>
-<a name="l00041"></a>00041 <span class="stringliteral">        TCA calculado</span>
-<a name="l00042"></a>00042 <span class="stringliteral">        Diferencias en RTN ---&gt; Plotea.</span>
-<a name="l00043"></a>00043 <span class="stringliteral">        Genera archivo lat, long ---&gt; Plotea.</span>
-<a name="l00044"></a>00044 <span class="stringliteral">      </span>
-<a name="l00045"></a>00045 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00046"></a>00046     <span class="comment"># Importar los TLE de NORAD.</span>
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048     usuario=<span class="stringliteral">&#39;macecilia&#39;</span>
-<a name="l00049"></a>00049     clave=<span class="stringliteral">&#39;MaCeciliaSpace17&#39;</span>
-<a name="l00050"></a>00050     tle_sat=Tle.creadoxParam(usuario, clave, sat_id, tca)
-<a name="l00051"></a>00051     tle_deb=Tle.creadoxParam(usuario, clave, deb_id, tca)
-<a name="l00052"></a>00052     
-<a name="l00053"></a>00053     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00054"></a>00054 <span class="stringliteral">    Propagacion hasta el Encuentro</span>
-<a name="l00055"></a>00055 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00056"></a>00056     r_sat,v_sat=tle_sat.propagaTLE(tca)
-<a name="l00057"></a>00057     r_deb,v_deb=tle_deb.propagaTLE(tca)
-<a name="l00058"></a>00058     
-<a name="l00059"></a>00059     encuentro1=Encuentro(tle_sat,tle_deb,tca)
-<a name="l00060"></a>00060     vector_rsw=encuentro1.DistRic_min
-<a name="l00061"></a>00061 
-<a name="l00062"></a>00062     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Minima Distancia = &#39;</span>, encuentro1.mod_minDist,encuentro1.tca_c
-<a name="l00063"></a>00063     <a class="code" href="namespacevisual_1_1trackencuentro.html#a473941de6bf706338bd4a9d181779050">grafica_track</a>(<span class="stringliteral">&#39;../Encuentro/archivos/&#39;</span>+str(sat_id)+<span class="stringliteral">&#39;</span><span class="stringliteral">U&#39;, &#39;</span>../Encuentro/archivos/&#39;+str(deb_id)+&#39;<span class="stringliteral">U&#39;)</span>
-<a name="l00064"></a>00064 <span class="stringliteral"></span>
-<a name="l00065"></a>00065 <span class="stringliteral">    </span><span class="keywordflow">return</span> r_sat,v_sat,r_deb,v_deb,vector_rsw
-<a name="l00066"></a>00066 
-<a name="l00067"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7bbec2a797f8fe066010b01be84f2f8e">00067</a> <span class="keyword">def </span><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7bbec2a797f8fe066010b01be84f2f8e">metodoOSWtles</a>(sat_id,crudo,tca):
-<a name="l00068"></a>00068     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00069"></a>00069 <span class="stringliteral">     Tanto para el Satelite como para el Desecho:</span>
-<a name="l00070"></a>00070 <span class="stringliteral">    </span>
-<a name="l00071"></a>00071 <span class="stringliteral">    * Importar Set de TLEs (importar_tle)</span>
-<a name="l00072"></a>00072 <span class="stringliteral">    * Implementar OSW con TLEs ---&gt; extrar matriz.</span>
-<a name="l00073"></a>00073 <span class="stringliteral">    * </span>
+<a name="l00017"></a>00017 <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta
+<a name="l00018"></a>00018 <span class="keyword">from</span> TleAdmin.TLE <span class="keyword">import</span> Tle
+<a name="l00019"></a>00019 <span class="keyword">from</span> Estadistica.matrizOsweiler <span class="keyword">import</span> calcula_matriz_Tles
+<a name="l00020"></a>00020 <span class="comment">#from pruebas.claseTle import Tle, Encuentro</span>
+<a name="l00021"></a>00021 <span class="keyword">from</span> TleAdmin.TleArchivos <span class="keyword">import</span> divide_setTLE
+<a name="l00022"></a>00022 <span class="keyword">from</span> AjustarTLE.AjustarTLE <span class="keyword">import</span> generadorDatos, ordenaTles
+<a name="l00023"></a>00023 <span class="keyword">from</span> SistReferencia.sist_deCoordenadas <span class="keyword">import</span> ricSis
+<a name="l00024"></a>00024 <span class="keyword">from</span> visual.trackencuentro <span class="keyword">import</span> grafica_track
+<a name="l00025"></a>00025 <span class="keyword">from</span> Encuentro <span class="keyword">import</span> Encuentro
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00028"></a>00028 <span class="stringliteral">PASOS.</span>
+<a name="l00029"></a>00029 <span class="stringliteral">----------------------------</span>
+<a name="l00030"></a>00030 <span class="stringliteral">1 - Ejecutar el encuentro para obtener las diferencias en R,S,W.</span>
+<a name="l00031"></a>00031 <span class="stringliteral">    Calcular muX, muY.</span>
+<a name="l00032"></a>00032 <span class="stringliteral">    Calcular el angulo phi entre los vectores velocidad.</span>
+<a name="l00033"></a>00033 <span class="stringliteral">2 - Ejecutar Osweiler para obtener los errores en R,S,W para ambos objetos.</span>
+<a name="l00034"></a>00034 <span class="stringliteral">    Sumarlos y obtener los sigmaR, sigmaS y sigmaW combinados.</span>
+<a name="l00035"></a>00035 <span class="stringliteral">    *Tiene que ejecutar Osweiler con CODS. </span>
+<a name="l00036"></a>00036 <span class="stringliteral">3 - Calcular los sigmaX, sigmaY</span>
+<a name="l00037"></a>00037 <span class="stringliteral">4 - Reemplazar en PoC y calcular. </span>
+<a name="l00038"></a>00038 <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00039"></a>00039 
+<a name="l00040"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a0ec8439628e67a192bb488d63dadbae9">00040</a> <span class="keyword">def </span><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a0ec8439628e67a192bb488d63dadbae9">proc_encuentroSimple</a>(sat_id,deb_id,tca):
+<a name="l00041"></a>00041     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00042"></a>00042 <span class="stringliteral">    Propaga los objetos involucrados un intervalos [tca-90:tca+20]</span>
+<a name="l00043"></a>00043 <span class="stringliteral">    Calcula:</span>
+<a name="l00044"></a>00044 <span class="stringliteral">        Miss Distance</span>
+<a name="l00045"></a>00045 <span class="stringliteral">        TCA calculado</span>
+<a name="l00046"></a>00046 <span class="stringliteral">        Diferencias en RTN ---&gt; Plotea.</span>
+<a name="l00047"></a>00047 <span class="stringliteral">        Genera archivo lat, long ---&gt; Plotea.</span>
+<a name="l00048"></a>00048 <span class="stringliteral">      </span>
+<a name="l00049"></a>00049 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00050"></a>00050     <span class="comment"># Importar los TLE de NORAD.</span>
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052     usuario=<span class="stringliteral">&#39;macecilia&#39;</span>
+<a name="l00053"></a>00053     clave=<span class="stringliteral">&#39;MaCeciliaSpace17&#39;</span>
+<a name="l00054"></a>00054     tle_sat=Tle.creadoxParam(sat_id, tca)
+<a name="l00055"></a>00055     tle_deb=Tle.creadoxParam(deb_id, tca)
+<a name="l00056"></a>00056     
+<a name="l00057"></a>00057     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00058"></a>00058 <span class="stringliteral">    Propagacion hasta el Encuentro</span>
+<a name="l00059"></a>00059 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00060"></a>00060     r_sat,v_sat=tle_sat.propagaTLE(tca)
+<a name="l00061"></a>00061     r_deb,v_deb=tle_deb.propagaTLE(tca)
+<a name="l00062"></a>00062     
+<a name="l00063"></a>00063     encuentro1=Encuentro(tle_sat,tle_deb,tca)
+<a name="l00064"></a>00064     vector_rsw=encuentro1.DistRic_min
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Minima Distancia = &#39;</span>, encuentro1.mod_minDist,encuentro1.tca_c
+<a name="l00067"></a>00067     <a class="code" href="namespacevisual_1_1trackencuentro.html#a473941de6bf706338bd4a9d181779050">grafica_track</a>(<span class="stringliteral">&#39;../Encuentro/archivos/&#39;</span>+str(sat_id)+<span class="stringliteral">&#39;</span><span class="stringliteral">U&#39;, &#39;</span>../Encuentro/archivos/&#39;+str(deb_id)+&#39;<span class="stringliteral">U&#39;)</span>
+<a name="l00068"></a>00068 <span class="stringliteral"></span>
+<a name="l00069"></a>00069 <span class="stringliteral">    </span><span class="keywordflow">return</span> r_sat,v_sat,r_deb,v_deb,vector_rsw
+<a name="l00070"></a>00070 
+<a name="l00071"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7bbec2a797f8fe066010b01be84f2f8e">00071</a> <span class="keyword">def </span><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7bbec2a797f8fe066010b01be84f2f8e">metodoOSWtles</a>(sat_id,crudo,tca):
+<a name="l00072"></a>00072     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00073"></a>00073 <span class="stringliteral">     Tanto para el Satelite como para el Desecho:</span>
 <a name="l00074"></a>00074 <span class="stringliteral">    </span>
-<a name="l00075"></a>00075 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00076"></a>00076     files=glob.glob(<span class="stringliteral">&#39;../TleAdmin/tle/*&#39;</span>)
-<a name="l00077"></a>00077     <span class="keywordflow">for</span> filename <span class="keywordflow">in</span> files:
-<a name="l00078"></a>00078         os.unlink(filename)
-<a name="l00079"></a>00079    
-<a name="l00080"></a>00080     
-<a name="l00081"></a>00081     <a class="code" href="namespace_tle_admin_1_1_tle_archivos.html#a244024f2862e971e68ad202d37911f27">setTLE</a>(sat_id, crudo)
-<a name="l00082"></a>00082     tles=glob.glob(<span class="stringliteral">&#39;../TleAdmin/tle/*&#39;</span>)
-<a name="l00083"></a>00083     dic_tles=<a class="code" href="namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#ac352fb5d30dae7100bfa677e5a33fb7b">generadorDatos</a>(tles)
-<a name="l00084"></a>00084     tle_ordenados=<a class="code" href="namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#af6f0f78d827900de034dde2317641d71">ordenaTles</a>(dic_tles)
-<a name="l00085"></a>00085     
-<a name="l00086"></a>00086     
-<a name="l00087"></a>00087     tle_primario = Tle.creadoxArchivo(<span class="stringliteral">&#39;../TleAdmin/tle/&#39;</span>+tle_ordenados[-1][0])
-<a name="l00088"></a>00088     r0,rp=tle_primario.propagaTLE(tca) <span class="comment"># En TEME</span>
-<a name="l00089"></a>00089     r0=np.array([r0[0],r0[1],r0[2]])
-<a name="l00090"></a>00090         
-<a name="l00091"></a>00091     nombre=<span class="stringliteral">&#39;difRSW_&#39;</span>+str(sat_id)+<span class="stringliteral">&#39;_&#39;</span>+tca.strftime(<span class="stringliteral">&#39;%Y%m%d&#39;</span>)+<span class="stringliteral">&#39;.TLE&#39;</span>
-<a name="l00092"></a>00092     archivo_dif_rsw=open(<span class="stringliteral">&#39;../AjustarTLE/diferencias/&#39;</span>+nombre+<span class="stringliteral">&#39;&#39;</span>,<span class="stringliteral">&#39;w&#39;</span>)
-<a name="l00093"></a>00093     <span class="comment"># listas de diferencias (RSW)</span>
-<a name="l00094"></a>00094     dr=[]
-<a name="l00095"></a>00095     ds=[]
-<a name="l00096"></a>00096     dw=[]
-<a name="l00097"></a>00097     drr=[]
-<a name="l00098"></a>00098     dss=[]
-<a name="l00099"></a>00099     dww=[]
-<a name="l00100"></a>00100 
-<a name="l00101"></a>00101     item=range(len(tle_ordenados)-2,-1,-1)       
-<a name="l00102"></a>00102     <span class="keywordflow">for</span> j <span class="keywordflow">in</span> item:
-<a name="l00103"></a>00103         tle1=Tle.creadoxArchivo(<span class="stringliteral">&#39;../TleAdmin/tle/&#39;</span>+tle_ordenados[j][0])
-<a name="l00104"></a>00104         fsec=tle1.epoca()
-<a name="l00105"></a>00105         pos,vel=tle1.propagaTLE(tca)
-<a name="l00106"></a>00106         pos=np.array([pos[0],pos[1],pos[2]])
-<a name="l00107"></a>00107         vel=np.array([vel[0],vel[1],vel[2]]) 
-<a name="l00108"></a>00108         <span class="comment"># Calculo de Diferencias</span>
-<a name="l00109"></a>00109         d_r=pos-r0
-<a name="l00110"></a>00110         d_v=vel-rp
-<a name="l00111"></a>00111         r,s,w=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a8eccb1d3c6c56a4c77b891b1da887dd7">ricSis</a>(r0, rp, d_r)
-<a name="l00112"></a>00112         rr,ss,ww=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a8eccb1d3c6c56a4c77b891b1da887dd7">ricSis</a>(r0,rp,d_v)
-<a name="l00113"></a>00113         <span class="stringliteral">&#39;&#39;&#39;</span>
-<a name="l00114"></a>00114 <span class="stringliteral">        Sistema RSW</span>
-<a name="l00115"></a>00115 <span class="stringliteral">        &#39;&#39;&#39;</span>
-<a name="l00116"></a>00116         dr.append(r)
-<a name="l00117"></a>00117         ds.append(s)
-<a name="l00118"></a>00118         dw.append(w)
-<a name="l00119"></a>00119         drr.append(rr)
-<a name="l00120"></a>00120         dss.append(ss)
-<a name="l00121"></a>00121         dww.append(ww)
-<a name="l00122"></a>00122         
-<a name="l00123"></a>00123         infodifRST=fsec.strftime(<span class="stringliteral">&#39;%Y%m%d&#39;</span>)+<span class="stringliteral">&#39; &#39;</span>+str(r)+<span class="stringliteral">&#39; &#39;</span>+str(s)+<span class="stringliteral">&#39; &#39;</span>+str(w)+<span class="stringliteral">&#39; &#39;</span>+str(rr)+<span class="stringliteral">&#39; &#39;</span>+str(ss)+<span class="stringliteral">&#39; &#39;</span>+str(ww)+<span class="stringliteral">&#39;\n&#39;</span>
-<a name="l00124"></a>00124         archivo_dif_rsw.write(infodifRST)
-<a name="l00125"></a>00125     
-<a name="l00126"></a>00126     var_r=np.var(dr)
-<a name="l00127"></a>00127     var_s=np.var(ds)
-<a name="l00128"></a>00128     var_w=np.var(dw)
+<a name="l00075"></a>00075 <span class="stringliteral">    * Importar Set de TLEs (importar_tle)</span>
+<a name="l00076"></a>00076 <span class="stringliteral">    * Implementar OSW con TLEs ---&gt; extrar matriz.</span>
+<a name="l00077"></a>00077 <span class="stringliteral">    * </span>
+<a name="l00078"></a>00078 <span class="stringliteral">    </span>
+<a name="l00079"></a>00079 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00080"></a>00080     files=glob.glob(<span class="stringliteral">&#39;../TleAdmin/tle/*&#39;</span>)
+<a name="l00081"></a>00081     <span class="keywordflow">for</span> filename <span class="keywordflow">in</span> files:
+<a name="l00082"></a>00082         os.unlink(filename)
+<a name="l00083"></a>00083    
+<a name="l00084"></a>00084     
+<a name="l00085"></a>00085     <a class="code" href="namespace_tle_admin_1_1_tle_archivos.html#ae8fa5020f6a4cd74f6506d6b3a26422f">divide_setTLE</a>(sat_id, crudo)
+<a name="l00086"></a>00086     tles=glob.glob(<span class="stringliteral">&#39;../TleAdmin/tle/*&#39;</span>)
+<a name="l00087"></a>00087     dic_tles=<a class="code" href="namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#ac352fb5d30dae7100bfa677e5a33fb7b">generadorDatos</a>(tles)
+<a name="l00088"></a>00088     tle_ordenados=<a class="code" href="namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#af6f0f78d827900de034dde2317641d71">ordenaTles</a>(dic_tles)
+<a name="l00089"></a>00089     
+<a name="l00090"></a>00090     
+<a name="l00091"></a>00091     tle_primario = Tle.creadoxArchivo(<span class="stringliteral">&#39;../TleAdmin/tle/&#39;</span>+tle_ordenados[-1][0])
+<a name="l00092"></a>00092     r0,rp=tle_primario.propagaTLE(tca) <span class="comment"># En TEME</span>
+<a name="l00093"></a>00093     r0=np.array([r0[0],r0[1],r0[2]])
+<a name="l00094"></a>00094         
+<a name="l00095"></a>00095     nombre=<span class="stringliteral">&#39;difRSW_&#39;</span>+str(sat_id)+<span class="stringliteral">&#39;_&#39;</span>+tca.strftime(<span class="stringliteral">&#39;%Y%m%d&#39;</span>)+<span class="stringliteral">&#39;.TLE&#39;</span>
+<a name="l00096"></a>00096     archivo_dif_rsw=open(<span class="stringliteral">&#39;../AjustarTLE/diferencias/&#39;</span>+nombre+<span class="stringliteral">&#39;&#39;</span>,<span class="stringliteral">&#39;w&#39;</span>)
+<a name="l00097"></a>00097     <span class="comment"># listas de diferencias (RSW)</span>
+<a name="l00098"></a>00098     dr=[]
+<a name="l00099"></a>00099     ds=[]
+<a name="l00100"></a>00100     dw=[]
+<a name="l00101"></a>00101     drr=[]
+<a name="l00102"></a>00102     dss=[]
+<a name="l00103"></a>00103     dww=[]
+<a name="l00104"></a>00104 
+<a name="l00105"></a>00105     item=range(len(tle_ordenados)-2,-1,-1)       
+<a name="l00106"></a>00106     <span class="keywordflow">for</span> j <span class="keywordflow">in</span> item:
+<a name="l00107"></a>00107         tle1=Tle.creadoxArchivo(<span class="stringliteral">&#39;../TleAdmin/tle/&#39;</span>+tle_ordenados[j][0])
+<a name="l00108"></a>00108         fsec=tle1.epoca()
+<a name="l00109"></a>00109         pos,vel=tle1.propagaTLE(tca)
+<a name="l00110"></a>00110         pos=np.array([pos[0],pos[1],pos[2]])
+<a name="l00111"></a>00111         vel=np.array([vel[0],vel[1],vel[2]]) 
+<a name="l00112"></a>00112         <span class="comment"># Calculo de Diferencias</span>
+<a name="l00113"></a>00113         d_r=pos-r0
+<a name="l00114"></a>00114         d_v=vel-rp
+<a name="l00115"></a>00115         r,s,w=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a8eccb1d3c6c56a4c77b891b1da887dd7">ricSis</a>(r0, rp, d_r)
+<a name="l00116"></a>00116         rr,ss,ww=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a8eccb1d3c6c56a4c77b891b1da887dd7">ricSis</a>(r0,rp,d_v)
+<a name="l00117"></a>00117         <span class="stringliteral">&#39;&#39;&#39;</span>
+<a name="l00118"></a>00118 <span class="stringliteral">        Sistema RSW</span>
+<a name="l00119"></a>00119 <span class="stringliteral">        &#39;&#39;&#39;</span>
+<a name="l00120"></a>00120         dr.append(r)
+<a name="l00121"></a>00121         ds.append(s)
+<a name="l00122"></a>00122         dw.append(w)
+<a name="l00123"></a>00123         drr.append(rr)
+<a name="l00124"></a>00124         dss.append(ss)
+<a name="l00125"></a>00125         dww.append(ww)
+<a name="l00126"></a>00126         
+<a name="l00127"></a>00127         infodifRST=fsec.strftime(<span class="stringliteral">&#39;%Y%m%d&#39;</span>)+<span class="stringliteral">&#39; &#39;</span>+str(r)+<span class="stringliteral">&#39; &#39;</span>+str(s)+<span class="stringliteral">&#39; &#39;</span>+str(w)+<span class="stringliteral">&#39; &#39;</span>+str(rr)+<span class="stringliteral">&#39; &#39;</span>+str(ss)+<span class="stringliteral">&#39; &#39;</span>+str(ww)+<span class="stringliteral">&#39;\n&#39;</span>
+<a name="l00128"></a>00128         archivo_dif_rsw.write(infodifRST)
 <a name="l00129"></a>00129     
-<a name="l00130"></a>00130     <span class="keywordflow">return</span> var_r,var_s,var_w
-<a name="l00131"></a>00131 
-<a name="l00132"></a>00132 <span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:
+<a name="l00130"></a>00130     var_r=np.var(dr)
+<a name="l00131"></a>00131     var_s=np.var(ds)
+<a name="l00132"></a>00132     var_w=np.var(dw)
 <a name="l00133"></a>00133     
-<a name="l00134"></a>00134     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00135"></a>00135 <span class="stringliteral">    Codigo principal.</span>
-<a name="l00136"></a>00136 <span class="stringliteral">    Inicia el ciclo de procesamiento. </span>
-<a name="l00137"></a>00137 <span class="stringliteral">    -----------------------------------------------------------</span>
-<a name="l00138"></a>00138 <span class="stringliteral">    inputs</span>
-<a name="l00139"></a>00139 <span class="stringliteral">        sat_id: id NORAD del Satelite (string)</span>
-<a name="l00140"></a>00140 <span class="stringliteral">        deb_id: id NORAD del Desecho (String)</span>
-<a name="l00141"></a>00141 <span class="stringliteral">        tca: tiempo de maximo acercamiento (datetime)</span>
-<a name="l00142"></a>00142 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00143"></a>00143     
-<a name="l00144"></a>00144     
-<a name="l00145"></a>00145     <span class="comment"># Se crean los directorios necesarios.</span>
-<a name="l00146"></a>00146    
-<a name="l00147"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#ad28b3a43dc771a37740531eee0c0de0e">00147</a>     d1=<span class="stringliteral">&#39;../TleAdmin/tle&#39;</span>
-<a name="l00148"></a>00148     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d1):
-<a name="l00149"></a>00149         os.mkdir(d1)
-<a name="l00150"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7729370dffef751488eeb7ab37fb3f81">00150</a>     d2=<span class="stringliteral">&#39;../AjustarTLE/diferencias&#39;</span>
-<a name="l00151"></a>00151     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d2):
-<a name="l00152"></a>00152         os.mkdir(d2)
-<a name="l00153"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#ab944c29b94ff53ca78ef743b475265bb">00153</a>     d3=<span class="stringliteral">&#39;../main/matrices/&#39;</span>
-<a name="l00154"></a>00154     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d3):
-<a name="l00155"></a>00155         os.mkdir(d3)
-<a name="l00156"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a5f1affeb758492584226917f70c3ed2d">00156</a>     d4=<span class="stringliteral">&#39;../visual/archivos/TLE&#39;</span>
-<a name="l00157"></a>00157     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d4):
-<a name="l00158"></a>00158         os.mkdir(d4)
-<a name="l00159"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a1af5c083590ce8fe3a0ec7a823fbb886">00159</a>     d5=<span class="stringliteral">&#39;../visual/archivos/CODS&#39;</span>
-<a name="l00160"></a>00160     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d5):
-<a name="l00161"></a>00161         os.mkdir(d5)    
-<a name="l00162"></a>00162         
-<a name="l00163"></a>00163 
-<a name="l00164"></a>00164     
-<a name="l00165"></a>00165     <span class="comment"># Genera las diferencias en R,S,W (idem R,T,N)</span>
-<a name="l00166"></a>00166 
-<a name="l00167"></a>00167 <span class="comment">#     TCA=datetime(2008,1,9,19,1,30,0)</span>
-<a name="l00168"></a>00168 <span class="comment">#     sat_id=&#39;27386&#39; #ENVISAT</span>
-<a name="l00169"></a>00169 <span class="comment">#     deb_id=&#39;15482&#39; #COSMOS</span>
-<a name="l00170"></a>00170 <span class="comment"># -------------------------------------------</span>
-<a name="l00171"></a>00171 <span class="comment">#   Escenario 2</span>
-<a name="l00172"></a>00172 <span class="comment"># -------------------------------------------</span>
-<a name="l00173"></a>00173 <span class="comment">#     TCA=datetime(2004,6,5,10,44,39,0)</span>
-<a name="l00174"></a>00174 <span class="comment">#     sat_id=&#39;27386&#39; # ENVISAT</span>
-<a name="l00175"></a>00175 <span class="comment">#     deb_id=&#39;21798&#39;  # AKM</span>
+<a name="l00134"></a>00134     <span class="keywordflow">return</span> var_r,var_s,var_w
+<a name="l00135"></a>00135 
+<a name="l00136"></a>00136 <span class="keywordflow">if</span> __name__ == <span class="stringliteral">&#39;__main__&#39;</span>:
+<a name="l00137"></a>00137     
+<a name="l00138"></a>00138     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00139"></a>00139 <span class="stringliteral">    Codigo principal.</span>
+<a name="l00140"></a>00140 <span class="stringliteral">    Inicia el ciclo de procesamiento. </span>
+<a name="l00141"></a>00141 <span class="stringliteral">    -----------------------------------------------------------</span>
+<a name="l00142"></a>00142 <span class="stringliteral">    inputs</span>
+<a name="l00143"></a>00143 <span class="stringliteral">        sat_id: id NORAD del Satelite (string)</span>
+<a name="l00144"></a>00144 <span class="stringliteral">        deb_id: id NORAD del Desecho (String)</span>
+<a name="l00145"></a>00145 <span class="stringliteral">        tca: tiempo de maximo acercamiento (datetime)</span>
+<a name="l00146"></a>00146 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00147"></a>00147     
+<a name="l00148"></a>00148     
+<a name="l00149"></a>00149     <span class="comment"># Se crean los directorios necesarios.</span>
+<a name="l00150"></a>00150    
+<a name="l00151"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#ad28b3a43dc771a37740531eee0c0de0e">00151</a>     d1=<span class="stringliteral">&#39;../TleAdmin/tle&#39;</span>
+<a name="l00152"></a>00152     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d1):
+<a name="l00153"></a>00153         os.mkdir(d1)
+<a name="l00154"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7729370dffef751488eeb7ab37fb3f81">00154</a>     d2=<span class="stringliteral">&#39;../AjustarTLE/diferencias&#39;</span>
+<a name="l00155"></a>00155     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d2):
+<a name="l00156"></a>00156         os.mkdir(d2)
+<a name="l00157"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#ab944c29b94ff53ca78ef743b475265bb">00157</a>     d3=<span class="stringliteral">&#39;../main/matrices/&#39;</span>
+<a name="l00158"></a>00158     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d3):
+<a name="l00159"></a>00159         os.mkdir(d3)
+<a name="l00160"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a5f1affeb758492584226917f70c3ed2d">00160</a>     d4=<span class="stringliteral">&#39;../visual/archivos/TLE&#39;</span>
+<a name="l00161"></a>00161     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d4):
+<a name="l00162"></a>00162         os.mkdir(d4)
+<a name="l00163"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a1af5c083590ce8fe3a0ec7a823fbb886">00163</a>     d5=<span class="stringliteral">&#39;../visual/archivos/CODS&#39;</span>
+<a name="l00164"></a>00164     <span class="keywordflow">if</span> <span class="keywordflow">not</span> os.path.exists(d5):
+<a name="l00165"></a>00165         os.mkdir(d5)    
+<a name="l00166"></a>00166         
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168     
+<a name="l00169"></a>00169     <span class="comment"># Genera las diferencias en R,S,W (idem R,T,N)</span>
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171 <span class="comment">#     TCA=datetime(2008,1,9,19,1,30,0)</span>
+<a name="l00172"></a>00172 <span class="comment">#     sat_id=&#39;27386&#39; #ENVISAT</span>
+<a name="l00173"></a>00173 <span class="comment">#     deb_id=&#39;15482&#39; #COSMOS</span>
+<a name="l00174"></a>00174 <span class="comment"># -------------------------------------------</span>
+<a name="l00175"></a>00175 <span class="comment">#   Escenario 2</span>
 <a name="l00176"></a>00176 <span class="comment"># -------------------------------------------</span>
-<a name="l00177"></a>00177 <span class="comment">#   Escenario 3</span>
-<a name="l00178"></a>00178 <span class="comment"># -------------------------------------------</span>
-<a name="l00179"></a>00179 <span class="comment">#     TCA=datetime(2004,6,9,17,46,29,0)</span>
-<a name="l00180"></a>00180 <span class="comment">#     sat_id=&#39;27386&#39; # ENVISAT</span>
-<a name="l00181"></a>00181 <span class="comment">#     deb_id=&#39;5395&#39;  # AKM</span>
+<a name="l00177"></a>00177 <span class="comment">#     TCA=datetime(2004,6,5,10,44,39,0)</span>
+<a name="l00178"></a>00178 <span class="comment">#     sat_id=&#39;27386&#39; # ENVISAT</span>
+<a name="l00179"></a>00179 <span class="comment">#     deb_id=&#39;21798&#39;  # AKM</span>
+<a name="l00180"></a>00180 <span class="comment"># -------------------------------------------</span>
+<a name="l00181"></a>00181 <span class="comment">#   Escenario 3</span>
 <a name="l00182"></a>00182 <span class="comment"># -------------------------------------------</span>
-<a name="l00183"></a>00183 <span class="comment">#   Escenario 4</span>
-<a name="l00184"></a>00184 <span class="comment"># -------------------------------------------</span>
-<a name="l00185"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a88b7deb45405de2ec87cd1081fcbcacd">00185</a>     TCA=datetime(2004,9,2,19,14,11,0)
-<a name="l00186"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a59c2fc21a0c43f5f8ed341a020272717">00186</a>     sat_id=<span class="stringliteral">&#39;27386&#39;</span> <span class="comment">#ENVISAT</span>
-<a name="l00187"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a588db6ca344e22d20c74848b0e0a969a">00187</a>     deb_id=<span class="stringliteral">&#39;12442&#39;</span> <span class="comment">#COSMOS</span>
+<a name="l00183"></a>00183 <span class="comment">#     TCA=datetime(2004,6,9,17,46,29,0)</span>
+<a name="l00184"></a>00184 <span class="comment">#     sat_id=&#39;27386&#39; # ENVISAT</span>
+<a name="l00185"></a>00185 <span class="comment">#     deb_id=&#39;5395&#39;  # AKM</span>
+<a name="l00186"></a>00186 <span class="comment"># -------------------------------------------</span>
+<a name="l00187"></a>00187 <span class="comment">#   Escenario 4</span>
 <a name="l00188"></a>00188 <span class="comment"># -------------------------------------------</span>
-<a name="l00189"></a>00189 <span class="comment">#   Escenario 5</span>
-<a name="l00190"></a>00190 <span class="comment"># -------------------------------------------</span>
-<a name="l00191"></a>00191 <span class="comment">#     TCA=datetime(2004,9,29,23,56,3,0)</span>
-<a name="l00192"></a>00192 <span class="comment">#     sat_id=&#39;23560&#39; # ERS-2</span>
-<a name="l00193"></a>00193 <span class="comment">#     deb_id=&#39;16681&#39;  # COSMOS 1741</span>
+<a name="l00189"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a88b7deb45405de2ec87cd1081fcbcacd">00189</a>     TCA=datetime(2004,9,2,19,14,11,0)
+<a name="l00190"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a59c2fc21a0c43f5f8ed341a020272717">00190</a>     sat_id=<span class="stringliteral">&#39;27386&#39;</span> <span class="comment">#ENVISAT</span>
+<a name="l00191"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a588db6ca344e22d20c74848b0e0a969a">00191</a>     deb_id=<span class="stringliteral">&#39;12442&#39;</span> <span class="comment">#COSMOS</span>
+<a name="l00192"></a>00192 <span class="comment"># -------------------------------------------</span>
+<a name="l00193"></a>00193 <span class="comment">#   Escenario 5</span>
 <a name="l00194"></a>00194 <span class="comment"># -------------------------------------------</span>
-<a name="l00195"></a>00195 <span class="comment">#   Escenario ALSAT I - (No hay datos para el debris)</span>
-<a name="l00196"></a>00196 <span class="comment"># -------------------------------------------</span>
-<a name="l00197"></a>00197 <span class="comment">#     TCA=datetime(2012,4,29,9,47,28,755)</span>
-<a name="l00198"></a>00198 <span class="comment">#     sat_id=&#39;36798&#39; # ALSAT</span>
-<a name="l00199"></a>00199 <span class="comment">#     deb_id=&#39;37976&#39;  # COSMOS 2251</span>
+<a name="l00195"></a>00195 <span class="comment">#     TCA=datetime(2004,9,29,23,56,3,0)</span>
+<a name="l00196"></a>00196 <span class="comment">#     sat_id=&#39;23560&#39; # ERS-2</span>
+<a name="l00197"></a>00197 <span class="comment">#     deb_id=&#39;16681&#39;  # COSMOS 1741</span>
+<a name="l00198"></a>00198 <span class="comment"># -------------------------------------------</span>
+<a name="l00199"></a>00199 <span class="comment">#   Escenario ALSAT I - (No hay datos para el debris)</span>
 <a name="l00200"></a>00200 <span class="comment"># -------------------------------------------</span>
-<a name="l00201"></a>00201 <span class="comment">#   Escenario SAC D - 20 DE JUNIO SOCRATES</span>
-<a name="l00202"></a>00202 <span class="comment"># -------------------------------------------</span>
-<a name="l00203"></a>00203 <span class="comment">#     TCA=datetime(2017,6,20,15,59,18,9)</span>
-<a name="l00204"></a>00204 <span class="comment">#     sat_id=&#39;37673&#39; # SAC-D</span>
-<a name="l00205"></a>00205 <span class="comment">#     deb_id=&#39;14493&#39;  # DELTA 1 DEB</span>
+<a name="l00201"></a>00201 <span class="comment">#     TCA=datetime(2012,4,29,9,47,28,755)</span>
+<a name="l00202"></a>00202 <span class="comment">#     sat_id=&#39;36798&#39; # ALSAT</span>
+<a name="l00203"></a>00203 <span class="comment">#     deb_id=&#39;37976&#39;  # COSMOS 2251</span>
+<a name="l00204"></a>00204 <span class="comment"># -------------------------------------------</span>
+<a name="l00205"></a>00205 <span class="comment">#   Escenario SAC D - 20 DE JUNIO SOCRATES</span>
 <a name="l00206"></a>00206 <span class="comment"># -------------------------------------------</span>
-<a name="l00207"></a>00207 <span class="comment">#   Escenario TerraSAR - PEGASUS DEBRIS</span>
-<a name="l00208"></a>00208 <span class="comment"># -------------------------------------------</span>
-<a name="l00209"></a>00209     TCA=datetime(2010,8,7,13,19,35,0)
-<a name="l00210"></a>00210     sat_id=<span class="stringliteral">&#39;31698&#39;</span> <span class="comment"># TerraSAR</span>
-<a name="l00211"></a>00211     deb_id=<span class="stringliteral">&#39;24978&#39;</span>  <span class="comment"># PEGASUS DEBRIS</span>
-<a name="l00212"></a>00212 
-<a name="l00213"></a>00213     r_sat,v_sat,r_deb,v_deb,vec_rsw=<a class="code" href="namespace_encuentro_1_1poc_explicita.html#a0ec8439628e67a192bb488d63dadbae9">proc_encuentroSimple</a>(sat_id,deb_id,TCA)
-<a name="l00214"></a>00214     
-<a name="l00215"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a119646b39dd230d6c8dff5c171732d61">00215</a>     r_comp=vec_rsw[0]
-<a name="l00216"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#ac1aa96f22c1a67b631ff6640675bf092">00216</a>     s_comp=vec_rsw[1]
-<a name="l00217"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#afc783f689f82b362d252c91e762ca9b2">00217</a>     w_comp=vec_rsw[2]
+<a name="l00207"></a>00207 <span class="comment">#     TCA=datetime(2017,6,20,15,59,18,9)</span>
+<a name="l00208"></a>00208 <span class="comment">#     sat_id=&#39;37673&#39; # SAC-D</span>
+<a name="l00209"></a>00209 <span class="comment">#     deb_id=&#39;14493&#39;  # DELTA 1 DEB</span>
+<a name="l00210"></a>00210 <span class="comment"># -------------------------------------------</span>
+<a name="l00211"></a>00211 <span class="comment">#   Escenario TerraSAR - PEGASUS DEBRIS</span>
+<a name="l00212"></a>00212 <span class="comment"># -------------------------------------------</span>
+<a name="l00213"></a>00213 <span class="comment">#     TCA=datetime(2010,8,7,13,19,35,0)</span>
+<a name="l00214"></a>00214 <span class="comment">#     sat_id=&#39;31698&#39; # TerraSAR</span>
+<a name="l00215"></a>00215 <span class="comment">#     deb_id=&#39;24978&#39;  # PEGASUS DEBRIS</span>
+<a name="l00216"></a>00216 
+<a name="l00217"></a>00217     r_sat,v_sat,r_deb,v_deb,vec_rsw=<a class="code" href="namespace_encuentro_1_1poc_explicita.html#a0ec8439628e67a192bb488d63dadbae9">proc_encuentroSimple</a>(sat_id,deb_id,TCA)
 <a name="l00218"></a>00218     
-<a name="l00219"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#abcf7993ec3b4090b516135d6fd93ef38">00219</a>     mu_x=r_comp
-<a name="l00220"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a15601a1c8f374b15240d4f1519949fc0">00220</a>     mu_y=np.sqrt(s_comp*s_comp+w_comp*w_comp)
-<a name="l00221"></a>00221     
-<a name="l00222"></a>00222     <span class="comment">#Calculo el angulo entre los vectores velocidad.</span>
-<a name="l00223"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a6fbfa27437a7064d705ba018ff939eca">00223</a>     cos_phi=np.dot(v_sat,v_deb)/(np.sqrt(np.dot(v_sat,v_sat))*np.sqrt(np.dot(v_deb,v_deb)))
-<a name="l00224"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#ab281a7edf7743947b8d936e227f7f0fd">00224</a>     phi=np.arccos(cos_phi)
+<a name="l00219"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a119646b39dd230d6c8dff5c171732d61">00219</a>     r_comp=vec_rsw[0]
+<a name="l00220"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#ac1aa96f22c1a67b631ff6640675bf092">00220</a>     s_comp=vec_rsw[1]
+<a name="l00221"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#afc783f689f82b362d252c91e762ca9b2">00221</a>     w_comp=vec_rsw[2]
+<a name="l00222"></a>00222     
+<a name="l00223"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#abcf7993ec3b4090b516135d6fd93ef38">00223</a>     mu_x=r_comp
+<a name="l00224"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a15601a1c8f374b15240d4f1519949fc0">00224</a>     mu_y=np.sqrt(s_comp*s_comp+w_comp*w_comp)
 <a name="l00225"></a>00225     
-<a name="l00226"></a>00226     <span class="comment"># Genera las varianzas en R,S,W para ambos.</span>
-<a name="l00227"></a>00227     <span class="comment"># Metodo OSW. </span>
-<a name="l00228"></a>00228     
-<a name="l00229"></a>00229     <span class="comment"># !!! HARDCODEO ARCHIVO CRUDO!!!</span>
-<a name="l00230"></a>00230     
-<a name="l00231"></a>00231     <span class="comment"># Ma. satelite.</span>
-<a name="l00232"></a>00232 <span class="comment">#    crudo_sat=&#39;37673_20170605_20170621.tle&#39;</span>
-<a name="l00233"></a>00233 <span class="comment">#    crudo_sat=&#39;27386_20040523_20040607.tle&#39;</span>
-<a name="l00234"></a>00234 <span class="comment">#    crudo_sat=&#39;27386_20040526_20040610.tle&#39; # Escenario 3</span>
-<a name="l00235"></a>00235 <span class="comment">#    crudo_sat=&#39;27386_20071226_20080109.tle&#39; #ENVI</span>
-<a name="l00236"></a>00236 <span class="comment">#    crudo_sat=&#39;27386_20040819_20040903.tle&#39; # Escenario 4</span>
-<a name="l00237"></a>00237 <span class="comment">#    crudo_sat=&#39;23560_20040915_20040930.tle&#39; # Escenario 5</span>
-<a name="l00238"></a>00238 <span class="comment">#    crudo_sat=&#39;36798_20120415_20120430.tle&#39; #Escenario ALSAT I</span>
-<a name="l00239"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a1deff3b045a916025d1dfd581c6a8378">00239</a>     crudo_sat=<span class="stringliteral">&#39;31698_20100725_20100808.tle&#39;</span> <span class="comment"># TerraSAR</span>
-<a name="l00240"></a>00240     
-<a name="l00241"></a>00241     var_rsat,var_ssat,var_wsat=<a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7bbec2a797f8fe066010b01be84f2f8e">metodoOSWtles</a>(sat_id,crudo_sat,TCA)
-<a name="l00242"></a>00242     
-<a name="l00243"></a>00243     <span class="comment"># Ma. Debris</span>
-<a name="l00244"></a>00244 <span class="comment">#    crudo_deb= &#39;14493_20170605_20170621.tle&#39;</span>
-<a name="l00245"></a>00245 <span class="comment">#    crudo_deb=&#39;21798_20040523_20040607.tle&#39;</span>
-<a name="l00246"></a>00246 <span class="comment">#    crudo_deb=&#39;5395_20040526_20040610.tle&#39; # Escenario 3</span>
-<a name="l00247"></a>00247 <span class="comment">#    crudo_deb=&#39;15482_20071226_20080109.tle&#39; #COSMOS </span>
-<a name="l00248"></a>00248 <span class="comment">#    crudo_deb=&#39;12442_20040819_20040903.tle&#39;  # Escenario 4</span>
-<a name="l00249"></a>00249 <span class="comment">#    crudo_deb=&#39;16681_20040915_20040930.tle&#39; #Escenario 5</span>
-<a name="l00250"></a>00250 <span class="comment">#    crudo_deb=&#39;37976_20120415_20120430.tle&#39; #Escenario ALSAT I</span>
-<a name="l00251"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7487a3ac57d1a4d2f320280a0a19d2da">00251</a>     crudo_deb=<span class="stringliteral">&#39;24978_20100725_20100808.tle&#39;</span> <span class="comment"># Pegasus DEB.</span>
-<a name="l00252"></a>00252 
-<a name="l00253"></a>00253     var_rdeb,var_sdeb,var_wdeb=<a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7bbec2a797f8fe066010b01be84f2f8e">metodoOSWtles</a>(deb_id,crudo_deb,TCA)
-<a name="l00254"></a>00254 
-<a name="l00255"></a>00255     <span class="comment">#Calculo los errores combinados proyectados.</span>
-<a name="l00256"></a>00256     
-<a name="l00257"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a94a8d1f873062eb3196a7701ab8b7113">00257</a>     var_s=var_ssat+var_sdeb
-<a name="l00258"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a8a31f21e186cdd6bfa87b87df65aca9f">00258</a>     var_w=var_wsat+var_wdeb
-<a name="l00259"></a>00259     
-<a name="l00260"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#aa689de410595dc4400566796e2ba7d84">00260</a>     var_x=var_rsat+var_rdeb 
-<a name="l00261"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a9eb0c17d4f6138d6ffa8ed7382520783">00261</a>     var_y=var_s*np.cos(phi/2.0)*np.cos(phi/2.0)+var_w*np.sin(phi/2.0)*np.sin(phi/2.0)
-<a name="l00262"></a>00262 
-<a name="l00263"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a3177812fa5ffa001cb39c70755dbb83a">00263</a>     ra=0.005
-<a name="l00264"></a>00264     
-<a name="l00265"></a>00265 <span class="comment">#    PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))</span>
-<a name="l00266"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a54832d160924f6a2ad26bc221960af11">00266</a>     PoC=dblquad(<span class="keyword">lambda</span> y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/var_x)+(y*y/var_y))), mu_x-ra, mu_x+ra, <span class="keyword">lambda</span> y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, <span class="keyword">lambda</span> y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
-<a name="l00267"></a>00267     <span class="keywordflow">print</span> <span class="stringliteral">&#39;======================================&#39;</span>
-<a name="l00268"></a>00268     <span class="keywordflow">print</span> <span class="stringliteral">&#39;PoC = &#39;</span>, PoC[0]
-<a name="l00269"></a>00269     <span class="keywordflow">print</span> <span class="stringliteral">&#39;======================================&#39;</span>
+<a name="l00226"></a>00226     <span class="comment">#Calculo el angulo entre los vectores velocidad.</span>
+<a name="l00227"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a6fbfa27437a7064d705ba018ff939eca">00227</a>     cos_phi=np.dot(v_sat,v_deb)/(np.sqrt(np.dot(v_sat,v_sat))*np.sqrt(np.dot(v_deb,v_deb)))
+<a name="l00228"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#ab281a7edf7743947b8d936e227f7f0fd">00228</a>     phi=np.arccos(cos_phi)
+<a name="l00229"></a>00229     
+<a name="l00230"></a>00230     <span class="comment"># Genera las varianzas en R,S,W para ambos.</span>
+<a name="l00231"></a>00231     <span class="comment"># Metodo OSW. </span>
+<a name="l00232"></a>00232     
+<a name="l00233"></a>00233     <span class="comment"># !!! HARDCODEO ARCHIVO CRUDO!!!</span>
+<a name="l00234"></a>00234     
+<a name="l00235"></a>00235     <span class="comment"># Ma. satelite.</span>
+<a name="l00236"></a>00236 <span class="comment">#    crudo_sat=&#39;37673_20170605_20170621.tle&#39;</span>
+<a name="l00237"></a>00237 <span class="comment">#    crudo_sat=&#39;27386_20040523_20040607.tle&#39;</span>
+<a name="l00238"></a>00238 <span class="comment">#    crudo_sat=&#39;27386_20040526_20040610.tle&#39; # Escenario 3</span>
+<a name="l00239"></a>00239 <span class="comment">#    crudo_sat=&#39;27386_20071226_20080109.tle&#39; #ENVI</span>
+<a name="l00240"></a>00240 <span class="comment">#    crudo_sat=&#39;27386_20040819_20040903.tle&#39; # Escenario 4</span>
+<a name="l00241"></a>00241 <span class="comment">#    crudo_sat=&#39;23560_20040915_20040930.tle&#39; # Escenario 5</span>
+<a name="l00242"></a>00242 <span class="comment">#    crudo_sat=&#39;36798_20120415_20120430.tle&#39; #Escenario ALSAT I</span>
+<a name="l00243"></a>00243 <span class="comment">#    crudo_sat=&#39;31698_20100725_20100808.tle&#39; # TerraSAR</span>
+<a name="l00244"></a>00244 
+<a name="l00245"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a55513c4af70b07a6ed69997f131dad17">00245</a>     tca0=TCA-timedelta(days=15)
+<a name="l00246"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a1deff3b045a916025d1dfd581c6a8378">00246</a>     crudo_sat=sat_id+<span class="stringliteral">&#39;_&#39;</span>+datetime.strftime(tca0,<span class="stringliteral">&#39;%Y-%m-%d&#39;</span>)+<span class="stringliteral">&#39;_&#39;</span>+datetime.strftime(TCA,<span class="stringliteral">&#39;%Y-%m-%d&#39;</span>)+<span class="stringliteral">&#39;.tle&#39;</span>
+<a name="l00247"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a7487a3ac57d1a4d2f320280a0a19d2da">00247</a>     crudo_deb=deb_id+<span class="stringliteral">&#39;_&#39;</span>+datetime.strftime(tca0,<span class="stringliteral">&#39;%Y-%m-%d&#39;</span>)+<span class="stringliteral">&#39;_&#39;</span>+datetime.strftime(TCA,<span class="stringliteral">&#39;%Y-%m-%d&#39;</span>)+<span class="stringliteral">&#39;.tle&#39;</span>
+<a name="l00248"></a>00248     
+<a name="l00249"></a>00249     nombre_archivo_sat,var_rsat,var_ssat,var_wsat=<a class="code" href="namespace_estadistica_1_1matriz_osweiler.html#a0ddeff775dd98ada88ad57166d9efb12">calcula_matriz_Tles</a>(sat_id,tca0,TCA,crudo_sat)
+<a name="l00250"></a>00250     nombre_archivo_deb,var_rdeb,var_sdeb,var_wdeb=<a class="code" href="namespace_estadistica_1_1matriz_osweiler.html#a0ddeff775dd98ada88ad57166d9efb12">calcula_matriz_Tles</a>(deb_id,tca0,TCA,crudo_deb)
+<a name="l00251"></a>00251     
+<a name="l00252"></a>00252      
+<a name="l00253"></a>00253 <span class="comment">#    var_rsat,var_ssat,var_wsat=metodoOSWtles(sat_id,crudo_sat,TCA) </span>
+<a name="l00254"></a>00254     <span class="comment"># Ma. Debris</span>
+<a name="l00255"></a>00255 <span class="comment">#    crudo_deb= &#39;14493_20170605_20170621.tle&#39;</span>
+<a name="l00256"></a>00256 <span class="comment">#    crudo_deb=&#39;21798_20040523_20040607.tle&#39;</span>
+<a name="l00257"></a>00257 <span class="comment">#    crudo_deb=&#39;5395_20040526_20040610.tle&#39; # Escenario 3</span>
+<a name="l00258"></a>00258 <span class="comment">#    crudo_deb=&#39;15482_20071226_20080109.tle&#39; #COSMOS </span>
+<a name="l00259"></a>00259 <span class="comment">#    crudo_deb=&#39;12442_20040819_20040903.tle&#39;  # Escenario 4</span>
+<a name="l00260"></a>00260 <span class="comment">#    crudo_deb=&#39;16681_20040915_20040930.tle&#39; #Escenario 5</span>
+<a name="l00261"></a>00261 <span class="comment">#    crudo_deb=&#39;37976_20120415_20120430.tle&#39; #Escenario ALSAT I</span>
+<a name="l00262"></a>00262 <span class="comment">#    crudo_deb=&#39;24978_20100725_20100808.tle&#39; # Pegasus DEB.</span>
+<a name="l00263"></a>00263 <span class="comment">#    var_rdeb,var_sdeb,var_wdeb=metodoOSWtles(deb_id,crudo_deb,TCA)</span>
+<a name="l00264"></a>00264 
+<a name="l00265"></a>00265     <span class="comment">#============================================</span>
+<a name="l00266"></a>00266     <span class="comment">#Calculo los errores combinados proyectados.</span>
+<a name="l00267"></a>00267     <span class="comment">#============================================</span>
+<a name="l00268"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a94a8d1f873062eb3196a7701ab8b7113">00268</a>     var_s=var_ssat+var_sdeb
+<a name="l00269"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a8a31f21e186cdd6bfa87b87df65aca9f">00269</a>     var_w=var_wsat+var_wdeb
+<a name="l00270"></a>00270     
+<a name="l00271"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#aa689de410595dc4400566796e2ba7d84">00271</a>     var_x=var_rsat+var_rdeb 
+<a name="l00272"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a9eb0c17d4f6138d6ffa8ed7382520783">00272</a>     var_y=var_s*np.cos(phi/2.0)*np.cos(phi/2.0)+var_w*np.sin(phi/2.0)*np.sin(phi/2.0)
+<a name="l00273"></a>00273 
+<a name="l00274"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a3177812fa5ffa001cb39c70755dbb83a">00274</a>     ra=0.01
+<a name="l00275"></a>00275     
+<a name="l00276"></a><a class="code" href="namespace_encuentro_1_1poc_explicita.html#a54832d160924f6a2ad26bc221960af11">00276</a>     PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
+<a name="l00277"></a>00277 <span class="comment">#    PoC=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/var_x)+(y*y/var_y))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)</span>
+<a name="l00278"></a>00278     <span class="keywordflow">print</span> <span class="stringliteral">&#39;======================================&#39;</span>
+<a name="l00279"></a>00279     <span class="keywordflow">print</span> <span class="stringliteral">&#39;PoC = &#39;</span>, PoC
+<a name="l00280"></a>00280     <span class="keywordflow">print</span> <span class="stringliteral">&#39;======================================&#39;</span>
 </pre></div></div><!-- contents -->
 </div>
 <!-- window showing the filter options -->
@@ -387,7 +398,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li class="navelem"><a class="el" href="poc_explicita_8py.html">pocExplicita.py</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

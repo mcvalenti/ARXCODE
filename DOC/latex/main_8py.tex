@@ -3,31 +3,46 @@
 \subsection*{\-Packages}
 \begin{DoxyCompactItemize}
 \item 
-namespace {\bf main}
-\end{DoxyCompactItemize}
-\subsection*{\-Functions}
-\begin{DoxyCompactItemize}
-\item 
-def {\bf main.\-proc\-\_\-encuentro\-Simple}
-\item 
-def {\bf main.\-metodo\-O\-S\-Wtles}
+namespace {\bf main\-::main}
 \end{DoxyCompactItemize}
 \subsection*{\-Variables}
 \begin{DoxyCompactItemize}
 \item 
-string {\bf main.\-d1} = '../\-Tle\-Admin/tle'
+string {\bf main\-::main.\-d1} = '../\-Tle\-Admin/tle'
 \item 
-string {\bf main.\-d2} = '../\-Ajustar\-T\-L\-E/diferencias'
+string {\bf main\-::main.\-d2} = '../\-Ajustar\-T\-L\-E/diferencias'
 \item 
-string {\bf main.\-d3} = '../main/matrices/'
+string {\bf main\-::main.\-d3} = '../main/matrices/'
 \item 
-string {\bf main.\-d4} = '../visual/archivos/\-T\-L\-E'
+string {\bf main\-::main.\-d4} = '../visual/archivos/\-T\-L\-E'
 \item 
-string {\bf main.\-d5} = '../visual/archivos/\-C\-O\-D\-S'
+string {\bf main\-::main.\-d5} = '../visual/archivos/\-C\-O\-D\-S'
 \item 
-tuple {\bf main.\-T\-C\-A} = datetime(2008,1,9,19,1,30,0)
+tuple {\bf main\-::main.\-T\-C\-A} = datetime(2004,9,2,19,14,11,0)
 \item 
-string {\bf main.\-sat\-\_\-id} = '27386'
+string {\bf main\-::main.\-sat\-\_\-id} = '27386'
 \item 
-string {\bf main.\-deb\-\_\-id} = '15482'
+string {\bf main\-::main.\-deb\-\_\-id} = '12442'
+\item 
+int {\bf main\-::main.\-n} = 0
+\item 
+tuple {\bf main\-::main.\-tle\-\_\-sat} = \-Tle.\-creadox\-Param(sat\-\_\-id, \-T\-C\-A-\/timedelta(days=n))
+\item 
+tuple {\bf main\-::main.\-tle\-\_\-deb} = \-Tle.\-creadox\-Param(deb\-\_\-id, \-T\-C\-A-\/timedelta(days=n))
+\item 
+tuple {\bf main\-::main.\-encuentro1} = \-Encuentro(tle\-\_\-sat,tle\-\_\-deb,\-T\-C\-A,n)
+\item 
+{\bf main\-::main.\-tca\-\_\-calculado} = encuentro1.\-tca\-\_\-c
+\item 
+{\bf main\-::main.\-min\-\_\-distancia} = encuentro1.\-mod\-\_\-min\-Dist
+\item 
+list {\bf main\-::main.\-dif\-\_\-r} = encuentro1.\-Dist\-Ric\-\_\-min[0]
+\item 
+list {\bf main\-::main.\-dif\-\_\-t} = encuentro1.\-Dist\-Ric\-\_\-min[1]
+\item 
+list {\bf main\-::main.\-dif\-\_\-n} = encuentro1.\-Dist\-Ric\-\_\-min[2]
+\item 
+tuple {\bf main\-::main.\-matriz\-\_\-combinada} = encuentro1.\-calcula\-Macombinada()
+\item 
+tuple {\bf main\-::main.\-Po\-C} = encuentro1.\-calcula\-Po\-C\-\_\-circ()
 \end{DoxyCompactItemize}

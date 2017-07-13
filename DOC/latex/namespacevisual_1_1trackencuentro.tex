@@ -35,36 +35,44 @@ Track del encuentro ENVI-COSMOS
 11 
 12 def grafica_track(satelite,debris):
 13     gmt = GMT( config={'BASEMAP_TYPE':'fancy'})
-14     
+14      
 15     gmt.pscoast( R='0/280/-75/75', #g
-16                  J='M6i', #'G70/-51/5i'
-17                  B='30g30',              # grid
-18                  N='1',
-19                  S=(173,216,230),      # wet fill color 
-20                  G=(144,238,144),      # dry fill color
-21                  W='thinnest' )        # shoreline pen
-22                
+16                   J='M6i', #'G70/-51/5i'
+17                   B='30g30',              # grid
+18                   N='1',
+19                   S=(173,216,230),      # wet fill color 
+20                   G=(144,238,144),      # dry fill color
+21                   W='thinnest' )        # shoreline pen
+22                 
 23     gmt.psxy( satelite,#'../Encuentro/archivos/15482U',
-24               R='',
-25               J='',
-26               O='-',
-27               S='t0.05',
-28               K='K')
-29                
-30     gmt.psxy( debris,  #'../Encuentro/archivos/27386U',
-31               R='',
-32               J='',
-33               O='',
-34               S='t0.05',
-35               K='K')
-36     
-37     
-38     gmt.save('../visual/archivos/ploteo_track.ps')
-39     
-40     print 'Grafico Terminado'
+24                R='',
+25                J='',
+26                O='-',
+27                S='t0.05',
+28                K='K',
+29                G='red')
+30                 
+31     gmt.psxy( debris,  #'../Encuentro/archivos/27386U',
+32                R='',
+33                J='',
+34                O='',
+35                S='t0.05',
+36                K='K',
+37                G='blue')
+38      
+39      
+40     gmt.save('../visual/archivos/ploteo_track.ps')
+41      
+42     print 'Grafico Terminado'
 \end{DoxyCode}
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacevisual_1_1trackencuentro_a473941de6bf706338bd4a9d181779050_icgraph}
+\end{center}
+\end{figure}
 
 

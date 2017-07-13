@@ -307,130 +307,136 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00207"></a>00207     ec=np.dot(1.0/rxrp_mod,rxrp_int)
 <a name="l00208"></a>00208     ei=np.cross(ec,er)
 <a name="l00209"></a>00209     
-<a name="l00210"></a>00210     rr=np.dot(er,dr)
-<a name="l00211"></a>00211     i=np.dot(ei,dr)
-<a name="l00212"></a>00212     c=np.dot(ec,dr)
-<a name="l00213"></a>00213     
-<a name="l00214"></a>00214     <span class="keywordflow">return</span> rr,i,c
-<a name="l00215"></a>00215     
-<a name="l00216"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aeabecea1efe147dcf61f5e324b1769d6">00216</a> <span class="keyword">def </span><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aeabecea1efe147dcf61f5e324b1769d6">lof_qsw</a>(rt,vt):
-<a name="l00217"></a>00217     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00218"></a>00218 <span class="stringliteral">    ---------------------------------------------------</span>
-<a name="l00219"></a>00219 <span class="stringliteral">    Transforma las coordeandas al Local Orbital Frame</span>
-<a name="l00220"></a>00220 <span class="stringliteral">    vectores unitarios: q (radial), s (normal a q),</span>
-<a name="l00221"></a>00221 <span class="stringliteral">    w (normal al plano)</span>
-<a name="l00222"></a>00222 <span class="stringliteral">    ----------------------------------------------------</span>
-<a name="l00223"></a>00223 <span class="stringliteral">    inputs </span>
-<a name="l00224"></a>00224 <span class="stringliteral">        r: posicion en el sistema cartesiano (Vector) - [km]</span>
-<a name="l00225"></a>00225 <span class="stringliteral">        v: velocidad en el sistema cartesiano (Vector) -[km/s]</span>
-<a name="l00226"></a>00226 <span class="stringliteral">    outputs</span>
-<a name="l00227"></a>00227 <span class="stringliteral">        q: direccion radial - (Vector) - [km]</span>
-<a name="l00228"></a>00228 <span class="stringliteral">        s: direccion transversal - (Vector) - [km]</span>
-<a name="l00229"></a>00229 <span class="stringliteral">        w: direccion perpendicular al plano - (Vector) - [km]      </span>
-<a name="l00230"></a>00230 <span class="stringliteral">    &quot;&quot;&quot;</span>    
-<a name="l00231"></a>00231     rq=np.sqrt(np.dot(rt,rt))
-<a name="l00232"></a>00232     q=np.dot(1.0/rq,rt)
-<a name="l00233"></a>00233     rxv_mod=np.sqrt(np.abs(np.dot(rt,vt)))
-<a name="l00234"></a>00234     rxv=np.cross(rt,vt)
-<a name="l00235"></a>00235     w=np.dot(1.0/rxv_mod,rxv)
-<a name="l00236"></a>00236     s=np.cross(w,q)    
-<a name="l00237"></a>00237     <span class="keywordflow">return</span> q,s,w
-<a name="l00238"></a>00238     
-<a name="l00239"></a>00239 
-<a name="l00240"></a>00240     
-<a name="l00241"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a36201b49e2dc6085646b89f4f08f197e">00241</a> <span class="keyword">def </span><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a36201b49e2dc6085646b89f4f08f197e">rot_tierra</a>(x,y,z,minu,ts):
-<a name="l00242"></a>00242     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00243"></a>00243 <span class="stringliteral">    x,y,z (ECI) -----&gt; x,y,z (ECEF)</span>
-<a name="l00244"></a>00244 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00245"></a>00245     pos=[x,y,z]
-<a name="l00246"></a>00246     OmegaT=ts<span class="comment">#+minu*60.0*15.04/3600.0 # velocidad angular de la tierra [seg]</span>
-<a name="l00247"></a>00247     OmegaT_rad=OmegaT*np.pi/180.0
-<a name="l00248"></a>00248 
-<a name="l00249"></a>00249     ma_rot=np.array([[np.cos(OmegaT_rad), np.sin(OmegaT_rad), 0.0],
-<a name="l00250"></a>00250                        [-np.sin(OmegaT_rad), np.cos(OmegaT_rad), 0.0],
-<a name="l00251"></a>00251                        [0.0, 0.0, 1.0]])
-<a name="l00252"></a>00252                   
-<a name="l00253"></a>00253     r_prima=np.dot(ma_rot,pos)
-<a name="l00254"></a>00254     <span class="keywordflow">return</span> r_prima 
-<a name="l00255"></a>00255 
-<a name="l00256"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">00256</a> <span class="keyword">def </span><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">teme2tod</a>(epoch,r_teme):
-<a name="l00257"></a>00257     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00258"></a>00258 <span class="stringliteral">    Transforma las coordenadas de r_teme, en el sistema</span>
-<a name="l00259"></a>00259 <span class="stringliteral">    TEME al sistema TOD.</span>
-<a name="l00260"></a>00260 <span class="stringliteral">    -----------------------------------------------------</span>
-<a name="l00261"></a>00261 <span class="stringliteral">    input</span>
-<a name="l00262"></a>00262 <span class="stringliteral">        epoch: epoca del vector de estado (datetime)</span>
-<a name="l00263"></a>00263 <span class="stringliteral">        r_teme: vector de estado en el sistema TEME (array)</span>
-<a name="l00264"></a>00264 <span class="stringliteral">    output</span>
-<a name="l00265"></a>00265 <span class="stringliteral">        r_tod: vector de estado en el sistema TOD (array)</span>
-<a name="l00266"></a>00266 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00267"></a>00267     
-<a name="l00268"></a>00268     arc2rad=np.pi/(180.0*3600.0)   
-<a name="l00269"></a>00269     jd1=<a class="code" href="namespace_sist_referencia_1_1sist__de_tiempo.html#a4bce296a4c0b68be2d00dd41b0f84198">jd</a>(epoch)
-<a name="l00270"></a>00270     tt=(jd1-2451544.5)/36525.0 
-<a name="l00271"></a>00271 <span class="comment">#     mjd=calcula_mjd(epoch)</span>
-<a name="l00272"></a>00272 <span class="comment">#     tt=(mjd-51544.5)/36525.0</span>
-<a name="l00273"></a>00273 
-<a name="l00274"></a>00274     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00275"></a>00275 <span class="stringliteral">    Parametros [arcseconds / segundos de arco]</span>
-<a name="l00276"></a>00276 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00277"></a>00277     M_moon  = 134.96340251*3600.0+1717915923.2178*tt+31.8792*tt*tt+0.051*tt*tt*tt
-<a name="l00278"></a>00278     M_sun   = 357.52910918*3600.0+129596581.0481*tt-0.5532*tt*tt-0.000136*tt*tt*tt
-<a name="l00279"></a>00279     mu_moon = 93.27209062*3600.0+1739527262.8478*tt-12.7512*tt*tt-0.00103*tt*tt*tt
-<a name="l00280"></a>00280     D_sun   = 297.85019547*3600.0+1602961601.2090*tt-6.3706*tt*tt+0.06593*tt*tt*tt
-<a name="l00281"></a>00281     O_moon  = 125.04455501*3600.0-6962890.2665*tt+7.4722*tt*tt+0.007702*tt*tt*tt
-<a name="l00282"></a>00282     
-<a name="l00283"></a>00283     nutacion=open(<span class="stringliteral">&#39;../SistReferencia/prenut.dat&#39;</span>,<span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
-<a name="l00284"></a>00284 <span class="stringliteral">    coef=nutacion.readlines()</span>
-<a name="l00285"></a>00285 <span class="stringliteral">    d_epsi=0</span>
-<a name="l00286"></a>00286 <span class="stringliteral">    d_psi=0</span>
-<a name="l00287"></a>00287 <span class="stringliteral">    </span>
-<a name="l00288"></a>00288 <span class="stringliteral">    </span><span class="keywordflow">for</span> c <span class="keywordflow">in</span> coef:
-<a name="l00289"></a>00289         an=c.split(<span class="stringliteral">&#39;,&#39;</span>)
-<a name="l00290"></a>00290         a1=float(an[0])
-<a name="l00291"></a>00291         a2=float(an[1])
-<a name="l00292"></a>00292         a3=float(an[2])
-<a name="l00293"></a>00293         a4=float(an[3])
-<a name="l00294"></a>00294         a5=float(an[4])
-<a name="l00295"></a>00295         aphi=float(an[5])
-<a name="l00296"></a>00296         aphi_d=float(an[6])
-<a name="l00297"></a>00297         aepsi=float(an[7])
-<a name="l00298"></a>00298         aepsi_d=float(an[8])
-<a name="l00299"></a>00299         
-<a name="l00300"></a>00300         phi_i=(a1*M_moon+a2*M_sun+a3*mu_moon+a4*D_sun+a5*O_moon)*arc2rad
-<a name="l00301"></a>00301 <span class="comment">#        phi_i=phi_i1%(2*np.pi)</span>
-<a name="l00302"></a>00302         
-<a name="l00303"></a>00303         d_epsi=d_epsi + (aepsi+aepsi_d*tt)*np.cos(phi_i)
-<a name="l00304"></a>00304 <span class="comment">#        d_epsi=d_epsi1%(2*np.pi)</span>
-<a name="l00305"></a>00305         d_psi=d_psi + (aphi+aphi_d*tt)*np.sin(phi_i)
-<a name="l00306"></a>00306 <span class="comment">#        d_psi=d_psi1%(2*np.pi)</span>
-<a name="l00307"></a>00307 
-<a name="l00308"></a>00308     d_epsi=d_epsi*(1.0/10000.0)
-<a name="l00309"></a>00309     d_psi=d_psi*(1.0/10000.0)
-<a name="l00310"></a>00310 
-<a name="l00311"></a>00311     epsi_media = (84381.448-46.815*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad <span class="comment"># [rad]</span>
-<a name="l00312"></a>00312     
-<a name="l00313"></a>00313     EQnox = (d_psi*np.cos(epsi_media)+0.00264*np.sin(O_moon*arc2rad)+0.000063*np.sin(2*O_moon*arc2rad))*arc2rad
-<a name="l00314"></a>00314 
-<a name="l00315"></a>00315     
-<a name="l00316"></a>00316     Q=np.matrix([[np.cos(-EQnox),np.sin(-EQnox),0],
-<a name="l00317"></a>00317                  [-np.sin(-EQnox),np.cos(-EQnox),0],
-<a name="l00318"></a>00318                  [0,0,1]])
-<a name="l00319"></a>00319     
-<a name="l00320"></a>00320     r_tod=np.dot(Q,r_teme)
+<a name="l00210"></a>00210 <span class="comment">#     matriz=np.array([[er],[ei],[ec]])</span>
+<a name="l00211"></a>00211 <span class="comment">#     dif_ric=np.dot(matriz,dr)  </span>
+<a name="l00212"></a>00212 <span class="comment">#     rr=np.abs(dif_ric[0])</span>
+<a name="l00213"></a>00213 <span class="comment">#     i=np.abs(dif_ric[1])</span>
+<a name="l00214"></a>00214 <span class="comment">#     c=np.abs(dif_ric[2])</span>
+<a name="l00215"></a>00215 
+<a name="l00216"></a>00216     rr=np.abs(np.dot(er,dr))
+<a name="l00217"></a>00217     i=np.abs(np.dot(ei,dr))
+<a name="l00218"></a>00218     c=np.abs(np.dot(ec,dr))
+<a name="l00219"></a>00219     
+<a name="l00220"></a>00220     <span class="keywordflow">return</span> rr,i,c
+<a name="l00221"></a>00221     
+<a name="l00222"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aeabecea1efe147dcf61f5e324b1769d6">00222</a> <span class="keyword">def </span><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aeabecea1efe147dcf61f5e324b1769d6">lof_qsw</a>(rt,vt):
+<a name="l00223"></a>00223     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00224"></a>00224 <span class="stringliteral">    ---------------------------------------------------</span>
+<a name="l00225"></a>00225 <span class="stringliteral">    Transforma las coordeandas al Local Orbital Frame</span>
+<a name="l00226"></a>00226 <span class="stringliteral">    vectores unitarios: q (radial), s (normal a q),</span>
+<a name="l00227"></a>00227 <span class="stringliteral">    w (normal al plano)</span>
+<a name="l00228"></a>00228 <span class="stringliteral">    ----------------------------------------------------</span>
+<a name="l00229"></a>00229 <span class="stringliteral">    inputs </span>
+<a name="l00230"></a>00230 <span class="stringliteral">        r: posicion en el sistema cartesiano (Vector) - [km]</span>
+<a name="l00231"></a>00231 <span class="stringliteral">        v: velocidad en el sistema cartesiano (Vector) -[km/s]</span>
+<a name="l00232"></a>00232 <span class="stringliteral">    outputs</span>
+<a name="l00233"></a>00233 <span class="stringliteral">        q: direccion radial - (Vector) - [km]</span>
+<a name="l00234"></a>00234 <span class="stringliteral">        s: direccion transversal - (Vector) - [km]</span>
+<a name="l00235"></a>00235 <span class="stringliteral">        w: direccion perpendicular al plano - (Vector) - [km]      </span>
+<a name="l00236"></a>00236 <span class="stringliteral">    &quot;&quot;&quot;</span>    
+<a name="l00237"></a>00237     rq=np.sqrt(np.dot(rt,rt))
+<a name="l00238"></a>00238     q=np.dot(1.0/rq,rt)
+<a name="l00239"></a>00239     rxv_mod=np.sqrt(np.abs(np.dot(rt,vt)))
+<a name="l00240"></a>00240     rxv=np.cross(rt,vt)
+<a name="l00241"></a>00241     w=np.dot(1.0/rxv_mod,rxv)
+<a name="l00242"></a>00242     s=np.cross(w,q)    
+<a name="l00243"></a>00243     <span class="keywordflow">return</span> q,s,w
+<a name="l00244"></a>00244     
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246     
+<a name="l00247"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a36201b49e2dc6085646b89f4f08f197e">00247</a> <span class="keyword">def </span><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a36201b49e2dc6085646b89f4f08f197e">rot_tierra</a>(x,y,z,minu,ts):
+<a name="l00248"></a>00248     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00249"></a>00249 <span class="stringliteral">    x,y,z (ECI) -----&gt; x,y,z (ECEF)</span>
+<a name="l00250"></a>00250 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00251"></a>00251     pos=[x,y,z]
+<a name="l00252"></a>00252     OmegaT=ts<span class="comment">#+minu*60.0*15.04/3600.0 # velocidad angular de la tierra [seg]</span>
+<a name="l00253"></a>00253     OmegaT_rad=OmegaT*np.pi/180.0
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255     ma_rot=np.array([[np.cos(OmegaT_rad), np.sin(OmegaT_rad), 0.0],
+<a name="l00256"></a>00256                        [-np.sin(OmegaT_rad), np.cos(OmegaT_rad), 0.0],
+<a name="l00257"></a>00257                        [0.0, 0.0, 1.0]])
+<a name="l00258"></a>00258                   
+<a name="l00259"></a>00259     r_prima=np.dot(ma_rot,pos)
+<a name="l00260"></a>00260     <span class="keywordflow">return</span> r_prima 
+<a name="l00261"></a>00261 
+<a name="l00262"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">00262</a> <span class="keyword">def </span><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">teme2tod</a>(epoch,r_teme):
+<a name="l00263"></a>00263     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00264"></a>00264 <span class="stringliteral">    Transforma las coordenadas de r_teme, en el sistema</span>
+<a name="l00265"></a>00265 <span class="stringliteral">    TEME al sistema TOD.</span>
+<a name="l00266"></a>00266 <span class="stringliteral">    -----------------------------------------------------</span>
+<a name="l00267"></a>00267 <span class="stringliteral">    input</span>
+<a name="l00268"></a>00268 <span class="stringliteral">        epoch: epoca del vector de estado (datetime)</span>
+<a name="l00269"></a>00269 <span class="stringliteral">        r_teme: vector de estado en el sistema TEME (array)</span>
+<a name="l00270"></a>00270 <span class="stringliteral">    output</span>
+<a name="l00271"></a>00271 <span class="stringliteral">        r_tod: vector de estado en el sistema TOD (array)</span>
+<a name="l00272"></a>00272 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00273"></a>00273     
+<a name="l00274"></a>00274     arc2rad=np.pi/(180.0*3600.0)   
+<a name="l00275"></a>00275     jd1=<a class="code" href="namespace_sist_referencia_1_1sist__de_tiempo.html#a4bce296a4c0b68be2d00dd41b0f84198">jd</a>(epoch)
+<a name="l00276"></a>00276     tt=(jd1-2451544.5)/36525.0 
+<a name="l00277"></a>00277 <span class="comment">#     mjd=calcula_mjd(epoch)</span>
+<a name="l00278"></a>00278 <span class="comment">#     tt=(mjd-51544.5)/36525.0</span>
+<a name="l00279"></a>00279 
+<a name="l00280"></a>00280     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00281"></a>00281 <span class="stringliteral">    Parametros [arcseconds / segundos de arco]</span>
+<a name="l00282"></a>00282 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00283"></a>00283     M_moon  = 134.96340251*3600.0+1717915923.2178*tt+31.8792*tt*tt+0.051*tt*tt*tt
+<a name="l00284"></a>00284     M_sun   = 357.52910918*3600.0+129596581.0481*tt-0.5532*tt*tt-0.000136*tt*tt*tt
+<a name="l00285"></a>00285     mu_moon = 93.27209062*3600.0+1739527262.8478*tt-12.7512*tt*tt-0.00103*tt*tt*tt
+<a name="l00286"></a>00286     D_sun   = 297.85019547*3600.0+1602961601.2090*tt-6.3706*tt*tt+0.06593*tt*tt*tt
+<a name="l00287"></a>00287     O_moon  = 125.04455501*3600.0-6962890.2665*tt+7.4722*tt*tt+0.007702*tt*tt*tt
+<a name="l00288"></a>00288     
+<a name="l00289"></a>00289     nutacion=open(<span class="stringliteral">&#39;../SistReferencia/prenut.dat&#39;</span>,<span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
+<a name="l00290"></a>00290 <span class="stringliteral">    coef=nutacion.readlines()</span>
+<a name="l00291"></a>00291 <span class="stringliteral">    d_epsi=0</span>
+<a name="l00292"></a>00292 <span class="stringliteral">    d_psi=0</span>
+<a name="l00293"></a>00293 <span class="stringliteral">    </span>
+<a name="l00294"></a>00294 <span class="stringliteral">    </span><span class="keywordflow">for</span> c <span class="keywordflow">in</span> coef:
+<a name="l00295"></a>00295         an=c.split(<span class="stringliteral">&#39;,&#39;</span>)
+<a name="l00296"></a>00296         a1=float(an[0])
+<a name="l00297"></a>00297         a2=float(an[1])
+<a name="l00298"></a>00298         a3=float(an[2])
+<a name="l00299"></a>00299         a4=float(an[3])
+<a name="l00300"></a>00300         a5=float(an[4])
+<a name="l00301"></a>00301         aphi=float(an[5])
+<a name="l00302"></a>00302         aphi_d=float(an[6])
+<a name="l00303"></a>00303         aepsi=float(an[7])
+<a name="l00304"></a>00304         aepsi_d=float(an[8])
+<a name="l00305"></a>00305         
+<a name="l00306"></a>00306         phi_i=(a1*M_moon+a2*M_sun+a3*mu_moon+a4*D_sun+a5*O_moon)*arc2rad
+<a name="l00307"></a>00307 <span class="comment">#        phi_i=phi_i1%(2*np.pi)</span>
+<a name="l00308"></a>00308         
+<a name="l00309"></a>00309         d_epsi=d_epsi + (aepsi+aepsi_d*tt)*np.cos(phi_i)
+<a name="l00310"></a>00310 <span class="comment">#        d_epsi=d_epsi1%(2*np.pi)</span>
+<a name="l00311"></a>00311         d_psi=d_psi + (aphi+aphi_d*tt)*np.sin(phi_i)
+<a name="l00312"></a>00312 <span class="comment">#        d_psi=d_psi1%(2*np.pi)</span>
+<a name="l00313"></a>00313 
+<a name="l00314"></a>00314     d_epsi=d_epsi*(1.0/10000.0)
+<a name="l00315"></a>00315     d_psi=d_psi*(1.0/10000.0)
+<a name="l00316"></a>00316 
+<a name="l00317"></a>00317     epsi_media = (84381.448-46.815*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad <span class="comment"># [rad]</span>
+<a name="l00318"></a>00318     
+<a name="l00319"></a>00319     EQnox = (d_psi*np.cos(epsi_media)+0.00264*np.sin(O_moon*arc2rad)+0.000063*np.sin(2*O_moon*arc2rad))*arc2rad
+<a name="l00320"></a>00320 
 <a name="l00321"></a>00321     
-<a name="l00322"></a>00322     <span class="keywordflow">return</span> r_tod    
-<a name="l00323"></a>00323     
-<a name="l00324"></a>00324 <span class="keywordflow">if</span> __name__==<span class="stringliteral">&#39;__main__&#39;</span>:
+<a name="l00322"></a>00322     Q=np.matrix([[np.cos(-EQnox),np.sin(-EQnox),0],
+<a name="l00323"></a>00323                  [-np.sin(-EQnox),np.cos(-EQnox),0],
+<a name="l00324"></a>00324                  [0,0,1]])
 <a name="l00325"></a>00325     
-<a name="l00326"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a5b1ef879add4bc0afc576033b8c65bf9">00326</a>     epoca=datetime(2000,6,28,15,8,51,655*1000)
-<a name="l00327"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#afff457861437508005c437a8ca938e69">00327</a>     r_teme=[3961.0035498,6010.7511740,4619.3009301]
-<a name="l00328"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#abfd44e8a22ea6251de2241c7899332e2">00328</a>     r_todVal=[3961.4214985,6010.4752688,4619.301531]
-<a name="l00329"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a62aae6ec02c7834cb0f5b4aeafb763e3">00329</a>     r_tod=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">teme2tod</a>(epoca, r_teme)
-<a name="l00330"></a>00330 
-<a name="l00331"></a>00331     <span class="keywordflow">print</span> epoca
-<a name="l00332"></a>00332     <span class="keywordflow">print</span> r_tod
-<a name="l00333"></a>00333     <span class="keywordflow">print</span> r_todVal-r_tod
+<a name="l00326"></a>00326     r_tod=np.dot(Q,r_teme)
+<a name="l00327"></a>00327     
+<a name="l00328"></a>00328     <span class="keywordflow">return</span> r_tod    
+<a name="l00329"></a>00329     
+<a name="l00330"></a>00330 <span class="keywordflow">if</span> __name__==<span class="stringliteral">&#39;__main__&#39;</span>:
+<a name="l00331"></a>00331     
+<a name="l00332"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a5b1ef879add4bc0afc576033b8c65bf9">00332</a>     epoca=datetime(2000,6,28,15,8,51,655*1000)
+<a name="l00333"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#afff457861437508005c437a8ca938e69">00333</a>     r_teme=[3961.0035498,6010.7511740,4619.3009301]
+<a name="l00334"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#abfd44e8a22ea6251de2241c7899332e2">00334</a>     r_todVal=[3961.4214985,6010.4752688,4619.301531]
+<a name="l00335"></a><a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a62aae6ec02c7834cb0f5b4aeafb763e3">00335</a>     r_tod=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">teme2tod</a>(epoca, r_teme)
+<a name="l00336"></a>00336 
+<a name="l00337"></a>00337     <span class="keywordflow">print</span> epoca
+<a name="l00338"></a>00338     <span class="keywordflow">print</span> r_tod
+<a name="l00339"></a>00339     <span class="keywordflow">print</span> r_todVal-r_tod
 </pre></div></div><!-- contents -->
 </div>
 <!-- window showing the filter options -->
@@ -451,7 +457,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li class="navelem"><a class="el" href="sist__de_coordenadas_8py.html">sist_deCoordenadas.py</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

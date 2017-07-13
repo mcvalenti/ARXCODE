@@ -98,40 +98,40 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">main/leeCODS2TOD.py</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="lee_c_o_d_s2_t_o_d_8py.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html">00001</a> <span class="keyword">from</span> sgp4.earth_gravity <span class="keyword">import</span> wgs72
+<a href="lee_c_o_d_s2_t_o_d_8py.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html">00001</a> <span class="keyword">from</span> sgp4.earth_gravity <span class="keyword">import</span> wgs72
 <a name="l00002"></a>00002 <span class="keyword">from</span> sgp4.io <span class="keyword">import</span> twoline2rv
 <a name="l00003"></a>00003 <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
 <a name="l00004"></a>00004 <span class="keyword">from</span> SistReferencia.sist_deCoordenadas <span class="keyword">import</span> teme2tod, vncSis
 <a name="l00005"></a>00005 
-<a name="l00006"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a740e14d90ddcc32bacf32d97dda0bbaa">00006</a> f = open(<span class="stringliteral">&#39;tlesacd.txt&#39;</span>,<span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
-<a name="l00007"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a051f7c8bd96880e125811c42d6a99bf1">00007</a> <span class="stringliteral">g = open(</span><span class="stringliteral">&#39;cods05jun2013.txt&#39;</span>,<span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
-<a name="l00008"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a1091d58ce26082e7b7c4e94c12fd4dcb">00008</a> <span class="stringliteral">cods = g.readlines()</span>
+<a name="l00006"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#ae4a31d3fc13e6c19ee2f9b265bdc7e55">00006</a> f = open(<span class="stringliteral">&#39;tlesacd.txt&#39;</span>,<span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
+<a name="l00007"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#ae2ec69df1e4f43c41a1af3401424bb52">00007</a> <span class="stringliteral">g = open(</span><span class="stringliteral">&#39;cods05jun2013.txt&#39;</span>,<span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
+<a name="l00008"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#aefb455c156e4c5623c341086059d54d2">00008</a> <span class="stringliteral">cods = g.readlines()</span>
 <a name="l00009"></a>00009 <span class="stringliteral"></span><span class="comment">#cuenta = 0</span>
-<a name="l00010"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a6820889e577a8ead537dd26d1bc3f5d8">00010</a> line1 = f.readline()
-<a name="l00011"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#aa9da18aac2648ee4b8c7128bab915b6d">00011</a> line2 = f.readline()
-<a name="l00012"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#adff2085c41374c2d193eb362a619b756">00012</a> satellite = twoline2rv(line1, line2, wgs72)
-<a name="l00013"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#aaf8bb3c739d63ab92175a480a306ec53">00013</a> t0 = satellite.epoch
-<a name="l00014"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a3003dfb96400176e1801d8044dd46508">00014</a> dif = ()
-<a name="l00015"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a6e8af16ef718dcba41b65542a5300627">00015</a> poscods = ()
-<a name="l00016"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#ad2b8ba71b75c2557c042962449eb098f">00016</a> velcods = ()
+<a name="l00010"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a0145126d8b2ca668ed62c1eca803b04e">00010</a> line1 = f.readline()
+<a name="l00011"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#aacf7be1d740990152023d44cfb6b9365">00011</a> line2 = f.readline()
+<a name="l00012"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a85280e2aeab3df43f30d929ba7b3d9ce">00012</a> satellite = twoline2rv(line1, line2, wgs72)
+<a name="l00013"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#aeb1c8c250a25c983de18365e80fd14d0">00013</a> t0 = satellite.epoch
+<a name="l00014"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a4081ce57fcd8125a64d96a5f291d4cda">00014</a> dif = ()
+<a name="l00015"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a69a80c15a084364309e8a2264b7da87f">00015</a> poscods = ()
+<a name="l00016"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a48799d9e60c20dc17a0b391292f6c8f8">00016</a> velcods = ()
 <a name="l00017"></a>00017 <span class="comment">#print type(t0)</span>
 <a name="l00018"></a>00018 <span class="keywordflow">print</span> <span class="stringliteral">&quot;Epoch: &quot;</span> ,t0
 <a name="l00019"></a>00019 <span class="comment">#   print satellite.epoch</span>
 <a name="l00020"></a>00020 <span class="keywordflow">for</span> hora <span class="keywordflow">in</span> range(0,24):
 <a name="l00021"></a>00021     <span class="keywordflow">for</span> minuto <span class="keywordflow">in</span> range(0,60):
 <a name="l00022"></a>00022         <span class="keywordflow">for</span> segundo <span class="keywordflow">in</span> range(0,60):
-<a name="l00023"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a75950e762348f5e054dc20db515efd08">00023</a>             datos = cods[segundo + minuto * 60 + hora * 3600].split()
-<a name="l00024"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a7af23be84bda27bd85366ffe50e81fde">00024</a>             xcods = float(datos[2])
-<a name="l00025"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a4dc06da1afe86e15a8541604012ced44">00025</a>             ycods = float(datos[3])
-<a name="l00026"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a87d5152953643aa2d84c9a4b6c1671fd">00026</a>             zcods = float(datos[4])
-<a name="l00027"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a1420af9db9f5bc92ef64ca4146dc7419">00027</a>             xpcods = float(datos[5])
-<a name="l00028"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a8e3465da035af5b9d8c5c6b2a064009d">00028</a>             ypcods = float(datos[6])
-<a name="l00029"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#acc6dd5aece84a1663e0bc18c5ef9ff58">00029</a>             zpcods = float(datos[7])
+<a name="l00023"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#af5b96b8e5ec602fe29e07b6e2253ec8f">00023</a>             datos = cods[segundo + minuto * 60 + hora * 3600].split()
+<a name="l00024"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a800d9fb168d816a1593966c272ed6f95">00024</a>             xcods = float(datos[2])
+<a name="l00025"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a9281124df73b091c34419e498cdd753e">00025</a>             ycods = float(datos[3])
+<a name="l00026"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#ab45dd7f715ebbde4c4e3fd53235d9475">00026</a>             zcods = float(datos[4])
+<a name="l00027"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#aaa96ec83351462281ccb37f8a6f21dea">00027</a>             xpcods = float(datos[5])
+<a name="l00028"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#ac0768a3f89a23f6d2ba0f2eb12d00e1c">00028</a>             ypcods = float(datos[6])
+<a name="l00029"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a4ea4f6637f92c755e114a48c5effa187">00029</a>             zpcods = float(datos[7])
 <a name="l00030"></a>00030 <span class="comment">#           zosition, velocity = satellite.propagate(t0.year, t0.month, t0.day, t0.hour, t0.minute, t0.second)</span>
 <a name="l00031"></a>00031             position, velocity = satellite.propagate(t0.year, t0.month, 5, hora, minuto, segundo)
-<a name="l00032"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#aa1cf671423328901493feb4800332d89">00032</a>             fechahora = datetime(t0.year,t0.month,t0.day,hora,minuto,segundo)
+<a name="l00032"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a62f8db35aaf0a360c9186452d2d5a132">00032</a>             fechahora = datetime(t0.year,t0.month,t0.day,hora,minuto,segundo)
 <a name="l00033"></a>00033 <span class="comment">#           print &quot;teme&quot; , fechahora, position[0], position[1], position[2]</span>
-<a name="l00034"></a><a class="code" href="namespacelee_c_o_d_s2_t_o_d.html#a776a728821127f201bf781cd7239e101">00034</a>             r_tod = <a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">teme2tod</a>(fechahora,position) 
+<a name="l00034"></a><a class="code" href="namespacemain_1_1lee_c_o_d_s2_t_o_d.html#aa4e21e1d58263923058f972b0294d82e">00034</a>             r_tod = <a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">teme2tod</a>(fechahora,position) 
 <a name="l00035"></a>00035 <span class="comment">#           print &quot;tod&quot; , fechahora, r_tod.item(0), r_tod.item(1), r_tod.item(2)</span>
 <a name="l00036"></a>00036 <span class="comment">#           print &quot;delta&quot;, fechahora, r_tod.item(0)-position[0] , r_tod.item(1)-position[1] , r_tod.item(2)-position[2]</span>
 <a name="l00037"></a>00037 <span class="comment">#           dif = (r_tod.item(0)-position[0] , r_tod.item(1)-position[1] , r_tod.item(2)-position[2])</span>
@@ -162,7 +162,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li class="navelem"><a class="el" href="lee_c_o_d_s2_t_o_d_8py.html">leeCODS2TOD.py</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

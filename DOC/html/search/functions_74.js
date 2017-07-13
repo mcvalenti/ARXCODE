@@ -6,5 +6,5 @@ var searchData=
   ['totimestamp',['toTimestamp',['../namespacefunciones_utiles_1_1funciones.html#a3d74c0520a16933699930e2937322d1a',1,'funcionesUtiles::funciones']]],
   ['ts_5fgreenwich',['ts_greenwich',['../namespace_sist_referencia_1_1sist__de_tiempo.html#aa45ac920a2f9f3fd545721f0bc37b71f',1,'SistReferencia::sist_deTiempo']]],
   ['ts_5flocal',['ts_local',['../namespace_sist_referencia_1_1sist__de_tiempo.html#a6f330fd6d3f541d61563da4b6675e778',1,'SistReferencia::sist_deTiempo']]],
-  ['tuplafloat',['tuplaFloat',['../namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#a8d5188ab96d4fb7e38c637b837e15641',1,'AjustarTLE::AjustarTLE.tuplaFloat()'],['../namespace_encuentro_1_1encuentro.html#a2979f0f53dff5bd740e994a10c8f7a11',1,'Encuentro::encuentro.tuplaFloat()']]]
+  ['tuplafloat',['tuplaFloat',['../namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#a8d5188ab96d4fb7e38c637b837e15641',1,'AjustarTLE::AjustarTLE.tuplaFloat()'],['../namespace_encuentro_1_1akella_po_c.html#aab57a8539d1030bf2ff71c5624b349be',1,'Encuentro::akellaPoC.tuplaFloat()']]]
 ];

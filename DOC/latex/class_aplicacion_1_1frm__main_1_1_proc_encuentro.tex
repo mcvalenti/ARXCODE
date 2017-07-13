@@ -1,5 +1,23 @@
 \section{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro \-Class \-Reference}
 \label{class_aplicacion_1_1frm__main_1_1_proc_encuentro}\index{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro@{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro}}
+
+
+\-Inheritance diagram for \-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{class_aplicacion_1_1frm__main_1_1_proc_encuentro__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for \-Aplicacion.\-frm\-\_\-main.\-Proc\-Encuentro\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=252pt]{class_aplicacion_1_1frm__main_1_1_proc_encuentro__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -38,6 +56,8 @@ def {\bf salir}
 \item 
 {\bf dif}
 \item 
+{\bf boton\-\_\-carga\-\_\-fecha}
+\item 
 {\bf boton\-\_\-encuetro}
 \item 
 {\bf boton\-\_\-dif}
@@ -62,15 +82,29 @@ def {\bf salir}
 \item 
 {\bf table\-Encuentro}
 \item 
+{\bf hora}
+\item 
+{\bf cal}
+\item 
+{\bf fecha}
+\item 
+{\bf horas}
+\item 
+{\bf tca}
+\item 
 {\bf sat\-\_\-id}
 \item 
 {\bf deb\-\_\-id}
 \item 
-{\bf tca}
+{\bf n}
 \item 
 {\bf min\-\_\-dist}
 \item 
 {\bf tca\-\_\-calc}
+\item 
+{\bf ma\-\_\-comb}
+\item 
+{\bf poc\-\_\-arx}
 \item 
 {\bf archivo\-\_\-dif}
 \item 
@@ -78,14 +112,14 @@ def {\bf salir}
 \item 
 {\bf pixmap1}
 \item 
-{\bf pixmap}
+{\bf track\-\_\-graf}
 \end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
 
 
-\-Definition at line 213 of file frm\-\_\-main.\-py.
+\-Definition at line 322 of file frm\-\_\-main.\-py.
 
 
 
@@ -100,20 +134,26 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_abf26f68ed41e5b2a3802baf0dafbace2}
 
 
-\-Definition at line 214 of file frm\-\_\-main.\-py.
+\-Definition at line 323 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-214 
-215     def __init__(self,parent=None):
-216         QDialog.__init__(self,parent)
-217 
-218         self.setWindowModality(Qt.ApplicationModal)
+323 
+324     def __init__(self,parent=None):
+325         QDialog.__init__(self,parent)
+326 
+327         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_aplicacion_1_1frm__main_1_1_proc_encuentro_abf26f68ed41e5b2a3802baf0dafbace2_cgraph}
+\end{center}
+\end{figure}
 
 
 
@@ -128,104 +168,119 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a0df5f10ce0e6544ee7996b2ffd32d5c3}
 
 
-\-Definition at line 227 of file frm\-\_\-main.\-py.
+\-Definition at line 335 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-227 
-228     def initUI(self):
-229         self.palette = QPalette()
-230         self.palette.setColor(QPalette.Background,Qt.white)
-231         self.setPalette(self.palette)
-232         
-233         """
-234         Etiquetas
-235         """
-236         self.sat_lab  = QLabel('Satelite NORAD ID')
-237         self.deb_lab  = QLabel('Desecho NORAD ID')
-238         self.time_lab = QLabel('TCA')
-239         self.hs_lab   = QLabel('Hs:')
-240         self.min_lab  = QLabel('min:')
-241         self.seg_lab  = QLabel('seg')
-242         self.mseg_lab = QLabel('mseg')
-243         # imagen 
-244         self.track = QLabel() 
-245         self.dif   = QLabel()
-246         #track.setPixmap(pixmap)
-247         """
-248         Botones
-249         """
-250         self.boton_encuetro = QPushButton('Procesar Encuentro')
-251         self.boton_dif      = QPushButton('Ver diferencias')
-252         self.boton_track    = QPushButton('Track')
-253         self.boton_salir    = QPushButton('Salir')
-254         """
-255         Campos de Edicion
-256         """
-257         self.sat_id_text = QLineEdit()
-258         self.deb_id_text = QLineEdit()
-259         self.tca_text    = QCalendarWidget()
-260         self.hs_tex      = QLineEdit()
-261         self.min_tex     = QLineEdit()
-262         self.seg_tex     = QLineEdit()
-263         self.mseg_tex    = QLineEdit()
-264 
-265         """
-266         Otros
-267         """
-268         self.tableEncuentro   = QTableWidget()
-269         self.tableEncuentro.setRowCount(1)
-270         self.tableEncuentro.setColumnCount(4)
-271         listaLabels=['Norad Id','Nombre','TCAarx','MinD arx']
-272         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
-273         """
-274         Plantilla
-275         """
-276         grid = QGridLayout()
-277         grid.setSpacing(5)
-278         scroll = QScrollArea()
-279 
-280         
-281         grid.addWidget(self.sat_lab,2,1)
-282         grid.addWidget(self.sat_id_text,2,2)
-283         grid.addWidget(self.deb_lab,3,1)
-284         grid.addWidget(self.deb_id_text,3,2)
-285         grid.addWidget(self.time_lab,4,1)
-286         grid.addWidget(self.tca_text,4,2)
-287         grid.addWidget(self.hs_tex,4,3)
-288         grid.addWidget(self.hs_lab,4,4)
-289         grid.addWidget(self.min_tex,4,5)
-290         grid.addWidget(self.min_lab,4,6)
-291         grid.addWidget(self.seg_tex,4,7)
-292         grid.addWidget(self.seg_lab,4,8)
-293         grid.addWidget(self.mseg_tex,4,9)
-294         grid.addWidget(self.mseg_lab,4,10)        
-295         grid.addWidget(self.tableEncuentro,6,2,2,5)
-296         grid.addWidget(self.track,8,2)
-297         grid.addWidget(self.dif,8,3)
-298         grid.addWidget(self.boton_encuetro,6,10)
-299         grid.addWidget(self.boton_dif,7,10)
-300         grid.addWidget(self.boton_track,8,10)
-301         grid.addWidget(self.boton_salir,9,10)
-302         
-303         """
-304         Acciones
-305         """
-306         self.boton_encuetro.clicked.connect(self.procesoSimple)
-307         self.boton_salir.clicked.connect(self.salir)
-308         self.boton_track.clicked.connect(self.mostrarTrack)
-309         self.boton_dif.clicked.connect(self.mostrarDif)
-310         self.boton_track.setEnabled(False)
-311         self.boton_dif.setEnabled(False)
-312         
-313         self.setLayout(grid)
-314         self.setWindowTitle('Procesamiento de Encuentro')    
-315         self.show()
-    
+335 
+336     def initUI(self):
+337         self.palette = QPalette()
+338         self.palette.setColor(QPalette.Background,Qt.white)
+339         self.setPalette(self.palette)
+340         
+341         """
+342         Etiquetas
+343         """
+344         self.sat_lab  = QLabel('Satelite NORAD ID')
+345         self.deb_lab  = QLabel('Desecho NORAD ID')
+346         self.time_lab = QLabel('TCA')
+347         self.hs_lab   = QLabel('Hs:')
+348         self.min_lab  = QLabel('min:')
+349         self.seg_lab  = QLabel('seg')
+350         self.mseg_lab = QLabel('mseg')
+351         # imagen 
+352         self.track = QLabel() 
+353         self.dif   = QLabel()
+354         """
+355         Botones
+356         """
+357         self.boton_carga_fecha  = QPushButton('Cargar')
+358         self.boton_encuetro = QPushButton('Procesar Encuentro')
+359         self.boton_dif      = QPushButton('Ver diferencias')
+360         self.boton_track    = QPushButton('Track')
+361         self.boton_salir    = QPushButton('Salir')
+362         """
+363         Campos de Edicion
+364         """
+365         self.sat_id_text = QLineEdit()
+366         self.deb_id_text = QLineEdit() 
+367         # calendario
+368         # nice widget for editing the date  
+369         self.tca_text    = QDateEdit()  
+370         self.tca_text.setCalendarPopup(True)
+371 
+372 #         self.fecha = self.tca_text.selectedDate()
+373 #        self.tca_text    = QCalendarWidget()
+374         self.hs_tex      = QLineEdit()
+375         self.min_tex     = QLineEdit()
+376         self.seg_tex     = QLineEdit()
+377         self.mseg_tex    = QLineEdit()
+378         """
+379         Otros
+380         """
+381         self.tableEncuentro   = QTableWidget()
+382         self.tableEncuentro.setRowCount(1)
+383         self.tableEncuentro.setColumnCount(5)
+384         listaLabels=['Norad Id','Nombre','TCAarx','MinD arx','PoC']
+385         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)      
+386 #       # Fecha y Hora
+387         self.hora = QTimeEdit()
+388 #       self.hora.setTime(QTime(19,14,11))
+389         """
+390         Plantilla
+391         """
+392         grid = QGridLayout()
+393         grid.setSpacing(5)
+394         scroll = QScrollArea()
+395 
+396         grid.addWidget(self.sat_lab,2,1)
+397         grid.addWidget(self.sat_id_text,2,2)
+398         grid.addWidget(self.deb_lab,3,1)
+399         grid.addWidget(self.deb_id_text,3,2)
+400         grid.addWidget(self.time_lab,4,1)
+401 #        grid.addWidget(self.tca_text,4,2)
+402         grid.addWidget(self.tca_text,4,2)
+403         grid.addWidget(self.hora,5,2)
+404         grid.addWidget(self.boton_carga_fecha,5,1)
+405 #         grid.addWidget(self.hs_tex,4,3)
+406 #         grid.addWidget(self.hs_lab,4,4)
+407 #         grid.addWidget(self.min_tex,4,5)
+408 #         grid.addWidget(self.min_lab,4,6)
+409 #         grid.addWidget(self.seg_tex,4,7)
+410 #         grid.addWidget(self.seg_lab,4,8)
+411 #         grid.addWidget(self.mseg_tex,4,9)
+412 #         grid.addWidget(self.mseg_lab,4,10)        
+413         grid.addWidget(self.tableEncuentro,8,1,2,5)
+414         grid.addWidget(self.track,2,3,5,3)
+415         grid.addWidget(self.dif,12,4)
+416         grid.addWidget(self.boton_encuetro,10,10)
+417         grid.addWidget(self.boton_dif,11,10)
+418         grid.addWidget(self.boton_track,12,10)
+419         grid.addWidget(self.boton_salir,13,10)
+420         """
+421         Acciones
+422         """
+423         self.boton_encuetro.clicked.connect(self.procesoSimple)
+424         self.boton_salir.clicked.connect(self.salir)
+425         self.boton_track.clicked.connect(self.mostrarTrack)
+426         self.boton_dif.clicked.connect(self.mostrarDif)
+427         self.boton_track.setEnabled(False)
+428         self.boton_dif.setEnabled(False)
+429 
+430         self.setLayout(grid)
+431         self.setWindowTitle('Procesamiento de Encuentro')    
+432         self.show()
+
 \end{DoxyCode}
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a0df5f10ce0e6544ee7996b2ffd32d5c3_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!mostrar\-Dif@{mostrar\-Dif}}
@@ -237,15 +292,15 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a05cf641959fca6add2fc6bd39742c972}
 
 
-\-Definition at line 362 of file frm\-\_\-main.\-py.
+\-Definition at line 489 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-362 
-363     def mostrarDif(self):
-364         self.grafico_dif= ploteos.grafica_diferenciasRIC(self.archivo_dif)
-365         self.pixmap1 = QPixmap(self.grafico_dif)
-366         self.dif.setPixmap(self.pixmap1)
+489 
+490     def mostrarDif(self):
+491         self.grafico_dif= ploteos.grafica_diferenciasRIC(self.archivo_dif)
+492         self.pixmap1 = QPixmap(self.grafico_dif)
+493         self.dif.setPixmap(self.pixmap1)
     
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!mostrar\-Track@{mostrar\-Track}}
@@ -257,14 +312,14 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a48160da57694ee4375e6b0fdd7a99a71}
 
 
-\-Definition at line 367 of file frm\-\_\-main.\-py.
+\-Definition at line 494 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-367 
-368     def mostrarTrack(self):
-369         self.pixmap = QPixmap('../visual/archivos/ploteo_track.ps')
-370         self.track.setPixmap(self.pixmap)
+494 
+495     def mostrarTrack(self):
+496         self.track_graf = QPixmap('../visual/archivos/ploteo_track.ps')
+497         self.track.setPixmap( self.track_graf)
         
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!proceso\-Simple@{proceso\-Simple}}
@@ -280,64 +335,76 @@ Calcula:
     Miss Distance
     TCA calculado
     Diferencias en RTN ---> Plotea.
-    Genera archivo lat, long ---> Plotea.
-  
+    Genera archivo lat, long ---> Plotea.          
 \end{DoxyVerb}
  
 
-\-Definition at line 316 of file frm\-\_\-main.\-py.
+\-Definition at line 433 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-316 
-317     def procesoSimple(self):
-318         """
-319         Propaga los objetos involucrados un intervalos [tca-90:tca+10]
-320         Calcula:
-321             Miss Distance
-322             TCA calculado
-323             Diferencias en RTN ---> Plotea.
-324             Genera archivo lat, long ---> Plotea.
-325           
-326         """
-327         # Importar los TLE de NORAD.
-328     
-329         usuario='macecilia'
-330         clave='MaCeciliaSpace17'
-331         self.sat_id=str(self.sat_id_text.text())
-332         self.deb_id=str(self.deb_id_text.text())
-333         hs =int(self.hs_tex.text())
-334         min=int(self.min_tex.text())
-335         seg=int(self.seg_tex.text())
-336         fecha = self.tca_text.selectedDate()#.toPyDate()
-337         hora = QTime(hs,min,seg)
-338         self.tca=QDateTime(fecha,hora).toPyDateTime()
-339         tle_sat=Tle.creadoxParam(usuario, clave, self.sat_id, self.tca)
-340         tle_deb=Tle.creadoxParam(usuario, clave, self.deb_id, self.tca)
-341 #         
-342         """
-343         Propagacion hasta el Encuentro
-344         """
-345         encuentro1=Encuentro(tle_sat,tle_deb,self.tca)
-346         self.min_dist= encuentro1.mod_minDist
-347         self.tca_calc= encuentro1.tca_c
-348         self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
-349         self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
-350         self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(
+433 
+434     def procesoSimple(self):
+435         """
+436         Propaga los objetos involucrados un intervalos [tca-90:tca+10]
+437         Calcula:
+438             Miss Distance
+439             TCA calculado
+440             Diferencias en RTN ---> Plotea.
+441             Genera archivo lat, long ---> Plotea.          
+442         """
+443 
+444         self.cal = self.tca_text.calendarWidget()
+445         self.fecha = self.cal.selectedDate().toPyDate()
+446         self.horas = self.hora.time()
+447         self.tca = QDateTime(self.fecha,self.horas).toPyDateTime()
+448 
+449 #         # Importar los TLE de NORAD.    
+450         self.sat_id=str(self.sat_id_text.text())
+451         self.deb_id=str(self.deb_id_text.text())
+452 #         hs =int(self.hs_tex.text())
+453 #         min=int(self.min_tex.text())
+454 #         seg=int(self.seg_tex.text())
+455 #         fecha = self.tca_text.selectedDate()#.toPyDate()
+456 #         hora = QTime(hs,min,seg)
+457 #       
+       self.tca=datetime(2004,9,2,19,14,11)#QDateTime(fecha,hora).toPyDateTime()
+458         tle_sat=Tle.creadoxParam(self.sat_id, self.tca)
+459         tle_deb=Tle.creadoxParam(self.deb_id, self.tca)
+460 #         
+461         """
+462         Propagacion hasta el Encuentro
+463         """
+464         self.n=3
+465         encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.n)
+466         self.min_dist= encuentro1.mod_minDist
+467         self.tca_calc= encuentro1.tca_c
+468         self.ma_comb= encuentro1.calculaMacombinada()
+469         self.poc_arx=encuentro1.calculaPoC_circ()
+470         self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
+471         self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
+472         self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(
       self.tca_calc,'%Y-%m-%d %H:%M:%S')))
-351         self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(self.min_dist)))
-352         # archivo de diferencias.
-353         self.archivo_dif=encuentro1.archivo_dif
-354         
-355 
-356         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.
+473         self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(round(self.
+      min_dist,7))))
+474         self.tableEncuentro.setItem(0,4, QTableWidgetItem(str(round(self.poc_arx
+      ,7))))
+475         # formato de tabla
+476         header = self.tableEncuentro.horizontalHeader()
+477         header.setResizeMode(0,QHeaderView.Stretch)
+478         header.setResizeMode(1,QHeaderView.ResizeToContents)
+479         header.setResizeMode(2,QHeaderView.ResizeToContents)
+480         header.setResizeMode(3,QHeaderView.ResizeToContents)
+481         # archivo de diferencias.
+482         self.archivo_dif=encuentro1.archivo_dif
+483         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.
       epoca_ini
-357         grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '
+484         grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '
       ../Encuentro/archivos/'+str(self.deb_id)+'U')
-358         print 'fin del procesamiento.'
-359         
-360         self.boton_track.setEnabled(True)
-361         self.boton_dif.setEnabled(True)
+485         print 'fin del procesamiento.'
+486        
+487         self.boton_track.setEnabled(True)
+488         self.boton_dif.setEnabled(True)
     
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!salir@{salir}}
@@ -349,14 +416,14 @@ Calcula:
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a58cb9bc6a82da02c73bbee45fce6a4d4}
 
 
-\-Definition at line 371 of file frm\-\_\-main.\-py.
+\-Definition at line 498 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-371 
-372     def salir(self):
-373         self.accept()    
-374         
+498 
+499     def salir(self):
+500         self.accept()    
+501         
         
 \end{DoxyCode}
 
@@ -367,217 +434,273 @@ Calcula:
 \subsubsection[{archivo\-\_\-dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::archivo\-\_\-dif}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ad91f138c2d34ec1dddfa274961d9f4b9}
 
 
-\-Definition at line 326 of file frm\-\_\-main.\-py.
+\-Definition at line 447 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-carga\-\_\-fecha@{boton\-\_\-carga\-\_\-fecha}}
+\index{boton\-\_\-carga\-\_\-fecha@{boton\-\_\-carga\-\_\-fecha}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{boton\-\_\-carga\-\_\-fecha}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-carga\-\_\-fecha}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ad65d0ac83d7deb549f0e4bd83d834a3e}
+
+
+\-Definition at line 339 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-dif@{boton\-\_\-dif}}
 \index{boton\-\_\-dif@{boton\-\_\-dif}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{boton\-\_\-dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-dif}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aeb31ca7f82f7239731383b96e7075337}
 
 
-\-Definition at line 231 of file frm\-\_\-main.\-py.
+\-Definition at line 339 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-encuetro@{boton\-\_\-encuetro}}
 \index{boton\-\_\-encuetro@{boton\-\_\-encuetro}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{boton\-\_\-encuetro}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-encuetro}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a8644605ee796fee24b6dd923fc266846}
 
 
-\-Definition at line 231 of file frm\-\_\-main.\-py.
+\-Definition at line 339 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-salir@{boton\-\_\-salir}}
 \index{boton\-\_\-salir@{boton\-\_\-salir}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{boton\-\_\-salir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-salir}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aca036cbd7f766bf701ae36c2a5a7b3b8}
 
 
-\-Definition at line 231 of file frm\-\_\-main.\-py.
+\-Definition at line 339 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!boton\-\_\-track@{boton\-\_\-track}}
 \index{boton\-\_\-track@{boton\-\_\-track}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{boton\-\_\-track}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::boton\-\_\-track}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a1941629b003e80f8ded4df0f456c7bd2}
 
 
-\-Definition at line 231 of file frm\-\_\-main.\-py.
+\-Definition at line 339 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!cal@{cal}}
+\index{cal@{cal}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{cal}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::cal}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ac7468fc1228d26d5ea967897aa0c2d19}
+
+
+\-Definition at line 440 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!deb\-\_\-id@{deb\-\_\-id}}
 \index{deb\-\_\-id@{deb\-\_\-id}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{deb\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::deb\-\_\-id}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a29b4b7477eec45dc43c8420fe57f380b}
 
 
-\-Definition at line 324 of file frm\-\_\-main.\-py.
+\-Definition at line 440 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!deb\-\_\-id\-\_\-text@{deb\-\_\-id\-\_\-text}}
 \index{deb\-\_\-id\-\_\-text@{deb\-\_\-id\-\_\-text}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{deb\-\_\-id\-\_\-text}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::deb\-\_\-id\-\_\-text}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a2f2e7ac9884884073150132b5a7fee63}
 
 
-\-Definition at line 233 of file frm\-\_\-main.\-py.
+\-Definition at line 341 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!deb\-\_\-lab@{deb\-\_\-lab}}
 \index{deb\-\_\-lab@{deb\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{deb\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::deb\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ab4c6985a68b1ffe2180b3b88489b06aa}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!dif@{dif}}
 \index{dif@{dif}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::dif}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a9bdbd42721fd4c57a52c8370e4d75a8b}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!fecha@{fecha}}
+\index{fecha@{fecha}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{fecha}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::fecha}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a817571257a62cf7e3738720dc7cbc8e6}
+
+
+\-Definition at line 440 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!grafico\-\_\-dif@{grafico\-\_\-dif}}
 \index{grafico\-\_\-dif@{grafico\-\_\-dif}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{grafico\-\_\-dif}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::grafico\-\_\-dif}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a21cd8515b488cb5a1a7ed05f7a02ac28}
 
 
-\-Definition at line 362 of file frm\-\_\-main.\-py.
+\-Definition at line 489 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!hora@{hora}}
+\index{hora@{hora}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{hora}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::hora}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a6bafebd8e2e4f63e64a7fbb7a5f47e41}
+
+
+\-Definition at line 344 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!horas@{horas}}
+\index{horas@{horas}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{horas}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::horas}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a46d50b0d81fb2a57756f583dbe2fb0e5}
+
+
+\-Definition at line 440 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!hs\-\_\-lab@{hs\-\_\-lab}}
 \index{hs\-\_\-lab@{hs\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{hs\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::hs\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a27ad8a3bf2a7faab4b19e36c1d790dfa}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!hs\-\_\-tex@{hs\-\_\-tex}}
 \index{hs\-\_\-tex@{hs\-\_\-tex}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{hs\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::hs\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a47af2e4568d0c0103808db6f86817885}
 
 
-\-Definition at line 233 of file frm\-\_\-main.\-py.
+\-Definition at line 342 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!ma\-\_\-comb@{ma\-\_\-comb}}
+\index{ma\-\_\-comb@{ma\-\_\-comb}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{ma\-\_\-comb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::ma\-\_\-comb}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a0c27a291d5a87b4cb0d8a2aafc939aca}
+
+
+\-Definition at line 447 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!min\-\_\-dist@{min\-\_\-dist}}
 \index{min\-\_\-dist@{min\-\_\-dist}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{min\-\_\-dist}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::min\-\_\-dist}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a8071ddf9f15d916a95ba4937e00c02bc}
 
 
-\-Definition at line 326 of file frm\-\_\-main.\-py.
+\-Definition at line 447 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!min\-\_\-lab@{min\-\_\-lab}}
 \index{min\-\_\-lab@{min\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{min\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::min\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a775f0c0c1b4e7d4e68fdf04efa135071}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!min\-\_\-tex@{min\-\_\-tex}}
 \index{min\-\_\-tex@{min\-\_\-tex}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{min\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::min\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ad30a0e55f3288798e84da8aadb8e3bcd}
 
 
-\-Definition at line 233 of file frm\-\_\-main.\-py.
+\-Definition at line 342 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!mseg\-\_\-lab@{mseg\-\_\-lab}}
 \index{mseg\-\_\-lab@{mseg\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{mseg\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::mseg\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a35b3a9db8e7eae867df6d9e7762dfea0}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!mseg\-\_\-tex@{mseg\-\_\-tex}}
 \index{mseg\-\_\-tex@{mseg\-\_\-tex}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{mseg\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::mseg\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_afe9a3882b2c5537df85cb18df916f01b}
 
 
-\-Definition at line 233 of file frm\-\_\-main.\-py.
+\-Definition at line 342 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!n@{n}}
+\index{n@{n}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::n}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aeaa64f1663476183b0bd3a2241277eeb}
+
+
+\-Definition at line 447 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!palette@{palette}}
 \index{palette@{palette}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{palette}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::palette}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_acf473733b894ad6506a589a393363799}
 
 
-\-Definition at line 227 of file frm\-\_\-main.\-py.
-
-\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!pixmap@{pixmap}}
-\index{pixmap@{pixmap}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
-\subsubsection[{pixmap}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::pixmap}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a8299df646f0d2694d7dc6fe63bd07f85}
-
-
-\-Definition at line 367 of file frm\-\_\-main.\-py.
+\-Definition at line 335 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!pixmap1@{pixmap1}}
 \index{pixmap1@{pixmap1}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{pixmap1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::pixmap1}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_af0da3467b8af9d808e55ff06ef69bdc2}
 
 
-\-Definition at line 362 of file frm\-\_\-main.\-py.
+\-Definition at line 489 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!poc\-\_\-arx@{poc\-\_\-arx}}
+\index{poc\-\_\-arx@{poc\-\_\-arx}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{poc\-\_\-arx}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::poc\-\_\-arx}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_abb41a1dfa6b16c3548805933b92a5f9f}
+
+
+\-Definition at line 447 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!sat\-\_\-id@{sat\-\_\-id}}
 \index{sat\-\_\-id@{sat\-\_\-id}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::sat\-\_\-id}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aa2733a045e28eb7c02115a09d51a836a}
 
 
-\-Definition at line 324 of file frm\-\_\-main.\-py.
+\-Definition at line 440 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!sat\-\_\-id\-\_\-text@{sat\-\_\-id\-\_\-text}}
 \index{sat\-\_\-id\-\_\-text@{sat\-\_\-id\-\_\-text}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{sat\-\_\-id\-\_\-text}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::sat\-\_\-id\-\_\-text}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a2007df02bfb5112b366cfc4328c280a7}
 
 
-\-Definition at line 233 of file frm\-\_\-main.\-py.
+\-Definition at line 341 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!sat\-\_\-lab@{sat\-\_\-lab}}
 \index{sat\-\_\-lab@{sat\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{sat\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::sat\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a9d2a1d34deb3175ecf73d0dfe65242f6}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!seg\-\_\-lab@{seg\-\_\-lab}}
 \index{seg\-\_\-lab@{seg\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{seg\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::seg\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_ab3d01094156d3614f263c6f42d6febd7}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!seg\-\_\-tex@{seg\-\_\-tex}}
 \index{seg\-\_\-tex@{seg\-\_\-tex}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{seg\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::seg\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_aa8a995a723c03140e4a348b4ad2ab417}
 
 
-\-Definition at line 233 of file frm\-\_\-main.\-py.
+\-Definition at line 342 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!table\-Encuentro@{table\-Encuentro}}
 \index{table\-Encuentro@{table\-Encuentro}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{table\-Encuentro}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::table\-Encuentro}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a8480361e1e7806f47f338b7df37e33bc}
 
 
-\-Definition at line 235 of file frm\-\_\-main.\-py.
+\-Definition at line 344 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!tca@{tca}}
 \index{tca@{tca}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{tca}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::tca}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a197eac71261a31914e870a5d4d61c40c}
 
 
-\-Definition at line 324 of file frm\-\_\-main.\-py.
+\-Definition at line 440 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!tca\-\_\-calc@{tca\-\_\-calc}}
 \index{tca\-\_\-calc@{tca\-\_\-calc}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{tca\-\_\-calc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::tca\-\_\-calc}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a975e5f4e68911fb69a242157bc1450ab}
 
 
-\-Definition at line 326 of file frm\-\_\-main.\-py.
+\-Definition at line 447 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!tca\-\_\-text@{tca\-\_\-text}}
 \index{tca\-\_\-text@{tca\-\_\-text}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{tca\-\_\-text}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::tca\-\_\-text}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a92e586584e7eed72d3aadf7e67695439}
 
 
-\-Definition at line 233 of file frm\-\_\-main.\-py.
+\-Definition at line 341 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!time\-\_\-lab@{time\-\_\-lab}}
 \index{time\-\_\-lab@{time\-\_\-lab}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{time\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::time\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a241a5287aae2adf3fa66aee1ade8ad22}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!track@{track}}
 \index{track@{track}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
 \subsubsection[{track}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::track}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_a5aad2c5d4f711da0c77ad9a0e2b4f568}
 
 
-\-Definition at line 229 of file frm\-\_\-main.\-py.
+\-Definition at line 337 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}!track\-\_\-graf@{track\-\_\-graf}}
+\index{track\-\_\-graf@{track\-\_\-graf}!Aplicacion::frm_main::ProcEncuentro@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Encuentro}}
+\subsubsection[{track\-\_\-graf}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Encuentro\-::track\-\_\-graf}}\label{class_aplicacion_1_1frm__main_1_1_proc_encuentro_abf2a27956c7c1831b3cbe373bf6419b1}
+
+
+\-Definition at line 494 of file frm\-\_\-main.\-py.
 
 
 

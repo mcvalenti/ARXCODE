@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">main/estudioTLE.py</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="estudio_t_l_e_8py.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="namespaceestudio_t_l_e.html">00001</a> <span class="stringliteral">&#39;&#39;&#39;</span>
+<a href="estudio_t_l_e_8py.html">Go to the documentation of this file.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html">00001</a> <span class="stringliteral">&#39;&#39;&#39;</span>
 <a name="l00002"></a>00002 <span class="stringliteral">Created on 12/06/2017</span>
 <a name="l00003"></a>00003 <span class="stringliteral">Voy a generar un crudo TLE con tles para el 1 de los meses de</span>
 <a name="l00004"></a>00004 <span class="stringliteral">Febrero, Abril, Junio, Agosto y Octubre del anio 2013.</span>
@@ -131,7 +131,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00031"></a>00031 <span class="stringliteral">&quot;&quot;&quot;</span>
 <a name="l00032"></a>00032 
 <a name="l00033"></a>00033 
-<a name="l00034"></a><a class="code" href="namespaceestudio_t_l_e.html#a05f5fb07809e9aed4c1d036c20f31d2d">00034</a> <span class="keyword">def </span><a class="code" href="namespaceestudio_t_l_e.html#a05f5fb07809e9aed4c1d036c20f31d2d">procesar</a>(sat_id,archivo_crudo_tle):
+<a name="l00034"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#adc1677cad58b325f36824667323a687c">00034</a> <span class="keyword">def </span><a class="code" href="namespacemain_1_1estudio_t_l_e.html#adc1677cad58b325f36824667323a687c">procesar</a>(sat_id,archivo_crudo_tle):
 <a name="l00035"></a>00035     <span class="stringliteral">&quot;&quot;&quot;</span>
 <a name="l00036"></a>00036 <span class="stringliteral">    Invoca a la funcion setTLE, para fragmentar</span>
 <a name="l00037"></a>00037 <span class="stringliteral">    cada uno de los TLE del dato crudo en archivos</span>
@@ -142,7 +142,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00042"></a>00042         os.unlink(filename)
 <a name="l00043"></a>00043     <span class="keywordflow">if</span> os.stat(<span class="stringliteral">&#39;../TleAdmin/crudosTLE/&#39;</span>+archivo_crudo_tle).st_size == 0:
 <a name="l00044"></a>00044         print(<span class="stringliteral">&#39;El archivo esta vacio&#39;</span>)
-<a name="l00045"></a>00045     <a class="code" href="namespace_tle_admin_1_1_tle_archivos.html#a244024f2862e971e68ad202d37911f27">setTLE</a>(sat_id,archivo_crudo_tle )
+<a name="l00045"></a>00045     setTLE(sat_id,archivo_crudo_tle )
 <a name="l00046"></a>00046     lista_tles=glob.glob(<span class="stringliteral">&#39;../TleAdmin/tle/*&#39;</span>)
 <a name="l00047"></a>00047     cant_tles=len(lista_tles)
 <a name="l00048"></a>00048     <span class="stringliteral">&quot;&quot;&quot;</span>
@@ -212,7 +212,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00112"></a>00112     
 <a name="l00113"></a>00113     
 <a name="l00114"></a>00114     <span class="comment">#SAC-D</span>
-<a name="l00115"></a><a class="code" href="namespaceestudio_t_l_e.html#a85ca1771abea931dec7b455964ba32a1">00115</a>     sat_id=<span class="stringliteral">&#39;37673&#39;</span>
+<a name="l00115"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#acc9101b604fe7b4696210a580af19d18">00115</a>     sat_id=<span class="stringliteral">&#39;37673&#39;</span>
 <a name="l00116"></a>00116     <span class="comment">#1 Junio</span>
 <a name="l00117"></a>00117 <span class="comment">#     archivo_crudo_tle=&#39;37673_20130518_20130604.tle&#39;</span>
 <a name="l00118"></a>00118 <span class="comment">#     archivo_crudo_cods=&#39;CODS_20130604_135818_SACD_DENSEPHEM_TOD_XYZ_O.TXT&#39;</span>
@@ -220,8 +220,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00120"></a>00120 <span class="comment">#     archivo_crudo_tle=&#39;37673_20130620_20130704.tle&#39;</span>
 <a name="l00121"></a>00121 <span class="comment">#     archivo_crudo_cods=&#39;CODS_20130704_135823_SACD_DENSEPHEM_TOD_XYZ_O.TXT&#39;</span>
 <a name="l00122"></a>00122     <span class="comment">#3 Agosto</span>
-<a name="l00123"></a><a class="code" href="namespaceestudio_t_l_e.html#ad48154f6ac79cd26dfef93e5cb857045">00123</a>     archivo_crudo_tle=<span class="stringliteral">&#39;37673_20130721_20130804.tle&#39;</span>
-<a name="l00124"></a><a class="code" href="namespaceestudio_t_l_e.html#a29cb816f50fc278f1fc6b5243c83727d">00124</a>     archivo_crudo_cods=<span class="stringliteral">&#39;CODS_20130804_135714_SACD_DENSEPHEM_TOD_XYZ_O.TXT&#39;</span>
+<a name="l00123"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a5c2da23286e8de1140f07bc80316064a">00123</a>     archivo_crudo_tle=<span class="stringliteral">&#39;37673_20130721_20130804.tle&#39;</span>
+<a name="l00124"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a03b94f3196188f37a6bef7c7b8dfc0cd">00124</a>     archivo_crudo_cods=<span class="stringliteral">&#39;CODS_20130804_135714_SACD_DENSEPHEM_TOD_XYZ_O.TXT&#39;</span>
 <a name="l00125"></a>00125     <span class="comment">#4 Septiembre</span>
 <a name="l00126"></a>00126 <span class="comment">#    archivo_crudo_tle=&#39;37673_20130821_20130904.tle&#39;</span>
 <a name="l00127"></a>00127     <span class="comment">#5 Octubre</span>
@@ -242,43 +242,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00142"></a>00142 <span class="comment">#    archivo_crudo_tle=&#39;37673_20140420_20140504.tle&#39;</span>
 <a name="l00143"></a>00143     <span class="comment">#13 Junio  </span>
 <a name="l00144"></a>00144 <span class="comment">#    archivo_crudo_tle=&#39;37673_20140521_20140604.tle&#39;</span>
-<a name="l00145"></a>00145     tle_primario, tle_dia1= <a class="code" href="namespaceestudio_t_l_e.html#a05f5fb07809e9aed4c1d036c20f31d2d">procesar</a>(sat_id,archivo_crudo_tle)
+<a name="l00145"></a>00145     tle_primario, tle_dia1= <a class="code" href="namespacemain_1_1estudio_t_l_e.html#adc1677cad58b325f36824667323a687c">procesar</a>(sat_id,archivo_crudo_tle)
 <a name="l00146"></a>00146     
 <a name="l00147"></a>00147     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Fecha del TLE del dia 1: &#39;</span>, tle_dia1.epoca()
 <a name="l00148"></a>00148     
 <a name="l00149"></a>00149     <span class="stringliteral">&quot;&quot;&quot;</span>
 <a name="l00150"></a>00150 <span class="stringliteral">    Comparacion con CODS</span>
 <a name="l00151"></a>00151 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00152"></a><a class="code" href="namespaceestudio_t_l_e.html#a08826f20b82a757bad4d2f07e11d3b33">00152</a>     ephem=<a class="code" href="class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s.html">EphemCODS</a>(<span class="stringliteral">&#39;../CodsAdmin/sacDdensos/&#39;</span>+archivo_crudo_cods)   
-<a name="l00153"></a><a class="code" href="namespaceestudio_t_l_e.html#a70df421239bd23b05dbfcc944f5aaeb5">00153</a>     ephem_dic=ephem.genera_diccionario()
+<a name="l00152"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#ad88e5c7f769ca1417de7b7c435a2a131">00152</a>     ephem=<a class="code" href="class_cods_admin_1_1_ephem_c_o_d_s_1_1_ephem_c_o_d_s.html">EphemCODS</a>(<span class="stringliteral">&#39;../CodsAdmin/sacDdensos/&#39;</span>+archivo_crudo_cods)   
+<a name="l00153"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a95cc4040a9f85b7879252cfb36239e09">00153</a>     ephem_dic=ephem.genera_diccionario()
 <a name="l00154"></a>00154     
 <a name="l00155"></a>00155     
 <a name="l00156"></a>00156     <span class="comment"># Propago el TLE del dia 1. </span>
-<a name="l00157"></a><a class="code" href="namespaceestudio_t_l_e.html#a504174fa066414d58becbf37540ec5e0">00157</a>     anio=tle_dia1.epoca.year
-<a name="l00158"></a><a class="code" href="namespaceestudio_t_l_e.html#a0e597f6e5f7488399ac4c42273aa6615">00158</a>     mes=tle_dia1.epoca.month
-<a name="l00159"></a><a class="code" href="namespaceestudio_t_l_e.html#a61370b9373ad741def7ba9794aaa0b6a">00159</a>     epoca_ini_prop=datetime(anio,mes,3,0,0,0)
-<a name="l00160"></a><a class="code" href="namespaceestudio_t_l_e.html#a8e8d7ab6b2220b2de3821e828c938898">00160</a>     epoca_fin_prop=epoca_ini_prop+timedelta(days=1)
+<a name="l00157"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a007401dcd25795955b531938bae011ae">00157</a>     anio=tle_dia1.epoca.year
+<a name="l00158"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a539b598d5c6e5750941f4d70d6e9fdb0">00158</a>     mes=tle_dia1.epoca.month
+<a name="l00159"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a8ac2f4d12577b45e29a51768880be9a0">00159</a>     epoca_ini_prop=datetime(anio,mes,3,0,0,0)
+<a name="l00160"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#afa80af51ad91b863d33f0c72a48bbe84">00160</a>     epoca_fin_prop=epoca_ini_prop+timedelta(days=1)
 <a name="l00161"></a>00161     
-<a name="l00162"></a><a class="code" href="namespaceestudio_t_l_e.html#a166a17f127ceb4b7583e66e200a5512a">00162</a>     dif_r=[]
-<a name="l00163"></a><a class="code" href="namespaceestudio_t_l_e.html#a7f3f768198d910d138998f00073d4848">00163</a>     dif_v=[]
-<a name="l00164"></a><a class="code" href="namespaceestudio_t_l_e.html#a516ac8d53fecd606ff13b67a800c3c67">00164</a>     dif_n=[]
-<a name="l00165"></a><a class="code" href="namespaceestudio_t_l_e.html#afead10cf733b61d1340753bbcdd715f6">00165</a>     dif_c=[]
+<a name="l00162"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#aad1b05cd0339c0b911daa68e52a0096c">00162</a>     dif_r=[]
+<a name="l00163"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#ac92cc0a5000ecb28d011c866cbd4d1e4">00163</a>     dif_v=[]
+<a name="l00164"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#ae39645610f47de66f88032bf3bbce407">00164</a>     dif_n=[]
+<a name="l00165"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a5f14fccd2c58166bac086fca74061028">00165</a>     dif_c=[]
 <a name="l00166"></a>00166       
 <a name="l00167"></a>00167     <span class="keywordflow">while</span> epoca_ini_prop &lt; epoca_fin_prop:
 <a name="l00168"></a>00168         <span class="comment">#propago</span>
 <a name="l00169"></a>00169         r,v = tle_dia1.propagaTLE(epoca_ini_prop)
-<a name="l00170"></a><a class="code" href="namespaceestudio_t_l_e.html#a299627ac470b042bc4d26d25aef1a790">00170</a>         r_tod = <a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">teme2tod</a>(epoca_ini_prop,r)        
+<a name="l00170"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#aa5c6956ca6ccc251a54b4dd70e081ccc">00170</a>         r_tod = <a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc">teme2tod</a>(epoca_ini_prop,r)        
 <a name="l00171"></a>00171         <span class="comment">#extraigo datos cods</span>
-<a name="l00172"></a><a class="code" href="namespaceestudio_t_l_e.html#a563806c6a8999212459daf08a9226309">00172</a>         x=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;x&#39;</span>]
-<a name="l00173"></a><a class="code" href="namespaceestudio_t_l_e.html#af75e112c996e585da463ace7e180a471">00173</a>         y=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;y&#39;</span>]
-<a name="l00174"></a><a class="code" href="namespaceestudio_t_l_e.html#a3ec34a740b736765542eaf20999a4b7a">00174</a>         z=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;z&#39;</span>]
-<a name="l00175"></a><a class="code" href="namespaceestudio_t_l_e.html#a1c80cfb5f136a31fa13abded69a21e9f">00175</a>         vx=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;vx&#39;</span>]
-<a name="l00176"></a><a class="code" href="namespaceestudio_t_l_e.html#afa5854431c0e127e4eda621500b33668">00176</a>         vy=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;vy&#39;</span>]
-<a name="l00177"></a><a class="code" href="namespaceestudio_t_l_e.html#a05c5779853ecd24fe946bbb0c7af5c88">00177</a>         vz=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;vz&#39;</span>]
-<a name="l00178"></a><a class="code" href="namespaceestudio_t_l_e.html#a1b00721df9da8b35d54765e9f5ffca44">00178</a>         r_cods=np.array([float(x),float(y),float(z)])
-<a name="l00179"></a><a class="code" href="namespaceestudio_t_l_e.html#afdeb675739ece4622166417475376aa8">00179</a>         v_cods=np.array([float(vx),float(vy),float(vz)])
+<a name="l00172"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#aeadabccb7a4ffa65eb8b42136e911ff1">00172</a>         x=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;x&#39;</span>]
+<a name="l00173"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a0254a661ac894514ff42807547eb300a">00173</a>         y=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;y&#39;</span>]
+<a name="l00174"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a04ac4d49d3d3a314e40348e2b546dca7">00174</a>         z=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;z&#39;</span>]
+<a name="l00175"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#aedcf57414d6d0ead6517c18a1d58e667">00175</a>         vx=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;vx&#39;</span>]
+<a name="l00176"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a703836dd993c4ab464fcf1988e238be4">00176</a>         vy=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;vy&#39;</span>]
+<a name="l00177"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a12a5c57dddf52d096ee7e6ad913d1dd5">00177</a>         vz=ephem_dic[epoca_ini_prop][<span class="stringliteral">&#39;vz&#39;</span>]
+<a name="l00178"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#aec1ebad5041393afbf610c97e3cf4c75">00178</a>         r_cods=np.array([float(x),float(y),float(z)])
+<a name="l00179"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#acfd3263b693635675771c4495f838613">00179</a>         v_cods=np.array([float(vx),float(vy),float(vz)])
 <a name="l00180"></a>00180       
-<a name="l00181"></a><a class="code" href="namespaceestudio_t_l_e.html#ac49c596bc8811ca7fe0415bc0034894a">00181</a>         resta=r_cods[0]-r_tod.item(0),r_cods[1]-r_tod.item(1),r_cods[2]-r_tod.item(2)
+<a name="l00181"></a><a class="code" href="namespacemain_1_1estudio_t_l_e.html#a93e4064352334bf8446fcf986e275247">00181</a>         resta=r_cods[0]-r_tod.item(0),r_cods[1]-r_tod.item(1),r_cods[2]-r_tod.item(2)
 <a name="l00182"></a>00182         v,n,c=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a8190e729516e0f1cc25eee08d0303760">vncSis</a>(r_cods,v_cods,resta)
 <a name="l00183"></a>00183           
 <a name="l00184"></a>00184         dif_r.append(resta)
@@ -312,7 +312,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li class="navelem"><a class="el" href="estudio_t_l_e_8py.html">estudioTLE.py</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

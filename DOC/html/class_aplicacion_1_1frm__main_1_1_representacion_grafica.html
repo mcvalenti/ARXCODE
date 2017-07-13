@@ -77,6 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -102,7 +103,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Aplicacion.frm_main.RepresentacionGrafica Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="Aplicacion::frm_main::RepresentacionGrafica" -->
+<!-- doxytag: class="Aplicacion::frm_main::RepresentacionGrafica" --><!-- doxytag: inherits="QDialog" --><div class="dynheader">
+Inheritance diagram for Aplicacion.frm_main.RepresentacionGrafica:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_aplicacion_1_1frm__main_1_1_representacion_grafica__inherit__graph.png" border="0" usemap="#_aplicacion_8frm__main_8_representacion_grafica_inherit__map" alt="Inheritance graph"/></div>
+<map name="_aplicacion_8frm__main_8_representacion_grafica_inherit__map" id="_aplicacion_8frm__main_8_representacion_grafica_inherit__map">
+<area shape="rect" id="node2" href="class_q_dialog.html" title="{QDialog\n||}" alt="" coords="109,5,179,83"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for Aplicacion.frm_main.RepresentacionGrafica:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_aplicacion_1_1frm__main_1_1_representacion_grafica__coll__graph.png" border="0" usemap="#_aplicacion_8frm__main_8_representacion_grafica_coll__map" alt="Collaboration graph"/></div>
+<map name="_aplicacion_8frm__main_8_representacion_grafica_coll__map" id="_aplicacion_8frm__main_8_representacion_grafica_coll__map">
+<area shape="rect" id="node2" href="class_q_dialog.html" title="{QDialog\n||}" alt="" coords="109,5,179,83"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
 <p><a href="class_aplicacion_1_1frm__main_1_1_representacion_grafica-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
@@ -124,7 +139,7 @@ Public Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00719">719</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00846">846</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a498ac17d5fb23f5463fdbc8a9b745fce"></a><!-- doxytag: member="Aplicacion::frm_main::RepresentacionGrafica::__init__" ref="a498ac17d5fb23f5463fdbc8a9b745fce" args="" -->
 <div class="memitem">
@@ -157,56 +172,56 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00721">721</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00721"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#aa724a1066343c396a2e7b5c20e589422">00721</a> 
-<a name="l00722"></a>00722     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a498ac17d5fb23f5463fdbc8a9b745fce">__init__</a>(self,set_datos=None,parent=None):
-<a name="l00723"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ab2af4245537eb9cfe16d3a976c057026">00723</a>         QDialog.__init__(self,parent)
-<a name="l00724"></a>00724 
-<a name="l00725"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ac9b7ad146fce25b37dfece36b4ae8257">00725</a>         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#aa724a1066343c396a2e7b5c20e589422">sat_id</a>=set_datos[0]
-<a name="l00726"></a>00726         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a959356515b4557e20ba68ac69d2dec69">dt</a>=set_datos[5]
-<a name="l00727"></a>00727         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a29581766bd0948596dc1ded6a9dca912">data</a>=set_datos[6]
-<a name="l00728"></a>00728         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a2f282c1dfbe12fd44965a55b6433b321">coef</a>=set_datos[7]
-<a name="l00729"></a>00729         
-<a name="l00730"></a>00730         self.setWindowModality(Qt.ApplicationModal)
-<a name="l00731"></a>00731         layout = QHBoxLayout()
-<a name="l00732"></a>00732 
-<a name="l00733"></a>00733         graficos=[<span class="stringliteral">&quot;Diferencias Totales&quot;</span>,<span class="stringliteral">&quot;Diferencias por Coordenada&quot;</span>,<span class="stringliteral">&quot;Diferencias del Set Principal&quot;</span>,<span class="stringliteral">&quot;Histograma de Bin&quot;</span>]
-<a name="l00734"></a>00734         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a31e87397c1aa917d5fe481921da7e733">listWidget</a> = QListWidget()
-<a name="l00735"></a>00735         self.listWidget.addItems(graficos)
-<a name="l00736"></a>00736         
-<a name="l00737"></a>00737 
-<a name="l00738"></a>00738         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a3f44b584b529d20626bbdb1260d5406d">figura</a>=plt.figure()
-<a name="l00739"></a>00739         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#abd84ce84f9d83698d4152d59ad27435f">canvas</a> = FigureCanvas(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a3f44b584b529d20626bbdb1260d5406d">figura</a>)
-<a name="l00740"></a>00740         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00741"></a>00741 <span class="stringliteral">        Boton</span>
-<a name="l00742"></a>00742 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00743"></a>00743         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ab2af4245537eb9cfe16d3a976c057026">boton_salir</a> = QPushButton(<span class="stringliteral">&#39;Salir&#39;</span>)
-<a name="l00744"></a>00744         
-<a name="l00745"></a>00745         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00746"></a>00746 <span class="stringliteral">        Etiquetas</span>
-<a name="l00747"></a>00747 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00748"></a>00748         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ac9b7ad146fce25b37dfece36b4ae8257">escribir</a> = QTextEdit()
-<a name="l00749"></a>00749         
-<a name="l00750"></a>00750         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00751"></a>00751 <span class="stringliteral">        Acciones</span>
-<a name="l00752"></a>00752 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00753"></a>00753         self.listWidget.itemSelectionChanged.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a4e8da8af91257b9a22c00f59bda16ad4">itemChanged</a>)
-<a name="l00754"></a>00754 <span class="comment">#        self.listWidget.itemClicked.connect(self.item_click)</span>
-<a name="l00755"></a>00755         self.boton_salir.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a8c97e7cf01f8abb735f63d6c375f4fed">salir</a>)
-<a name="l00756"></a>00756 
-<a name="l00757"></a>00757 
-<a name="l00758"></a>00758         layout.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a31e87397c1aa917d5fe481921da7e733">listWidget</a>)
-<a name="l00759"></a>00759         layout.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#abd84ce84f9d83698d4152d59ad27435f">canvas</a>)
-<a name="l00760"></a>00760         layout.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ab2af4245537eb9cfe16d3a976c057026">boton_salir</a>)
-<a name="l00761"></a>00761         self.setLayout(layout)
-<a name="l00762"></a>00762         self.setWindowTitle(<span class="stringliteral">&#39;Graficos&#39;</span>)
-<a name="l00763"></a>00763 
-<a name="l00764"></a>00764 <span class="comment">#     def add_items(self):</span>
-<a name="l00765"></a>00765 <span class="comment">#         for item_text in [&#39;item1&#39;, &#39;item2&#39;, &#39;item3&#39;]:</span>
-<a name="l00766"></a>00766 <span class="comment">#             item = QListWidgetItem(item_text)</span>
-<a name="l00767"></a>00767 <span class="comment">#             self.addItem(item)</span>
-<a name="l00768"></a>00768 
-<a name="l00769"></a>00769             
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00848">848</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00848"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#aa724a1066343c396a2e7b5c20e589422">00848</a> 
+<a name="l00849"></a>00849     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a498ac17d5fb23f5463fdbc8a9b745fce">__init__</a>(self,set_datos=None,parent=None):
+<a name="l00850"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ab2af4245537eb9cfe16d3a976c057026">00850</a>         QDialog.__init__(self,parent)
+<a name="l00851"></a>00851 
+<a name="l00852"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ac9b7ad146fce25b37dfece36b4ae8257">00852</a>         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#aa724a1066343c396a2e7b5c20e589422">sat_id</a>=set_datos[0]
+<a name="l00853"></a>00853         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a959356515b4557e20ba68ac69d2dec69">dt</a>=set_datos[5]
+<a name="l00854"></a>00854         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a29581766bd0948596dc1ded6a9dca912">data</a>=set_datos[6]
+<a name="l00855"></a>00855         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a2f282c1dfbe12fd44965a55b6433b321">coef</a>=set_datos[7]
+<a name="l00856"></a>00856         
+<a name="l00857"></a>00857         self.setWindowModality(Qt.ApplicationModal)
+<a name="l00858"></a>00858         layout = QHBoxLayout()
+<a name="l00859"></a>00859 
+<a name="l00860"></a>00860         graficos=[<span class="stringliteral">&quot;Diferencias Totales&quot;</span>,<span class="stringliteral">&quot;Diferencias por Coordenada&quot;</span>,<span class="stringliteral">&quot;Diferencias del Set Principal&quot;</span>,<span class="stringliteral">&quot;Histograma de Bin&quot;</span>]
+<a name="l00861"></a>00861         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a31e87397c1aa917d5fe481921da7e733">listWidget</a> = QListWidget()
+<a name="l00862"></a>00862         self.listWidget.addItems(graficos)
+<a name="l00863"></a>00863         
+<a name="l00864"></a>00864 
+<a name="l00865"></a>00865         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a3f44b584b529d20626bbdb1260d5406d">figura</a>=plt.figure()
+<a name="l00866"></a>00866         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#abd84ce84f9d83698d4152d59ad27435f">canvas</a> = FigureCanvas(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a3f44b584b529d20626bbdb1260d5406d">figura</a>)
+<a name="l00867"></a>00867         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00868"></a>00868 <span class="stringliteral">        Boton</span>
+<a name="l00869"></a>00869 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00870"></a>00870         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ab2af4245537eb9cfe16d3a976c057026">boton_salir</a> = QPushButton(<span class="stringliteral">&#39;Salir&#39;</span>)
+<a name="l00871"></a>00871         
+<a name="l00872"></a>00872         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00873"></a>00873 <span class="stringliteral">        Etiquetas</span>
+<a name="l00874"></a>00874 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00875"></a>00875         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ac9b7ad146fce25b37dfece36b4ae8257">escribir</a> = QTextEdit()
+<a name="l00876"></a>00876         
+<a name="l00877"></a>00877         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00878"></a>00878 <span class="stringliteral">        Acciones</span>
+<a name="l00879"></a>00879 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00880"></a>00880         self.listWidget.itemSelectionChanged.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a4e8da8af91257b9a22c00f59bda16ad4">itemChanged</a>)
+<a name="l00881"></a>00881 <span class="comment">#        self.listWidget.itemClicked.connect(self.item_click)</span>
+<a name="l00882"></a>00882         self.boton_salir.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a8c97e7cf01f8abb735f63d6c375f4fed">salir</a>)
+<a name="l00883"></a>00883 
+<a name="l00884"></a>00884 
+<a name="l00885"></a>00885         layout.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a31e87397c1aa917d5fe481921da7e733">listWidget</a>)
+<a name="l00886"></a>00886         layout.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#abd84ce84f9d83698d4152d59ad27435f">canvas</a>)
+<a name="l00887"></a>00887         layout.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#ab2af4245537eb9cfe16d3a976c057026">boton_salir</a>)
+<a name="l00888"></a>00888         self.setLayout(layout)
+<a name="l00889"></a>00889         self.setWindowTitle(<span class="stringliteral">&#39;Graficos&#39;</span>)
+<a name="l00890"></a>00890 
+<a name="l00891"></a>00891 <span class="comment">#     def add_items(self):</span>
+<a name="l00892"></a>00892 <span class="comment">#         for item_text in [&#39;item1&#39;, &#39;item2&#39;, &#39;item3&#39;]:</span>
+<a name="l00893"></a>00893 <span class="comment">#             item = QListWidgetItem(item_text)</span>
+<a name="l00894"></a>00894 <span class="comment">#             self.addItem(item)</span>
+<a name="l00895"></a>00895 
+<a name="l00896"></a>00896             
 
 </pre></div>
 </div>
@@ -227,15 +242,15 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00770">770</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00770"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a4e8da8af91257b9a22c00f59bda16ad4">00770</a> 
-<a name="l00771"></a>00771     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a4e8da8af91257b9a22c00f59bda16ad4">itemChanged</a>(self):
-<a name="l00772"></a>00772         item = QListWidgetItem(self.listWidget.currentItem())
-<a name="l00773"></a>00773         item_str=item.text()
-<a name="l00774"></a>00774         <span class="keywordflow">if</span> item_str == <span class="stringliteral">&quot;Diferencias Totales&quot;</span>:
-<a name="l00775"></a>00775             self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a3f44b584b529d20626bbdb1260d5406d">figura</a> = ploteos.grafica_setcompleto(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a959356515b4557e20ba68ac69d2dec69">dt</a>, self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a29581766bd0948596dc1ded6a9dca912">data</a>, self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a2f282c1dfbe12fd44965a55b6433b321">coef</a>)
-<a name="l00776"></a>00776 <span class="comment">#            ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data,self.coef)</span>
-<a name="l00777"></a>00777             self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#abd84ce84f9d83698d4152d59ad27435f">canvas</a> = FigureCanvas(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a3f44b584b529d20626bbdb1260d5406d">figura</a>)
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00897">897</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00897"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a4e8da8af91257b9a22c00f59bda16ad4">00897</a> 
+<a name="l00898"></a>00898     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a4e8da8af91257b9a22c00f59bda16ad4">itemChanged</a>(self):
+<a name="l00899"></a>00899         item = QListWidgetItem(self.listWidget.currentItem())
+<a name="l00900"></a>00900         item_str=item.text()
+<a name="l00901"></a>00901         <span class="keywordflow">if</span> item_str == <span class="stringliteral">&quot;Diferencias Totales&quot;</span>:
+<a name="l00902"></a>00902             self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a3f44b584b529d20626bbdb1260d5406d">figura</a> = ploteos.grafica_setcompleto(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a959356515b4557e20ba68ac69d2dec69">dt</a>, self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a29581766bd0948596dc1ded6a9dca912">data</a>, self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a2f282c1dfbe12fd44965a55b6433b321">coef</a>)
+<a name="l00903"></a>00903 <span class="comment">#            ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data,self.coef)</span>
+<a name="l00904"></a>00904             self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#abd84ce84f9d83698d4152d59ad27435f">canvas</a> = FigureCanvas(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a3f44b584b529d20626bbdb1260d5406d">figura</a>)
             self.canvas.draw()
 </pre></div>
 </div>
@@ -255,11 +270,11 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00796">796</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00796"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a8c97e7cf01f8abb735f63d6c375f4fed">00796</a> 
-<a name="l00797"></a>00797     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a8c97e7cf01f8abb735f63d6c375f4fed">salir</a>(self):
-<a name="l00798"></a>00798         self.accept()
-<a name="l00799"></a>00799         
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00923">923</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00923"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a8c97e7cf01f8abb735f63d6c375f4fed">00923</a> 
+<a name="l00924"></a>00924     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a8c97e7cf01f8abb735f63d6c375f4fed">salir</a>(self):
+<a name="l00925"></a>00925         self.accept()
+<a name="l00926"></a>00926         
 
 </pre></div>
 </div>
@@ -276,7 +291,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00723">723</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00850">850</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -291,7 +306,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00721">721</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00848">848</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -306,7 +321,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00721">721</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00848">848</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -321,7 +336,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00721">721</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00848">848</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -336,7 +351,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00721">721</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00848">848</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -351,7 +366,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00725">725</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00852">852</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -366,7 +381,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00721">721</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00848">848</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -381,7 +396,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00721">721</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00848">848</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -396,7 +411,7 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00721">721</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00848">848</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -425,7 +440,7 @@ Public Attributes</h2></td></tr>
       <li class="navelem"><a class="el" href="namespace_aplicacion_1_1frm__main.html">frm_main</a>      </li>
       <li class="navelem"><a class="el" href="class_aplicacion_1_1frm__main_1_1_representacion_grafica.html">RepresentacionGrafica</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

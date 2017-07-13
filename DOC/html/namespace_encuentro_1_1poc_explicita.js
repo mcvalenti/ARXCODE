@@ -20,6 +20,7 @@ var namespace_encuentro_1_1poc_explicita =
     [ "s_comp", "namespace_encuentro_1_1poc_explicita.html#ac1aa96f22c1a67b631ff6640675bf092", null ],
     [ "sat_id", "namespace_encuentro_1_1poc_explicita.html#a59c2fc21a0c43f5f8ed341a020272717", null ],
     [ "TCA", "namespace_encuentro_1_1poc_explicita.html#a88b7deb45405de2ec87cd1081fcbcacd", null ],
+    [ "tca0", "namespace_encuentro_1_1poc_explicita.html#a55513c4af70b07a6ed69997f131dad17", null ],
     [ "var_s", "namespace_encuentro_1_1poc_explicita.html#a94a8d1f873062eb3196a7701ab8b7113", null ],
     [ "var_w", "namespace_encuentro_1_1poc_explicita.html#a8a31f21e186cdd6bfa87b87df65aca9f", null ],
     [ "var_x", "namespace_encuentro_1_1poc_explicita.html#aa689de410595dc4400566796e2ba7d84", null ],

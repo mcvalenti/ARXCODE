@@ -2,57 +2,67 @@
 \label{chap:arxcode} 
 
 %\endinput
-\section{Especificaciones}
-Prototipo de un software modular, reusable, modificables. 
+\section{Especificaciones generales}
 
-El ARxCODE es un prototipo de software dise\~ado para el procesamiento y an\'alisis de encuentros con riesgo de colisi\'on, entre misiones operativas y desechos espaciales.\\
-Tiene como objetivo principal procesar la informaci\'on, proveniente de los organismos internacionales de alerta, o cargada manualmente, para facilitar al operador los par\'ametros de la situaci\'on en forma clara para su correcta interpretaci\'on y comunicaci\'on.\\
-Es una aplicaci\'on de escritorio ¿?. BackEnd ¿?.\\
-Cuenta con una interfaz amigable.\\
-Su arquitectura permite agregar funciones, es extensible. Flexibilidad en la adici\'on de funcionalidades, filosof\'ia de expansi\'on.\\
-Describir:
-\begin{itemize}
-\itemsep0em
- \item  M\'odulos Fundamentales.
- \item Flujo de Pantallas.
- \item Diagrama de Componentes.
- \item Requerimientos.
- \item Casos de USO.
- \item Entidades (diagrama de clases)
- \item Diagrama de Secuencia.
- \item Dise\~no de interfaces.
-\end{itemize}
+ARxCODE es un prototipo de software dise\~nado para el procesamiento y an\'alisis de encuentros con riesgo de colisi\'on, entre misiones operativas y desechos espaciales.\\
+Tiene como objetivo principal procesar la informaci\'on, proveniente de los organismos internacionales de alerta (mensaje CDM), o cargada manualmente, y facilitar al operador la visualizaci\'on de los par\'ametros de la situaci\'on en forma clara para su correcta interpretaci\'on y comunicaci\'on.\\
+Es una aplicaci\'on de escritorio, de estructura modular, reusable y modificable que cuenta con una interfaz amigable.\\
+Pensada con una filosof\'ia de expansi\'on y perfeccionamiento, su arquitectura permite la adici\'on de funcionalidades sin mayores inconvenientes.\\
 
-\section{Requerimientos}
-Se listan a continuaci\'on los requerimientos del sistema.
+% Describir:
+% \begin{itemize}
+% \itemsep0em
+%  \item  M\'odulos Fundamentales.
+%  \item Flujo de Pantallas.
+%  \item Diagrama de Componentes.
+%  \item Requerimientos.
+%  \item Casos de USO.
+%  \item Entidades (diagrama de clases)
+%  \item Diagrama de Secuencia.
+%  \item Dise\~no de interfaces.
+% \end{itemize}
+
+\section{Requerimientos}\label{sec:requerimientos}
+
+Se pretende que ARxCODE sea una herramienta que oficie de soporte al operador en el di\'alogo con los organismos internacionales que proveen los mensajes de alerta, frente a una situaci\'on de riesgo de colisi\'on. A tal fin, el sistema debe tener la capacidad de interpretar los mensajes estandarizados CDM y presentar la informaci\'on que all\'i se registra, en forma clara al operador.\\
+Por otro lado, debe tener la capacidad de colectar datos ingresados manualmente por el operador y ofrecer los par\'ametros que resulten del procesamiento propio del ARxCODE, como m\'inima distancia, TCA calculado y PoC.\\
+Esta \'ultima funcionalidad implica que ARxCODE debe poder solicitar a la p\'agina Space-Track los TLEs correspondientes a los objetos involucrados, debe poder estimar las matrices de covarianza de ambos objetos, ya sea mediante el m\'etodo de Osweiler o incorporando efem\'erides predichas del departamento de din\'amica orbital; debe poder propagar esos errores al momento del TCA y finalmente calcular la PoC, con un error aceptable.\\
+En la tabla \ref{tab:req}, se listan todos los requerimientos del sistema.\\
 
 \begin{table}[!h]
  \resizebox{\linewidth}{!}{
- \begin{tabular}{|l|l|l|}
+ \begin{tabular}{|l|l|}
  \hline \hline
-  Req. ID & Descripci\'on & Comentario \\
+   \rowcolor{lightgray}
+  Req. ID & Descripci\'on \\
   \hline \hline
-  1 & Requerimientos FUNCIONALES & \\
+  \rowcolor{lightgray}
+  1 & Requerimientos FUNCIONALES\\
   \hline
-  ARR-010 & ARxCODE debe calcular la probabilidad de colisi\'on de un acercamiento de riesgo. & \\
+  ARR-010 & ARxCODE debe calcular la probabilidad de colisi\'on de un acercamiento de riesgo.\\
   \hline
-  ARR-020 & \makecell{ARxCODE debe  aceptar como inputs: un mensaje de alerta (CDM),\\ o los identificadores de NORAD de ambos objetos y\\ el tiempo de m\'aximo acercamiento (TCA).}&\\
+  \multirow{2}{*}{ARR-020} & ARxCODE debe  aceptar como inputs: un mensaje de alerta (CDM),o los identificadores\\
+  & de NORAD de ambos objetos y el tiempo de m\'aximo acercamiento (TCA).\\
   \hline
-  ARR-030 & \makecell{ARxCODE debe utilizar los productos orbitales de la misi\'on o realizar \\el mismo procedimiento que se aplica al desecho, a la misi\'on.}&\\
+  \multirow{2}{*}{ARR-030} & ARxCODE debe utilizar los productos orbitales de la misi\'on o realizar el mismo\\
+  & procedimiento que se aplica al desecho, a la misi\'on.\\
   \hline
-  ARR-040 & ARxCODE debe calcular la m\'inima distancia, total y en la coordenada radial.&\\
+  ARR-040 & ARxCODE debe calcular la m\'inima distancia, total y en la coordenada radial.\\
   \hline
-  ARR-050 & ARxCODE debe manipular los sistemas de referencia: TEME, TOD, VNC y RTN. &\\
+  ARR-050 & ARxCODE debe manipular los sistemas de referencia: TEME, TOD, VNC y RTN. \\
   \hline
-  ARR-060 & \makecell{ARxCODE debe permitir al operador/analista experto visualizar\\ el encuentro, generar reportes y notificaciones.}&\\
+  \multirow{2}{*}{ARR-060}& ARxCODE debe permitir al operador/analista experto visualizar el encuentro,\\
+  & generar reportes y notificaciones.\\
   \hline
-  ARR-070 & \makecell{ARxCODE debe extraer el set de TLEs de los objetos involucrados \\ de los \'ultimos 15 d\'ias anteriores al TCA.}&\\
+  \multirow{2}{*}{ARR-070} & ARxCODE debe extraer el set de TLEs de los objetos involucrados \\
+  & de los \'ultimos 15 d\'ias anteriores al TCA.\\
   \hline
-  ARR-080 & ARxCODE debe estimar los errores en la posici\'on incial del desecho y de la misi\'on opeartiva.& \\
+  ARR-080 & ARxCODE debe estimar los errores en la posici\'on incial del desecho y de la misi\'on opeartiva.\\
   \hline
-  ARR-090 & ARxCODE debe propagar los errores de la posici\'on incial al TCA& \\
+  ARR-090 & ARxCODE debe propagar los errores de la posici\'on incial al TCA.\\
   \hline
-  2 & Requerimientos de INTERFACES & \\
+   \rowcolor{lightgray}
+  2 & Requerimientos de INTERFACES \\
   \hline
   ARR-100 & ARxCODE deber\'a permitir la carga manual de la situaci\'on de encuentro.\\
   \hline
@@ -60,80 +70,90 @@ Se listan a continuaci\'on los requerimientos del sistema.
   \hline
   ARR-120 & ARxCODE deber\'a manipular los CDM con formato xml.\\
   \hline
-  3 & Requerimientos de RENDIMIENTO y/o PERFORMANCE & \\
+   \rowcolor{lightgray}
+  3 & Requerimientos de RENDIMIENTO y/o PERFORMANCE\\
   \hline
-  ARR-210 & ARxCODE deber\'a ofrecer el reporte de la situaci\'on en no m\'as de 1 minuto &...\\
+  ARR-210 & ARxCODE deber\'a ofrecer el reporte de la situaci\'on en no m\'as de 1 minuto \\
   \hline
-  4 & Requerimientos de VALIDACI\'ON & \\
+    \rowcolor{lightgray}
+  4 & Requerimientos de VALIDACI\'ON \\
   \hline
-  ARR-300 & \makecell{Los m\'odulos de implementaci\'on de metodolog\'ias de ARxCODE\\ ser\'an validados con los resultados de las publicaciones pertinentes y la bibliograf\'ia} &...\\
+  \multirow{2}{*}{ARR-300} & Los m\'odulos de implementaci\'on de metodolog\'ias de ARxCODE ser\'an validados\\
+  & con los resultados de las publicaciones pertinentes y la bibliograf\'ia\\
   \hline
-  ARR-310 & Las propagaciones realizadas con el SGP4 ser\'an validadas con el software STK &...\\
+  ARR-310 & Las propagaciones realizadas con el SGP4 ser\'an validadas con el software STK \\
   \hline
-  5 & Requerimientos de DISE\~NO& \\
+    \rowcolor{lightgray}
+  5 & Requerimientos de DISE\~NO\\
   \hline
-  ARR-400 & ARxCODE tendr\'a un dise\~no modular&...\\
+  ARR-400 & ARxCODE tendr\'a un dise\~no modular\\
    \hline
-  ARR-410 & ARxCODE se desarrollar\'a como una librer\'ia &...\\
+  ARR-410 & ARxCODE se desarrollar\'a como una librer\'ia \\
   \hline
-  ARR-420 & ARxCODE contar\'a con una interfaz gr\'afica &...\\
+  ARR-420 & ARxCODE contar\'a con una interfaz gr\'afica \\
   \hline
-  6 & Requerimientos de IMPLEMENTACI\'ON& \\
+    \rowcolor{lightgray}
+  6 & Requerimientos de IMPLEMENTACI\'ON\\
   \hline
-  ARR-500& ARxCODE ser\'a implementado en python 2.7&...\\
+  ARR-500& ARxCODE ser\'a implementado en python 2.7\\
   \hline
-  ARR-510& ARxCODE ser\'a implementado en el entorno de desarrollo Eclipse&...\\
+  ARR-510& ARxCODE ser\'a implementado en el entorno de desarrollo Eclipse\\
   \hline
-  ARR-520& El control de versiones ser realizar\'a con Git&...\\
+  ARR-520& El control de versiones se realizar\'a con Git\\
   \hline
-  7 & Requerimientos de REUSABILIDAD & \\
+    \rowcolor{lightgray}
+  7 & Requerimientos de REUSABILIDAD\\
   \hline
-  ARR-600 & ARxCODE utilizar\'a la librer\'ia de SGP4 en Python &...\\
+  ARR-600 & ARxCODE utilizar\'a la librer\'ia de SGP4 en Python \\
   \hline
-  ARR-610 & ARxCODE utilizar\'a la librer\'ia de Element Tree para el parseo del CDM &...\\
+  ARR-610 & ARxCODE utilizar\'a la librer\'ia de Element Tree para el parseo del CDM\\
   \hline
-  ARR-620 & ARxCODE utilizar\'a la librer\'ia de ..bla..para la conexi\'on con Space-Track &...\\
-   \hline
-  ARR-630 & ARxCODE utilizar\'a la librer\'ia de ..bla..para los c\'alculos estad\'isticos y de integrac\'ion &...\\
+  ARR-620 & ARxCODE utilizar\'a la librer\'ia de ..bla..para la conexi\'on con Space-Track\\
+  \hline
+  ARR-630 & ARxCODE utilizar\'a la librer\'ia de ..bla..para los c\'alculos estad\'isticos y de integraci\'on \\
   \hline
  \end{tabular}
  }
  \caption[Tabla de Requerimientos]{Tabla de especificaci\'on de requerimientos del ARxCODE}
+ \label{tab:req}
 \end{table}
 
 
 \section{Interfaces}
 ARxCODE fue pensado para ser un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
-Ocupa un rol de intermediario a fin de facilitarle a un operador analista experto, herramientas para el intercambio de informaci\'on con los organismos externos y el centro de control.\\
 El dise\~no completo, contempla un acceso directo al servidor de la base de datos de los productos de Din\'amica Orbital para la obtenci\'on de: las efem\'erides propagadas de la misi\'on operativa, y los mensajes de alerta (CDM). Estos \'ultimos tambi\'en podr\'an ser recibidos por mail de los organismos internacionales de alerta, como por ejemplo JSpOC o mediante una solicitud a la p\'agina Space-track, previa notificaci\'on y registro autorizado del operador a cargo. (Ver Fig. \ref{fig:interfaces})\\
 
 \begin{figure}
 \centering
-  \includegraphics[width=0.8\textwidth]{imagenes/interfasessistemas}
+  \fbox{\includegraphics[width=0.8\textwidth]{imagenes/interfasessistemas}}
   \caption[Diagrama de Interfaces del Sistema]{Diagrama de Interfaces del Sistema}
   \label{fig:interfaces}
 \end{figure}
 
-No obstante, las interfaces implementadas son:\\
+No obstante, por cuestiones de tiempo y de accesibilidad, para el desarrollo de este trabajo, los datos que provee el departamento de din\'amica orbital fueron descargados y se extraen de un directorio, al igual que los mensajes de alerta CDM, que fueron descargados de pa\'aginas de internet , ya que no nos han facilitado ninguno vinculado a la misi\'on operativa de la que cual procesamos los productos orbitales, por motivos de confidencialidad. Se realiz\'o la automatizaci\'on de la descarga de TLEs de la p\'agina Space-Track y se habilit\'o en la interfaz la pantalla que permite la carga manual de los datos del encuentro.\\
 
+En conclusi\'on, las interfaces implementadas, son (Ver Fig. \ref{fig:interfacesImpl}):\\
 \begin{itemize}
 \itemsep0em
  \item Conexi\'on a Space-Track para la solicitud de TLEs.
- \item Administraci\'on de las efem\'erides orbitales de los directorios de CodsAdmin
+ \item Administraci\'on de las efem\'erides orbitales de los directorios de CodsAdmin.
  \item Administraci\'on de los CDM del directorio CDM, a trav\'es de la intervenci\'on del operador.
  \item Carga Manual de datos de un encuentro realizada por el operador.
 \end{itemize}
 
-(Ver Fig. \ref{fig:interfacesImpl})
-
 \begin{figure}
 \centering
-  \includegraphics[width=0.8\textwidth]{imagenes/interfazImplementada}
+  \fbox{\includegraphics[width=0.8\textwidth]{imagenes/interfazImplementada}}
   \caption[Diagrama de Interfaces Implementadas en ARxCODE]{Diagrama de Interfaces Implementadas en ARxCODE}
   \label{fig:interfacesImpl}
 \end{figure}
 
 \section{Arquitectura}
+
+
+\subsection*{Componentes}\label{subsec:componentes}
+Los distintos paquetes de ARxCODE pueden agruparse en .\\
+
 \begin{figure}[h!]
   \centering
   \includegraphics[width=.8\textwidth]{imagenes/componentesAR}
@@ -143,13 +163,6 @@ No obstante, las interfaces implementadas son:\\
 
 {\it{Dise\~no conceptual, con un alto grado de abstracci\'on de los principales m\'odulos de la aplicaci\'on y c\'omo se relacionan.}}
 clases principales: TLE, EphemCODS
-\subsection*{parametros globales y nomenclatura de la generacion de archivos}
-Parametros:\\
-\begin{itemize}
- \item satId
- \item fechaIni,fechaFin
- \item TLE/CODS
-\end{itemize}
 
 l prototipo de software para el An\'alisis de Riesgo por Colisi\'on con Desechos Espaciales {\it{ARxCODE}}, ser\'a un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
 El mismo se piensa como un intermediario capaz de: detectar los mensajes de alerta CDM provistos por el JSpOC, procesar los datos, generar mejores estimaciones para la posici\'on del desecho, solicitar datos m\'as precisos para la posici\'on de la misi\'on primaria y calcular la PoC. Todo esto a fin de facilitarle a un a un operador analista experto, herramientas para la toma de decisiones o el intercambio de informaci\'on con los organismos externos y el centro de control.\\

@@ -1,5 +1,23 @@
 \section{\-Aplicacion.\-frm\-\_\-main.\-Representacion\-Grafica \-Class \-Reference}
 \label{class_aplicacion_1_1frm__main_1_1_representacion_grafica}\index{\-Aplicacion.\-frm\-\_\-main.\-Representacion\-Grafica@{\-Aplicacion.\-frm\-\_\-main.\-Representacion\-Grafica}}
+
+
+\-Inheritance diagram for \-Aplicacion.\-frm\-\_\-main.\-Representacion\-Grafica\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_aplicacion_1_1frm__main_1_1_representacion_grafica__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for \-Aplicacion.\-frm\-\_\-main.\-Representacion\-Grafica\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{class_aplicacion_1_1frm__main_1_1_representacion_grafica__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,7 +53,7 @@ def {\bf salir}
 \subsection{\-Detailed \-Description}
 
 
-\-Definition at line 719 of file frm\-\_\-main.\-py.
+\-Definition at line 846 of file frm\-\_\-main.\-py.
 
 
 
@@ -51,60 +69,60 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_a498ac17d5fb23f5463fdbc8a9b745fce}
 
 
-\-Definition at line 721 of file frm\-\_\-main.\-py.
+\-Definition at line 848 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-721 
-722     def __init__(self,set_datos=None,parent=None):
-723         QDialog.__init__(self,parent)
-724 
-725         self.sat_id=set_datos[0]
-726         self.dt=set_datos[5]
-727         self.data=set_datos[6]
-728         self.coef=set_datos[7]
-729         
-730         self.setWindowModality(Qt.ApplicationModal)
-731         layout = QHBoxLayout()
-732 
-733         graficos=["Diferencias Totales","Diferencias por Coordenada","
+848 
+849     def __init__(self,set_datos=None,parent=None):
+850         QDialog.__init__(self,parent)
+851 
+852         self.sat_id=set_datos[0]
+853         self.dt=set_datos[5]
+854         self.data=set_datos[6]
+855         self.coef=set_datos[7]
+856         
+857         self.setWindowModality(Qt.ApplicationModal)
+858         layout = QHBoxLayout()
+859 
+860         graficos=["Diferencias Totales","Diferencias por Coordenada","
       Diferencias del Set Principal","Histograma de Bin"]
-734         self.listWidget = QListWidget()
-735         self.listWidget.addItems(graficos)
-736         
-737 
-738         self.figura=plt.figure()
-739         self.canvas = FigureCanvas(self.figura)
-740         """
-741         Boton
-742         """
-743         self.boton_salir = QPushButton('Salir')
-744         
-745         """
-746         Etiquetas
-747         """
-748         self.escribir = QTextEdit()
-749         
-750         """
-751         Acciones
-752         """
-753         self.listWidget.itemSelectionChanged.connect(self.itemChanged)
-754 #        self.listWidget.itemClicked.connect(self.item_click)
-755         self.boton_salir.clicked.connect(self.salir)
-756 
-757 
-758         layout.addWidget(self.listWidget)
-759         layout.addWidget(self.canvas)
-760         layout.addWidget(self.boton_salir)
-761         self.setLayout(layout)
-762         self.setWindowTitle('Graficos')
-763 
-764 #     def add_items(self):
-765 #         for item_text in ['item1', 'item2', 'item3']:
-766 #             item = QListWidgetItem(item_text)
-767 #             self.addItem(item)
-768 
-769             
+861         self.listWidget = QListWidget()
+862         self.listWidget.addItems(graficos)
+863         
+864 
+865         self.figura=plt.figure()
+866         self.canvas = FigureCanvas(self.figura)
+867         """
+868         Boton
+869         """
+870         self.boton_salir = QPushButton('Salir')
+871         
+872         """
+873         Etiquetas
+874         """
+875         self.escribir = QTextEdit()
+876         
+877         """
+878         Acciones
+879         """
+880         self.listWidget.itemSelectionChanged.connect(self.itemChanged)
+881 #        self.listWidget.itemClicked.connect(self.item_click)
+882         self.boton_salir.clicked.connect(self.salir)
+883 
+884 
+885         layout.addWidget(self.listWidget)
+886         layout.addWidget(self.canvas)
+887         layout.addWidget(self.boton_salir)
+888         self.setLayout(layout)
+889         self.setWindowTitle('Graficos')
+890 
+891 #     def add_items(self):
+892 #         for item_text in ['item1', 'item2', 'item3']:
+893 #             item = QListWidgetItem(item_text)
+894 #             self.addItem(item)
+895 
+896             
 
 \end{DoxyCode}
 
@@ -119,20 +137,20 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_a4e8da8af91257b9a22c00f59bda16ad4}
 
 
-\-Definition at line 770 of file frm\-\_\-main.\-py.
+\-Definition at line 897 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-770 
-771     def itemChanged(self):
-772         item = QListWidgetItem(self.listWidget.currentItem())
-773         item_str=item.text()
-774         if item_str == "Diferencias Totales":
-775             self.figura = ploteos.grafica_setcompleto(self.dt, self.data, self.
+897 
+898     def itemChanged(self):
+899         item = QListWidgetItem(self.listWidget.currentItem())
+900         item_str=item.text()
+901         if item_str == "Diferencias Totales":
+902             self.figura = ploteos.grafica_setcompleto(self.dt, self.data, self.
       coef)
-776 #           
+903 #           
        ploteos.grafica_diferenciasTotales(self.sat_id,self.dt,self.data,self.coef)
-777             self.canvas = FigureCanvas(self.figura)
+904             self.canvas = FigureCanvas(self.figura)
             self.canvas.draw()
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!salir@{salir}}
@@ -144,14 +162,14 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_a8c97e7cf01f8abb735f63d6c375f4fed}
 
 
-\-Definition at line 796 of file frm\-\_\-main.\-py.
+\-Definition at line 923 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-796 
-797     def salir(self):
-798         self.accept()
-799         
+923 
+924     def salir(self):
+925         self.accept()
+926         
 
 \end{DoxyCode}
 
@@ -162,63 +180,63 @@ def {\bf salir}
 \subsubsection[{boton\-\_\-salir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::boton\-\_\-salir}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_ab2af4245537eb9cfe16d3a976c057026}
 
 
-\-Definition at line 723 of file frm\-\_\-main.\-py.
+\-Definition at line 850 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!canvas@{canvas}}
 \index{canvas@{canvas}!Aplicacion::frm_main::RepresentacionGrafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}}
 \subsubsection[{canvas}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::canvas}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_abd84ce84f9d83698d4152d59ad27435f}
 
 
-\-Definition at line 721 of file frm\-\_\-main.\-py.
+\-Definition at line 848 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!coef@{coef}}
 \index{coef@{coef}!Aplicacion::frm_main::RepresentacionGrafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}}
 \subsubsection[{coef}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::coef}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_a2f282c1dfbe12fd44965a55b6433b321}
 
 
-\-Definition at line 721 of file frm\-\_\-main.\-py.
+\-Definition at line 848 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!data@{data}}
 \index{data@{data}!Aplicacion::frm_main::RepresentacionGrafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}}
 \subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::data}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_a29581766bd0948596dc1ded6a9dca912}
 
 
-\-Definition at line 721 of file frm\-\_\-main.\-py.
+\-Definition at line 848 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!dt@{dt}}
 \index{dt@{dt}!Aplicacion::frm_main::RepresentacionGrafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}}
 \subsubsection[{dt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::dt}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_a959356515b4557e20ba68ac69d2dec69}
 
 
-\-Definition at line 721 of file frm\-\_\-main.\-py.
+\-Definition at line 848 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!escribir@{escribir}}
 \index{escribir@{escribir}!Aplicacion::frm_main::RepresentacionGrafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}}
 \subsubsection[{escribir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::escribir}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_ac9b7ad146fce25b37dfece36b4ae8257}
 
 
-\-Definition at line 725 of file frm\-\_\-main.\-py.
+\-Definition at line 852 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!figura@{figura}}
 \index{figura@{figura}!Aplicacion::frm_main::RepresentacionGrafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}}
 \subsubsection[{figura}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::figura}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_a3f44b584b529d20626bbdb1260d5406d}
 
 
-\-Definition at line 721 of file frm\-\_\-main.\-py.
+\-Definition at line 848 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!list\-Widget@{list\-Widget}}
 \index{list\-Widget@{list\-Widget}!Aplicacion::frm_main::RepresentacionGrafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}}
 \subsubsection[{list\-Widget}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::list\-Widget}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_a31e87397c1aa917d5fe481921da7e733}
 
 
-\-Definition at line 721 of file frm\-\_\-main.\-py.
+\-Definition at line 848 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}!sat\-\_\-id@{sat\-\_\-id}}
 \index{sat\-\_\-id@{sat\-\_\-id}!Aplicacion::frm_main::RepresentacionGrafica@{\-Aplicacion\-::frm\-\_\-main\-::\-Representacion\-Grafica}}
 \subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Representacion\-Grafica\-::sat\-\_\-id}}\label{class_aplicacion_1_1frm__main_1_1_representacion_grafica_aa724a1066343c396a2e7b5c20e589422}
 
 
-\-Definition at line 721 of file frm\-\_\-main.\-py.
+\-Definition at line 848 of file frm\-\_\-main.\-py.
 
 
 

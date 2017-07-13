@@ -107,64 +107,143 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00007"></a>00007 <span class="stringliteral">&#39;&#39;&#39;</span>
 <a name="l00008"></a>00008 <span class="keyword">import</span> xml.etree.ElementTree <span class="keyword">as</span> ET
 <a name="l00009"></a>00009 
-<a name="l00010"></a>00010 
-<a name="l00011"></a><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">00011</a> <span class="keyword">def </span><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">extraeCDM</a>(archivo):
-<a name="l00012"></a>00012     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00013"></a>00013 <span class="stringliteral">    Extrae los datos de un CDM en formato XML.</span>
-<a name="l00014"></a>00014 <span class="stringliteral">    inputs</span>
-<a name="l00015"></a>00015 <span class="stringliteral">        archivos: nombre de archivo CDM en formato .xml (string)</span>
-<a name="l00016"></a>00016 <span class="stringliteral">    Outputs</span>
-<a name="l00017"></a>00017 <span class="stringliteral">        TCA: tiempo de maximos acercamiento. (string)</span>
-<a name="l00018"></a>00018 <span class="stringliteral">        Obj1, Obj2: nombre de objetos implicados (string)</span>
-<a name="l00019"></a>00019 <span class="stringliteral">        miss_dist: minima distancia (string)</span>
-<a name="l00020"></a>00020 <span class="stringliteral">        poc: probabilidad de colision (string)</span>
-<a name="l00021"></a>00021 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00022"></a>00022     tree = ET.parse(<span class="stringliteral">&#39;../CDM/archivos/&#39;</span>+archivo)
-<a name="l00023"></a>00023     root = tree.getroot()
-<a name="l00024"></a>00024 
-<a name="l00025"></a>00025     obj_m=[]
-<a name="l00026"></a>00026     obj_d=[]
-<a name="l00027"></a>00027 
-<a name="l00028"></a>00028     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00029"></a>00029 <span class="stringliteral">    ENCUENTRO</span>
-<a name="l00030"></a>00030 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00031"></a>00031 <span class="comment">#     tca_mio=cdm.find(&#39;body/relativeMetaData&#39;)</span>
-<a name="l00032"></a>00032 <span class="comment">#     print tca_mio.attrib</span>
-<a name="l00033"></a>00033     <span class="keywordflow">for</span> bod <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;body&#39;</span>):
-<a name="l00034"></a>00034         TCA=bod[0][1].text
-<a name="l00035"></a>00035         MISS_DISTANCE=bod[0][2].text
-<a name="l00036"></a>00036         POC=bod[0][14].text
-<a name="l00037"></a>00037         
-<a name="l00038"></a>00038     n=0    
-<a name="l00039"></a>00039     <span class="keywordflow">for</span> meta <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;metadata&#39;</span>):
-<a name="l00040"></a>00040         <span class="keywordflow">if</span> n == 0:
-<a name="l00041"></a>00041             obj_m.append(meta[1].text)
-<a name="l00042"></a>00042             obj_m.append(meta[2].text)
-<a name="l00043"></a>00043         <span class="keywordflow">else</span>:
-<a name="l00044"></a>00044             obj_d.append(meta[1].text)
-<a name="l00045"></a>00045             obj_d.append(meta[2].text)
-<a name="l00046"></a>00046         n=n+1
-<a name="l00047"></a>00047 
-<a name="l00048"></a>00048     obj_list=[obj_m,obj_d]    
-<a name="l00049"></a>00049     <span class="keywordflow">return</span> TCA,MISS_DISTANCE,POC,obj_list
-<a name="l00050"></a>00050     
-<a name="l00051"></a>00051     
-<a name="l00052"></a>00052 <span class="keywordflow">if</span> __name__==<span class="stringliteral">&#39;__main__&#39;</span>:
-<a name="l00053"></a>00053     
-<a name="l00054"></a><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#a596846ed946122c4c50bf17746fcc8c1">00054</a>     archivo=<span class="stringliteral">&#39;cdmTest.xml&#39;</span>
-<a name="l00055"></a>00055     TCA,MISS_DISTANCE,POC,obj_list= <a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">extraeCDM</a>(archivo)
-<a name="l00056"></a>00056     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00057"></a>00057 <span class="stringliteral">    Impresion por pantalla.</span>
-<a name="l00058"></a>00058 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00059"></a><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af6b27ddcc8dbdf433fe024867c90dbc8">00059</a>     info1=<span class="stringliteral">&#39;Acercamiento entre &#39;</span>+str(obj_list[0][0])+<span class="stringliteral">&#39; y &#39;</span>+str(obj_list[1][0])
-<a name="l00060"></a>00060     <span class="keywordflow">print</span> <span class="stringliteral">&#39;==============================================================&#39;</span>
-<a name="l00061"></a>00061     <span class="keywordflow">print</span> info1
-<a name="l00062"></a>00062     <span class="keywordflow">print</span> <span class="stringliteral">&#39;==============================================================&#39;</span>
-<a name="l00063"></a>00063     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Mision Id= &#39;</span>, str(obj_list[0][1])
-<a name="l00064"></a>00064     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Target Id= &#39;</span>, str(obj_list[1][1])
-<a name="l00065"></a>00065     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Tiempo de maximo acercamiento= &#39;</span>, TCA
-<a name="l00066"></a>00066     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Minima Distancia = &#39;</span>, MISS_DISTANCE
-<a name="l00067"></a>00067     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Probabilidad de Colision = &#39;</span>, POC
+<a name="l00010"></a><a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html">00010</a> <span class="keyword">class </span><a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html">CDM</a>():
+<a name="l00011"></a><a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a7ba1bf2236cc19183480ce500eb378f0">00011</a>     <span class="keyword">def </span><a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a62fdc401a53a9292808b8d2409e70083">__init__</a>(self,archivo):
+<a name="l00012"></a>00012         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#ad2ae7b043c68649d6d72ae7a8dbee791">tree</a>=ET.parse(<span class="stringliteral">&#39;../CDM/archivos/&#39;</span>+archivo)
+<a name="l00013"></a><a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a41ae52d766c516ceab07d112693e45a8">00013</a>         root = self.tree.getroot() 
+<a name="l00014"></a>00014         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#aaf05fe912ea80ac69e8d5b4b5a2724e6">TCA</a>=<span class="keywordtype">None</span>
+<a name="l00015"></a>00015         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a7cf5ff5f9464899a517a898c60bdf889">MISS_DISTANCE</a>=<span class="keywordtype">None</span>
+<a name="l00016"></a>00016         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#add6774955aefd7e4f2836d6d08b0f4c1">POC</a>=<span class="keywordtype">None</span>
+<a name="l00017"></a>00017         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a8c0a74883bb7d30d5bb529ff1ab0b80e">mision_name</a>=<span class="keywordtype">None</span>
+<a name="l00018"></a>00018         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#ae0e3fd458f12dd85ca17c2a44227b8f4">noradID_mision</a>=<span class="keywordtype">None</span>
+<a name="l00019"></a>00019         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a69e94e805571bd8c5aa1b9f2678e7a27">r_sat</a>=<span class="keywordtype">None</span>
+<a name="l00020"></a>00020         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a7ba1bf2236cc19183480ce500eb378f0">v_sat</a>=<span class="keywordtype">None</span>
+<a name="l00021"></a>00021         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a3ff0fb481830f1ca15e9ff1f9ecf02c6">deb_name</a>=<span class="keywordtype">None</span>
+<a name="l00022"></a>00022         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#ae2b53793d08d3b1532f8c0e3d1c5a893">noradID_deb</a>=<span class="keywordtype">None</span>
+<a name="l00023"></a>00023         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a484072da43b4efede4d279fecbb84675">dr</a>=<span class="keywordtype">None</span>
+<a name="l00024"></a>00024         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a026f33be06c1aff96e92ac6a205f68e7">ds</a>=<span class="keywordtype">None</span>
+<a name="l00025"></a>00025         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a715aedb3af35934564308f890f8c4aef">dw</a>=<span class="keywordtype">None</span>
+<a name="l00026"></a>00026         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a252e926f84ea5780990a9cfcd566a646">cr_r</a>=<span class="keywordtype">None</span>
+<a name="l00027"></a>00027         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a2fc05a349806916e63cf795f91e8d902">ct_r</a>=<span class="keywordtype">None</span>
+<a name="l00028"></a>00028         self_cr_t=<span class="keywordtype">None</span>
+<a name="l00029"></a>00029         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#aaf7fbfc87b7b35f6139a86d06f464939">cn_r</a>=<span class="keywordtype">None</span>
+<a name="l00030"></a>00030         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#aa86dfe2581acfb4d404ceb420a36e8c8">cn_t</a>=<span class="keywordtype">None</span>
+<a name="l00031"></a>00031         self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a1e39ee3ae6d6ee4bb099da7982ce8dea">cn_n</a>=<span class="keywordtype">None</span>
+<a name="l00032"></a>00032         
+<a name="l00033"></a>00033         n=0    
+<a name="l00034"></a>00034         <span class="keywordflow">for</span> meta <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;metadata&#39;</span>):
+<a name="l00035"></a>00035             <span class="keywordflow">if</span> n == 0:
+<a name="l00036"></a>00036                 self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a8c0a74883bb7d30d5bb529ff1ab0b80e">mision_name</a>=meta[1].text
+<a name="l00037"></a>00037                 self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#ae0e3fd458f12dd85ca17c2a44227b8f4">noradID_mision</a>=meta[2].text
+<a name="l00038"></a>00038             <span class="keywordflow">else</span>:
+<a name="l00039"></a>00039                 self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a3ff0fb481830f1ca15e9ff1f9ecf02c6">deb_name</a>=meta[1].text
+<a name="l00040"></a>00040                 self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#ae2b53793d08d3b1532f8c0e3d1c5a893">noradID_deb</a>=meta[2].text
+<a name="l00041"></a>00041             n=n+1
+<a name="l00042"></a>00042             
+<a name="l00043"></a>00043         k=0    
+<a name="l00044"></a>00044         <span class="keywordflow">for</span> data <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;stateVector&#39;</span>):
+<a name="l00045"></a>00045             <span class="keywordflow">if</span> k == 0:
+<a name="l00046"></a>00046                 self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a69e94e805571bd8c5aa1b9f2678e7a27">r_sat</a>=[float(data[1].text),float(data[2].text),float(data[3].text)]
+<a name="l00047"></a>00047                 self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a7ba1bf2236cc19183480ce500eb378f0">v_sat</a>=[float(data[4].text),float(data[5].text),float(data[6].text)]
+<a name="l00048"></a>00048             <span class="keywordflow">else</span>:
+<a name="l00049"></a>00049                 self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a3ca850ef3d78a66f32eec56f6c4d8aa1">r_deb</a>=[float(data[1].text),float(data[2].text),float(data[3].text)]
+<a name="l00050"></a>00050                 self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a5744c6758aa5f186542c4413dbb8cb32">v_deb</a>=[float(data[4].text),float(data[5].text),float(data[6].text)]
+<a name="l00051"></a>00051             k=k+1
+<a name="l00052"></a>00052         
+<a name="l00053"></a>00053         <span class="keywordflow">for</span> bod <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;body&#39;</span>):
+<a name="l00054"></a>00054             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#aaf05fe912ea80ac69e8d5b4b5a2724e6">TCA</a>=bod[0][1].text
+<a name="l00055"></a>00055             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a7cf5ff5f9464899a517a898c60bdf889">MISS_DISTANCE</a>=bod[0][2].text
+<a name="l00056"></a>00056 <span class="comment">#            self.POC=bod[0][14].text</span>
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058         
+<a name="l00059"></a>00059         <span class="keywordflow">for</span> rel <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;relativeStateVector&#39;</span>):
+<a name="l00060"></a>00060             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a484072da43b4efede4d279fecbb84675">dr</a>=rel[0].text
+<a name="l00061"></a>00061             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a026f33be06c1aff96e92ac6a205f68e7">ds</a>=rel[1].text
+<a name="l00062"></a>00062             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a715aedb3af35934564308f890f8c4aef">dw</a>=rel[2].text
+<a name="l00063"></a>00063 <span class="comment">#             </span>
+<a name="l00064"></a>00064         <span class="keywordflow">for</span> cov <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;covarianceMatrix&#39;</span>):
+<a name="l00065"></a>00065             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a252e926f84ea5780990a9cfcd566a646">cr_r</a>=cov[1].text
+<a name="l00066"></a>00066             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a2fc05a349806916e63cf795f91e8d902">ct_r</a>=cov[2].text
+<a name="l00067"></a>00067             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a41ae52d766c516ceab07d112693e45a8">ct_t</a>=cov[3].text
+<a name="l00068"></a>00068             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#aaf7fbfc87b7b35f6139a86d06f464939">cn_r</a>=cov[4].text
+<a name="l00069"></a>00069             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#aa86dfe2581acfb4d404ceb420a36e8c8">cn_t</a>=cov[5].text
+<a name="l00070"></a>00070             self.<a class="code" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html#a1e39ee3ae6d6ee4bb099da7982ce8dea">cn_n</a>=cov[6].text
+<a name="l00071"></a>00071       
+<a name="l00072"></a>00072         
+<a name="l00073"></a><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">00073</a> <span class="keyword">def </span><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">extraeCDM</a>(archivo):
+<a name="l00074"></a>00074     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00075"></a>00075 <span class="stringliteral">    Extrae los datos de un CDM en formato XML.</span>
+<a name="l00076"></a>00076 <span class="stringliteral">    inputs</span>
+<a name="l00077"></a>00077 <span class="stringliteral">        archivos: nombre de archivo CDM en formato .xml (string)</span>
+<a name="l00078"></a>00078 <span class="stringliteral">    Outputs</span>
+<a name="l00079"></a>00079 <span class="stringliteral">        TCA: tiempo de maximos acercamiento. (string)</span>
+<a name="l00080"></a>00080 <span class="stringliteral">        Obj1, Obj2: nombre de objetos implicados (string)</span>
+<a name="l00081"></a>00081 <span class="stringliteral">        miss_dist: minima distancia (string)</span>
+<a name="l00082"></a>00082 <span class="stringliteral">        poc: probabilidad de colision (string)</span>
+<a name="l00083"></a>00083 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00084"></a>00084     tree = ET.parse(<span class="stringliteral">&#39;../CDM/archivos/&#39;</span>+archivo)
+<a name="l00085"></a>00085     root = tree.getroot()
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     obj_m=[]
+<a name="l00088"></a>00088     obj_d=[]
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00091"></a>00091 <span class="stringliteral">    ENCUENTRO</span>
+<a name="l00092"></a>00092 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00093"></a>00093 <span class="comment">#     tca_mio=cdm.find(&#39;body/relativeMetaData&#39;)</span>
+<a name="l00094"></a>00094 <span class="comment">#     print tca_mio.attrib</span>
+<a name="l00095"></a>00095     <span class="keywordflow">for</span> bod <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;body&#39;</span>):
+<a name="l00096"></a>00096         TCA=bod[0][1].text
+<a name="l00097"></a>00097         MISS_DISTANCE=bod[0][2].text
+<a name="l00098"></a>00098         POC=bod[0][14].text
+<a name="l00099"></a>00099         
+<a name="l00100"></a>00100     n=0    
+<a name="l00101"></a>00101     <span class="keywordflow">for</span> meta <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;metadata&#39;</span>):
+<a name="l00102"></a>00102         <span class="keywordflow">if</span> n == 0:
+<a name="l00103"></a>00103             obj_m.append(meta[1].text)
+<a name="l00104"></a>00104             obj_m.append(meta[2].text)
+<a name="l00105"></a>00105         <span class="keywordflow">else</span>:
+<a name="l00106"></a>00106             obj_d.append(meta[1].text)
+<a name="l00107"></a>00107             obj_d.append(meta[2].text)
+<a name="l00108"></a>00108         n=n+1
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110     obj_list=[obj_m,obj_d]    
+<a name="l00111"></a>00111     <span class="keywordflow">return</span> TCA,MISS_DISTANCE,POC,obj_list
+<a name="l00112"></a>00112     
+<a name="l00113"></a>00113     
+<a name="l00114"></a>00114 <span class="keywordflow">if</span> __name__==<span class="stringliteral">&#39;__main__&#39;</span>:
+<a name="l00115"></a>00115     
+<a name="l00116"></a><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#a596846ed946122c4c50bf17746fcc8c1">00116</a>     archivo=<span class="stringliteral">&#39;cdmTest.xml&#39;</span>
+<a name="l00117"></a>00117     TCA,MISS_DISTANCE,POC,obj_list= <a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">extraeCDM</a>(archivo)
+<a name="l00118"></a>00118     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00119"></a>00119 <span class="stringliteral">    Impresion por pantalla.</span>
+<a name="l00120"></a>00120 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00121"></a><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af6b27ddcc8dbdf433fe024867c90dbc8">00121</a>     info1=<span class="stringliteral">&#39;Acercamiento entre &#39;</span>+str(obj_list[0][0])+<span class="stringliteral">&#39; y &#39;</span>+str(obj_list[1][0])
+<a name="l00122"></a>00122     <span class="keywordflow">print</span> <span class="stringliteral">&#39;==============================================================&#39;</span>
+<a name="l00123"></a>00123     <span class="keywordflow">print</span> info1
+<a name="l00124"></a>00124     <span class="keywordflow">print</span> <span class="stringliteral">&#39;==============================================================&#39;</span>
+<a name="l00125"></a>00125     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Mision Id= &#39;</span>, str(obj_list[0][1])
+<a name="l00126"></a>00126     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Target Id= &#39;</span>, str(obj_list[1][1])
+<a name="l00127"></a>00127     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Tiempo de maximo acercamiento= &#39;</span>, TCA
+<a name="l00128"></a>00128     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Minima Distancia = &#39;</span>, MISS_DISTANCE
+<a name="l00129"></a>00129     <span class="keywordflow">print</span> <span class="stringliteral">&#39;Probabilidad de Colision = &#39;</span>, POC
+<a name="l00130"></a>00130     
+<a name="l00131"></a>00131     
+<a name="l00132"></a>00132 <span class="comment">#         &quot;&quot;&quot;</span>
+<a name="l00133"></a>00133 <span class="comment">#         Pruebas ENVISAT-COSMOS</span>
+<a name="l00134"></a>00134 <span class="comment">#         &quot;&quot;&quot;</span>
+<a name="l00135"></a>00135 <span class="comment">#         self.TCA=datetime(2008,1,9,19,0,30,6)</span>
+<a name="l00136"></a>00136 <span class="comment">#         TCAstr0=datetime.strftime(self.TCA,&#39;%Y-%m-%dT%H:%M:%S&#39;)</span>
+<a name="l00137"></a>00137 <span class="comment">#         self.sat_idc=&#39;27386&#39; #ENVISAT</span>
+<a name="l00138"></a>00138 <span class="comment">#         self.deb_idc=&#39;12442&#39; #COSMOS</span>
+<a name="l00139"></a>00139 <span class="comment">#         </span>
+<a name="l00140"></a>00140 <span class="comment">#         Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.078011634263035007],</span>
+<a name="l00141"></a>00141 <span class="comment">#                 [-0.031437388833697122,0.0025693554190851101,-0.014250096142904997],</span>
+<a name="l00142"></a>00142 <span class="comment">#                 [0.078011634263035007,-0.014250096142904997,0.096786625771746529]])</span>
+<a name="l00143"></a>00143 <span class="comment">#     </span>
+<a name="l00144"></a>00144 <span class="comment">#         Cm=np.array([[4.8247926515782202,0.05994752830943241,0.049526867540809635],</span>
+<a name="l00145"></a>00145 <span class="comment">#                 [0.05994752830943241,0.019150349628774828,0.012470649611436152],</span>
+<a name="l00146"></a>00146 <span class="comment">#                 [0.049526867540809635,0.012470649611436152,0.012649606483621921]])</span>
 </pre></div></div><!-- contents -->
 </div>
 <!-- window showing the filter options -->
@@ -185,7 +264,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul>
       <li class="navelem"><a class="el" href="cdm_parser_8py.html">cdmParser.py</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

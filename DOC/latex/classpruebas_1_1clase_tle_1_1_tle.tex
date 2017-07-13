@@ -41,14 +41,14 @@ def {\bf propaga\-T\-L\-E}
 )}\label{classpruebas_1_1clase_tle_1_1_tle_aee8bbc2bc55783889d5c652807e9f0fd}
 
 
-\-Definition at line 117 of file clase\-Tle.\-py.
+\-Definition at line 124 of file clase\-Tle.\-py.
 
 
 \begin{DoxyCode}
-117 
-118     def catID(self):
-119         self.catID=self.linea1.split()[1]
-120         return self.catID
+124 
+125     def catID(self):
+126         self.catID=self.linea1.split()[1]
+127         return self.catID
         
 \end{DoxyCode}
 \index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!creadox\-Archivo@{creadox\-Archivo}}
@@ -61,26 +61,26 @@ def {\bf propaga\-T\-L\-E}
 )}\label{classpruebas_1_1clase_tle_1_1_tle_a05b752bee515bfd7246a74bbecfd5899}
 
 
-\-Definition at line 101 of file clase\-Tle.\-py.
+\-Definition at line 108 of file clase\-Tle.\-py.
 
 
 \begin{DoxyCode}
-101 
-102     def creadoxArchivo(cls, archivo):
-103         inst2=cls()
-104         inst2.tle = open(archivo,'r')
-105         lineas = inst2.tle.readlines()
-106         inst2.linea1 = lineas[0]
-107         inst2.linea2 = lineas[1]
-108         inst2.tle.close() 
-109         inst2.i=inst2.linea2.split()[2]
-110         inst2.Omega=inst2.linea2.split()[3]
-111         inst2.e=inst2.linea2.split()[4]
-112         inst2.ap=inst2.linea2.split()[5]
-113         inst2.m=inst2.linea2.split()[6]
-114         inst2.n=inst2.linea2.split()[7]
-115             
-116         return inst2
+108 
+109     def creadoxArchivo(cls, archivo):
+110         inst2=cls()
+111         inst2.tle = open(archivo,'r')
+112         lineas = inst2.tle.readlines()
+113         inst2.linea1 = lineas[0]
+114         inst2.linea2 = lineas[1]
+115         inst2.tle.close() 
+116         inst2.i=inst2.linea2.split()[2]
+117         inst2.Omega=inst2.linea2.split()[3]
+118         inst2.e=inst2.linea2.split()[4]
+119         inst2.ap=inst2.linea2.split()[5]
+120         inst2.m=inst2.linea2.split()[6]
+121         inst2.n=inst2.linea2.split()[7]
+122             
+123         return inst2
     
 \end{DoxyCode}
 \index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!creadox\-Param@{creadox\-Param}}
@@ -139,26 +139,35 @@ ofrece las descargas Space-track.
 81             data = {'identity': 'macecilia' , 'password': 'MaCeciliaSpace17'}
 82             s=session() 
 83             s.post('https://www.space-track.org/auth/login',data)
-84             fquery1='
+84             inst1.tle_text=''
+85             cont=0
+86             while inst1.tle_text=='':
+87                 fquery1='
       https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+inst1.f0+'--'+inst1.f1+'/NORAD_CAT_ID/'+inst1.noradId+'
       /orderby/TLE_LINE1 ASC/format/tle'
-85             r = s.get(fquery1)
-86             inst1.tle_text=r.text
-87             inst1.lineas=inst1.tle_text.split('\n')
-88             if len(inst1.lineas) > 1 and r.status_code == 200:
-89                 print 'Se ha generado el tle para el objeto de NORAD_ID= ',
+88                 r = s.get(fquery1)
+89                 inst1.tle_text=r.text
+90                 inst1.lineas=inst1.tle_text.split('\n')
+91                 inst1.f0=datetime.strptime(inst1.f0,'%Y-%m-%d')-timedelta(days=
+      1)
+92                 cont=cont+1
+93             if cont > 1:
+94                     print 'El proceso cambio la fecha inicial del set = ', 
+      inst1.f0
+95             if len(inst1.lineas) > 1 and r.status_code == 200:
+96                 print 'Se ha generado el tle para el objeto de NORAD_ID= ',
       inst1.noradId
-90                 inst1.linea1=inst1.lineas[-3]
-91                 inst1.linea2=inst1.lineas[-2]
-92             else:
-93                 print 'No pudo completarse la solicitud para el objeto de
+97                 inst1.linea1=inst1.lineas[-3]
+98                 inst1.linea2=inst1.lineas[-2]
+99             else:
+100                 print 'No pudo completarse la solicitud para el objeto de
        NORAD_ID= ',inst1.noradId                      
-94     
-95         except exceptions.HTTPError as e:
-96             print "Error: " + str(e)
-97             return "Error: " + str(e)
-98 
-99         return inst1
+101     
+102         except exceptions.HTTPError as e:
+103             print "Error: " + str(e)
+104             return "Error: " + str(e)
+105 
+106         return inst1
     
 \end{DoxyCode}
 \index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!epoca@{epoca}}
@@ -170,16 +179,16 @@ ofrece las descargas Space-track.
 )}\label{classpruebas_1_1clase_tle_1_1_tle_a783b5366a1cc97539be2c98eb50663a3}
 
 
-\-Definition at line 121 of file clase\-Tle.\-py.
+\-Definition at line 128 of file clase\-Tle.\-py.
 
 
 \begin{DoxyCode}
-121 
-122     def epoca(self):
-123         whichconst = wgs72
-124         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
-125         self.epoca=satrec.epoch
-126         return self.epoca
+128 
+129     def epoca(self):
+130         whichconst = wgs72
+131         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+132         self.epoca=satrec.epoch
+133         return self.epoca
     
 \end{DoxyCode}
 \index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!propaga\-T\-L\-E@{propaga\-T\-L\-E}}
@@ -192,25 +201,25 @@ ofrece las descargas Space-track.
 )}\label{classpruebas_1_1clase_tle_1_1_tle_a445a93647d47eb2fbee981daf2034968}
 
 
-\-Definition at line 127 of file clase\-Tle.\-py.
+\-Definition at line 134 of file clase\-Tle.\-py.
 
 
 \begin{DoxyCode}
-127 
-128     def propagaTLE(self,date=None):
-129         whichconst = wgs72
-130         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
-131         if date==None:
-132             ffin=satrec.epoch
-133             self.r,self.v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin
+134 
+135     def propagaTLE(self,date=None):
+136         whichconst = wgs72
+137         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+138         if date==None:
+139             ffin=satrec.epoch
+140             self.r,self.v = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin
       .hour,ffin.minute,ffin.second)
-134         else:
-135             segundos=date.second+date.microsecond
-136             self.r,self.v = satrec.propagate(date.year,date.month,date.day,date
+141         else:
+142             segundos=date.second+date.microsecond
+143             self.r,self.v = satrec.propagate(date.year,date.month,date.day,date
       .hour,date.minute,segundos)
-137         return self.r,self.v
-138     
-139 
+144         return self.r,self.v
+145     
+146 
 
 \end{DoxyCode}
 
@@ -221,21 +230,21 @@ ofrece las descargas Space-track.
 \subsubsection[{cat\-I\-D}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Tle\-::cat\-I\-D}}\label{classpruebas_1_1clase_tle_1_1_tle_aee565d2718311997256022faa3f0553d}
 
 
-\-Definition at line 117 of file clase\-Tle.\-py.
+\-Definition at line 124 of file clase\-Tle.\-py.
 
 \index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!epoca@{epoca}}
 \index{epoca@{epoca}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
 \subsubsection[{epoca}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Tle\-::epoca}}\label{classpruebas_1_1clase_tle_1_1_tle_ace8eaeb1b82e456cab188685192175d7}
 
 
-\-Definition at line 121 of file clase\-Tle.\-py.
+\-Definition at line 128 of file clase\-Tle.\-py.
 
 \index{pruebas\-::clase\-Tle\-::\-Tle@{pruebas\-::clase\-Tle\-::\-Tle}!v@{v}}
 \index{v@{v}!pruebas::claseTle::Tle@{pruebas\-::clase\-Tle\-::\-Tle}}
 \subsubsection[{v}]{\setlength{\rightskip}{0pt plus 5cm}{\bf pruebas\-::clase\-Tle.\-Tle\-::v}}\label{classpruebas_1_1clase_tle_1_1_tle_a23f7b707f9822503842898e4c6f48895}
 
 
-\-Definition at line 127 of file clase\-Tle.\-py.
+\-Definition at line 134 of file clase\-Tle.\-py.
 
 
 

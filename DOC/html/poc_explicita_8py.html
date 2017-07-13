@@ -129,14 +129,15 @@ Variables</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a15601a1c8f374b15240d4f1519949fc0">Encuentro::pocExplicita.mu_y</a> = np.sqrt(s_comp*s_comp+w_comp*w_comp)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a6fbfa27437a7064d705ba018ff939eca">Encuentro::pocExplicita.cos_phi</a> = np.dot(v_sat,v_deb)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#ab281a7edf7743947b8d936e227f7f0fd">Encuentro::pocExplicita.phi</a> = np.arccos(cos_phi)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a1deff3b045a916025d1dfd581c6a8378">Encuentro::pocExplicita.crudo_sat</a> = '31698_20100725_20100808.tle'</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a7487a3ac57d1a4d2f320280a0a19d2da">Encuentro::pocExplicita.crudo_deb</a> = '24978_20100725_20100808.tle'</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a55513c4af70b07a6ed69997f131dad17">Encuentro::pocExplicita.tca0</a> = TCA-timedelta(days=15)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a1deff3b045a916025d1dfd581c6a8378">Encuentro::pocExplicita.crudo_sat</a> = '_'</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a7487a3ac57d1a4d2f320280a0a19d2da">Encuentro::pocExplicita.crudo_deb</a> = '_'</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a94a8d1f873062eb3196a7701ab8b7113">Encuentro::pocExplicita.var_s</a> = var_ssat+var_sdeb</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a8a31f21e186cdd6bfa87b87df65aca9f">Encuentro::pocExplicita.var_w</a> = var_wsat+var_wdeb</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#aa689de410595dc4400566796e2ba7d84">Encuentro::pocExplicita.var_x</a> = var_rsat+var_rdeb</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a9eb0c17d4f6138d6ffa8ed7382520783">Encuentro::pocExplicita.var_y</a> = var_s*np.cos(phi/2.0)</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a3177812fa5ffa001cb39c70755dbb83a">Encuentro::pocExplicita.ra</a> = 0.005</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a54832d160924f6a2ad26bc221960af11">Encuentro::pocExplicita.PoC</a> = dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/var_x)+(y*y/var_y))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a3177812fa5ffa001cb39c70755dbb83a">Encuentro::pocExplicita.ra</a> = 0.01</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">tuple&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_encuentro_1_1poc_explicita.html#a54832d160924f6a2ad26bc221960af11">Encuentro::pocExplicita.PoC</a> = np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))</td></tr>
 </table>
 </div><!-- contents -->
 </div>
@@ -158,7 +159,7 @@ Variables</h2></td></tr>
     <ul>
       <li class="navelem"><a class="el" href="poc_explicita_8py.html">pocExplicita.py</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

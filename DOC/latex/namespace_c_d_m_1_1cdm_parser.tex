@@ -1,5 +1,10 @@
 \section{\-C\-D\-M\-:\-:cdm\-Parser \-Namespace \-Reference}
 \label{namespace_c_d_m_1_1cdm_parser}\index{\-C\-D\-M\-::cdm\-Parser@{\-C\-D\-M\-::cdm\-Parser}}
+\subsection*{\-Classes}
+\begin{DoxyCompactItemize}
+\item 
+class {\bf \-C\-D\-M}
+\end{DoxyCompactItemize}
 \subsection*{\-Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -44,51 +49,51 @@ Outputs
 \end{DoxyVerb}
  
 
-\-Definition at line 11 of file cdm\-Parser.\-py.
+\-Definition at line 73 of file cdm\-Parser.\-py.
 
 
 \begin{DoxyCode}
-11 
-12 def extraeCDM(archivo):
-13     """
-14     Extrae los datos de un CDM en formato XML.
-15     inputs
-16         archivos: nombre de archivo CDM en formato .xml (string)
-17     Outputs
-18         TCA: tiempo de maximos acercamiento. (string)
-19         Obj1, Obj2: nombre de objetos implicados (string)
-20         miss_dist: minima distancia (string)
-21         poc: probabilidad de colision (string)
-22     """
-23     tree = ET.parse('../CDM/archivos/'+archivo)
-24     root = tree.getroot()
-25 
-26     obj_m=[]
-27     obj_d=[]
-28 
-29     """
-30     ENCUENTRO
-31     """
-32 #     tca_mio=cdm.find('body/relativeMetaData')
-33 #     print tca_mio.attrib
-34     for bod in root.iter('body'):
-35         TCA=bod[0][1].text
-36         MISS_DISTANCE=bod[0][2].text
-37         POC=bod[0][14].text
-38         
-39     n=0    
-40     for meta in root.iter('metadata'):
-41         if n == 0:
-42             obj_m.append(meta[1].text)
-43             obj_m.append(meta[2].text)
-44         else:
-45             obj_d.append(meta[1].text)
-46             obj_d.append(meta[2].text)
-47         n=n+1
-48 
-49     obj_list=[obj_m,obj_d]    
-50     return TCA,MISS_DISTANCE,POC,obj_list
-51     
+73 
+74 def extraeCDM(archivo):
+75     """
+76     Extrae los datos de un CDM en formato XML.
+77     inputs
+78         archivos: nombre de archivo CDM en formato .xml (string)
+79     Outputs
+80         TCA: tiempo de maximos acercamiento. (string)
+81         Obj1, Obj2: nombre de objetos implicados (string)
+82         miss_dist: minima distancia (string)
+83         poc: probabilidad de colision (string)
+84     """
+85     tree = ET.parse('../CDM/archivos/'+archivo)
+86     root = tree.getroot()
+87 
+88     obj_m=[]
+89     obj_d=[]
+90 
+91     """
+92     ENCUENTRO
+93     """
+94 #     tca_mio=cdm.find('body/relativeMetaData')
+95 #     print tca_mio.attrib
+96     for bod in root.iter('body'):
+97         TCA=bod[0][1].text
+98         MISS_DISTANCE=bod[0][2].text
+99         POC=bod[0][14].text
+100         
+101     n=0    
+102     for meta in root.iter('metadata'):
+103         if n == 0:
+104             obj_m.append(meta[1].text)
+105             obj_m.append(meta[2].text)
+106         else:
+107             obj_d.append(meta[1].text)
+108             obj_d.append(meta[2].text)
+109         n=n+1
+110 
+111     obj_list=[obj_m,obj_d]    
+112     return TCA,MISS_DISTANCE,POC,obj_list
+113     
     
 \end{DoxyCode}
 
@@ -99,12 +104,12 @@ Outputs
 \subsubsection[{archivo}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-C\-D\-M\-::cdm\-Parser\-::archivo} = 'cdm\-Test.\-xml'}\label{namespace_c_d_m_1_1cdm_parser_a596846ed946122c4c50bf17746fcc8c1}
 
 
-\-Definition at line 54 of file cdm\-Parser.\-py.
+\-Definition at line 116 of file cdm\-Parser.\-py.
 
 \index{\-C\-D\-M\-::cdm\-Parser@{\-C\-D\-M\-::cdm\-Parser}!info1@{info1}}
 \index{info1@{info1}!CDM::cdmParser@{\-C\-D\-M\-::cdm\-Parser}}
 \subsubsection[{info1}]{\setlength{\rightskip}{0pt plus 5cm}string {\bf \-C\-D\-M\-::cdm\-Parser\-::info1} = '\-Acercamiento entre '}\label{namespace_c_d_m_1_1cdm_parser_af6b27ddcc8dbdf433fe024867c90dbc8}
 
 
-\-Definition at line 59 of file cdm\-Parser.\-py.
+\-Definition at line 121 of file cdm\-Parser.\-py.
 

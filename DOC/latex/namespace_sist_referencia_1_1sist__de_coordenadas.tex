@@ -186,35 +186,35 @@ outputs
 \end{DoxyVerb}
  
 
-\-Definition at line 216 of file sist\-\_\-de\-Coordenadas.\-py.
+\-Definition at line 222 of file sist\-\_\-de\-Coordenadas.\-py.
 
 
 \begin{DoxyCode}
-216 
-217 def lof_qsw(rt,vt):
-218     """
-219     ---------------------------------------------------
-220     Transforma las coordeandas al Local Orbital Frame
-221     vectores unitarios: q (radial), s (normal a q),
-222     w (normal al plano)
-223     ----------------------------------------------------
-224     inputs 
-225         r: posicion en el sistema cartesiano (Vector) - [km]
-226         v: velocidad en el sistema cartesiano (Vector) -[km/s]
-227     outputs
-228         q: direccion radial - (Vector) - [km]
-229         s: direccion transversal - (Vector) - [km]
-230         w: direccion perpendicular al plano - (Vector) - [km]      
-231     """    
-232     rq=np.sqrt(np.dot(rt,rt))
-233     q=np.dot(1.0/rq,rt)
-234     rxv_mod=np.sqrt(np.abs(np.dot(rt,vt)))
-235     rxv=np.cross(rt,vt)
-236     w=np.dot(1.0/rxv_mod,rxv)
-237     s=np.cross(w,q)    
-238     return q,s,w
-239     
-240 
+222 
+223 def lof_qsw(rt,vt):
+224     """
+225     ---------------------------------------------------
+226     Transforma las coordeandas al Local Orbital Frame
+227     vectores unitarios: q (radial), s (normal a q),
+228     w (normal al plano)
+229     ----------------------------------------------------
+230     inputs 
+231         r: posicion en el sistema cartesiano (Vector) - [km]
+232         v: velocidad en el sistema cartesiano (Vector) -[km/s]
+233     outputs
+234         q: direccion radial - (Vector) - [km]
+235         s: direccion transversal - (Vector) - [km]
+236         w: direccion perpendicular al plano - (Vector) - [km]      
+237     """    
+238     rq=np.sqrt(np.dot(rt,rt))
+239     q=np.dot(1.0/rq,rt)
+240     rxv_mod=np.sqrt(np.abs(np.dot(rt,vt)))
+241     rxv=np.cross(rt,vt)
+242     w=np.dot(1.0/rxv_mod,rxv)
+243     s=np.cross(w,q)    
+244     return q,s,w
+245     
+246 
     
 \end{DoxyCode}
 \index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!ric\-Sis@{ric\-Sis}}
@@ -270,16 +270,28 @@ outputs
 208     ec=np.dot(1.0/rxrp_mod,rxrp_int)
 209     ei=np.cross(ec,er)
 210     
-211     rr=np.dot(er,dr)
-212     i=np.dot(ei,dr)
-213     c=np.dot(ec,dr)
-214     
-215     return rr,i,c
+211 #     matriz=np.array([[er],[ei],[ec]])
+212 #     dif_ric=np.dot(matriz,dr)  
+213 #     rr=np.abs(dif_ric[0])
+214 #     i=np.abs(dif_ric[1])
+215 #     c=np.abs(dif_ric[2])
+216 
+217     rr=np.abs(np.dot(er,dr))
+218     i=np.abs(np.dot(ei,dr))
+219     c=np.abs(np.dot(ec,dr))
+220     
+221     return rr,i,c
     
 \end{DoxyCode}
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_sist_referencia_1_1sist__de_coordenadas_a8eccb1d3c6c56a4c77b891b1da887dd7_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!rot\-\_\-tierra@{rot\-\_\-tierra}}
@@ -298,25 +310,25 @@ x,y,z (ECI) -----> x,y,z (ECEF)
 \end{DoxyVerb}
  
 
-\-Definition at line 241 of file sist\-\_\-de\-Coordenadas.\-py.
+\-Definition at line 247 of file sist\-\_\-de\-Coordenadas.\-py.
 
 
 \begin{DoxyCode}
-241 
-242 def rot_tierra(x,y,z,minu,ts):
-243     """
-244     x,y,z (ECI) -----> x,y,z (ECEF)
-245     """
-246     pos=[x,y,z]
-247     OmegaT=ts#+minu*60.0*15.04/3600.0 # velocidad angular de la tierra [seg]
-248     OmegaT_rad=OmegaT*np.pi/180.0
-249 
-250     ma_rot=np.array([[np.cos(OmegaT_rad), np.sin(OmegaT_rad), 0.0],
-251                        [-np.sin(OmegaT_rad), np.cos(OmegaT_rad), 0.0],
-252                        [0.0, 0.0, 1.0]])
-253                   
-254     r_prima=np.dot(ma_rot,pos)
-255     return r_prima 
+247 
+248 def rot_tierra(x,y,z,minu,ts):
+249     """
+250     x,y,z (ECI) -----> x,y,z (ECEF)
+251     """
+252     pos=[x,y,z]
+253     OmegaT=ts#+minu*60.0*15.04/3600.0 # velocidad angular de la tierra [seg]
+254     OmegaT_rad=OmegaT*np.pi/180.0
+255 
+256     ma_rot=np.array([[np.cos(OmegaT_rad), np.sin(OmegaT_rad), 0.0],
+257                        [-np.sin(OmegaT_rad), np.cos(OmegaT_rad), 0.0],
+258                        [0.0, 0.0, 1.0]])
+259                   
+260     r_prima=np.dot(ma_rot,pos)
+261     return r_prima 
 
 \end{DoxyCode}
 \index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!teme2tod@{teme2tod}}
@@ -339,95 +351,107 @@ output
 \end{DoxyVerb}
  
 
-\-Definition at line 256 of file sist\-\_\-de\-Coordenadas.\-py.
+\-Definition at line 262 of file sist\-\_\-de\-Coordenadas.\-py.
 
 
 \begin{DoxyCode}
-256 
-257 def teme2tod(epoch,r_teme):
-258     """
-259     Transforma las coordenadas de r_teme, en el sistema
-260     TEME al sistema TOD.
-261     -----------------------------------------------------
-262     input
-263         epoch: epoca del vector de estado (datetime)
-264         r_teme: vector de estado en el sistema TEME (array)
-265     output
-266         r_tod: vector de estado en el sistema TOD (array)
-267     """
-268     
-269     arc2rad=np.pi/(180.0*3600.0)   
-270     jd1=jd(epoch)
-271     tt=(jd1-2451544.5)/36525.0 
-272 #     mjd=calcula_mjd(epoch)
-273 #     tt=(mjd-51544.5)/36525.0
-274 
-275     """
-276     Parametros [arcseconds / segundos de arco]
-277     """
-278     M_moon  = 134.96340251*3600.0+1717915923.2178*tt+31.8792*tt*tt+0.051*tt*tt*
+262 
+263 def teme2tod(epoch,r_teme):
+264     """
+265     Transforma las coordenadas de r_teme, en el sistema
+266     TEME al sistema TOD.
+267     -----------------------------------------------------
+268     input
+269         epoch: epoca del vector de estado (datetime)
+270         r_teme: vector de estado en el sistema TEME (array)
+271     output
+272         r_tod: vector de estado en el sistema TOD (array)
+273     """
+274     
+275     arc2rad=np.pi/(180.0*3600.0)   
+276     jd1=jd(epoch)
+277     tt=(jd1-2451544.5)/36525.0 
+278 #     mjd=calcula_mjd(epoch)
+279 #     tt=(mjd-51544.5)/36525.0
+280 
+281     """
+282     Parametros [arcseconds / segundos de arco]
+283     """
+284     M_moon  = 134.96340251*3600.0+1717915923.2178*tt+31.8792*tt*tt+0.051*tt*tt*
       tt
-279     M_sun   = 357.52910918*3600.0+129596581.0481*tt-0.5532*tt*tt-0.000136*tt*tt
+285     M_sun   = 357.52910918*3600.0+129596581.0481*tt-0.5532*tt*tt-0.000136*tt*tt
       *tt
-280     mu_moon = 93.27209062*3600.0+1739527262.8478*tt-12.7512*tt*tt-0.00103*tt*tt
+286     mu_moon = 93.27209062*3600.0+1739527262.8478*tt-12.7512*tt*tt-0.00103*tt*tt
       *tt
-281     D_sun   = 297.85019547*3600.0+1602961601.2090*tt-6.3706*tt*tt+0.06593*tt*tt
+287     D_sun   = 297.85019547*3600.0+1602961601.2090*tt-6.3706*tt*tt+0.06593*tt*tt
       *tt
-282     O_moon  = 125.04455501*3600.0-6962890.2665*tt+7.4722*tt*tt+0.007702*tt*tt*
+288     O_moon  = 125.04455501*3600.0-6962890.2665*tt+7.4722*tt*tt+0.007702*tt*tt*
       tt
-283     
-284     nutacion=open('../SistReferencia/prenut.dat','r')
-285     coef=nutacion.readlines()
-286     d_epsi=0
-287     d_psi=0
-288     
-289     for c in coef:
-290         an=c.split(',')
-291         a1=float(an[0])
-292         a2=float(an[1])
-293         a3=float(an[2])
-294         a4=float(an[3])
-295         a5=float(an[4])
-296         aphi=float(an[5])
-297         aphi_d=float(an[6])
-298         aepsi=float(an[7])
-299         aepsi_d=float(an[8])
-300         
-301         phi_i=(a1*M_moon+a2*M_sun+a3*mu_moon+a4*D_sun+a5*O_moon)*arc2rad
-302 #        phi_i=phi_i1%(2*np.pi)
-303         
-304         d_epsi=d_epsi + (aepsi+aepsi_d*tt)*np.cos(phi_i)
-305 #        d_epsi=d_epsi1%(2*np.pi)
-306         d_psi=d_psi + (aphi+aphi_d*tt)*np.sin(phi_i)
-307 #        d_psi=d_psi1%(2*np.pi)
-308 
-309     d_epsi=d_epsi*(1.0/10000.0)
-310     d_psi=d_psi*(1.0/10000.0)
-311 
-312     epsi_media = (84381.448-46.815*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad 
+289     
+290     nutacion=open('../SistReferencia/prenut.dat','r')
+291     coef=nutacion.readlines()
+292     d_epsi=0
+293     d_psi=0
+294     
+295     for c in coef:
+296         an=c.split(',')
+297         a1=float(an[0])
+298         a2=float(an[1])
+299         a3=float(an[2])
+300         a4=float(an[3])
+301         a5=float(an[4])
+302         aphi=float(an[5])
+303         aphi_d=float(an[6])
+304         aepsi=float(an[7])
+305         aepsi_d=float(an[8])
+306         
+307         phi_i=(a1*M_moon+a2*M_sun+a3*mu_moon+a4*D_sun+a5*O_moon)*arc2rad
+308 #        phi_i=phi_i1%(2*np.pi)
+309         
+310         d_epsi=d_epsi + (aepsi+aepsi_d*tt)*np.cos(phi_i)
+311 #        d_epsi=d_epsi1%(2*np.pi)
+312         d_psi=d_psi + (aphi+aphi_d*tt)*np.sin(phi_i)
+313 #        d_psi=d_psi1%(2*np.pi)
+314 
+315     d_epsi=d_epsi*(1.0/10000.0)
+316     d_psi=d_psi*(1.0/10000.0)
+317 
+318     epsi_media = (84381.448-46.815*tt-0.00059*tt*tt+0.001813*tt*tt*tt)*arc2rad 
       # [rad]
-313     
-314     EQnox = (d_psi*np.cos(epsi_media)+0.00264*np.sin(O_moon*arc2rad)+0.000063*
+319     
+320     EQnox = (d_psi*np.cos(epsi_media)+0.00264*np.sin(O_moon*arc2rad)+0.000063*
       np.sin(2*O_moon*arc2rad))*arc2rad
-315 
-316     
-317     Q=np.matrix([[np.cos(-EQnox),np.sin(-EQnox),0],
-318                  [-np.sin(-EQnox),np.cos(-EQnox),0],
-319                  [0,0,1]])
-320     
-321     r_tod=np.dot(Q,r_teme)
+321 
 322     
-323     return r_tod    
+323     Q=np.matrix([[np.cos(-EQnox),np.sin(-EQnox),0],
+324                  [-np.sin(-EQnox),np.cos(-EQnox),0],
+325                  [0,0,1]])
+326     
+327     r_tod=np.dot(Q,r_teme)
+328     
+329     return r_tod    
     
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_sist_referencia_1_1sist__de_coordenadas_aee17184e86131336dd2574ead19d91cc_cgraph}
+\end{center}
+\end{figure}
 
 
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_sist_referencia_1_1sist__de_coordenadas_aee17184e86131336dd2574ead19d91cc_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!vnc\-Sis@{vnc\-Sis}}
@@ -492,7 +516,13 @@ outputs
 \end{DoxyCode}
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_sist_referencia_1_1sist__de_coordenadas_a8190e729516e0f1cc25eee08d0303760_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!xv2eo@{xv2eo}}
@@ -616,7 +646,13 @@ outputs:
 \end{DoxyCode}
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_sist_referencia_1_1sist__de_coordenadas_ad986ee217f88feb6eb19b36560e14f09_icgraph}
+\end{center}
+\end{figure}
 
 
 
@@ -627,26 +663,26 @@ outputs:
 \subsubsection[{epoca}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas\-::epoca} = datetime(2000,6,28,15,8,51,655$\ast$1000)}\label{namespace_sist_referencia_1_1sist__de_coordenadas_a5b1ef879add4bc0afc576033b8c65bf9}
 
 
-\-Definition at line 326 of file sist\-\_\-de\-Coordenadas.\-py.
+\-Definition at line 332 of file sist\-\_\-de\-Coordenadas.\-py.
 
 \index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!r\-\_\-teme@{r\-\_\-teme}}
 \index{r\-\_\-teme@{r\-\_\-teme}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
 \subsubsection[{r\-\_\-teme}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas\-::r\-\_\-teme} = [3961.\-0035498,6010.\-7511740,4619.\-3009301]}\label{namespace_sist_referencia_1_1sist__de_coordenadas_afff457861437508005c437a8ca938e69}
 
 
-\-Definition at line 327 of file sist\-\_\-de\-Coordenadas.\-py.
+\-Definition at line 333 of file sist\-\_\-de\-Coordenadas.\-py.
 
 \index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!r\-\_\-tod@{r\-\_\-tod}}
 \index{r\-\_\-tod@{r\-\_\-tod}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
 \subsubsection[{r\-\_\-tod}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas\-::r\-\_\-tod} = {\bf teme2tod}({\bf epoca}, {\bf r\-\_\-teme})}\label{namespace_sist_referencia_1_1sist__de_coordenadas_a62aae6ec02c7834cb0f5b4aeafb763e3}
 
 
-\-Definition at line 329 of file sist\-\_\-de\-Coordenadas.\-py.
+\-Definition at line 335 of file sist\-\_\-de\-Coordenadas.\-py.
 
 \index{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}!r\-\_\-tod\-Val@{r\-\_\-tod\-Val}}
 \index{r\-\_\-tod\-Val@{r\-\_\-tod\-Val}!SistReferencia::sist_deCoordenadas@{\-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas}}
 \subsubsection[{r\-\_\-tod\-Val}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Sist\-Referencia\-::sist\-\_\-de\-Coordenadas\-::r\-\_\-tod\-Val} = [3961.\-4214985,6010.\-4752688,4619.\-301531]}\label{namespace_sist_referencia_1_1sist__de_coordenadas_abfd44e8a22ea6251de2241c7899332e2}
 
 
-\-Definition at line 328 of file sist\-\_\-de\-Coordenadas.\-py.
+\-Definition at line 334 of file sist\-\_\-de\-Coordenadas.\-py.
 

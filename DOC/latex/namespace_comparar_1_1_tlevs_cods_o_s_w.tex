@@ -88,7 +88,7 @@ tuple {\bf r} = np.\-array([float(linea\-\_\-interpol.\-split()[2]),float(linea\
 \item 
 tuple {\bf rp} = np.\-array([float(linea\-\_\-interpol.\-split()[5]),float(linea\-\_\-interpol.\-split()[6]),float(linea\-\_\-interpol.\-split()[7])])
 \item 
-tuple {\bf tle0} = {\bf \-Tle}('../\-Tle\-Admin/{\bf tle}/'+{\bf tle})
+tuple {\bf tle0} = {\bf \-Tle.\-creadox\-Archivo}('../\-Tle\-Admin/{\bf tle}/'+{\bf tle})
 \item 
 {\bf line1} = tle0.\-linea1
 \item 
@@ -134,81 +134,87 @@ en etapas de maniobras.
 \end{DoxyVerb}
  
 
-\-Definition at line 577 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 581 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 
 \begin{DoxyCode}
-577 
-578 def analizaEO():
-579     """
-580     Transforma x,y,z a eo, para ver el comportamiento
-581     en etapas de maniobras. 
-582     """
-583     salida=open('eo.txt','w')
-584     arch3_cods=glob.glob('../CodsAdmin/Validacion/*')
-585     tiempo=[] 
-586     prom_a=[]
-587     prom_i=[]
-588     n=0
-589     with progressbar.ProgressBar(max_value=len(arch3_cods)) as progress:
-590         for arch in arch3_cods:
-591             sleep(0.1)
-592             progress.update(n)
-593             n=n+1
-594             """
-595             parseo nombre del archivo
-596             """
-597             nombre=arch.split('_')
-598             dia=nombre[1]
-599             yy=dia[:4]
-600             mes=dia[4:6]
-601             dd=dia[6:8]
-602             hora=nombre[2]
-603             fecha_base=datetime(int(yy),int(mes),int(dd))
-604             tiempo.append(fecha_base)
-605             """
-606             Acumulo promedios
-607             """
-608             a=open(arch,'r')
-609             contenido = a.readlines()
-610             t=[]
-611             a=[]
-612             i=[]
-613             for c in contenido:
-614                 c1=c.split()
-615                 if c1[0]=='*HEADER':
-616                     continue
-617                 fecha=c[:16]
-618                 hr=fecha[11:13]
-619                 if hr != '24':
-620                     d=datetime.strptime(fecha,'%Y/%m/%d %H:%M')
-621                     t.append(d)
-622                     r=[float(c1[2]),float(c1[3]),float(c1[4])]
-623                     v=[float(c1[5]),float(c1[6]),float(c1[7])]
-624                     semi,e,inc,Omega,w,nu=xv2eo(r,v)
-625                     a.append(semi)
-626                     i.append(inc*180.0/(np.pi))
-627             prom_a.append(np.mean(a))
-628             prom_i.append(np.mean(i))
-629             info=fecha_base.strftime('%Y-%m-%d')+' '+str(np.mean(a))+' '+str(
+581 
+582 def analizaEO():
+583     """
+584     Transforma x,y,z a eo, para ver el comportamiento
+585     en etapas de maniobras. 
+586     """
+587     salida=open('eo.txt','w')
+588     arch3_cods=glob.glob('../CodsAdmin/Validacion/*')
+589     tiempo=[] 
+590     prom_a=[]
+591     prom_i=[]
+592     n=0
+593     with progressbar.ProgressBar(max_value=len(arch3_cods)) as progress:
+594         for arch in arch3_cods:
+595             sleep(0.1)
+596             progress.update(n)
+597             n=n+1
+598             """
+599             parseo nombre del archivo
+600             """
+601             nombre=arch.split('_')
+602             dia=nombre[1]
+603             yy=dia[:4]
+604             mes=dia[4:6]
+605             dd=dia[6:8]
+606             hora=nombre[2]
+607             fecha_base=datetime(int(yy),int(mes),int(dd))
+608             tiempo.append(fecha_base)
+609             """
+610             Acumulo promedios
+611             """
+612             a=open(arch,'r')
+613             contenido = a.readlines()
+614             t=[]
+615             a=[]
+616             i=[]
+617             for c in contenido:
+618                 c1=c.split()
+619                 if c1[0]=='*HEADER':
+620                     continue
+621                 fecha=c[:16]
+622                 hr=fecha[11:13]
+623                 if hr != '24':
+624                     d=datetime.strptime(fecha,'%Y/%m/%d %H:%M')
+625                     t.append(d)
+626                     r=[float(c1[2]),float(c1[3]),float(c1[4])]
+627                     v=[float(c1[5]),float(c1[6]),float(c1[7])]
+628                     semi,e,inc,Omega,w,nu=xv2eo(r,v)
+629                     a.append(semi)
+630                     i.append(inc*180.0/(np.pi))
+631             prom_a.append(np.mean(a))
+632             prom_i.append(np.mean(i))
+633             info=fecha_base.strftime('%Y-%m-%d')+' '+str(np.mean(a))+' '+str(
       np.mean(i))+'\n'
-630             salida.write(info)
-631     #        print 'procesando archivo: ', n
-632     dt_frac=[]            
-633     f_ini=np.min(t)
-634     for dt in t:
-635         dt_frac.append((dt-f_ini).total_seconds()/86400.0)
-636          
-637     eo=[tiempo,prom_a,prom_i]
-638  
-639 #    grafica_tendencia(data)
-640     grafica_EO(eo)
-641     print 'fin'
+634             salida.write(info)
+635     #        print 'procesando archivo: ', n
+636     dt_frac=[]            
+637     f_ini=np.min(t)
+638     for dt in t:
+639         dt_frac.append((dt-f_ini).total_seconds()/86400.0)
+640          
+641     eo=[tiempo,prom_a,prom_i]
+642  
+643 #    grafica_tendencia(data)
+644     grafica_EO(eo)
+645     print 'fin'
 
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a2c65fd0e063560c78f985c7c54f55517_cgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dif\-\_\-tle\-C\-O\-D\-S15dias@{dif\-\_\-tle\-C\-O\-D\-S15dias}}
@@ -240,7 +246,7 @@ en etapas de maniobras.
 329     #===============
 330     data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]   
 331     
-332     print 'PROCESANDO DATOS DE MISION...'
+332 #    print 'PROCESANDO DATOS DE MISION...'
 333     tles=glob.glob('../TleAdmin/tle/*')
 334     dic_tles=generadorDatos(tles)
 335     tle_ordenados=ordenaTles(dic_tles)
@@ -251,14 +257,14 @@ en etapas de maniobras.
 340     dic_tles=generadorDatos(tles)
 341     tle_ordenados=ordenaTles(dic_tles)
 342     
-343     tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+343     tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
 344     epoca_ffin  = tle_primario.epoca()
 345     cat_id = tle_primario.catID()
 346     linea1 = tle_primario.linea1
 347     linea2 = tle_primario.linea2
 348     epoca15dias=epoca_ffin-timedelta(days=15)
 349     
-350     tle_inicio=Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+350     tle_inicio=Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[0][0])
 351     epoca_ini  = tle_inicio.epoca()
 352     
 353     arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[-1][0])
@@ -271,7 +277,7 @@ en etapas de maniobras.
 358     # Bucle de comparacion total  (tiene sentido?)
 359     #===============================================
 360     for m in range(len(tle_ordenados)-1,0,-1):
-361         tle0 = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
+361         tle0 = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[m][0])
 362         epoca_tle0 = tle0.epoca()
 363         if epoca_tle0 >= epoca15dias:          
 364             data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
@@ -285,7 +291,7 @@ en etapas de maniobras.
 370             continue
 371     
 372     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data,2)    
-373     print statsReport
+373 #    print statsReport
 374     
 375     
 376     set_data15=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d
@@ -352,12 +358,24 @@ en etapas de maniobras.
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a6a99a99f88bff2b4a515cba6aa466a88_cgraph}
+\end{center}
+\end{figure}
 
 
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a6a99a99f88bff2b4a515cba6aa466a88_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!diferencias\-\_\-tle\-C\-O\-D\-S@{diferencias\-\_\-tle\-C\-O\-D\-S}}
@@ -416,7 +434,7 @@ output
 286     item=range(0,len(tles))
 287     whichconst=wgs72
 288     for j in item:
-289         tle0=Tle('../TleAdmin/tle/'+tles[j][0])
+289         tle0=Tle.creadoxArchivo('../TleAdmin/tle/'+tles[j][0])
 290         fecha_tle=tle0.epoca()
 291         if fecha_tle <= d:
 292             dif_fechas=(d-fecha_tle).total_seconds()/86400.0
@@ -449,12 +467,24 @@ output
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_ac1b5420da32e09d495acb8c770def128_cgraph}
+\end{center}
+\end{figure}
 
 
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_ac1b5420da32e09d495acb8c770def128_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!ejecuta\-Procesamiento\-Cods@{ejecuta\-Procesamiento\-Cods}}
@@ -465,6 +495,7 @@ output
 \end{DoxyParamCaption}
 )}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_aceeb4d968f06abd2e044e25db4fb0585}
 \begin{DoxyVerb}
+REVISAR - FUE MODIFICADO
 Lista y ordena los nombres de los archivos de la carpeta: TleAdmin/tles.
 Recupera la informacion del ultimo TLE del set (TLE primario), en particular la epoca.
 Busca entre los archivos de CODS, la epoca coincidente con la epoca del TLE primario.
@@ -486,180 +517,194 @@ corresponderse con esa mision.
 428 def ejecutaProcesamientoCods():
 429 #if __name__ == '__main__':
 430     """
-431     Lista y ordena los nombres de los archivos de la carpeta: TleAdmin/tles.
-432     Recupera la informacion del ultimo TLE del set (TLE primario), en
+431     REVISAR - FUE MODIFICADO
+432     Lista y ordena los nombres de los archivos de la carpeta: TleAdmin/tles.
+433     Recupera la informacion del ultimo TLE del set (TLE primario), en
        particular la epoca.
-433     Busca entre los archivos de CODS, la epoca coincidente con la epoca del TLE
+434     Busca entre los archivos de CODS, la epoca coincidente con la epoca del TLE
        primario.
-434     Interpola para la fecha al nivel del segundo. 
-435     Luego propaga todos los TLEs del set a la epoca del CODS interpolado y
+435     Interpola para la fecha al nivel del segundo. 
+436     Luego propaga todos los TLEs del set a la epoca del CODS interpolado y
        calcular las 
-436     diferencias. 
-437    
+437     diferencias. 
+438    
        ---------------------------------------------------------------------------------------
-438     Nota! LOS DATOS CODS SON SOLO DE LA MISION SAC-D.
-439     Luego los tles, previamente procesados y archivados en la carpeta de
+439     Nota! LOS DATOS CODS SON SOLO DE LA MISION SAC-D.
+440     Luego los tles, previamente procesados y archivados en la carpeta de
        TleAdmin/tles, deben
-440     corresponderse con esa mision.
-441     """
-442 
-443     print 'PROCESANDO DATOS DE MISION...'
-444     tles=glob.glob('../TleAdmin/tle/*')
-445     dic_tles=generadorDatos(tles)
-446     tle_ordenados=ordenaTles(dic_tles)
-447     
-448     tles=glob.glob('../TleAdmin/tle/*')
-449     dic_tles=generadorDatos(tles)
-450     tle_ordenados=ordenaTles(dic_tles)
-451     
-452     tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
-453     cat_id = tle_inicio.catID()
-454     epoca_ini = tle_inicio.epoca()
-455     
-456     tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
-457     epoca_fin  = tle_primario.epoca()
-458     epoca_ffin = epoca_fin
-459     epoca15dias=epoca_ffin-timedelta(days=15)
-460     
-461     """
-462     Impresiones de info de TLEs.
-463     """
-464     tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
-465     cat_id = tle_inicio.catID()
-466     epoca_ini = tle_inicio.epoca()
-467     
-468     tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
-469     epoca_fin  = tle_primario.epoca()
-470     epoca_ffin = epoca_fin
-471     linea1 = tle_primario.linea1
-472     linea2 = tle_primario.linea2
-473     fecha_ini=str(epoca_ini.year)+str(epoca_ini.month).zfill(2)+str(epoca_ini.
+441     corresponderse con esa mision.
+442     """
+443 
+444 #    print 'PROCESANDO DATOS DE MISION...'
+445     tles=glob.glob('../TleAdmin/tle/*')
+446     dic_tles=generadorDatos(tles)
+447     tle_ordenados=ordenaTles(dic_tles)
+448     
+449 #     tles=glob.glob('../TleAdmin/tle/*')
+450 #     dic_tles=generadorDatos(tles)
+451 #     tle_ordenados=ordenaTles(dic_tles)
+452     
+453     tle_inicio = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[0][0])
+454     cat_id = tle_inicio.catID()
+455     epoca_ini = tle_inicio.epoca()
+456     
+457     tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
+458     epoca_fin  = tle_primario.epoca()
+459     epoca_ffin = epoca_fin
+460     epoca15dias=epoca_ffin-timedelta(days=15)
+461     
+462     """
+463     Impresiones de info de TLEs.
+464     """
+465     tle_inicio = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[0][0])
+466     cat_id = tle_inicio.catID()
+467     epoca_ini = tle_inicio.epoca()
+468     
+469     tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
+470     epoca_fin  = tle_primario.epoca()
+471     epoca_ffin = epoca_fin
+472     linea1 = tle_primario.linea1
+473     linea2 = tle_primario.linea2
+474     fecha_ini=str(epoca_ini.year)+str(epoca_ini.month).zfill(2)+str(epoca_ini.
       day).zfill(2)
-474     fecha_fin=str(epoca_fin.year)+str(epoca_fin.month).zfill(2)+str(epoca_fin.
+475     fecha_fin=str(epoca_fin.year)+str(epoca_fin.month).zfill(2)+str(epoca_fin.
       day).zfill(2)
-475     print '
-      ------------------------------------------------------------------------'
-476     print '-------------------------TLE
+476 #     print
+       '------------------------------------------------------------------------'
+477 #     print '-------------------------TLE
        PRIMARIO-----------------------------------'
-477     print linea1
-478     print linea2
-479     print epoca_ffin
-480     print '
-      ------------------------------------------------------------------------'
-481     t=[]
-482     dv=[]
-483     du=[]
-484     dc=[]
-485     dvv=[]
-486     dnn=[]
-487     dcc=[]
-488     dt_frac=[]
-489     t15=[]
-490     dv15=[]
-491     du15=[]
-492     dc15=[]
-493     dvv15=[]
-494     dnn15=[]
-495     dcc15=[]
-496     dt_frac15=[]
-497     #===============
-498     # Set de Datos
-499     #===============
-500     data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]
-501     data15=[t15,dv15,du15,dc15,dvv15,dnn15,dcc15,dt_frac15]
-502     #======================
-503     # Nomenclatura Archivos
-504     #======================
-505     archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
-506     salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
-507     salida1=open('../Comparar/diferencias/'+archivo,'w')
-508     salida15=open('../Comparar/diferencias/dif_15dias-'+archivo,'w')
-509     #===============================================
-510     # Bucle de comparacion total  (tiene sentido?)
-511     #===============================================
-512     for m in range(len(tle_ordenados)-1,0,-1):
-513         tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
-514         epoca_fin = tle_primario.epoca()
-515         arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
-516         linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], 
+478 #     print linea1
+479 #     print linea2
+480 #     print epoca_ffin
+481 #     print
+       '------------------------------------------------------------------------'
+482     t=[]
+483     dv=[]
+484     du=[]
+485     dc=[]
+486     dvv=[]
+487     dnn=[]
+488     dcc=[]
+489     dt_frac=[]
+490     t15=[]
+491     dv15=[]
+492     du15=[]
+493     dc15=[]
+494     dvv15=[]
+495     dnn15=[]
+496     dcc15=[]
+497     dt_frac15=[]
+498     #===============
+499     # Set de Datos
+500     #===============
+501     data=[t,dv,du,dc,dvv,dnn,dcc,dt_frac]
+502     data15=[t15,dv15,du15,dc15,dvv15,dnn15,dcc15,dt_frac15]
+503     #======================
+504     # Nomenclatura Archivos
+505     #======================
+506     archivo = cat_id+'_'+fecha_ini+'_'+fecha_fin+'.cods'    
+507     salida=open('../Comparar/diferencias/difTot_'+archivo,'w')
+508     salida1=open('../Comparar/diferencias/'+archivo,'w')
+509     salida15=open('../Comparar/diferencias/dif_15dias_'+archivo,'w')
+510     #===============================================
+511     # Bucle de comparacion total  (tiene sentido?)
+512     #===============================================
+513     for m in range(len(tle_ordenados)-1,0,-1):
+514         tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[m][0
+      ])
+515         epoca_fin = tle_primario.epoca()
+516         arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
+517         linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0], 
       arch3_cods)
-517         if linea_interpol != None:                 
-518             data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
-519             if m == len(tle_ordenados)-1:
-520                 for k in range(len(data[0])):
-521                     info = data[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(
+518         if linea_interpol != None:                 
+519             data=diferencias_tleCODS(salida,tle_ordenados, linea_interpol,data)
+520             if m == len(tle_ordenados)-1:
+521                 for k in range(len(data[0])):
+522                     info = data[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' '+str(
       data[1][k])+' '+str(data[2][k])+' '+str(data[3][k])+' '+str(data[4][k])+' '+str(
       data[5][k])+' '+str(data[6][k])+'\n'
-522                     salida1.write(info)
-523         else:
-524             continue
-525     #================================================== 
-526     # Bucle de comparacion del set primario (15 TLEs)
-527     #==================================================
-528     
-529     epoca15=epoca_ffin-timedelta(days=15)
-530     for m in range(len(tle_ordenados)-1,0,-1):
-531         tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[m][0])
-532         epoca_fin = tle_primario.epoca()
-533         if epoca_fin > epoca15:
-534             arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
-535             linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0]
+523                     salida1.write(info)
+524         else:
+525             continue
+526     #================================================== 
+527     # Bucle de comparacion del set primario (15 TLEs)
+528     #==================================================
+529     
+530     epoca15=epoca_ffin-timedelta(days=15)
+531     for m in range(len(tle_ordenados)-1,0,-1):
+532         tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[m][0
+      ])
+533         epoca_fin = tle_primario.epoca()
+534         if epoca_fin > epoca15:
+535             arch3_cods=FiltraArchivos('../TleAdmin/tle/'+tle_ordenados[m][0])
+536             linea_interpol=interpola_3sv('../TleAdmin/tle/'+tle_ordenados[m][0]
       , arch3_cods)
-536             if linea_interpol != None:                   
-537                 data15=dif_tleCODS15dias(salida15,tle_ordenados,linea_interpol,
-      data15)
-538                 if m == len(tle_ordenados)-1:
-539                     for k in range(len(data15[0])):
-540                         info = data15[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+' 
-      '+str(data15[1][k])+' '+str(data15[2][k])+' '+str(data15[3][k])+' '+str(data15[4
-      ][k])+' '+str(data15[5][k])+' '+str(data15[6][k])+'\n'
-541                         salida15.write(info)
-542             else:
-543                 continue 
-544         else:
-545             continue  
-546         
-547     salida1.close()
-548     
-549     """
-550     AJUSTE Y GENERACION DE COEFICIENTES.
+537             if linea_interpol != None:                   
+538                 data15=dif_tleCODS15dias()
+539                 if m == len(tle_ordenados)-1:
+540                     for k in range(len(data15[0])):
+541                         info = data15[0][k]+' '+str(data15[1][k])+' '+str(
+      data15[2][k])+' '+str(data15[3][k])+' '+str(data15[4][k])+' '+str(data15[5][k])+' '+
+      str(data15[6][k])+'\n'
+542                        # info = data15[0][k].strftime("%Y-%m-%d %H:%M:%S.%f")+'
+       '+str(data15[1][k])+' '+str(data15[2][k])+' '+str(data15[3][k])+'
+       '+str(data15[4][k])+' '+str(data15[5][k])+' '+str(data15[6][k])+'\n'
+543                         salida15.write(info)
+544             else:
+545                 continue 
+546         else:
+547             continue  
+548         
+549     salida1.close()
+550     
 551     """
-552     
-553     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data15,2)
-554     dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data15,1)
-555     """
-556     Guarda en archivos las diferencias que se corresponden al
-557     ultimo TLE del set. (Estadistica/archivos)
-558     tendenciaTle.py toma luego esos archivos, y grafica.
-559     """
-560 
-561     estadistica_salida=open('../Estadistica/archivos/'+fecha_ini+'_'+fecha_fin+
+552     AJUSTE Y GENERACION DE COEFICIENTES.
+553     """
+554     
+555 #     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data15,2)
+556 #     dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,data15,1)
+557     coef1=0
+558     """
+559     Guarda en archivos las diferencias que se corresponden al
+560     ultimo TLE del set. (Estadistica/archivos)
+561     tendenciaTle.py toma luego esos archivos, y grafica.
+562     """
+563 
+564     estadistica_salida=open('../Estadistica/archivos/'+fecha_ini+'_'+fecha_fin+
       '_difEst.txt','w')
-562     info_esta=fecha_fin+' '+str(data[1][len(tles)])+' '+str(data[2][len(tles)])
+565     info_esta=fecha_fin+' '+str(data[1][len(tles)])+' '+str(data[2][len(tles)])
       +' '+str(data[3][len(tles)])
-563     estadistica_salida.write(info_esta)
-564     estadistica_salida.close()
-565     
-566     print 'DIFERENCIAS:'
-567     print '
+566     estadistica_salida.write(info_esta)
+567     estadistica_salida.close()
+568     
+569     print 'DIFERENCIAS:'
+570     print '
       -------------------------------------------------------------------------'
-568     print 'dv =',data[1][len(tles)-1]
-569     print 'dn =',data[2][len(tles)-1]
-570     print 'dc =',data[3][len(tles)-1]
-571     print '
+571     diferencias=[data[1][len(tles)-1],data[2][len(tles)-1],data[3][len(tles)-1]
+      ,data[4][len(tles)-1],data[5][len(tles)-1],data[6][len(tles)-1]]
+572     print 'dv =',data[1][len(tles)-1]
+573     print 'dn =',data[2][len(tles)-1]
+574     print 'dc =',data[3][len(tles)-1]
+575     print '
       -------------------------------------------------------------------------'
-572     print 'Fin del Calculo de Diferencias'
-573 
-574     set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d
+576     print 'Fin del Calculo de Diferencias'
+577 
+578 #    set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d
        %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
-575     set_data15=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d
-       %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data15,coef1,archivo]
-576     return set_data15
+579     set_data15=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d
+       %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),data15,coef1,archivo]
+580     return diferencias,set_data15
 
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_aceeb4d968f06abd2e044e25db4fb0585_cgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!encuentra\-Bordes@{encuentra\-Bordes}}
@@ -753,7 +798,13 @@ output
 \end{DoxyCode}
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a6247e26228742556a20f988bc818cb55_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!\-Filtra\-Archivos@{\-Filtra\-Archivos}}
@@ -797,7 +848,7 @@ output
 176         archivos_datos: nombres de los archivos CODS que contienen la fecha
 177                         del TLE primario - (Lista)
 178     """
-179     tle1=Tle(tle)
+179     tle1=Tle.creadoxArchivo(tle)
 180     fecha=tle1.epoca()
 181     fechas_busqueda=[datetime(fecha.year,fecha.month,fecha.day)+timedelta(days=
       2),
@@ -826,7 +877,13 @@ output
 \end{DoxyCode}
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_ae35fa90ace9d99f00529dfb4c37791ed_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!genera\-T\-O\-D@{genera\-T\-O\-D}}
@@ -869,7 +926,13 @@ output
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_addec5aabcf3b30ff227ac4f1536fd487_cgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!interpola@{interpola}}
@@ -969,12 +1032,24 @@ output
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a489657853bb99b1b74c3abb90af20e62_cgraph}
+\end{center}
+\end{figure}
 
 
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a489657853bb99b1b74c3abb90af20e62_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!interpola\-\_\-3sv@{interpola\-\_\-3sv}}
@@ -1020,7 +1095,7 @@ output
 232         linea_interpol: linea con el vector de estado interpolado a la epoca
        del TLE. (String)
 233     """
-234     tle1=Tle(tle)
+234     tle1=Tle.creadoxArchivo(tle)
 235     fecha_tle=tle1.epoca()
 236     r,v=tle1.propagaTLE()
 237     fila=str(fecha_tle)+' '+str(r[0])+' '+str(r[1])+' '+str(r[2])+' '+str(v[0])
@@ -1059,12 +1134,24 @@ output
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a43b4c6ce3d6b53735210bd9bf7f42943_cgraph}
+\end{center}
+\end{figure}
 
 
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a43b4c6ce3d6b53735210bd9bf7f42943_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!sv\-\_\-interpolados@{sv\-\_\-interpolados}}
@@ -1108,7 +1195,13 @@ correspondientes a los TLEs.
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespace_comparar_1_1_tlevs_cods_o_s_w_a85c0fa94a309bffac54cbb9f06dede43_cgraph}
+\end{center}
+\end{figure}
 
 
 
@@ -1119,292 +1212,292 @@ correspondientes a los TLEs.
 \subsubsection[{a}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::a} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a4359ad8c851e8a3975ec8a52f6e82661}
 
 
-\-Definition at line 669 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 673 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!coef@{coef}}
 \index{coef@{coef}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{coef}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::coef} = [c,c1,c2]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a9ce743d5d29f2b0c385bcf64c39d155e}
 
 
-\-Definition at line 724 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 728 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!corte@{corte}}
 \index{corte@{corte}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{corte}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::corte} = len({\bf tle\-\_\-ord})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a1a5c4f744ba44e6e91411b6a1502736b}
 
 
-\-Definition at line 676 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 680 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!d@{d}}
 \index{d@{d}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{d}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::d} = datetime.\-strptime({\bf fecha},'\%\-Y-\/\%m-\/\%{\bf d} \%\-H\-:\%\-M\-:\%\-S.\%f')}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a1811fffa84235e16ac8ede40c52ca2ff}
 
 
-\-Definition at line 688 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 692 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!data@{data}}
 \index{data@{data}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::data} = [{\bf t},{\bf dv},{\bf dn},{\bf dc},{\bf dt\-\_\-frac}]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a0e4d67c3448069473ffece91e5e422b1}
 
 
-\-Definition at line 671 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 675 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!data\-\_\-xyz@{data\-\_\-xyz}}
 \index{data\-\_\-xyz@{data\-\_\-xyz}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{data\-\_\-xyz}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::data\-\_\-xyz} = [{\bf t},{\bf dv},{\bf dn},{\bf dc},{\bf dt\-\_\-frac}]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a841e85546174cadb738eead62b51ae0c}
 
 
-\-Definition at line 672 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 676 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dc@{dc}}
 \index{dc@{dc}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dc}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dc} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a26a82f2f3640b3d6352b6e1f48f28b2a}
 
 
-\-Definition at line 661 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 665 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dcc@{dcc}}
 \index{dcc@{dcc}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dcc}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dcc} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_afa289d4d809218bc536e6e4442952180}
 
 
-\-Definition at line 667 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 671 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dic\-\_\-tle@{dic\-\_\-tle}}
 \index{dic\-\_\-tle@{dic\-\_\-tle}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dic\-\_\-tle}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dic\-\_\-tle} = generador\-Datos({\bf tlelista})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a15e6e9937287f3d218fee795c481de64}
 
 
-\-Definition at line 648 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 652 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dn@{dn}}
 \index{dn@{dn}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dn}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dn} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_ad820f3df2061696288358169c519f323}
 
 
-\-Definition at line 660 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 664 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dnn@{dnn}}
 \index{dnn@{dnn}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dnn}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dnn} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_ab56aaf1095eddbb998d0571d051ca5df}
 
 
-\-Definition at line 666 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 670 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dt\-\_\-frac@{dt\-\_\-frac}}
 \index{dt\-\_\-frac@{dt\-\_\-frac}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dt\-\_\-frac}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dt\-\_\-frac} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_acb74f49825b48b679501305ccf64bff8}
 
 
-\-Definition at line 668 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 672 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dv@{dv}}
 \index{dv@{dv}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dv}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dv} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a25b0a62ac5cd277d13af636221d0c3b3}
 
 
-\-Definition at line 659 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 663 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dvv@{dvv}}
 \index{dvv@{dvv}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dvv}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dvv} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_ac1f107b08569a2892bf4f25463982276}
 
 
-\-Definition at line 665 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 669 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dx@{dx}}
 \index{dx@{dx}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dx}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dx} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_ac674ac6e1d533a5fda250de97499ddc1}
 
 
-\-Definition at line 662 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 666 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dy@{dy}}
 \index{dy@{dy}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dy}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dy} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_ae3eb3943f7c7f1ff35d72ccc15e9fef4}
 
 
-\-Definition at line 663 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 667 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!dz@{dz}}
 \index{dz@{dz}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{dz}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::dz} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a082b1f8c817120b5d9d9ae363ea10729}
 
 
-\-Definition at line 664 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 668 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!f\-\_\-ini@{f\-\_\-ini}}
 \index{f\-\_\-ini@{f\-\_\-ini}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{f\-\_\-ini}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::f\-\_\-ini} = np.\-min({\bf t})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a383f7c9987353b1748212a0b1bf3b902}
 
 
-\-Definition at line 716 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 720 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!fecha@{fecha}}
 \index{fecha@{fecha}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{fecha}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::fecha} = {\bf linea\-\_\-interpol}[\-:26]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a102df5f7aed3ecdf411aaac705734a66}
 
 
-\-Definition at line 687 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 691 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!g@{g}}
 \index{g@{g}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{g}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::g} = 2}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a449cb974121e81b552d6db4a153b09d5}
 
 
-\-Definition at line 720 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 724 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!i@{i}}
 \index{i@{i}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{i}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::i} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a2f6fee3a94d4f13e4c2a52f58fb847aa}
 
 
-\-Definition at line 670 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 674 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!line1@{line1}}
 \index{line1@{line1}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{line1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::line1} = tle0.\-linea1}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a01431002ae763f793093af37d3bd4f9f}
 
 
-\-Definition at line 692 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 696 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!line2@{line2}}
 \index{line2@{line2}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{line2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::line2} = tle0.\-linea2}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_af6ea0e959de687b7e11bee30bb306933}
 
 
-\-Definition at line 693 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 697 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!linea\-\_\-interpol@{linea\-\_\-interpol}}
 \index{linea\-\_\-interpol@{linea\-\_\-interpol}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{linea\-\_\-interpol}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::linea\-\_\-interpol} = {\bf interpola\-\_\-3sv}('../\-Tle\-Admin/{\bf tle}/'+{\bf tle}, {\bf tres\-\_\-archivos})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_afc1b200f18d3c35e8f7e192e417e0da5}
 
 
-\-Definition at line 685 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 689 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!lista\-\_\-tle\-\_\-ord@{lista\-\_\-tle\-\_\-ord}}
 \index{lista\-\_\-tle\-\_\-ord@{lista\-\_\-tle\-\_\-ord}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{lista\-\_\-tle\-\_\-ord}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::lista\-\_\-tle\-\_\-ord} = {\bf tle\-\_\-ord}[1]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a9fef17d7d75b265e9225754672197bb9}
 
 
-\-Definition at line 650 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 654 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!listar@{listar}}
 \index{listar@{listar}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{listar}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::listar} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a9433da424e0f606225111d856804ce53}
 
 
-\-Definition at line 654 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 658 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!n@{n}}
 \index{n@{n}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{n}]{\setlength{\rightskip}{0pt plus 5cm}int {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::n} = 0}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a3992130f41fc449ce600a45bb9ac4a11}
 
 
-\-Definition at line 674 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 678 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!r@{r}}
 \index{r@{r}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{r}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::r} = np.\-array([float(linea\-\_\-interpol.\-split()[2]),float(linea\-\_\-interpol.\-split()[3]),float(linea\-\_\-interpol.\-split()[4])])}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_ae6320a32b24556b0740d386d1e4af0b6}
 
 
-\-Definition at line 689 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 693 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!r\-\_\-teme@{r\-\_\-teme}}
 \index{r\-\_\-teme@{r\-\_\-teme}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{r\-\_\-teme}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::r\-\_\-teme} = [pos1[0],pos1[1],pos1[2]]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a7e8d3edb1b36c374efcdafd0fb6c69c8}
 
 
-\-Definition at line 697 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 701 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!r\-\_\-tod@{r\-\_\-tod}}
 \index{r\-\_\-tod@{r\-\_\-tod}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{r\-\_\-tod}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::r\-\_\-tod} = teme2tod({\bf d},{\bf r\-\_\-teme})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_aa7d018c2a669560e6201c84adeb53ff3}
 
 
-\-Definition at line 702 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 706 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!rp@{rp}}
 \index{rp@{rp}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{rp}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::rp} = np.\-array([float(linea\-\_\-interpol.\-split()[5]),float(linea\-\_\-interpol.\-split()[6]),float(linea\-\_\-interpol.\-split()[7])])}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a5e389b559374b48e3d7eabf11bed2c9e}
 
 
-\-Definition at line 690 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 694 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!satrec@{satrec}}
 \index{satrec@{satrec}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{satrec}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::satrec} = twoline2rv({\bf line1}, {\bf line2}, {\bf whichconst})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a0bfe4765874dd65107c89bf8aea32540}
 
 
-\-Definition at line 694 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 698 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!t@{t}}
 \index{t@{t}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{t}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::t} = [$\,$]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a573d95346e8f216e0115deb293eecfa6}
 
 
-\-Definition at line 658 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 662 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!tle@{tle}}
 \index{tle@{tle}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{tle}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::tle} = k[0]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_ad5fef370da15e7e3e9fa5434f24e419d}
 
 
-\-Definition at line 683 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 687 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!tle0@{tle0}}
 \index{tle0@{tle0}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
-\subsubsection[{tle0}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::tle0} = {\bf \-Tle}('../\-Tle\-Admin/{\bf tle}/'+{\bf tle})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a76fc5a1006fc5c6c6a11953bbd2b9379}
+\subsubsection[{tle0}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::tle0} = {\bf \-Tle.\-creadox\-Archivo}('../\-Tle\-Admin/{\bf tle}/'+{\bf tle})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a76fc5a1006fc5c6c6a11953bbd2b9379}
 
 
-\-Definition at line 691 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 695 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!tle\-\_\-15@{tle\-\_\-15}}
 \index{tle\-\_\-15@{tle\-\_\-15}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{tle\-\_\-15}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::tle\-\_\-15} = {\bf tle\-\_\-ord}[corte\-:]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a7a65b12548a20c0076b5a3e2dd451e28}
 
 
-\-Definition at line 677 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 681 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!tle\-\_\-ord@{tle\-\_\-ord}}
 \index{tle\-\_\-ord@{tle\-\_\-ord}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{tle\-\_\-ord}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::tle\-\_\-ord} = ordena\-Tles({\bf dic\-\_\-tle})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a4853289b31012e20d74e05ff4e6eca64}
 
 
-\-Definition at line 649 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 653 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!tlelista@{tlelista}}
 \index{tlelista@{tlelista}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{tlelista}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::tlelista} = glob.\-glob('../\-Tle\-Admin/{\bf tle}/$\ast$')}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a50013febf888a21e3a01a7179bf4441a}
 
 
-\-Definition at line 647 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 651 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!tres\-\_\-archivos@{tres\-\_\-archivos}}
 \index{tres\-\_\-archivos@{tres\-\_\-archivos}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{tres\-\_\-archivos}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::tres\-\_\-archivos} = {\bf \-Filtra\-Archivos}('../\-Tle\-Admin/{\bf tle}/'+{\bf tle})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a834eb72aa01a2418fc767c4d34b62f8d}
 
 
-\-Definition at line 684 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 688 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!v\-\_\-teme@{v\-\_\-teme}}
 \index{v\-\_\-teme@{v\-\_\-teme}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{v\-\_\-teme}]{\setlength{\rightskip}{0pt plus 5cm}list {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::v\-\_\-teme} = [vel1[0],vel1[1],vel1[2]]}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_af56ebdde98c2102a1cda5e1d0fcade44}
 
 
-\-Definition at line 698 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 702 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!v\-\_\-tod@{v\-\_\-tod}}
 \index{v\-\_\-tod@{v\-\_\-tod}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{v\-\_\-tod}]{\setlength{\rightskip}{0pt plus 5cm}tuple {\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::v\-\_\-tod} = teme2tod({\bf d},{\bf v\-\_\-teme})}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a67fcf7e0e6ea8441d0bfa8f52c7f99a6}
 
 
-\-Definition at line 704 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 708 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 
 \index{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}!whichconst@{whichconst}}
 \index{whichconst@{whichconst}!Comparar::TlevsCodsOSW@{\-Comparar\-::\-Tlevs\-Cods\-O\-S\-W}}
 \subsubsection[{whichconst}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Comparar\-::\-Tlevs\-Cods\-O\-S\-W\-::whichconst} = wgs72}\label{namespace_comparar_1_1_tlevs_cods_o_s_w_a2f263feac66e6a83750b5d6eeebc4141}
 
 
-\-Definition at line 673 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
+\-Definition at line 677 of file \-Tlevs\-Cods\-O\-S\-W.\-py.
 

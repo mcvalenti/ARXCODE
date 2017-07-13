@@ -1,5 +1,23 @@
 \section{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Mision \-Class \-Reference}
 \label{class_aplicacion_1_1frm__main_1_1_proc_mision}\index{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Mision@{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Mision}}
+
+
+\-Inheritance diagram for \-Aplicacion.\-frm\-\_\-main.\-Proc\-Mision\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{class_aplicacion_1_1frm__main_1_1_proc_mision__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for \-Aplicacion.\-frm\-\_\-main.\-Proc\-Mision\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=236pt]{class_aplicacion_1_1frm__main_1_1_proc_mision__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -98,7 +116,7 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 \end{DoxyVerb}
  
 
-\-Definition at line 801 of file frm\-\_\-main.\-py.
+\-Definition at line 928 of file frm\-\_\-main.\-py.
 
 
 
@@ -113,32 +131,32 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_ab386f8a70670aa3edd2ff232d0c9696d}
 
 
-\-Definition at line 808 of file frm\-\_\-main.\-py.
+\-Definition at line 935 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-808 
-809     def __init__(self,parent=None):
-810         QDialog.__init__(self,parent)
-811 
-812         self.setWindowModality(Qt.ApplicationModal)
-813 #       self.resize(1200, 600)
-814 #        self.resize(1700, 700)
-815         self.initUI()
-816         
-817         self.sat_id='99999'
-818         self.sat_nombre=''
-819         self.linea1=''
-820         self.linea2=''
-821         self.grafico_arch=''
-822         self.dif_cvstle= ''
-823         self.macovarT=''
-824         self.path='../Comparar/diferencias/'
-825         self.dt=[]
-826         self.data=[]
-827         self.set_datos15dias=[]
-828         self.coef=[]
-829         self.set_datos=[]
+935 
+936     def __init__(self,parent=None):
+937         QDialog.__init__(self,parent)
+938 
+939         self.setWindowModality(Qt.ApplicationModal)
+940 #       self.resize(1200, 600)
+941 #        self.resize(1700, 700)
+942         self.initUI()
+943         
+944         self.sat_id='99999'
+945         self.sat_nombre=''
+946         self.linea1=''
+947         self.linea2=''
+948         self.grafico_arch=''
+949         self.dif_cvstle= ''
+950         self.macovarT=''
+951         self.path='../Comparar/diferencias/'
+952         self.dt=[]
+953         self.data=[]
+954         self.set_datos15dias=[]
+955         self.coef=[]
+956         self.set_datos=[]
         
 \end{DoxyCode}
 
@@ -153,89 +171,89 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a9218bf963132eaa32d23247740787305}
 
 
-\-Definition at line 830 of file frm\-\_\-main.\-py.
+\-Definition at line 957 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-830 
-831     def initUI(self):
-832         self.grilla = QGridLayout()
-833         self.grilla.setSpacing(10)
-834         
-835         """
-836         Etiquetas
-837         """
-838         self.mision_lab     = QLabel('Mision')
-839         self.fechaini_lab   = QLabel('Fecha Inicio')
-840         self.fechafin_lab   = QLabel('Fecha Fin')
-841         self.ma_lab       = QLabel('Ma. Varianza-Covarianza')
-842         
-843         """
-844         Botones
-845         """
-846         self.boton_procesar     = QPushButton('Procesar')
-847         self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
-848         self.boton_dxcoord      = QPushButton('Graficar Diferencias por
+957 
+958     def initUI(self):
+959         self.grilla = QGridLayout()
+960         self.grilla.setSpacing(10)
+961         
+962         """
+963         Etiquetas
+964         """
+965         self.mision_lab     = QLabel('Mision')
+966         self.fechaini_lab   = QLabel('Fecha Inicio')
+967         self.fechafin_lab   = QLabel('Fecha Fin')
+968         self.ma_lab       = QLabel('Ma. Varianza-Covarianza')
+969         
+970         """
+971         Botones
+972         """
+973         self.boton_procesar     = QPushButton('Procesar')
+974         self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
+975         self.boton_dxcoord      = QPushButton('Graficar Diferencias por
        Coordenadas')
-849         self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set
+976         self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set
        primario')
-850         self.boton_macovar      = QPushButton('Calcular Matriz')
-851         self.boton_salir        = QPushButton('Salir')
-852         
-853         """
-854         Campos de Edicion
-855         """
-856         self.fechaini_edit   = QLineEdit()
-857         self.fechafin_edit   = QLineEdit()
-858         self.tlepri_edit     = QTextEdit()
-859                 
-860         """
-861         Lista desplegada
-862         """
-863         self.listaSat       = QComboBox()
-864         self.listaSat.addItem("...");
-865         self.listaSat.addItem("SAC-D"); 
-866         self.listaSat.addItem("LAGEOS");
-867         self.listaSat.addItem("ICESAT");
-868         """
-869         tabla
-870         """
-871         self.tableView       = QTableWidget()
-872         
-873         self.grilla.addWidget(self.mision_lab,1,0)
-874         self.grilla.addWidget(self.listaSat,1,1)
-875         self.grilla.addWidget(self.boton_procesar,2,1)
-876         self.grilla.addWidget(self.fechaini_lab,3,0)
-877         self.grilla.addWidget(self.fechaini_edit,3,1)
-878         self.grilla.addWidget(self.fechafin_lab,4,0)
-879         self.grilla.addWidget(self.fechafin_edit,4,1)
-880         self.grilla.addWidget(self.tlepri_edit,5,0,1,2)
-881         self.grilla.addWidget(self.boton_dtotales,6,0)
-882         self.grilla.addWidget(self.boton_dxcoord,6,1)
-883         self.grilla.addWidget(self.boton_dsetprimario,6,2)
-884         self.grilla.addWidget(self.tableView,7,0,7,1)
-885         self.grilla.addWidget(self.boton_macovar,8,1)
-886         self.grilla.addWidget(self.boton_salir,17,1)
-887         
-888         """
-889         Acciones
-890         """
-891         self.listaSat.currentIndexChanged.connect(self.selectionchange)
-892         self.boton_procesar.clicked.connect(self.procesarCods)
-893         self.boton_procesar.setEnabled(False)
-894         self.boton_dtotales.setEnabled(False)
-895         self.boton_dxcoord.setEnabled(False)
-896         self.boton_dsetprimario.setEnabled(False)
-897         self.boton_macovar.setEnabled(False)
-898         self.boton_salir.clicked.connect(self.salir)
-899         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
-900         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
-901         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
-902         self.boton_macovar.clicked.connect(self.Macovar)
-903 #        self.datos_mis_edit.textChanged.connect(self.validar_nombre)
-904                 
-905         self.setWindowTitle('PROCESAMIENTO de DATOS CODS')
-906         self.setLayout(self.grilla) 
+977         self.boton_macovar      = QPushButton('Calcular Matriz')
+978         self.boton_salir        = QPushButton('Salir')
+979         
+980         """
+981         Campos de Edicion
+982         """
+983         self.fechaini_edit   = QLineEdit()
+984         self.fechafin_edit   = QLineEdit()
+985         self.tlepri_edit     = QTextEdit()
+986                 
+987         """
+988         Lista desplegada
+989         """
+990         self.listaSat       = QComboBox()
+991         self.listaSat.addItem("...");
+992         self.listaSat.addItem("SAC-D"); 
+993         self.listaSat.addItem("LAGEOS");
+994         self.listaSat.addItem("ICESAT");
+995         """
+996         tabla
+997         """
+998         self.tableView       = QTableWidget()
+999         
+1000         self.grilla.addWidget(self.mision_lab,1,0)
+1001         self.grilla.addWidget(self.listaSat,1,1)
+1002         self.grilla.addWidget(self.boton_procesar,2,1)
+1003         self.grilla.addWidget(self.fechaini_lab,3,0)
+1004         self.grilla.addWidget(self.fechaini_edit,3,1)
+1005         self.grilla.addWidget(self.fechafin_lab,4,0)
+1006         self.grilla.addWidget(self.fechafin_edit,4,1)
+1007         self.grilla.addWidget(self.tlepri_edit,5,0,1,2)
+1008         self.grilla.addWidget(self.boton_dtotales,6,0)
+1009         self.grilla.addWidget(self.boton_dxcoord,6,1)
+1010         self.grilla.addWidget(self.boton_dsetprimario,6,2)
+1011         self.grilla.addWidget(self.tableView,7,0,7,1)
+1012         self.grilla.addWidget(self.boton_macovar,8,1)
+1013         self.grilla.addWidget(self.boton_salir,17,1)
+1014         
+1015         """
+1016         Acciones
+1017         """
+1018         self.listaSat.currentIndexChanged.connect(self.selectionchange)
+1019         self.boton_procesar.clicked.connect(self.procesarCods)
+1020         self.boton_procesar.setEnabled(False)
+1021         self.boton_dtotales.setEnabled(False)
+1022         self.boton_dxcoord.setEnabled(False)
+1023         self.boton_dsetprimario.setEnabled(False)
+1024         self.boton_macovar.setEnabled(False)
+1025         self.boton_salir.clicked.connect(self.salir)
+1026         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
+1027         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
+1028         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
+1029         self.boton_macovar.clicked.connect(self.Macovar)
+1030 #        self.datos_mis_edit.textChanged.connect(self.validar_nombre)
+1031                 
+1032         self.setWindowTitle('PROCESAMIENTO de DATOS CODS')
+1033         self.setLayout(self.grilla) 
         
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!\-Macovar@{\-Macovar}}
@@ -247,23 +265,29 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_acc3e51ea01f718127f28f752079417d2}
 
 
-\-Definition at line 947 of file frm\-\_\-main.\-py.
+\-Definition at line 1074 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-947 
-948     def Macovar(self):
-949         self.macovarT=EjecutaMaCovarCODS(self.grafico_arch)
-950         self.tableView.setRowCount(len(self.macovarT))
-951         self.tableView.setColumnCount(len(self.macovarT))
-952         for i,fila in enumerate(self.macovarT):
-953             for j,col in enumerate(fila):
-954                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
+1074 
+1075     def Macovar(self):
+1076         self.macovarT=EjecutaMaCovarCODS(self.grafico_arch)
+1077         self.tableView.setRowCount(len(self.macovarT))
+1078         self.tableView.setColumnCount(len(self.macovarT))
+1079         for i,fila in enumerate(self.macovarT):
+1080             for j,col in enumerate(fila):
+1081                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
    
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_aplicacion_1_1frm__main_1_1_proc_mision_acc3e51ea01f718127f28f752079417d2_cgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!procesar\-Cods@{procesar\-Cods}}
@@ -275,38 +299,44 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a833aec7ff42fabde02e729e5ab5e5a44}
 
 
-\-Definition at line 913 of file frm\-\_\-main.\-py.
+\-Definition at line 1040 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-913 
-914     def procesarCods(self):
-915         files=glob.glob('../Comparar/diferencias/*')
-916         for filename in files:
-917             os.unlink(filename)
-918 #        self.set_datos =ejecutaProcesamientoCods()
-919         self.set_datos= dif_tleCODS15dias()
-920         self.sat_id=self.set_datos[0]
-921         self.linea1=self.set_datos[1]
-922         self.linea2=self.set_datos[2]
-923         self.fini=self.set_datos[3]
-924         self.ffin=self.set_datos[4]
-925         self.dt=self.set_datos[5]
-926         self.data=self.set_datos[6]
-927         self.coef=self.set_datos[7]
-928         self.grafico_arch=self.set_datos[8]
-929         self.fechaini_edit.setText(self.fini)
-930         self.fechafin_edit.setText(self.ffin)
-931         self.tlepri_edit.setText(self.linea1+'\n'+self.linea2)
-932         self.boton_dtotales.setEnabled(True)
-933         self.boton_dxcoord.setEnabled(True)
-934         self.boton_dsetprimario.setEnabled(True)
-935         self.boton_macovar.setEnabled(True)
+1040 
+1041     def procesarCods(self):
+1042         files=glob.glob('../Comparar/diferencias/*')
+1043         for filename in files:
+1044             os.unlink(filename)
+1045 #        self.set_datos =ejecutaProcesamientoCods()
+1046         self.set_datos= dif_tleCODS15dias()
+1047         self.sat_id=self.set_datos[0]
+1048         self.linea1=self.set_datos[1]
+1049         self.linea2=self.set_datos[2]
+1050         self.fini=self.set_datos[3]
+1051         self.ffin=self.set_datos[4]
+1052         self.dt=self.set_datos[5]
+1053         self.data=self.set_datos[6]
+1054         self.coef=self.set_datos[7]
+1055         self.grafico_arch=self.set_datos[8]
+1056         self.fechaini_edit.setText(self.fini)
+1057         self.fechafin_edit.setText(self.ffin)
+1058         self.tlepri_edit.setText(self.linea1+'\n'+self.linea2)
+1059         self.boton_dtotales.setEnabled(True)
+1060         self.boton_dxcoord.setEnabled(True)
+1061         self.boton_dsetprimario.setEnabled(True)
+1062         self.boton_macovar.setEnabled(True)
         
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_aplicacion_1_1frm__main_1_1_proc_mision_a833aec7ff42fabde02e729e5ab5e5a44_cgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!salir@{salir}}
@@ -318,15 +348,15 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_abe5eaa272c4758f505193a0359e13b7e}
 
 
-\-Definition at line 955 of file frm\-\_\-main.\-py.
+\-Definition at line 1082 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-955 
-956     def salir(self):
-957         self.accept()
-958         
-959         
+1082 
+1083     def salir(self):
+1084         self.accept()
+1085         
+1086         
 #def IniciaApp():
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!selectionchange@{selectionchange}}
@@ -339,16 +369,16 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a32dded3405be1a68a86b698ab03077ae}
 
 
-\-Definition at line 907 of file frm\-\_\-main.\-py.
+\-Definition at line 1034 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-907 
-908     def selectionchange(self,i):
-909         self.sat_nombre= self.listaSat.currentText()
-910         self.dic_satelites={'SAC-D':37673,'LAGEOS':8820,'ICESAT':27642}
-911         self.sat_id=self.dic_satelites[str(self.sat_nombre)]
-912         self.boton_procesar.setEnabled(True)
+1034 
+1035     def selectionchange(self,i):
+1036         self.sat_nombre= self.listaSat.currentText()
+1037         self.dic_satelites={'SAC-D':37673,'LAGEOS':8820,'ICESAT':27642}
+1038         self.sat_id=self.dic_satelites[str(self.sat_nombre)]
+1039         self.boton_procesar.setEnabled(True)
         
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!ver\-\_\-dif\-\_\-set\-\_\-primario@{ver\-\_\-dif\-\_\-set\-\_\-primario}}
@@ -360,16 +390,16 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_ae8b8bd169d4cb3383b04eef230662d94}
 
 
-\-Definition at line 942 of file frm\-\_\-main.\-py.
+\-Definition at line 1069 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-942 
-943     def ver_dif_set_primario(self):
-944         ploteos.grafica_set15dias(self.data, self.coef)
-945 #       
+1069 
+1070     def ver_dif_set_primario(self):
+1071         ploteos.grafica_set15dias(self.data, self.coef)
+1072 #       
        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch,self.ffin)
-946         
+1073         
         
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!ver\-\_\-dif\-\_\-x\-\_\-coordenadas@{ver\-\_\-dif\-\_\-x\-\_\-coordenadas}}
@@ -381,13 +411,13 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a75e87bed4ae6deeb7c2a537e7aec92c2}
 
 
-\-Definition at line 939 of file frm\-\_\-main.\-py.
+\-Definition at line 1066 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-939 
-940     def ver_dif_x_coordenadas(self):
-941         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data, self.coef)
+1066 
+1067     def ver_dif_x_coordenadas(self):
+1068         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data, self.coef)
         
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!ver\-\_\-diferencias\-\_\-totales@{ver\-\_\-diferencias\-\_\-totales}}
@@ -399,13 +429,13 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a1f554257b2dc3c7d9205fcccc4567503}
 
 
-\-Definition at line 936 of file frm\-\_\-main.\-py.
+\-Definition at line 1063 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-936 
-937     def ver_diferencias_totales(self):
-938         ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data,
+1063 
+1064     def ver_diferencias_totales(self):
+1065         ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data,
       self.coef)
         
 \end{DoxyCode}
@@ -417,224 +447,224 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 \subsubsection[{boton\-\_\-dsetprimario}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::boton\-\_\-dsetprimario}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a55df2c2f9f6fcc71be77878a2dd313d7}
 
 
-\-Definition at line 834 of file frm\-\_\-main.\-py.
+\-Definition at line 961 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!boton\-\_\-dtotales@{boton\-\_\-dtotales}}
 \index{boton\-\_\-dtotales@{boton\-\_\-dtotales}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{boton\-\_\-dtotales}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::boton\-\_\-dtotales}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a42d8a8b34d3c480ab348894c322a860c}
 
 
-\-Definition at line 834 of file frm\-\_\-main.\-py.
+\-Definition at line 961 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!boton\-\_\-dxcoord@{boton\-\_\-dxcoord}}
 \index{boton\-\_\-dxcoord@{boton\-\_\-dxcoord}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{boton\-\_\-dxcoord}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::boton\-\_\-dxcoord}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a4cf737219230bd140c671f40ad1c14bc}
 
 
-\-Definition at line 834 of file frm\-\_\-main.\-py.
+\-Definition at line 961 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!boton\-\_\-macovar@{boton\-\_\-macovar}}
 \index{boton\-\_\-macovar@{boton\-\_\-macovar}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{boton\-\_\-macovar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::boton\-\_\-macovar}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a92c0069fe00775eefd9f1f233ad40635}
 
 
-\-Definition at line 834 of file frm\-\_\-main.\-py.
+\-Definition at line 961 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!boton\-\_\-procesar@{boton\-\_\-procesar}}
 \index{boton\-\_\-procesar@{boton\-\_\-procesar}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{boton\-\_\-procesar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::boton\-\_\-procesar}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_ad25186a3caaabdf09c46f5b8260a3e4a}
 
 
-\-Definition at line 834 of file frm\-\_\-main.\-py.
+\-Definition at line 961 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!boton\-\_\-salir@{boton\-\_\-salir}}
 \index{boton\-\_\-salir@{boton\-\_\-salir}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{boton\-\_\-salir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::boton\-\_\-salir}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a20327beb8d3a747995089a37f477a4e6}
 
 
-\-Definition at line 834 of file frm\-\_\-main.\-py.
+\-Definition at line 961 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!coef@{coef}}
 \index{coef@{coef}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{coef}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::coef}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_aaf0c4aebba29569f505f11fa1734b6fa}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!data@{data}}
 \index{data@{data}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::data}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a3a657cafea73c6a7aea4d11c33550c3e}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!dic\-\_\-satelites@{dic\-\_\-satelites}}
 \index{dic\-\_\-satelites@{dic\-\_\-satelites}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{dic\-\_\-satelites}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::dic\-\_\-satelites}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a6335ad8c4d5a2c4c1ecd4d97f0760d5f}
 
 
-\-Definition at line 907 of file frm\-\_\-main.\-py.
+\-Definition at line 1034 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!dif\-\_\-cvstle@{dif\-\_\-cvstle}}
 \index{dif\-\_\-cvstle@{dif\-\_\-cvstle}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{dif\-\_\-cvstle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::dif\-\_\-cvstle}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a557b7916dfc6ca8321f0cbe20c61ca77}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!dt@{dt}}
 \index{dt@{dt}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{dt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::dt}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a9e7a8f2abdaaca0e031e31c8dfa229af}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!fechafin\-\_\-edit@{fechafin\-\_\-edit}}
 \index{fechafin\-\_\-edit@{fechafin\-\_\-edit}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{fechafin\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::fechafin\-\_\-edit}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_af4caad95665cbfe298b126e8778d6985}
 
 
-\-Definition at line 836 of file frm\-\_\-main.\-py.
+\-Definition at line 963 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!fechafin\-\_\-lab@{fechafin\-\_\-lab}}
 \index{fechafin\-\_\-lab@{fechafin\-\_\-lab}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{fechafin\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::fechafin\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a8440b3f75b5e19ce866bf04c8804dcc4}
 
 
-\-Definition at line 832 of file frm\-\_\-main.\-py.
+\-Definition at line 959 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!fechaini\-\_\-edit@{fechaini\-\_\-edit}}
 \index{fechaini\-\_\-edit@{fechaini\-\_\-edit}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{fechaini\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::fechaini\-\_\-edit}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a419a8ea96b6c0f523ca319fc0f645162}
 
 
-\-Definition at line 836 of file frm\-\_\-main.\-py.
+\-Definition at line 963 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!fechaini\-\_\-lab@{fechaini\-\_\-lab}}
 \index{fechaini\-\_\-lab@{fechaini\-\_\-lab}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{fechaini\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::fechaini\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_ab568e83eaf9bffba0d7dbfc890873660}
 
 
-\-Definition at line 832 of file frm\-\_\-main.\-py.
+\-Definition at line 959 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!ffin@{ffin}}
 \index{ffin@{ffin}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{ffin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::ffin}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a5f16740ae5b70bf2ba275df1d15b2bd7}
 
 
-\-Definition at line 913 of file frm\-\_\-main.\-py.
+\-Definition at line 1040 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!fini@{fini}}
 \index{fini@{fini}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{fini}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::fini}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a577add6b0e98b4e2f7b6e04b7479fd67}
 
 
-\-Definition at line 913 of file frm\-\_\-main.\-py.
+\-Definition at line 1040 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!grafico\-\_\-arch@{grafico\-\_\-arch}}
 \index{grafico\-\_\-arch@{grafico\-\_\-arch}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{grafico\-\_\-arch}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::grafico\-\_\-arch}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a3002cea889ffe07f57ddd32afe8779d6}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!grilla@{grilla}}
 \index{grilla@{grilla}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{grilla}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::grilla}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_ab03ced5fd6f9885d9edc8cb7aeb99a51}
 
 
-\-Definition at line 830 of file frm\-\_\-main.\-py.
+\-Definition at line 957 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!linea1@{linea1}}
 \index{linea1@{linea1}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{linea1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::linea1}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a9eb29e9192330d7e17dfb3aa158e0a6a}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!linea2@{linea2}}
 \index{linea2@{linea2}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{linea2}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::linea2}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a9d93788fa1c41422c23c50a7b5334ca4}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!lista\-Sat@{lista\-Sat}}
 \index{lista\-Sat@{lista\-Sat}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{lista\-Sat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::lista\-Sat}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a9c79623431ad53062320a6e418d2ad3b}
 
 
-\-Definition at line 838 of file frm\-\_\-main.\-py.
+\-Definition at line 965 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!ma\-\_\-lab@{ma\-\_\-lab}}
 \index{ma\-\_\-lab@{ma\-\_\-lab}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{ma\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::ma\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a941296d73b52836ccbe2f034f025271b}
 
 
-\-Definition at line 832 of file frm\-\_\-main.\-py.
+\-Definition at line 959 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!macovar\-T@{macovar\-T}}
 \index{macovar\-T@{macovar\-T}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{macovar\-T}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::macovar\-T}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_aa13d10aacf060079761b4c5f4d71cb7b}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!mision\-\_\-lab@{mision\-\_\-lab}}
 \index{mision\-\_\-lab@{mision\-\_\-lab}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{mision\-\_\-lab}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::mision\-\_\-lab}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_af958acf508c4118ce0faab708f26ec5b}
 
 
-\-Definition at line 832 of file frm\-\_\-main.\-py.
+\-Definition at line 959 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!path@{path}}
 \index{path@{path}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{path}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::path}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_aa3966e8997b4cd36f93ec279368419c7}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!sat\-\_\-id@{sat\-\_\-id}}
 \index{sat\-\_\-id@{sat\-\_\-id}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::sat\-\_\-id}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a567f66e7bbde2200a082882dc97c6655}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!sat\-\_\-nombre@{sat\-\_\-nombre}}
 \index{sat\-\_\-nombre@{sat\-\_\-nombre}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{sat\-\_\-nombre}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::sat\-\_\-nombre}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a47fb6c6887ca9e86d79f390b5bcbe2ed}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!set\-\_\-datos@{set\-\_\-datos}}
 \index{set\-\_\-datos@{set\-\_\-datos}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{set\-\_\-datos}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::set\-\_\-datos}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a55fedfe2e3266b40a79267c4996831b0}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!set\-\_\-datos15dias@{set\-\_\-datos15dias}}
 \index{set\-\_\-datos15dias@{set\-\_\-datos15dias}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{set\-\_\-datos15dias}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::set\-\_\-datos15dias}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a1622a9351a6cc68b212129a888d01f3c}
 
 
-\-Definition at line 809 of file frm\-\_\-main.\-py.
+\-Definition at line 936 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!table\-View@{table\-View}}
 \index{table\-View@{table\-View}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{table\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::table\-View}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_a9e6ae8feb67beb52cf0671a58641403a}
 
 
-\-Definition at line 840 of file frm\-\_\-main.\-py.
+\-Definition at line 967 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}!tlepri\-\_\-edit@{tlepri\-\_\-edit}}
 \index{tlepri\-\_\-edit@{tlepri\-\_\-edit}!Aplicacion::frm_main::ProcMision@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Mision}}
 \subsubsection[{tlepri\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Mision\-::tlepri\-\_\-edit}}\label{class_aplicacion_1_1frm__main_1_1_proc_mision_aff624b7080bfce3b21dee4783d67e315}
 
 
-\-Definition at line 836 of file frm\-\_\-main.\-py.
+\-Definition at line 963 of file frm\-\_\-main.\-py.
 
 
 

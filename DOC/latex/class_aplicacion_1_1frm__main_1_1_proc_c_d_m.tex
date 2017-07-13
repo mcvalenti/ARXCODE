@@ -1,5 +1,23 @@
 \section{\-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M \-Class \-Reference}
 \label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m}\index{\-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M@{\-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M}}
+
+
+\-Inheritance diagram for \-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{class_aplicacion_1_1frm__main_1_1_proc_c_d_m__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for \-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{class_aplicacion_1_1frm__main_1_1_proc_c_d_m__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -7,12 +25,32 @@ def {\bf \-\_\-\-\_\-init\-\_\-\-\_\-}
 \item 
 def {\bf init\-U\-I}
 \item 
+def {\bf \-Archivo}
+\item 
+def {\bf \-Carga\-\_\-\-C\-D\-M}
+\item 
 def {\bf salir\-Cdm}
 \end{DoxyCompactItemize}
 \subsection*{\-Public \-Attributes}
 \begin{DoxyCompactItemize}
 \item 
-{\bf cdm\-\_\-titulo}
+{\bf \-T\-C\-A}
+\item 
+{\bf \-M\-I\-S\-S\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E}
+\item 
+{\bf \-P\-O\-C}
+\item 
+{\bf palette}
+\item 
+{\bf cdm\-\_\-archivo}
+\item 
+{\bf opciones}
+\item 
+{\bf archivo\-\_\-tex}
+\item 
+{\bf boton\-\_\-dir}
+\item 
+{\bf boton\-\_\-cargar}
 \item 
 {\bf boton\-\_\-graf\-Cdm}
 \item 
@@ -20,28 +58,58 @@ def {\bf salir\-Cdm}
 \item 
 {\bf boton\-\_\-salir\-Cdm}
 \item 
-{\bf \-C\-D\-M\-\_\-edit}
-\item 
 {\bf table\-P\-O\-C}
 \item 
 {\bf cdm\-\_\-xml}
 \item 
 {\bf cdm\-\_\-nombre}
 \item 
-{\bf obj\-\_\-list}
+{\bf \-C\-D\-M}
 \item 
-{\bf \-T\-C\-A}
+{\bf mision\-\_\-name}
 \item 
-{\bf sat\-\_\-idc}
+{\bf norad\-I\-D\-\_\-mision}
 \item 
-{\bf deb\-\_\-idc}
+{\bf r\-\_\-sat}
+\item 
+{\bf v\-\_\-sat}
+\item 
+{\bf deb\-\_\-name}
+\item 
+{\bf norad\-I\-D\-\_\-deb}
+\item 
+{\bf r\-\_\-deb}
+\item 
+{\bf v\-\_\-deb}
+\item 
+{\bf dr}
+\item 
+{\bf ds}
+\item 
+{\bf dw}
+\item 
+{\bf rsw\-\_\-vect}
+\item 
+{\bf cr\-\_\-r}
+\item 
+{\bf ct\-\_\-r}
+\item 
+{\bf ct\-\_\-t}
+\item 
+{\bf cn\-\_\-r}
+\item 
+{\bf cn\-\_\-t}
+\item 
+{\bf cn\-\_\-n}
+\item 
+{\bf cov\-\_\-rtn}
 \end{DoxyCompactItemize}
 
 
 \subsection{\-Detailed \-Description}
 
 
-\-Definition at line 122 of file frm\-\_\-main.\-py.
+\-Definition at line 157 of file frm\-\_\-main.\-py.
 
 
 
@@ -56,27 +124,144 @@ def {\bf salir\-Cdm}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a9aff53446934408cdfded450b0968f69}
 
 
-\-Definition at line 123 of file frm\-\_\-main.\-py.
+\-Definition at line 158 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-123 
-124     def __init__(self,parent=None):
-125         QDialog.__init__(self,parent)
-126         
-127         self.setWindowModality(Qt.ApplicationModal)
-128         self.initUI()
-129 
+158 
+159     def __init__(self,parent=None):
+160         QDialog.__init__(self,parent)
+161         
+162         self.setWindowModality(Qt.ApplicationModal)
+163         self.initUI()
+164         
+165         # Construccion
+166         self.TCA=None
+167         self.MISS_DISTANCE=None
+168         self.POC=None
+169 
 
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
-
-
-
-
 \subsection{\-Member \-Function \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-Archivo@{\-Archivo}}
+\index{\-Archivo@{\-Archivo}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{\-Archivo}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M.\-Archivo} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ad54c9746ccc6b3cae8752f5218382392}
+
+
+\-Definition at line 237 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+237 
+238     def Archivo(self):    
+239         self.cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a
+       Procesar', "../CDM/archivos/*")
+240         self.cdm_nombre=str(self.cdm_xml).split('/')[-1]
+241         self.archivo_tex.setText(self.cdm_nombre)
+242         
+        
+\end{DoxyCode}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-Carga\-\_\-\-C\-D\-M@{\-Carga\-\_\-\-C\-D\-M}}
+\index{\-Carga\-\_\-\-C\-D\-M@{\-Carga\-\_\-\-C\-D\-M}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{\-Carga\-\_\-\-C\-D\-M}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M.\-Carga\-\_\-\-C\-D\-M} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_aed2541f88f0074784be48854f9876cae}
+
+
+\-Definition at line 243 of file frm\-\_\-main.\-py.
+
+
+\begin{DoxyCode}
+243 
+244     def Carga_CDM(self):
+245 #        self.cdm_nombre='cdmEnviCosmos08.xml' # seteo el archivo para las
+       pruebas
+246 #        self.cdm_nombre='cdmTerraPegasus10.xml' # seteo el archivo para las
+       pruebas
+247         self.CDM=CDM(self.cdm_nombre)
+248         self.TCA=self.CDM.TCA
+249         self.MISS_DISTANCE=self.CDM.MISS_DISTANCE
+250         self.POC=self.CDM.POC
+251         self.mision_name=self.CDM.mision_name
+252         self.noradID_mision=self.CDM.noradID_mision
+253         self.r_sat=self.CDM.r_sat
+254         self.v_sat=self.CDM.v_sat
+255         self.deb_name=self.CDM.deb_name
+256         self.noradID_deb=self.CDM.noradID_deb
+257         self.r_deb=self.CDM.r_deb
+258         self.v_deb=self.CDM.v_deb
+259         # Posiciones Relativas.
+260         self.dr=float(self.CDM.dr)/1000.0
+261         self.ds=float(self.CDM.ds)/1000.0
+262         self.dw=float(self.CDM.dw)/1000.0
+263         self.rsw_vect=[self.dr,self.ds,self.dw]
+264         # Estadistica 
+265         self.cr_r=float(self.CDM.cr_r)*(0.001*0.001)
+266         self.ct_r=float(self.CDM.ct_r)*(0.001*0.001)
+267         self.ct_t=float(self.CDM.ct_t)*(0.001*0.001)
+268         self.cn_r=float(self.CDM.cn_r)*(0.001*0.001)
+269         self.cn_t=float(self.CDM.cn_t)*(0.001*0.001)
+270         self.cn_n=float(self.CDM.cn_n)*(0.001*0.001) 
+271         self.cov_rtn=np.array([[self.cr_r,self.ct_r,self.cn_r],[self.ct_r,self.
+      ct_t,self.cn_t],[self.cn_r,self.cn_t,self.cn_n]])     
+272         print'**********************'
+273         print 'r_sat = ',self.r_sat
+274         print 'v_sat = ',self.v_sat
+275         print 'r_deb = ',self.r_deb
+276         print 'v_deb = ',self.v_deb
+277         print self.dr,self.ds,self.dw
+278         print '*********************'
+279         print self.cr_r
+280         print self.ct_r,self.ct_t
+281         print self.cn_r,self.cn_t,self.cn_n        
+282         #Calculo el angulo entre los vectores velocidad.
+283         cos_phi=np.dot(self.v_sat,self.v_deb)/(np.sqrt(np.dot(self.v_sat,self.
+      v_sat))*np.sqrt(np.dot(self.v_deb,self.v_deb)))
+284         phi=np.arccos(cos_phi) 
+285     
+286         #Validacion del calculo POC a partir de datos CDM.
+287         mu_x,mu_y,sig2_xc,sig2_yc=proyecta_plano_de_encuentro(self.rsw_vect,
+      self.cov_rtn,phi)
+288         poc, poc_int=calcula_Poc_manual(mu_x, mu_y, sig2_xc, sig2_yc)
+289         print '======================'
+290         print '------POC-------------'
+291         print '======================'
+292         print poc, poc_int[0]
+293         """
+294         Carga de Informacion 
+295         """
+296         # Cargar la tabla
+297         self.tablePOC.setItem(0,0, QTableWidgetItem( self.mision_name))
+298         self.tablePOC.setItem(1,0, QTableWidgetItem(self.deb_name))
+299         self.tablePOC.setItem(0,1, QTableWidgetItem(self.noradID_mision))
+300         self.tablePOC.setItem(1,1, QTableWidgetItem(self.noradID_deb))
+301         self.tablePOC.setItem(0,2, QTableWidgetItem(self.TCA))
+302         self.tablePOC.setItem(0,3, QTableWidgetItem('TCA arx'))
+303         self.tablePOC.setItem(0,4, QTableWidgetItem(self.MISS_DISTANCE))
+304         self.tablePOC.setItem(0,5, QTableWidgetItem('M_dist arx'))
+305         self.tablePOC.setItem(0,6, QTableWidgetItem(self.POC))
+306         self.tablePOC.setItem(0,7, QTableWidgetItem('POC arx'))
+307         # formato de tabla
+308         header = self.tablePOC.horizontalHeader()
+309         header.setResizeMode(0,QHeaderView.Stretch)
+310         header.setResizeMode(1,QHeaderView.ResizeToContents)
+311         header.setResizeMode(2,QHeaderView.ResizeToContents)
+312         header.setResizeMode(3,QHeaderView.ResizeToContents)
+313         header.setResizeMode(4,QHeaderView.ResizeToContents)
+314         header.setResizeMode(5,QHeaderView.ResizeToContents)
+315         header.setResizeMode(6,QHeaderView.ResizeToContents)        
+316         header.setResizeMode(7,QHeaderView.ResizeToContents)
+317         print 'FIN DE LA CARGA'
+        
+\end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!init\-U\-I@{init\-U\-I}}
 \index{init\-U\-I@{init\-U\-I}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
 \subsubsection[{init\-U\-I}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf \-Aplicacion.\-frm\-\_\-main.\-Proc\-C\-D\-M.\-init\-U\-I} (
@@ -84,115 +269,94 @@ def {\bf salir\-Cdm}
 \item[{}]{self}
 \end{DoxyParamCaption}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a33b199687fcecc96e4d2912d9f0fbf20}
-\begin{DoxyVerb}
-Etiquetas
-\end{DoxyVerb}
- 
 
-\-Definition at line 130 of file frm\-\_\-main.\-py.
+
+\-Definition at line 170 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-130 
-131     def initUI(self):
-132         
-133         """
-134         Etiquetas
-135         """
-136         self.cdm_titulo = QLabel('Informe CDM')      
-137         """
-138         Botones
-139         """
-140         self.boton_grafCdm  = QPushButton('Graficos')
-141         self.boton_informe  = QPushButton('Generar Informe')
-142         self.boton_salirCdm = QPushButton('SALIR')
-143         """
-144         OTROS
-145         """
-146         self.CDM_edit    = QTextEdit()
-147         self.tablePOC   = QTableWidget()
-148         self.tablePOC.setRowCount(2)
-149         self.tablePOC.setColumnCount(8)
-150         listaLabels=['Norad Id','Nombre','TCAcdm','TCAarx','MinD cdm','MinD arx
-      ','PoC cdm','PoC arx']
-151         self.tablePOC.setHorizontalHeaderLabels(listaLabels)
-152         
-153         grid = QGridLayout()
-154         grid.setSpacing(5)
-155         
-156         grid.addWidget(self.CDM_edit,2,1)
-157         grid.addWidget(self.cdm_titulo,1,1)
-158         grid.addWidget(self.boton_grafCdm,4,2)
-159         grid.addWidget(self.boton_informe,5,2)
-160         grid.addWidget(self.boton_salirCdm,6,2)
-161         grid.addWidget(self.tablePOC,3,1)
-162         
-163         self.setLayout(grid)
-164         self.setWindowTitle('Procesamiento de CDM')    
-165         self.show()
-166         
-167         """
-168         Acciones
-169         """
-170         self.boton_salirCdm.clicked.connect(self.salirCdm)
-171         
-172         """
-173         Carga de Informacion principal
-174         """
-175         self.cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a
-       Procesar', "../CDM/archivos/*")
-176         self.cdm_nombre=str(self.cdm_xml).split('/')[-1]
-177         self.TCA, self.MISS_DISTANCE,self.POC,self.obj_list=extraeCDM(self.
-      cdm_nombre)
-178         infoCDM='Mision = '+str(self.obj_list[0][0])+'---- ID= '+str(self.
-      obj_list[0][1])+'\n'+'Desecho = '+str(self.obj_list[1][0])+'---- ID= '+str(
-      self.obj_list[1][1])+'\n'+'TCA = '+self.TCA+'\n'+'Minima Distancia [m] = '+self.
-      MISS_DISTANCE+'\n'+'Probabilidad de Colision = '+self.POC                           
-                                     
-179         self.CDM_edit.setText(infoCDM)
-180                 
+170 
+171     def initUI(self):
+172         self.palette = QPalette()
+173         self.palette.setColor(QPalette.Background,Qt.white)
+174         self.setPalette(self.palette)
+175         
+176         """
+177         Etiquetas
+178         """
+179         self.cdm_archivo = QLabel('Archivo CDM: ')   
+180         self.opciones   = QLabel('Opciones')
 181         """
-182         Pruebas ENVISAT-COSMOS
-183         """
-184         self.TCA=datetime(2008,1,9,19,0,30,6)
-185         TCAstr0=datetime.strftime(self.TCA,'%Y-%m-%dT%H:%M:%S')
-186         self.sat_idc='27386' #ENVISAT
-187         self.deb_idc='15482' #COSMOS
-188         
-189         Cd=np.array([[4.1345498441906514,-0.031437388833697122,0.07801163426303
-      5007],
-190                 [-0.031437388833697122,0.0025693554190851101,-0.014250096142904
-      997],
-191                 [0.078011634263035007,-0.014250096142904997,0.09678662577174652
-      9]])
-192     
-193         Cm=np.array([[4.8247926515782202,0.05994752830943241,0.0495268675408096
-      35],
-194                 [0.05994752830943241,0.019150349628774828,0.012470649611436152]
-      ,
-195                 [0.049526867540809635,0.012470649611436152,0.012649606483621921
-      ]])
-196         
-197         TCAc,mod_dif,poc=evaluaEncuentro(self.TCA,self.sat_idc,self.deb_idc,Cd,
-      Cm)
-198         TCAstr=datetime.strftime(TCAc,'%Y-%m-%d %H:%M:%S.%f')
-199         mod_dif=int(mod_dif*1000.0)
-200         # set data self.TCA, self.MISS_DISTANCE,self.POC
-201         self.tablePOC.setItem(0,0, QTableWidgetItem('Mision'))
-202         self.tablePOC.setItem(1,0, QTableWidgetItem('Debris'))
-203         self.tablePOC.setItem(0,1, QTableWidgetItem(self.sat_idc))
-204         self.tablePOC.setItem(1,1, QTableWidgetItem(self.deb_idc))
-205         self.tablePOC.setItem(0,2, QTableWidgetItem(TCAstr0))
-206         self.tablePOC.setItem(0,3, QTableWidgetItem(TCAstr))
-207         self.tablePOC.setItem(0,4, QTableWidgetItem(self.MISS_DISTANCE))
-208         self.tablePOC.setItem(0,5, QTableWidgetItem(str(mod_dif)))
-209         self.tablePOC.setItem(0,6, QTableWidgetItem(self.POC))
-210         self.tablePOC.setItem(0,7, QTableWidgetItem(poc))
+182         Campos de Edicion
+183         """   
+184         self.archivo_tex=QLineEdit('cdmTerraPegasus10.xml') # seteo el archivo
+       para las pruebas
+185         """
+186         Botones
+187         """
+188         self.boton_dir      = QPushButton('Directorios')
+189         self.boton_cargar   = QPushButton('CARGAR')
+190         self.boton_grafCdm  = QPushButton('Graficos')
+191         self.boton_informe  = QPushButton('Generar Informe')
+192         self.boton_salirCdm = QPushButton('SALIR')
+193         """
+194         OTROS
+195         """                
+196         moods = [QCheckBox("Posiciones Relativas en RTN"), QCheckBox("
+      Procesamiento ARxCODE")] # botones de seleccion
+197         self.tablePOC   = QTableWidget() # Tabla con los resultados
+198         self.tablePOC.setRowCount(2)
+199         self.tablePOC.setColumnCount(8)
+200         listaLabels=['Norad Id','Nombre','TCAcdm','TCAarx','MinD cdm','MinD arx
+      ','PoC cdm','PoC arx']
+201         self.tablePOC.setHorizontalHeaderLabels(listaLabels)
+202 
+203         
+204         grid = QGridLayout()
+205         grid.setSpacing(5)
+206         
+207         grid.addWidget(self.cdm_archivo,2,1)
+208         grid.addWidget(self.archivo_tex,2,2)
+209         grid.addWidget(self.boton_dir,2,3)
+210         grid.addWidget( self.opciones,3,1)
+211         grid.addWidget(moods[0],4,2)     
+212         grid.addWidget(moods[1],5,2)
+213         grid.addWidget(self.boton_cargar,6,3)
+214 #         grid.addWidget(self.boton_grafCdm,4,2)
+215 #         grid.addWidget(self.boton_informe,5,2)
+216         grid.addWidget(self.boton_salirCdm,18,2)
+217         grid.addWidget(self.tablePOC,8,1,3,7)
+218 
+219         
+220         self.setLayout(grid)
+221         self.setWindowTitle('Procesamiento de CDM')    
+222         self.show()
+223         
+224         """
+225         Acciones
+226         """
+227         self.boton_dir.clicked.connect(self.Archivo)
+228         self.boton_cargar.clicked.connect(self.Carga_CDM)
+229         self.boton_salirCdm.clicked.connect(self.salirCdm)
+230         
+231 
+232 #        
+       TCAc,mod_dif,poc=evaluaEncuentro(self.TCA,self.sat_idc,self.deb_idc,Cd,Cm)
+233 #         TCAstr=datetime.strftime(TCAc,'%Y-%m-%d %H:%M:%S.%f')
+234 #         mod_dif=int(mod_dif*1000.0)
+235 #         # set data self.TCA, self.MISS_DISTANCE,self.POC
+236 
 
 \end{DoxyCode}
 
 
-\-Here is the caller graph for this function\-:
+\-Here is the caller graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a33b199687fcecc96e4d2912d9f0fbf20_icgraph}
+\end{center}
+\end{figure}
 
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!salir\-Cdm@{salir\-Cdm}}
@@ -204,100 +368,263 @@ Etiquetas
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a6078f86c360fc473378c37871bc276c1}
 
 
-\-Definition at line 211 of file frm\-\_\-main.\-py.
+\-Definition at line 318 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-211 
-212     def salirCdm(self):
-        self.accept()
+318 
+319     def salirCdm(self):
+320         self.accept()
+321 
+        
 \end{DoxyCode}
 
 
 \subsection{\-Member \-Data \-Documentation}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!archivo\-\_\-tex@{archivo\-\_\-tex}}
+\index{archivo\-\_\-tex@{archivo\-\_\-tex}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{archivo\-\_\-tex}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::archivo\-\_\-tex}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ab7b1fc2d236fed165a4ecffae0826885}
+
+
+\-Definition at line 174 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!boton\-\_\-cargar@{boton\-\_\-cargar}}
+\index{boton\-\_\-cargar@{boton\-\_\-cargar}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{boton\-\_\-cargar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::boton\-\_\-cargar}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a5711d6b7029f242b87d527c1bb6842bb}
+
+
+\-Definition at line 176 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!boton\-\_\-dir@{boton\-\_\-dir}}
+\index{boton\-\_\-dir@{boton\-\_\-dir}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{boton\-\_\-dir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::boton\-\_\-dir}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a05c4f93bc30ea030b37a7a881725d512}
+
+
+\-Definition at line 176 of file frm\-\_\-main.\-py.
+
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!boton\-\_\-graf\-Cdm@{boton\-\_\-graf\-Cdm}}
 \index{boton\-\_\-graf\-Cdm@{boton\-\_\-graf\-Cdm}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
 \subsubsection[{boton\-\_\-graf\-Cdm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::boton\-\_\-graf\-Cdm}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ac86bc089a875acc78843824ca78d286c}
 
 
-\-Definition at line 134 of file frm\-\_\-main.\-py.
+\-Definition at line 176 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!boton\-\_\-informe@{boton\-\_\-informe}}
 \index{boton\-\_\-informe@{boton\-\_\-informe}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
 \subsubsection[{boton\-\_\-informe}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::boton\-\_\-informe}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_acb483334d88f558ace6d2174521dd982}
 
 
-\-Definition at line 134 of file frm\-\_\-main.\-py.
+\-Definition at line 176 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!boton\-\_\-salir\-Cdm@{boton\-\_\-salir\-Cdm}}
 \index{boton\-\_\-salir\-Cdm@{boton\-\_\-salir\-Cdm}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
 \subsubsection[{boton\-\_\-salir\-Cdm}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::boton\-\_\-salir\-Cdm}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a18aa5750b77a458dbd44a6fe96688186}
 
 
-\-Definition at line 134 of file frm\-\_\-main.\-py.
+\-Definition at line 176 of file frm\-\_\-main.\-py.
 
-\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-C\-D\-M\-\_\-edit@{\-C\-D\-M\-\_\-edit}}
-\index{\-C\-D\-M\-\_\-edit@{\-C\-D\-M\-\_\-edit}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
-\subsubsection[{\-C\-D\-M\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::\-C\-D\-M\-\_\-edit}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a4e7b0190497039d0e89b297c27632edb}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-C\-D\-M@{\-C\-D\-M}}
+\index{\-C\-D\-M@{\-C\-D\-M}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{\-C\-D\-M}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::\-C\-D\-M}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_af608a21996b27b7cd0bb10563fc9e96b}
 
 
-\-Definition at line 136 of file frm\-\_\-main.\-py.
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cdm\-\_\-archivo@{cdm\-\_\-archivo}}
+\index{cdm\-\_\-archivo@{cdm\-\_\-archivo}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cdm\-\_\-archivo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cdm\-\_\-archivo}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a54f6f5bd86de7195c64800f4b4d5f550}
+
+
+\-Definition at line 172 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cdm\-\_\-nombre@{cdm\-\_\-nombre}}
 \index{cdm\-\_\-nombre@{cdm\-\_\-nombre}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
 \subsubsection[{cdm\-\_\-nombre}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cdm\-\_\-nombre}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ae9b065153b32988b2b7b3f75bd1dee55}
 
 
-\-Definition at line 140 of file frm\-\_\-main.\-py.
-
-\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cdm\-\_\-titulo@{cdm\-\_\-titulo}}
-\index{cdm\-\_\-titulo@{cdm\-\_\-titulo}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
-\subsubsection[{cdm\-\_\-titulo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cdm\-\_\-titulo}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a3f0b2faa46ba997ba164f5cdad997d4d}
-
-
-\-Definition at line 132 of file frm\-\_\-main.\-py.
+\-Definition at line 237 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cdm\-\_\-xml@{cdm\-\_\-xml}}
 \index{cdm\-\_\-xml@{cdm\-\_\-xml}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
 \subsubsection[{cdm\-\_\-xml}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cdm\-\_\-xml}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a92d0f7594213d5cf23a6a8a3b0dcf568}
 
 
-\-Definition at line 140 of file frm\-\_\-main.\-py.
+\-Definition at line 237 of file frm\-\_\-main.\-py.
 
-\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!deb\-\_\-idc@{deb\-\_\-idc}}
-\index{deb\-\_\-idc@{deb\-\_\-idc}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
-\subsubsection[{deb\-\_\-idc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::deb\-\_\-idc}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a384ec9c81d0d9c4ff39c18ae3e35a7e1}
-
-
-\-Definition at line 142 of file frm\-\_\-main.\-py.
-
-\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!obj\-\_\-list@{obj\-\_\-list}}
-\index{obj\-\_\-list@{obj\-\_\-list}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
-\subsubsection[{obj\-\_\-list}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::obj\-\_\-list}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a80c1806f35b86764692f5ff467650b97}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cn\-\_\-n@{cn\-\_\-n}}
+\index{cn\-\_\-n@{cn\-\_\-n}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cn\-\_\-n}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cn\-\_\-n}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a7a690279821ce424c8974c87eea9aca1}
 
 
-\-Definition at line 140 of file frm\-\_\-main.\-py.
+\-Definition at line 245 of file frm\-\_\-main.\-py.
 
-\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!sat\-\_\-idc@{sat\-\_\-idc}}
-\index{sat\-\_\-idc@{sat\-\_\-idc}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
-\subsubsection[{sat\-\_\-idc}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::sat\-\_\-idc}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a990f4900d518c601adf8ff9988bdc60a}
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cn\-\_\-r@{cn\-\_\-r}}
+\index{cn\-\_\-r@{cn\-\_\-r}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cn\-\_\-r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cn\-\_\-r}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a315411041da65429f698d23b9ab7d395}
 
 
-\-Definition at line 142 of file frm\-\_\-main.\-py.
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cn\-\_\-t@{cn\-\_\-t}}
+\index{cn\-\_\-t@{cn\-\_\-t}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cn\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cn\-\_\-t}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a254519a3937bdd9f5e8d0e4436463be1}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cov\-\_\-rtn@{cov\-\_\-rtn}}
+\index{cov\-\_\-rtn@{cov\-\_\-rtn}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cov\-\_\-rtn}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cov\-\_\-rtn}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ae77c3984c00ccdd317043b9432f70724}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!cr\-\_\-r@{cr\-\_\-r}}
+\index{cr\-\_\-r@{cr\-\_\-r}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{cr\-\_\-r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::cr\-\_\-r}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a6a445fa10747b5ef7f5287ed1d9543ab}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!ct\-\_\-r@{ct\-\_\-r}}
+\index{ct\-\_\-r@{ct\-\_\-r}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{ct\-\_\-r}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::ct\-\_\-r}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_adff3c04b7f06dfe44c4353cb903272df}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!ct\-\_\-t@{ct\-\_\-t}}
+\index{ct\-\_\-t@{ct\-\_\-t}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{ct\-\_\-t}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::ct\-\_\-t}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_af01e616ddf626901bd7cbdf071f421b7}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!deb\-\_\-name@{deb\-\_\-name}}
+\index{deb\-\_\-name@{deb\-\_\-name}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{deb\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::deb\-\_\-name}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a84a06b8222490907b4447f3fb86e7d1c}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!dr@{dr}}
+\index{dr@{dr}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{dr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::dr}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a7ebcb1ad8d0289c49c02492540823a50}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!ds@{ds}}
+\index{ds@{ds}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{ds}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::ds}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a72e1a29ff114577ff2b01b7eae8440ab}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!dw@{dw}}
+\index{dw@{dw}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{dw}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::dw}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ab8e621e7e023196ab30910df106922fe}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!mision\-\_\-name@{mision\-\_\-name}}
+\index{mision\-\_\-name@{mision\-\_\-name}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{mision\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::mision\-\_\-name}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_aa065da97b64d80f7d800f2638a15e2e2}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-M\-I\-S\-S\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E@{\-M\-I\-S\-S\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E}}
+\index{\-M\-I\-S\-S\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E@{\-M\-I\-S\-S\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{\-M\-I\-S\-S\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::\-M\-I\-S\-S\-\_\-\-D\-I\-S\-T\-A\-N\-C\-E}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a512ea2358325a44d64f33dfade076dcc}
+
+
+\-Definition at line 158 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!norad\-I\-D\-\_\-deb@{norad\-I\-D\-\_\-deb}}
+\index{norad\-I\-D\-\_\-deb@{norad\-I\-D\-\_\-deb}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{norad\-I\-D\-\_\-deb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::norad\-I\-D\-\_\-deb}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a9a4fa3d1689053b3943bdfa242a26eda}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!norad\-I\-D\-\_\-mision@{norad\-I\-D\-\_\-mision}}
+\index{norad\-I\-D\-\_\-mision@{norad\-I\-D\-\_\-mision}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{norad\-I\-D\-\_\-mision}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::norad\-I\-D\-\_\-mision}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a01dfddf25e9e718e7e05a1c6d4e9e7f7}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!opciones@{opciones}}
+\index{opciones@{opciones}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{opciones}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::opciones}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a65331fe7e9064330ebd0be10822f0571}
+
+
+\-Definition at line 172 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!palette@{palette}}
+\index{palette@{palette}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{palette}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::palette}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_aada760c2d77c59bc0054e7a38bc571ac}
+
+
+\-Definition at line 170 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-P\-O\-C@{\-P\-O\-C}}
+\index{\-P\-O\-C@{\-P\-O\-C}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{\-P\-O\-C}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::\-P\-O\-C}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_aac37760ecdaf03cabf2e9ec4e2b21d97}
+
+
+\-Definition at line 158 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!r\-\_\-deb@{r\-\_\-deb}}
+\index{r\-\_\-deb@{r\-\_\-deb}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{r\-\_\-deb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::r\-\_\-deb}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a10c2a89ce69afb1803e02bfe61882e22}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!r\-\_\-sat@{r\-\_\-sat}}
+\index{r\-\_\-sat@{r\-\_\-sat}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{r\-\_\-sat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::r\-\_\-sat}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_abe62806df6944a0b1877de83636f1c4f}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!rsw\-\_\-vect@{rsw\-\_\-vect}}
+\index{rsw\-\_\-vect@{rsw\-\_\-vect}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{rsw\-\_\-vect}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::rsw\-\_\-vect}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ac5bfa96912f033d09ebf7e6a1adc8dab}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!table\-P\-O\-C@{table\-P\-O\-C}}
 \index{table\-P\-O\-C@{table\-P\-O\-C}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
 \subsubsection[{table\-P\-O\-C}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::table\-P\-O\-C}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_a00e6ed32fb0248050fb7f5882aa44f26}
 
 
-\-Definition at line 136 of file frm\-\_\-main.\-py.
+\-Definition at line 178 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!\-T\-C\-A@{\-T\-C\-A}}
 \index{\-T\-C\-A@{\-T\-C\-A}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
 \subsubsection[{\-T\-C\-A}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::\-T\-C\-A}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_abe1e1e647122ef84eb86b2707b3bbc79}
 
 
-\-Definition at line 142 of file frm\-\_\-main.\-py.
+\-Definition at line 158 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!v\-\_\-deb@{v\-\_\-deb}}
+\index{v\-\_\-deb@{v\-\_\-deb}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{v\-\_\-deb}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::v\-\_\-deb}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ad67ceb349235b172f12ab6c51fffa51c}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
+
+\index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}!v\-\_\-sat@{v\-\_\-sat}}
+\index{v\-\_\-sat@{v\-\_\-sat}!Aplicacion::frm_main::ProcCDM@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-C\-D\-M}}
+\subsubsection[{v\-\_\-sat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-C\-D\-M\-::v\-\_\-sat}}\label{class_aplicacion_1_1frm__main_1_1_proc_c_d_m_ab9af407588f41665563bfc941b3063b9}
+
+
+\-Definition at line 245 of file frm\-\_\-main.\-py.
 
 
 

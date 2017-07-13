@@ -1,5 +1,23 @@
 \section{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Tle \-Class \-Reference}
 \label{class_aplicacion_1_1frm__main_1_1_proc_tle}\index{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Tle@{\-Aplicacion.\-frm\-\_\-main.\-Proc\-Tle}}
+
+
+\-Inheritance diagram for \-Aplicacion.\-frm\-\_\-main.\-Proc\-Tle\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{class_aplicacion_1_1frm__main_1_1_proc_tle__inherit__graph}
+\end{center}
+\end{figure}
+
+
+\-Collaboration diagram for \-Aplicacion.\-frm\-\_\-main.\-Proc\-Tle\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{class_aplicacion_1_1frm__main_1_1_proc_tle__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{\-Public \-Member \-Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -123,7 +141,7 @@ def {\bf salir}
 \subsection{\-Detailed \-Description}
 
 
-\-Definition at line 375 of file frm\-\_\-main.\-py.
+\-Definition at line 502 of file frm\-\_\-main.\-py.
 
 
 
@@ -138,35 +156,35 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a8a14007499f5229334b72bc388db6428}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-377 
-378     def __init__(self,parent=None):
-379         QDialog.__init__(self,parent)
-380 
-381         self.setWindowModality(Qt.ApplicationModal)
-382         self.initUI()
-383 
-384         self.filename = ''
-385         self.sat_id='99999'
-386         self.fini=''
-387         self.ffin=''
-388         self.fin_tle=datetime(1957,1,1,0,0,0)
-389         self.ini_tle=datetime(1957,1,1,0,0,0)
-390         self.tles=0
-391         self.tleOrdenados={}
-392         self.data=[]
-393         self.coef=[]
-394         self.path='../AjustarTLE/diferencias/'
-395         self.diferencias=''
-396         self.set_data=[]
-397         self.set_pri=[]
-398         self.arch_macovar=''
-399         self.macovarT=''  
-400         self.cantxbin=[]
-401         self.mediaxbin=[]      
+504 
+505     def __init__(self,parent=None):
+506         QDialog.__init__(self,parent)
+507 
+508         self.setWindowModality(Qt.ApplicationModal)
+509         self.initUI()
+510 
+511         self.filename = ''
+512         self.sat_id='99999'
+513         self.fini=''
+514         self.ffin=''
+515         self.fin_tle=datetime(1957,1,1,0,0,0)
+516         self.ini_tle=datetime(1957,1,1,0,0,0)
+517         self.tles=0
+518         self.tleOrdenados={}
+519         self.data=[]
+520         self.coef=[]
+521         self.path='../AjustarTLE/diferencias/'
+522         self.diferencias=''
+523         self.set_data=[]
+524         self.set_pri=[]
+525         self.arch_macovar=''
+526         self.macovarT=''  
+527         self.cantxbin=[]
+528         self.mediaxbin=[]      
         
 \end{DoxyCode}
 
@@ -181,20 +199,20 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a9fc52e9ad9e366a48c39de5b0904140a}
 
 
-\-Definition at line 495 of file frm\-\_\-main.\-py.
+\-Definition at line 622 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-495 
-496     def Archivo(self):    
-497         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a
+622 
+623     def Archivo(self):    
+624         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a
        Procesar', "../TleAdmin/crudosTLE/*")
-498         nombre=str(fname).split('/')[-1]
-499         self.filename = nombre
-500         self.sat_id = nombre.split('_')[0]
-501         self.arch_cargado.setText(self.filename)
-502         self.boton_procesa.setEnabled(True)
-503         
+625         nombre=str(fname).split('/')[-1]
+626         self.filename = nombre
+627         self.sat_id = nombre.split('_')[0]
+628         self.arch_cargado.setText(self.filename)
+629         self.boton_procesa.setEnabled(True)
+630         
     
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!boton\-Norad@{boton\-Norad}}
@@ -206,20 +224,20 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a4c08618591a63dfe1eed6785d53b7877}
 
 
-\-Definition at line 486 of file frm\-\_\-main.\-py.
+\-Definition at line 613 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-486 
-487     def botonNorad(self):
-488         print ("Procesando la Conexion con NORAD para la Descarga...")
-489         self.w = ConexionNorad()
-490         self.w.exec_()
-491         self.sat_id, self.fini, self.ffin, self.filename = 
+613 
+614     def botonNorad(self):
+615         print ("Procesando la Conexion con NORAD para la Descarga...")
+616         self.w = ConexionNorad()
+617         self.w.exec_()
+618         self.sat_id, self.fini, self.ffin, self.filename = 
       self.w.iniciaSolicitud()
-492         self.arch_cargado.setText(self.filename)
-493         self.sat_id_line.setText(self.sat_id) 
-494         self.boton_procesa.setEnabled(True) 
+619         self.arch_cargado.setText(self.filename)
+620         self.sat_id_line.setText(self.sat_id) 
+621         self.boton_procesa.setEnabled(True) 
         
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!init\-U\-I@{init\-U\-I}}
@@ -231,96 +249,96 @@ def {\bf salir}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_aaf23e6957942a56690df1661246fe63a}
 
 
-\-Definition at line 402 of file frm\-\_\-main.\-py.
+\-Definition at line 529 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-402 
-403     def initUI(self):
-404         self.palette = QPalette()
-405         self.palette.setColor(QPalette.Background,Qt.white)
-406         self.setPalette(self.palette)
-407         
-408         """
-409         Etiquetas
-410         """
-411         self.carga           = QLabel('CARGADO DE TLEs')
-412         self.norad           = QLabel('A partir de NORAD')  
-413         self.equipo          = QLabel('Desde el Equipo')
-414         self.arch_prepro     = QLabel('Archivo a Procesar: ')
-415         self.sat_id_label    = QLabel('NORAD_ID')
-416         self.cant_tles       = QLabel('Cantidad de TLEs')
-417         self.tle_pri         = QLabel('Ultimo TLE del set.')
-418         self.outputs         = QLabel('Output')
-419         self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
-420         """
-421         Botones
-422         """
-423         self.boton_norad        = QPushButton('Space-Track')
-424         self.boton_equipo       = QPushButton('Directorios')
-425         self.boton_procesa      = QPushButton('PROCESAR')
-426         self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
-427         self.boton_dxcoord      = QPushButton('Graficar Diferencias por
+529 
+530     def initUI(self):
+531         self.palette = QPalette()
+532         self.palette.setColor(QPalette.Background,Qt.white)
+533         self.setPalette(self.palette)
+534         
+535         """
+536         Etiquetas
+537         """
+538         self.carga           = QLabel('CARGADO DE TLEs')
+539         self.norad           = QLabel('A partir de NORAD')  
+540         self.equipo          = QLabel('Desde el Equipo')
+541         self.arch_prepro     = QLabel('Archivo a Procesar: ')
+542         self.sat_id_label    = QLabel('NORAD_ID')
+543         self.cant_tles       = QLabel('Cantidad de TLEs')
+544         self.tle_pri         = QLabel('Ultimo TLE del set.')
+545         self.outputs         = QLabel('Output')
+546         self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
+547         """
+548         Botones
+549         """
+550         self.boton_norad        = QPushButton('Space-Track')
+551         self.boton_equipo       = QPushButton('Directorios')
+552         self.boton_procesa      = QPushButton('PROCESAR')
+553         self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
+554         self.boton_dxcoord      = QPushButton('Graficar Diferencias por
        Coordenadas')
-428         self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set
+555         self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set
        primario')
-429         self.boton_salir        = QPushButton('Salir')
-430         """
-431         Campos de Edicion
-432         """
-433         self.arch_cargado       = QLineEdit()
-434         self.sat_id_line        = QLineEdit()
-435         self.cant_tles_edit     = QLineEdit()
-436         self.matriz             = QLineEdit()
-437         self.estado_proc_edit   = QLineEdit()
-438         """
-439         OTROS
-440         """
-441         self.tle_pri_edit    = QTextEdit()
-442         self.tableView       = QTableWidget()
-443         """
-444         Plantilla
-445         """
-446         grid = QGridLayout()
-447         grid.setSpacing(5)
-448         
-449         grid.addWidget(self.carga,2,0)
-450         grid.addWidget(self.norad,3,0)
-451         grid.addWidget(self.boton_norad,3,1)
-452         grid.addWidget(self.equipo,4,0)
-453         grid.addWidget(self.boton_equipo,4,1)
-454         grid.addWidget(self.arch_prepro,5,0)
-455         grid.addWidget(self.arch_cargado,5,1)
-456         grid.addWidget(self.boton_procesa,5,2)
-457         grid.addWidget(self.sat_id_label,7,0)
-458         grid.addWidget(self.sat_id_line,7,1)
-459         grid.addWidget(self.cant_tles,8,0)
-460         grid.addWidget(self.cant_tles_edit,8,1)        
-461         grid.addWidget(self.tle_pri,9,0)
-462         grid.addWidget(self.tle_pri_edit,10,0,1,4)
-463         grid.addWidget(self.ma_covar_label,11,0) 
-464         grid.addWidget(self.tableView,12,0)
-465         grid.addWidget(self.outputs,23,1)
-466         grid.addWidget(self.estado_proc_edit,23,2)
-467         grid.addWidget(self.boton_dsetprimario,24,2)
-468         grid.addWidget(self.boton_salir,25,2)
-469 #         grid.addWidget(self.boton_dtotales,25,1)
-470 #         grid.addWidget(self.boton_dxcoord,25,2)
-471         
-472         """
-473         Acciones
-474         """
-475         self.boton_procesa.setEnabled(False)
-476         self.boton_norad.clicked.connect(self.botonNorad)
-477         self.boton_equipo.clicked.connect(self.Archivo)
-478         self.boton_salir.clicked.connect(self.salir)
-479         self.boton_procesa.clicked.connect(self.procesar)
-480         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
-481 #         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
-482 #         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
-483         self.setLayout(grid)
-484         self.setWindowTitle('Procesamiento de TLE')    
-485         self.show()
+556         self.boton_salir        = QPushButton('Salir')
+557         """
+558         Campos de Edicion
+559         """
+560         self.arch_cargado       = QLineEdit()
+561         self.sat_id_line        = QLineEdit()
+562         self.cant_tles_edit     = QLineEdit()
+563         self.matriz             = QLineEdit()
+564         self.estado_proc_edit   = QLineEdit()
+565         """
+566         OTROS
+567         """
+568         self.tle_pri_edit    = QTextEdit()
+569         self.tableView       = QTableWidget()
+570         """
+571         Plantilla
+572         """
+573         grid = QGridLayout()
+574         grid.setSpacing(5)
+575         
+576         grid.addWidget(self.carga,2,0)
+577         grid.addWidget(self.norad,3,0)
+578         grid.addWidget(self.boton_norad,3,1)
+579         grid.addWidget(self.equipo,4,0)
+580         grid.addWidget(self.boton_equipo,4,1)
+581         grid.addWidget(self.arch_prepro,5,0)
+582         grid.addWidget(self.arch_cargado,5,1)
+583         grid.addWidget(self.boton_procesa,5,2)
+584         grid.addWidget(self.sat_id_label,7,0)
+585         grid.addWidget(self.sat_id_line,7,1)
+586         grid.addWidget(self.cant_tles,8,0)
+587         grid.addWidget(self.cant_tles_edit,8,1)        
+588         grid.addWidget(self.tle_pri,9,0)
+589         grid.addWidget(self.tle_pri_edit,10,0,1,4)
+590         grid.addWidget(self.ma_covar_label,11,0) 
+591         grid.addWidget(self.tableView,12,0)
+592         grid.addWidget(self.outputs,23,1)
+593         grid.addWidget(self.estado_proc_edit,23,2)
+594         grid.addWidget(self.boton_dsetprimario,24,2)
+595         grid.addWidget(self.boton_salir,25,2)
+596 #         grid.addWidget(self.boton_dtotales,25,1)
+597 #         grid.addWidget(self.boton_dxcoord,25,2)
+598         
+599         """
+600         Acciones
+601         """
+602         self.boton_procesa.setEnabled(False)
+603         self.boton_norad.clicked.connect(self.botonNorad)
+604         self.boton_equipo.clicked.connect(self.Archivo)
+605         self.boton_salir.clicked.connect(self.salir)
+606         self.boton_procesa.clicked.connect(self.procesar)
+607         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
+608 #         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
+609 #         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
+610         self.setLayout(grid)
+611         self.setWindowTitle('Procesamiento de TLE')    
+612         self.show()
           
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!procesar@{procesar}}
@@ -331,102 +349,102 @@ def {\bf salir}
 \end{DoxyParamCaption}
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a0efa8947e0fe54038f57f6aa46d39f44}
 \begin{DoxyVerb}
-Invoca a la funcion setTLE, para fragmentar
+Invoca a la funcion divide_setTLE, para fragmentar
 cada uno de los TLE del dato crudo en archivos
 individuales; y los guarda en: TleAdmin/tle
 \end{DoxyVerb}
  
 
-\-Definition at line 504 of file frm\-\_\-main.\-py.
+\-Definition at line 631 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-504 
-505     def procesar(self):
-506         """
-507         Invoca a la funcion setTLE, para fragmentar
-508         cada uno de los TLE del dato crudo en archivos
-509         individuales; y los guarda en: TleAdmin/tle
-510         """
-511         files=glob.glob('../TleAdmin/tle/*')
-512         for filename in files:
-513             os.unlink(filename)
-514         if os.stat('../TleAdmin/crudosTLE/'+self.filename).st_size == 0:
-515             print('El archivo esta vacio')
-516         setTLE(self.sat_id, self.filename)
-517         self.sat_id_line.setText(self.sat_id)
-518         self.lista=glob.glob('../TleAdmin/tle/*')
-519         self.tles=len(self.lista)
-520         self.cant_tles_edit.setText(str(self.tles))
-521         """
-522         Ordenamiento de los TLEs
-523         """
-524         self.tledic=generadorDatos(self.lista)
-525         self.tleOrdenados=ordenaTles(self.tledic)
-526 
-527         """
-528         Impresiones de info de TLEs.
-529         """
-530         print 'PROCESAMIENTO DE TLE'
-531         print '-----------------------------------------------------'
-532         print 'TLE PRIMARIO'
-533         print '-----------------------------------------------------'
-534         tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[
+631 
+632     def procesar(self):
+633         """
+634         Invoca a la funcion divide_setTLE, para fragmentar
+635         cada uno de los TLE del dato crudo en archivos
+636         individuales; y los guarda en: TleAdmin/tle
+637         """
+638         files=glob.glob('../TleAdmin/tle/*')
+639         for filename in files:
+640             os.unlink(filename)
+641         if os.stat('../TleAdmin/crudosTLE/'+self.filename).st_size == 0:
+642             print('El archivo esta vacio')
+643         divide_setTLE(self.sat_id, self.filename)
+644         self.sat_id_line.setText(self.sat_id)
+645         self.lista=glob.glob('../TleAdmin/tle/*')
+646         self.tles=len(self.lista)
+647         self.cant_tles_edit.setText(str(self.tles))
+648         """
+649         Ordenamiento de los TLEs
+650         """
+651         self.tledic=generadorDatos(self.lista)
+652         self.tleOrdenados=ordenaTles(self.tledic)
+653 
+654         """
+655         Impresiones de info de TLEs.
+656         """
+657         print 'PROCESAMIENTO DE TLE'
+658         print '-----------------------------------------------------'
+659         print 'TLE PRIMARIO'
+660         print '-----------------------------------------------------'
+661         tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[
       -1][0])
-535         linea1= tle_primario.linea1
-536         linea2= tle_primario.linea2
-537         self.fin_tle=tle_primario.epoca()
-538         self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S.%f' )
-539         self.tle_pri_edit.setText(linea1+'\n'+linea2)
-540         print linea1
-541         print linea2
-542         print '-----------------------------------------------------'
-543         print 'TLE INICIAL DEL SET'
-544         print '-----------------------------------------------------'
-545         tle_inial = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[0][
+662         linea1= tle_primario.linea1
+663         linea2= tle_primario.linea2
+664         self.fin_tle=tle_primario.epoca()
+665         self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S.%f' )
+666         self.tle_pri_edit.setText(linea1+'\n'+linea2)
+667         print linea1
+668         print linea2
+669         print '-----------------------------------------------------'
+670         print 'TLE INICIAL DEL SET'
+671         print '-----------------------------------------------------'
+672         tle_inial = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[0][
       0])
-546         linea1_0= tle_inial.linea1
-547         linea2_0= tle_inial.linea2
-548         self.ini_tle=tle_inial.epoca()
-549         print linea1_0
-550         print linea2_0
-551         print '-----------------------------------------------------'
-552         
-553         """
-554         PROCESAMIENTO.
-555         """
-556         files=glob.glob('../AjustarTLE/diferencias/*')
-557         for filename in files:
-558             os.unlink(filename)
-559 #        self.bin, self.data, self.set_pri, self.coef=difTle(self.tleOrdenados,
+673         linea1_0= tle_inial.linea1
+674         linea2_0= tle_inial.linea2
+675         self.ini_tle=tle_inial.epoca()
+676         print linea1_0
+677         print linea2_0
+678         print '-----------------------------------------------------'
+679         
+680         """
+681         PROCESAMIENTO.
+682         """
+683         files=glob.glob('../AjustarTLE/diferencias/*')
+684         for filename in files:
+685             os.unlink(filename)
+686 #        self.bin, self.data, self.set_pri, self.coef=difTle(self.tleOrdenados,
        self.tles)
-560         self.set_pri=difPrimario(self.tleOrdenados, self.tles)
-561         self.dt=self.set_pri[0]
-562         self.data1=self.set_pri[1]
-563         self.coef=self.set_pri[2]
-564         self.nombre_archivo=self.set_pri[3]
-565 #         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
-566 #         self.diferencias=difPrimario(self.nombre_archivo,self.tles-1)
-567         self.estado_proc_edit.setText(self.nombre_archivo)
-568 
-569         """
-570         Ma. de Covarianza
-571         """
-572         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.nombre_archivo)
-573         self.tableView.setRowCount(len(self.macovarT))
-574         self.tableView.setColumnCount(len(self.macovarT))
-575         for i,fila in enumerate(self.macovarT):
-576             for j,col in enumerate(fila):
-577                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))    
-578         
-579         print 'Fin del Procesamiento'
-580         
-581 #     def ver_dif_x_coordenadas(self):
-582 #         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1,
+687         self.set_pri=difPrimario()
+688         self.dt=self.set_pri[0]
+689         self.data1=self.set_pri[1]
+690         self.coef=self.set_pri[2]
+691         self.nombre_archivo=self.set_pri[3]
+692 #         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
+693 #         self.diferencias=difPrimario(self.nombre_archivo,self.tles-1)
+694         self.estado_proc_edit.setText(self.nombre_archivo)
+695 
+696         """
+697         Ma. de Covarianza
+698         """
+699         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.nombre_archivo)
+700         self.tableView.setRowCount(len(self.macovarT))
+701         self.tableView.setColumnCount(len(self.macovarT))
+702         for i,fila in enumerate(self.macovarT):
+703             for j,col in enumerate(fila):
+704                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))    
+705         
+706         print 'Fin del Procesamiento'
+707         
+708 #     def ver_dif_x_coordenadas(self):
+709 #         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1,
        self.coef)
-583 #      
-584 #     def ver_diferencias_totales(self):
-585 #        
+710 #      
+711 #     def ver_diferencias_totales(self):
+712 #        
        ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data1,self.coef) 
         
 \end{DoxyCode}
@@ -439,13 +457,13 @@ individuales; y los guarda en: TleAdmin/tle
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a83cf8f64ae3064bb6ef4923a244ca807}
 
 
-\-Definition at line 607 of file frm\-\_\-main.\-py.
+\-Definition at line 734 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-607 
-608     def salir(self):
-609         self.accept()
+734 
+735     def salir(self):
+736         self.accept()
 
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!ver\-\_\-dif\-\_\-set\-\_\-primario@{ver\-\_\-dif\-\_\-set\-\_\-primario}}
@@ -457,20 +475,20 @@ individuales; y los guarda en: TleAdmin/tle
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a9b7bf8fdffe010b12798bbd6b98578b5}
 
 
-\-Definition at line 586 of file frm\-\_\-main.\-py.
+\-Definition at line 713 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-586 
-587     def ver_dif_set_primario(self):
-588         ploteos.grafica_set_principal(self.sat_id,self.path, self.data1,self.
+713 
+714     def ver_dif_set_primario(self):
+715         ploteos.grafica_set_principal(self.sat_id,self.path, self.data1,self.
       coef)
-589         
-590 #     def Graficar(self):
-591 # #        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
-592 #         data=[self.sat_id,self.diferencias]
-593 #         self.graf = RepresentacionGrafica(data)
-594 #         self.graf.exec_()
+716         
+717 #     def Graficar(self):
+718 # #        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
+719 #         data=[self.sat_id,self.diferencias]
+720 #         self.graf = RepresentacionGrafica(data)
+721 #         self.graf.exec_()
         
 \end{DoxyCode}
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!ver\-\_\-mediasxbin@{ver\-\_\-mediasxbin}}
@@ -482,28 +500,34 @@ individuales; y los guarda en: TleAdmin/tle
 )}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a1e55b3bd59f3d4eb73585631bf02f225}
 
 
-\-Definition at line 595 of file frm\-\_\-main.\-py.
+\-Definition at line 722 of file frm\-\_\-main.\-py.
 
 
 \begin{DoxyCode}
-595 
-596     def ver_mediasxbin(self):
-597         desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin
+722 
+723     def ver_mediasxbin(self):
+724         desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin
       [1], self.mediaxbin[2])
-598 
-599 #     def Macovar(self):
-600 #         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
-601 #         self.tableView.setRowCount(len(self.macovarT))
-602 #         self.tableView.setColumnCount(len(self.macovarT))
-603 #         for i,fila in enumerate(self.macovarT):
-604 #             for j,col in enumerate(fila):
-605 #                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
-606 #         self.arch_macovar_edit.setText(self.arch_macovar)        
+725 
+726 #     def Macovar(self):
+727 #         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
+728 #         self.tableView.setRowCount(len(self.macovarT))
+729 #         self.tableView.setColumnCount(len(self.macovarT))
+730 #         for i,fila in enumerate(self.macovarT):
+731 #             for j,col in enumerate(fila):
+732 #                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
+733 #         self.arch_macovar_edit.setText(self.arch_macovar)        
     
 \end{DoxyCode}
 
 
-\-Here is the call graph for this function\-:
+\-Here is the call graph for this function\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_aplicacion_1_1frm__main_1_1_proc_tle_a1e55b3bd59f3d4eb73585631bf02f225_cgraph}
+\end{center}
+\end{figure}
 
 
 
@@ -514,336 +538,336 @@ individuales; y los guarda en: TleAdmin/tle
 \subsubsection[{arch\-\_\-cargado}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::arch\-\_\-cargado}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a8d25d88316b65c3168f35a121c50e387}
 
 
-\-Definition at line 408 of file frm\-\_\-main.\-py.
+\-Definition at line 535 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!arch\-\_\-macovar@{arch\-\_\-macovar}}
 \index{arch\-\_\-macovar@{arch\-\_\-macovar}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{arch\-\_\-macovar}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::arch\-\_\-macovar}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a1ccdf851f71df42b3825b20eee64e92f}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!arch\-\_\-prepro@{arch\-\_\-prepro}}
 \index{arch\-\_\-prepro@{arch\-\_\-prepro}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{arch\-\_\-prepro}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::arch\-\_\-prepro}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ad43d79e0743fc7352335d7f001d081c5}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!boton\-\_\-dsetprimario@{boton\-\_\-dsetprimario}}
 \index{boton\-\_\-dsetprimario@{boton\-\_\-dsetprimario}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{boton\-\_\-dsetprimario}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::boton\-\_\-dsetprimario}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a7631d0d1e7c28883fb96234ce67e7492}
 
 
-\-Definition at line 406 of file frm\-\_\-main.\-py.
+\-Definition at line 533 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!boton\-\_\-dtotales@{boton\-\_\-dtotales}}
 \index{boton\-\_\-dtotales@{boton\-\_\-dtotales}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{boton\-\_\-dtotales}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::boton\-\_\-dtotales}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a15f64c9f5fb87cb7c8e2c0b20f605501}
 
 
-\-Definition at line 406 of file frm\-\_\-main.\-py.
+\-Definition at line 533 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!boton\-\_\-dxcoord@{boton\-\_\-dxcoord}}
 \index{boton\-\_\-dxcoord@{boton\-\_\-dxcoord}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{boton\-\_\-dxcoord}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::boton\-\_\-dxcoord}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a96a285eb182d86af4677ba5b57b1791f}
 
 
-\-Definition at line 406 of file frm\-\_\-main.\-py.
+\-Definition at line 533 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!boton\-\_\-equipo@{boton\-\_\-equipo}}
 \index{boton\-\_\-equipo@{boton\-\_\-equipo}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{boton\-\_\-equipo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::boton\-\_\-equipo}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a402cbf3922e656ca7b19069df0357dc2}
 
 
-\-Definition at line 406 of file frm\-\_\-main.\-py.
+\-Definition at line 533 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!boton\-\_\-norad@{boton\-\_\-norad}}
 \index{boton\-\_\-norad@{boton\-\_\-norad}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{boton\-\_\-norad}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::boton\-\_\-norad}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a6994359117a8a6ebd6b127a5fbb4ea94}
 
 
-\-Definition at line 406 of file frm\-\_\-main.\-py.
+\-Definition at line 533 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!boton\-\_\-procesa@{boton\-\_\-procesa}}
 \index{boton\-\_\-procesa@{boton\-\_\-procesa}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{boton\-\_\-procesa}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::boton\-\_\-procesa}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a5f38e23fd65221917002fcf892340ae4}
 
 
-\-Definition at line 406 of file frm\-\_\-main.\-py.
+\-Definition at line 533 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!boton\-\_\-salir@{boton\-\_\-salir}}
 \index{boton\-\_\-salir@{boton\-\_\-salir}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{boton\-\_\-salir}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::boton\-\_\-salir}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a53caa6ae5f98ae241b26229db6ce5bd7}
 
 
-\-Definition at line 406 of file frm\-\_\-main.\-py.
+\-Definition at line 533 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!cant\-\_\-tles@{cant\-\_\-tles}}
 \index{cant\-\_\-tles@{cant\-\_\-tles}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{cant\-\_\-tles}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::cant\-\_\-tles}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ac20e8aaa26b77b63146bb4b075371f5f}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!cant\-\_\-tles\-\_\-edit@{cant\-\_\-tles\-\_\-edit}}
 \index{cant\-\_\-tles\-\_\-edit@{cant\-\_\-tles\-\_\-edit}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{cant\-\_\-tles\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::cant\-\_\-tles\-\_\-edit}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_aabcccf0dd24ae037d0fd45095dbb7e4b}
 
 
-\-Definition at line 408 of file frm\-\_\-main.\-py.
+\-Definition at line 535 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!cantxbin@{cantxbin}}
 \index{cantxbin@{cantxbin}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{cantxbin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::cantxbin}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a9829a722583b1f1faeb4f260e4a935fa}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!carga@{carga}}
 \index{carga@{carga}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{carga}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::carga}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ad99c9a4d2e2355816b5a3362c385a140}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!coef@{coef}}
 \index{coef@{coef}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{coef}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::coef}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ae18d2fd96fbf6088a5553e3f111fbbc1}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!data@{data}}
 \index{data@{data}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::data}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a8737c8fdf74468b499a0b9ef521fdb0c}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!data1@{data1}}
 \index{data1@{data1}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{data1}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::data1}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a7979e3941bd5f486fa3d9a7b03d01629}
 
 
-\-Definition at line 514 of file frm\-\_\-main.\-py.
+\-Definition at line 641 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!diferencias@{diferencias}}
 \index{diferencias@{diferencias}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{diferencias}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::diferencias}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a413cc4964b14c7f9d9ef98b11b68073b}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!dt@{dt}}
 \index{dt@{dt}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{dt}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::dt}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_af0f8f9c39379ee193e098aeaf58487c1}
 
 
-\-Definition at line 514 of file frm\-\_\-main.\-py.
+\-Definition at line 641 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!equipo@{equipo}}
 \index{equipo@{equipo}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{equipo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::equipo}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ae5a7fa4b802defc3a390262b5f8de1c7}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!estado\-\_\-proc\-\_\-edit@{estado\-\_\-proc\-\_\-edit}}
 \index{estado\-\_\-proc\-\_\-edit@{estado\-\_\-proc\-\_\-edit}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{estado\-\_\-proc\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::estado\-\_\-proc\-\_\-edit}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ad7f43026c3d60ca9327e1c85c0ea5087}
 
 
-\-Definition at line 408 of file frm\-\_\-main.\-py.
+\-Definition at line 535 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!ffin@{ffin}}
 \index{ffin@{ffin}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{ffin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::ffin}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a58e224fd1d6ba81c336e3bdfa389a174}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!filename@{filename}}
 \index{filename@{filename}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{filename}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::filename}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a3337b73115f16528a50aa5d2b959d17c}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!fin\-\_\-tle@{fin\-\_\-tle}}
 \index{fin\-\_\-tle@{fin\-\_\-tle}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{fin\-\_\-tle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::fin\-\_\-tle}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a7de8fb374fc149ea98078a4217206b3f}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!fini@{fini}}
 \index{fini@{fini}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{fini}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::fini}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a59873ea4b0ed0285d60ea4df68cdfacf}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!ini\-\_\-tle@{ini\-\_\-tle}}
 \index{ini\-\_\-tle@{ini\-\_\-tle}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{ini\-\_\-tle}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::ini\-\_\-tle}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a7df4e51f089cfdef54208e9665befc93}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!lista@{lista}}
 \index{lista@{lista}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{lista}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::lista}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a19ebac4a83060f49ae0bb675e61917ad}
 
 
-\-Definition at line 508 of file frm\-\_\-main.\-py.
+\-Definition at line 635 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!ma\-\_\-covar\-\_\-label@{ma\-\_\-covar\-\_\-label}}
 \index{ma\-\_\-covar\-\_\-label@{ma\-\_\-covar\-\_\-label}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{ma\-\_\-covar\-\_\-label}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::ma\-\_\-covar\-\_\-label}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a5521eb511dd0d0422d35827a63aa7259}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!macovar\-T@{macovar\-T}}
 \index{macovar\-T@{macovar\-T}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{macovar\-T}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::macovar\-T}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a718c19c132988b408b03ae60f91986ea}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!matriz@{matriz}}
 \index{matriz@{matriz}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{matriz}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::matriz}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a7437101e793904703cc0856ec1bf180d}
 
 
-\-Definition at line 408 of file frm\-\_\-main.\-py.
+\-Definition at line 535 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!mediaxbin@{mediaxbin}}
 \index{mediaxbin@{mediaxbin}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{mediaxbin}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::mediaxbin}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a56c19935024758aa57df46f3ae01d558}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!nombre\-\_\-archivo@{nombre\-\_\-archivo}}
 \index{nombre\-\_\-archivo@{nombre\-\_\-archivo}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{nombre\-\_\-archivo}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::nombre\-\_\-archivo}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a5f33a0440e48211cf4a46e28db154959}
 
 
-\-Definition at line 514 of file frm\-\_\-main.\-py.
+\-Definition at line 641 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!norad@{norad}}
 \index{norad@{norad}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{norad}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::norad}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a1a0c1a134203bf3d395e386a784862d5}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!outputs@{outputs}}
 \index{outputs@{outputs}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{outputs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::outputs}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_afc1e344f9f10e9b9d2fd2f0b4a3d0531}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!palette@{palette}}
 \index{palette@{palette}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{palette}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::palette}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ae191ee397d01d8050eeb7ee0b1968c31}
 
 
-\-Definition at line 402 of file frm\-\_\-main.\-py.
+\-Definition at line 529 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!path@{path}}
 \index{path@{path}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{path}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::path}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a6309e51089a511eb2d243cc9e1e2f6e0}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!sat\-\_\-id@{sat\-\_\-id}}
 \index{sat\-\_\-id@{sat\-\_\-id}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{sat\-\_\-id}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::sat\-\_\-id}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ae58e7537304d197e68c818645d3c0d78}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!sat\-\_\-id\-\_\-label@{sat\-\_\-id\-\_\-label}}
 \index{sat\-\_\-id\-\_\-label@{sat\-\_\-id\-\_\-label}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{sat\-\_\-id\-\_\-label}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::sat\-\_\-id\-\_\-label}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a3e81c2159b8cb9357f66f4a7c619acff}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!sat\-\_\-id\-\_\-line@{sat\-\_\-id\-\_\-line}}
 \index{sat\-\_\-id\-\_\-line@{sat\-\_\-id\-\_\-line}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{sat\-\_\-id\-\_\-line}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::sat\-\_\-id\-\_\-line}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ae3af95516b9c8d20ddc4867d72a0e151}
 
 
-\-Definition at line 408 of file frm\-\_\-main.\-py.
+\-Definition at line 535 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!set\-\_\-data@{set\-\_\-data}}
 \index{set\-\_\-data@{set\-\_\-data}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{set\-\_\-data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::set\-\_\-data}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a296785de58ddc3fd015df8e9e08f9f04}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!set\-\_\-pri@{set\-\_\-pri}}
 \index{set\-\_\-pri@{set\-\_\-pri}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{set\-\_\-pri}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::set\-\_\-pri}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a6f500c2fc7fd1a5c1e4e0e933167fa7a}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!table\-View@{table\-View}}
 \index{table\-View@{table\-View}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{table\-View}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::table\-View}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a383566a763c223ffffcdcad78e833f91}
 
 
-\-Definition at line 410 of file frm\-\_\-main.\-py.
+\-Definition at line 537 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!tle\-\_\-pri@{tle\-\_\-pri}}
 \index{tle\-\_\-pri@{tle\-\_\-pri}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{tle\-\_\-pri}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::tle\-\_\-pri}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_adf9c2206813eec7de6443a7926858ddc}
 
 
-\-Definition at line 404 of file frm\-\_\-main.\-py.
+\-Definition at line 531 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!tle\-\_\-pri\-\_\-edit@{tle\-\_\-pri\-\_\-edit}}
 \index{tle\-\_\-pri\-\_\-edit@{tle\-\_\-pri\-\_\-edit}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{tle\-\_\-pri\-\_\-edit}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::tle\-\_\-pri\-\_\-edit}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a24eb47913a7ce7da16da1e016a8f821f}
 
 
-\-Definition at line 410 of file frm\-\_\-main.\-py.
+\-Definition at line 537 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!tledic@{tledic}}
 \index{tledic@{tledic}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{tledic}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::tledic}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_acde5d85cb333bcd800a8416bed3e090b}
 
 
-\-Definition at line 510 of file frm\-\_\-main.\-py.
+\-Definition at line 637 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!tle\-Ordenados@{tle\-Ordenados}}
 \index{tle\-Ordenados@{tle\-Ordenados}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{tle\-Ordenados}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::tle\-Ordenados}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_ab32fa3f404886263b1f3fc3de3dffba0}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!tles@{tles}}
 \index{tles@{tles}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{tles}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::tles}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a1cdb726be7f50cb96381757162fd2c48}
 
 
-\-Definition at line 377 of file frm\-\_\-main.\-py.
+\-Definition at line 504 of file frm\-\_\-main.\-py.
 
 \index{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}!w@{w}}
 \index{w@{w}!Aplicacion::frm_main::ProcTle@{\-Aplicacion\-::frm\-\_\-main\-::\-Proc\-Tle}}
 \subsubsection[{w}]{\setlength{\rightskip}{0pt plus 5cm}{\bf \-Aplicacion\-::frm\-\_\-main.\-Proc\-Tle\-::w}}\label{class_aplicacion_1_1frm__main_1_1_proc_tle_a76261cc03473963538670404ed4c693e}
 
 
-\-Definition at line 486 of file frm\-\_\-main.\-py.
+\-Definition at line 613 of file frm\-\_\-main.\-py.
 
 
 

@@ -45,9 +45,11 @@ tuple {\bf \-Encuentro\-::poc\-Explicita.\-cos\-\_\-phi} = np.\-dot(v\-\_\-sat,v
 \item 
 tuple {\bf \-Encuentro\-::poc\-Explicita.\-phi} = np.\-arccos(cos\-\_\-phi)
 \item 
-string {\bf \-Encuentro\-::poc\-Explicita.\-crudo\-\_\-sat} = '31698\-\_\-20100725\-\_\-20100808.\-tle'
+tuple {\bf \-Encuentro\-::poc\-Explicita.\-tca0} = \-T\-C\-A-\/timedelta(days=15)
 \item 
-string {\bf \-Encuentro\-::poc\-Explicita.\-crudo\-\_\-deb} = '24978\-\_\-20100725\-\_\-20100808.\-tle'
+string {\bf \-Encuentro\-::poc\-Explicita.\-crudo\-\_\-sat} = '\-\_\-'
+\item 
+string {\bf \-Encuentro\-::poc\-Explicita.\-crudo\-\_\-deb} = '\-\_\-'
 \item 
 {\bf \-Encuentro\-::poc\-Explicita.\-var\-\_\-s} = var\-\_\-ssat+var\-\_\-sdeb
 \item 
@@ -57,7 +59,7 @@ string {\bf \-Encuentro\-::poc\-Explicita.\-crudo\-\_\-deb} = '24978\-\_\-201007
 \item 
 tuple {\bf \-Encuentro\-::poc\-Explicita.\-var\-\_\-y} = var\-\_\-s$\ast$np.\-cos(phi/2.\-0)
 \item 
-float {\bf \-Encuentro\-::poc\-Explicita.\-ra} = 0.\-005
+float {\bf \-Encuentro\-::poc\-Explicita.\-ra} = 0.\-01
 \item 
-tuple {\bf \-Encuentro\-::poc\-Explicita.\-Po\-C} = dblquad(lambda y, x\-: (1.\-0/(2.\-0$\ast$np.\-pi$\ast$np.\-sqrt(var\-\_\-x)$\ast$np.\-sqrt(var\-\_\-y)))$\ast$np.\-exp((-\/1.\-0/2.\-0)$\ast$((x$\ast$x/var\-\_\-x)+(y$\ast$y/var\-\_\-y))), mu\-\_\-x-\/ra, mu\-\_\-x+ra, lambda y\-: -\/np.\-sqrt(ra$\ast$ra-\/(y-\/mu\-\_\-x)$\ast$(y-\/mu\-\_\-x))+mu\-\_\-y, lambda y\-: np.\-sqrt(ra$\ast$ra-\/(y-\/mu\-\_\-x)$\ast$(y-\/mu\-\_\-x))+mu\-\_\-y)
+tuple {\bf \-Encuentro\-::poc\-Explicita.\-Po\-C} = np.\-exp((-\/1.\-0/2.\-0)$\ast$((mu\-\_\-x$\ast$mu\-\_\-x/var\-\_\-x)+(mu\-\_\-y$\ast$mu\-\_\-y/var\-\_\-y)))
 \end{DoxyCompactItemize}

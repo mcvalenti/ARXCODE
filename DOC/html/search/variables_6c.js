@@ -1,13 +1,17 @@
 var searchData=
 [
   ['l',['l',['../namespace_sist_referencia_1_1alfa_delta_provisorio.html#aa41286ddcfabf19d8091da4d7ac917a6',1,'SistReferencia::alfaDeltaProvisorio']]],
+  ['l1',['l1',['../namespace_validaciones_1_1valida___o_s_w.html#a89cc0323f2faa3ddda9665a293b4c3be',1,'Validaciones::valida_OSW']]],
+  ['l2',['l2',['../namespace_validaciones_1_1valida___o_s_w.html#ae30890b691ff3df71881175847a68634',1,'Validaciones::valida_OSW']]],
+  ['l3',['l3',['../namespace_validaciones_1_1valida___o_s_w.html#a04f6856a1f067fc4365ddde828bd8e3f',1,'Validaciones::valida_OSW']]],
   ['label_5fdate',['label_date',['../classpruebas_1_1ejemplo_1_1_start_window.html#a45fed6596c3f2d33b1a7eb2c408dc198',1,'pruebas::ejemplo::StartWindow']]],
   ['largo',['largo',['../namespace_cods_admin_1_1_preprocesamiento_c_o_d_s.html#ab2e1f10478ebbd16ccb4fa9d5b90a8bd',1,'CodsAdmin::PreprocesamientoCODS']]],
   ['layout',['layout',['../classpruebas_1_1_p_r_u_e_b_a2_1_1_example.html#ac78ea661374efc21127b55c07f959227',1,'pruebas::PRUEBA2::Example']]],
-  ['line1',['line1',['../namespace_comparar_1_1_tlevs_cods_o_s_w.html#a01431002ae763f793093af37d3bd4f9f',1,'Comparar::TlevsCodsOSW.line1()'],['../namespacelee_c_o_d_s2_t_o_d.html#a6820889e577a8ead537dd26d1bc3f5d8',1,'leeCODS2TOD.line1()']]],
-  ['line2',['line2',['../namespace_comparar_1_1_tlevs_cods_o_s_w.html#af6ea0e959de687b7e11bee30bb306933',1,'Comparar::TlevsCodsOSW.line2()'],['../namespacelee_c_o_d_s2_t_o_d.html#aa9da18aac2648ee4b8c7128bab915b6d',1,'leeCODS2TOD.line2()']]],
-  ['linea1',['linea1',['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9eb29e9192330d7e17dfb3aa158e0a6a',1,'Aplicacion::frm_main::ProcMision.linea1()'],['../class_tle_admin_1_1_t_l_e_1_1_tle.html#a5564c5a5d235b9c1c4c745fd45babf74',1,'TleAdmin::TLE::Tle.linea1()'],['../namespacepruebas_1_1propagacion_test.html#a16c7451b84b5cba1c298217e2d0f9925',1,'pruebas::propagacionTest.linea1()']]],
-  ['linea2',['linea2',['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9d93788fa1c41422c23c50a7b5334ca4',1,'Aplicacion::frm_main::ProcMision.linea2()'],['../class_tle_admin_1_1_t_l_e_1_1_tle.html#a0884704904f95db22272c64bb16f8690',1,'TleAdmin::TLE::Tle.linea2()'],['../namespacepruebas_1_1propagacion_test.html#a1045e064a443533b6ee82494aa5799bf',1,'pruebas::propagacionTest.linea2()']]],
+  ['line1',['line1',['../namespace_comparar_1_1_tlevs_cods_o_s_w.html#a01431002ae763f793093af37d3bd4f9f',1,'Comparar::TlevsCodsOSW.line1()'],['../namespacemain_1_1lee_c_o_d_s2_t_o_d.html#a0145126d8b2ca668ed62c1eca803b04e',1,'main::leeCODS2TOD.line1()']]],
+  ['line2',['line2',['../namespace_comparar_1_1_tlevs_cods_o_s_w.html#af6ea0e959de687b7e11bee30bb306933',1,'Comparar::TlevsCodsOSW.line2()'],['../namespacemain_1_1lee_c_o_d_s2_t_o_d.html#aacf7be1d740990152023d44cfb6b9365',1,'main::leeCODS2TOD.line2()']]],
+  ['linea1',['linea1',['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9eb29e9192330d7e17dfb3aa158e0a6a',1,'Aplicacion::frm_main::ProcMision.linea1()'],['../namespacepruebas_1_1propagacion_test.html#a16c7451b84b5cba1c298217e2d0f9925',1,'pruebas::propagacionTest.linea1()'],['../namespace_validaciones_1_1valida___o_s_w.html#a5e16b5e75c35cfc398268c329958900f',1,'Validaciones::valida_OSW.linea1()']]],
+  ['linea2',['linea2',['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9d93788fa1c41422c23c50a7b5334ca4',1,'Aplicacion::frm_main::ProcMision.linea2()'],['../namespacepruebas_1_1propagacion_test.html#a1045e064a443533b6ee82494aa5799bf',1,'pruebas::propagacionTest.linea2()'],['../namespace_validaciones_1_1valida___o_s_w.html#aa0dcddfdc4a11b3d85fd311e108e5469',1,'Validaciones::valida_OSW.linea2()']]],
+  ['linea3',['linea3',['../namespace_validaciones_1_1valida___o_s_w.html#ad1aa3862e2d756a01ada514321ad7221',1,'Validaciones::valida_OSW']]],
   ['linea_5farchivo',['linea_archivo',['../namespace_cods_admin_1_1_preprocesamiento_c_o_d_s.html#a657ff951819e00b0a99a03b12e7c7d64',1,'CodsAdmin::PreprocesamientoCODS']]],
   ['linea_5ffin',['linea_fin',['../namespace_cods_admin_1_1_preprocesamiento_c_o_d_s.html#a2a542337422f7b641b1514af533351c3',1,'CodsAdmin::PreprocesamientoCODS']]],
   ['linea_5fini',['linea_ini',['../namespace_cods_admin_1_1_preprocesamiento_c_o_d_s.html#afda9d28a3fb0d5dacde75d749c658ece',1,'CodsAdmin::PreprocesamientoCODS']]],
@@ -21,6 +25,5 @@ var searchData=
   ['listar',['listar',['../namespace_comparar_1_1_tlevs_cods_o_s_w.html#a9433da424e0f606225111d856804ce53',1,'Comparar::TlevsCodsOSW']]],
   ['listasat',['listaSat',['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9c79623431ad53062320a6e418d2ad3b',1,'Aplicacion::frm_main::ProcMision.listaSat()'],['../class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s.html#a4b90a628fd56e7ab325a92dd84040c73',1,'AplicacionCODS::CODSinterface::ProcCODS.listaSat()']]],
   ['listwidget',['listWidget',['../class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e.html#aba9c3be396df199bcf42610cbd4ca031',1,'Aplicacion::frm_main::ProcARxCODE.listWidget()'],['../class_aplicacion_1_1frm__main_1_1_representacion_grafica.html#a31e87397c1aa917d5fe481921da7e733',1,'Aplicacion::frm_main::RepresentacionGrafica.listWidget()']]],
-  ['listwidget1',['listWidget1',['../class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e.html#af9e9444bb3f4f193e4bcc8e93070430b',1,'Aplicacion::frm_main::ProcARxCODE']]],
   ['ll',['ll',['../namespace_sist_referencia_1_1alfa_delta_provisorio.html#a193e22f930abd1c0889811eb50700ec2',1,'SistReferencia::alfaDeltaProvisorio']]]
 ];

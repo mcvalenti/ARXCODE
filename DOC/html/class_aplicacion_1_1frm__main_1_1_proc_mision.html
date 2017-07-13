@@ -77,6 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -102,7 +103,21 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Aplicacion.frm_main.ProcMision Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<!-- doxytag: class="Aplicacion::frm_main::ProcMision" -->
+<!-- doxytag: class="Aplicacion::frm_main::ProcMision" --><!-- doxytag: inherits="QtGui::QDialog" --><div class="dynheader">
+Inheritance diagram for Aplicacion.frm_main.ProcMision:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_aplicacion_1_1frm__main_1_1_proc_mision__inherit__graph.png" border="0" usemap="#_aplicacion_8frm__main_8_proc_mision_inherit__map" alt="Inheritance graph"/></div>
+<map name="_aplicacion_8frm__main_8_proc_mision_inherit__map" id="_aplicacion_8frm__main_8_proc_mision_inherit__map">
+<area shape="rect" id="node2" href="class_qt_gui_1_1_q_dialog.html" title="{QDialog\n||}" alt="" coords="75,5,144,83"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for Aplicacion.frm_main.ProcMision:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_aplicacion_1_1frm__main_1_1_proc_mision__coll__graph.png" border="0" usemap="#_aplicacion_8frm__main_8_proc_mision_coll__map" alt="Collaboration graph"/></div>
+<map name="_aplicacion_8frm__main_8_proc_mision_coll__map" id="_aplicacion_8frm__main_8_proc_mision_coll__map">
+<area shape="rect" id="node2" href="class_qt_gui_1_1_q_dialog.html" title="{QDialog\n||}" alt="" coords="75,5,144,83"/></map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+
 <p><a href="class_aplicacion_1_1frm__main_1_1_proc_mision-members.html">List of all members.</a></p>
 <table class="memberdecls">
 <tr><td colspan="2"><h2><a name="pub-methods"></a>
@@ -157,7 +172,7 @@ REQUIERE CORRER PRIMERO EL PROCESAMIENTO TLE!!!
 Utiliza los datos ya cargados en TleAdmin/tle y los Datos de los archivos CODS.
 Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las diferenicas
 </pre></div> 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00801">801</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00928">928</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="ab386f8a70670aa3edd2ff232d0c9696d"></a><!-- doxytag: member="Aplicacion::frm_main::ProcMision::__init__" ref="ab386f8a70670aa3edd2ff232d0c9696d" args="" -->
 <div class="memitem">
@@ -184,29 +199,29 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00808">808</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00808"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab386f8a70670aa3edd2ff232d0c9696d">00808</a> 
-<a name="l00809"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1622a9351a6cc68b212129a888d01f3c">00809</a>     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab386f8a70670aa3edd2ff232d0c9696d">__init__</a>(self,parent=None):
-<a name="l00810"></a>00810         QDialog.__init__(self,parent)
-<a name="l00811"></a>00811 
-<a name="l00812"></a>00812         self.setWindowModality(Qt.ApplicationModal)
-<a name="l00813"></a>00813 <span class="comment">#       self.resize(1200, 600)</span>
-<a name="l00814"></a>00814 <span class="comment">#        self.resize(1700, 700)</span>
-<a name="l00815"></a>00815         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9218bf963132eaa32d23247740787305">initUI</a>()
-<a name="l00816"></a>00816         
-<a name="l00817"></a>00817         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>=<span class="stringliteral">&#39;99999&#39;</span>
-<a name="l00818"></a>00818         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a47fb6c6887ca9e86d79f390b5bcbe2ed">sat_nombre</a>=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00819"></a>00819         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9eb29e9192330d7e17dfb3aa158e0a6a">linea1</a>=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00820"></a>00820         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9d93788fa1c41422c23c50a7b5334ca4">linea2</a>=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00821"></a>00821         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3002cea889ffe07f57ddd32afe8779d6">grafico_arch</a>=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00822"></a>00822         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a557b7916dfc6ca8321f0cbe20c61ca77">dif_cvstle</a>= <span class="stringliteral">&#39;&#39;</span>
-<a name="l00823"></a>00823         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00824"></a>00824         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa3966e8997b4cd36f93ec279368419c7">path</a>=<span class="stringliteral">&#39;../Comparar/diferencias/&#39;</span>
-<a name="l00825"></a>00825         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e7a8f2abdaaca0e031e31c8dfa229af">dt</a>=[]
-<a name="l00826"></a>00826         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>=[]
-<a name="l00827"></a>00827         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1622a9351a6cc68b212129a888d01f3c">set_datos15dias</a>=[]
-<a name="l00828"></a>00828         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>=[]
-<a name="l00829"></a>00829         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>=[]
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00935">935</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00935"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab386f8a70670aa3edd2ff232d0c9696d">00935</a> 
+<a name="l00936"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1622a9351a6cc68b212129a888d01f3c">00936</a>     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab386f8a70670aa3edd2ff232d0c9696d">__init__</a>(self,parent=None):
+<a name="l00937"></a>00937         QDialog.__init__(self,parent)
+<a name="l00938"></a>00938 
+<a name="l00939"></a>00939         self.setWindowModality(Qt.ApplicationModal)
+<a name="l00940"></a>00940 <span class="comment">#       self.resize(1200, 600)</span>
+<a name="l00941"></a>00941 <span class="comment">#        self.resize(1700, 700)</span>
+<a name="l00942"></a>00942         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9218bf963132eaa32d23247740787305">initUI</a>()
+<a name="l00943"></a>00943         
+<a name="l00944"></a>00944         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>=<span class="stringliteral">&#39;99999&#39;</span>
+<a name="l00945"></a>00945         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a47fb6c6887ca9e86d79f390b5bcbe2ed">sat_nombre</a>=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00946"></a>00946         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9eb29e9192330d7e17dfb3aa158e0a6a">linea1</a>=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00947"></a>00947         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9d93788fa1c41422c23c50a7b5334ca4">linea2</a>=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00948"></a>00948         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3002cea889ffe07f57ddd32afe8779d6">grafico_arch</a>=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00949"></a>00949         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a557b7916dfc6ca8321f0cbe20c61ca77">dif_cvstle</a>= <span class="stringliteral">&#39;&#39;</span>
+<a name="l00950"></a>00950         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00951"></a>00951         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa3966e8997b4cd36f93ec279368419c7">path</a>=<span class="stringliteral">&#39;../Comparar/diferencias/&#39;</span>
+<a name="l00952"></a>00952         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e7a8f2abdaaca0e031e31c8dfa229af">dt</a>=[]
+<a name="l00953"></a>00953         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>=[]
+<a name="l00954"></a>00954         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1622a9351a6cc68b212129a888d01f3c">set_datos15dias</a>=[]
+<a name="l00955"></a>00955         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>=[]
+<a name="l00956"></a>00956         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>=[]
         
 </pre></div>
 </div>
@@ -227,84 +242,84 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00830">830</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00830"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9218bf963132eaa32d23247740787305">00830</a> 
-<a name="l00831"></a>00831     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9218bf963132eaa32d23247740787305">initUI</a>(self):
-<a name="l00832"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af958acf508c4118ce0faab708f26ec5b">00832</a>         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab03ced5fd6f9885d9edc8cb7aeb99a51">grilla</a> = QGridLayout()
-<a name="l00833"></a>00833         self.grilla.setSpacing(10)
-<a name="l00834"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a20327beb8d3a747995089a37f477a4e6">00834</a>         
-<a name="l00835"></a>00835         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00836"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aff624b7080bfce3b21dee4783d67e315">00836</a> <span class="stringliteral">        Etiquetas</span>
-<a name="l00837"></a>00837 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00838"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9c79623431ad53062320a6e418d2ad3b">00838</a>         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af958acf508c4118ce0faab708f26ec5b">mision_lab</a>     = QLabel(<span class="stringliteral">&#39;Mision&#39;</span>)
-<a name="l00839"></a>00839         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab568e83eaf9bffba0d7dbfc890873660">fechaini_lab</a>   = QLabel(<span class="stringliteral">&#39;Fecha Inicio&#39;</span>)
-<a name="l00840"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e6ae8feb67beb52cf0671a58641403a">00840</a>         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a8440b3f75b5e19ce866bf04c8804dcc4">fechafin_lab</a>   = QLabel(<span class="stringliteral">&#39;Fecha Fin&#39;</span>)
-<a name="l00841"></a>00841         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a941296d73b52836ccbe2f034f025271b">ma_lab</a>       = QLabel(<span class="stringliteral">&#39;Ma. Varianza-Covarianza&#39;</span>)
-<a name="l00842"></a>00842         
-<a name="l00843"></a>00843         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00844"></a>00844 <span class="stringliteral">        Botones</span>
-<a name="l00845"></a>00845 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00846"></a>00846         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ad25186a3caaabdf09c46f5b8260a3e4a">boton_procesar</a>     = QPushButton(<span class="stringliteral">&#39;Procesar&#39;</span>)
-<a name="l00847"></a>00847         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a42d8a8b34d3c480ab348894c322a860c">boton_dtotales</a>     = QPushButton(<span class="stringliteral">&#39;Graficar Diferencias Totales&#39;</span>)
-<a name="l00848"></a>00848         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a4cf737219230bd140c671f40ad1c14bc">boton_dxcoord</a>      = QPushButton(<span class="stringliteral">&#39;Graficar Diferencias por Coordenadas&#39;</span>)
-<a name="l00849"></a>00849         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55df2c2f9f6fcc71be77878a2dd313d7">boton_dsetprimario</a> = QPushButton (<span class="stringliteral">&#39;Graficar Diferencias del Set primario&#39;</span>)
-<a name="l00850"></a>00850         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a92c0069fe00775eefd9f1f233ad40635">boton_macovar</a>      = QPushButton(<span class="stringliteral">&#39;Calcular Matriz&#39;</span>)
-<a name="l00851"></a>00851         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a20327beb8d3a747995089a37f477a4e6">boton_salir</a>        = QPushButton(<span class="stringliteral">&#39;Salir&#39;</span>)
-<a name="l00852"></a>00852         
-<a name="l00853"></a>00853         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00854"></a>00854 <span class="stringliteral">        Campos de Edicion</span>
-<a name="l00855"></a>00855 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00856"></a>00856         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a419a8ea96b6c0f523ca319fc0f645162">fechaini_edit</a>   = QLineEdit()
-<a name="l00857"></a>00857         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af4caad95665cbfe298b126e8778d6985">fechafin_edit</a>   = QLineEdit()
-<a name="l00858"></a>00858         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aff624b7080bfce3b21dee4783d67e315">tlepri_edit</a>     = QTextEdit()
-<a name="l00859"></a>00859                 
-<a name="l00860"></a>00860         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00861"></a>00861 <span class="stringliteral">        Lista desplegada</span>
-<a name="l00862"></a>00862 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00863"></a>00863         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9c79623431ad53062320a6e418d2ad3b">listaSat</a>       = QComboBox()
-<a name="l00864"></a>00864         self.listaSat.addItem(<span class="stringliteral">&quot;...&quot;</span>);
-<a name="l00865"></a>00865         self.listaSat.addItem(<span class="stringliteral">&quot;SAC-D&quot;</span>); 
-<a name="l00866"></a>00866         self.listaSat.addItem(<span class="stringliteral">&quot;LAGEOS&quot;</span>);
-<a name="l00867"></a>00867         self.listaSat.addItem(<span class="stringliteral">&quot;ICESAT&quot;</span>);
-<a name="l00868"></a>00868         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00869"></a>00869 <span class="stringliteral">        tabla</span>
-<a name="l00870"></a>00870 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00871"></a>00871         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e6ae8feb67beb52cf0671a58641403a">tableView</a>       = QTableWidget()
-<a name="l00872"></a>00872         
-<a name="l00873"></a>00873         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af958acf508c4118ce0faab708f26ec5b">mision_lab</a>,1,0)
-<a name="l00874"></a>00874         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9c79623431ad53062320a6e418d2ad3b">listaSat</a>,1,1)
-<a name="l00875"></a>00875         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ad25186a3caaabdf09c46f5b8260a3e4a">boton_procesar</a>,2,1)
-<a name="l00876"></a>00876         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab568e83eaf9bffba0d7dbfc890873660">fechaini_lab</a>,3,0)
-<a name="l00877"></a>00877         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a419a8ea96b6c0f523ca319fc0f645162">fechaini_edit</a>,3,1)
-<a name="l00878"></a>00878         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a8440b3f75b5e19ce866bf04c8804dcc4">fechafin_lab</a>,4,0)
-<a name="l00879"></a>00879         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af4caad95665cbfe298b126e8778d6985">fechafin_edit</a>,4,1)
-<a name="l00880"></a>00880         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aff624b7080bfce3b21dee4783d67e315">tlepri_edit</a>,5,0,1,2)
-<a name="l00881"></a>00881         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a42d8a8b34d3c480ab348894c322a860c">boton_dtotales</a>,6,0)
-<a name="l00882"></a>00882         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a4cf737219230bd140c671f40ad1c14bc">boton_dxcoord</a>,6,1)
-<a name="l00883"></a>00883         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55df2c2f9f6fcc71be77878a2dd313d7">boton_dsetprimario</a>,6,2)
-<a name="l00884"></a>00884         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e6ae8feb67beb52cf0671a58641403a">tableView</a>,7,0,7,1)
-<a name="l00885"></a>00885         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a92c0069fe00775eefd9f1f233ad40635">boton_macovar</a>,8,1)
-<a name="l00886"></a>00886         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a20327beb8d3a747995089a37f477a4e6">boton_salir</a>,17,1)
-<a name="l00887"></a>00887         
-<a name="l00888"></a>00888         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00889"></a>00889 <span class="stringliteral">        Acciones</span>
-<a name="l00890"></a>00890 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00891"></a>00891         self.listaSat.currentIndexChanged.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a32dded3405be1a68a86b698ab03077ae">selectionchange</a>)
-<a name="l00892"></a>00892         self.boton_procesar.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a833aec7ff42fabde02e729e5ab5e5a44">procesarCods</a>)
-<a name="l00893"></a>00893         self.boton_procesar.setEnabled(<span class="keyword">False</span>)
-<a name="l00894"></a>00894         self.boton_dtotales.setEnabled(<span class="keyword">False</span>)
-<a name="l00895"></a>00895         self.boton_dxcoord.setEnabled(<span class="keyword">False</span>)
-<a name="l00896"></a>00896         self.boton_dsetprimario.setEnabled(<span class="keyword">False</span>)
-<a name="l00897"></a>00897         self.boton_macovar.setEnabled(<span class="keyword">False</span>)
-<a name="l00898"></a>00898         self.boton_salir.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#abe5eaa272c4758f505193a0359e13b7e">salir</a>)
-<a name="l00899"></a>00899         self.boton_dtotales.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1f554257b2dc3c7d9205fcccc4567503">ver_diferencias_totales</a>)
-<a name="l00900"></a>00900         self.boton_dxcoord.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a75e87bed4ae6deeb7c2a537e7aec92c2">ver_dif_x_coordenadas</a>)
-<a name="l00901"></a>00901         self.boton_dsetprimario.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ae8b8bd169d4cb3383b04eef230662d94">ver_dif_set_primario</a>)
-<a name="l00902"></a>00902         self.boton_macovar.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#acc3e51ea01f718127f28f752079417d2">Macovar</a>)
-<a name="l00903"></a>00903 <span class="comment">#        self.datos_mis_edit.textChanged.connect(self.validar_nombre)</span>
-<a name="l00904"></a>00904                 
-<a name="l00905"></a>00905         self.setWindowTitle(<span class="stringliteral">&#39;PROCESAMIENTO de DATOS CODS&#39;</span>)
-<a name="l00906"></a>00906         self.setLayout(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab03ced5fd6f9885d9edc8cb7aeb99a51">grilla</a>) 
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00957">957</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00957"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9218bf963132eaa32d23247740787305">00957</a> 
+<a name="l00958"></a>00958     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9218bf963132eaa32d23247740787305">initUI</a>(self):
+<a name="l00959"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af958acf508c4118ce0faab708f26ec5b">00959</a>         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab03ced5fd6f9885d9edc8cb7aeb99a51">grilla</a> = QGridLayout()
+<a name="l00960"></a>00960         self.grilla.setSpacing(10)
+<a name="l00961"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a20327beb8d3a747995089a37f477a4e6">00961</a>         
+<a name="l00962"></a>00962         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00963"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aff624b7080bfce3b21dee4783d67e315">00963</a> <span class="stringliteral">        Etiquetas</span>
+<a name="l00964"></a>00964 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00965"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9c79623431ad53062320a6e418d2ad3b">00965</a>         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af958acf508c4118ce0faab708f26ec5b">mision_lab</a>     = QLabel(<span class="stringliteral">&#39;Mision&#39;</span>)
+<a name="l00966"></a>00966         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab568e83eaf9bffba0d7dbfc890873660">fechaini_lab</a>   = QLabel(<span class="stringliteral">&#39;Fecha Inicio&#39;</span>)
+<a name="l00967"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e6ae8feb67beb52cf0671a58641403a">00967</a>         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a8440b3f75b5e19ce866bf04c8804dcc4">fechafin_lab</a>   = QLabel(<span class="stringliteral">&#39;Fecha Fin&#39;</span>)
+<a name="l00968"></a>00968         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a941296d73b52836ccbe2f034f025271b">ma_lab</a>       = QLabel(<span class="stringliteral">&#39;Ma. Varianza-Covarianza&#39;</span>)
+<a name="l00969"></a>00969         
+<a name="l00970"></a>00970         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00971"></a>00971 <span class="stringliteral">        Botones</span>
+<a name="l00972"></a>00972 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00973"></a>00973         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ad25186a3caaabdf09c46f5b8260a3e4a">boton_procesar</a>     = QPushButton(<span class="stringliteral">&#39;Procesar&#39;</span>)
+<a name="l00974"></a>00974         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a42d8a8b34d3c480ab348894c322a860c">boton_dtotales</a>     = QPushButton(<span class="stringliteral">&#39;Graficar Diferencias Totales&#39;</span>)
+<a name="l00975"></a>00975         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a4cf737219230bd140c671f40ad1c14bc">boton_dxcoord</a>      = QPushButton(<span class="stringliteral">&#39;Graficar Diferencias por Coordenadas&#39;</span>)
+<a name="l00976"></a>00976         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55df2c2f9f6fcc71be77878a2dd313d7">boton_dsetprimario</a> = QPushButton (<span class="stringliteral">&#39;Graficar Diferencias del Set primario&#39;</span>)
+<a name="l00977"></a>00977         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a92c0069fe00775eefd9f1f233ad40635">boton_macovar</a>      = QPushButton(<span class="stringliteral">&#39;Calcular Matriz&#39;</span>)
+<a name="l00978"></a>00978         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a20327beb8d3a747995089a37f477a4e6">boton_salir</a>        = QPushButton(<span class="stringliteral">&#39;Salir&#39;</span>)
+<a name="l00979"></a>00979         
+<a name="l00980"></a>00980         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00981"></a>00981 <span class="stringliteral">        Campos de Edicion</span>
+<a name="l00982"></a>00982 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00983"></a>00983         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a419a8ea96b6c0f523ca319fc0f645162">fechaini_edit</a>   = QLineEdit()
+<a name="l00984"></a>00984         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af4caad95665cbfe298b126e8778d6985">fechafin_edit</a>   = QLineEdit()
+<a name="l00985"></a>00985         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aff624b7080bfce3b21dee4783d67e315">tlepri_edit</a>     = QTextEdit()
+<a name="l00986"></a>00986                 
+<a name="l00987"></a>00987         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00988"></a>00988 <span class="stringliteral">        Lista desplegada</span>
+<a name="l00989"></a>00989 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00990"></a>00990         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9c79623431ad53062320a6e418d2ad3b">listaSat</a>       = QComboBox()
+<a name="l00991"></a>00991         self.listaSat.addItem(<span class="stringliteral">&quot;...&quot;</span>);
+<a name="l00992"></a>00992         self.listaSat.addItem(<span class="stringliteral">&quot;SAC-D&quot;</span>); 
+<a name="l00993"></a>00993         self.listaSat.addItem(<span class="stringliteral">&quot;LAGEOS&quot;</span>);
+<a name="l00994"></a>00994         self.listaSat.addItem(<span class="stringliteral">&quot;ICESAT&quot;</span>);
+<a name="l00995"></a>00995         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00996"></a>00996 <span class="stringliteral">        tabla</span>
+<a name="l00997"></a>00997 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00998"></a>00998         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e6ae8feb67beb52cf0671a58641403a">tableView</a>       = <a class="code" href="class_q_table_widget.html">QTableWidget</a>()
+<a name="l00999"></a>00999         
+<a name="l01000"></a>01000         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af958acf508c4118ce0faab708f26ec5b">mision_lab</a>,1,0)
+<a name="l01001"></a>01001         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9c79623431ad53062320a6e418d2ad3b">listaSat</a>,1,1)
+<a name="l01002"></a>01002         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ad25186a3caaabdf09c46f5b8260a3e4a">boton_procesar</a>,2,1)
+<a name="l01003"></a>01003         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab568e83eaf9bffba0d7dbfc890873660">fechaini_lab</a>,3,0)
+<a name="l01004"></a>01004         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a419a8ea96b6c0f523ca319fc0f645162">fechaini_edit</a>,3,1)
+<a name="l01005"></a>01005         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a8440b3f75b5e19ce866bf04c8804dcc4">fechafin_lab</a>,4,0)
+<a name="l01006"></a>01006         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#af4caad95665cbfe298b126e8778d6985">fechafin_edit</a>,4,1)
+<a name="l01007"></a>01007         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aff624b7080bfce3b21dee4783d67e315">tlepri_edit</a>,5,0,1,2)
+<a name="l01008"></a>01008         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a42d8a8b34d3c480ab348894c322a860c">boton_dtotales</a>,6,0)
+<a name="l01009"></a>01009         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a4cf737219230bd140c671f40ad1c14bc">boton_dxcoord</a>,6,1)
+<a name="l01010"></a>01010         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55df2c2f9f6fcc71be77878a2dd313d7">boton_dsetprimario</a>,6,2)
+<a name="l01011"></a>01011         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e6ae8feb67beb52cf0671a58641403a">tableView</a>,7,0,7,1)
+<a name="l01012"></a>01012         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a92c0069fe00775eefd9f1f233ad40635">boton_macovar</a>,8,1)
+<a name="l01013"></a>01013         self.grilla.addWidget(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a20327beb8d3a747995089a37f477a4e6">boton_salir</a>,17,1)
+<a name="l01014"></a>01014         
+<a name="l01015"></a>01015         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l01016"></a>01016 <span class="stringliteral">        Acciones</span>
+<a name="l01017"></a>01017 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l01018"></a>01018         self.listaSat.currentIndexChanged.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a32dded3405be1a68a86b698ab03077ae">selectionchange</a>)
+<a name="l01019"></a>01019         self.boton_procesar.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a833aec7ff42fabde02e729e5ab5e5a44">procesarCods</a>)
+<a name="l01020"></a>01020         self.boton_procesar.setEnabled(<span class="keyword">False</span>)
+<a name="l01021"></a>01021         self.boton_dtotales.setEnabled(<span class="keyword">False</span>)
+<a name="l01022"></a>01022         self.boton_dxcoord.setEnabled(<span class="keyword">False</span>)
+<a name="l01023"></a>01023         self.boton_dsetprimario.setEnabled(<span class="keyword">False</span>)
+<a name="l01024"></a>01024         self.boton_macovar.setEnabled(<span class="keyword">False</span>)
+<a name="l01025"></a>01025         self.boton_salir.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#abe5eaa272c4758f505193a0359e13b7e">salir</a>)
+<a name="l01026"></a>01026         self.boton_dtotales.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1f554257b2dc3c7d9205fcccc4567503">ver_diferencias_totales</a>)
+<a name="l01027"></a>01027         self.boton_dxcoord.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a75e87bed4ae6deeb7c2a537e7aec92c2">ver_dif_x_coordenadas</a>)
+<a name="l01028"></a>01028         self.boton_dsetprimario.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ae8b8bd169d4cb3383b04eef230662d94">ver_dif_set_primario</a>)
+<a name="l01029"></a>01029         self.boton_macovar.clicked.connect(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#acc3e51ea01f718127f28f752079417d2">Macovar</a>)
+<a name="l01030"></a>01030 <span class="comment">#        self.datos_mis_edit.textChanged.connect(self.validar_nombre)</span>
+<a name="l01031"></a>01031                 
+<a name="l01032"></a>01032         self.setWindowTitle(<span class="stringliteral">&#39;PROCESAMIENTO de DATOS CODS&#39;</span>)
+<a name="l01033"></a>01033         self.setLayout(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ab03ced5fd6f9885d9edc8cb7aeb99a51">grilla</a>) 
         
 </pre></div>
 </div>
@@ -324,15 +339,15 @@ Carga el set de datos TLE y realiza el metodo de Osweiler para estimar las difer
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00947">947</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00947"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#acc3e51ea01f718127f28f752079417d2">00947</a> 
-<a name="l00948"></a>00948     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#acc3e51ea01f718127f28f752079417d2">Macovar</a>(self):
-<a name="l00949"></a>00949         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>=<a class="code" href="namespace_estadistica_1_1ma_covar.html#ae50df5102737352392fa1f5ef83ceb6c">EjecutaMaCovarCODS</a>(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3002cea889ffe07f57ddd32afe8779d6">grafico_arch</a>)
-<a name="l00950"></a>00950         self.tableView.setRowCount(len(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>))
-<a name="l00951"></a>00951         self.tableView.setColumnCount(len(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>))
-<a name="l00952"></a>00952         <span class="keywordflow">for</span> i,fila <span class="keywordflow">in</span> enumerate(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>):
-<a name="l00953"></a>00953             <span class="keywordflow">for</span> j,col <span class="keywordflow">in</span> enumerate(fila):
-<a name="l00954"></a>00954                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01074">1074</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l01074"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#acc3e51ea01f718127f28f752079417d2">01074</a> 
+<a name="l01075"></a>01075     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#acc3e51ea01f718127f28f752079417d2">Macovar</a>(self):
+<a name="l01076"></a>01076         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>=<a class="code" href="namespace_estadistica_1_1ma_covar.html#ae50df5102737352392fa1f5ef83ceb6c">EjecutaMaCovarCODS</a>(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3002cea889ffe07f57ddd32afe8779d6">grafico_arch</a>)
+<a name="l01077"></a>01077         self.tableView.setRowCount(len(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>))
+<a name="l01078"></a>01078         self.tableView.setColumnCount(len(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>))
+<a name="l01079"></a>01079         <span class="keywordflow">for</span> i,fila <span class="keywordflow">in</span> enumerate(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa13d10aacf060079761b4c5f4d71cb7b">macovarT</a>):
+<a name="l01080"></a>01080             <span class="keywordflow">for</span> j,col <span class="keywordflow">in</span> enumerate(fila):
+<a name="l01081"></a>01081                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
    
 </pre></div>
 <p><div class="dynheader">
@@ -340,7 +355,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_aplicacion_1_1frm__main_1_1_proc_mision_acc3e51ea01f718127f28f752079417d2_cgraph.png" border="0" usemap="#class_aplicacion_1_1frm__main_1_1_proc_mision_acc3e51ea01f718127f28f752079417d2_cgraph" alt=""/></div>
 <map name="class_aplicacion_1_1frm__main_1_1_proc_mision_acc3e51ea01f718127f28f752079417d2_cgraph" id="class_aplicacion_1_1frm__main_1_1_proc_mision_acc3e51ea01f718127f28f752079417d2_cgraph">
-</map>
+<area shape="rect" id="node2" href="namespace_estadistica_1_1ma_covar.html#ae50df5102737352392fa1f5ef83ceb6c" title="Estadistica.maCovar.EjecutaMaCovarCODS" alt="" coords="318,5,602,32"/><area shape="rect" id="node3" href="namespace_estadistica_1_1ma_covar.html#aa48123d0e8657fa1dd0847526bf613b3" title="Estadistica.maCovar.maCovTLE" alt="" coords="651,5,866,32"/><area shape="rect" id="node4" href="namespace_estadistica_1_1ma_covar.html#a832b0372f644397fe8a443add309ba1e" title="Estadistica.maCovar.maCovCODS" alt="" coords="915,5,1144,32"/><area shape="rect" id="node5" href="namespace_estadistica_1_1ma_covar.html#a3343dc68ba49032b874357a6c4fca628" title="Estadistica.maCovar.sigmaCalcCODS" alt="" coords="1193,5,1442,32"/></map>
 </div>
 </p>
 
@@ -361,30 +376,30 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00913">913</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00913"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a833aec7ff42fabde02e729e5ab5e5a44">00913</a> 
-<a name="l00914"></a>00914     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a833aec7ff42fabde02e729e5ab5e5a44">procesarCods</a>(self):
-<a name="l00915"></a>00915         files=glob.glob(<span class="stringliteral">&#39;../Comparar/diferencias/*&#39;</span>)
-<a name="l00916"></a>00916         <span class="keywordflow">for</span> filename <span class="keywordflow">in</span> files:
-<a name="l00917"></a>00917             os.unlink(filename)
-<a name="l00918"></a>00918 <span class="comment">#        self.set_datos =ejecutaProcesamientoCods()</span>
-<a name="l00919"></a>00919         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>= <a class="code" href="namespace_comparar_1_1_tlevs_cods_o_s_w.html#a6a99a99f88bff2b4a515cba6aa466a88">dif_tleCODS15dias</a>()
-<a name="l00920"></a>00920         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[0]
-<a name="l00921"></a>00921         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9eb29e9192330d7e17dfb3aa158e0a6a">linea1</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[1]
-<a name="l00922"></a>00922         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9d93788fa1c41422c23c50a7b5334ca4">linea2</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[2]
-<a name="l00923"></a>00923         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a577add6b0e98b4e2f7b6e04b7479fd67">fini</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[3]
-<a name="l00924"></a>00924         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a5f16740ae5b70bf2ba275df1d15b2bd7">ffin</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[4]
-<a name="l00925"></a>00925         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e7a8f2abdaaca0e031e31c8dfa229af">dt</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[5]
-<a name="l00926"></a>00926         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[6]
-<a name="l00927"></a>00927         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[7]
-<a name="l00928"></a>00928         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3002cea889ffe07f57ddd32afe8779d6">grafico_arch</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[8]
-<a name="l00929"></a>00929         self.fechaini_edit.setText(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a577add6b0e98b4e2f7b6e04b7479fd67">fini</a>)
-<a name="l00930"></a>00930         self.fechafin_edit.setText(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a5f16740ae5b70bf2ba275df1d15b2bd7">ffin</a>)
-<a name="l00931"></a>00931         self.tlepri_edit.setText(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9eb29e9192330d7e17dfb3aa158e0a6a">linea1</a>+<span class="stringliteral">&#39;\n&#39;</span>+self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9d93788fa1c41422c23c50a7b5334ca4">linea2</a>)
-<a name="l00932"></a>00932         self.boton_dtotales.setEnabled(<span class="keyword">True</span>)
-<a name="l00933"></a>00933         self.boton_dxcoord.setEnabled(<span class="keyword">True</span>)
-<a name="l00934"></a>00934         self.boton_dsetprimario.setEnabled(<span class="keyword">True</span>)
-<a name="l00935"></a>00935         self.boton_macovar.setEnabled(<span class="keyword">True</span>)
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01040">1040</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l01040"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a833aec7ff42fabde02e729e5ab5e5a44">01040</a> 
+<a name="l01041"></a>01041     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a833aec7ff42fabde02e729e5ab5e5a44">procesarCods</a>(self):
+<a name="l01042"></a>01042         files=glob.glob(<span class="stringliteral">&#39;../Comparar/diferencias/*&#39;</span>)
+<a name="l01043"></a>01043         <span class="keywordflow">for</span> filename <span class="keywordflow">in</span> files:
+<a name="l01044"></a>01044             os.unlink(filename)
+<a name="l01045"></a>01045 <span class="comment">#        self.set_datos =ejecutaProcesamientoCods()</span>
+<a name="l01046"></a>01046         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>= <a class="code" href="namespace_comparar_1_1_tlevs_cods_o_s_w.html#a6a99a99f88bff2b4a515cba6aa466a88">dif_tleCODS15dias</a>()
+<a name="l01047"></a>01047         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[0]
+<a name="l01048"></a>01048         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9eb29e9192330d7e17dfb3aa158e0a6a">linea1</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[1]
+<a name="l01049"></a>01049         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9d93788fa1c41422c23c50a7b5334ca4">linea2</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[2]
+<a name="l01050"></a>01050         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a577add6b0e98b4e2f7b6e04b7479fd67">fini</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[3]
+<a name="l01051"></a>01051         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a5f16740ae5b70bf2ba275df1d15b2bd7">ffin</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[4]
+<a name="l01052"></a>01052         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9e7a8f2abdaaca0e031e31c8dfa229af">dt</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[5]
+<a name="l01053"></a>01053         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[6]
+<a name="l01054"></a>01054         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[7]
+<a name="l01055"></a>01055         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3002cea889ffe07f57ddd32afe8779d6">grafico_arch</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a55fedfe2e3266b40a79267c4996831b0">set_datos</a>[8]
+<a name="l01056"></a>01056         self.fechaini_edit.setText(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a577add6b0e98b4e2f7b6e04b7479fd67">fini</a>)
+<a name="l01057"></a>01057         self.fechafin_edit.setText(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a5f16740ae5b70bf2ba275df1d15b2bd7">ffin</a>)
+<a name="l01058"></a>01058         self.tlepri_edit.setText(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9eb29e9192330d7e17dfb3aa158e0a6a">linea1</a>+<span class="stringliteral">&#39;\n&#39;</span>+self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a9d93788fa1c41422c23c50a7b5334ca4">linea2</a>)
+<a name="l01059"></a>01059         self.boton_dtotales.setEnabled(<span class="keyword">True</span>)
+<a name="l01060"></a>01060         self.boton_dxcoord.setEnabled(<span class="keyword">True</span>)
+<a name="l01061"></a>01061         self.boton_dsetprimario.setEnabled(<span class="keyword">True</span>)
+<a name="l01062"></a>01062         self.boton_macovar.setEnabled(<span class="keyword">True</span>)
         
 </pre></div>
 <p><div class="dynheader">
@@ -392,7 +407,7 @@ Here is the call graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="class_aplicacion_1_1frm__main_1_1_proc_mision_a833aec7ff42fabde02e729e5ab5e5a44_cgraph.png" border="0" usemap="#class_aplicacion_1_1frm__main_1_1_proc_mision_a833aec7ff42fabde02e729e5ab5e5a44_cgraph" alt=""/></div>
 <map name="class_aplicacion_1_1frm__main_1_1_proc_mision_a833aec7ff42fabde02e729e5ab5e5a44_cgraph" id="class_aplicacion_1_1frm__main_1_1_proc_mision_a833aec7ff42fabde02e729e5ab5e5a44_cgraph">
-</map>
+<area shape="rect" id="node2" href="namespace_comparar_1_1_tlevs_cods_o_s_w.html#a6a99a99f88bff2b4a515cba6aa466a88" title="Comparar.TlevsCodsOSW.dif_tleCODS15dias" alt="" coords="350,132,645,159"/><area shape="rect" id="node3" href="namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#ac352fb5d30dae7100bfa677e5a33fb7b" title="AjustarTLE.AjustarTLE.generadorDatos" alt="" coords="721,5,973,32"/><area shape="rect" id="node4" href="namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#af6f0f78d827900de034dde2317641d71" title="AjustarTLE.AjustarTLE.ordenaTles" alt="" coords="735,56,959,83"/><area shape="rect" id="node5" href="namespace_comparar_1_1_tlevs_cods_o_s_w.html#ae35fa90ace9d99f00529dfb4c37791ed" title="Comparar.TlevsCodsOSW.FiltraArchivos" alt="" coords="715,107,978,133"/><area shape="rect" id="node6" href="namespace_comparar_1_1_tlevs_cods_o_s_w.html#a43b4c6ce3d6b53735210bd9bf7f42943" title="Comparar.TlevsCodsOSW.interpola_3sv" alt="" coords="717,157,976,184"/><area shape="rect" id="node9" href="namespace_comparar_1_1_tlevs_cods_o_s_w.html#ac1b5420da32e09d495acb8c770def128" title="Comparar.TlevsCodsOSW.diferencias_tleCODS" alt="" coords="694,208,999,235"/><area shape="rect" id="node14" href="namespace_estadistica_1_1ajuste_min_cuad.html#aa33554754bf43adc6df315cff92367e1" title="Estadistica.ajusteMinCuad.ajustar_diferencias" alt="" coords="701,259,992,285"/><area shape="rect" id="node7" href="namespace_comparar_1_1_tlevs_cods_o_s_w.html#a489657853bb99b1b74c3abb90af20e62" title="Comparar.TlevsCodsOSW.interpola" alt="" coords="1078,157,1309,184"/><area shape="rect" id="node8" href="namespacefunciones_utiles_1_1funciones.html#a3d74c0520a16933699930e2937322d1a" title="funcionesUtiles.funciones.toTimestamp" alt="" coords="1387,157,1639,184"/><area shape="rect" id="node10" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#aee17184e86131336dd2574ead19d91cc" title="SistReferencia.sist_deCoordenadas.teme2tod" alt="" coords="1049,208,1338,235"/><area shape="rect" id="node13" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a8190e729516e0f1cc25eee08d0303760" title="SistReferencia.sist_deCoordenadas.vncSis" alt="" coords="1056,259,1331,285"/><area shape="rect" id="node11" href="namespace_sist_referencia_1_1sist__de_tiempo.html#a4bce296a4c0b68be2d00dd41b0f84198" title="SistReferencia.sist_deTiempo.jd" alt="" coords="1408,208,1619,235"/><area shape="rect" id="node12" href="namespace_sist_referencia_1_1sist__de_tiempo.html#ae2039dacf6ec7bd9234fe7fdd50fa498" title="SistReferencia.sist_deTiempo.j0" alt="" coords="1688,208,1899,235"/></map>
 </div>
 </p>
 
@@ -413,12 +428,12 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00955">955</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00955"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#abe5eaa272c4758f505193a0359e13b7e">00955</a> 
-<a name="l00956"></a>00956     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#abe5eaa272c4758f505193a0359e13b7e">salir</a>(self):
-<a name="l00957"></a>00957         self.accept()
-<a name="l00958"></a>00958         
-<a name="l00959"></a>00959         
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01082">1082</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l01082"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#abe5eaa272c4758f505193a0359e13b7e">01082</a> 
+<a name="l01083"></a>01083     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#abe5eaa272c4758f505193a0359e13b7e">salir</a>(self):
+<a name="l01084"></a>01084         self.accept()
+<a name="l01085"></a>01085         
+<a name="l01086"></a>01086         
 <span class="comment">#def IniciaApp():</span>
 </pre></div>
 </div>
@@ -448,13 +463,13 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00907">907</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00907"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a32dded3405be1a68a86b698ab03077ae">00907</a> 
-<a name="l00908"></a>00908     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a32dded3405be1a68a86b698ab03077ae">selectionchange</a>(self,i):
-<a name="l00909"></a>00909         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a47fb6c6887ca9e86d79f390b5bcbe2ed">sat_nombre</a>= self.listaSat.currentText()
-<a name="l00910"></a>00910         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a6335ad8c4d5a2c4c1ecd4d97f0760d5f">dic_satelites</a>={<span class="stringliteral">&#39;SAC-D&#39;</span>:37673,<span class="stringliteral">&#39;LAGEOS&#39;</span>:8820,<span class="stringliteral">&#39;ICESAT&#39;</span>:27642}
-<a name="l00911"></a>00911         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a6335ad8c4d5a2c4c1ecd4d97f0760d5f">dic_satelites</a>[str(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a47fb6c6887ca9e86d79f390b5bcbe2ed">sat_nombre</a>)]
-<a name="l00912"></a>00912         self.boton_procesar.setEnabled(<span class="keyword">True</span>)
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01034">1034</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l01034"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a32dded3405be1a68a86b698ab03077ae">01034</a> 
+<a name="l01035"></a>01035     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a32dded3405be1a68a86b698ab03077ae">selectionchange</a>(self,i):
+<a name="l01036"></a>01036         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a47fb6c6887ca9e86d79f390b5bcbe2ed">sat_nombre</a>= self.listaSat.currentText()
+<a name="l01037"></a>01037         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a6335ad8c4d5a2c4c1ecd4d97f0760d5f">dic_satelites</a>={<span class="stringliteral">&#39;SAC-D&#39;</span>:37673,<span class="stringliteral">&#39;LAGEOS&#39;</span>:8820,<span class="stringliteral">&#39;ICESAT&#39;</span>:27642}
+<a name="l01038"></a>01038         self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>=self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a6335ad8c4d5a2c4c1ecd4d97f0760d5f">dic_satelites</a>[str(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a47fb6c6887ca9e86d79f390b5bcbe2ed">sat_nombre</a>)]
+<a name="l01039"></a>01039         self.boton_procesar.setEnabled(<span class="keyword">True</span>)
         
 </pre></div>
 </div>
@@ -474,12 +489,12 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00942">942</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00942"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ae8b8bd169d4cb3383b04eef230662d94">00942</a> 
-<a name="l00943"></a>00943     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ae8b8bd169d4cb3383b04eef230662d94">ver_dif_set_primario</a>(self):
-<a name="l00944"></a>00944         ploteos.grafica_set15dias(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>, self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>)
-<a name="l00945"></a>00945 <span class="comment">#        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch,self.ffin)</span>
-<a name="l00946"></a>00946         
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01069">1069</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l01069"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ae8b8bd169d4cb3383b04eef230662d94">01069</a> 
+<a name="l01070"></a>01070     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#ae8b8bd169d4cb3383b04eef230662d94">ver_dif_set_primario</a>(self):
+<a name="l01071"></a>01071         ploteos.grafica_set15dias(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>, self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>)
+<a name="l01072"></a>01072 <span class="comment">#        ploteos.grafica_set_principal(self.sat_id,self.path,self.grafico_arch,self.ffin)</span>
+<a name="l01073"></a>01073         
         
 </pre></div>
 </div>
@@ -499,10 +514,10 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00939">939</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00939"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a75e87bed4ae6deeb7c2a537e7aec92c2">00939</a> 
-<a name="l00940"></a>00940     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a75e87bed4ae6deeb7c2a537e7aec92c2">ver_dif_x_coordenadas</a>(self):
-<a name="l00941"></a>00941         ploteos.grafica_setcompleto(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa3966e8997b4cd36f93ec279368419c7">path</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>, self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>)
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01066">1066</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l01066"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a75e87bed4ae6deeb7c2a537e7aec92c2">01066</a> 
+<a name="l01067"></a>01067     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a75e87bed4ae6deeb7c2a537e7aec92c2">ver_dif_x_coordenadas</a>(self):
+<a name="l01068"></a>01068         ploteos.grafica_setcompleto(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa3966e8997b4cd36f93ec279368419c7">path</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>, self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>)
         
 </pre></div>
 </div>
@@ -522,10 +537,10 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00936"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1f554257b2dc3c7d9205fcccc4567503">00936</a> 
-<a name="l00937"></a>00937     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1f554257b2dc3c7d9205fcccc4567503">ver_diferencias_totales</a>(self):
-<a name="l00938"></a>00938         ploteos.grafica_diferenciasTotales(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa3966e8997b4cd36f93ec279368419c7">path</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>)
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01063">1063</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l01063"></a><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1f554257b2dc3c7d9205fcccc4567503">01063</a> 
+<a name="l01064"></a>01064     <span class="keyword">def </span><a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1f554257b2dc3c7d9205fcccc4567503">ver_diferencias_totales</a>(self):
+<a name="l01065"></a>01065         ploteos.grafica_diferenciasTotales(self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a567f66e7bbde2200a082882dc97c6655">sat_id</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aa3966e8997b4cd36f93ec279368419c7">path</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#a3a657cafea73c6a7aea4d11c33550c3e">data</a>,self.<a class="code" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html#aaf0c4aebba29569f505f11fa1734b6fa">coef</a>)
         
 </pre></div>
 </div>
@@ -542,7 +557,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00834">834</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00961">961</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -557,7 +572,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00834">834</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00961">961</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -572,7 +587,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00834">834</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00961">961</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -587,7 +602,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00834">834</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00961">961</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -602,7 +617,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00834">834</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00961">961</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -617,7 +632,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00834">834</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00961">961</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -632,7 +647,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -647,7 +662,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -662,7 +677,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00907">907</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01034">1034</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -677,7 +692,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -692,7 +707,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -707,7 +722,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00836">836</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00963">963</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -722,7 +737,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00832">832</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00959">959</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -737,7 +752,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00836">836</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00963">963</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -752,7 +767,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00832">832</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00959">959</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -767,7 +782,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00913">913</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01040">1040</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -782,7 +797,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00913">913</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01040">1040</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -797,7 +812,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -812,7 +827,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00830">830</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00957">957</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -827,7 +842,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -842,7 +857,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -857,7 +872,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00838">838</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00965">965</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -872,7 +887,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00832">832</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00959">959</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -887,7 +902,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -902,7 +917,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00832">832</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00959">959</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -917,7 +932,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -932,7 +947,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -947,7 +962,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -962,7 +977,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -977,7 +992,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00809">809</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00936">936</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -992,7 +1007,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00840">840</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00967">967</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -1007,7 +1022,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00836">836</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00963">963</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -1036,7 +1051,7 @@ Here is the call graph for this function:</div>
       <li class="navelem"><a class="el" href="namespace_aplicacion_1_1frm__main.html">frm_main</a>      </li>
       <li class="navelem"><a class="el" href="class_aplicacion_1_1frm__main_1_1_proc_mision.html">ProcMision</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

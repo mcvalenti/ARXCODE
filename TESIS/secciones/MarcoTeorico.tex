@@ -375,11 +375,47 @@ En los encuentros cortos puede asumirse que:\\
 
 \begin{itemize}
 \itemsep0em
- \item El movimiento relativo lineal.
+ \item El movimiento relativo es lineal.
  \item Los errores en la posici\'on durante el encuentro son constantes e iguales al del error en TCA.
  \item No hay errores en la velocidad.
- \item Los errores en la posici\'on se representan por distribuciones gaussiana de tres dimensiones.
+ \item Los errores en la posici\'on se representan con una distribuci\'on gaussiana de tres dimensiones.
 \end{itemize}
+
+M\'etodos para el c\'alculo de la PoC en {\it{encuentros cortos}}:
+
+\begin{table}
+ \centering
+  \resizebox{\linewidth}{!}{
+ \begin{tabular}{|c|l|}
+ \hline \hline
+ Autor/es & Metodolog\'ia\\
+ \hline \hline
+    Akella y Alfriend & Calcula la integral de superficie, del problema simplificado a 2D.\\
+    \hline
+    \multirow{4}{*}{Foster} & Calcula la integral de superficie del problema simplificado a 2D, utilizando la suma\\
+    &  acumulada de anillos el\'ipticos conc\'entricos. Transforma el sistema a un sistema   \\
+    & de referencia polar, e integra cada $0.5^{\circ}$ y un radio de $r_{a}/12$.\\
+    & Es el m\'etodo que utiliza NASA para la ISS.\\
+    \hline
+    \multirow{4}{*}{Chan} & Desarroll\'o una soluci\'on anal\'itica en base a una serie infinita de\\
+    &  t\'erminos que converge para la mayor\'ia de los valores m\'as comunes del problema,  \\
+    &  a saber: radios combinados $r_{a}$ entre $1-100 m$, distancias m\'inimas  \\
+    & de $10m-100km$ y covarianzas en el rango de $1m-10km$. \\
+    \hline
+    \multirow{3}{*}{Patera} & Transforma la integral de superficie a una integral de l\'inea\\
+    &  de una dimensi\'on. Este nuevo planteo permite adaptar la secci\'on \\
+    & de superfice a la forma de los objetos.\\
+    \hline
+    \multirow{2}{*}{Alfano (Serie)} & Utiliza una serie que combina las funciones error y\\
+    & t\'erminos exponenciales para aproximar la integral de 2D.\\
+    \hline
+    \multirow{3}{*}{Alfano (Prob. M\'axima)} & Expresi\'on simplificada que permite hacer una estimaci\'on grosera\\
+    & cuando no se cuenta con datos precisos de posici\'on o de la matriz de covarianza. \\
+    & Utiliza una relaci\'on entre los radios combinados y la m\'inima distancia.\\
+    \hline
+ \end{tabular} }
+\end{table}
+
 
 De acuerdo al estudio del libro de \citep{leichen}, la {\it{probabilidad de colisi\'on}} ser\'a:
 

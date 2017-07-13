@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['valida_5fbibl',['valida_bibl',['../namespace_validaciones_1_1valida___po_c.html#ac852aa9eac6f9a0ce50b95fffc7d1e24',1,'Validaciones::valida_PoC']]],
+  ['valida_5fcdm',['valida_cdm',['../namespace_validaciones_1_1valida___po_c.html#a49c5929efc3e1b5c06a4a78d86df8e20',1,'Validaciones::valida_PoC']]],
   ['ver_5fdif_5fset_5fprimario',['ver_dif_set_primario',['../class_aplicacion_1_1frm__main_1_1_proc_tle.html#a9b7bf8fdffe010b12798bbd6b98578b5',1,'Aplicacion::frm_main::ProcTle.ver_dif_set_primario()'],['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#ae8b8bd169d4cb3383b04eef230662d94',1,'Aplicacion::frm_main::ProcMision.ver_dif_set_primario()']]],
   ['ver_5fdif_5fx_5fcoordenadas',['ver_dif_x_coordenadas',['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#a75e87bed4ae6deeb7c2a537e7aec92c2',1,'Aplicacion::frm_main::ProcMision']]],
   ['ver_5fdiferencias_5ftotales',['ver_diferencias_totales',['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#a1f554257b2dc3c7d9205fcccc4567503',1,'Aplicacion::frm_main::ProcMision']]],

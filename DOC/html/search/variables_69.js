@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['i',['i',['../class_tle_admin_1_1_t_l_e_1_1_tle.html#a1b43fddf9df054e764b869e03044621d',1,'TleAdmin::TLE::Tle.i()'],['../namespace_comparar_1_1_tlevs_cods_o_s_w.html#a2f6fee3a94d4f13e4c2a52f58fb847aa',1,'Comparar::TlevsCodsOSW.i()']]],
+  ['i',['i',['../namespace_comparar_1_1_tlevs_cods_o_s_w.html#a2f6fee3a94d4f13e4c2a52f58fb847aa',1,'Comparar::TlevsCodsOSW']]],
   ['i1',['i1',['../struct__coeff__record.html#af26f8195abb73cea1b054aacf38781bc',1,'_coeff_record']]],
   ['i2',['i2',['../struct__coeff__record.html#a9d3db03a7779e46f8afb83afc62538e8',1,'_coeff_record']]],
   ['i3',['i3',['../struct__coeff__record.html#a5e5dde6efe7dad52d6e9c452ed61fd10',1,'_coeff_record']]],
@@ -11,6 +11,9 @@ var searchData=
   ['info',['info',['../namespace_tle_admin_1_1validacion_s_t_k.html#a91d21fa5ff5e79bb692a4f5a35d6e464',1,'TleAdmin::validacionSTK']]],
   ['info1',['info1',['../namespace_c_d_m_1_1cdm_parser.html#af6b27ddcc8dbdf433fe024867c90dbc8',1,'CDM::cdmParser']]],
   ['info2',['info2',['../namespace_tle_admin_1_1validacion_s_t_k.html#aede181d2bff23480a4a255af2cb84d2b',1,'TleAdmin::validacionSTK']]],
+  ['ini_5fepoca',['ini_epoca',['../namespace_validaciones_1_1valida___o_s_w.html#a78d9070dad109e1b50bd7e69e431621a',1,'Validaciones::valida_OSW']]],
+  ['ini_5fset_5fdeb',['ini_set_deb',['../namespacepruebas_1_1main_completo.html#ac78da5d930a4ef88e90681cd87f963ed',1,'pruebas::mainCompleto']]],
+  ['ini_5fset_5fsat',['ini_set_sat',['../namespacepruebas_1_1main_completo.html#a437c178e250788af54a50cb4650ee3cf',1,'pruebas::mainCompleto']]],
   ['ini_5ftle',['ini_tle',['../class_aplicacion_1_1frm__main_1_1_proc_tle.html#a7df4e51f089cfdef54208e9665befc93',1,'Aplicacion::frm_main::ProcTle']]],
   ['inicio',['inicio',['../class_aplicacion_1_1frm__main_1_1_proc_a_rx_c_o_d_e.html#adc7f0557ece0bb19955dc79e7f3c1a72',1,'Aplicacion::frm_main::ProcARxCODE']]]
 ];

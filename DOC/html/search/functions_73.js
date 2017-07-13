@@ -4,9 +4,8 @@ var searchData=
   ['salircdm',['salirCdm',['../class_aplicacion_1_1frm__main_1_1_proc_c_d_m.html#a6078f86c360fc473378c37871bc276c1',1,'Aplicacion::frm_main::ProcCDM']]],
   ['seleccionsat',['seleccionSat',['../namespace_ajustar_t_l_e_1_1_ajustar_t_l_e.html#aa379e880455c19bcde9490860b81d4b0',1,'AjustarTLE::AjustarTLE']]],
   ['selectionchange',['selectionchange',['../class_aplicacion_1_1frm__main_1_1_proc_mision.html#a32dded3405be1a68a86b698ab03077ae',1,'Aplicacion::frm_main::ProcMision.selectionchange()'],['../class_aplicacion_c_o_d_s_1_1_c_o_d_sinterface_1_1_proc_c_o_d_s.html#a313808e7082abc43c51720ca279a4ab8',1,'AplicacionCODS::CODSinterface::ProcCODS.selectionchange()']]],
-  ['settle',['setTLE',['../namespace_tle_admin_1_1_tle_archivos.html#a244024f2862e971e68ad202d37911f27',1,'TleAdmin::TleArchivos']]],
   ['show_5fsystem_5fusers',['show_system_users',['../classpruebas_1_1ejemplo_1_1_my_table.html#ab50826f5bb21590875b1520b3edc3d62',1,'pruebas::ejemplo::MyTable']]],
   ['sigmacalccods',['sigmaCalcCODS',['../namespace_estadistica_1_1ma_covar.html#a3343dc68ba49032b874357a6c4fca628',1,'Estadistica::maCovar']]],
-  ['solicitudtle',['solicitudTle',['../class_tle_admin_1_1get__tle_1_1importar__tle.html#a3a563b39f7026b507afd3924438fd3b5',1,'TleAdmin::get_tle::importar_tle']]],
+  ['solicitudtle',['solicitudTle',['../class_tle_admin_1_1get__tle_1_1importar_set_t_l_e.html#adb0a0b0fb85dd05668dbda94f29937e0',1,'TleAdmin::get_tle::importarSetTLE.solicitudTle()'],['../class_tle_admin_1_1_t_l_e_1_1_set_t_l_e.html#afa3047c89ede1a73ac121c38be7de658',1,'TleAdmin::TLE::SetTLE.solicitudTle()']]],
   ['sv_5finterpolados',['sv_interpolados',['../namespace_comparar_1_1_tlevs_cods_o_s_w.html#a85c0fa94a309bffac54cbb9f06dede43',1,'Comparar::TlevsCodsOSW']]]
 ];

@@ -190,10 +190,10 @@ def valida_cdm(cdm_archivo):
 if __name__=='__main__':
     
 #    valida_bibl() # CARGA LOS PARAMETROS DE LA BIBLIOGRAFIA Y CALCULA PoC.
-    cdm_archivo='cdmxmlBluebook.xml'
+#    cdm_archivo='cdmxmlBluebook.xml'
 #    cdm_archivo='cdmTerraPegasus10.xml'
 #    cdm_archivo='25922_conj_23270_JAN_2013010_1603.xml'
-#    cdm_archivo='24903_conj_33759_JAN_2013010_1322.xml'
+    cdm_archivo='24903_conj_33759_JAN_2013010_1322.xml'
     valida_cdm(cdm_archivo) # CARGA vel, dif RTN, varianzas RTN y calcula PoC
 
     

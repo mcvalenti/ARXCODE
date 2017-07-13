@@ -3,46 +3,46 @@
 \subsection*{\-Packages}
 \begin{DoxyCompactItemize}
 \item 
-namespace {\bf lee\-C\-O\-D\-S2\-T\-O\-D}
+namespace {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D}
 \end{DoxyCompactItemize}
 \subsection*{\-Variables}
 \begin{DoxyCompactItemize}
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-f} = open('tlesacd.\-txt','r')
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-f} = open('tlesacd.\-txt','r')
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-g} = open('cods05jun2013.\-txt','r')
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-g} = open('cods05jun2013.\-txt','r')
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-cods} = g.\-readlines()
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-cods} = g.\-readlines()
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-line1} = f.\-readline()
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-line1} = f.\-readline()
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-line2} = f.\-readline()
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-line2} = f.\-readline()
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-satellite} = twoline2rv(line1, line2, wgs72)
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-satellite} = twoline2rv(line1, line2, wgs72)
 \item 
-{\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-t0} = satellite.\-epoch
+{\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-t0} = satellite.\-epoch
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-dif} = ()
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-dif} = ()
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-poscods} = ()
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-poscods} = ()
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-velcods} = ()
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-velcods} = ()
 \item 
-list {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-datos} = cods[segundo + minuto $\ast$ 60 + hora $\ast$ 3600]
+list {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-datos} = cods[segundo + minuto $\ast$ 60 + hora $\ast$ 3600]
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-xcods} = float(datos[2])
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-xcods} = float(datos[2])
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-ycods} = float(datos[3])
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-ycods} = float(datos[3])
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-zcods} = float(datos[4])
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-zcods} = float(datos[4])
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-xpcods} = float(datos[5])
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-xpcods} = float(datos[5])
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-ypcods} = float(datos[6])
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-ypcods} = float(datos[6])
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-zpcods} = float(datos[7])
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-zpcods} = float(datos[7])
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-fechahora} = datetime(t0.\-year,t0.\-month,t0.\-day,hora,minuto,segundo)
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-fechahora} = datetime(t0.\-year,t0.\-month,t0.\-day,hora,minuto,segundo)
 \item 
-tuple {\bf lee\-C\-O\-D\-S2\-T\-O\-D.\-r\-\_\-tod} = teme2tod(fechahora,position)
+tuple {\bf main\-::lee\-C\-O\-D\-S2\-T\-O\-D.\-r\-\_\-tod} = teme2tod(fechahora,position)
 \end{DoxyCompactItemize}

@@ -190,91 +190,91 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00612">612</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00612"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#aca71229c12209595ea2e3cfa6dc9e0ed">00612</a> 
-<a name="l00613"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#aac877611e691e00884dd8a03a80e87b6">00613</a>     <span class="keyword">def </span><a class="code" href="namespace_aplicacion_1_1frm__main.html#a6ce95408fde91ae744714c4201615d27">__init__</a>(self,parent=None):
-<a name="l00614"></a>00614         QDialog.__init__(self,parent)
-<a name="l00615"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#ae83fa09eff48d46074a8e2a5b2833e01">00615</a> 
-<a name="l00616"></a>00616         self.setWindowModality(Qt.ApplicationModal)
-<a name="l00617"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a80eb15c0bf9bc1a1cf642231198d9613">00617</a>         self.archTLE=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00618"></a>00618         self.cat_id=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00619"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a3e8b156da5148a751d4e574e34309e4a">00619</a>         self.fini=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00620"></a>00620         self.ffin=<span class="stringliteral">&#39;&#39;</span>
-<a name="l00621"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#ae187876b094717a7cca7c408dc15f65e">00621</a> <span class="comment">#         </span>
-<a name="l00622"></a>00622         self.palette = QPalette()
-<a name="l00623"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a288f45f26b999c26949165730d99278a">00623</a>         self.palette.setColor(QPalette.Background,Qt.lightGray)
-<a name="l00624"></a>00624         self.setPalette(self.palette)
-<a name="l00625"></a>00625 <span class="comment">#         </span>
-<a name="l00626"></a>00626         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00627"></a>00627 <span class="stringliteral">        CALENDARIOS</span>
-<a name="l00628"></a>00628 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00629"></a>00629         self.cal = QCalendarWidget()
-<a name="l00630"></a>00630         self.cal.setGridVisible(<span class="keyword">True</span>)
-<a name="l00631"></a>00631         self.cal.clicked[QDate].connect(self.verFinicio)
-<a name="l00632"></a>00632         self.cal1 = QCalendarWidget()
-<a name="l00633"></a>00633         self.cal1.setGridVisible(<span class="keyword">True</span>)
-<a name="l00634"></a>00634         self.cal1.clicked[QDate].connect(self.verFfin)
-<a name="l00635"></a>00635          
-<a name="l00636"></a>00636         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00637"></a>00637 <span class="stringliteral">        Etiquetas</span>
-<a name="l00638"></a>00638 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00639"></a>00639         self.usuario    = QLabel(<span class="stringliteral">&#39;Usuario: &#39;</span>)
-<a name="l00640"></a>00640         self.passw      = QLabel(<span class="stringliteral">&#39;Password: &#39;</span>)
-<a name="l00641"></a>00641         self.norad_id   = QLabel(<span class="stringliteral">&#39;NORAD ID: &#39;</span>)
-<a name="l00642"></a>00642         self.stime      = QLabel(<span class="stringliteral">&#39;Fecha Inicio&#39;</span>)
-<a name="l00643"></a>00643         self.ftime      = QLabel(<span class="stringliteral">&#39;Fecha Fin&#39;</span>)
-<a name="l00644"></a>00644         self.arhcivoTLE = QLabel(<span class="stringliteral">&#39;Archivo Generado&#39;</span>)
-<a name="l00645"></a>00645         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00646"></a>00646 <span class="stringliteral">        Botones</span>
-<a name="l00647"></a>00647 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00648"></a>00648         self.buttons = QDialogButtonBox(
-<a name="l00649"></a>00649             QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
-<a name="l00650"></a>00650             Qt.Horizontal, self)
-<a name="l00651"></a>00651         self.boton_request = QPushButton(<span class="stringliteral">&#39;Enviar Solicitud&#39;</span>)
-<a name="l00652"></a>00652 
-<a name="l00653"></a>00653         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00654"></a>00654 <span class="stringliteral">        Campos de Edicion</span>
-<a name="l00655"></a>00655 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00656"></a>00656         self.usuario_edit  = QLineEdit(<span class="stringliteral">&#39;macecilia&#39;</span>)
-<a name="l00657"></a>00657         self.clave_edit    = QLineEdit(<span class="stringliteral">&#39;MaCeciliaSpace17&#39;</span>)
-<a name="l00658"></a>00658         self.clave_edit.setEchoMode(QLineEdit.Password)
-<a name="l00659"></a>00659         self.norad_id_edit = QLineEdit()
-<a name="l00660"></a>00660         self.st            = QLineEdit()
-<a name="l00661"></a>00661         self.et            = QLineEdit()
-<a name="l00662"></a>00662         self.nombreTle     = QLineEdit()
-<a name="l00663"></a>00663 
-<a name="l00664"></a>00664         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00665"></a>00665 <span class="stringliteral">        Solapas</span>
-<a name="l00666"></a>00666 <span class="stringliteral">        &quot;&quot;&quot;</span>        
-<a name="l00667"></a>00667         self.grilla = QGridLayout()
-<a name="l00668"></a>00668         self.grilla.setSpacing(2)
-<a name="l00669"></a>00669         self.grilla.addWidget(self.usuario,1,1)
-<a name="l00670"></a>00670         self.grilla.addWidget(self.usuario_edit,1,2)
-<a name="l00671"></a>00671         self.grilla.addWidget(self.passw,2,1)
-<a name="l00672"></a>00672         self.grilla.addWidget(self.clave_edit,2,2)
-<a name="l00673"></a>00673         self.grilla.addWidget(self.norad_id,3,2)
-<a name="l00674"></a>00674         self.grilla.addWidget(self.norad_id_edit,4,2)
-<a name="l00675"></a>00675         self.grilla.addWidget(self.stime,5,1)
-<a name="l00676"></a>00676         self.grilla.addWidget(self.ftime,5,2)
-<a name="l00677"></a>00677         self.grilla.addWidget(self.cal,6,1)
-<a name="l00678"></a>00678         self.grilla.addWidget(self.cal1,6,2)
-<a name="l00679"></a>00679         self.grilla.addWidget(self.st,7,1)
-<a name="l00680"></a>00680         self.grilla.addWidget(self.et,7,2)
-<a name="l00681"></a>00681         self.grilla.addWidget(self.boton_request,8,2)
-<a name="l00682"></a>00682         self.grilla.addWidget(self.arhcivoTLE,9,1)
-<a name="l00683"></a>00683         self.grilla.addWidget(self.nombreTle,9,2)
-<a name="l00684"></a>00684         
-<a name="l00685"></a>00685 
-<a name="l00686"></a>00686         self.grilla.addWidget(self.buttons,13,2) 
-<a name="l00687"></a>00687         self.setLayout(self.grilla) 
-<a name="l00688"></a>00688         
-<a name="l00689"></a>00689         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00690"></a>00690 <span class="stringliteral">        Acciones</span>
-<a name="l00691"></a>00691 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00692"></a>00692         self.boton_request.clicked.connect(self.iniciaSolicitud)
-<a name="l00693"></a>00693         self.buttons.accepted.connect(self.accept)
-<a name="l00694"></a>00694         self.buttons.rejected.connect(self.reject)  
-<a name="l00695"></a>00695         self.setWindowTitle(<span class="stringliteral">&#39;Conexion con NORAD&#39;</span>)
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00739">739</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00739"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#aca71229c12209595ea2e3cfa6dc9e0ed">00739</a> 
+<a name="l00740"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#aac877611e691e00884dd8a03a80e87b6">00740</a>     <span class="keyword">def </span><a class="code" href="namespace_aplicacion_1_1frm__main.html#a6ce95408fde91ae744714c4201615d27">__init__</a>(self,parent=None):
+<a name="l00741"></a>00741         QDialog.__init__(self,parent)
+<a name="l00742"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#ae83fa09eff48d46074a8e2a5b2833e01">00742</a> 
+<a name="l00743"></a>00743         self.setWindowModality(Qt.ApplicationModal)
+<a name="l00744"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a80eb15c0bf9bc1a1cf642231198d9613">00744</a>         self.archTLE=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00745"></a>00745         self.cat_id=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00746"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a3e8b156da5148a751d4e574e34309e4a">00746</a>         self.fini=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00747"></a>00747         self.ffin=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00748"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#ae187876b094717a7cca7c408dc15f65e">00748</a> <span class="comment">#         </span>
+<a name="l00749"></a>00749         self.palette = QPalette()
+<a name="l00750"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a288f45f26b999c26949165730d99278a">00750</a>         self.palette.setColor(QPalette.Background,Qt.lightGray)
+<a name="l00751"></a>00751         self.setPalette(self.palette)
+<a name="l00752"></a>00752 <span class="comment">#         </span>
+<a name="l00753"></a>00753         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00754"></a>00754 <span class="stringliteral">        CALENDARIOS</span>
+<a name="l00755"></a>00755 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00756"></a>00756         self.cal = QCalendarWidget()
+<a name="l00757"></a>00757         self.cal.setGridVisible(<span class="keyword">True</span>)
+<a name="l00758"></a>00758         self.cal.clicked[QDate].connect(self.verFinicio)
+<a name="l00759"></a>00759         self.cal1 = QCalendarWidget()
+<a name="l00760"></a>00760         self.cal1.setGridVisible(<span class="keyword">True</span>)
+<a name="l00761"></a>00761         self.cal1.clicked[QDate].connect(self.verFfin)
+<a name="l00762"></a>00762          
+<a name="l00763"></a>00763         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00764"></a>00764 <span class="stringliteral">        Etiquetas</span>
+<a name="l00765"></a>00765 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00766"></a>00766         self.usuario    = QLabel(<span class="stringliteral">&#39;Usuario: &#39;</span>)
+<a name="l00767"></a>00767         self.passw      = QLabel(<span class="stringliteral">&#39;Password: &#39;</span>)
+<a name="l00768"></a>00768         self.norad_id   = QLabel(<span class="stringliteral">&#39;NORAD ID: &#39;</span>)
+<a name="l00769"></a>00769         self.stime      = QLabel(<span class="stringliteral">&#39;Fecha Inicio&#39;</span>)
+<a name="l00770"></a>00770         self.ftime      = QLabel(<span class="stringliteral">&#39;Fecha Fin&#39;</span>)
+<a name="l00771"></a>00771         self.arhcivoTLE = QLabel(<span class="stringliteral">&#39;Archivo Generado&#39;</span>)
+<a name="l00772"></a>00772         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00773"></a>00773 <span class="stringliteral">        Botones</span>
+<a name="l00774"></a>00774 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00775"></a>00775         self.buttons = QDialogButtonBox(
+<a name="l00776"></a>00776             QDialogButtonBox.Ok | QDialogButtonBox.Cancel,
+<a name="l00777"></a>00777             Qt.Horizontal, self)
+<a name="l00778"></a>00778         self.boton_request = QPushButton(<span class="stringliteral">&#39;Enviar Solicitud&#39;</span>)
+<a name="l00779"></a>00779 
+<a name="l00780"></a>00780         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00781"></a>00781 <span class="stringliteral">        Campos de Edicion</span>
+<a name="l00782"></a>00782 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00783"></a>00783         self.usuario_edit  = QLineEdit(<span class="stringliteral">&#39;macecilia&#39;</span>)
+<a name="l00784"></a>00784         self.clave_edit    = QLineEdit(<span class="stringliteral">&#39;MaCeciliaSpace17&#39;</span>)
+<a name="l00785"></a>00785         self.clave_edit.setEchoMode(QLineEdit.Password)
+<a name="l00786"></a>00786         self.norad_id_edit = QLineEdit()
+<a name="l00787"></a>00787         self.st            = QLineEdit()
+<a name="l00788"></a>00788         self.et            = QLineEdit()
+<a name="l00789"></a>00789         self.nombreTle     = QLineEdit()
+<a name="l00790"></a>00790 
+<a name="l00791"></a>00791         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00792"></a>00792 <span class="stringliteral">        Solapas</span>
+<a name="l00793"></a>00793 <span class="stringliteral">        &quot;&quot;&quot;</span>        
+<a name="l00794"></a>00794         self.grilla = QGridLayout()
+<a name="l00795"></a>00795         self.grilla.setSpacing(2)
+<a name="l00796"></a>00796         self.grilla.addWidget(self.usuario,1,1)
+<a name="l00797"></a>00797         self.grilla.addWidget(self.usuario_edit,1,2)
+<a name="l00798"></a>00798         self.grilla.addWidget(self.passw,2,1)
+<a name="l00799"></a>00799         self.grilla.addWidget(self.clave_edit,2,2)
+<a name="l00800"></a>00800         self.grilla.addWidget(self.norad_id,3,2)
+<a name="l00801"></a>00801         self.grilla.addWidget(self.norad_id_edit,4,2)
+<a name="l00802"></a>00802         self.grilla.addWidget(self.stime,5,1)
+<a name="l00803"></a>00803         self.grilla.addWidget(self.ftime,5,2)
+<a name="l00804"></a>00804         self.grilla.addWidget(self.cal,6,1)
+<a name="l00805"></a>00805         self.grilla.addWidget(self.cal1,6,2)
+<a name="l00806"></a>00806         self.grilla.addWidget(self.st,7,1)
+<a name="l00807"></a>00807         self.grilla.addWidget(self.et,7,2)
+<a name="l00808"></a>00808         self.grilla.addWidget(self.boton_request,8,2)
+<a name="l00809"></a>00809         self.grilla.addWidget(self.arhcivoTLE,9,1)
+<a name="l00810"></a>00810         self.grilla.addWidget(self.nombreTle,9,2)
+<a name="l00811"></a>00811         
+<a name="l00812"></a>00812 
+<a name="l00813"></a>00813         self.grilla.addWidget(self.buttons,13,2) 
+<a name="l00814"></a>00814         self.setLayout(self.grilla) 
+<a name="l00815"></a>00815         
+<a name="l00816"></a>00816         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00817"></a>00817 <span class="stringliteral">        Acciones</span>
+<a name="l00818"></a>00818 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00819"></a>00819         self.boton_request.clicked.connect(self.iniciaSolicitud)
+<a name="l00820"></a>00820         self.buttons.accepted.connect(self.accept)
+<a name="l00821"></a>00821         self.buttons.rejected.connect(self.reject)  
+<a name="l00822"></a>00822         self.setWindowTitle(<span class="stringliteral">&#39;Conexion con NORAD&#39;</span>)
 <span class="comment">#         </span>
 </pre></div>
 </div>
@@ -294,17 +294,17 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00696">696</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00696"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a175971e6657c70f60cd4061808cdcd09">00696</a> 
-<a name="l00697"></a>00697     <span class="keyword">def </span><a class="code" href="namespace_aplicacion_1_1frm__main.html#a0696013537081d2b63a55c27d8f4b55d">iniciaSolicitud</a>(self):
-<a name="l00698"></a>00698         
-<a name="l00699"></a>00699         self.usu1   = str(self.usuario_edit.text())
-<a name="l00700"></a>00700         self.passw1 = str(self.clave_edit.text())
-<a name="l00701"></a>00701         self.cat_id = str(self.norad_id_edit.text())
-<a name="l00702"></a>00702         self.nombreTle.setText(self.cat_id+<span class="stringliteral">&#39;_&#39;</span>+self.fini+<span class="stringliteral">&#39;_&#39;</span>+self.ffin+<span class="stringliteral">&#39;.tle&#39;</span>)
-<a name="l00703"></a>00703         self.tle=<a class="code" href="class_tle_admin_1_1get__tle_1_1importar__tle.html">importar_tle</a>(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
-<a name="l00704"></a>00704         self.archTLE=self.nombreTle.text()
-<a name="l00705"></a>00705         <span class="keywordflow">return</span> self.cat_id, self.fini, self.ffin, self.archTLE
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00823">823</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00823"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a175971e6657c70f60cd4061808cdcd09">00823</a> 
+<a name="l00824"></a>00824     <span class="keyword">def </span><a class="code" href="namespace_aplicacion_1_1frm__main.html#a0696013537081d2b63a55c27d8f4b55d">iniciaSolicitud</a>(self):
+<a name="l00825"></a>00825         
+<a name="l00826"></a>00826         self.usu1   = str(self.usuario_edit.text())
+<a name="l00827"></a>00827         self.passw1 = str(self.clave_edit.text())
+<a name="l00828"></a>00828         self.cat_id = str(self.norad_id_edit.text())
+<a name="l00829"></a>00829         self.nombreTle.setText(self.cat_id+<span class="stringliteral">&#39;_&#39;</span>+self.fini+<span class="stringliteral">&#39;_&#39;</span>+self.ffin+<span class="stringliteral">&#39;.tle&#39;</span>)
+<a name="l00830"></a>00830         self.tle=<a class="code" href="class_tle_admin_1_1get__tle_1_1importar_set_t_l_e.html">importarSetTLE</a>(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
+<a name="l00831"></a>00831         self.archTLE=self.nombreTle.text()
+<a name="l00832"></a>00832         <span class="keywordflow">return</span> self.cat_id, self.fini, self.ffin, self.archTLE
 <span class="comment">#             </span>
 </pre></div>
 </div>
@@ -324,14 +324,14 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00712">712</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00712"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a8aa3828fdbbbc44f17295f70419a6549">00712</a> 
-<a name="l00713"></a>00713     <span class="keyword">def </span><a class="code" href="namespace_aplicacion_1_1frm__main.html#a8aa3828fdbbbc44f17295f70419a6549">verFfin</a>(self):
-<a name="l00714"></a>00714         self.date1 = self.cal1.selectedDate()
-<a name="l00715"></a>00715         self.pydate1 = self.date1.toPyDate()
-<a name="l00716"></a>00716         self.et.setText(self.date1.toString())
-<a name="l00717"></a>00717         self.ffin=str(self.pydate1.year)+str(self.pydate1.month).zfill(2)+str(self.pydate1.day).zfill(2)
-<a name="l00718"></a>00718 
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00839">839</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00839"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a8aa3828fdbbbc44f17295f70419a6549">00839</a> 
+<a name="l00840"></a>00840     <span class="keyword">def </span><a class="code" href="namespace_aplicacion_1_1frm__main.html#a8aa3828fdbbbc44f17295f70419a6549">verFfin</a>(self):
+<a name="l00841"></a>00841         self.date1 = self.cal1.selectedDate()
+<a name="l00842"></a>00842         self.pydate1 = self.date1.toPyDate()
+<a name="l00843"></a>00843         self.et.setText(self.date1.toString())
+<a name="l00844"></a>00844         self.ffin=str(self.pydate1.year)+str(self.pydate1.month).zfill(2)+str(self.pydate1.day).zfill(2)
+<a name="l00845"></a>00845 
     
 </pre></div>
 </div>
@@ -351,13 +351,13 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00706">706</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00706"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a289620b76befe2678dd10039ec0e81c3">00706</a> 
-<a name="l00707"></a>00707     <span class="keyword">def </span><a class="code" href="namespace_aplicacion_1_1frm__main.html#a289620b76befe2678dd10039ec0e81c3">verFinicio</a>(self):
-<a name="l00708"></a>00708         self.date = self.cal.selectedDate()
-<a name="l00709"></a>00709         self.pydate = self.date.toPyDate()
-<a name="l00710"></a>00710         self.st.setText(self.date.toString())
-<a name="l00711"></a>00711         self.fini=str(self.pydate.year)+str(self.pydate.month).zfill(2)+str(self.pydate.day).zfill(2)
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00833">833</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00833"></a><a class="code" href="namespace_aplicacion_1_1frm__main.html#a289620b76befe2678dd10039ec0e81c3">00833</a> 
+<a name="l00834"></a>00834     <span class="keyword">def </span><a class="code" href="namespace_aplicacion_1_1frm__main.html#a289620b76befe2678dd10039ec0e81c3">verFinicio</a>(self):
+<a name="l00835"></a>00835         self.date = self.cal.selectedDate()
+<a name="l00836"></a>00836         self.pydate = self.date.toPyDate()
+<a name="l00837"></a>00837         self.st.setText(self.date.toString())
+<a name="l00838"></a>00838         self.fini=str(self.pydate.year)+str(self.pydate.month).zfill(2)+str(self.pydate.day).zfill(2)
 <span class="comment">#         </span>
 </pre></div>
 </div>
@@ -374,7 +374,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00992">992</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01119">1119</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -389,7 +389,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00612">612</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00739">739</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -404,7 +404,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00617">617</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00744">744</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -419,7 +419,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00619">619</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00746">746</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -434,7 +434,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00619">619</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00746">746</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -449,7 +449,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00615">615</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00742">742</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -464,7 +464,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00615">615</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00742">742</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -479,7 +479,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00612">612</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00739">739</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -494,7 +494,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00621">621</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00748">748</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -509,7 +509,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00966">966</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01093">1093</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -524,7 +524,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00969">969</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01096">1096</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -539,7 +539,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00972">972</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01099">1099</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -554,7 +554,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00975">975</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01102">1102</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -569,7 +569,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00978">978</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01105">1105</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -584,7 +584,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00981">981</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01108">1108</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -599,7 +599,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00984">984</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01111">1111</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -614,7 +614,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00706">706</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00833">833</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -629,7 +629,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00712">712</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00839">839</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -644,7 +644,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00621">621</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00748">748</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -659,7 +659,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00993">993</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l01120">1120</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -674,7 +674,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00612">612</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00739">739</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -689,7 +689,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00612">612</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00739">739</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -704,7 +704,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00617">617</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00744">744</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -719,7 +719,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00623">623</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00750">750</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -734,7 +734,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00621">621</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00748">748</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -749,7 +749,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00617">617</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00744">744</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -764,7 +764,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00621">621</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00748">748</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -779,7 +779,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00613">613</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00740">740</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -794,7 +794,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00617">617</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00744">744</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -809,7 +809,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00696">696</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00823">823</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -824,7 +824,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00706">706</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00833">833</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -839,7 +839,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00712">712</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00839">839</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -854,7 +854,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00621">621</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00748">748</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -869,7 +869,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00617">617</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00744">744</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -884,7 +884,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00696">696</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00823">823</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -899,7 +899,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00696">696</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00823">823</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -914,7 +914,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00617">617</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00744">744</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -929,7 +929,7 @@ Created on Feb 5, 2017
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00621">621</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
+<p>Definition at line <a class="el" href="frm__main_8py_source.html#l00748">748</a> of file <a class="el" href="frm__main_8py_source.html">frm_main.py</a>.</p>
 
 </div>
 </div>
@@ -954,7 +954,7 @@ Created on Feb 5, 2017
       <li class="navelem"><a class="el" href="namespace_aplicacion.html">Aplicacion</a>      </li>
       <li class="navelem"><a class="el" href="namespace_aplicacion_1_1frm__main.html">frm_main</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

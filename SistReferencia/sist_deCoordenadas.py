@@ -2,7 +2,6 @@
 
 import numpy as np
 from datetime import datetime
-from math import pi
 from sist_deTiempo import calcula_mjd, jd
 
 #from newton import newton

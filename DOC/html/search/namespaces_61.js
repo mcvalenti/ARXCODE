@@ -7,5 +7,6 @@ var searchData=
   ['aplicacioncods',['AplicacionCODS',['../namespace_aplicacion_c_o_d_s.html',1,'']]],
   ['codsinterface',['CODSinterface',['../namespace_aplicacion_c_o_d_s_1_1_c_o_d_sinterface.html',1,'AplicacionCODS']]],
   ['frm_5fmain',['frm_main',['../namespace_aplicacion_1_1frm__main.html',1,'Aplicacion']]],
-  ['funciondeajuste',['funcionDeAjuste',['../namespace_ajustar_1_1funcion_de_ajuste.html',1,'Ajustar']]]
+  ['funciondeajuste',['funcionDeAjuste',['../namespace_ajustar_1_1funcion_de_ajuste.html',1,'Ajustar']]],
+  ['globals',['globals',['../namespace_aplicacion_1_1globals.html',1,'Aplicacion']]]
 ];

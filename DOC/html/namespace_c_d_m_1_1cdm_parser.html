@@ -95,6 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div id="doc-content">
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
@@ -102,6 +103,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
+<tr><td colspan="2"><h2><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_c_d_m_1_1cdm_parser_1_1_c_d_m.html">CDM</a></td></tr>
 <tr><td colspan="2"><h2><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">extraeCDM</a></td></tr>
@@ -142,48 +146,48 @@ Outputs
     miss_dist: minima distancia (string)
     poc: probabilidad de colision (string)
 </pre></div> 
-<p>Definition at line <a class="el" href="cdm_parser_8py_source.html#l00011">11</a> of file <a class="el" href="cdm_parser_8py_source.html">cdmParser.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00011"></a><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">00011</a> 
-<a name="l00012"></a>00012 <span class="keyword">def </span><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">extraeCDM</a>(archivo):
-<a name="l00013"></a>00013     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00014"></a>00014 <span class="stringliteral">    Extrae los datos de un CDM en formato XML.</span>
-<a name="l00015"></a>00015 <span class="stringliteral">    inputs</span>
-<a name="l00016"></a>00016 <span class="stringliteral">        archivos: nombre de archivo CDM en formato .xml (string)</span>
-<a name="l00017"></a>00017 <span class="stringliteral">    Outputs</span>
-<a name="l00018"></a>00018 <span class="stringliteral">        TCA: tiempo de maximos acercamiento. (string)</span>
-<a name="l00019"></a>00019 <span class="stringliteral">        Obj1, Obj2: nombre de objetos implicados (string)</span>
-<a name="l00020"></a>00020 <span class="stringliteral">        miss_dist: minima distancia (string)</span>
-<a name="l00021"></a>00021 <span class="stringliteral">        poc: probabilidad de colision (string)</span>
-<a name="l00022"></a>00022 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00023"></a>00023     tree = ET.parse(<span class="stringliteral">&#39;../CDM/archivos/&#39;</span>+archivo)
-<a name="l00024"></a>00024     root = tree.getroot()
-<a name="l00025"></a>00025 
-<a name="l00026"></a>00026     obj_m=[]
-<a name="l00027"></a>00027     obj_d=[]
-<a name="l00028"></a>00028 
-<a name="l00029"></a>00029     <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00030"></a>00030 <span class="stringliteral">    ENCUENTRO</span>
-<a name="l00031"></a>00031 <span class="stringliteral">    &quot;&quot;&quot;</span>
-<a name="l00032"></a>00032 <span class="comment">#     tca_mio=cdm.find(&#39;body/relativeMetaData&#39;)</span>
-<a name="l00033"></a>00033 <span class="comment">#     print tca_mio.attrib</span>
-<a name="l00034"></a>00034     <span class="keywordflow">for</span> bod <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;body&#39;</span>):
-<a name="l00035"></a>00035         TCA=bod[0][1].text
-<a name="l00036"></a>00036         MISS_DISTANCE=bod[0][2].text
-<a name="l00037"></a>00037         POC=bod[0][14].text
-<a name="l00038"></a>00038         
-<a name="l00039"></a>00039     n=0    
-<a name="l00040"></a>00040     <span class="keywordflow">for</span> meta <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;metadata&#39;</span>):
-<a name="l00041"></a>00041         <span class="keywordflow">if</span> n == 0:
-<a name="l00042"></a>00042             obj_m.append(meta[1].text)
-<a name="l00043"></a>00043             obj_m.append(meta[2].text)
-<a name="l00044"></a>00044         <span class="keywordflow">else</span>:
-<a name="l00045"></a>00045             obj_d.append(meta[1].text)
-<a name="l00046"></a>00046             obj_d.append(meta[2].text)
-<a name="l00047"></a>00047         n=n+1
-<a name="l00048"></a>00048 
-<a name="l00049"></a>00049     obj_list=[obj_m,obj_d]    
-<a name="l00050"></a>00050     <span class="keywordflow">return</span> TCA,MISS_DISTANCE,POC,obj_list
-<a name="l00051"></a>00051     
+<p>Definition at line <a class="el" href="cdm_parser_8py_source.html#l00073">73</a> of file <a class="el" href="cdm_parser_8py_source.html">cdmParser.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00073"></a><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">00073</a> 
+<a name="l00074"></a>00074 <span class="keyword">def </span><a class="code" href="namespace_c_d_m_1_1cdm_parser.html#af2cfc5a5142b1ba17b7e7b36df2a7506">extraeCDM</a>(archivo):
+<a name="l00075"></a>00075     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00076"></a>00076 <span class="stringliteral">    Extrae los datos de un CDM en formato XML.</span>
+<a name="l00077"></a>00077 <span class="stringliteral">    inputs</span>
+<a name="l00078"></a>00078 <span class="stringliteral">        archivos: nombre de archivo CDM en formato .xml (string)</span>
+<a name="l00079"></a>00079 <span class="stringliteral">    Outputs</span>
+<a name="l00080"></a>00080 <span class="stringliteral">        TCA: tiempo de maximos acercamiento. (string)</span>
+<a name="l00081"></a>00081 <span class="stringliteral">        Obj1, Obj2: nombre de objetos implicados (string)</span>
+<a name="l00082"></a>00082 <span class="stringliteral">        miss_dist: minima distancia (string)</span>
+<a name="l00083"></a>00083 <span class="stringliteral">        poc: probabilidad de colision (string)</span>
+<a name="l00084"></a>00084 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00085"></a>00085     tree = ET.parse(<span class="stringliteral">&#39;../CDM/archivos/&#39;</span>+archivo)
+<a name="l00086"></a>00086     root = tree.getroot()
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088     obj_m=[]
+<a name="l00089"></a>00089     obj_d=[]
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091     <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00092"></a>00092 <span class="stringliteral">    ENCUENTRO</span>
+<a name="l00093"></a>00093 <span class="stringliteral">    &quot;&quot;&quot;</span>
+<a name="l00094"></a>00094 <span class="comment">#     tca_mio=cdm.find(&#39;body/relativeMetaData&#39;)</span>
+<a name="l00095"></a>00095 <span class="comment">#     print tca_mio.attrib</span>
+<a name="l00096"></a>00096     <span class="keywordflow">for</span> bod <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;body&#39;</span>):
+<a name="l00097"></a>00097         TCA=bod[0][1].text
+<a name="l00098"></a>00098         MISS_DISTANCE=bod[0][2].text
+<a name="l00099"></a>00099         POC=bod[0][14].text
+<a name="l00100"></a>00100         
+<a name="l00101"></a>00101     n=0    
+<a name="l00102"></a>00102     <span class="keywordflow">for</span> meta <span class="keywordflow">in</span> root.iter(<span class="stringliteral">&#39;metadata&#39;</span>):
+<a name="l00103"></a>00103         <span class="keywordflow">if</span> n == 0:
+<a name="l00104"></a>00104             obj_m.append(meta[1].text)
+<a name="l00105"></a>00105             obj_m.append(meta[2].text)
+<a name="l00106"></a>00106         <span class="keywordflow">else</span>:
+<a name="l00107"></a>00107             obj_d.append(meta[1].text)
+<a name="l00108"></a>00108             obj_d.append(meta[2].text)
+<a name="l00109"></a>00109         n=n+1
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111     obj_list=[obj_m,obj_d]    
+<a name="l00112"></a>00112     <span class="keywordflow">return</span> TCA,MISS_DISTANCE,POC,obj_list
+<a name="l00113"></a>00113     
     
 </pre></div>
 </div>
@@ -200,7 +204,7 @@ Outputs
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="cdm_parser_8py_source.html#l00054">54</a> of file <a class="el" href="cdm_parser_8py_source.html">cdmParser.py</a>.</p>
+<p>Definition at line <a class="el" href="cdm_parser_8py_source.html#l00116">116</a> of file <a class="el" href="cdm_parser_8py_source.html">cdmParser.py</a>.</p>
 
 </div>
 </div>
@@ -215,7 +219,7 @@ Outputs
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="cdm_parser_8py_source.html#l00059">59</a> of file <a class="el" href="cdm_parser_8py_source.html">cdmParser.py</a>.</p>
+<p>Definition at line <a class="el" href="cdm_parser_8py_source.html#l00121">121</a> of file <a class="el" href="cdm_parser_8py_source.html">cdmParser.py</a>.</p>
 
 </div>
 </div>
@@ -240,7 +244,7 @@ Outputs
       <li class="navelem"><a class="el" href="namespace_c_d_m.html">CDM</a>      </li>
       <li class="navelem"><a class="el" href="namespace_c_d_m_1_1cdm_parser.html">cdmParser</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:22:59 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

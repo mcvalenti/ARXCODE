@@ -77,6 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -137,11 +138,11 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00117">117</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00117"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#aee8bbc2bc55783889d5c652807e9f0fd">00117</a> 
-<a name="l00118"></a>00118     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#aee565d2718311997256022faa3f0553d">catID</a>(self):
-<a name="l00119"></a>00119         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#aee565d2718311997256022faa3f0553d">catID</a>=self.linea1.split()[1]
-<a name="l00120"></a>00120         <span class="keywordflow">return</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#aee565d2718311997256022faa3f0553d">catID</a>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00124">124</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00124"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#aee8bbc2bc55783889d5c652807e9f0fd">00124</a> 
+<a name="l00125"></a>00125     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#aee565d2718311997256022faa3f0553d">catID</a>(self):
+<a name="l00126"></a>00126         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#aee565d2718311997256022faa3f0553d">catID</a>=self.linea1.split()[1]
+<a name="l00127"></a>00127         <span class="keywordflow">return</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#aee565d2718311997256022faa3f0553d">catID</a>
         
 </pre></div>
 </div>
@@ -171,23 +172,23 @@ Public Attributes</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00101">101</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00101"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a05b752bee515bfd7246a74bbecfd5899">00101</a> 
-<a name="l00102"></a>00102     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a05b752bee515bfd7246a74bbecfd5899">creadoxArchivo</a>(cls, archivo):
-<a name="l00103"></a>00103         inst2=cls()
-<a name="l00104"></a>00104         inst2.tle = open(archivo,<span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
-<a name="l00105"></a>00105 <span class="stringliteral">        lineas = inst2.tle.readlines()</span>
-<a name="l00106"></a>00106 <span class="stringliteral">        inst2.linea1 = lineas[0]</span>
-<a name="l00107"></a>00107 <span class="stringliteral">        inst2.linea2 = lineas[1]</span>
-<a name="l00108"></a>00108 <span class="stringliteral">        inst2.tle.close() </span>
-<a name="l00109"></a>00109 <span class="stringliteral">        inst2.i=inst2.linea2.split()[2]</span>
-<a name="l00110"></a>00110 <span class="stringliteral">        inst2.Omega=inst2.linea2.split()[3]</span>
-<a name="l00111"></a>00111 <span class="stringliteral">        inst2.e=inst2.linea2.split()[4]</span>
-<a name="l00112"></a>00112 <span class="stringliteral">        inst2.ap=inst2.linea2.split()[5]</span>
-<a name="l00113"></a>00113 <span class="stringliteral">        inst2.m=inst2.linea2.split()[6]</span>
-<a name="l00114"></a>00114 <span class="stringliteral">        inst2.n=inst2.linea2.split()[7]</span>
-<a name="l00115"></a>00115 <span class="stringliteral">            </span>
-<a name="l00116"></a>00116 <span class="stringliteral">        </span><span class="keywordflow">return</span> inst2
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00108">108</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00108"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a05b752bee515bfd7246a74bbecfd5899">00108</a> 
+<a name="l00109"></a>00109     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a05b752bee515bfd7246a74bbecfd5899">creadoxArchivo</a>(cls, archivo):
+<a name="l00110"></a>00110         inst2=cls()
+<a name="l00111"></a>00111         inst2.tle = open(archivo,<span class="stringliteral">&#39;</span><span class="stringliteral">r&#39;)</span>
+<a name="l00112"></a>00112 <span class="stringliteral">        lineas = inst2.tle.readlines()</span>
+<a name="l00113"></a>00113 <span class="stringliteral">        inst2.linea1 = lineas[0]</span>
+<a name="l00114"></a>00114 <span class="stringliteral">        inst2.linea2 = lineas[1]</span>
+<a name="l00115"></a>00115 <span class="stringliteral">        inst2.tle.close() </span>
+<a name="l00116"></a>00116 <span class="stringliteral">        inst2.i=inst2.linea2.split()[2]</span>
+<a name="l00117"></a>00117 <span class="stringliteral">        inst2.Omega=inst2.linea2.split()[3]</span>
+<a name="l00118"></a>00118 <span class="stringliteral">        inst2.e=inst2.linea2.split()[4]</span>
+<a name="l00119"></a>00119 <span class="stringliteral">        inst2.ap=inst2.linea2.split()[5]</span>
+<a name="l00120"></a>00120 <span class="stringliteral">        inst2.m=inst2.linea2.split()[6]</span>
+<a name="l00121"></a>00121 <span class="stringliteral">        inst2.n=inst2.linea2.split()[7]</span>
+<a name="l00122"></a>00122 <span class="stringliteral">            </span>
+<a name="l00123"></a>00123 <span class="stringliteral">        </span><span class="keywordflow">return</span> inst2
     
 </pre></div>
 </div>
@@ -273,22 +274,29 @@ ofrece las descargas Space-track.
 <a name="l00081"></a>00081             data = {<span class="stringliteral">&#39;identity&#39;</span>: <span class="stringliteral">&#39;macecilia&#39;</span> , <span class="stringliteral">&#39;password&#39;</span>: <span class="stringliteral">&#39;MaCeciliaSpace17&#39;</span>}
 <a name="l00082"></a>00082             s=session() 
 <a name="l00083"></a>00083             s.post(<span class="stringliteral">&#39;https://www.space-track.org/auth/login&#39;</span>,data)
-<a name="l00084"></a>00084             fquery1=<span class="stringliteral">&#39;https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/&#39;</span>+inst1.f0+<span class="stringliteral">&#39;--&#39;</span>+inst1.f1+<span class="stringliteral">&#39;/NORAD_CAT_ID/&#39;</span>+inst1.noradId+<span class="stringliteral">&#39;/orderby/TLE_LINE1 ASC/format/tle&#39;</span>
-<a name="l00085"></a>00085             r = s.get(fquery1)
-<a name="l00086"></a>00086             inst1.tle_text=r.text
-<a name="l00087"></a>00087             inst1.lineas=inst1.tle_text.split(<span class="stringliteral">&#39;\n&#39;</span>)
-<a name="l00088"></a>00088             <span class="keywordflow">if</span> len(inst1.lineas) &gt; 1 <span class="keywordflow">and</span> r.status_code == 200:
-<a name="l00089"></a>00089                 <span class="keywordflow">print</span> <span class="stringliteral">&#39;Se ha generado el tle para el objeto de NORAD_ID= &#39;</span>,inst1.noradId
-<a name="l00090"></a>00090                 inst1.linea1=inst1.lineas[-3]
-<a name="l00091"></a>00091                 inst1.linea2=inst1.lineas[-2]
-<a name="l00092"></a>00092             <span class="keywordflow">else</span>:
-<a name="l00093"></a>00093                 <span class="keywordflow">print</span> <span class="stringliteral">&#39;No pudo completarse la solicitud para el objeto de NORAD_ID= &#39;</span>,inst1.noradId                      
-<a name="l00094"></a>00094     
-<a name="l00095"></a>00095         <span class="keywordflow">except</span> exceptions.HTTPError <span class="keyword">as</span> e:
-<a name="l00096"></a>00096             <span class="keywordflow">print</span> <span class="stringliteral">&quot;Error: &quot;</span> + str(e)
-<a name="l00097"></a>00097             <span class="keywordflow">return</span> <span class="stringliteral">&quot;Error: &quot;</span> + str(e)
-<a name="l00098"></a>00098 
-<a name="l00099"></a>00099         <span class="keywordflow">return</span> inst1
+<a name="l00084"></a>00084             inst1.tle_text=<span class="stringliteral">&#39;&#39;</span>
+<a name="l00085"></a>00085             cont=0
+<a name="l00086"></a>00086             <span class="keywordflow">while</span> inst1.tle_text==<span class="stringliteral">&#39;&#39;</span>:
+<a name="l00087"></a>00087                 fquery1=<span class="stringliteral">&#39;https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/&#39;</span>+inst1.f0+<span class="stringliteral">&#39;--&#39;</span>+inst1.f1+<span class="stringliteral">&#39;/NORAD_CAT_ID/&#39;</span>+inst1.noradId+<span class="stringliteral">&#39;/orderby/TLE_LINE1 ASC/format/tle&#39;</span>
+<a name="l00088"></a>00088                 r = s.get(fquery1)
+<a name="l00089"></a>00089                 inst1.tle_text=r.text
+<a name="l00090"></a>00090                 inst1.lineas=inst1.tle_text.split(<span class="stringliteral">&#39;\n&#39;</span>)
+<a name="l00091"></a>00091                 inst1.f0=datetime.strptime(inst1.f0,<span class="stringliteral">&#39;%Y-%m-%d&#39;</span>)-timedelta(days=1)
+<a name="l00092"></a>00092                 cont=cont+1
+<a name="l00093"></a>00093             <span class="keywordflow">if</span> cont &gt; 1:
+<a name="l00094"></a>00094                     <span class="keywordflow">print</span> <span class="stringliteral">&#39;El proceso cambio la fecha inicial del set = &#39;</span>, inst1.f0
+<a name="l00095"></a>00095             <span class="keywordflow">if</span> len(inst1.lineas) &gt; 1 <span class="keywordflow">and</span> r.status_code == 200:
+<a name="l00096"></a>00096                 <span class="keywordflow">print</span> <span class="stringliteral">&#39;Se ha generado el tle para el objeto de NORAD_ID= &#39;</span>,inst1.noradId
+<a name="l00097"></a>00097                 inst1.linea1=inst1.lineas[-3]
+<a name="l00098"></a>00098                 inst1.linea2=inst1.lineas[-2]
+<a name="l00099"></a>00099             <span class="keywordflow">else</span>:
+<a name="l00100"></a>00100                 <span class="keywordflow">print</span> <span class="stringliteral">&#39;No pudo completarse la solicitud para el objeto de NORAD_ID= &#39;</span>,inst1.noradId                      
+<a name="l00101"></a>00101     
+<a name="l00102"></a>00102         <span class="keywordflow">except</span> exceptions.HTTPError <span class="keyword">as</span> e:
+<a name="l00103"></a>00103             <span class="keywordflow">print</span> <span class="stringliteral">&quot;Error: &quot;</span> + str(e)
+<a name="l00104"></a>00104             <span class="keywordflow">return</span> <span class="stringliteral">&quot;Error: &quot;</span> + str(e)
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106         <span class="keywordflow">return</span> inst1
     
 </pre></div>
 </div>
@@ -308,13 +316,13 @@ ofrece las descargas Space-track.
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00121">121</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00121"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a783b5366a1cc97539be2c98eb50663a3">00121</a> 
-<a name="l00122"></a>00122     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#ace8eaeb1b82e456cab188685192175d7">epoca</a>(self):
-<a name="l00123"></a>00123         whichconst = wgs72
-<a name="l00124"></a>00124         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
-<a name="l00125"></a>00125         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#ace8eaeb1b82e456cab188685192175d7">epoca</a>=satrec.epoch
-<a name="l00126"></a>00126         <span class="keywordflow">return</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#ace8eaeb1b82e456cab188685192175d7">epoca</a>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00128">128</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00128"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a783b5366a1cc97539be2c98eb50663a3">00128</a> 
+<a name="l00129"></a>00129     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#ace8eaeb1b82e456cab188685192175d7">epoca</a>(self):
+<a name="l00130"></a>00130         whichconst = wgs72
+<a name="l00131"></a>00131         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+<a name="l00132"></a>00132         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#ace8eaeb1b82e456cab188685192175d7">epoca</a>=satrec.epoch
+<a name="l00133"></a>00133         <span class="keywordflow">return</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#ace8eaeb1b82e456cab188685192175d7">epoca</a>
     
 </pre></div>
 </div>
@@ -344,20 +352,20 @@ ofrece las descargas Space-track.
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00127">127</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00127"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a23f7b707f9822503842898e4c6f48895">00127</a> 
-<a name="l00128"></a>00128     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a445a93647d47eb2fbee981daf2034968">propagaTLE</a>(self,date=None):
-<a name="l00129"></a>00129         whichconst = wgs72
-<a name="l00130"></a>00130         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
-<a name="l00131"></a>00131         <span class="keywordflow">if</span> date==<span class="keywordtype">None</span>:
-<a name="l00132"></a>00132             ffin=satrec.epoch
-<a name="l00133"></a>00133             self.r,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a23f7b707f9822503842898e4c6f48895">v</a> = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
-<a name="l00134"></a>00134         <span class="keywordflow">else</span>:
-<a name="l00135"></a>00135             segundos=date.second+date.microsecond
-<a name="l00136"></a>00136             self.r,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a23f7b707f9822503842898e4c6f48895">v</a> = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,segundos)
-<a name="l00137"></a>00137         <span class="keywordflow">return</span> self.r,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a23f7b707f9822503842898e4c6f48895">v</a>
-<a name="l00138"></a>00138     
-<a name="l00139"></a>00139 
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00134">134</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00134"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a23f7b707f9822503842898e4c6f48895">00134</a> 
+<a name="l00135"></a>00135     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a445a93647d47eb2fbee981daf2034968">propagaTLE</a>(self,date=None):
+<a name="l00136"></a>00136         whichconst = wgs72
+<a name="l00137"></a>00137         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
+<a name="l00138"></a>00138         <span class="keywordflow">if</span> date==<span class="keywordtype">None</span>:
+<a name="l00139"></a>00139             ffin=satrec.epoch
+<a name="l00140"></a>00140             self.r,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a23f7b707f9822503842898e4c6f48895">v</a> = satrec.propagate(ffin.year,ffin.month,ffin.day,ffin.hour,ffin.minute,ffin.second)
+<a name="l00141"></a>00141         <span class="keywordflow">else</span>:
+<a name="l00142"></a>00142             segundos=date.second+date.microsecond
+<a name="l00143"></a>00143             self.r,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a23f7b707f9822503842898e4c6f48895">v</a> = satrec.propagate(date.year,date.month,date.day,date.hour,date.minute,segundos)
+<a name="l00144"></a>00144         <span class="keywordflow">return</span> self.r,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_tle.html#a23f7b707f9822503842898e4c6f48895">v</a>
+<a name="l00145"></a>00145     
+<a name="l00146"></a>00146 
 
 </pre></div>
 </div>
@@ -374,7 +382,7 @@ ofrece las descargas Space-track.
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00117">117</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00124">124</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -389,7 +397,7 @@ ofrece las descargas Space-track.
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00121">121</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00128">128</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -404,7 +412,7 @@ ofrece las descargas Space-track.
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00127">127</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00134">134</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -433,7 +441,7 @@ ofrece las descargas Space-track.
       <li class="navelem"><a class="el" href="namespacepruebas_1_1clase_tle.html">claseTle</a>      </li>
       <li class="navelem"><a class="el" href="classpruebas_1_1clase_tle_1_1_tle.html">Tle</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:23:00 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>

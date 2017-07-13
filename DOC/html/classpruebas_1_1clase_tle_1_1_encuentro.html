@@ -77,6 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -125,7 +126,7 @@ Public Attributes</h2></td></tr>
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock">
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00140">140</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00147">147</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 </div><hr/><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a7e6399999864f7f80bd1b9e4f3c4dee2"></a><!-- doxytag: member="pruebas::claseTle::Encuentro::__init__" ref="a7e6399999864f7f80bd1b9e4f3c4dee2" args="" -->
 <div class="memitem">
@@ -174,100 +175,100 @@ outpus:
     tca_c: Instante del maximo acercamiento. (datetime)
     DistRic_min: coordenadas RTN en el momento de min distancia (array)
 </pre></div> 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00142">142</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
-<div class="fragment"><pre class="fragment"><a name="l00142"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a7e6399999864f7f80bd1b9e4f3c4dee2">00142</a> 
-<a name="l00143"></a>00143     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a7e6399999864f7f80bd1b9e4f3c4dee2">__init__</a>(self,tle_sat,tle_deb,tca):
-<a name="l00144"></a>00144         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00145"></a>00145 <span class="stringliteral">        Calcula las diferencias en posiciones y velocidades </span>
-<a name="l00146"></a>00146 <span class="stringliteral">        para dos objetos en situacion de acercamiento, 5 minutos antes</span>
-<a name="l00147"></a>00147 <span class="stringliteral">        y 5 minutos despues del tca.</span>
-<a name="l00148"></a>00148 <span class="stringliteral">        -----------------------------------------------------------</span>
-<a name="l00149"></a>00149 <span class="stringliteral">        outpus:</span>
-<a name="l00150"></a>00150 <span class="stringliteral">            3 archivos.</span>
-<a name="l00151"></a>00151 <span class="stringliteral">            mod_minDist: Minima distancia en modulo en el sistema RTN. (float)</span>
-<a name="l00152"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#acde6947c44e857998bdb3f65b932f8d5">00152</a> <span class="stringliteral">            tca_c: Instante del maximo acercamiento. (datetime)</span>
-<a name="l00153"></a>00153 <span class="stringliteral">            DistRic_min: coordenadas RTN en el momento de min distancia (array)</span>
-<a name="l00154"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#af72762abc3ab894e7ffc1e5424215eb3">00154</a> <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00155"></a>00155         
-<a name="l00156"></a>00156         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#acde6947c44e857998bdb3f65b932f8d5">tle_sat</a>=tle_sat
-<a name="l00157"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a592e3697e36b946c3945ab10110424df">00157</a>         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ad15cca3ff05d0048906d1d02140fbd7d">tle_deb</a>=tle_deb
-<a name="l00158"></a>00158         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a6517088d42ceaf01d97ccd1e2c8ccb5c">tca</a>=tca
-<a name="l00159"></a>00159         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>=0         
-<a name="l00160"></a>00160         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00161"></a>00161 <span class="stringliteral">        Genera Archivos</span>
-<a name="l00162"></a>00162 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00163"></a>00163         sat_id=self.tle_sat.catID()
-<a name="l00164"></a>00164         deb_id=self.tle_deb.catID()
-<a name="l00165"></a>00165         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#af72762abc3ab894e7ffc1e5424215eb3">archivo_dif</a> =<span class="stringliteral">&#39;../Encuentro/archivos/&#39;</span>+str(sat_id)+<span class="stringliteral">&#39;_&#39;</span>+str(deb_id)+<span class="stringliteral">&#39;_rtn&#39;</span>
-<a name="l00166"></a>00166         salida1=open(<span class="stringliteral">&#39;../Encuentro/archivos/&#39;</span>+str(sat_id),<span class="stringliteral">&#39;w+&#39;</span>)
-<a name="l00167"></a>00167         salida2=open(<span class="stringliteral">&#39;../Encuentro/archivos/&#39;</span>+str(deb_id),<span class="stringliteral">&#39;w+&#39;</span>)
-<a name="l00168"></a>00168         salida3=open(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#af72762abc3ab894e7ffc1e5424215eb3">archivo_dif</a>,<span class="stringliteral">&#39;w+&#39;</span>)
-<a name="l00169"></a>00169 
-<a name="l00170"></a>00170         <span class="stringliteral">&quot;&quot;&quot;</span>
-<a name="l00171"></a>00171 <span class="stringliteral">        Calcula las diferencias relativas entre los dos </span>
-<a name="l00172"></a>00172 <span class="stringliteral">        objetos en el sistema RTN.</span>
-<a name="l00173"></a>00173 <span class="stringliteral">        &quot;&quot;&quot;</span>
-<a name="l00174"></a>00174 
-<a name="l00175"></a>00175         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a6517088d42ceaf01d97ccd1e2c8ccb5c">tca</a>-timedelta(minutes=5)
-<a name="l00176"></a>00176         epoca_fin=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a6517088d42ceaf01d97ccd1e2c8ccb5c">tca</a>+timedelta(minutes=5)
-<a name="l00177"></a>00177         
-<a name="l00178"></a>00178         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ad2e2746fd37fe86d659b1c7e5731ba5a">mod_minDist</a>=sys.float_info.max
-<a name="l00179"></a>00179         <span class="keywordflow">while</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a> &lt; epoca_fin:
-<a name="l00180"></a>00180             r,v=self.tle_sat.propagaTLE(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>)
-<a name="l00181"></a>00181             r1,v1=self.tle_deb.propagaTLE(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>)
-<a name="l00182"></a>00182             
-<a name="l00183"></a>00183             r=np.array([float(r[0]),float(r[1]),float(r[2])])
-<a name="l00184"></a>00184             v=np.array([float(v[0]),float(v[1]),float(v[2])])
-<a name="l00185"></a>00185             r1=np.array([float(r1[0]),float(r1[1]),float(r1[2])])
-<a name="l00186"></a>00186             v1=np.array([float(v1[0]),float(v1[1]),float(v1[2])])
-<a name="l00187"></a>00187             
-<a name="l00188"></a>00188             pos1=<a class="code" href="classpruebas_1_1clase_tle_1_1_posicion.html">Posicion</a>(r,v,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>)
-<a name="l00189"></a>00189             pos2=<a class="code" href="classpruebas_1_1clase_tle_1_1_posicion.html">Posicion</a>(r1,v1,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>)
-<a name="l00190"></a>00190             
-<a name="l00191"></a>00191             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#aedd8a3ee3330aff4d6aea7bd4c30c44b">DistVector</a>=pos1.r-pos2.r
-<a name="l00192"></a>00192             x_ric,y_ric,z_ric=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a8eccb1d3c6c56a4c77b891b1da887dd7">ricSis</a>(pos1.r,pos1.v,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#aedd8a3ee3330aff4d6aea7bd4c30c44b">DistVector</a>)
-<a name="l00193"></a>00193             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>=np.array([x_ric,y_ric,z_ric])
-<a name="l00194"></a>00194             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a592e3697e36b946c3945ab10110424df">VelVector</a>=pos1.v-pos2.v
-<a name="l00195"></a>00195             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a769750840e1f38038e22ace6a5a6bac7">mod_Dist1</a>=np.sqrt(np.dot(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>))
-<a name="l00196"></a>00196 <span class="comment">#            self.mod_Dist1=np.sqrt(np.dot(self.DistVector,self.DistVector))</span>
-<a name="l00197"></a>00197             <span class="keywordflow">if</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a769750840e1f38038e22ace6a5a6bac7">mod_Dist1</a> &lt; self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ad2e2746fd37fe86d659b1c7e5731ba5a">mod_minDist</a>:
-<a name="l00198"></a>00198                 self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ad2e2746fd37fe86d659b1c7e5731ba5a">mod_minDist</a>=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a769750840e1f38038e22ace6a5a6bac7">mod_Dist1</a>
-<a name="l00199"></a>00199                 self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#aafdda70a8d6f7862b4211f3a9fe49023">tca_c</a>=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>
-<a name="l00200"></a>00200                 self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ada92cbea7ee81c5f5da61d08cb08acde">DistRic_min</a>=np.array([x_ric,y_ric,z_ric])
-<a name="l00201"></a>00201             <span class="keywordflow">print</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>, self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a769750840e1f38038e22ace6a5a6bac7">mod_Dist1</a>
-<a name="l00202"></a>00202             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>+timedelta(seconds=1)
-<a name="l00203"></a>00203             
-<a name="l00204"></a>00204             <span class="comment"># Transformo a Coordenadas Geodesicas.</span>
-<a name="l00205"></a>00205             delta1, alpha1=pos1.getCoordenadasGEOD()
-<a name="l00206"></a>00206             delta2, alpha2=pos2.getCoordenadasGEOD()
-<a name="l00207"></a>00207             <span class="comment"># GUARDA EN ARCHIVO Posiciones en ALFA, DELTA (Seudo Geodesicas).</span>
-<a name="l00208"></a>00208             salida1.write(str(alpha1)+<span class="stringliteral">&#39; &#39;</span>+str(delta1)+<span class="stringliteral">&#39; &#39;</span>+datetime.strftime(pos1.epoca,<span class="stringliteral">&#39;%Y-%m-%d %H:%M:%S&#39;</span>)+<span class="stringliteral">&#39;\n&#39;</span>)
-<a name="l00209"></a>00209             salida2.write(str(alpha2)+<span class="stringliteral">&#39; &#39;</span>+str(delta2)+<span class="stringliteral">&#39; &#39;</span>+datetime.strftime(pos2.epoca,<span class="stringliteral">&#39;%Y-%m-%d %H:%M:%S&#39;</span>)+<span class="stringliteral">&#39;\n&#39;</span>) 
-<a name="l00210"></a>00210             <span class="comment"># GUARDA EN ARCHIVO Posiciones en RTN.</span>
-<a name="l00211"></a>00211             salida3.write(datetime.strftime(pos1.epoca,<span class="stringliteral">&#39;%Y-%m-%d %H:%M:%S&#39;</span>)+<span class="stringliteral">&#39; &#39;</span>+str(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>[0])+<span class="stringliteral">&#39; &#39;</span>+str(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>[1])+<span class="stringliteral">&#39; &#39;</span>+str(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>[2])+<span class="stringliteral">&#39;\n&#39;</span>)
-<a name="l00212"></a>00212 
-<a name="l00213"></a>00213         salida1.close()
-<a name="l00214"></a>00214         salida2.close()
-<a name="l00215"></a>00215         salida3.close()
-<a name="l00216"></a>00216 
-<a name="l00217"></a>00217 <span class="comment">#     </span>
-<a name="l00218"></a>00218 <span class="comment"># if __name__==&#39;__main__&#39;:</span>
-<a name="l00219"></a>00219 <span class="comment">#      </span>
-<a name="l00220"></a>00220 <span class="comment">#      TCA=datetime(2008,1,9,19,0,30)</span>
-<a name="l00221"></a>00221 <span class="comment">#      sat_id=&#39;27386&#39; #ENVISAT</span>
-<a name="l00222"></a>00222 <span class="comment">#      deb_id=&#39;15482&#39; #COSMOS</span>
-<a name="l00223"></a>00223 <span class="comment">#      usuario=&#39;macecilia&#39;</span>
-<a name="l00224"></a>00224 <span class="comment">#      clave=&#39;MaCeciliaSpace17&#39;</span>
-<a name="l00225"></a>00225 <span class="comment">#  </span>
-<a name="l00226"></a>00226 <span class="comment">#      tle_sat=Tle(usuario,clave,sat_id,TCA)</span>
-<a name="l00227"></a>00227 <span class="comment">#      tle_deb=Tle(usuario,clave,deb_id,TCA)</span>
-<a name="l00228"></a>00228 <span class="comment">#      </span>
-<a name="l00229"></a>00229 <span class="comment">#      encuentro1=Encuentro(tle_sat,tle_deb,TCA)</span>
-<a name="l00230"></a>00230 <span class="comment"># #     dif_r,dif_v=encuentro1.svDif()</span>
-<a name="l00231"></a>00231 <span class="comment">#     </span>
-<a name="l00232"></a>00232 <span class="comment">#     tle_archivo=Tle.creadoxArchivo(archivo=&#39;../TleAdmin/tle/37673tle0&#39;)</span>
-<a name="l00233"></a>00233 <span class="comment">#     print tle_archivo.epoca()</span>
-<a name="l00234"></a>00234     
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00149">149</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<div class="fragment"><pre class="fragment"><a name="l00149"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a7e6399999864f7f80bd1b9e4f3c4dee2">00149</a> 
+<a name="l00150"></a>00150     <span class="keyword">def </span><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a7e6399999864f7f80bd1b9e4f3c4dee2">__init__</a>(self,tle_sat,tle_deb,tca):
+<a name="l00151"></a>00151         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00152"></a>00152 <span class="stringliteral">        Calcula las diferencias en posiciones y velocidades </span>
+<a name="l00153"></a>00153 <span class="stringliteral">        para dos objetos en situacion de acercamiento, 5 minutos antes</span>
+<a name="l00154"></a>00154 <span class="stringliteral">        y 5 minutos despues del tca.</span>
+<a name="l00155"></a>00155 <span class="stringliteral">        -----------------------------------------------------------</span>
+<a name="l00156"></a>00156 <span class="stringliteral">        outpus:</span>
+<a name="l00157"></a>00157 <span class="stringliteral">            3 archivos.</span>
+<a name="l00158"></a>00158 <span class="stringliteral">            mod_minDist: Minima distancia en modulo en el sistema RTN. (float)</span>
+<a name="l00159"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#acde6947c44e857998bdb3f65b932f8d5">00159</a> <span class="stringliteral">            tca_c: Instante del maximo acercamiento. (datetime)</span>
+<a name="l00160"></a>00160 <span class="stringliteral">            DistRic_min: coordenadas RTN en el momento de min distancia (array)</span>
+<a name="l00161"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#af72762abc3ab894e7ffc1e5424215eb3">00161</a> <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00162"></a>00162         
+<a name="l00163"></a>00163         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#acde6947c44e857998bdb3f65b932f8d5">tle_sat</a>=tle_sat
+<a name="l00164"></a><a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a592e3697e36b946c3945ab10110424df">00164</a>         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ad15cca3ff05d0048906d1d02140fbd7d">tle_deb</a>=tle_deb
+<a name="l00165"></a>00165         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a6517088d42ceaf01d97ccd1e2c8ccb5c">tca</a>=tca
+<a name="l00166"></a>00166         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>=0         
+<a name="l00167"></a>00167         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00168"></a>00168 <span class="stringliteral">        Genera Archivos</span>
+<a name="l00169"></a>00169 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00170"></a>00170         sat_id=self.tle_sat.catID()
+<a name="l00171"></a>00171         deb_id=self.tle_deb.catID()
+<a name="l00172"></a>00172         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#af72762abc3ab894e7ffc1e5424215eb3">archivo_dif</a> =<span class="stringliteral">&#39;../Encuentro/archivos/&#39;</span>+str(sat_id)+<span class="stringliteral">&#39;_&#39;</span>+str(deb_id)+<span class="stringliteral">&#39;_rtn&#39;</span>
+<a name="l00173"></a>00173         salida1=open(<span class="stringliteral">&#39;../Encuentro/archivos/&#39;</span>+str(sat_id),<span class="stringliteral">&#39;w+&#39;</span>)
+<a name="l00174"></a>00174         salida2=open(<span class="stringliteral">&#39;../Encuentro/archivos/&#39;</span>+str(deb_id),<span class="stringliteral">&#39;w+&#39;</span>)
+<a name="l00175"></a>00175         salida3=open(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#af72762abc3ab894e7ffc1e5424215eb3">archivo_dif</a>,<span class="stringliteral">&#39;w+&#39;</span>)
+<a name="l00176"></a>00176 
+<a name="l00177"></a>00177         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00178"></a>00178 <span class="stringliteral">        Calcula las diferencias relativas entre los dos </span>
+<a name="l00179"></a>00179 <span class="stringliteral">        objetos en el sistema RTN.</span>
+<a name="l00180"></a>00180 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00181"></a>00181 
+<a name="l00182"></a>00182         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a6517088d42ceaf01d97ccd1e2c8ccb5c">tca</a>-timedelta(minutes=5)
+<a name="l00183"></a>00183         epoca_fin=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a6517088d42ceaf01d97ccd1e2c8ccb5c">tca</a>+timedelta(minutes=5)
+<a name="l00184"></a>00184         
+<a name="l00185"></a>00185         self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ad2e2746fd37fe86d659b1c7e5731ba5a">mod_minDist</a>=sys.float_info.max
+<a name="l00186"></a>00186         <span class="keywordflow">while</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a> &lt; epoca_fin:
+<a name="l00187"></a>00187             r,v=self.tle_sat.propagaTLE(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>)
+<a name="l00188"></a>00188             r1,v1=self.tle_deb.propagaTLE(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>)
+<a name="l00189"></a>00189             
+<a name="l00190"></a>00190             r=np.array([float(r[0]),float(r[1]),float(r[2])])
+<a name="l00191"></a>00191             v=np.array([float(v[0]),float(v[1]),float(v[2])])
+<a name="l00192"></a>00192             r1=np.array([float(r1[0]),float(r1[1]),float(r1[2])])
+<a name="l00193"></a>00193             v1=np.array([float(v1[0]),float(v1[1]),float(v1[2])])
+<a name="l00194"></a>00194             
+<a name="l00195"></a>00195             pos1=<a class="code" href="classpruebas_1_1clase_tle_1_1_posicion.html">Posicion</a>(r,v,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>)
+<a name="l00196"></a>00196             pos2=<a class="code" href="classpruebas_1_1clase_tle_1_1_posicion.html">Posicion</a>(r1,v1,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>)
+<a name="l00197"></a>00197             
+<a name="l00198"></a>00198             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#aedd8a3ee3330aff4d6aea7bd4c30c44b">DistVector</a>=pos1.r-pos2.r
+<a name="l00199"></a>00199             x_ric,y_ric,z_ric=<a class="code" href="namespace_sist_referencia_1_1sist__de_coordenadas.html#a8eccb1d3c6c56a4c77b891b1da887dd7">ricSis</a>(pos1.r,pos1.v,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#aedd8a3ee3330aff4d6aea7bd4c30c44b">DistVector</a>)
+<a name="l00200"></a>00200             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>=np.array([x_ric,y_ric,z_ric])
+<a name="l00201"></a>00201             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a592e3697e36b946c3945ab10110424df">VelVector</a>=pos1.v-pos2.v
+<a name="l00202"></a>00202             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a769750840e1f38038e22ace6a5a6bac7">mod_Dist1</a>=np.sqrt(np.dot(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>,self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>))
+<a name="l00203"></a>00203 <span class="comment">#            self.mod_Dist1=np.sqrt(np.dot(self.DistVector,self.DistVector))</span>
+<a name="l00204"></a>00204             <span class="keywordflow">if</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a769750840e1f38038e22ace6a5a6bac7">mod_Dist1</a> &lt; self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ad2e2746fd37fe86d659b1c7e5731ba5a">mod_minDist</a>:
+<a name="l00205"></a>00205                 self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ad2e2746fd37fe86d659b1c7e5731ba5a">mod_minDist</a>=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a769750840e1f38038e22ace6a5a6bac7">mod_Dist1</a>
+<a name="l00206"></a>00206                 self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#aafdda70a8d6f7862b4211f3a9fe49023">tca_c</a>=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>
+<a name="l00207"></a>00207                 self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#ada92cbea7ee81c5f5da61d08cb08acde">DistRic_min</a>=np.array([x_ric,y_ric,z_ric])
+<a name="l00208"></a>00208             <span class="keywordflow">print</span> self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>, self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a769750840e1f38038e22ace6a5a6bac7">mod_Dist1</a>
+<a name="l00209"></a>00209             self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>=self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a64cc6d8583bccb824569de3dda2efddb">epoca_ini</a>+timedelta(seconds=1)
+<a name="l00210"></a>00210             
+<a name="l00211"></a>00211             <span class="comment"># Transformo a Coordenadas Geodesicas.</span>
+<a name="l00212"></a>00212             delta1, alpha1=pos1.getCoordenadasGEOD()
+<a name="l00213"></a>00213             delta2, alpha2=pos2.getCoordenadasGEOD()
+<a name="l00214"></a>00214             <span class="comment"># GUARDA EN ARCHIVO Posiciones en ALFA, DELTA (Seudo Geodesicas).</span>
+<a name="l00215"></a>00215             salida1.write(str(alpha1)+<span class="stringliteral">&#39; &#39;</span>+str(delta1)+<span class="stringliteral">&#39; &#39;</span>+datetime.strftime(pos1.epoca,<span class="stringliteral">&#39;%Y-%m-%d %H:%M:%S&#39;</span>)+<span class="stringliteral">&#39;\n&#39;</span>)
+<a name="l00216"></a>00216             salida2.write(str(alpha2)+<span class="stringliteral">&#39; &#39;</span>+str(delta2)+<span class="stringliteral">&#39; &#39;</span>+datetime.strftime(pos2.epoca,<span class="stringliteral">&#39;%Y-%m-%d %H:%M:%S&#39;</span>)+<span class="stringliteral">&#39;\n&#39;</span>) 
+<a name="l00217"></a>00217             <span class="comment"># GUARDA EN ARCHIVO Posiciones en RTN.</span>
+<a name="l00218"></a>00218             salida3.write(datetime.strftime(pos1.epoca,<span class="stringliteral">&#39;%Y-%m-%d %H:%M:%S&#39;</span>)+<span class="stringliteral">&#39; &#39;</span>+str(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>[0])+<span class="stringliteral">&#39; &#39;</span>+str(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>[1])+<span class="stringliteral">&#39; &#39;</span>+str(self.<a class="code" href="classpruebas_1_1clase_tle_1_1_encuentro.html#a9580630b90329c0f138b47a47a4e993a">DistRic</a>[2])+<span class="stringliteral">&#39;\n&#39;</span>)
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220         salida1.close()
+<a name="l00221"></a>00221         salida2.close()
+<a name="l00222"></a>00222         salida3.close()
+<a name="l00223"></a>00223 
+<a name="l00224"></a>00224 <span class="comment">#     </span>
+<a name="l00225"></a>00225 <span class="comment"># if __name__==&#39;__main__&#39;:</span>
+<a name="l00226"></a>00226 <span class="comment">#      </span>
+<a name="l00227"></a>00227 <span class="comment">#      TCA=datetime(2008,1,9,19,0,30)</span>
+<a name="l00228"></a>00228 <span class="comment">#      sat_id=&#39;27386&#39; #ENVISAT</span>
+<a name="l00229"></a>00229 <span class="comment">#      deb_id=&#39;15482&#39; #COSMOS</span>
+<a name="l00230"></a>00230 <span class="comment">#      usuario=&#39;macecilia&#39;</span>
+<a name="l00231"></a>00231 <span class="comment">#      clave=&#39;MaCeciliaSpace17&#39;</span>
+<a name="l00232"></a>00232 <span class="comment">#  </span>
+<a name="l00233"></a>00233 <span class="comment">#      tle_sat=Tle(usuario,clave,sat_id,TCA)</span>
+<a name="l00234"></a>00234 <span class="comment">#      tle_deb=Tle(usuario,clave,deb_id,TCA)</span>
+<a name="l00235"></a>00235 <span class="comment">#      </span>
+<a name="l00236"></a>00236 <span class="comment">#      encuentro1=Encuentro(tle_sat,tle_deb,TCA)</span>
+<a name="l00237"></a>00237 <span class="comment"># #     dif_r,dif_v=encuentro1.svDif()</span>
+<a name="l00238"></a>00238 <span class="comment">#     </span>
+<a name="l00239"></a>00239 <span class="comment">#     tle_archivo=Tle.creadoxArchivo(archivo=&#39;../TleAdmin/tle/37673tle0&#39;)</span>
+<a name="l00240"></a>00240 <span class="comment">#     print tle_archivo.epoca()</span>
+<a name="l00241"></a>00241     
     </pre></div>
 </div>
 </div>
@@ -283,7 +284,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00154">154</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00161">161</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -298,7 +299,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00152">152</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00159">159</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -313,7 +314,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00157">157</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00164">164</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -328,7 +329,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00157">157</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00164">164</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -343,7 +344,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00157">157</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00164">164</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -358,7 +359,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00157">157</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00164">164</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -373,7 +374,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00157">157</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00164">164</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -388,7 +389,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00152">152</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00159">159</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -403,7 +404,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00157">157</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00164">164</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -418,7 +419,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00152">152</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00159">159</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -433,7 +434,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00152">152</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00159">159</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -448,7 +449,7 @@ outpus:
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00157">157</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
+<p>Definition at line <a class="el" href="clase_tle_8py_source.html#l00164">164</a> of file <a class="el" href="clase_tle_8py_source.html">claseTle.py</a>.</p>
 
 </div>
 </div>
@@ -477,7 +478,7 @@ outpus:
       <li class="navelem"><a class="el" href="namespacepruebas_1_1clase_tle.html">claseTle</a>      </li>
       <li class="navelem"><a class="el" href="classpruebas_1_1clase_tle_1_1_encuentro.html">Encuentro</a>      </li>
 
-    <li class="footer">Generated on Fri Jun 23 2017 11:23:00 for ARxCODE by
+    <li class="footer">Generated on Thu Jul 13 2017 12:06:31 for ARxCODE by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.6.1 </li>
    </ul>
