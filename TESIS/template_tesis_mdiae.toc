@@ -30,17 +30,16 @@
 \contentsline {section}{\numberline {4.1}Especificaciones generales}{38}{section.4.1}
 \contentsline {section}{\numberline {4.2}Requerimientos}{38}{section.4.2}
 \contentsline {section}{\numberline {4.3}Interfaces}{39}{section.4.3}
-\contentsline {section}{\numberline {4.4}Arquitectura}{41}{section.4.4}
-\contentsline {subsection}{\numberline {4.4.1}Componentes}{41}{subsection.4.4.1}
-\contentsline {subsection}{\numberline {4.4.2}Casos de Uso}{42}{subsection.4.4.2}
-\contentsline {section}{\numberline {4.5}Entradas y Salidas}{42}{section.4.5}
-\contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{46}{chapter.5}
-\contentsline {section}{\numberline {5.1}Introducci\'on}{46}{section.5.1}
-\contentsline {section}{\numberline {5.2}Implentenaci\'on del modelo SGP4 en Python}{47}{section.5.2}
-\contentsline {section}{\numberline {5.3}Implementaci\'on del M\'etodo de Osweiler}{47}{section.5.3}
-\contentsline {section}{\numberline {5.4}Metodolog\'ia de Estimaci\'on de Errores}{48}{section.5.4}
-\contentsline {chapter}{\numberline {6}Conclusiones}{50}{chapter.6}
-\contentsline {chapter}{\numberline {7}Ap\'endice}{51}{chapter.7}
-\contentsline {section}{\numberline {7.1}Appendix 1}{51}{section.7.1}
-\contentsline {section}{\numberline {7.2}Transformaci\'on de Coordenadas}{51}{section.7.2}
-\contentsline {section}{\numberline {7.3}Appendix 2}{52}{section.7.3}
+\contentsline {section}{\numberline {4.4}Casos de Uso}{41}{section.4.4}
+\contentsline {section}{\numberline {4.5}Arquitectura}{42}{section.4.5}
+\contentsline {section}{\numberline {4.6}Diagrama de Actividad}{47}{section.4.6}
+\contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{48}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introducci\'on}{48}{section.5.1}
+\contentsline {section}{\numberline {5.2}Implentenaci\'on del modelo SGP4 en Python}{49}{section.5.2}
+\contentsline {section}{\numberline {5.3}Implementaci\'on del M\'etodo de Osweiler}{49}{section.5.3}
+\contentsline {section}{\numberline {5.4}Metodolog\'ia de Estimaci\'on de Errores}{50}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusiones}{52}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ap\'endice}{53}{chapter.7}
+\contentsline {section}{\numberline {7.1}Appendix 1}{53}{section.7.1}
+\contentsline {section}{\numberline {7.2}Transformaci\'on de Coordenadas}{53}{section.7.2}
+\contentsline {section}{\numberline {7.3}Appendix 2}{54}{section.7.3}

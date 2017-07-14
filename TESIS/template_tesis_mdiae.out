@@ -27,17 +27,16 @@
 \BOOKMARK [1][-]{section.4.1}{Especificaciones generales}{chapter.4}% 27
 \BOOKMARK [1][-]{section.4.2}{Requerimientos}{chapter.4}% 28
 \BOOKMARK [1][-]{section.4.3}{Interfaces}{chapter.4}% 29
-\BOOKMARK [1][-]{section.4.4}{Arquitectura}{chapter.4}% 30
-\BOOKMARK [2][-]{subsection.4.4.1}{Componentes}{section.4.4}% 31
-\BOOKMARK [2][-]{subsection.4.4.2}{Casos de Uso}{section.4.4}% 32
-\BOOKMARK [1][-]{section.4.5}{Entradas y Salidas}{chapter.4}% 33
-\BOOKMARK [0][-]{chapter.5}{Validaci\363n y Resultados}{}% 34
-\BOOKMARK [1][-]{section.5.1}{Introducci\363n}{chapter.5}% 35
-\BOOKMARK [1][-]{section.5.2}{Implentenaci\363n del modelo SGP4 en Python}{chapter.5}% 36
-\BOOKMARK [1][-]{section.5.3}{Implementaci\363n del M\351todo de Osweiler}{chapter.5}% 37
-\BOOKMARK [1][-]{section.5.4}{Metodolog\355a de Estimaci\363n de Errores}{chapter.5}% 38
-\BOOKMARK [0][-]{chapter.6}{Conclusiones}{}% 39
-\BOOKMARK [0][-]{chapter.7}{Ap\351ndice}{}% 40
-\BOOKMARK [1][-]{section.7.1}{Appendix 1}{chapter.7}% 41
-\BOOKMARK [1][-]{section.7.2}{Transformaci\363n de Coordenadas}{chapter.7}% 42
-\BOOKMARK [1][-]{section.7.3}{Appendix 2}{chapter.7}% 43
+\BOOKMARK [1][-]{section.4.4}{Casos de Uso}{chapter.4}% 30
+\BOOKMARK [1][-]{section.4.5}{Arquitectura}{chapter.4}% 31
+\BOOKMARK [1][-]{section.4.6}{Diagrama de Actividad}{chapter.4}% 32
+\BOOKMARK [0][-]{chapter.5}{Validaci\363n y Resultados}{}% 33
+\BOOKMARK [1][-]{section.5.1}{Introducci\363n}{chapter.5}% 34
+\BOOKMARK [1][-]{section.5.2}{Implentenaci\363n del modelo SGP4 en Python}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.3}{Implementaci\363n del M\351todo de Osweiler}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.4}{Metodolog\355a de Estimaci\363n de Errores}{chapter.5}% 37
+\BOOKMARK [0][-]{chapter.6}{Conclusiones}{}% 38
+\BOOKMARK [0][-]{chapter.7}{Ap\351ndice}{}% 39
+\BOOKMARK [1][-]{section.7.1}{Appendix 1}{chapter.7}% 40
+\BOOKMARK [1][-]{section.7.2}{Transformaci\363n de Coordenadas}{chapter.7}% 41
+\BOOKMARK [1][-]{section.7.3}{Appendix 2}{chapter.7}% 42

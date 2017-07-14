@@ -152,7 +152,34 @@ En conclusi\'on, las interfaces implementadas, son (Ver Fig. \ref{fig:interfaces
 
 
 \subsection*{Componentes}\label{subsec:componentes}
-Los distintos paquetes de ARxCODE pueden agruparse en .\\
+En un planteo conceptual, con alto grado de abstracci\'on, los distintos paquetes de ARxCODE pueden agruparse en cinco componentes Fig.  \ref{fig:componentes}: PROCESAMIENTO, ADMINISTRACI\'ON DE DATOS, INTERFAZ GR\'AFICA Y VISUALIZACI\'ON, Sistemas de Referencia y VALIDACIONES.\\
+
+\begin{itemize}
+ \item PROCESAMIENTO: Involucra los cuatro paquetes que no s\'olo operan con los datos ingresados, sino que tambi\'en los manipulan y procesan para generar nuevos productos. Estos m\'odulos son, de alguna manera los distintos n\'ucleos del c\'odigo.\\
+ \begin{itemize}
+ \itemsep0em
+  \item {\it{AjustarTle}}
+  \item {\it{Comparar}}
+  \item {\it{Estadistica}}
+  \item {\it{Encuentro}}
+ \end{itemize}
+ \item ADMINISTRACI\'ON DE DATOS: Son aquellos paquetes que se encargan de la obtenci\'on, el desgloce y el preprocesamiento de los datos que ser\'an utilizados por el resto de los m\'odulos.
+ \begin{itemize}
+ \itemsep0em
+  \item {\it{TleAdmin}}
+  \item {\it{CodsAdmin}}
+  \item {\it{CDM}}
+ \end{itemize}
+ \item INTERFAZ Y VISUALIZACI\'ON: Agrupa el paquete que genera la interfaz gr\'afica y el paquete que contiene todos los m\'odulos que generan represntaciones visuales, como los ploteos o los tracks de las trayectorias de los objetos.\\
+ \begin{itemize}
+ \itemsep0em
+ \item {\it{Aplicacion}}
+ \item {\it{visual}}
+ \end{itemize}
+ \item Sistemas de Referencia: {\it{SistReferencia}}, es el paquete que contiene todo lo referente a las transformaciones entre los distintos sistemas de referencia, ya sean espaciales o de tiempo.
+ \item VALIDACIONES: Agrupa todos los m\'odulos desarrollados para validar los resultados.
+\end{itemize}
+
 
 \begin{figure}[h!]
   \centering
@@ -161,11 +188,79 @@ Los distintos paquetes de ARxCODE pueden agruparse en .\\
   \caption{Componentes de ARxCODE}
 \end{figure}
 
-{\it{Dise\~no conceptual, con un alto grado de abstracci\'on de los principales m\'odulos de la aplicaci\'on y c\'omo se relacionan.}}
-clases principales: TLE, EphemCODS
+\subsubsection*{ADMINISTRACI\'ON DE DATOS: TleAdmin}
+Este paquete contiene las dos clases que gestionan la descarga de los TLEs de la p\'agina Space-Track: {\bf{Tle}} y {\bf{setTLE}}. La primera provee un \'unico TLE y todo lo referente a \'el Fig. \ref{fig:clasetle}; se instancia a partir del identificador de NORAD del objeto y una \'epoca o a partir del nombre de un archivo que contiene un \'unico TLE. Entre sus m\'etodos, es fundamental {\bf{propagaTLE()}}, que propaga la posici\'on del objeto al momento que sea necesario.\\
+La clase {\bf{setTLE}} Fig. \ref{clasesettle}, es necesaria particularmente para la implementaci\'on del m\'etodo de Osweiler que requiere un conjunto de TLEs de 15 d\'ias para la generaci\'on de la matriz de covarianza de la posici\'on del objeto. Esta clase se instancia, indicando el identificador de NORAD del objeto, la fecha de inicio y fin, del set que se requiere. Una vez descargados, genera un \'unico archivo con todos los TLEs del intervalo y los guarda en la carpeta {\it{crudosTLE}}. El m\'etodo {\bf{divide\_setTLE()}}, particiona el texto con el conjunto de TLEs y genera un archivo por cada TLE y lo almacena en la carpeta {\it{tle}} del paquete.Esta \'ultima carpeta, se actualiza con cada corrida del software, de modo que siempre contiene s\'olo el conjunto de archivos de TLEs que van a ser procesados.\\
 
-l prototipo de software para el An\'alisis de Riesgo por Colisi\'on con Desechos Espaciales {\it{ARxCODE}}, ser\'a un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
-El mismo se piensa como un intermediario capaz de: detectar los mensajes de alerta CDM provistos por el JSpOC, procesar los datos, generar mejores estimaciones para la posici\'on del desecho, solicitar datos m\'as precisos para la posici\'on de la misi\'on primaria y calcular la PoC. Todo esto a fin de facilitarle a un a un operador analista experto, herramientas para la toma de decisiones o el intercambio de informaci\'on con los organismos externos y el centro de control.\\
+\begin{figure}[!h]
+\centering
+  \subfigure[Clase TLE (TleAdmin/TLE/Tle)]{
+    \includegraphics[width=0.3\textwidth]{imagenes/tleClass}
+    \label{fig:clasetle}
+  }
+  \hspace{1.5cm}
+  \subfigure[Clase setTLE (TleAdmin/TLE/setTLE)]{
+    \includegraphics[width=0.3\columnwidth, keepaspectratio]{imagenes/setTLEclass}
+    \label{fig:clasesettle}
+  }
+  \caption[Clases Tle y setTLE]{Clases Tle y setTLE del paquete TleAdmin}
+\end{figure}
+
+\subsubsection*{ADMINISTRACI\'ON DE DATOS: CDM}
+El paquete CDM contiene una carpeta con archivos en formato del CDM, en xml y la clase {\bf{CDM}} que tiene la capacidad de desglozarlos y extraer los datos del mensajes que ser\'an plasmados en la pantalla de la interfaz gr\'afica, para la visualizaci\'on del operador.\\
+
+\subsubsection*{ADMINISTRACI\'ON DE DATOS: CodsAdmin}
+Este paquete administra los productos orbitales generados por el departamento de Din\'amica Orbital \ac{CODS}.\\
+Cuenta con varias carpetas que almacenan los productos previamente descargados y contiene a la clase {\bf{EphemCODS}}, que tiene la capacidad de extraer las efem\'erides de los archivos y de identificar el periodo que los mismos contienen a partir del nombre.\\
+
+\begin{figure}[!h]
+\centering
+  \subfigure[Clase CDM (CDM/CDM).]{
+    \includegraphics[width=.3\textwidth]{imagenes/cdmClass}
+    \label{fig:clasetle}
+  }
+  \hspace{1.5cm}
+  \subfigure[Clase EphemCODS (CodsAdmin/EphemCODS)]{
+    \includegraphics[width=0.4\columnwidth, keepaspectratio]{imagenes/ephemcodsClass}
+    \label{fig:clasesettle}
+  }
+  \caption[Clases CDM y EphemCODS]{Clases CDM y EphemCODS para el pareseo de los mensajes de alerta CDM y los productos orbitales de \ac{CODS}}
+\end{figure}
+
+\subsubsection*{PROCESAMIENTO: AjustarTle}
+Este paquete incluye el m\'odulo con el mismo nombre {\it{AjustarTle}}, que cuenta con varias funciones que reagrupan la informaci\'on del set de TLEs a fin de poder hacer ordenamientos y comparaciones, entre TLEs de distintas fechas que son propagados a una misma \'epoca (pr\'actica necesaria para la implementaci\'on del m\'etodo de Osweiler para la construcci\'on de las matrices de covarianza).\\
+
+\subsubsection*{PROCESAMIENTO: Comparar}
+En el paquete {\it{Comprar}} se nuclean todos los m\'odulos y funciones que permiten la selecci\'on y la extracci\'on de los datos de los productos de Din\'amica Orbital (CODS), y sus respectivas comparaciones con los resultados que provienen de la propagaci\'on de los TLEs. Este tipo de comparaciones son necesarias en la estimaci\'on de errores que se comenten al utilizar propagaciones de TLE con SGP4. 
+
+\subsubsection*{PROCESAMIENTO: Estad\'istica}
+Dentro de este paquete se encuentran los desarrollos referidos a los c\'alculos estad\'isticos, m\'as precisamente los m\'odulos que calculan las matrices de covarianza. En este paquete se encuentra el m\'odulo que implementa el m\'etodo de Oswiler {\bf{matrizOsweiler}}
+
+\subsubsection*{PROCESAMIENTO: Encuentro}
+
+
+\subsubsection*{INTERFAZ GR\'AFICA Y VISUALIZACI\'ON: Aplicaci\'on}
+Este paquete contiene, principalmente el m\'odulo con el formulario de interfaz de ARxCODE {\bf{frm\_main}}. Dentro del mismo se ubican las clases que heredan de la estructura de QT, para el desarrollo de la aplicaci\'on, y son estas clases las que invocan los distintos m\'odulos del resto del c\'odigo para el desarrollo de los procesos.\\
+
+\subsubsection*{INTERFAZ GR\'AFICA Y VISUALIZACI\'ON: visual}
+{\bf{Visual}} es el paquete que agrupa todos los m\'odulos de generaci\'on de gr\'aficos y ploteos. Muchos de ellos s\'olo se utilizaron durante el desarrollo y no van a ser parte de los productos que ofrece la aplicaci\'on, al menos en este prototipo.\\
+Dentro de este paquete se encuentra el m\'odulo que genera el track de las \'orbitas, proyectadas sobre el mapa en el momento del encuentro.\\
+
+\subsubsection*{Sistemas de Referencia}
+Este paquete contiene m\'odulos para realizar transformaciones entre los distintos sistemas de referencia. Entre ellos, los dos m\'as utilizados son:
+{\it{teme2tod}} y {\it{ricSis}}, ya descriptos en \textcolor{red}{referencia sist de ref. marco teorico}.
+
+\subsubsection*{Validaciones}
+Re\'une todas los m\'odulos que se desarrollaron para la validaci\'on de los resultados, cuyos valores se analizan y publican en la secci\'on \ref{chap:resultados}. A saber:
+
+\begin{itemize}
+ \item valida\_OSW: valida el m\'etodo de Osweiler.
+ \item valida\_poc: valida los m\'etodos de c\'alculo de la probabilidad de colisi\'on.
+ \item valida\_RTN: valida la transformaci\'on del sistema de referencia al RTN.
+\end{itemize}
+
+
+
 
 \subsection{Casos de Uso}
 
@@ -232,50 +327,42 @@ Postcondiciones & El informe de an\'alisis de riesgo fue generado y almacenado.\
 
 \section{Entradas y Salidas}
 
-archivos y demases
-
-\subsection*{Preprocesamiento de los Datos de Misi\'on de CODS}
-Para este trabajo CONAE nos facilit\'o el acceso a los datos orbitales de la misi\'on SAC-D.
-Los datos se ecuentran montados en un servidor que contiene la informaci\'on organizada en archivos con formato ASCII, distribuidos en distintas carpetas seg\'un su clasificaci\'on.\\
-Para la comparaci\'on que proponemos, solicitamos acceso a los archivos de efem\'erides orbitales ORBEPHEM, que ofrecen posiciones y velocidades tabuladas cada un minuto, en el Sistema de Referencia TOD (True of Date), en coordenadas cartesianas.
-
-\subsection*{ORBEPHEM}
-Estos productos son generados luego de un post procesamiento que incluye una propagaci\'on ajustada por una determinaci\'on orbital. 
-Cada archivo contiene un listado cronol\'ogicamente tabulado de posiciones y velocidades, dentro de un periodo de casi 3 d\'ias. ( doc\_interfaces)
-
-La nomenclatura de los mismos respeta el siguiente formato:\\
-\begin{verbatim}
- CODS_YYYYMMDD_HHMMSS_SACD_ORBEPHEM_TOD_XYZ_O.TXT
- 
- Donde:
-  CODS = Identifica el Servicio dentro del CUSS que presta la información.
-  YYYYMMDD_HHMMSS = epoca de generación del dato.
-  SACD = Identificación del Satélite.
-  ORBEPHEM = Tipo de Dato, Efeméride Orbital (procesada a posteriori)
-  TOD = Sistema de Referencia True of Date.
-  XYZ = Tipo de efeméride, cartesiana.
-  O = Operacional. 
-\end{verbatim}
-
-
-\subsection*{Archivos Utilizados}
-Si bien la nomenclatura de los archivos respeta una estructura, s\'olo se indica en el nombre, la fecha de generaci\'on de los datos y no puede desprenderse del mismo cu\'al es la \'epoca final e inicial de cada archivo, y no existe un registro del los gaps de datos ausentes. A su vez, las \'epocas contempladas en cada uno de ellos no está homogeneizada. Es decir, la fecha y hora inicial y final de cada registro es diferente para cada archivo.\\
-Dada esta organizaci\'on, para el punto tres del procedimiento, referente a la localizaci\'on del archivo necesario para la comparaci\'on, la b\'usqueda se realiza de la siguiente manera:\\
-Localizamos en primer lugar el archivo cuyo nombre coincide con la fecha de la \'epoca del TLE primario.
-Como una misma fecha se encuentra en m\'as de un archivo, buscamos el archivo que contenga esa fecha y que adem\'as sea el m\'as actualizado de todos. Para ello, además del archivo cuyo nombre contiene la fecha del TLE primario, se enlistan los siguientes dos archivos y se ordenan en orden decreciente, de manera que el primer lugar de la lista lo ocupe el \'ultimo de los archivos seleccionados. Finalmente se comienza el proceso iterativo de abrir los archivos, evaluar el contenido y ver si se encuentran los dos registros que encierren la \'epoca del TLE.
-Una vez que se encuentran las l\'ineas de efem\'erides que contienen la \'epoca de inter\'es se interpola, y se termina la iteraci\'on.
-
-\noindent
-Cantidad TOTAL de archivos $=  1454$\\
-Cantidad media de resgistros por archivo $=  2688$\\
-Archivo con el mayor n\'umero de registros $=  3042$\\
-Archivo con el menor n\'umero de registros $=  142$\\
+% archivos y demases
+% 
+% \subsection*{Preprocesamiento de los Datos de Misi\'on de CODS}
+% Para este trabajo CONAE nos facilit\'o el acceso a los datos orbitales de la misi\'on SAC-D.
+% Los datos se ecuentran montados en un servidor que contiene la informaci\'on organizada en archivos con formato ASCII, distribuidos en distintas carpetas seg\'un su clasificaci\'on.\\
+% Para la comparaci\'on que proponemos, solicitamos acceso a los archivos de efem\'erides orbitales ORBEPHEM, que ofrecen posiciones y velocidades tabuladas cada un minuto, en el Sistema de Referencia TOD (True of Date), en coordenadas cartesianas.
+% 
+% \subsection*{ORBEPHEM}
+% Estos productos son generados luego de un post procesamiento que incluye una propagaci\'on ajustada por una determinaci\'on orbital. 
+% Cada archivo contiene un listado cronol\'ogicamente tabulado de posiciones y velocidades, dentro de un periodo de casi 3 d\'ias. ( doc\_interfaces)
+% 
+% La nomenclatura de los mismos respeta el siguiente formato:\\
+% \begin{verbatim}
+%  CODS_YYYYMMDD_HHMMSS_SACD_ORBEPHEM_TOD_XYZ_O.TXT
+%  
+%  Donde:
+%   CODS = Identifica el Servicio dentro del CUSS que presta la información.
+%   YYYYMMDD_HHMMSS = epoca de generación del dato.
+%   SACD = Identificación del Satélite.
+%   ORBEPHEM = Tipo de Dato, Efeméride Orbital (procesada a posteriori)
+%   TOD = Sistema de Referencia True of Date.
+%   XYZ = Tipo de efeméride, cartesiana.
+%   O = Operacional. 
+% \end{verbatim}
 
 
-\section*{Diferencias}
+% \subsection*{Archivos Utilizados}
+% Si bien la nomenclatura de los archivos respeta una estructura, s\'olo se indica en el nombre, la fecha de generaci\'on de los datos y no puede desprenderse del mismo cu\'al es la \'epoca final e inicial de cada archivo, y no existe un registro del los gaps de datos ausentes. A su vez, las \'epocas contempladas en cada uno de ellos no está homogeneizada. Es decir, la fecha y hora inicial y final de cada registro es diferente para cada archivo.\\
+% Dada esta organizaci\'on, para el punto tres del procedimiento, referente a la localizaci\'on del archivo necesario para la comparaci\'on, la b\'usqueda se realiza de la siguiente manera:\\
+% Localizamos en primer lugar el archivo cuyo nombre coincide con la fecha de la \'epoca del TLE primario.
+% Como una misma fecha se encuentra en m\'as de un archivo, buscamos el archivo que contenga esa fecha y que adem\'as sea el m\'as actualizado de todos. Para ello, además del archivo cuyo nombre contiene la fecha del TLE primario, se enlistan los siguientes dos archivos y se ordenan en orden decreciente, de manera que el primer lugar de la lista lo ocupe el \'ultimo de los archivos seleccionados. Finalmente se comienza el proceso iterativo de abrir los archivos, evaluar el contenido y ver si se encuentran los dos registros que encierren la \'epoca del TLE.
+% Una vez que se encuentran las l\'ineas de efem\'erides que contienen la \'epoca de inter\'es se interpola, y se termina la iteraci\'on.
+% 
+% \noindent
+% Cantidad TOTAL de archivos $=  1454$\\
+% Cantidad media de resgistros por archivo $=  2688$\\
+% Archivo con el mayor n\'umero de registros $=  3042$\\
+% Archivo con el menor n\'umero de registros $=  142$\\
 
-\begin{itemize}
- \item Revisar escritura sobre datos CODS.
- \item Comparar defasaje inicial con defasaje de TLE respecto de GPS. (ver tendencias - empezar a diagramar los apédices)
- \item Comparar errores lineal vs cuadr\'atico.
-\end{itemize}

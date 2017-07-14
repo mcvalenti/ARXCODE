@@ -23,10 +23,17 @@
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Interfaces del Sistema}}{40}{figure.caption.62}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{41}{figure.caption.63}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Componentes de ARxCODE\relax }}{42}{figure.caption.64}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Casos de Uso de ARxCODE\relax }}{43}{figure.caption.65}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{44}{figure.caption.67}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Casos de Uso de ARxCODE\relax }}{41}{figure.caption.64}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Componentes de ARxCODE\relax }}{43}{figure.caption.67}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Clases Tle y setTLE}}{44}{figure.caption.69}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{44}{figure.caption.69}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{44}{figure.caption.69}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Clases CDM y EphemCODS}}{45}{figure.caption.73}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{45}{figure.caption.73}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{45}{figure.caption.73}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Clase Encuentro}}{46}{figure.caption.78}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{47}{figure.caption.83}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{49}{figure.caption.79}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{51}{figure.caption.91}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
