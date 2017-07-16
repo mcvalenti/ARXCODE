@@ -353,7 +353,6 @@ class ProcEncuentro(QDialog):
         """
         Botones
         """
-        self.boton_carga_fecha  = QPushButton('Cargar')
         self.boton_encuetro = QPushButton('Procesar Encuentro')
         self.boton_dif      = QPushButton('Ver diferencias')
         self.boton_track    = QPushButton('Track')
@@ -384,6 +383,7 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)      
 #       # Fecha y Hora
         self.hora = QTimeEdit()
+        self.progress = QProgressBar(self)
 #       self.hora.setTime(QTime(19,14,11))
         """
         Plantilla
@@ -400,7 +400,6 @@ class ProcEncuentro(QDialog):
 #        grid.addWidget(self.tca_text,4,2)
         grid.addWidget(self.tca_text,4,2)
         grid.addWidget(self.hora,5,2)
-        grid.addWidget(self.boton_carga_fecha,5,1)
 #         grid.addWidget(self.hs_tex,4,3)
 #         grid.addWidget(self.hs_lab,4,4)
 #         grid.addWidget(self.min_tex,4,5)
@@ -410,12 +409,13 @@ class ProcEncuentro(QDialog):
 #         grid.addWidget(self.mseg_tex,4,9)
 #         grid.addWidget(self.mseg_lab,4,10)        
         grid.addWidget(self.tableEncuentro,8,1,2,5)
+        grid.addWidget(self.progress,10,1)
         grid.addWidget(self.track,2,3,5,3)
         grid.addWidget(self.dif,12,4)
-        grid.addWidget(self.boton_encuetro,10,10)
-        grid.addWidget(self.boton_dif,11,10)
-        grid.addWidget(self.boton_track,12,10)
-        grid.addWidget(self.boton_salir,13,10)
+        grid.addWidget(self.boton_encuetro,11,10)
+        grid.addWidget(self.boton_dif,12,10)
+        grid.addWidget(self.boton_track,13,10)
+        grid.addWidget(self.boton_salir,14,10)
         """
         Acciones
         """
@@ -480,11 +480,17 @@ class ProcEncuentro(QDialog):
         # archivo de diferencias.
         self.archivo_dif=encuentro1.archivo_dif
         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
-        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
-        print 'fin del procesamiento.'
+#        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
+#        print 'fin del procesamiento.'
        
         self.boton_track.setEnabled(True)
         self.boton_dif.setEnabled(True)
+        
+        #barra de progreso.
+        self.completo=0
+        while self.completo < 100:
+            self.completo = self.completo + 0.01
+        self.progress.setValue(self.completo)
     
     def mostrarDif(self):
         self.grafico_dif= ploteos.grafica_diferenciasRIC(self.archivo_dif)

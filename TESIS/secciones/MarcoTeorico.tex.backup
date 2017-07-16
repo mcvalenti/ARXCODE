@@ -229,34 +229,46 @@ En 2004 Hoots et al. public\'o un documento completo con todas las ecuaciones (i
 
 El SGP4 es actualmente, el \'unico modelo para el mantenimiento del cat\'alogo de objetos a bajas alturas que orbitan la Tierra. 
 
-\subsection*{Sistemas de Referencia}
+\subsection{Sistemas de Referencia}
+
 \subsubsection*{TEME}
- Es un sistema inercial con origen en el centro de la Tierra. Sus siglas hacen referencia a un ecuador verdader y un equinoccio medio, aunque el equinoccio medio no est\'a definido en la forma convencional. Es el sistema que se utiliza NORAD para la generaci\'on y propagaci\'on de los TLEs. 
+ Es un sistema inercial con origen en el centro de la Tierra, que utiliza como plano fundamental el Ecuador. El eje {\it{x}} se ubica en el plano del Ecuador y apunta en la direcci\'on del Equinoccio Medio, el eje {\it{y}} tambi\'en se ubica sobre el plano ecuatorial a $90^{\circ}$ del eje {\it{x}}, y el eje {\it{z}} apunta en la direcci\'on del eje de rotaci\'on de la Tierra, perpendicular al plano ecuatorial. Sus siglas hacen referencia a un Ecuador Verdadero y un Equinoccio Medio \ac{TEME}. Si bien no es un sistema convencional estandarizado, es el sistema que utiliza NORAD para la generaci\'on y propagaci\'on de los TLE, por lo que se encuentra ampliamente difundido.
+ 
 \subsubsection*{TOD}
- Es im sistema quasi inercial definido con origen en el centro de la Tierra, con un ecuador y equinoccio verdadero de la fecha, es decir, que contempla correcciones por efectos de la nutaci\'on.
-\subsubsection{RSW y VNC}
- RSW and NTW coordinate systems [2] are the two common types of the satellite-based
-orbit coordinate system.\\
-The origin of RSW coordinate system is located at the centroid of the space
-object. The R axis (radial) always points from the Earth’s center along the radius
-vector toward the satellite as it moves through the orbit; the S axis (along-track or
-transverse) points in the direction of (but not necessarily parallel to) the velocity
-vector and is perpendicular to the radius vector; the W axis (cross-track) is normal to
-the orbital plane. Refer to Fig. 2.1 for details.
-Sometimes, the coordinate system is also marked as RTN (radial, transverse, and
-normal) coordinate system or UVW coordinate system [3]. RSW coordinate system
-is decided by its position and velocity vectors, which vary with time. Its Axis S does
-not always coincide with the velocity direction. This kind of coordinate system is
-mainly used to describe orbital errors, relative position, and satellite orbital transfer
-of circular orbit.
-In an ECI coordinate system, the unit vectors of the three axes of RSW
+ Al igual que el TEME, es un sistema inercial definido con origen en el centro de la Tierra, con plano fundamental el Ecuador. Su eje {\it{x}} tambi\'en yace sobre el plano ecuatorial pero se orienta en la direcci\'on del Equinoccio Verdadero (de la fecha).\\
+ En el ap\'endice \ref{App1} se describe en forma detallada la transformaci\'on de coordenadas del sistema TEME al sistema TOD.
+ 
+\subsubsection*{Sistemas centrados en el objeto}
+Los sistemas RSW y NTW son dos sistemas con origen centrado en el objeto. Esta caracter\'istica ofrece ventajas cuando se hacen estudios de movimientos relativos, como en las misiones de sistemas distribuidos, o en los acoplamientos entre naves y tambi\'en clarifican la influencia de ciertos efectos perturbativos, como por ejemplo el del frenado atmosf\'erico, muy notorio en la componente a lo largo de la velocidad.\\
 
 \begin{figure}[!h]
 \centering
 \fbox{\includegraphics[width=0.8\textwidth]{imagenes/sistref}}
-\caption[Sistemas de Referencia centrados en el Sat\'elite]{Sistemas de Referencia centrados en el Sat\'elite}
+\caption[Sistemas de Referencia centrados en el Sat\'elite]{Sistemas de Referencia centrados en el Sat\'elite - extra\'ido de: Vallado ..\textcolor{red}{buscar}}
 \label{fig:sistref}
 \end{figure}
+
+
+En el sistema {\bf{RSW}} la coordenada R (radial), tiene la direcci\'on del vector que une el centro de la Tierra con el objeto; la coordenada S ({\it{along-track or transverse}}), apunta en la direcci\'on perpendicular al vector R, a lo largo del movimiento pero no exactamente paralela a la direcci\'on de la velocidad (salvo en \'orbitas circulares o en \'orbitas el\'ipticas durante el apogeo y el perigeo); la coordenada W ({\it{cross-track}}), es perpendicular tanto a R como a S, es decir, normal al plano del movimiento. Este sistema tambi\'en se encuentra en la bibliograf\'ia como UVW, o RTN.\\
+Dado el vector posici\'on $\bar{r}$ y velocidad $\bar{v}$ del objeto de referencia, en un sistema inercial, en un momento dado; el sistema {\bf{RSW}} queda definido a partir de:\\
+
+
+\begin{equation}
+ \bar{R}=\frac{\bar{r}}{|\bar{r}|} \quad, \bar{W}=\frac{\bar{r}\times\bar{v}}{|\bar{r}\times\bar{v}|} \quad, \bar{S}=\bar{W}\times\bar{R}
+\end{equation}
+
+El sistema {\bf{NTW}} define el eje T (tangencial a la \'orbita) en la direcci\'on de la velocidad ({\it{in-track}}); el eje N (normal), en el plano orbital y perpendicular a la velocidad; y la componente W apunta en la direcci\'on perpendicular al plano orbital.\\
+Dado el vector posici\'on $\bar{r}$ y velocidad $\bar{v}$ del objeto de referencia, en un sistema inercial, en un momento dado; el sistema {\bf{NTW}} queda definido a partir de:\\
+
+\begin{equation}
+ \bar{N}=\frac{\bar{v}}{|\bar{v}|} \quad, \bar{W}=\frac{\bar{r}\times\bar{v}}{|\bar{r}\times\bar{v}|} \quad, \bar{S}=\bar{W}\times\bar{R}
+\end{equation}
+
+
+
+Notar que ambos sistemas dependen de la posici\'on y la velocidad, es decir, que var\'ian con el tiempo.\\
+
+
 
 * alfa \& delta para el track en Tierra.\\
 
@@ -385,9 +397,10 @@ M\'etodos para el c\'alculo de la PoC en {\it{encuentros cortos}}:
 
 \begin{table}
  \centering
+  \resizebox{\linewidth}{!}{
  \begin{tabular}{|c|l|}
  \hline \hline
- Autor/s & Metodolog\'ia\\
+ Autor/es & Metodolog\'ia\\
  \hline \hline
     Akella y Alfriend & Calcula la integral de superficie, del problema simplificado a 2D.\\
     \hline
@@ -397,16 +410,22 @@ M\'etodos para el c\'alculo de la PoC en {\it{encuentros cortos}}:
     & Es el m\'etodo que utiliza NASA para la ISS.\\
     \hline
     \multirow{4}{*}{Chan} & Desarroll\'o una soluci\'on anal\'itica en base a una serie infinita de\\
-    &  t\'erminos que converge para la mayor\'ia de los valores m\'as comunes del problema, a saber:  \\
-    & radios combinados $r_{a}$ entre $1-100 m$, distancias m\'inimas de $10m-100km$ \\
-    & y covarianzas en el rango de $1m-10km$. \\
+    &  t\'erminos que converge para la mayor\'ia de los valores m\'as comunes del problema,  \\
+    &  a saber: radios combinados $r_{a}$ entre $1-100 m$, distancias m\'inimas  \\
+    & de $10m-100km$ y covarianzas en el rango de $1m-10km$. \\
     \hline
-    \multirow{2}{*}{Patera} & Transforma la integral de superficie a una integral de l\'inea de una dimensi\'on.\\
-    & Este nuevo planteo permite adaptar la secci\'on de superfice a la forma de los objetos.\\
+    \multirow{3}{*}{Patera} & Transforma la integral de superficie a una integral de l\'inea\\
+    &  de una dimensi\'on. Este nuevo planteo permite adaptar la secci\'on \\
+    & de superfice a la forma de los objetos.\\
     \hline
-    Alfano $ \\
+    \multirow{2}{*}{Alfano (Serie)} & Utiliza una serie que combina las funciones error y\\
+    & t\'erminos exponenciales para aproximar la integral de 2D.\\
     \hline
- \end{tabular}
+    \multirow{3}{*}{Alfano (Prob. M\'axima)} & Expresi\'on simplificada que permite hacer una estimaci\'on grosera\\
+    & cuando no se cuenta con datos precisos de posici\'on o de la matriz de covarianza. \\
+    & Utiliza una relaci\'on entre los radios combinados y la m\'inima distancia.\\
+    \hline
+ \end{tabular} }
 \end{table}
 
 
