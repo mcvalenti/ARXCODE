@@ -9,6 +9,9 @@ from datetime import datetime
 class EphemCODS():
     '''
     Facilita la manipulacion de los datos CODS.
+    * Considera la informacion del nombre del archivo para saber el intervalo
+    de fechas que incluye.
+    * Genera un diccionario con cada linea del archivo: fecha: coordenadas y velocidades.
     '''
     def __init__(self, nombre_archivo):
         '''
@@ -25,6 +28,7 @@ class EphemCODS():
         self.hora   = campos[2][0:2]
         self.minu    = campos[2][2:4]
         self.seg    = campos[2][4:6]
+        self.epoca_archivo = datetime(self.anio,self.mes,self.dia,self.hora,self.minu,self.seg)
         
         return self.anio, self.mes, self.dia, self.hora, self.minu, self.seg
     

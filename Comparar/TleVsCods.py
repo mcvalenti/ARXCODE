@@ -11,7 +11,7 @@ from datetime import datetime
 from time import time
 from scipy.interpolate import barycentric_interpolate
 from funcionesUtiles.funciones import toTimestamp
-from TleAdmin.TleArchivos import divide_setTLE
+#from TleAdmin.TleArchivos import divide_setTLE
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis
 from Comparar.TlevsCodsOSW import FiltraArchivos

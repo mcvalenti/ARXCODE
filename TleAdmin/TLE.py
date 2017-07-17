@@ -132,44 +132,47 @@ class SetTLE():
         """
         
         self.noradId=cat_id
-        self.anio0=tca0.year
-        self.mes0=tca0.month
-        self.dia0=tca0.day
-        self.anio1=tca1.year
-        self.mes1=tca1.month
-        self.dia1=tca1.day
-        self.usuario=usuario
-        self.clave=clave
+        self.tca0=tca0
+        self.tca1=tca1
+        
+#         self.anio0=tca0.year
+#         self.mes0=tca0.month
+#         self.dia0=tca0.day
+#         self.anio1=tca1.year
+#         self.mes1=tca1.month
+#         self.dia1=tca1.day
+#         self.usuario=usuario
+#         self.clave=clave
         self.archivo=archivo
-        self.tleDato=self.solicitudTle()
-        self.f=open('../TleAdmin/crudosTLE/'+archivo,'w')
-        self.f.write(self.tleDato)
-        self.f.close()
+#         self.tleDato=self.solicitudTle()
+#         self.f=open('../TleAdmin/crudosTLE/'+archivo,'w')
+#         self.f.write(self.tleDato)
+#         self.f.close()
         
 
-    def ConsultaAutentica(self):
-        usuario=self.usuario
-        clave=self.clave
-        data = {'identity': usuario , 'password': clave}
-        return data
+#     def ConsultaAutentica(self):
+# #         usuario=self.usuario
+# #         clave=self.clave
+#         data = {'identity': usuario , 'password': clave}
+#         return data
     
-    def solicitudTle(self):
+#    def solicitudTle(self):
         try:
-            self.sincero=[self.mes0,self.mes1,self.dia0,self.dia1]
+            sincero=[self.tca0.month,self.tca1.month,self.tca0.day,self.tca1.day]
             i=0
-            for i in range(len(self.sincero)):           
-                if self.sincero[i] < 10:
-                    self.sincero[i]='0'+str(self.sincero[i])
+            for i in range(len(sincero)):           
+                if sincero[i] < 10:
+                    sincero[i]='0'+str(sincero[i])
                 i= i+1
-            self.sincero=[str(self.sincero[0]),str(self.sincero[1]),str(self.sincero[2]),str(self.sincero[3])]
-            self.f0=str(self.anio0)+'-'+self.sincero[0]+'-'+self.sincero[2]
-            self.f1=str(self.anio1)+'-'+self.sincero[1]+'-'+self.sincero[3]
-            print self.f0, self.f1
-            data = self.ConsultaAutentica()
-    #        data = {'identity': 'macecilia' , 'password': 'MaCeciliaSpace17'}
+            sincero=[str(sincero[0]),str(sincero[1]),str(sincero[2]),str(sincero[3])]
+            f0=str(self.tca0.year)+'-'+sincero[0]+'-'+sincero[2]
+            f1=str(self.tca1.year)+'-'+sincero[1]+'-'+sincero[3]
+            print f0, f1
+    #        data = self.ConsultaAutentica()
+            data = {'identity': usuario , 'password': clave}
             s=session() 
             s.post('https://www.space-track.org/auth/login',data)
-            fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+self.f0+'--'+self.f1+'/NORAD_CAT_ID/'+self.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
+            fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+f0+'--'+f1+'/NORAD_CAT_ID/'+self.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
             r = s.get(fquery1)
             if r.text !='' and r.status_code == 200:
                 print 'Se ha generado el archivo= ', self.archivo
@@ -178,8 +181,12 @@ class SetTLE():
             
         except exceptions.HTTPError as e:
             return "Error: " + str(e)
+        
+        f=open('../TleAdmin/crudosTLE/'+self.archivo,'w')
+        f.write(r.text)
+        f.close()
           
-        return r.text
+#        return {} #r.text
     
     def divide_setTLE(self):
         """

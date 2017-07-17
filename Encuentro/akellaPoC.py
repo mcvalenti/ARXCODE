@@ -184,7 +184,7 @@ def evaluaEncuentro(TCA,sat_id,deb_id,Cd,Cm):
     clave='MaCeciliaSpace17'
     
     #--------------------MISION-----------------------------    
-    importarSetTLE(usuario,clave, sat_id,f_ini,f_fin,str(sat_id))
+    importarSetTLE(sat_id,f_ini,f_fin,str(sat_id))
     ark=open('../TleAdmin/crudosTLE/'+str(sat_id))
     contenido=ark.readlines()
     if len(contenido) > 0:
@@ -200,7 +200,7 @@ def evaluaEncuentro(TCA,sat_id,deb_id,Cd,Cm):
         print 'El programa ha detenido su ejecucion.'
         sys.exit()
     #----------DESECHO----------------------------------------    
-    importarSetTLE(usuario,clave, deb_id,f_ini,f_fin,str(deb_id))
+    importarSetTLE(deb_id,f_ini,f_fin,str(deb_id))
     ark1=open('../TleAdmin/crudosTLE/'+str(deb_id))
     contenido1=ark1.readlines()
     if len(contenido) > 0:

@@ -14,56 +14,9 @@ import matplotlib.pylab as plt
 from datetime import datetime, timedelta
 from sgp4.earth_gravity import wgs72
 from sgp4.io import twoline2rv
-from TleAdmin.TleArchivos import divide_setTLE
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis, ricSis, teme2tod
 from Estadistica.ajusteMinCuad import ajustar_diferencias
-
-
-def seleccionSat():
-    """
-    --------------------------------------------------------
-    Preprocesamiento del dato crudo bajado de Space-track
-    Preparacion de los archivos TLE, para el procesamiento.
-    La funcion busca en la carpeta TleAdmin/crudosTLE.
-    (el archivo debe contener solo las lineas de los tle)
-    La funcion guarda los archivos tle generados en la carpeta
-    TleAdmin/tle
-    -------------------------------------------------------------
-    input
-        xxxx_fechainicio_fechafin:  archivo de texto plano 
-        (xxxx corresponde al cat_id del satelite de interes)
-    output
-        tle#: lista de archivos con 1 TLE por fecha.
-    """
-    satelites_datos=glob.glob('../TleAdmin/crudosTLE/*')
-    nombres=[]
- 
-    condicion=True
-     
-    while(condicion):
-        for arch in satelites_datos:
-            nombre_archivo=arch.split('/')[-1]
-            print nombre_archivo
-            nombres.append(nombre_archivo)
-        print "Seleccione el Satelite a analizar"
-        
-        
-        crudo=raw_input()
-        id_sat=crudo.split('_')[0]
-         
-        if crudo in nombres:
-            divide_setTLE(id_sat, crudo)
-            condicion=False
-        else:
-            print '-------------------------------'
-            print "Error en el nombre del archivo"
-            print '--------------------------------'
-            print '...'
-         
-    print 'El archivo seleccionado es = ', crudo
-    print 'Ud. Selecciono el satelite con ID= ', id_sat  
-    return crudo
 
 
 def generadorDatos(lista):
@@ -206,11 +159,11 @@ def difTle(tleOrdenados,cantidad_tles):
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
     
-    tle_inicio = Tle('../TleAdmin/tle/'+tle_ordenados[0][0])
+    tle_inicio = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[0][0])
     cat_id = tle_inicio.catID()
     epoca_ini = tle_inicio.epoca()
     
-    tle_primario = Tle('../TleAdmin/tle/'+tle_ordenados[-1][0])
+    tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[-1][0])
     epoca_fin  = tle_primario.epoca()
     epoca_ffin = epoca_fin
     
@@ -252,10 +205,10 @@ def difTle(tleOrdenados,cantidad_tles):
             zz=d_v[2]
             dt=abs(fsec-ffin)
             dtfracdias=dt.total_seconds()/86400.0
-#             v,n,c=vncSis(r, rp, dr)
-#             vv,nn,cc=vncSis(r,rp,d_v)
-            v,n,c=ricSis(r, rp, dr)
-            vv,nn,cc=ricSis(r,rp,dv)
+            v,n,c=vncSis(r, rp, dr)
+            vv,nn,cc=vncSis(r,rp,d_v)
+#             v,n,c=ricSis(r, rp, dr)
+#             vv,nn,cc=ricSis(r,rp,dv)
             infodiftot=str(fsec)+' '+str(v)+' '+str(n)+' '+str(c)+' '+str(vv)+' '+str(nn)+' '+str(cc)+' '+tlesec+'\n'
             infodiftot2=str(fsec)+' '+str(x)+' '+str(y)+' '+str(z)+' '+str(xx)+' '+str(yy)+' '+str(zz)+' '+tlesec+'\n'
             dtot.write(infodiftot)
@@ -360,9 +313,7 @@ def genera_estadisticaBin(bin_lista):
             stdz_list.append(desviacion_z)
     
     mediaxbin=[mx_list,my_list,mz_list]
-    return cantxbin, mediaxbin
- 
-    
+    return cantxbin, mediaxbin  
 
 def difPrimario():
     """
@@ -506,7 +457,27 @@ def difPrimario():
 
     return data     
 
-# if __name__=='__main__':
+#if __name__=='__main__':
+# 
+#     d1='../TleAdmin/tle'
+#     if not os.path.exists(d1):
+#         os.mkdir(d1)
+#     d2='../AjustarTLE/diferencias'
+#     if not os.path.exists(d2):
+#         os.mkdir(d2)
+#     d3='../main/matrices/'
+#     if not os.path.exists(d3):
+#         os.mkdir(d3)
+#     d4='../visual/archivos'
+#     if not os.path.exists(d4):
+#         os.mkdir(d4)
+
+
+
+
+
+
+
 # #    ejecuta_procesamiento_TLE():
 #     """
 #     Se crean los directorios necesarios.

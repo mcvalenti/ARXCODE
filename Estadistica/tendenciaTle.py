@@ -11,7 +11,6 @@ from datetime import datetime
 import matplotlib.dates as mdates
 from matplotlib.dates import date2num
 
-
 def grafica_tendencia(data,c):
     dt=data[4]
     dv=data[1]

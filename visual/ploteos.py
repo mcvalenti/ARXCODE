@@ -146,12 +146,13 @@ def grafica_diferenciasTotales(sat_id,path,data,coef):
     """
     Grafico
     """
-    plt.plot(dt, xx, 'rd', label='V')
-    plt.plot(dt, yy, 'bo', label='N')
-    plt.plot(dt, zz, 'kx', label='C')
+    plt.plot(dt, xx, 'rd', label='V (in-track)')
+    plt.plot(dt, yy, 'bo', label='N (normal)')
+    plt.plot(dt, zz, 'kx', label='C (cross-track)')
     plt.grid()
     plt.title('Diferencias en las Coordenadas V,N,C [km]')
     plt.ylabel('Diferencia en Km')
+    plt.xlabel('Diferencia en dias')
     plt.legend(loc=1)
     f_ini=datetime.strftime(fecha[0],'%Y-%m-%d')
     f_fin=datetime.strftime(fecha[len(data[0])-1],'%Y-%m-%d')

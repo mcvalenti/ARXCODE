@@ -305,6 +305,7 @@ Dentro de este paquete se encuentran los desarrollos referidos a los c\'alculos 
 
 \subsubsection*{PROCESAMIENTO: Encuentro}
 Este es el paquete n\'ucleo del software. En \'el se encuentra la clase {\bf{Encuentro}}  Fig. \ref{fig:claseencuentro}, que instancia la generaci\'on del encuentro, incorporando ambos objetos mediante sus identificadores de NORAD y el TCA, generando las propagaciones necesarias, y las matrices de error, para calcular la m\'inima distancia y la probabilidad de colisi\'on. A tal fin, cuenta con los m\'etodos (Fig. \ref{fig:claseencuentro}): {\bf{calculaMacombinada}}, {\bf{proyecta\_alplano\_encuentro}}, {\bf{calculaPoC\_circ}} y  {\bf{calculaPoC\_gral}}\\
+\textcolor{red}{agregar clase posicion}
 
 \begin{figure}[h!]
   \centering
@@ -318,7 +319,7 @@ Este es el paquete n\'ucleo del software. En \'el se encuentra la clase {\bf{Enc
 Este paquete contiene, principalmente el m\'odulo con el formulario de interfaz de ARxCODE {\bf{frm\_main}}. Dentro del mismo se ubican las clases que heredan de la estructura de QT, para el desarrollo de la aplicaci\'on, y son estas clases las que invocan los distintos m\'odulos del resto del c\'odigo para el desarrollo de los procesos.\\
 
 \subsubsection*{INTERFAZ GR\'AFICA Y VISUALIZACI\'ON: visual}
-{\bf{Visual}} es el paquete que agrupa todos los m\'odulos de generaci\'on de gr\'aficos y ploteos. Muchos de ellos s\'olo se utilizaron durante el desarrollo y no van a ser parte de los productos que ofrece la aplicaci\'on, al menos en este prototipo.\\
+{\bf{Visual}} es el paquete que agrupa todos los m\'odulos de generaci\'on de gr\'aficos y ploteos. Los gr\'aficos se utilizaron principalmente para el estudio de la tendencia de errores de los TLE y otros an\'alisis y validaciones.\\
 Dentro de este paquete se encuentra el m\'odulo que genera el track de las \'orbitas, proyectadas sobre el mapa en el momento del encuentro.\\
 
 \subsubsection*{Sistemas de Referencia}
@@ -333,7 +334,6 @@ Re\'une todas los m\'odulos que se desarrollaron para la validaci\'on de los res
  \item valida\_poc: valida los m\'etodos de c\'alculo de la probabilidad de colisi\'on.
  \item valida\_RTN: valida la transformaci\'on del sistema de referencia al RTN.
 \end{itemize}
-
 
 
 \section{Diagrama de Actividad}

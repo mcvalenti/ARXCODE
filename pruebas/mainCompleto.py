@@ -12,7 +12,7 @@ Created on 26/01/2017
 import os
 import numpy as np
 from datetime import datetime, timedelta
-from TleAdmin.TLE import Tle, SetTLE
+from TleAdmin.TLE import Tle
 from Encuentro.Encuentro import Encuentro
 from Estadistica.matrizOsweiler import calcula_matriz_Tles, calcula_matriz_OSWcorregido
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods

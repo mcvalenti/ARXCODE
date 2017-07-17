@@ -26,44 +26,44 @@ Pensada con una filosof\'ia de expansi\'on y perfeccionamiento, su arquitectura 
 
 Se pretende que ARxCODE sea una herramienta que oficie de soporte al operador en el di\'alogo con los organismos internacionales que proveen los mensajes de alerta, frente a una situaci\'on de riesgo de colisi\'on. A tal fin, el sistema debe tener la capacidad de interpretar los mensajes estandarizados CDM y presentar la informaci\'on que all\'i se registra, en forma clara al operador.\\
 Por otro lado, debe tener la capacidad de colectar datos ingresados manualmente por el operador y ofrecer los par\'ametros que resulten del procesamiento propio del ARxCODE, como m\'inima distancia, TCA calculado y PoC.\\
-Esta \'ultima funcionalidad implica que ARxCODE debe poder solicitar a la p\'agina Space-Track los TLEs correspondientes a los objetos involucrados, debe poder estimar las matrices de covarianza de ambos objetos, ya sea mediante el m\'etodo de Osweiler o incorporando efem\'erides predichas del departamento de din\'amica orbital; debe poder propagar esos errores al momento del TCA y finalmente calcular la PoC, con un error aceptable.\\
+Esta \'ultima funcionalidad implica que ARxCODE debe poder solicitar a la p\'agina Space-Track los TLEs correspondientes a los objetos involucrados, debe poder estimar las matrices de covarianza de ambos objetos, ya sea mediante el m\'etodo de Osweiler o incorporando efem\'erides predichas del departamento de din\'amica orbital; debe poder propagar esos errores al momento del TCA y finalmente calcular la PoC, con un \textcolor{red}{error aceptable.}\\
 En la tabla \ref{tab:req}, se listan todos los requerimientos del sistema.\\
 
-\begin{table}[!h]
+\begin{table}[!h]\renewcommand{\arraystretch}{1.15}
  \resizebox{\linewidth}{!}{
  \begin{tabular}{|l|l|}
- \hline \hline
+ \hline \hline 
    \rowcolor{lightgray}
   Req. ID & Descripci\'on \\
   \hline \hline
   \rowcolor{lightgray}
   1 & Requerimientos FUNCIONALES\\
-  \hline
+  \hline 
   ARR-010 & ARxCODE debe calcular la probabilidad de colisi\'on de un acercamiento de riesgo.\\
-  \hline
-  \multirow{2}{*}{ARR-020} & ARxCODE debe  aceptar como inputs: un mensaje de alerta (CDM),o los identificadores\\
+  \hline 
+  \multirow{2}{*}{ARR-020} & ARxCODE debe  aceptar como inputs: un mensaje de alerta (CDM), o los identificadores\\
   & de NORAD de ambos objetos y el tiempo de m\'aximo acercamiento (TCA).\\
-  \hline
+  \hline 
   \multirow{2}{*}{ARR-030} & ARxCODE debe utilizar los productos orbitales de la misi\'on o realizar el mismo\\
   & procedimiento que se aplica al desecho, a la misi\'on.\\
-  \hline
+  \hline 
   ARR-040 & ARxCODE debe calcular la m\'inima distancia, total y en la coordenada radial.\\
+  \hline 
+  ARR-050 & ARxCODE debe manipular los sistemas de referencia: TEME, TOD y RTN. \\
   \hline
-  ARR-050 & ARxCODE debe manipular los sistemas de referencia: TEME, TOD, VNC y RTN. \\
-  \hline
-  \multirow{2}{*}{ARR-060}& ARxCODE debe permitir al operador/analista experto visualizar el encuentro,\\
+  \multirow{2}{*}{ARR-060}& ARxCODE debe permitir al operador analista experto visualizar el encuentro,\\
   & generar reportes y notificaciones.\\
   \hline
   \multirow{2}{*}{ARR-070} & ARxCODE debe extraer el set de TLEs de los objetos involucrados \\
   & de los \'ultimos 15 d\'ias anteriores al TCA.\\
   \hline
-  ARR-080 & ARxCODE debe estimar los errores en la posici\'on incial del desecho y de la misi\'on opeartiva.\\
+  ARR-080 & ARxCODE debe estimar los errores en la posici\'on incial del desecho y de la misi\'on operativa.\\
   \hline
   ARR-090 & ARxCODE debe propagar los errores de la posici\'on incial al TCA.\\
   \hline
    \rowcolor{lightgray}
   2 & Requerimientos de INTERFACES \\
-  \hline
+  \hline 
   ARR-100 & ARxCODE deber\'a permitir la carga manual de la situaci\'on de encuentro.\\
   \hline
   ARR-110 & ARxCODE deber\'a descargar los TLE de Space-Track.\\
@@ -72,45 +72,45 @@ En la tabla \ref{tab:req}, se listan todos los requerimientos del sistema.\\
   \hline
    \rowcolor{lightgray}
   3 & Requerimientos de RENDIMIENTO y/o PERFORMANCE\\
-  \hline
-  ARR-210 & ARxCODE deber\'a ofrecer el reporte de la situaci\'on en no m\'as de 1 minuto \\
+  \hline 
+  ARR-210 & ARxCODE deber\'a ofrecer el reporte de la situaci\'on en no m\'as de 1 minuto. \\
   \hline
     \rowcolor{lightgray}
   4 & Requerimientos de VALIDACI\'ON \\
-  \hline
+  \hline 
   \multirow{2}{*}{ARR-300} & Los m\'odulos de implementaci\'on de metodolog\'ias de ARxCODE ser\'an validados\\
-  & con los resultados de las publicaciones pertinentes y la bibliograf\'ia\\
+  & con los resultados de las publicaciones pertinentes y de la bibliograf\'ia.\\
   \hline
-  ARR-310 & Las propagaciones realizadas con el SGP4 ser\'an validadas con el software STK \\
+  ARR-310 & Las propagaciones realizadas con el SGP4 ser\'an validadas con el software STK. \\
   \hline
     \rowcolor{lightgray}
   5 & Requerimientos de DISE\~NO\\
-  \hline
-  ARR-400 & ARxCODE tendr\'a un dise\~no modular\\
+  \hline 
+  ARR-400 & ARxCODE tendr\'a un dise\~no modular.\\
    \hline
-  ARR-410 & ARxCODE se desarrollar\'a como una librer\'ia \\
+  ARR-410 & ARxCODE se desarrollar\'a como una librer\'ia. \\
   \hline
-  ARR-420 & ARxCODE contar\'a con una interfaz gr\'afica \\
+  ARR-420 & ARxCODE contar\'a con una interfaz gr\'afica. \\
   \hline
     \rowcolor{lightgray}
   6 & Requerimientos de IMPLEMENTACI\'ON\\
+  \hline 
+  ARR-500& ARxCODE ser\'a implementado en python 2.7.\\
   \hline
-  ARR-500& ARxCODE ser\'a implementado en python 2.7\\
+  ARR-510& ARxCODE ser\'a implementado en el entorno de desarrollo Eclipse.\\
   \hline
-  ARR-510& ARxCODE ser\'a implementado en el entorno de desarrollo Eclipse\\
-  \hline
-  ARR-520& El control de versiones se realizar\'a con Git\\
+  ARR-520& El control de versiones se realizar\'a con Git.\\
   \hline
     \rowcolor{lightgray}
   7 & Requerimientos de REUSABILIDAD\\
+  \hline 
+  ARR-600 & ARxCODE utilizar\'a la librer\'ia de SGP4 en Python. \\
   \hline
-  ARR-600 & ARxCODE utilizar\'a la librer\'ia de SGP4 en Python \\
+  ARR-610 & ARxCODE utilizar\'a la librer\'ia de Element Tree para el parseo del CDM.\\
   \hline
-  ARR-610 & ARxCODE utilizar\'a la librer\'ia de Element Tree para el parseo del CDM\\
+  ARR-620 & ARxCODE utilizar\'a la librer\'ia de requests de python para la conexi\'on con Space-Track.\\
   \hline
-  ARR-620 & ARxCODE utilizar\'a la librer\'ia de ..bla..para la conexi\'on con Space-Track\\
-  \hline
-  ARR-630 & ARxCODE utilizar\'a la librer\'ia de ..bla..para los c\'alculos estad\'isticos y de integraci\'on \\
+  ARR-630 & ARxCODE utilizar\'a la librer\'ia de numpy y scipy de python para los c\'alculos estad\'isticos y de integraci\'on. \\
   \hline
  \end{tabular}
  }
@@ -130,9 +130,11 @@ El dise\~no completo, contempla un acceso directo al servidor de la base de dato
   \label{fig:interfaces}
 \end{figure}
 
-No obstante, por cuestiones de tiempo y de accesibilidad, para el desarrollo de este trabajo, los datos que provee el departamento de din\'amica orbital fueron descargados y se extraen de un directorio, al igual que los mensajes de alerta CDM, que fueron descargados de pa\'aginas de internet , ya que no nos han facilitado ninguno vinculado a la misi\'on operativa de la que cual procesamos los productos orbitales, por motivos de confidencialidad. Se realiz\'o la automatizaci\'on de la descarga de TLEs de la p\'agina Space-Track y se habilit\'o en la interfaz la pantalla que permite la carga manual de los datos del encuentro.\\
+No obstante, por cuestiones de tiempo y de accesibilidad, para el desarrollo de este trabajo, los datos que provee el departamento de Din\'amica Orbital fueron descargados y se extraen de un directorio, al igual que los mensajes de alerta CDM, que fueron descargados de pa\'aginas de internet , ya que no nos han facilitado ninguno vinculado a la misi\'on operativa con la que trabajamos, por motivos de confidencialidad.\\
+Se realiz\'o la automatizaci\'on de la descarga de TLEs de la p\'agina Space-Track y se habilit\'o en la interfaz la pantalla que permite la carga manual de los datos del encuentro.\\
 
-En conclusi\'on, las interfaces implementadas, son (Ver Fig. \ref{fig:interfacesImpl}):\\
+En conclusi\'on, las interfaces implementadas, son:\\
+ (Ver Fig. \ref{fig:interfacesImpl})\\
 \begin{itemize}
 \itemsep0em
  \item Conexi\'on a Space-Track para la solicitud de TLEs.
@@ -148,14 +150,74 @@ En conclusi\'on, las interfaces implementadas, son (Ver Fig. \ref{fig:interfaces
   \label{fig:interfacesImpl}
 \end{figure}
 
-\section{Arquitectura}
+\section{Casos de Uso}
 
+
+
+Este trabajo se pens\'o como un sistema acoplado al software principal del departamento de Din\'amica Orbital. En este sentido, no existe gran complejidad en la estructura del prototipo, ya que su valor, radica en la correcta implementaci\'on de los algoritmos que procesan la informaci\'on del encuentro. Identificamos dos casos de uso:\\
+Fig. \ref{fig:casosuso}
+ 
+ 
+\begin{itemize}
+ \item {\it{Procesar Encuentro}}: que nuclea el procesamiento vertebral de ARxCODE
+ \item {\it{Ver informes de encuentros anteriores}}: ofrece encuentros anteriores.
+\end{itemize}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=.5\textwidth]{imagenes/usecaseAR}
+  \caption{Casos de Uso de ARxCODE}
+  \label{fig:casosuso}
+\end{figure}
+
+
+ \begin{table}[h]\renewcommand{\arraystretch}{1.3}
+\centering
+\resizebox{18cm}{!}{
+\begin{tabular}[c]{|l|l|}
+\hline 
+\rowcolor{lightgray}
+\bf{Nombre}  &    {\it{\bf{Procesar Encuentro}}}\\
+\hline
+Actor  &    Operador de Din\'amica Orbital con Autorizaci\'on\\
+\hline
+\multirow{ 3}{*}{Prop\'osito} & Calcular la probabilidad de colisi\'on, la m\'inima distancia total\\
+& y m\'inima distancia en la coordenada radial, para poder hacer un an\'alisis\\
+& de la situaci\'on de encuentro.\\
+\hline
+\multirow{ 4}{*}{Resumen}& Procesa la ingesta de datos de un encuentro, (CDMs o ingreso manual)\\
+&  y calcula los par\'ametros de la situaci\'on de riesgo:\\
+& m\'inima distancia total, m\'inima distancia en la coordenada radial y probabilidad de colisi\'on.\\
+& Realiza gr\'aficos e informes.\\
+\hline
+\multirow{ 3}{*}{Precondiciones}  &  El operador debe estar registrado en la p\'agina space-track de NORAD.  \\
+& Los archivos CDM deben estar previamente cargados en el Directorio de b\'usqueda.\\
+& El operador debe conocer el encuentro que desea analizar y sus datos en caso del ingreso manual.\\
+\hline
+\multirow{ 3}{*}{Flujo Principal} & 1 - El operador selecciona un archivo CDM \\
+& 2 - El operador oprime el bot\'on {\it{Track}} para visualizar el encuentro proyectado en la superficie terrestre (opcional)\\
+& 3 - El operador oprime el bot\'on para generar un informe (opcional)\\
+\hline
+\multirow{ 3}{*}{Flujo Alternativo} & 1 - El operador ingresa los n\'umeros de identificaci\'on de los objetos (NORAD\_ID) \\
+& 2 - El operador ingresa la fecha y hora del m\'aximo acercamiento (TCA)\\
+& 3 - El operador oprime el bot\'on {\it{Procesar}} para procesar el encuentro\\
+\hline
+Postcondiciones & El informe de an\'alisis de riesgo fue generado y almacenado.\\
+\hline
+\end{tabular}}
+\caption[Caso de Uso: Procesar Encuentro]{Tabla con la descripci\'on del caso de uso: \it{Procesar Encuentro}}
+\label{tab:usoproceso}
+\end{table}
+
+
+\section{Arquitectura}
 
 \subsection*{Componentes}\label{subsec:componentes}
 En un planteo conceptual, con alto grado de abstracci\'on, los distintos paquetes de ARxCODE pueden agruparse en cinco componentes Fig.  \ref{fig:componentes}: PROCESAMIENTO, ADMINISTRACI\'ON DE DATOS, INTERFAZ GR\'AFICA Y VISUALIZACI\'ON, Sistemas de Referencia y VALIDACIONES.\\
 
 \begin{itemize}
- \item PROCESAMIENTO: Involucra los cuatro paquetes que no s\'olo operan con los datos ingresados, sino que tambi\'en los manipulan y procesan para generar nuevos productos. Estos m\'odulos son, de alguna manera los distintos n\'ucleos del c\'odigo.\\
+ \item PROCESAMIENTO: Involucra los cuatro paquetes que, no s\'olo operan con los datos ingresados, sino que tambi\'en los manipulan y procesan para generar nuevos productos. Estos m\'odulos son, de alguna manera, los distintos n\'ucleos del c\'odigo.\\
+
  \begin{itemize}
  \itemsep0em
   \item {\it{AjustarTle}}
@@ -163,14 +225,17 @@ En un planteo conceptual, con alto grado de abstracci\'on, los distintos paquete
   \item {\it{Estadistica}}
   \item {\it{Encuentro}}
  \end{itemize}
+
  \item ADMINISTRACI\'ON DE DATOS: Son aquellos paquetes que se encargan de la obtenci\'on, el desgloce y el preprocesamiento de los datos que ser\'an utilizados por el resto de los m\'odulos.
+
  \begin{itemize}
  \itemsep0em
   \item {\it{TleAdmin}}
   \item {\it{CodsAdmin}}
   \item {\it{CDM}}
  \end{itemize}
- \item INTERFAZ Y VISUALIZACI\'ON: Agrupa el paquete que genera la interfaz gr\'afica y el paquete que contiene todos los m\'odulos que generan represntaciones visuales, como los ploteos o los tracks de las trayectorias de los objetos.\\
+
+ \item INTERFAZ Y VISUALIZACI\'ON: Agrupa el paquete que genera la interfaz gr\'afica y el paquete que contiene todos los m\'odulos que generan representaciones visuales, como los ploteos o los tracks de las trayectorias de los objetos.\\
  \begin{itemize}
  \itemsep0em
  \item {\it{Aplicacion}}
@@ -183,27 +248,29 @@ En un planteo conceptual, con alto grado de abstracci\'on, los distintos paquete
 
 \begin{figure}[h!]
   \centering
-  \includegraphics[width=.8\textwidth]{imagenes/componentesAR}
-  \label{fig:componentes}
+  \includegraphics[width=.8\textwidth]{imagenes/componentesAR}  
   \caption{Componentes de ARxCODE}
+  \label{fig:componentes}
 \end{figure}
 
 \subsubsection*{ADMINISTRACI\'ON DE DATOS: TleAdmin}
-Este paquete contiene las dos clases que gestionan la descarga de los TLEs de la p\'agina Space-Track: {\bf{Tle}} y {\bf{setTLE}}. La primera provee un \'unico TLE y todo lo referente a \'el Fig. \ref{fig:clasetle}; se instancia a partir del identificador de NORAD del objeto y una \'epoca o a partir del nombre de un archivo que contiene un \'unico TLE. Entre sus m\'etodos, es fundamental {\bf{propagaTLE()}}, que propaga la posici\'on del objeto al momento que sea necesario.\\
-La clase {\bf{setTLE}} Fig. \ref{clasesettle}, es necesaria particularmente para la implementaci\'on del m\'etodo de Osweiler que requiere un conjunto de TLEs de 15 d\'ias para la generaci\'on de la matriz de covarianza de la posici\'on del objeto. Esta clase se instancia, indicando el identificador de NORAD del objeto, la fecha de inicio y fin, del set que se requiere. Una vez descargados, genera un \'unico archivo con todos los TLEs del intervalo y los guarda en la carpeta {\it{crudosTLE}}. El m\'etodo {\bf{divide\_setTLE()}}, particiona el texto con el conjunto de TLEs y genera un archivo por cada TLE y lo almacena en la carpeta {\it{tle}} del paquete.Esta \'ultima carpeta, se actualiza con cada corrida del software, de modo que siempre contiene s\'olo el conjunto de archivos de TLEs que van a ser procesados.\\
+Este paquete contiene las dos clases que gestionan la descarga de los TLEs de la p\'agina Space-Track: {\bf{Tle}} y {\bf{setTLE}} (Fig. \ref{fig:Tleadmin}). La primera provee un \'unico TLE y todo lo referente a \'el; se instancia a partir del identificador de NORAD del objeto y una \'epoca, o a partir del nombre de un archivo que contiene un \'unico TLE. Entre sus m\'etodos, es fundamental {\bf{propagaTLE()}}, que propaga la posici\'on del objeto al momento que sea necesario.\\
+
+La clase {\bf{setTLE}}, es necesaria particularmente para la implementaci\'on del m\'etodo de Osweiler que requiere un conjunto de TLEs de 15 d\'ias para la generaci\'on de la matriz de covarianza de la posici\'on del objeto. Esta clase se instancia, indicando el identificador de NORAD del objeto, la fecha de inicio y fin, del set que se requiere. Una vez descargados, genera un \'unico archivo con todos los TLEs del intervalo y los guarda en la carpeta {\it{crudosTLE}}.\\
+El m\'etodo {\bf{divide\_setTLE()}} de la clase {\bf{setTLE}}, particiona el texto con el conjunto de TLEs y genera un archivo por cada TLE y lo almacena en la carpeta {\it{tle}} del paquete.\\
+Esta \'ultima carpeta, se actualiza con cada corrida del software, de modo que siempre contiene s\'olo el conjunto de archivos de TLEs que van a ser procesados.\\
 
 \begin{figure}[!h]
 \centering
   \subfigure[Clase TLE (TleAdmin/TLE/Tle)]{
     \includegraphics[width=0.3\textwidth]{imagenes/tleClass}
-    \label{fig:clasetle}
   }
   \hspace{1.5cm}
   \subfigure[Clase setTLE (TleAdmin/TLE/setTLE)]{
     \includegraphics[width=0.3\columnwidth, keepaspectratio]{imagenes/setTLEclass}
-    \label{fig:clasesettle}
   }
   \caption[Clases Tle y setTLE]{Clases Tle y setTLE del paquete TleAdmin}
+  \label{fig:Tleadmin}
 \end{figure}
 
 \subsubsection*{ADMINISTRACI\'ON DE DATOS: CDM}
@@ -211,7 +278,7 @@ El paquete CDM contiene una carpeta con archivos en formato del CDM, en xml y la
 
 \subsubsection*{ADMINISTRACI\'ON DE DATOS: CodsAdmin}
 Este paquete administra los productos orbitales generados por el departamento de Din\'amica Orbital \ac{CODS}.\\
-Cuenta con varias carpetas que almacenan los productos previamente descargados y contiene a la clase {\bf{EphemCODS}}, que tiene la capacidad de extraer las efem\'erides de los archivos y de identificar el periodo que los mismos contienen a partir del nombre.\\
+Cuenta con varias carpetas que almacenan los productos previamente descargados y contiene a la clase {\bf{EphemCODS}}, que tiene la capacidad de extraer las efem\'erides de los archivos y de identificar el periodo de datos que abarca el archivo a partir del nombre.\\
 
 \begin{figure}[!h]
 \centering
@@ -234,9 +301,18 @@ Este paquete incluye el m\'odulo con el mismo nombre {\it{AjustarTle}}, que cuen
 En el paquete {\it{Comprar}} se nuclean todos los m\'odulos y funciones que permiten la selecci\'on y la extracci\'on de los datos de los productos de Din\'amica Orbital (CODS), y sus respectivas comparaciones con los resultados que provienen de la propagaci\'on de los TLEs. Este tipo de comparaciones son necesarias en la estimaci\'on de errores que se comenten al utilizar propagaciones de TLE con SGP4. 
 
 \subsubsection*{PROCESAMIENTO: Estad\'istica}
-Dentro de este paquete se encuentran los desarrollos referidos a los c\'alculos estad\'isticos, m\'as precisamente los m\'odulos que calculan las matrices de covarianza. En este paquete se encuentra el m\'odulo que implementa el m\'etodo de Oswiler {\bf{matrizOsweiler}}
+Dentro de este paquete se encuentran los desarrollos referidos a los c\'alculos estad\'isticos, m\'as precisamente los m\'odulos que calculan las matrices de covarianza. En este paquete se encuentra el m\'odulo que implementa el m\'etodo de Oswiler {\bf{matrizOsweiler}}.
 
 \subsubsection*{PROCESAMIENTO: Encuentro}
+Este es el paquete n\'ucleo del software. En \'el se encuentra la clase {\bf{Encuentro}}  Fig. \ref{fig:claseencuentro}, que instancia la generaci\'on del encuentro, incorporando ambos objetos mediante sus identificadores de NORAD y el TCA, generando las propagaciones necesarias, y las matrices de error, para calcular la m\'inima distancia y la probabilidad de colisi\'on. A tal fin, cuenta con los m\'etodos (Fig. \ref{fig:claseencuentro}): {\bf{calculaMacombinada}}, {\bf{proyecta\_alplano\_encuentro}}, {\bf{calculaPoC\_circ}} y  {\bf{calculaPoC\_gral}}\\
+\textcolor{red}{agregar clase posicion}
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=.3\textwidth]{imagenes/encuentroClass} 
+  \caption[Clase Encuentro]{Clase Encuentro para el c\'alculo de los par\'ametros del acercamiento}
+  \label{fig:claseencuentro}
+\end{figure}
 
 
 \subsubsection*{INTERFAZ GR\'AFICA Y VISUALIZACI\'ON: Aplicaci\'on}
@@ -251,7 +327,7 @@ Este paquete contiene m\'odulos para realizar transformaciones entre los distint
 {\it{teme2tod}} y {\it{ricSis}}, ya descriptos en \textcolor{red}{referencia sist de ref. marco teorico}.
 
 \subsubsection*{Validaciones}
-Re\'une todas los m\'odulos que se desarrollaron para la validaci\'on de los resultados, cuyos valores se analizan y publican en la secci\'on \ref{chap:resultados}. A saber:
+Re\'une todas los m\'odulos que se desarrollaron para la validaci\'on de los resultados, cuyos valores se analizan y publican en la secci\'on de Resultados y Validaciones Sec. \ref{chap:resultados}. A saber:
 
 \begin{itemize}
  \item valida\_OSW: valida el m\'etodo de Osweiler.
@@ -261,62 +337,8 @@ Re\'une todas los m\'odulos que se desarrollaron para la validaci\'on de los res
 
 
 
+\section{Diagrama de Actividad}
 
-\subsection{Casos de Uso}
-
-Este trabajo se pens\'o como un adicional, o un \textcolor{red}{agregado}, al software principal del departamento de din\'amica orbital. En este sentdio, no existe gran complejidad en la estrucutura del prototipo, ya que su valor, radica en la correcta implementaci\'on de los algoritmos que procesan la informaci\'on del encuentro.\\
-Identificamos dos clases de uso Fig. \ref{fig:casosuso} :\\
-\begin{itemize}
- \item {\it{Procesar Encuentro}}: que nuclea el procesamiento vertebral de ARxCODE
- \item {\it{Ver informes de encuentros anteriores}}: ofrece encuentros anteriores.
-\end{itemize}
-
-\begin{figure}[h!]
-  \centering
-  \includegraphics[width=.5\textwidth]{imagenes/usecaseAR}
-  \label{fig:casosuso}
-  \caption{Casos de Uso de ARxCODE}
-\end{figure}
-
-
- \begin{table}[h]
-\centering
-\resizebox{18cm}{!}{
-\begin{tabular}[c]{|l|l|}
-\hline
-\bf{Nombre}  &    \it{Procesar Encuentro}\\
-\hline
-Actor  &    Operador de Din\'amica Orbital con Autorizaci\'on\\
-\hline
-\multirow{ 3}{*}{Prop\'osito} & Calcular la probabilidad de colisi\'on, la m\'inima distancia total\\
-& y m\'inima distancia en la coordenada radial, para poder hacer un an\'alisis\\
-& de la situaci\'on de encuentro.\\
-\hline
-\multirow{ 4}{*}{Resumen}& Procesa la ingesta de datos de un encuentro, (CDMs o ingreso manual)\\
-&  y calcula los par\'ametros de la situaci\'on de riesgo:\\
-& m\'inima distancia total, m\'inima distancia en la coordenada radial y probabilidad de colisi\'on.\\
-& Realiza gr\'aficos e informes.\\
-\hline
-Requerimientos  &    \\
-\hline
-\multirow{ 3}{*}{Precondiciones}  &  El operador debe estar registrado en la p\'agina space-track de NORAD.  \\
-& Los archivos CDM deben estar previamente cargados en el Directorio de b\'usqueda.\\
-& El operador debe conocer el encuentro que desea analizar y sus datos en caso del ingreso manual.\\
-\hline
-\multirow{ 3}{*}{Flujo Principal} & 1 - El operador selecciona un archivo CDM \\
-& 2 - El operador oprime el bot\'on {\it{Track}} para visualizar el encuentro proyectado en la superficie terrestre (opcional)\\
-& 3 - El operador oprime el bot\'on para genera un informe (opcional)\\
-\hline
-\multirow{ 3}{*}{Flujo Alternativo} & 1 - El operador ingresa los n\'umeros de identificaci\'on de los objetos (NORAD\_ID) \\
-& 2 - El operador ingresa la fecha y hora del m\'aximo acercamiento (TCA)\\
-& 3 - El operador oprime el bot\'on {\it{Procesar}} para procesar el encuentro\\
-\hline
-Postcondiciones & El informe de an\'alisis de riesgo fue generado y almacenado.\\
-\hline
-\end{tabular}}
-\caption[Caso de Uso: Procesar Encuentro]{Tabla con la descripci\'on del caso de uso: \it{Procesar Encuentro}}
-\label{tab:usoproceso}
-\end{table}
 
 \begin{figure}[h!]
   \centering
@@ -325,7 +347,7 @@ Postcondiciones & El informe de an\'alisis de riesgo fue generado y almacenado.\
   \caption{Diagrama de Actividades de ARxCODE}
 \end{figure}
 
-\section{Entradas y Salidas}
+
 
 % archivos y demases
 % 

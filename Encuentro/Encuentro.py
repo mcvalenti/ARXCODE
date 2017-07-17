@@ -8,7 +8,7 @@ import sys
 from Aplicacion.globals import tabla
 from SistReferencia.sist_deCoordenadas import ricSis
 from datetime import datetime,timedelta
-from TleAdmin.TLE import Tle, SetTLE
+#from TleAdmin.TLE import Tle, SetTLE
 from Estadistica.matrizOsweiler import calcula_matriz_Tles
 from Estadistica.maCovar import EjecutaMaCovar
 
@@ -46,8 +46,21 @@ class Encuentro():
     def __init__(self,tle_sat,tle_deb,tca,n):
         """
         Calcula las diferencias en posiciones y velocidades 
-        para dos objetos en situacion de acercamiento, 5 minutos antes
-        y 5 minutos despues del tca.
+        para dos objetos en situacion de acercamiento, durante un 
+        intervalo que inicia 5 minutos antes y termina 5 minutos
+        despues del TCA.
+        Devuelve los parametros del encuentro:
+        * minima distancia en modulo (RTN)
+        * componentes de la minima distancia (R, T, N)
+        * tiempo de maximo acercamiento
+        * 2 archivos con las coordenadas de las trayectorias en el
+          sistema geodesico.
+        * 1 archivo con con las posiciones relativas del intervalo
+          (RTN)
+        METODOS para el caculo de la PoC.
+        * Calcula la matriz de covarianzas combinadas.
+        * Proyecta resultados al plano de encuentro.
+        * Calcula la PoC.
         -----------------------------------------------------------
         outpus:
             3 archivos: (../Encuentro/archivos/)
@@ -61,62 +74,72 @@ class Encuentro():
         
         self.tle_sat=tle_sat
         self.tle_deb=tle_deb
-        self.tca=tca
-        self.DistRic=0   
-        self.n=n      
+        self.tca=tca  
+        self.ndias_prev=n      
         """
         Genera Archivos
         """
         self.sat_id=self.tle_sat.catID()
         self.deb_id=self.tle_deb.catID()
-        self.archivo_dif ='../Encuentro/archivos/'+str(self.sat_id)+'_'+str(self.deb_id)+'_rtn'
+        archivo_dif ='../Encuentro/archivos/'+str(self.sat_id)+'_'+str(self.deb_id)+'_rtn'
         salida1=open('../Encuentro/archivos/'+str(self.sat_id),'w+')
         salida2=open('../Encuentro/archivos/'+str(self.deb_id),'w+')
-        salida3=open(self.archivo_dif,'w+')
+        salida3=open(archivo_dif,'w+')
 
         """
         Calcula las diferencias relativas entre los dos 
         objetos en el sistema RTN.
         """
 
-        self.epoca_ini=self.tca-timedelta(minutes=5)
-        epoca_fin=self.tca+timedelta(minutes=5)
+        epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
+        epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
         
         self.mod_minDist=sys.float_info.max
-        while self.epoca_ini < epoca_fin:
-            r,v=self.tle_sat.propagaTLE(self.epoca_ini)
-            r1,v1=self.tle_deb.propagaTLE(self.epoca_ini)
+        while epoca_ini < epoca_fin:
+            r,v=self.tle_sat.propagaTLE(epoca_ini)
+            r1,v1=self.tle_deb.propagaTLE(epoca_ini)
             
             r=np.array([float(r[0]),float(r[1]),float(r[2])])
             v=np.array([float(v[0]),float(v[1]),float(v[2])])
             r1=np.array([float(r1[0]),float(r1[1]),float(r1[2])])
             v1=np.array([float(v1[0]),float(v1[1]),float(v1[2])])
             
-            pos1=Posicion(r,v,self.epoca_ini)
-            pos2=Posicion(r1,v1,self.epoca_ini)
-            
-            self.DistVector=pos1.r-pos2.r
-            x_ric,y_ric,z_ric=ricSis(pos1.r,pos1.v,self.DistVector)
-            self.DistRic=np.array([x_ric,y_ric,z_ric])
-            self.VelVector=pos1.v-pos2.v
-            vx_ric,vy_ric,vz_ric=ricSis(pos2.r,pos2.v,self.VelVector)
+            #====================================
+            # Posiciones en el ECI
+            #====================================
+            pos1=Posicion(r,v,epoca_ini)
+            pos2=Posicion(r1,v1,epoca_ini)
+            #====================================
+            # Posiciones y vel relativas ECI
+            #====================================
+            DistVector=pos1.r-pos2.r
+            VelVector=pos1.v-pos2.v
+            #====================================
+            # Posiciones y vel relativas RIC (RTN)
+            #====================================           
+            x_ric,y_ric,z_ric=ricSis(pos1.r,pos1.v,DistVector)            
+            DistRic=np.array([x_ric,y_ric,z_ric])
+            vx_ric,vy_ric,vz_ric=ricSis(pos2.r,pos2.v,VelVector)
             self.VelRic=np.array([vx_ric,vy_ric,vz_ric])
-            self.mod_Dist1=np.sqrt(np.dot(self.DistRic,self.DistRic))
+            mod_Dist1=np.sqrt(np.dot(DistRic,DistRic))
+            
 #            self.mod_Dist1=np.sqrt(np.dot(self.DistVector,self.DistVector))
-            if self.mod_Dist1 < self.mod_minDist:
-                self.mod_minDist=self.mod_Dist1
-                self.tca_c=self.epoca_ini
-                self.DistRic_min=np.array([x_ric,y_ric,z_ric])
+
+            # Calculo de la distancia minima. 
+            if mod_Dist1 < self.mod_minDist:
+                self.mod_minDist=mod_Dist1
+                self.tca_c=epoca_ini
+                DistRic_min=np.array([x_ric,y_ric,z_ric])
                 self.vel_sat_tca=v
                 self.vel_deb_tca=v1
 #                print self.tca_c, self.mod_minDist
-            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
+            epoca_ini=epoca_ini+timedelta(seconds=1)
             #====================================
-            # Distancias relativas en RTN.
+            # Distancias Minimas en RTN.
             #====================================
-            self.r_comp=self.DistRic_min[0]
-            self.s_comp=self.DistRic_min[1]
-            self.w_comp=self.DistRic_min[2]
+            self.r_comp=DistRic_min[0]
+            self.s_comp=DistRic_min[1]
+            self.w_comp=DistRic_min[2]
     
             #Calculo el angulo entre los vectores velocidad.
             cos_phi=np.dot(self.vel_sat_tca,self.vel_deb_tca)/(np.sqrt(np.dot(self.vel_sat_tca,self.vel_sat_tca))*np.sqrt(np.dot(self.vel_deb_tca,self.vel_deb_tca)))
@@ -128,7 +151,7 @@ class Encuentro():
             salida1.write(str(alpha1)+' '+str(delta1)+' '+datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
             salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n') 
             # GUARDA EN ARCHIVO Posiciones Relativas en RTN.
-            salida3.write(datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(self.DistRic[0])+' '+str(self.DistRic[1])+' '+str(self.DistRic[2])+'\n')
+            salida3.write(datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(DistRic[0])+' '+str(DistRic[1])+' '+str(DistRic[2])+'\n')
 
         print 'Fin del procesamiento de Encuentro'
         salida1.close()
@@ -192,9 +215,9 @@ class Encuentro():
         # 3 -Corrijo ambas matrices por tabla de Marce al TCA -
         # n dias adelante.
         #=============================================================
-        var_tab_r=tabla[self.n][0]
-        var_tab_t=tabla[self.n][1]
-        var_tab_c=tabla[self.n][2]
+        var_tab_r=tabla[self.ndias_prev][0]
+        var_tab_t=tabla[self.ndias_prev][1]
+        var_tab_c=tabla[self.ndias_prev][2]
         
         maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r
         maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t

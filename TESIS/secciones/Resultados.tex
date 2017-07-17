@@ -71,17 +71,32 @@ Epoca & x [km] & y [km] & z [km] & vx $[km/s]$ & vy $[km/s]$ & vz $[km/s]$\\
 
 \textcolor{red}{hacer las diferencias en python y publicarlas}
 
-\section{Implementaci\'on del M\'etodo de Osweiler}
+\section{Estudio de errores de TLE con datos hist\'oricos}
 
-El trabajo de Osweiler publica los resultados de las matrices de covarianzas generadas, para 6 misiones y 8 ventanas de tiempo.\\
-ARxCODE implementa el m\'etodo y obtiene resultados que difieren en algunos metros en los casos m\'as groseros. Esto resulta satisfactorio ya que se estiman errores medios del orden de decenas de metros.\\
-Se compararon 3 de las misiones: LAGEOS-1, GRACE-1 e ICESAT.\\
-Se muestran a continuaci\'on
+El trabajo de Osweiler publica los resultados de las matrices de covarianza generadas, para 6 misiones y 8 ventanas de tiempo.\\
+Para la validaci\'on se tomaron dos escenarios muy diferentes en cuanto a la altura del sat\'elite: LAGEOS-1 a m\'as de $5000 km$ y ICESAT a $600 km$
+Se presentan a continuaci\'on las tablas con los resultados comparativos, entre los valores publicados y los valores obtenidos por ARxCODE.\\
+Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura, que se ve m\'as perturbado por el efecto atmosf\'erico, que no es modelable con precisión; mientras que el LAGEOS-1 presenta errores muchos \'ordenes de magnitud menor.\\
+
+\begin{table}
+ \centering
+      \begin{tabular}{cccccc}
+      \hline
+      Nombre & ID NORAD & Altura & Ecc. & Inclinaci\'on & B* \\
+      \hline
+      LAGEOS-1 & 8820 & $5850$ & $0.004$ & $109.8$ & $0.0001$ \\
+      ICESAT & 27642 & $600$ & $0.0002 - 0.001$ & $94$ & var\'ia \\
+      \hline
+      \end{tabular}
+    \caption[Sat\'elites de Estudio]{Resumen de las caracter\'isticas de los sat\'elites a analizar}
+\end{table}
+
+\subsection*{Tablas comparativas ICESAT}
 
 \begin{table}[!h]
 \centering
 \makebox[0pt][c]{\parbox{1.0\textwidth}{%
-    \begin{minipage}[b]{0.48\hsize}\centering
+    \begin{minipage}[t]{0.48\hsize}\centering
      \resizebox{8cm}{!}{
     \begin{tabular}{cccc}
       \hline
@@ -95,8 +110,7 @@ Se muestran a continuaci\'on
       \caption{Matriz de Covarianza de la Bilbiografia \citep{Osweiler} - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03}
       \label{tab:singlebest}
     \end{minipage}
-    \hfill
-    \begin{minipage}[b]{0.48\hsize}\centering
+    \begin{minipage}[t]{0.48\hsize}\centering
     \resizebox{8cm}{!}{
       \begin{tabular}{cccc}
 	\hline
@@ -121,15 +135,96 @@ Se muestran a continuaci\'on
  Vent 1 & Dif.$R_{v}$ (km) & Dif.$R_{n}$ (km) & Dif.$R_{c}$ (km)\\
  \hline
  Dif. $R_{v}$ & -0.00373241 & 0.0002234 & -0.00011404 \\
- Dif. $R_{n}$ &  2.23395376e-04 &  8.60134465e-06 & -4.88505718e-06\\
- Dif. $R_{c}$ & -1.14040213e-04 & -4.88505718e-06 &  2.56027057e-06\\
+ Dif. $R_{n}$ &  0.0002234 &  0.000008 & -0.000004\\
+ Dif. $R_{c}$ & -0.00011404  & -0.000004 &  0.000002\\
  \hline
  \end{tabular}
  \caption{Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler \citep{Oseweiler}}
 \end{table}
 
 
-\section{Metodolog\'ia de Estimaci\'on de Errores}
+\subsection*{Tablas comparativas LAGEOS-1}
+
+
+\begin{table}[!h]
+\centering
+\makebox[0pt][c]{\parbox{1.0\textwidth}{%
+    \begin{minipage}[b]{0.48\hsize}\centering
+     \resizebox{8cm}{!}{
+    \begin{tabular}{cccc}
+      \hline
+    Vent 1 & $R_{v}$ (km) & $R_{n}$ (km) & $R_{c}$ (km)\\
+    \hline
+    $R_{v}$ & 0.378619 & -0.0343598 & 0.02771527 \\
+    $R_{n}$ & -0.0343598 &  0.004002 & -0.0027171 \\
+    $R_{c}$ & 0.02771527 & -0.0027171 &  0.0084302 \\
+    \hline
+    \end{tabular}}
+      \caption{Matriz de Covarianza de la Bilbiografia \citep{Osweiler} - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
+      \label{tab:singlebest}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.48\hsize}\centering
+    \resizebox{8cm}{!}{
+      \begin{tabular}{cccc}
+	\hline
+      Vent 1 & $R_{v}$ (km) & $R_{n}$ (km) & $R_{c}$ (km)\\
+      \hline
+      $R_{v}$ &  0.37863904 & -0.03440871 & 0.02772177 \\
+      $R_{n}$ & -0.03440871 & 0.00401173 & -0.00272334 \\
+      $R_{c}$ & 0.02772177 & -0.00272334 & 0.00843443\\
+      \hline
+      \end{tabular}}
+        \caption{Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
+        \label{tab:twobest}
+    \end{minipage}
+    \hfill
+}}
+\end{table}
+
+\begin{table}[!h]
+\centering
+ \begin{tabular}{cccc}
+  \hline
+ Vent 1 & Dif.$R_{v}$ (km) & Dif.$R_{n}$ (km) & Dif.$R_{c}$ (km)\\
+ \hline
+ Dif. $R_{v}$ & 0.000020 &  -0.000048 &  0.000006 \\
+ Dif. $R_{n}$ & -0.000048 &   0.000009 &  -0.000006 \\
+ Dif. $R_{c}$ & 0.000006 &  -0.000006 &   0.000004 \\
+ \hline
+ \end{tabular}
+ \caption{Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler \citep{Oseweiler}}
+\end{table}
+
+\subsection*{Diferencias de los escenarios todos contra todos}
+Estudio hecho sobre los errores que se producen en las propagaciones de los TLE en funci\'on de la cantidad de d\'ias que se propaguen.\\
+
+\begin{figure}[h!]
+\centering
+  \subfigure[Diferencias ICESAT - ARxCODE]{
+    \includegraphics[width=0.48\textwidth]{imagenes/TLEdifTot27642esc52}
+  }
+  \subfigure[Diferencias ICESAT - Osweiler]{
+    \includegraphics[width=0.48\columnwidth, keepaspectratio]{imagenes/ICESATdifTot}
+  }
+  \caption{Gr\'afico con Diferencias Totales del escenario ICESAT}
+  \label{fig:icesatTot}
+\end{figure}
+
+\begin{figure}[h!]
+\centering
+  \subfigure[Diferencias LAGEOS-1 - ARxCODE]{
+    \includegraphics[width=0.48\textwidth]{imagenes/TLEdifTot8820esc11}
+  }
+  \subfigure[Diferencias LAGEOS-1 - ARxCODE]{
+    \includegraphics[width=0.48\columnwidth, keepaspectratio]{imagenes/LAGEOSdifTot}
+  }
+  \caption{Gr\'afico con Diferencias Totales del escenario LAGEOS-1}
+  \label{fig:lageosTot}
+\end{figure}
+
+
+\section{Estudio de errores de TLE contra efem\'erides precisas}
 \subsection*{Sistema de referencia TOD}
 Como ya mencionamos \textcolor{red}{debe haber una secci\'on dedicada a datos CODS}, los productos del departamento de din\'amica orbital con los que trabajamos ofrecen las posiciones orbitales en el sistema de referencia verdadero de la fecha \ac{TOD}, mientras que los resultados de las propagaciones con el sgp4 se encuentran en el sistema \ac{TEME}. Para poder hacer comparaciones desarrollamos un m\'odulo que transforma las coordenadas y velocidades, del sistema TEME al sistema TOD. (Ver. \textcolor{red}{apendice}).
 Para la validaci\'on del mismo, utilizamos TLEs de la misi\'on y los propagamos con el sgp4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos de din\'amica orbital, para los mismos instantes.\\

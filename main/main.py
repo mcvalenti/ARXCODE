@@ -8,7 +8,7 @@ import numpy as np
 from scipy.integrate import quad, dblquad
 from datetime import datetime, timedelta
 from Aplicacion.globals import tabla
-from TleAdmin.TLE import Tle, SetTLE
+from TleAdmin.TLE import Tle
 from Encuentro.Encuentro import Encuentro
 from Estadistica.matrizOsweiler import calcula_matriz_Tles, calcula_matriz_OSWcorregido
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
