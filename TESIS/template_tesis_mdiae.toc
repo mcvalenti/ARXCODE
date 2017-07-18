@@ -11,16 +11,15 @@
 \contentsline {section}{\numberline {1.7}Objetivos}{13}{section.1.7}
 \contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{15}{chapter.2}
 \contentsline {section}{\numberline {2.1}Introducci\'on}{15}{section.2.1}
-\contentsline {section}{\numberline {2.2}Comunicaciones de riesgo de colisi\'on}{16}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}El CDM}{16}{subsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.1.1}Ejemplo de CDM}{18}{subsubsection.2.2.1.1}
-\contentsline {section}{\numberline {2.3}La posici\'on de los objetos involucrados}{19}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}SGP4}{21}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Sistemas de Referencia}{22}{subsection.2.3.2}
-\contentsline {section}{\numberline {2.4}El tratamiento de los Errores en la posici\'on}{24}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}M\'etodo de Osweiler}{24}{subsection.2.4.1}
-\contentsline {subsection}{\numberline {2.4.2}Propagaci\'on de errores}{25}{subsection.2.4.2}
-\contentsline {section}{\numberline {2.5}La Probabilidad de Colisi\'on}{28}{section.2.5}
+\contentsline {section}{\numberline {2.2}La posici\'on de los objetos involucrados}{16}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}SGP4}{18}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2.2.2}Sistemas de Referencia}{19}{subsection.2.2.2}
+\contentsline {section}{\numberline {2.3}El tratamiento de los errores utilizando s\'olo TLE}{21}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}M\'etodo de Osweiler}{21}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.2}Propagaci\'on de errores utilizando TLE y efem\'erides precisas}{23}{subsection.2.3.2}
+\contentsline {section}{\numberline {2.4}La Probabilidad de Colisi\'on}{25}{section.2.4}
+\contentsline {section}{\numberline {2.5}Comunicaciones de riesgo de colisi\'on}{30}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}El CDM}{30}{subsection.2.5.1}
 \contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de Desarrollo}{35}{chapter.3}
 \contentsline {section}{\numberline {3.1}Inicializaci\'on}{35}{section.3.1}
 \contentsline {section}{\numberline {3.2}Iteraci\'on}{36}{section.3.2}
@@ -37,7 +36,8 @@
 \contentsline {section}{\numberline {5.1}Introducci\'on}{49}{section.5.1}
 \contentsline {section}{\numberline {5.2}Implentenaci\'on del modelo SGP4 en Python}{50}{section.5.2}
 \contentsline {section}{\numberline {5.3}Estudio de errores de TLE con datos hist\'oricos}{50}{section.5.3}
-\contentsline {section}{\numberline {5.4}Estudio de errores de TLE contra efem\'erides precisas}{52}{section.5.4}
+\contentsline {section}{\numberline {5.4}Estudio de errores de TLE con efem\'erides precisas}{52}{section.5.4}
+\contentsline {subsection}{\numberline {5.4.1}Sistema de referencia TOD}{52}{subsection.5.4.1}
 \contentsline {chapter}{\numberline {6}Conclusiones}{54}{chapter.6}
 \contentsline {chapter}{\numberline {7}Ap\'endice}{55}{chapter.7}
 \contentsline {section}{\numberline {7.1}Appendix 1}{55}{section.7.1}

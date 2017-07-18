@@ -61,4 +61,3 @@ bin, data, dataPri, coef1 = difTle(tle_ordenados, cant_tle)
 #======================================
 path='../AjustarTLE/diferencias'
 grafica_diferenciasTotales(sat_id,path,data[1],coef1)
-

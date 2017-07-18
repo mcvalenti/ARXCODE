@@ -20,11 +20,11 @@
 {Brandon Rhodes}.
 \newblock sgp4-1.4.
 
-\bibitem[\protect\astroncite{Consultative Committee~for Space
-  Data~Systems}{2013}]{CDMstd}
-Consultative Committee~for Space Data~Systems, C. (2013).
-\newblock Conjunction data message standard.
-\newblock Technical report, CCSDS.
+\bibitem[\protect\astroncite{CCSDS}{2013}]{CDM}
+CCSDS (2013).
+\newblock {\em Conjunction Data Message - CCSDS 508.0-B-1 - Recommended
+  Standard}.
+\newblock CCSDS Secretariat.
 
 \bibitem[\protect\astroncite{ESA}{2013}]{esaSD}
 ESA (2013).

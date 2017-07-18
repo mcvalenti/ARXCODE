@@ -207,20 +207,20 @@ Estudio hecho sobre los errores que se producen en las propagaciones de los TLE 
   \subfigure[Diferencias ICESAT - Osweiler]{
     \includegraphics[width=0.48\columnwidth, keepaspectratio]{imagenes/ICESATdifTot}
   }
-  \caption{Gr\'afico con Diferencias Totales}
-  \label{fig:Tleadmin}
+  \caption{Gr\'afico con Diferencias Totales del escenario ICESAT}
+  \label{fig:icesatTot}
 \end{figure}
 
 \begin{figure}[h!]
 \centering
-  \subfigure[Clase TLE (TleAdmin/TLE/Tle)]{
-    \includegraphics[width=0.48\textwidth]{imagenes/TLEdifTot27642esc52}
+  \subfigure[Diferencias LAGEOS-1 - ARxCODE]{
+    \includegraphics[width=0.48\textwidth]{imagenes/TLEdifTot8820esc11}
   }
-  \subfigure[Clase setTLE (TleAdmin/TLE/setTLE)]{
-    \includegraphics[width=0.48\columnwidth, keepaspectratio]{imagenes/ICESATdifTot}
+  \subfigure[Diferencias LAGEOS-1 - ARxCODE]{
+    \includegraphics[width=0.48\columnwidth, keepaspectratio]{imagenes/LAGEOSdifTot}
   }
-  \caption[Clases Tle y setTLE]{Clases Tle y setTLE del paquete TleAdmin}
-  \label{fig:Tleadmin}
+  \caption{Gr\'afico con Diferencias Totales del escenario LAGEOS-1}
+  \label{fig:lageosTot}
 \end{figure}
 
 

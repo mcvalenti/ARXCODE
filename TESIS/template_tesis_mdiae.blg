@@ -15,6 +15,7 @@ A level-1 auxiliary file: secciones/Apendice.aux
 The style file: apa.bst
 Database file #1: template_tesis_mdiae.bib
 Warning--I didn't find a database entry for "Oseweiler"
+Warning--I didn't find a database entry for "CDMstd"
 Warning--empty year in stk
 Warning--empty year in sgp4python
 Warning--empty journal in karacalioglu2016impact
@@ -22,43 +23,43 @@ Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty year in nasaprogramme
 You've used 22 entries,
             1940 wiz_defined-function locations,
-            591 strings with 6418 characters,
-and the built_in function-call counts, 6785 in all, are:
-= -- 659
+            593 strings with 6421 characters,
+and the built_in function-call counts, 6798 in all, are:
+= -- 657
 > -- 217
 < -- 22
 + -- 75
 - -- 66
-* -- 515
-:= -- 1247
+* -- 516
+:= -- 1245
 add.period$ -- 63
 call.type$ -- 22
-change.case$ -- 142
+change.case$ -- 140
 chr.to.int$ -- 19
 cite$ -- 27
-duplicate$ -- 285
-empty$ -- 476
+duplicate$ -- 288
+empty$ -- 481
 format.name$ -- 100
-if$ -- 1296
+if$ -- 1301
 int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 17
+missing$ -- 19
 newline$ -- 110
 num.names$ -- 66
-pop$ -- 122
+pop$ -- 126
 preamble$ -- 1
 purify$ -- 143
 quote$ -- 0
-skip$ -- 224
+skip$ -- 225
 stack$ -- 0
 substring$ -- 373
-swap$ -- 45
+swap$ -- 46
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 124
+type$ -- 122
 warning$ -- 5
 while$ -- 49
 width$ -- 0
-write$ -- 269
-(There were 6 warnings)
+write$ -- 268
+(There were 7 warnings)

@@ -224,13 +224,12 @@ Estudio hecho sobre los errores que se producen en las propagaciones de los TLE 
 \end{figure}
 
 
-\section{Estudio de errores de TLE contra efem\'erides precisas}
-\subsection*{Sistema de referencia TOD}
+\section{Estudio de errores de TLE con efem\'erides precisas}
+\subsection{Sistema de referencia TOD}
 Como ya mencionamos \textcolor{red}{debe haber una secci\'on dedicada a datos CODS}, los productos del departamento de din\'amica orbital con los que trabajamos ofrecen las posiciones orbitales en el sistema de referencia verdadero de la fecha \ac{TOD}, mientras que los resultados de las propagaciones con el sgp4 se encuentran en el sistema \ac{TEME}. Para poder hacer comparaciones desarrollamos un m\'odulo que transforma las coordenadas y velocidades, del sistema TEME al sistema TOD. (Ver. \textcolor{red}{apendice}).
 Para la validaci\'on del mismo, utilizamos TLEs de la misi\'on y los propagamos con el sgp4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos de din\'amica orbital, para los mismos instantes.\\
 
 \textcolor{red}{buscar esos resultados}
-
 
 \subsection*{Estad\'istica de Errores}
 Con la certeza de que los datos eran compatibles y pod\'ian ser comparados, iniciamos el procesamiento de comparaci\'on de las posiciones y la generaci\'on de los resultados estad\'isticos para la propagaci\'on de errores que describimos en la Sec. \ref{sec:properrores}.
