@@ -81,23 +81,23 @@ class Encuentro():
         """
         self.sat_id=self.tle_sat.catID()
         self.deb_id=self.tle_deb.catID()
-        archivo_dif ='../Encuentro/archivos/'+str(self.sat_id)+'_'+str(self.deb_id)+'_rtn'
+        self.archivo_dif ='../Encuentro/archivos/'+str(self.sat_id)+'_'+str(self.deb_id)+'_rtn'
         salida1=open('../Encuentro/archivos/'+str(self.sat_id),'w+')
         salida2=open('../Encuentro/archivos/'+str(self.deb_id),'w+')
-        salida3=open(archivo_dif,'w+')
+        salida3=open(self.archivo_dif,'w+')
 
         """
         Calcula las diferencias relativas entre los dos 
         objetos en el sistema RTN.
         """
 
-        epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
-        epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
+        self.epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
+        self.epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
         
         self.mod_minDist=sys.float_info.max
-        while epoca_ini < epoca_fin:
-            r,v=self.tle_sat.propagaTLE(epoca_ini)
-            r1,v1=self.tle_deb.propagaTLE(epoca_ini)
+        while self.epoca_ini < self.epoca_fin:
+            r,v=self.tle_sat.propagaTLE(self.epoca_ini)
+            r1,v1=self.tle_deb.propagaTLE(self.epoca_ini)
             
             r=np.array([float(r[0]),float(r[1]),float(r[2])])
             v=np.array([float(v[0]),float(v[1]),float(v[2])])
@@ -107,8 +107,8 @@ class Encuentro():
             #====================================
             # Posiciones en el ECI
             #====================================
-            pos1=Posicion(r,v,epoca_ini)
-            pos2=Posicion(r1,v1,epoca_ini)
+            pos1=Posicion(r,v,self.epoca_ini)
+            pos2=Posicion(r1,v1,self.epoca_ini)
             #====================================
             # Posiciones y vel relativas ECI
             #====================================
@@ -128,12 +128,12 @@ class Encuentro():
             # Calculo de la distancia minima. 
             if mod_Dist1 < self.mod_minDist:
                 self.mod_minDist=mod_Dist1
-                self.tca_c=epoca_ini
+                self.tca_c=self.epoca_ini
                 DistRic_min=np.array([x_ric,y_ric,z_ric])
                 self.vel_sat_tca=v
                 self.vel_deb_tca=v1
 #                print self.tca_c, self.mod_minDist
-            epoca_ini=epoca_ini+timedelta(seconds=1)
+            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
             #====================================
             # Distancias Minimas en RTN.
             #====================================

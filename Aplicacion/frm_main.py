@@ -10,13 +10,13 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 from CDM.cdmParser import CDM,extraeCDM
 #from pruebas.claseTle import Tle, Encuentro
-from TleAdmin.TleArchivos import divide_setTLE
+#from TleAdmin.TleArchivos import divide_setTLE
 from TleAdmin.TLE import Tle
 from Encuentro.Encuentro import Encuentro
-from TleAdmin.get_tle import importarSetTLE
+#from TleAdmin.get_tle import importarSetTLE
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
 from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
-from Encuentro.akellaPoC import evaluaEncuentro
+#from Encuentro.akellaPoC import evaluaEncuentro
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
 from visual import ploteos
 from visual.trackencuentro import grafica_track
@@ -410,7 +410,7 @@ class ProcEncuentro(QDialog):
 #         grid.addWidget(self.mseg_lab,4,10)        
         grid.addWidget(self.tableEncuentro,8,1,2,5)
         grid.addWidget(self.progress,10,1)
-        grid.addWidget(self.track,2,3,5,3)
+        grid.addWidget(self.track,2,4,5,3)
         grid.addWidget(self.dif,12,4)
         grid.addWidget(self.boton_encuetro,11,10)
         grid.addWidget(self.boton_dif,12,10)
@@ -505,240 +505,240 @@ class ProcEncuentro(QDialog):
         self.accept()    
         
         
-class ProcTle(QDialog):
-
-    def __init__(self,parent=None):
-        QDialog.__init__(self,parent)
-
-        self.setWindowModality(Qt.ApplicationModal)
-        self.initUI()
-
-        self.filename = ''
-        self.sat_id='99999'
-        self.fini=''
-        self.ffin=''
-        self.fin_tle=datetime(1957,1,1,0,0,0)
-        self.ini_tle=datetime(1957,1,1,0,0,0)
-        self.tles=0
-        self.tleOrdenados={}
-        self.data=[]
-        self.coef=[]
-        self.path='../AjustarTLE/diferencias/'
-        self.diferencias=''
-        self.set_data=[]
-        self.set_pri=[]
-        self.arch_macovar=''
-        self.macovarT=''  
-        self.cantxbin=[]
-        self.mediaxbin=[]      
-        
-    def initUI(self):
-        self.palette = QPalette()
-        self.palette.setColor(QPalette.Background,Qt.white)
-        self.setPalette(self.palette)
-        
-        """
-        Etiquetas
-        """
-        self.carga           = QLabel('CARGADO DE TLEs')
-        self.norad           = QLabel('A partir de NORAD')  
-        self.equipo          = QLabel('Desde el Equipo')
-        self.arch_prepro     = QLabel('Archivo a Procesar: ')
-        self.sat_id_label    = QLabel('NORAD_ID')
-        self.cant_tles       = QLabel('Cantidad de TLEs')
-        self.tle_pri         = QLabel('Ultimo TLE del set.')
-        self.outputs         = QLabel('Output')
-        self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
-        """
-        Botones
-        """
-        self.boton_norad        = QPushButton('Space-Track')
-        self.boton_equipo       = QPushButton('Directorios')
-        self.boton_procesa      = QPushButton('PROCESAR')
-        self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
-        self.boton_dxcoord      = QPushButton('Graficar Diferencias por Coordenadas')
-        self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set primario')
-        self.boton_salir        = QPushButton('Salir')
-        """
-        Campos de Edicion
-        """
-        self.arch_cargado       = QLineEdit()
-        self.sat_id_line        = QLineEdit()
-        self.cant_tles_edit     = QLineEdit()
-        self.matriz             = QLineEdit()
-        self.estado_proc_edit   = QLineEdit()
-        """
-        OTROS
-        """
-        self.tle_pri_edit    = QTextEdit()
-        self.tableView       = QTableWidget()
-        """
-        Plantilla
-        """
-        grid = QGridLayout()
-        grid.setSpacing(5)
-        
-        grid.addWidget(self.carga,2,0)
-        grid.addWidget(self.norad,3,0)
-        grid.addWidget(self.boton_norad,3,1)
-        grid.addWidget(self.equipo,4,0)
-        grid.addWidget(self.boton_equipo,4,1)
-        grid.addWidget(self.arch_prepro,5,0)
-        grid.addWidget(self.arch_cargado,5,1)
-        grid.addWidget(self.boton_procesa,5,2)
-        grid.addWidget(self.sat_id_label,7,0)
-        grid.addWidget(self.sat_id_line,7,1)
-        grid.addWidget(self.cant_tles,8,0)
-        grid.addWidget(self.cant_tles_edit,8,1)        
-        grid.addWidget(self.tle_pri,9,0)
-        grid.addWidget(self.tle_pri_edit,10,0,1,4)
-        grid.addWidget(self.ma_covar_label,11,0) 
-        grid.addWidget(self.tableView,12,0)
-        grid.addWidget(self.outputs,23,1)
-        grid.addWidget(self.estado_proc_edit,23,2)
-        grid.addWidget(self.boton_dsetprimario,24,2)
-        grid.addWidget(self.boton_salir,25,2)
-#         grid.addWidget(self.boton_dtotales,25,1)
-#         grid.addWidget(self.boton_dxcoord,25,2)
-        
-        """
-        Acciones
-        """
-        self.boton_procesa.setEnabled(False)
-        self.boton_norad.clicked.connect(self.botonNorad)
-        self.boton_equipo.clicked.connect(self.Archivo)
-        self.boton_salir.clicked.connect(self.salir)
-        self.boton_procesa.clicked.connect(self.procesar)
-        self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
-#         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
-#         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
-        self.setLayout(grid)
-        self.setWindowTitle('Procesamiento de TLE')    
-        self.show()
-          
-    def botonNorad(self):
-        print ("Procesando la Conexion con NORAD para la Descarga...")
-        self.w = ConexionNorad()
-        self.w.exec_()
-        self.sat_id, self.fini, self.ffin, self.filename = self.w.iniciaSolicitud()
-        self.arch_cargado.setText(self.filename)
-        self.sat_id_line.setText(self.sat_id) 
-        self.boton_procesa.setEnabled(True) 
-        
-    def Archivo(self):    
-        fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
-        nombre=str(fname).split('/')[-1]
-        self.filename = nombre
-        self.sat_id = nombre.split('_')[0]
-        self.arch_cargado.setText(self.filename)
-        self.boton_procesa.setEnabled(True)
-        
-    
-    def procesar(self):
-        """
-        Invoca a la funcion divide_setTLE, para fragmentar
-        cada uno de los TLE del dato crudo en archivos
-        individuales; y los guarda en: TleAdmin/tle
-        """
-        files=glob.glob('../TleAdmin/tle/*')
-        for filename in files:
-            os.unlink(filename)
-        if os.stat('../TleAdmin/crudosTLE/'+self.filename).st_size == 0:
-            print('El archivo esta vacio')
-        divide_setTLE(self.sat_id, self.filename)
-        self.sat_id_line.setText(self.sat_id)
-        self.lista=glob.glob('../TleAdmin/tle/*')
-        self.tles=len(self.lista)
-        self.cant_tles_edit.setText(str(self.tles))
-        """
-        Ordenamiento de los TLEs
-        """
-        self.tledic=generadorDatos(self.lista)
-        self.tleOrdenados=ordenaTles(self.tledic)
-
-        """
-        Impresiones de info de TLEs.
-        """
-        print 'PROCESAMIENTO DE TLE'
-        print '-----------------------------------------------------'
-        print 'TLE PRIMARIO'
-        print '-----------------------------------------------------'
-        tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
-        linea1= tle_primario.linea1
-        linea2= tle_primario.linea2
-        self.fin_tle=tle_primario.epoca()
-        self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S.%f' )
-        self.tle_pri_edit.setText(linea1+'\n'+linea2)
-        print linea1
-        print linea2
-        print '-----------------------------------------------------'
-        print 'TLE INICIAL DEL SET'
-        print '-----------------------------------------------------'
-        tle_inial = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[0][0])
-        linea1_0= tle_inial.linea1
-        linea2_0= tle_inial.linea2
-        self.ini_tle=tle_inial.epoca()
-        print linea1_0
-        print linea2_0
-        print '-----------------------------------------------------'
-        
-        """
-        PROCESAMIENTO.
-        """
-        files=glob.glob('../AjustarTLE/diferencias/*')
-        for filename in files:
-            os.unlink(filename)
-#        self.bin, self.data, self.set_pri, self.coef=difTle(self.tleOrdenados, self.tles)
-        self.set_pri=difPrimario()
-        self.dt=self.set_pri[0]
-        self.data1=self.set_pri[1]
-        self.coef=self.set_pri[2]
-        self.nombre_archivo=self.set_pri[3]
-#         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
-#         self.diferencias=difPrimario(self.nombre_archivo,self.tles-1)
-        self.estado_proc_edit.setText(self.nombre_archivo)
-
-        """
-        Ma. de Covarianza
-        """
-        self.macovarT, self.arch_macovar=EjecutaMaCovar(self.nombre_archivo)
-        self.tableView.setRowCount(len(self.macovarT))
-        self.tableView.setColumnCount(len(self.macovarT))
-        for i,fila in enumerate(self.macovarT):
-            for j,col in enumerate(fila):
-                self.tableView.setItem(i,j,QTableWidgetItem(str(col)))    
-        
-        print 'Fin del Procesamiento'
-        
-#     def ver_dif_x_coordenadas(self):
-#         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1, self.coef)
-#      
-#     def ver_diferencias_totales(self):
-#         ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data1,self.coef) 
-        
-    def ver_dif_set_primario(self):
-        ploteos.grafica_set_principal(self.sat_id,self.path, self.data1,self.coef)
-        
-#     def Graficar(self):
-# #        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
-#         data=[self.sat_id,self.diferencias]
-#         self.graf = RepresentacionGrafica(data)
-#         self.graf.exec_()
-        
-    def ver_mediasxbin(self):
-        desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin[1], self.mediaxbin[2])
-
-#     def Macovar(self):
-#         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
+# class ProcTle(QDialog):
+# 
+#     def __init__(self,parent=None):
+#         QDialog.__init__(self,parent)
+# 
+#         self.setWindowModality(Qt.ApplicationModal)
+#         self.initUI()
+# 
+#         self.filename = ''
+#         self.sat_id='99999'
+#         self.fini=''
+#         self.ffin=''
+#         self.fin_tle=datetime(1957,1,1,0,0,0)
+#         self.ini_tle=datetime(1957,1,1,0,0,0)
+#         self.tles=0
+#         self.tleOrdenados={}
+#         self.data=[]
+#         self.coef=[]
+#         self.path='../AjustarTLE/diferencias/'
+#         self.diferencias=''
+#         self.set_data=[]
+#         self.set_pri=[]
+#         self.arch_macovar=''
+#         self.macovarT=''  
+#         self.cantxbin=[]
+#         self.mediaxbin=[]      
+#         
+#     def initUI(self):
+#         self.palette = QPalette()
+#         self.palette.setColor(QPalette.Background,Qt.white)
+#         self.setPalette(self.palette)
+#         
+#         """
+#         Etiquetas
+#         """
+#         self.carga           = QLabel('CARGADO DE TLEs')
+#         self.norad           = QLabel('A partir de NORAD')  
+#         self.equipo          = QLabel('Desde el Equipo')
+#         self.arch_prepro     = QLabel('Archivo a Procesar: ')
+#         self.sat_id_label    = QLabel('NORAD_ID')
+#         self.cant_tles       = QLabel('Cantidad de TLEs')
+#         self.tle_pri         = QLabel('Ultimo TLE del set.')
+#         self.outputs         = QLabel('Output')
+#         self.ma_covar_label  = QLabel('Ma. de COVARIANZA')
+#         """
+#         Botones
+#         """
+#         self.boton_norad        = QPushButton('Space-Track')
+#         self.boton_equipo       = QPushButton('Directorios')
+#         self.boton_procesa      = QPushButton('PROCESAR')
+#         self.boton_dtotales     = QPushButton('Graficar Diferencias Totales')
+#         self.boton_dxcoord      = QPushButton('Graficar Diferencias por Coordenadas')
+#         self.boton_dsetprimario = QPushButton ('Graficar Diferencias del Set primario')
+#         self.boton_salir        = QPushButton('Salir')
+#         """
+#         Campos de Edicion
+#         """
+#         self.arch_cargado       = QLineEdit()
+#         self.sat_id_line        = QLineEdit()
+#         self.cant_tles_edit     = QLineEdit()
+#         self.matriz             = QLineEdit()
+#         self.estado_proc_edit   = QLineEdit()
+#         """
+#         OTROS
+#         """
+#         self.tle_pri_edit    = QTextEdit()
+#         self.tableView       = QTableWidget()
+#         """
+#         Plantilla
+#         """
+#         grid = QGridLayout()
+#         grid.setSpacing(5)
+#         
+#         grid.addWidget(self.carga,2,0)
+#         grid.addWidget(self.norad,3,0)
+#         grid.addWidget(self.boton_norad,3,1)
+#         grid.addWidget(self.equipo,4,0)
+#         grid.addWidget(self.boton_equipo,4,1)
+#         grid.addWidget(self.arch_prepro,5,0)
+#         grid.addWidget(self.arch_cargado,5,1)
+#         grid.addWidget(self.boton_procesa,5,2)
+#         grid.addWidget(self.sat_id_label,7,0)
+#         grid.addWidget(self.sat_id_line,7,1)
+#         grid.addWidget(self.cant_tles,8,0)
+#         grid.addWidget(self.cant_tles_edit,8,1)        
+#         grid.addWidget(self.tle_pri,9,0)
+#         grid.addWidget(self.tle_pri_edit,10,0,1,4)
+#         grid.addWidget(self.ma_covar_label,11,0) 
+#         grid.addWidget(self.tableView,12,0)
+#         grid.addWidget(self.outputs,23,1)
+#         grid.addWidget(self.estado_proc_edit,23,2)
+#         grid.addWidget(self.boton_dsetprimario,24,2)
+#         grid.addWidget(self.boton_salir,25,2)
+# #         grid.addWidget(self.boton_dtotales,25,1)
+# #         grid.addWidget(self.boton_dxcoord,25,2)
+#         
+#         """
+#         Acciones
+#         """
+#         self.boton_procesa.setEnabled(False)
+#         self.boton_norad.clicked.connect(self.botonNorad)
+#         self.boton_equipo.clicked.connect(self.Archivo)
+#         self.boton_salir.clicked.connect(self.salir)
+#         self.boton_procesa.clicked.connect(self.procesar)
+#         self.boton_dsetprimario.clicked.connect(self.ver_dif_set_primario)
+# #         self.boton_dxcoord.clicked.connect(self.ver_dif_x_coordenadas)
+# #         self.boton_dtotales.clicked.connect(self.ver_diferencias_totales)
+#         self.setLayout(grid)
+#         self.setWindowTitle('Procesamiento de TLE')    
+#         self.show()
+#           
+#     def botonNorad(self):
+#         print ("Procesando la Conexion con NORAD para la Descarga...")
+#         self.w = ConexionNorad()
+#         self.w.exec_()
+#         self.sat_id, self.fini, self.ffin, self.filename = self.w.iniciaSolicitud()
+#         self.arch_cargado.setText(self.filename)
+#         self.sat_id_line.setText(self.sat_id) 
+#         self.boton_procesa.setEnabled(True) 
+#         
+#     def Archivo(self):    
+#         fname=QFileDialog.getOpenFileName(self, 'Seleccione el Archivo a Procesar', "../TleAdmin/crudosTLE/*")
+#         nombre=str(fname).split('/')[-1]
+#         self.filename = nombre
+#         self.sat_id = nombre.split('_')[0]
+#         self.arch_cargado.setText(self.filename)
+#         self.boton_procesa.setEnabled(True)
+#         
+#     
+#     def procesar(self):
+#         """
+#         Invoca a la funcion divide_setTLE, para fragmentar
+#         cada uno de los TLE del dato crudo en archivos
+#         individuales; y los guarda en: TleAdmin/tle
+#         """
+#         files=glob.glob('../TleAdmin/tle/*')
+#         for filename in files:
+#             os.unlink(filename)
+#         if os.stat('../TleAdmin/crudosTLE/'+self.filename).st_size == 0:
+#             print('El archivo esta vacio')
+#         divide_setTLE(self.sat_id, self.filename)
+#         self.sat_id_line.setText(self.sat_id)
+#         self.lista=glob.glob('../TleAdmin/tle/*')
+#         self.tles=len(self.lista)
+#         self.cant_tles_edit.setText(str(self.tles))
+#         """
+#         Ordenamiento de los TLEs
+#         """
+#         self.tledic=generadorDatos(self.lista)
+#         self.tleOrdenados=ordenaTles(self.tledic)
+# 
+#         """
+#         Impresiones de info de TLEs.
+#         """
+#         print 'PROCESAMIENTO DE TLE'
+#         print '-----------------------------------------------------'
+#         print 'TLE PRIMARIO'
+#         print '-----------------------------------------------------'
+#         tle_primario = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[-1][0])
+#         linea1= tle_primario.linea1
+#         linea2= tle_primario.linea2
+#         self.fin_tle=tle_primario.epoca()
+#         self.ffin=self.fin_tle.strftime('%Y-%m-%d %H:%M:%S.%f' )
+#         self.tle_pri_edit.setText(linea1+'\n'+linea2)
+#         print linea1
+#         print linea2
+#         print '-----------------------------------------------------'
+#         print 'TLE INICIAL DEL SET'
+#         print '-----------------------------------------------------'
+#         tle_inial = Tle.creadoxArchivo('../TleAdmin/tle/'+self.tleOrdenados[0][0])
+#         linea1_0= tle_inial.linea1
+#         linea2_0= tle_inial.linea2
+#         self.ini_tle=tle_inial.epoca()
+#         print linea1_0
+#         print linea2_0
+#         print '-----------------------------------------------------'
+#         
+#         """
+#         PROCESAMIENTO.
+#         """
+#         files=glob.glob('../AjustarTLE/diferencias/*')
+#         for filename in files:
+#             os.unlink(filename)
+# #        self.bin, self.data, self.set_pri, self.coef=difTle(self.tleOrdenados, self.tles)
+#         self.set_pri=difPrimario()
+#         self.dt=self.set_pri[0]
+#         self.data1=self.set_pri[1]
+#         self.coef=self.set_pri[2]
+#         self.nombre_archivo=self.set_pri[3]
+# #         self.cantxbin,self.mediaxbin=genera_estadisticaBin(self.bin)
+# #         self.diferencias=difPrimario(self.nombre_archivo,self.tles-1)
+#         self.estado_proc_edit.setText(self.nombre_archivo)
+# 
+#         """
+#         Ma. de Covarianza
+#         """
+#         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.nombre_archivo)
 #         self.tableView.setRowCount(len(self.macovarT))
 #         self.tableView.setColumnCount(len(self.macovarT))
 #         for i,fila in enumerate(self.macovarT):
 #             for j,col in enumerate(fila):
-#                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
-#         self.arch_macovar_edit.setText(self.arch_macovar)        
-    
-    def salir(self):
-        self.accept()
+#                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))    
+#         
+#         print 'Fin del Procesamiento'
+#         
+# #     def ver_dif_x_coordenadas(self):
+# #         ploteos.grafica_setcompleto(self.sat_id,self.path,self.data1, self.coef)
+# #      
+# #     def ver_diferencias_totales(self):
+# #         ploteos.grafica_diferenciasTotales(self.sat_id,self.path,self.data1,self.coef) 
+#         
+#     def ver_dif_set_primario(self):
+#         ploteos.grafica_set_principal(self.sat_id,self.path, self.data1,self.coef)
+#         
+# #     def Graficar(self):
+# # #        data=[self.sat_id,self.diferencias,self.cantxbin, self.mediaxbin]
+# #         data=[self.sat_id,self.diferencias]
+# #         self.graf = RepresentacionGrafica(data)
+# #         self.graf.exec_()
+#         
+#     def ver_mediasxbin(self):
+#         desviacion_standard_graf(self.sat_id, self.mediaxbin[0], self.mediaxbin[1], self.mediaxbin[2])
+# 
+# #     def Macovar(self):
+# #         self.macovarT, self.arch_macovar=EjecutaMaCovar(self.diferencias)
+# #         self.tableView.setRowCount(len(self.macovarT))
+# #         self.tableView.setColumnCount(len(self.macovarT))
+# #         for i,fila in enumerate(self.macovarT):
+# #             for j,col in enumerate(fila):
+# #                 self.tableView.setItem(i,j,QTableWidgetItem(str(col)))
+# #         self.arch_macovar_edit.setText(self.arch_macovar)        
+#     
+#     def salir(self):
+#         self.accept()
 
 class ConexionNorad(QDialog):
 #     def __init__(self):
@@ -832,7 +832,7 @@ class ConexionNorad(QDialog):
         self.passw1 = str(self.clave_edit.text())
         self.cat_id = str(self.norad_id_edit.text())
         self.nombreTle.setText(self.cat_id+'_'+self.fini+'_'+self.ffin+'.tle')
-        self.tle=importarSetTLE(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
+#        self.tle=importarSetTLE(self.usu1,self.passw1,self.cat_id,self.pydate,self.pydate1,self.nombreTle.text())
         self.archTLE=self.nombreTle.text()
         return self.cat_id, self.fini, self.ffin, self.archTLE
 #             

@@ -152,8 +152,6 @@ En conclusi\'on, las interfaces implementadas, son:\\
 
 \section{Casos de Uso}
 
-
-
 Este trabajo se pens\'o como un sistema acoplado al software principal del departamento de Din\'amica Orbital. En este sentido, no existe gran complejidad en la estructura del prototipo, ya que su valor, radica en la correcta implementaci\'on de los algoritmos que procesan la informaci\'on del encuentro. Identificamos dos casos de uso:\\
 Fig. \ref{fig:casosuso}
  
@@ -305,7 +303,6 @@ Dentro de este paquete se encuentran los desarrollos referidos a los c\'alculos 
 
 \subsubsection*{PROCESAMIENTO: Encuentro}
 Este es el paquete n\'ucleo del software. En \'el se encuentra la clase {\bf{Encuentro}}  Fig. \ref{fig:claseencuentro}, que instancia la generaci\'on del encuentro, incorporando ambos objetos mediante sus identificadores de NORAD y el TCA, generando las propagaciones necesarias, y las matrices de error, para calcular la m\'inima distancia y la probabilidad de colisi\'on. A tal fin, cuenta con los m\'etodos (Fig. \ref{fig:claseencuentro}): {\bf{calculaMacombinada}}, {\bf{proyecta\_alplano\_encuentro}}, {\bf{calculaPoC\_circ}} y  {\bf{calculaPoC\_gral}}\\
-\textcolor{red}{agregar clase posicion}
 
 \begin{figure}[h!]
   \centering
@@ -324,7 +321,7 @@ Dentro de este paquete se encuentra el m\'odulo que genera el track de las \'orb
 
 \subsubsection*{Sistemas de Referencia}
 Este paquete contiene m\'odulos para realizar transformaciones entre los distintos sistemas de referencia. Entre ellos, los dos m\'as utilizados son:
-{\it{teme2tod}} y {\it{ricSis}}, ya descriptos en \textcolor{red}{referencia sist de ref. marco teorico}.
+{\it{teme2tod}} y {\it{ricSis}}, ya descriptos en \ref{subsec:sistRef}.
 
 \subsubsection*{Validaciones}
 Re\'une todas los m\'odulos que se desarrollaron para la validaci\'on de los resultados, cuyos valores se analizan y publican en la secci\'on de Resultados y Validaciones Sec. \ref{chap:resultados}. A saber:
@@ -336,18 +333,63 @@ Re\'une todas los m\'odulos que se desarrollaron para la validaci\'on de los res
 \end{itemize}
 
 
-\section{Diagrama de Actividad}
+\section{Flujo din\'amico de ARxCODE}
 
+ARxCODE se inicializa cuando un operador lo ejecuta.\\
+Una vez iniciado el programa, el operador debe seleccionar alguna de las dos opciones de procesamiento: {\it{Cargar CDM}} o {\it{Carga Manual}}. Una vez cargados los datos se inicia la etapa del PROCESAMIENTO.\\
+
+\subsection*{Procesamiento a partir de un CDM}
+Si el procesamiento se realiza a partir de la carga de un CDM, el c\'odigo se ocupa de la extracci\'on y la publciaci\'on de los datos del CDM. 
+\subsection*{Procesamiento a partir de una carga manual}
+En el caso de la carga manual, el procesamiento implica distintos pasos Fig. \ref{fig:actdiag}:
+\begin{itemize}
+ \item Solicita los TLE a NORAD.
+ \item Propaga los TLE y calcula el TCA y la m\'inima distancia.
+ \item Calcula la covarianza del desecho, y de la misi\'on si la misma no fue provista por el departamento de Din\'amica Orbital.
+ \item Calcula la matriz de covarianza combinada.
+ \item Propaga la matriz de covarianza combinada hasta el TCA.
+ \item Calcula la probabilidad de colisi\'on.
+ \item Publica los datos en la pantalla para el operador.
+\end{itemize}
+
+Finalizada esta etapa de procesamiento y publicaci\'on de los datos por pantalla, el operador puede solicitar la visualizaci\'on de las trayectorias en el intervalo analizado, para ello presiona el bot\'on {\it{Track}} y el gr\'afico se agrega a la pantalla.\\
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{imagenes/actdiagAR}
-  \label{fig:actdiag}
   \caption{Diagrama de Actividades de ARxCODE}
+  \label{fig:actdiag}
+\end{figure}
+
+\subsection*{Pantallas del ARxCODE}
+
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{imagenes/pantalla0}
+  \caption{Impresi\'on de la pantalla de inicio del ARxCODE}
+  \label{fig:pantInicio}
 \end{figure}
 
 
+\begin{figure}[!h]
+\centering
+  \subfigure[Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE]{
+    \includegraphics[width=0.48\textwidth]{imagenes/pantalla1}
+  }
+  \subfigure[Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE]{
+    \includegraphics[width=0.48\columnwidth, keepaspectratio]{imagenes/pantalla2}
+  }
+  \caption{Pantallas de Ingreso de Datos, ya sea selecci\'on del CDM o carga manual}
+  \label{fig:ingresadatosPant}
+\end{figure}
 
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=0.8\textwidth]{imagenes/pantalla4}
+  \caption{Vista con los resultados publicados y la incorporaci\'on de las trayectorias.}
+  \label{fig:pantfinal}
+\end{figure}
 % archivos y demases
 % 
 % \subsection*{Preprocesamiento de los Datos de Misi\'on de CODS}

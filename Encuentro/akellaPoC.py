@@ -7,8 +7,8 @@ import sys, os, glob
 import numpy as np
 from scipy.integrate import quad, nquad
 from datetime import datetime, timedelta
-from TleAdmin.get_tle import importarSetTLE
-from TleAdmin.TleArchivos import divide_setTLE
+#from TleAdmin.get_tle import importarSetTLE
+#from TleAdmin.TleArchivos import divide_setTLE
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import vncSis
 from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles
