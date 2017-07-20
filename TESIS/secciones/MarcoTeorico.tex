@@ -204,7 +204,7 @@ Una vez que ya se conoce la matriz de covarianza del desecho para el momento de 
 Dado que se desconocen los errores que introduce el propagador SGP4, fue necesario pensar una metodolog\'ia que permita hacer una estimaci\'on independiente.\\
 Se propone un m\'etodo que utiliza las diferencias que resultan de los valores que ofrecen las efem\'erides precisas, en comparaci\'on con los valores que resultan de las propagaciones de TLE mediante SGP4. Se eval\'ua la tendencia en una ventana temporal de seis meses y se calculan valores medios para los errores, en funci\'on de la cantidad de d\'ias que se propaguen.
 
-\subsubsection*{Metodolog\'ia del estudio de la propagaci\'on de errores}
+\subsubsection*{Metodolog\'ia del estudio de la propagaci\'on de errores}\label{subsec:errorProp}
 Pasos que se realizan, (Fig. \ref{fig:metodotabla}):
 \begin{itemize}
 \itemsep0em
@@ -362,6 +362,43 @@ Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC 
 \item Los errores en las posiciones del objeto primario y del desecho no est\'an correlacionados.
 \item Los errores en las posiciones son constantes durante el encuentro, al igual que la matrices de covarianzas correspondientes al TCA.
 \end{itemize}
+
+\subsection{Expresi\'on Anal\'itica Simplifiacada \ref{leichen}}
+
+
+
+Dados dos objetos, ambos en \'orbitas circulares ... bajo \textcolor{red}{Teor\'ia de Leiche},
+\subsubsection*{Proyecci\'on al plano de encuentro} \label{subsec:planoencuentro}
+
+Para el instante TCA, las coordenadas del centro del elipsoide de posici\'on del objeto secundario, son:\\
+
+
+\begin{gather}
+ \mu_{x}=\Delta r_{rad}\\
+ \mu_{y}=\Delta r_{vel}\\
+\end{gather}
+
+Estas expresiones, proyectadas en el sistema RSW, resultan en:
+
+\begin{gather}
+ \mu_{x}=R\\
+ \mu_{y}=\sqrt(S^{2}+W^{2})
+\end{gather}
+
+analizando el problema en el plano de encuentro (\textcolor{red}{definirlo}), la probabilidad de colisi\'on se calcula mediante la integral:
+
+\begin{equation}
+ PoC=\int \int_{(x-\mu_{x})^{2}+(y-\mu_{y})^{2}\leq r_{a}^{2}} \frac{1}{2\pi\sigma_{x}\sigma_{y}} exp [-\frac{1}{2}(\frac{\mu_{x}^{2}}{\sigma_{x}^{2}}+\frac{\mu_{y}^{2}}{\sigma_{y}^{2}}) ] dy dx
+ \label{eq:pocintegral}
+\end{equation}
+
+puede encontrarse una expresi\'on anal\'itica simplificada para el c\'alculo de la probabilidad de colisi\'on.\\
+
+\begin{equation}
+ PoC= \exp[-\frac{1}{2}(\frac{\mu_{x}^{2}}{\sigma_{x}^{2}}+\frac{\mu_{y}^{2}}{\sigma_{y}^{2}})][1-\exp(\frac{r_{a}^{2}}{2\sigma_{x}\sigma_{y}})]
+ \label{eq:pocexpress}
+\end{equation}
+
 
 \subsection*{M\'etodo de Akella}
 En este trabajo para el c\'alculo de la PoC se utilizar\'a el m\'etodo de Alfriend \& Akella \citep{akellaAlfriend} ya que es conceptualmente simple y aunque tiene un alto costo computacional, es realizable por las m\'aquinas actuales en tiempos menores a un segundo.\\

@@ -4,6 +4,7 @@ Created on 23/06/2017
 @author: mcvalenti
 '''
 import numpy as np
+from scipy.integrate import dblquad
 import sys
 from Aplicacion.globals import tabla
 from SistReferencia.sist_deCoordenadas import ricSis
@@ -129,7 +130,7 @@ class Encuentro():
             if mod_Dist1 < self.mod_minDist:
                 self.mod_minDist=mod_Dist1
                 self.tca_c=self.epoca_ini
-                DistRic_min=np.array([x_ric,y_ric,z_ric])
+                self.DistRic_min=np.array([x_ric,y_ric,z_ric])
                 self.vel_sat_tca=v
                 self.vel_deb_tca=v1
 #                print self.tca_c, self.mod_minDist
@@ -137,9 +138,9 @@ class Encuentro():
             #====================================
             # Distancias Minimas en RTN.
             #====================================
-            self.r_comp=DistRic_min[0]
-            self.s_comp=DistRic_min[1]
-            self.w_comp=DistRic_min[2]
+            self.r_comp=self.DistRic_min[0]
+            self.s_comp=self.DistRic_min[1]
+            self.w_comp=self.DistRic_min[2]
     
             #Calculo el angulo entre los vectores velocidad.
             cos_phi=np.dot(self.vel_sat_tca,self.vel_deb_tca)/(np.sqrt(np.dot(self.vel_sat_tca,self.vel_sat_tca))*np.sqrt(np.dot(self.vel_deb_tca,self.vel_deb_tca)))
@@ -238,6 +239,7 @@ class Encuentro():
     #============================================
     # Calcula los errores combinados proyectados.
     #============================================
+        self.calculaMacombinada()
         mu_x=self.r_comp
         mu_y=np.sqrt(self.s_comp*self.s_comp+self.w_comp*self.w_comp)
         var_x=self.matriz_combinada[0][0]
@@ -249,7 +251,8 @@ class Encuentro():
         mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro()
         ra=0.01
         PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra*ra/(2*np.sqrt(var_x)*np.sqrt(var_y))))
-        return PoC
+        PoC_int=PoC_int=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/(var_x))+(y*y/(var_y)))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
+        return PoC, PoC_int[0]
     
     def calculaPoC_gral(self):
         pass

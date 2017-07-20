@@ -4,15 +4,15 @@
 %\endinput
 
 \section{Introducci\'on}
-En este cap\'itulo presentamos los distintos escenarios que fueron planteados para la validaci\'on de los procesos.\\
-Dado que para la metodolog\'ia de estimaci\'on de errores que proponemos utilizamos datos reales de una misi\'on operativa argentina, hubiera sido
-deseable contar con datos de alertas de colisiones reales propias de esa misi\'on, ya que esto nos hubiera permitido hacer una validaci\'on end-to-end de todo el prototipo. No obstante, por cuestiones de confidencialidad y pol\'iticas que fueron modific\'andose, no fue posible tener acceso a esa informaci\'on, que seg\'un nos comunicaron, fue borrada una vez finalizada la misi\'on.\\
-Frente a este panorama, presentamos a continuaci\'on la secuencia de etapas de validaci\'on que permiten evaluar, cada una de las etapas del procesamiento.\\
+En este cap\'itulo se presentan los distintos escenarios que fueron planteados para la validaci\'on de los procesos.\\
+Dado que para la metodolog\'ia de estimaci\'on de errores que proponemos, utilizamos datos reales de una misi\'on operativa argentina, hubiera sido
+deseable contar con datos de alertas de colisiones reales propias de esa misi\'on, ya que esto nos hubiera permitido hacer una validaci\'on end-to-end de todo el prototipo. No obstante, por cuestiones de confidencialidad y pol\'iticas que fueron modific\'andose, no fue posible tener acceso a esa informaci\'on.\\
+Frente a este panorama, se detalla a continuaci\'on la secuencia de etapas de validaci\'on que permiten evaluar, cada una de las etapas del procesamiento.\\
 
-En primer lugar fue fundamental corroborar las propagaciones de los TLEs realizadas con la librer\'ia de python {\it{sgp4-1}} \citep{sgp4python}, para ello utilizamos la versi\'on de prueba que ofrece el software STK (System Tool Kit) \citep{stk}.\\
-Para la validaci\'on de los resultados de la implementaci\'on del m\'etodo de Osweiler en la generaci\'on de matrices de covarianza, comparamos nuestros resultados para los distintos escenarios que se publican en el trabajo.\\
+En primer lugar fue fundamental corroborar las propagaciones de los TLE realizadas con la librer\'ia de python {\it{sgp4-1}} \citep{sgp4python}, para ello utilizamos la versi\'on de prueba que ofrece el software STK (System Tool Kit) \citep{stk}.\\
+Para la validaci\'on de los resultados de la implementaci\'on del m\'etodo de Osweiler en la generaci\'on de matrices de covarianza, se compararon los resultados de ARxCODE para los distintos escenarios que se publican en el trabajo.\\
 
-El m\'etodo que proponemos para la estimaci\'on de la propagaci\'on de errores, es el que m\'as dificultades present\'o para ser validado. Ya que al basarse plenamente en los datos de la misi\'on cuyos resultados de colisi\'on de alerta no nos fueron suministrados, fue analizado en comparaci\'on con resultados estad\'isticos globales, o sobre el estudio de encuentros de otras misiones y esto implica una variaci\'on en si mismo.\\
+El m\'etodo que se propone para la estimaci\'on de la propagaci\'on de errores, es el que m\'as dificultades present\'o para ser validado. Al basarse plenamente en los datos de la misi\'on cuyos resultados de colisi\'on de alerta no fueron suministrados, fue analizado en comparaci\'on con resultados estad\'isticos globales, o sobre el estudio de encuentros de otras misiones.\\
 
 Finalmente la implementaci\'on del c\'alculo de probabilidad de colisi\'on fue evaluado a partir de la recopilaci\'on de bibliograf\'ia con datos de encuentros anteriores.\\
 
@@ -22,7 +22,7 @@ Para la propagaci\'on de las posiciones orbitales con el modelo SGP4 (Sec. \ref{
 Luego usamos el software {\it{Systems Tool Kit (STK)}} \citep{stk} para comparar nuestras propagaciones y asegurarnos la correcta utilizaci\'on y configuraci\'on de la librer\'ia sgp4-1.\\
 
 Se listan a continuaci\'on dos tablas con las efem\'erides de la misi\'on, correspondientes a los primeros cuatro minutos del d\'ia 01/01/2013.
-Ambas fueron generadas a partir del mismo TLE y presentas resultados que difieren en algunos metros para los peores casos. Resultado aceptable, teniendo en cuenta que las estimaciones groseras de errores para las propagaciones hechas con TLEs y SGP4 acarrean errores de kil\'ometros o decenas de kil\'ometros.\\
+Ambas fueron generadas a partir del mismo TLE y presentan resultados que difieren en algunos metros para los peores casos. Resultado aceptable, teniendo en cuenta que las estimaciones groseras de errores para las propagaciones hechas con TLEs y SGP4 acarrean errores de kil\'ometros o decenas de kil\'ometros.\\
 
 \underline{TLE.}
 {\small
@@ -69,13 +69,13 @@ Epoca & x [km] & y [km] & z [km] & vx $[km/s]$ & vy $[km/s]$ & vz $[km/s]$\\
 \end{table}
 
 
-\textcolor{red}{hacer las diferencias en python y publicarlas}
+%\textcolor{red}{hacer las diferencias medias para todo un dia en python y publicarlas}
 
 \section{Estudio de errores de TLE con datos hist\'oricos}
 
 El trabajo de Osweiler publica los resultados de las matrices de covarianza generadas, para 6 misiones y 8 ventanas de tiempo.\\
-Para la validaci\'on se tomaron dos escenarios muy diferentes en cuanto a la altura del sat\'elite: LAGEOS-1 a m\'as de $5000 km$ y ICESAT a $600 km$
-Se presentan a continuaci\'on las tablas con los resultados comparativos, entre los valores publicados y los valores obtenidos por ARxCODE.\\
+Para la validaci\'on se tomaron dos escenarios muy diferentes en cuanto a la altura del sat\'elite: LAGEOS-1 a m\'as de $5000 km$ y ICESAT a $600 km$.
+Se presentan a continuaci\'on las tablas con los resultados comparativos, entre los valores publicados y los valores obtenidos por ARxCODE para una unica ventana temporal (\textcolor{resto de las comparaciones en Appedice}).\\
 Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura, que se ve m\'as perturbado por el efecto atmosf\'erico, que no es modelable con precisión; mientras que el LAGEOS-1 presenta errores muchos \'ordenes de magnitud menor.\\
 
 \begin{table}
@@ -107,7 +107,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
     $R_{c}$ & -8.22221222 & -0.12314379 & 0.07316443\\
     \hline
     \end{tabular}}
-      \caption{Matriz de Covarianza de la Bilbiografia \citep{Osweiler} - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03}
+      \caption{Matriz de Covarianza de la Bibliograf\'ia \citep{Osweiler} - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03}
       \label{tab:singlebest}
     \end{minipage}
     \begin{minipage}[t]{0.48\hsize}\centering
@@ -160,7 +160,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
     $R_{c}$ & 0.02771527 & -0.0027171 &  0.0084302 \\
     \hline
     \end{tabular}}
-      \caption{Matriz de Covarianza de la Bilbiografia \citep{Osweiler} - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
+      \caption{Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
       \label{tab:singlebest}
     \end{minipage}
     \hfill
@@ -175,7 +175,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
       $R_{c}$ & 0.02772177 & -0.00272334 & 0.00843443\\
       \hline
       \end{tabular}}
-        \caption{Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
+        \caption{Matriz de Covarianza de la Bibliograf\'ia \citep{Osweiler}- Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
         \label{tab:twobest}
     \end{minipage}
     \hfill
@@ -216,7 +216,7 @@ Estudio hecho sobre los errores que se producen en las propagaciones de los TLE 
   \subfigure[Diferencias LAGEOS-1 - ARxCODE]{
     \includegraphics[width=0.48\textwidth]{imagenes/TLEdifTot8820esc11}
   }
-  \subfigure[Diferencias LAGEOS-1 - ARxCODE]{
+  \subfigure[Diferencias LAGEOS-1 - Osweiler]{
     \includegraphics[width=0.48\columnwidth, keepaspectratio]{imagenes/LAGEOSdifTot}
   }
   \caption{Gr\'afico con Diferencias Totales del escenario LAGEOS-1}
@@ -224,18 +224,21 @@ Estudio hecho sobre los errores que se producen en las propagaciones de los TLE 
 \end{figure}
 
 
-\section{Estudio de errores de TLE contra efem\'erides precisas}
+\section{Estudio de errores de TLE con efem\'erides precisas}
 \subsection*{Sistema de referencia TOD}
-Como ya mencionamos \textcolor{red}{debe haber una secci\'on dedicada a datos CODS}, los productos del departamento de din\'amica orbital con los que trabajamos ofrecen las posiciones orbitales en el sistema de referencia verdadero de la fecha \ac{TOD}, mientras que los resultados de las propagaciones con el sgp4 se encuentran en el sistema \ac{TEME}. Para poder hacer comparaciones desarrollamos un m\'odulo que transforma las coordenadas y velocidades, del sistema TEME al sistema TOD. (Ver. \textcolor{red}{apendice}).
-Para la validaci\'on del mismo, utilizamos TLEs de la misi\'on y los propagamos con el sgp4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos de din\'amica orbital, para los mismos instantes.\\
+La misi\'on operativa ofrece mediciones propias de sus efem\'erides.\\
+En esta secci\'on se muestran los resultados de comparar las posiciones obtenidas mediante los datos p\'ublicos TLE, propagadas con SGP4, contra las efem\'erides precisas.\\ 
 
-\textcolor{red}{buscar esos resultados}
+En primer lugar fue necesario plasmar las posiciones en el mismo sistema de referencia, ya que los productos del departamento de din\'amica orbital con los que trabajamos ofrecen las posiciones orbitales en el sistema de referencia verdadero de la fecha \ac{TOD}, mientras que los resultados de las propagaciones con el SGP4 se encuentran en el sistema \ac{TEME}. Para poder hacer comparaciones desarrollamos un m\'odulo que transforma las coordenadas y velocidades, del sistema TEME al sistema TOD (Ver. \ref{App1}).\\
 
+% \textcolor{red}{Para la validaci\'on del mismo, utilizamos TLE de la misi\'on y los propagamos con el SGP4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos de din\'amica orbital, para los mismos instantes.}\\
+
+Para la validaci\'on del mismo, utilizamos TLE de la misi\'on y los propagamos con el SGP4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos del STK, corridos para el mismo TLE y publicados en el sistema TOD que STK ofrece.
 
 \subsection*{Estad\'istica de Errores}
-Con la certeza de que los datos eran compatibles y pod\'ian ser comparados, iniciamos el procesamiento de comparaci\'on de las posiciones y la generaci\'on de los resultados estad\'isticos para la propagaci\'on de errores que describimos en la Sec. \ref{sec:properrores}.
+Con la certeza de que los datos eran compatibles y pod\'ian ser comparados, se inici\'o el procesamiento de comparaci\'on de las posiciones y la generaci\'on de los resultados estad\'isticos para la propagaci\'on de errores que se describe en la Sec. \ref{subsec:errorProp}.
 
-En un pre-procesamiento sobre un periodo amplio de la misi\'on, constatamos que fuera de los intervalos de maniobras por commissioning o maniobras de rutina, los TLE presentan un error que es {\it{acotado}}, {\it{estable}} y/o modelable.  
+En un pre-procesamiento sobre un periodo amplio de la misi\'on, constatamos que fuera de los intervalos de maniobras por {\it{commissioning}}\footnote{Puesta en \'orbita nominal} o maniobras de rutina, los TLE presentan un error que es {\it{acotado}}, {\it{estable}} y/o modelable.  
 
 \begin{figure}[!h]
 \centering
@@ -244,12 +247,155 @@ En un pre-procesamiento sobre un periodo amplio de la misi\'on, constatamos que 
   \caption{Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD}
 \end{figure}
 
+\begin{itemize}
+ \item Klinkrad Tabla para 14 misiones.
+ \item Paper del research gate
+ \item Peterson?!
+\end{itemize}
 
-% \section{C\'alculo de la Probabilidad de Colisi\'on}
-% \begin{figure}[!h]
-% \centering
-%  \includegraphics[width=0.5\textwidth]{imagenes/metodoARxCODE}
-%  \caption{Metodolog\'ia Propuesta}
-%  \label{fig:metodoARxCODE}
-% \end{figure}
+FINALIZAR CON COMPARACI\'ON TLE vs TLE. 
+
+
+
+\section{C\'alculo de la Probabilidad de Colisi\'on}
+
+El c\'alculo de la Probabilidad de Colisi\'on (PoC), implementa la expresi\'on presentada por  \cite[Lei Chen]{leichen}.
+
+
+\subsection*{Comparaci\'on de los resultados con la resoluci\'on de la integral}
+Con el objeto de verificar los c\'alculos que se realizan en el m\'odulo, se toman como datos iniciales, los valores publicados por el propio autor (Lei Chen), y se calcula la PoC, tanto para la expresi\'on anal\'itica como la integral. Para esta \'ultima se utiliza la biblioteca {\it{scipy.integrate}}  de python.
+
+De las expresiones para el c\'alculo de la PoC (Eq. \ref{eq:pocintegral} y Eq. \ref{eq:pocexpress}), se desprende que ser\'an necesarios los datos: ($\mu_{x}, \mu_{y}$), ($\sigma_{x}, \sigma_{y}$), $r_{a}$.
+
+\begin{minipage}[b]{0.28\textwidth}
+Valores iniciales.\\
+
+\begin{tabular}{|lc|}
+\hline
+ Dato & valor \\
+\hline
+$\mu_{x}$ & 0.031731 [km]\\
+$\mu_{y}$ & 0.697294 [km]\\
+$\sigma_{x}$ & 0.0430576\\
+$\sigma_{y}$ & 0.2941297\\
+$r_{a}$ & 0.01 [km]\\
+\hline
+\end{tabular}
+\end{minipage}
+\begin{minipage}[t]{0.7\textwidth}
+\begin{mdframed}[
+        linecolor=red,linewidth=2pt,% 
+        frametitlerule=true,% 
+        apptotikzsetting={\tikzset{mdfframetitlebackground/.append style={%
+            shade,left color=white, right color=blue!20}}}, 
+        frametitlerulecolor=blue,
+        frametitlerulewidth=1pt, innertopmargin=\topskip,
+        frametitle={Probabilidad de Colisi\'on},
+        outerlinewidth=1.25pt
+    ]
+\large
+\begin{tabular}{|l|l|l|}
+  \hline
+ Te\'orico & Expresi\'on & Valor de la Integral\\
+ \hline
+ 1.8079750e-04 & 1.8079124e-04 & 1.8071110e-04\\
+ \hline
+\end{tabular} 
+\end{mdframed}
+\end{minipage}
+
+Una vez verificada la implementaci\'on del c\'alculo de la PoC, es necesario ir verificando, paso a paso c\'omo llegar de los datos que pueden calcularse a partir de las inputs de ARxCODE, a estos par\'ametros de las ecuaciones. \\
+
+\subsection*{C\'alculos previos}
+
+Una vez determinadas la posici\'on relativa de los objetos en el sistema RSW (equivalente al RTN) en el TCA, la proyecci\'on al plano, para \'orbitas circulares, no representa mayores problemas, como se detall\'o en la Sec. \ref{subsec:planoencuentro}.\\
+Pero es importante verificar, que a partir de las posiciones inerciales de los objetos en el TCA, las transformaciones de la distancia relativa de los mismos al sistema RSW, coincide.\'
+Para ello, vamos a utilizar las posiciones de los objetos del ejemplo de la bibliograf\'ia y transformarlas con e m\'odulo de transformaci\'on {\it{sisRic}} del paquete {\it{SistReferencia.SistdeCoordenadas}} para corroborar los resultados.
+
+Vectores de Posiciones Inerciales al momento TCA:\\
+\begin{table}[!h]
+\begin{tabular}{l|c|c|c|c|c|c}
+\hline
+Objeto & x [km] & y [km] &z[km] &vx [km] &vy [km] &vz [km]\\
+\hline
+Obj1 & 1457.273246 &1589.568484&6814.189959&7.001731&2.439512&0.926209\\
+\hline
+Obj2 & 1457.532155&1588.932671&6814.316188&3.578705&6.172896&2.200215\\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[!h]
+\large
+ \centering
+\begin{tabular}{|l|c|c|c|}
+\hline
+Resultados seg\'un & R [km] & S [km] & W[km] \\
+\hline
+Lei Chen & 0.031731& 0.436476&0.543785\\
+\hline
+ARxCODE & 0.0317978& 0.4622953 &0.5220131
+\\
+\hline
+\end{tabular}
+\end{table}
+
+Estos resultados se logran en una transformaci\'on en la que se considere al Obj2 como origen de la referencia. Los mismos muestran una coincidencia del orden de las decenas de metros, aceptable para estas estimaciones.\\
+No obstante, contando s\'olo con la informaci\'on de los vectores de posici\'on al momento del m\'aximo acercamiento, no es posible verificar el m\'etodo de Osweiler de la contrucci\'on de la matriz de covarianza para este ejemplo de la bibliograf\'ia.\\
+
+Bien, hasta ac\'a hemos ido validando cada uno de los procesos por separado.\\
+Resta hacer pruebas desde el origen, es decir a partir de identificar los objetos y el TCA, correr los procesamientos de ARxCODE y obtener los restultados para la PoC.\\
+A tal fin, fue necesario conseguir registros que contuvieran la informaci\'on completa de una situaci\'on de encuentro.\\
+Esto no fue posible en su totalidad.Por un lado tuvimos acceso a mails de alerta p\'ublicos en internet, y por otro a CDM tambi\'en p\'ublicos\footnote{https://cwe.ccsds.org/moims/docs/Forms/AllItems.aspx?RootFolder=\%2Fmoims\%2Fdocs\%2FMOIMS-NAV\%2FDraft\%20Documents\%2FConjunction\%20Data\%20Message\%20\%28CDM\%29}, pero ninguno de esos datos se corresponden con la misi\'on operativa, cuyas efem\'erides precisas analizamos y utilizamos en la construcci\'on del modelo estad\'istico de propagaci\'on de errores.\\
+
+\subsubsection*{Validaci\'on de Mails}
+
+Formato de los mails:\\
+\begin{center}
+\fbox{\parbox[b]{0.8\linewidth}{
+The United States Joint Space Operations Center (JSpOC) has identified a\\
+predicted conjunction between DELFI C3 (SCC\# 32789) and SCC\# 23657.\\
+
+Primary Object: DELFI C3 (SCC\# 32789)\\
+Secondary Object: SCC\# 23657\\
+Time of Closest Approach: 15 JUL 2012 21:21 UTC \\
+
+Overall miss distance: 760 meters\\
+Radial (dU) miss distance: -186 meters\\
+In-Track (dV) miss distance: -389 meters\\
+Cross-track (dW) miss distance: -626 meters\\
+
+Primary Radial Error (U): 38 meters\\
+Primary In-track Error (V): 1388 meters\\
+Primary Cross-track Error (W): 11 meters\\
+
+Secondary Radial Error (U): 8 meters\\
+Secondary In-track Error (V): 338 meters\\
+Secondary Cross-track Error (W): 2 meters\\
+}}
+\end{center}
+
+\begin{itemize}
+ \item Los mails no contienen el dato de la PoC
+ \item Los mails no detallan las fracciones de segundo del TCA
+\end{itemize}
+
+Valores de ARxCODE:\\
+
+\resizebox{16cm}{!}{
+\begin{tabular}{|l|r|r|r|r|r|r|}
+ \hline \hline
+ \# & TCA arx & $\Delta r_{arx}$ [km] & $\Delta t_{arx}$ [km] & $\Delta n_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
+ \hline \hline
+ 1 & 2012-07-15 21:21:51 & 0.147106 & 2.749095 &  2.28711 & 3.579111 & 6.426171e-22 \\
+ \hline
+ 2 & 2014-06-29 04:55:59 & 0.081349 & 3.921163 & 2.002826 & 4.403799 & 0.0 \\
+ \hline
+ 3 & 2012-11-23 23:38:42 & 0.30062 & 1.668766 & 0.841432 & 1.892924 & 0.0 \\
+ \hline
+ 4 & 2013-03-31 03:25:45 & 68.072008 & 1.318496 & 426.131856 & 431.536667 & 0.0 \\
+ \hline
+ 5 & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx \\
+ \hline
+ \end{tabular} }
 

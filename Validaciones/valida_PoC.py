@@ -11,7 +11,7 @@ de la PoC son correctos.
 
 import numpy as np
 from datetime import datetime
-from scipy.integrate import quad, dblquad
+from scipy.integrate import dblquad
 from CDM.cdmParser import CDM
 from TleAdmin.TLE import Tle
 from Encuentro.Encuentro import Encuentro
@@ -21,7 +21,7 @@ def calcula_Poc_manual(mu_x,mu_y,sig2_xc,sig2_yc):
     #-----------------------------------------------
     # CAlculo de la PoC
     #-----------------------------------------------
-    ra=0.01
+    ra=0.1
     exp_c=np.exp(-ra*ra/(2*np.sqrt(sig2_xc)*np.sqrt(sig2_yc)))
     PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/(sig2_xc))+(mu_y*mu_y/(sig2_yc))))*(1-exp_c)
     PoC_int=dblquad(lambda y, x: (1.0/(2*np.sqrt(sig2_xc)*np.sqrt(sig2_yc)))*np.exp((-1.0/2.0)*((x*x/(sig2_xc))+(y*y/(sig2_yc)))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
@@ -187,6 +187,7 @@ def valida_cdm(cdm_archivo):
     print 'TCA calculado = ', encuentro.tca_c
     print 'Componentes RTN del CDM: ', dr, ds, dw
     print 'Componentes RTN calculadas: ', encuentro.r_comp, encuentro.s_comp, encuentro.w_comp
+    
 if __name__=='__main__':
     
 #    valida_bibl() # CARGA LOS PARAMETROS DE LA BIBLIOGRAFIA Y CALCULA PoC.

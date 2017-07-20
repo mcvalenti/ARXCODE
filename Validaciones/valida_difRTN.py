@@ -25,14 +25,14 @@ RTN, para verificar la transformacion.
 # poc=0.00343
 
 # Escenario LAPORTE.
-sat_id='36036'
-deb_id='34907'
-TCA='2015-02-21T7:07'
-min_d=0.944
-dr=0.003
-dt=0.849
-dn=0.413
-poc=0.0014
+# sat_id='36036'
+# deb_id='34907'
+# TCA='2015-02-21T7:07'
+# min_d=0.944
+# dr=0.003
+# dt=0.849
+# dn=0.413
+# poc=0.0014
 
 
 
@@ -53,6 +53,33 @@ poc=0.0014
 # dr=0.007
 # dt=0.249
 # dn=0.223
+
+# Escenario IV - (MAIL 3)
+# sat_id='24278'
+# deb_id='10470'
+# TCA=datetime(2012,11,23,23,38,0,0)
+# min_d=0.984
+# dr=0.174
+# dt=0.690
+# dn=0.680
+
+# Escenario V - (MAIL 4)
+sat_id='32789'
+deb_id='24097'
+TCA=datetime(2013,3,31,3,24,0,0)
+min_d=0.783
+dr=0.096
+dt=0.006
+dn=0.783
+
+# Escenario VI - (MAIL 5) - No existen los datos en NORAD
+# sat_id='38081'
+# deb_id='19363'
+# TCA=datetime(2013,5,5,17,12,0,0)
+# min_d=0.170
+# dr=0.138
+# dt=0.030
+# dn=0.096
 
 #==========================
 # Valida Mails
@@ -77,22 +104,26 @@ poc=0.0014
 # var_t_deb=linea_data[11]
 # var_n_deb=linea_data[12]
 #  
-tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M")
-tle_sat=Tle.creadoxParam(sat_id, tca_epoca)
-tle_deb=Tle.creadoxParam(deb_id, tca_epoca)
+#tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M")
+tle_sat=Tle.creadoxParam(sat_id, TCA)
+tle_deb=Tle.creadoxParam(deb_id, TCA)
 
 n=0
-encuentro=Encuentro(tle_sat,tle_deb,tca_epoca,n)
+encuentro=Encuentro(tle_sat,tle_deb,TCA,n)
+rtn_dist=encuentro.DistRic_min
+poc, poc_int=encuentro.calculaPoC_circ()
+
 print '**************************************************'
 print 'Calculado'
 print '**************************************************'
 print 'TCA calculado = ', encuentro.tca_c
-print 'Minima distancia total = ', encuentro.mod_minDist
-print 'Minima Distancia RTN = ', encuentro.DistRic_min
+print 'Minima distancia total = ', round(encuentro.mod_minDist,6)
+print 'Minima Distancia RTN = ', round(rtn_dist[0],6), round(rtn_dist[1],6), round(rtn_dist[2],6)
+print 'PoC calculada =', round(poc,6), round(poc_int,6)
 print '**************************************************'
 print 'Publicado'
 print '**************************************************'
-print 'TCA publicado = ',tca_epoca
+print 'TCA publicado = ',TCA
 print 'Minima distancia total = ',min_d
 print 'Minima Distancia RTN = ',dr,dt,dn
 

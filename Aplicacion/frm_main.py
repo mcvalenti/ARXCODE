@@ -67,9 +67,10 @@ class ProcARxCODE(QMainWindow):
         """
         # Lista de Encuentros.
         self.encuentros = QDockWidget("Carga de Encuentros", self)
-        self.listWidget = QListWidget()
-        self.listWidget.addItem("CARGAR CDM")
-        self.listWidget.addItem("Carga Manual")
+#         self.listWidget = QListWidget()
+#         self.listWidget.addItem("CARGAR CDM")
+#         self.listWidget.addItem("Carga Manual")
+#         self.listwidget.addItem("Encuentros Anteriores")
 #        self.encuentros.setWidget(self.listWidget)
 
         self.encuentros.setFloating(False)
@@ -78,8 +79,10 @@ class ProcARxCODE(QMainWindow):
         midock = QWidget()
         self.boton_cargarCDM = QPushButton('CARGAR CDM')
         self.boton_carga_manual = QPushButton('Carga Manual')
+        self.boton_anteriores = QPushButton('Encuentro Anterior')
         self.boton_cargarCDM.setStyleSheet("QPushButton { background-color: white; border:3px solid blue;font: bold 14px;height: 78px;width: 120px; }")
         self.boton_carga_manual.setStyleSheet("QPushButton { background-color: white; border:3px solid blue;font: bold 14px;height: 78px;width: 120px; }")
+        self.boton_anteriores.setStyleSheet("QPushButton { background-color: white; border:3px solid yellow;font: bold 14px;height: 78px;width: 120px; }")
         # plantilla
         stylesheet = \
         ".QWidget {\n" \
@@ -91,6 +94,7 @@ class ProcARxCODE(QMainWindow):
         layout=QVBoxLayout()
         layout.addWidget(self.boton_cargarCDM)
         layout.addWidget(self.boton_carga_manual)
+        layout.addWidget(self.boton_anteriores)
         midock.setLayout(layout)
         self.encuentros.setWidget(midock)
         # Acciones
@@ -354,7 +358,7 @@ class ProcEncuentro(QDialog):
         Botones
         """
         self.boton_encuetro = QPushButton('Procesar Encuentro')
-        self.boton_dif      = QPushButton('Ver diferencias')
+#        self.boton_dif      = QPushButton('Ver diferencias')
         self.boton_track    = QPushButton('Track')
         self.boton_salir    = QPushButton('Salir')
         """
@@ -379,7 +383,7 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro   = QTableWidget()
         self.tableEncuentro.setRowCount(1)
         self.tableEncuentro.setColumnCount(5)
-        listaLabels=['Norad Id','Nombre','TCAarx','MinD arx','PoC']
+        listaLabels=['Sat Id','Deb Id','TCAarx','MinD arx','PoC']
         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)      
 #       # Fecha y Hora
         self.hora = QTimeEdit()
@@ -413,7 +417,7 @@ class ProcEncuentro(QDialog):
         grid.addWidget(self.track,2,4,5,3)
         grid.addWidget(self.dif,12,4)
         grid.addWidget(self.boton_encuetro,11,10)
-        grid.addWidget(self.boton_dif,12,10)
+#        grid.addWidget(self.boton_dif,12,10)
         grid.addWidget(self.boton_track,13,10)
         grid.addWidget(self.boton_salir,14,10)
         """
@@ -422,9 +426,9 @@ class ProcEncuentro(QDialog):
         self.boton_encuetro.clicked.connect(self.procesoSimple)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_track.clicked.connect(self.mostrarTrack)
-        self.boton_dif.clicked.connect(self.mostrarDif)
+#        self.boton_dif.clicked.connect(self.mostrarDif)
         self.boton_track.setEnabled(False)
-        self.boton_dif.setEnabled(False)
+#        self.boton_dif.setEnabled(False)
 
         self.setLayout(grid)
         self.setWindowTitle('Procesamiento de Encuentro')    
@@ -484,7 +488,7 @@ class ProcEncuentro(QDialog):
 #        print 'fin del procesamiento.'
        
         self.boton_track.setEnabled(True)
-        self.boton_dif.setEnabled(True)
+#        self.boton_dif.setEnabled(True)
         
         #barra de progreso.
         self.completo=0
