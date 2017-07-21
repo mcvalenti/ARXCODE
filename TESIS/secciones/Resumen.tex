@@ -1,10 +1,25 @@
 \chapter*{Resumen}
 \label{chap:resumen}
+En este trabajo presentamos el prototipo de software ARxCODE. Un sistema dise\~nado para el estudio de acercamientos con riesgo de colisi\'on, entre misiones satelitales operativas y desechos espaciales.\\
 
+ARxCODE tiene la capacidad de extraer la informaci\'on que proviene de los mensajes de alerta de colisiones estandarizados, CDM (Conjunction Data Message), definidos por el CCSDS (Consultative Committee for Space Data System) y de procesar datos ingresados manualmente.\\
+Devuelve al operador par\'ametros para el an\'alisis de riesgo como: la m\'inima distancia y la probabilidad de colisi\'on en una interfaz gr\'afica que facilita una clara caracterizaci\'on y visualizaci\'on de la situaci\'on.\\
+
+Los estudios de acercamientos de riesgo que involucran desechos espaciales acarrean grandes incertezas respecto a la posici\'on del desecho, en especial para aquellos organismos que no cuentan con instrumentos propios de rastreo.\\
+
+En la actualidad, adem\'as de la distancia m\'inima de acercamiento, debe considerarse la probabilidad de colisi\'on. El c\'alculo de la probabilidad de colisi\'on requiere tener conocimiento de los errores de las posiciones y esto no siempre es conocido, en particular para los desechos, cuyos TLE son p\'ublicos, pero no sus errores asociados.\\
+
+Para la construcci\'on de la matriz de covarianza de la posici\'on del desecho correspondiente al \'ultimo TLE disponible m\'as cercano al momento del m\'aximo acercamiento (TCA: Time of Closest Approach), se implementa el m\'etodo desarrollado por Osweiler.\\
+
+Para la estimaci\'on de los errores que introducen las propagaciones de los TLE (Two-Line Elements) con el modelo de propagaci\'on anal\'itico SGP4 (Simplified General Perturbations) desarrollamos una metodolog\'ia que incorpora el análisis hist\'orico de los productos orbitales precisos de la misi\'on SAC-D.\\
+
+Finalmente para el c\'alculo de la probabilidad de colisi\'on, se implementa un m\'etodo simplificado desarrollado por Lei-Chen.\\
+ARxCODE es una herramienta que ofrece a los operadores de los centros de control de misi\'on, la posibilidad de tener una visi\'on m\'as clara de las situaciones de encuentro, para aquellos momentos de intercambio de di\'alogo con los organismos internacionales de alerta.
+
+\textbf{Palabras clave:}:space debris --- collision avoidance --- probability of collision
 \endinput
 %%%% Texto (no menos de 200 palabras)
 
-%\textbf{Palabras clave:}
 
 La capacidad de predecir y evitar el riesgo de colisión de un sat\'elite operativo con un desecho espacial, se ve limitada por los errores de precisi\'on con los que se conocen las \'orbitas de los desechos espaciales.\\
 

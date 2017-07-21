@@ -277,6 +277,9 @@ class ProcCDM(QDialog):
         print 'v_sat = ',self.v_sat
         print 'r_deb = ',self.r_deb
         print 'v_deb = ',self.v_deb
+        print '======================'
+        print '------Posiciones Rel--'
+        print '======================'
         print self.dr,self.ds,self.dw
         print '*********************'
         print self.cr_r
@@ -289,6 +292,7 @@ class ProcCDM(QDialog):
         #Validacion del calculo POC a partir de datos CDM.
         mu_x,mu_y,sig2_xc,sig2_yc=proyecta_plano_de_encuentro(self.rsw_vect,self.cov_rtn,phi)
         poc, poc_int=calcula_Poc_manual(mu_x, mu_y, sig2_xc, sig2_yc)
+
         print '======================'
         print '------POC-------------'
         print '======================'
@@ -297,15 +301,15 @@ class ProcCDM(QDialog):
         Carga de Informacion 
         """
         # Cargar la tabla
-        self.tablePOC.setItem(0,0, QTableWidgetItem( self.mision_name))
-        self.tablePOC.setItem(1,0, QTableWidgetItem(self.deb_name))
-        self.tablePOC.setItem(0,1, QTableWidgetItem(self.noradID_mision))
-        self.tablePOC.setItem(1,1, QTableWidgetItem(self.noradID_deb))
+        self.tablePOC.setItem(0,0, QTableWidgetItem(self.noradID_mision))
+        self.tablePOC.setItem(1,0, QTableWidgetItem(self.noradID_deb))
+        self.tablePOC.setItem(0,1, QTableWidgetItem( self.mision_name))
+        self.tablePOC.setItem(1,1, QTableWidgetItem(self.deb_name))
         self.tablePOC.setItem(0,2, QTableWidgetItem(self.TCA))
         self.tablePOC.setItem(0,3, QTableWidgetItem('TCA arx'))
         self.tablePOC.setItem(0,4, QTableWidgetItem(self.MISS_DISTANCE))
         self.tablePOC.setItem(0,5, QTableWidgetItem('M_dist arx'))
-        self.tablePOC.setItem(0,6, QTableWidgetItem(self.POC))
+        self.tablePOC.setItem(0,6, QTableWidgetItem(str(round(poc_int[0],10))))
         self.tablePOC.setItem(0,7, QTableWidgetItem('POC arx'))
         # formato de tabla
         header = self.tablePOC.horizontalHeader()

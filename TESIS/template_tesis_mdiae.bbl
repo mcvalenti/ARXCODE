@@ -1,10 +1,5 @@
 \begin{thebibliography}{}
 
-\bibitem[\protect\astroncite{{Akella} and {Alfriend}}{2000}]{akellaAlfriend}
-{Akella}, M.~R. and {Alfriend}, K.~T. (2000).
-\newblock {Probability of Collision Between Space Objects}.
-\newblock {\em Journal of Guidance Control Dynamics}, 23:769--772.
-
 \bibitem[\protect\astroncite{{Analytical Graphics, Inc.}}{}]{stk}
 {Analytical Graphics, Inc.}
 \newblock System tool kit - stk 11x64.
@@ -25,6 +20,12 @@ CCSDS (2013).
 \newblock {\em Conjunction Data Message - CCSDS 508.0-B-1 - Recommended
   Standard}.
 \newblock CCSDS Secretariat.
+
+\bibitem[\protect\astroncite{Chan}{2003}]{chan2003improved}
+Chan, K. (2003).
+\newblock Improved analytical expressions for computing spacecraft collision
+  probabilities.
+\newblock {\em Advances in the Astronautical Sciences}, 114:1197--1216.
 
 \bibitem[\protect\astroncite{ESA}{2013}]{esaSD}
 ESA (2013).
@@ -87,6 +88,12 @@ Klinkrad, H. (2006b).
 Laporte, F. (2014).
 \newblock Jac software, dedicated to the analysis of conjunction messages.
 \newblock {\em AIAA}, 1774.
+
+\bibitem[\protect\astroncite{LEI}{2009}]{lei2009rapid}
+LEI, B. X.~C. (2009).
+\newblock A rapid algorithm of space debris collision probability based on
+  space compression and infinite series [j].
+\newblock {\em Acta Mathematicae Applicatae Sinica}, 2:015.
 
 \bibitem[\protect\astroncite{Lei et~al.}{2017}]{leichen}
 Lei, C., Xian-Zong, B., Yan-Gang, L., and Ke-Bo, L. (2017).

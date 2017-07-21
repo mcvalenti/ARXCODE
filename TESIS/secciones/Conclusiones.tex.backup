@@ -1,0 +1,15 @@
+ \chapter{Conclusiones}
+\label{chap:conclusiones}
+
+
+
+\section{Trabajo a Futuro}
+
+\begin{itemize}
+ \item Incorporar al dise\~no una base de datos para los registros espec\'ificos de los CDM y los informes de alerta, o bien 
+ crear la entidad asociada, dentro de la base existente en Din\'amica Orbital.
+ \item Incorporar otros m\'etodos para el c\'alculo de la PoC.
+\end{itemize}
+
+
+\endinput

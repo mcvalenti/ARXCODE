@@ -21,45 +21,45 @@ Warning--empty year in sgp4python
 Warning--empty journal in karacalioglu2016impact
 Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty year in nasaprogramme
-You've used 22 entries,
+You've used 23 entries,
             1940 wiz_defined-function locations,
-            593 strings with 6421 characters,
-and the built_in function-call counts, 6798 in all, are:
-= -- 657
-> -- 217
-< -- 22
-+ -- 75
+            598 strings with 6601 characters,
+and the built_in function-call counts, 7101 in all, are:
+= -- 688
+> -- 218
+< -- 23
++ -- 77
 - -- 66
-* -- 516
-:= -- 1245
-add.period$ -- 63
-call.type$ -- 22
-change.case$ -- 140
-chr.to.int$ -- 19
-cite$ -- 27
-duplicate$ -- 288
-empty$ -- 481
-format.name$ -- 100
-if$ -- 1301
+* -- 538
+:= -- 1299
+add.period$ -- 66
+call.type$ -- 23
+change.case$ -- 145
+chr.to.int$ -- 20
+cite$ -- 28
+duplicate$ -- 302
+empty$ -- 508
+format.name$ -- 99
+if$ -- 1357
 int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 19
-newline$ -- 110
-num.names$ -- 66
-pop$ -- 126
+missing$ -- 20
+newline$ -- 115
+num.names$ -- 69
+pop$ -- 128
 preamble$ -- 1
-purify$ -- 143
+purify$ -- 148
 quote$ -- 0
-skip$ -- 225
+skip$ -- 236
 stack$ -- 0
-substring$ -- 373
-swap$ -- 46
+substring$ -- 406
+swap$ -- 48
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 122
+type$ -- 128
 warning$ -- 5
-while$ -- 49
+while$ -- 53
 width$ -- 0
-write$ -- 268
+write$ -- 281
 (There were 7 warnings)

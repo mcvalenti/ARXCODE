@@ -64,10 +64,10 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
         # Calculo de Diferencias
         d_r=pos-r0
         d_v=vel-rp0
-        r,t,n=vncSis(r0, rp0, d_r)
-        rr,tt,nn=vncSis(r0,rp0,d_v)
-#         r,t,n=ricSis(r0, rp0, d_r)
-#         rr,tt,nn=ricSis(r0,rp0,d_v)
+#         r,t,n=vncSis(r0, rp0, d_r)
+#         rr,tt,nn=vncSis(r0,rp0,d_v)
+        r,t,n=ricSis(r0, rp0, d_r)
+        rr,tt,nn=ricSis(r0,rp0,d_v)
         '''
         Sistema RTN
         '''

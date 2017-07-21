@@ -21,7 +21,7 @@ def calcula_Poc_manual(mu_x,mu_y,sig2_xc,sig2_yc):
     #-----------------------------------------------
     # CAlculo de la PoC
     #-----------------------------------------------
-    ra=0.1
+    ra=0.01
     exp_c=np.exp(-ra*ra/(2*np.sqrt(sig2_xc)*np.sqrt(sig2_yc)))
     PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/(sig2_xc))+(mu_y*mu_y/(sig2_yc))))*(1-exp_c)
     PoC_int=dblquad(lambda y, x: (1.0/(2*np.sqrt(sig2_xc)*np.sqrt(sig2_yc)))*np.exp((-1.0/2.0)*((x*x/(sig2_xc))+(y*y/(sig2_yc)))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)

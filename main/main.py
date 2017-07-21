@@ -57,7 +57,7 @@ if __name__ == '__main__':
     """
     Prediccion con n dias de aticipacion
     """
-    n=0 # x ejemplo para un CDM que llega 72 hs antes.
+    n=3 # x ejemplo para un CDM que llega 72 hs antes.
     #===========================================================
     # Satelite
     #===========================================================

@@ -198,6 +198,15 @@ booktitle = {Space Debris},
   year = {},
 }
 
+@BOOK{leichen,
+  title = {Orbital Data Applications for Space Objects},
+  publisher = {Springer},
+  year = {2017},
+  author = {Lei, Chen and Xian-Zong, Bai and Yan-Gang, Liang and Ke-Bo, Li},
+  owner = {Ceci},
+  timestamp = {2017}
+}
+
 @BOOK{Klinkrad,
   title = {Space Debris. Models and Risk Analysis},
   publisher = {Springer},
@@ -281,12 +290,6 @@ booktitle = {Space Debris},
   institution={AEROSPACE DEFENSE COMMAND PETERSON AFB CO OFFICE OF ASTRODYNAMICS}
 }
 
-@techreport{CDMstd,
-  title={Conjunction Data Message Standard},
-  author={Consultative Committee for Space Data Systems, CCSDS},
-  year={2013},
-  institution={CCSDS}
-}
 @techreport{spacetrackreport3,
   title={SPACETRACK REPORT NO. 3 Models for Propagation of NORAD Element Sets},
   author={Hoots, Felix R and Roehrich, Ronald L},
@@ -299,4 +302,13 @@ title={{A History of Analytical Orbit Modeling in the United States Space Survei
 author = {Hoots, Felix R and Roehrich, Ronald L},
 year = {1998},
 note= {Third US-Russian Space Surveillance Workshop. Washington, D.C},
+}
+
+@article{chan2003improved,
+  title={Improved analytical expressions for computing spacecraft collision probabilities},
+  author={Chan, Ken},
+  journal={Advances in the Astronautical Sciences},
+  volume={114},
+  pages={1197--1216},
+  year={2003}
 }

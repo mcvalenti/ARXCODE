@@ -1,4 +1,30 @@
  \chapter{Conclusiones}
 \label{chap:conclusiones}
 
+Como resultado de este trabajo se obtuvo el prototipo de software ARxCODE, para el an\'alisis de riesgo de posibles colisiones entre misiones operativas y desechos espaciales.\\
+El mismo fue pensado para operar montado sobre las estructuras ya existentes del departamento de Din\'amica Orbital y para ser utilizado por operadores o analistas con alto conocimiento sobre din\'amica orbital y desechos espaciales.\\
+
+ARxCODE es una aplicaci\'on que permite al operador visualizar la informaci\'on que contienen los mensajes internacionales estandarizados de alerta \ac{CDM} o bien, ingresar manualmente los datos de una situaci\'on de encuentro de riesgo, para su procesamiento.\\
+
+Entre sus funcionalidades principales, el ARxCODE:\\
+
+\begin{itemize}
+ \item Extrae la informaci\'on que contienen los mensajes de alerta estandarizados CDM, y publica por pantalla: la {\it{m\'inima distancia}}, la {\it{probabilidad de colisi\'on}} y el {\it{tiempo de m\'aximo acercamiento}} (TCA). 
+ \item Implementa el m\'etodo de Osweiler \cite{osweiler} para determinar las matrices de covarianza de los errores, en la posici\'on inicial.
+ \item Implementa un m\'etodo desarrollado en esta tesis, para propagar las matrices de covarianza de errores hasta el TCA.
+ \item Calcula la probabilidad de colisi\'on del encuentro.
+ \item Grafica las trayectorias de los objetos durante el encuentro.
+\end{itemize}
+
+
+\section*{Trabajo a Futuro}
+
+\begin{itemize}
+ \item Incorporar al dise\~no una base de datos para los registros espec\'ificos de los CDM y los informes de alerta, o bien 
+ crear la entidad asociada, dentro de la base existente en Din\'amica Orbital.
+ \item Incorporar un m\'etodo que mejore la estimaci\'on de la posici\'on inicial de los objetos a partir de un TLE.
+ \item Incorporar otros m\'etodos para el c\'alculo de la PoC.
+\end{itemize}
+
+
 \endinput

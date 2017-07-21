@@ -18,6 +18,10 @@ En este cap\'itulo, en primer lugar presentamos la forma en que se comunican los
 Una vez calculada la matriz de covarianza para ambos objetos involucrados en el encuentro, ser\'a necesario propagarla al instante predicho para el encuentro. Para ello proponemos la implementaci\'on de una tabla con valores estad\'isticos inferidos del an\'alisis de datos de la misi\'on.\\
 Finalmente detallamos el algoritmo para el c\'alculo de la PoC. - INCORPORAR UNA IDEA M\'AS GENERAL DEL ESTUDIO TLE VS TLE, contra TLE VS EPHEM PRECISAS}\\
 
+Bajo ciertos criterios predefinidos (ej: Sec. \ref{subsec:cdm}), que indican m\'argenes extremos para las m\'inimas distancias y las probabilidades, se inferir\'a el tipo de alerta que debe considerarse.\\ 
+
+% Incorporar los estados de alerta de Nasa. (texto de la aseguradora Britanica que me paso Juan ... bla de UNLAM.)
+
 
 \section{La posici\'on de los objetos involucrados}{\label{sec:posMision}}
 Al estudio de posiciones orbitales se lo puede dividir en tres etapas: medici\'on y/o rastreo, {\it{determinaci\'on orbital}} y {\it{propagaci\'on orbital}}.
@@ -258,15 +262,29 @@ Luego se agrupan los valores seg\'un el intervalo de propagaci\'on, es decir, si
 \end{table}
 
 \section{La Probabilidad de Colisi\'on}
+Para el an\'alisis de una situaci\'on de riesgo, en general se utilizan como par\'ametros:\\
 
-Dados dos objetos, en nuestro caso una misi\'on operativa: {\it{sat}}, y un desecho: {\it{deb}}, de los cuales conocemos su posici\'on $P_{sat}$ y $P_{deb}$ y las matrices de error asociadas a esas posiciones para un tiempo inicial: $t_{0}$. Todo referenciado al mismo sistema inercial de referencia, ya sea un sistema geoc\'entrico (\ac{ECI}) o el propio sistema del sat\'elite (\ac{RTN}).\\
-Sea TCA el instante de m\'aximo acercamiento entre ellos. Bajo ciertos criterios (ej: Sec. \ref{subsec:cdm})estos objetos estar\'an en una situaci\'on de encuentro.\\
-
-Los encuentros pueden clasificarse seg\'un sean:
 
 \begin{itemize}
- \item Encuentros cortos: se asume que movimiento relativo presenta comportamiento lineal durante el breve lapsus del encuentro.
- \item Encuentros largos: el encuentro no es lo suficientemente corto como para considerar movimiento relativo lineal.
+\centering
+\itemsep0em
+\item La m\'inima distancia.
+\item La probabilidad de Colisi\'on (PoC).
+\item La m\'axima PoC.
+\end{itemize}
+
+
+Estos par\'ametros se calculan a partir de: las \'orbitas predichas al momento TCA y las matrices de covarianza de los errores.
+
+Sean dos objetos; en nuestro caso una misi\'on operativa, {\it{sat}}, y un desecho, {\it{deb}}; de los cuales conocemos su posici\'on $\bar{X}_{sat0}=(\bar{x}_{sat},\bar{v}_{sat})$ y $\bar{X}_{deb0}=(\bar{x}_{deb},\bar{v}_{deb})$ y las matrices de covarianza de los errores, $C_{sat0}, C_{deb0}$, para un tiempo inicial, $t_{sat0}$, y $t_{deb0}$ respectivamente. Todo referenciado al mismo sistema inercial de referencia, ya sea un sistema geoc\'entrico (\ac{ECI}) o el sistema del sat\'elite (\ac{RTN}).\\
+En un planteo general, el estudio de una posible colisi\'on consiste en propagar hacia el futuro, mediante modelos (anal\'iticos y num\'ericos de alta precisi\'on), esas posiciones y matrices de covarianza de errores; definir radios seguros (o de colisi\'on) para los objetos, y calcular la probabilidad de que la m\'inimia distancia entre ellos, sea menor a la suma de esos radios.\\
+Un an\'alisis apropiado de situaciones de encuentro facilita la determinaci\'on del tiempo de m\'aximo acercamiento, TCA y las posiciones y matrices de covarianza para ese instante:  $\bar{X}_{sat}(TCA)$, $\bar{X}_{deb}(TCA)$, $C_{sat}(TCA), C_{deb}(TCA)$.
+
+Para su estudio, los encuentros pueden clasificarse seg\'un sean:
+
+\begin{itemize}
+ \item {\bf{Encuentros cortos}}: se asume que movimiento relativo presenta comportamiento lineal durante el breve lapsus del encuentro.
+ \item {\bf{Encuentros largos}}: el encuentro no es lo suficientemente corto como para considerar movimiento relativo lineal.
 \end{itemize}
 
 En particular en este trabajo, analizamos las situaciones de encuentros cortos.\\
@@ -280,7 +298,19 @@ En los encuentros cortos puede asumirse que:\\
  \item Los errores en la posici\'on se representan con una distribuci\'on gaussiana de tres dimensiones.
 \end{itemize}
 
-M\'etodos para el c\'alculo de la PoC en {\it{encuentros cortos}}:
+La probabilidad de colisi\'on se calcula en cada caso, conociendo: las posiciones, las matrices de covarianza de ambos objetos en el instante TCA, ($\bar{X}_{sat}(TCA)$, $\bar{X}_{deb}(TCA)$, $C_{sat}(TCA), C_{deb}(TCA)$) y los radios de colisi\'on respectivos, $R1$ y $R2$.
+
+\subsection*{C\'alculo de la PoC en encuentros cortos}
+
+Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC (Ver tabla \ref{tab:trabajosPoc}). Todos ellos comparten las siguientes consideraciones:\\
+\begin{itemize}
+\itemsep0em
+\item El error en la posici\'on puede representarse por una funci\'on de distribuci\'on Gaussiana en tres dimensiones (3D).
+\item Tanto el objeto primario, como el desecho se mueven con movimiento rectil\'ineo de velocidad constante durante el encuentro.
+\item Los errores en las velocidades se desprecian.
+\item Los errores en las posiciones del objeto primario y del desecho no est\'an correlacionados.
+\item Los errores en las posiciones son constantes durante el encuentro, al igual que la matrices de covarianzas correspondientes al TCA.
+\end{itemize}
 
 \begin{table}
  \centering
@@ -313,203 +343,195 @@ M\'etodos para el c\'alculo de la PoC en {\it{encuentros cortos}}:
     & Utiliza una relaci\'on entre los radios combinados y la m\'inima distancia.\\
     \hline
  \end{tabular} }
+ \caption[Trabajos sobre el c\'alculo de la PoC]{Distintos autores y trabajos para el c\'alculo de la Probabilidad de Colisi\'on PoC}
+ \label{tab:trabajosPoc}
 \end{table}
 
+En su mayor\'ia, los m\'etodos que se mencionan en la tabla \ref{tab:trabajosPoc}, son aceptados en el est\'andar del mensaje de alerta, para el c\'alculo de la probabilidad de colisi\'on, ver \ref{fig:pagsana}.
 
-De acuerdo al estudio del libro de \citep{leichen}, la {\it{probabilidad de colisi\'on}} ser\'a:
+% Los resultados del c\'alculo son sensibles a:
+% 
+% \begin{itemize}
+% \itemsep0em
+%  \item La geometr\'ia del encuentro.
+%  \item La matriz de covarianza.
+%  \item El tamaño de los objetos.
+% \end{itemize}
+  
 
-\resizebox{15cm}{!}{\fbox{La probabilidad de que la m\'inima distancia entre los objetos sea menor a la suma de sus radios seguros.}}\\
+\subsection{C\'alculo Simplificado de Lei-Chen}
 
-En un c\'alculo simplificado de la probabilidad de colisi\'on, las incertezas se combinan y los radios se suman en el TCA. Los resultados se proyectan en un plano perpendicular al vector velocidad relativa y en este plano, la probabilidad de colisi\'on se calcula como una integral doble de la funci\'on densidad de probabilidad sobre el \'area de corte circular.\\
-Esta integral no tiene  soluci\'on anal\'itica y se resuelve mediante m\'etodos num\'ericos de alta precisi\'on y bajo costo.\\
+En este trabajo se implement\'o la estimaci\'on de un c\'alculo simplificado para la PoC, que propone Lei-Chen junto a otros autores en el libro 
+{\it{Orbital Data Applications for Space Objects. Conjunction Assessment and Situation Analysis}} \citep{leichen}.
 
-Los resultados del c\'alculo son sensibles a:
+Lei-Chen se basa en estudios anteriores del problema del c\'alculo de la probabilidad de colisi\'on en encuentros cortos, que reducen el problema en tres dimensiones a un plano de encuentro.\\
+Con este planteo, se reduce el problema a calcular la integral de la funci\'on de densidad de probabilidad (PDF) en dos dimensiones, sobre el \'area de la secci\'on circular de colisi\'on que se proyecta en el plano de encuentro.\\
 
-\begin{itemize}
-\itemsep0em
- \item La geometr\'ia del encuentro.
- \item La matriz de covarianza.
- \item El tamaño de los objetos.
-\end{itemize}
+La secci\'on circular de colisi\'on que se proyecta en el plano de encuentro, con radio $r_{a}$, est\'a centrada en las coordenadas $\mu_{x}$, $\mu_{y}$ del plano. Las desviaciones est\'andar que resultan de la matriz combinada de covarianzas de ambos objetos, proyectadas, son $\sigma_{x}$ y $\sigma_{y}$ Fig. \ref{fig:planoenc}.\\
 
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\textwidth]{imagenes/planodeencuentro}
+\caption[Plano de Encuentro]{Esquematizaci\'on del plano de encuentro. Extra\'ido de \cite{leichen}}
+\label{fig:planoenc}
+\end{figure}
 
-
-Como ya hemos mencionado, el an\'alisis de una situaci\'on de riesgo puede realizarse tomando como par\'ametro:\\
-(\textcolor{red}{Introducir un p\'arrafo para la idea general})
-
-\begin{itemize}
-\itemsep0em
-\item La m\'inima distancia.
-\item La probabilidad de Colisi\'on (PoC).
-\item La m\'axima PoC.
-\end{itemize}
-
-Estos par\'ametros se calculan a partir de:
-\begin{itemize}
-\itemsep0em
-\item \'Orbitas Predichas.
-\item Covarianzas.
-\end{itemize}
-
-Luego se juzgan m\'argenes para las acciones a seguir seg\'un criterios propios del centro de control, que tiene en cuenta distintas consideraciones propias de la misi\'on.\\
-
-Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC (Patera, Klinkrad, Akella \& Alfriend ... \textcolor{red}{citar bien,  y detallar un poco los rasgos generales de cada uno}). Todos ellos comparten las siguientes consideraciones:\\
-\begin{itemize}
-\itemsep0em
-\item El error en la posici\'on puede representarse por una funci\'on de distribuci\'on Gaussiana 3D, cuya funci\'on de densidad de probabilidad se detalla en la eq...{\bf{bla}}
-\item Tanto el objeto primario, como el desecho se mueven en movimiento rectil\'ineo con velocidad constante durante el encuentro.
-\item Los errores en las velocidades se desprecian.
-\item Los errores en las posiciones del objeto primario y del desecho no est\'an correlacionados.
-\item Los errores en las posiciones son constantes durante el encuentro, al igual que la matrices de covarianzas correspondientes al TCA.
-\end{itemize}
-
-\subsection{Expresi\'on Anal\'itica Simplifiacada \ref{leichen}}
-
-
-
-Dados dos objetos, ambos en \'orbitas circulares ... bajo \textcolor{red}{Teor\'ia de Leiche},
-\subsubsection*{Proyecci\'on al plano de encuentro} \label{subsec:planoencuentro}
-
-Para el instante TCA, las coordenadas del centro del elipsoide de posici\'on del objeto secundario, son:\\
-
-
-\begin{gather}
- \mu_{x}=\Delta r_{rad}\\
- \mu_{y}=\Delta r_{vel}\\
-\end{gather}
-
-Estas expresiones, proyectadas en el sistema RSW, resultan en:
-
-\begin{gather}
- \mu_{x}=R\\
- \mu_{y}=\sqrt(S^{2}+W^{2})
-\end{gather}
-
-analizando el problema en el plano de encuentro (\textcolor{red}{definirlo}), la probabilidad de colisi\'on se calcula mediante la integral:
+Finalemente, la expresi\'on del c\'alculo de la integral en dos dimensiones (2D), resulta:\\
 
 \begin{equation}
  PoC=\int \int_{(x-\mu_{x})^{2}+(y-\mu_{y})^{2}\leq r_{a}^{2}} \frac{1}{2\pi\sigma_{x}\sigma_{y}} exp [-\frac{1}{2}(\frac{\mu_{x}^{2}}{\sigma_{x}^{2}}+\frac{\mu_{y}^{2}}{\sigma_{y}^{2}}) ] dy dx
  \label{eq:pocintegral}
 \end{equation}
 
-puede encontrarse una expresi\'on anal\'itica simplificada para el c\'alculo de la probabilidad de colisi\'on.\\
+Tomando como referencia los estudios previos realizados por Chan \citep{chan2003improved} en la b\'usqueda de una expresi\'on anal\'itica que se construye mediante una serie convergente de infinitos t\'erminos; Lei-Chen presenta una expresi\'on para el primer t\'ermino de la serie y una f\'ormula recursiva de la serie, que resulta ventajosa para los m\'etodos de programaci\'on.\\
+
+Como resultado de su trabajo \citep{lei2009rapid}, se encuentra que si se toma el primer t\'ermino de la serie como aproximaci\'on de la integral de la PoC,  el error de truncamiento es del orden de $10^{-5}$ o menor. Si se toman los dos primeros t\'erminos, el error de truncamiento es del orden de $10^{-9}$. Es decir, que para un primer an\'alisis, resulta suficiente considerar s\'olo el primer t\'ermino de la serie, cuya expresi\'on final es:\\
+
 
 \begin{equation}
  PoC= \exp[-\frac{1}{2}(\frac{\mu_{x}^{2}}{\sigma_{x}^{2}}+\frac{\mu_{y}^{2}}{\sigma_{y}^{2}})][1-\exp(\frac{r_{a}^{2}}{2\sigma_{x}\sigma_{y}})]
  \label{eq:pocexpress}
 \end{equation}
 
+Ser\'a necesario incorporar m\'as t\'erminos en aquellos casos, en los que el radio de la secci\'on circular de colisi\'on y la m\'inima distancia sean mayores a las desviaciones est'andar.
 
-\subsection*{M\'etodo de Akella}
-En este trabajo para el c\'alculo de la PoC se utilizar\'a el m\'etodo de Alfriend \& Akella \citep{akellaAlfriend} ya que es conceptualmente simple y aunque tiene un alto costo computacional, es realizable por las m\'aquinas actuales en tiempos menores a un segundo.\\
+% \subsection*{Expresi\'on de Poc para \'orbitas circulares}
 
-El mismo requiere como entradas:
-\begin{itemize}
-\itemsep0em
-\item Conocer el instante de m\'aximo acercamiento: TCA (Time of Closest Approach).
-\item La posici\'on relativa del desecho respecto al objeto primario en el TCA.
-\item La velocidad relativa del desecho respecto al objeto primario en el TCA.
-\item Las matrices de error de ambos objetos.
-\end{itemize}
-
-En los momentos pr\'oximos al encuentro, la posici\'on relativa de riesgo $\Delta r$ puede expresarse en funci\'on de un intervalo de tiempo respecto del TCA, es decir, $\Delta t_{tca}=t-t_{tca}$.
-
-\begin{equation}
-\Delta r(t)=\Delta r_{tca}+\Delta v_{tca}(t-t_{tca})
-\end{equation}
-
-Las matrices de covarianza de los errores que son calculadas para un momento dado t previo al TCA, deben ser propagadas. ({\bf{ver metodolog\'ia}})
-Dado que consideramos que los errores en las posiciones de ambos objetos no est\'an correlacionadas, ambas contribuciones pueden combinarse en una \'unica matriz, a partir de la suma de ambas.
-
-\begin{equation}
-C=C_{p}+C_{d}
-\end{equation}
-
-De $C$ s\'olo consideraremos la submatriz superior de la izquierda de dimensiones (3x3), que corresponde a los errores en las posiciones, con un $1 \sigma$.\\
-Dado que adem\'as asumimos que los errores en la posici\'on son de distribuci\'on normal en 3D, la funci\'on densidad de probabilidad $p(\Delta r)$ en momentos pr\'oximos al m\'aximo acercamiento queda definida por la expresi\'on {\bf{eq ..bla}}:
-
-\begin{equation}
-p(\Delta r)=\frac{1}{\sqrt((2 \pi)^3det(C))} exp[-\frac{1}{2}\Delta r^TC^{-1}\Delta r]
-\end{equation}
-
-Sean $R_{t}$ y $R_{r}$ los radios de las esferas que encierran a nuestra misi\'on principal y al desecho de riesgo, respectivamente. Se considera una situaci\'on de {\it{encuentro}} o {\it{riesgo de colisi\'on}}, al hecho de que estas esferas se intersecten, o lo que es lo mismo, si ocurre un acercamiento dentro de una esfera de {\it{radio de colisi\'on}} $R_{c}$, secci\'on $A_{c}$,  volumen $V_{c}$.
-
-\begin{equation}
-R_{c}=R_{t}+R_{r} \qquad A_{c}=\pi R_{C}^{2} \qquad V_{c}=\frac{4}{3} \pi R_{c}^{3}
-\end{equation}
-
-La probabilidad de colisi\'on $P_{c}$ se calcula a partir de la integral de volumen de la funci\'on densidad de probabilidad (eq) sobre la regi\'on esf\'erica $V_{c}$, centrada en el desecho de riesgo.
-\begin{equation}
-PoC=\frac{1}{\sqrt((2\pi)^3det(C))} \int \limits_{Vc} exp[-\frac{1}{2}\Delta r^TC^{-1}\Delta r]dV
-\label{eq:poc3d}
-\end{equation}
-
-Puede demostrarse que esta integral de volumen puede reducirse a una integral de superficie mapeando el elipsoide  de los errores en la posici\'on, en contornos el\'ipticos de probabilidad constante sobre el B-plane {\bf{(citar a Foster)}}.
-
-El B-plane es perpendicular al vector velocidad relativa $\Delta v_{tca}$ en el momento de m\'aximo acercamiento.
-A su vez, el vector $\Delta r_{tca}$ yace en el B-plane, como deja ver la ecuaci\'on de {\bf{zero-transit of the range-rate between the two objects}}:
-\begin{equation}
-\frac{\Delta v_{tca} \Delta r_{tca}}{\Delta r_{tca}}= \dot{\rho}_{tca}=0.0 \quad \rightarrow \quad t_{tca}
-\end{equation}
-
-Definamos los vectores directores unitarios del plano como $X_{B}$ e $Y_{B}$, de acuerdo a las expresiones:
-
-\begin{equation}
-X_{B}=\frac{\Delta r_{tca}}{|\Delta r_{tca}|} \quad Y_{B}=\frac{(\Delta r_{tca}) \times (\Delta v_{tca})}{|(\Delta r_{tca}) \times (\Delta v_{tca})|}
-\end{equation}
+% Most of space objects are in the circular or near-circular orbits, such as Low Earth
+% Orbit (LEO), Middle Earth Orbit (MEO), and Geostationary Earth Orbit (GEO). As
+% a consequence of the characteristic of orbit motion, the close approach or collision
+% between two space objects always occur in the vicinity of points of closest approach
+% between their orbits, as seen in Fig. 5.3.
+% In the case of circular orbits, the points of closest approach between orbits are
+% along the line of intersection of orbital planes.
+% 
+% Para el instante TCA, las coordenadas del centro del elipsoide de posici\'on del objeto secundario, son:\\
+% 
+% \begin{gather}
+%  \mu_{x}=\Delta r_{rad}\\
+%  \mu_{y}=\Delta r_{vel}\\
+% \end{gather}
+% 
+% Estas expresiones, proyectadas en el sistema RSW, resultan en:
+% 
+% \begin{gather}
+%  \mu_{x}=R\\
+%  \mu_{y}=\sqrt(S^{2}+W^{2})
+% \end{gather}
 
 
-A partir de estos vectores unitarios, se construye la matriz de transformaci\'on $R_{X_{B},Y_{B}}$ que mapea las matrices de covarianza en tres dimensiones $C=C_{x,y,z}$ a matrices de dos dimensiones en el B-plane $C_{B}$.
 
-\begin{equation}
-C_{B} = C_{{X_{B},Y_{B}}} = R_{X_{B},Y_{B}} C R^{T}_{X_{B},Y_{B}}\\
-\end{equation}
 
-\begin{equation}
-R_{X_{B},Y_{B}} =
-\begin{pmatrix}
-X_{B,X} & X_{B,Y} & X_{B,Z}\\
-Y_{B,X} & Y_{B,Y} & Y_{B,Z}
-\end{pmatrix}
-\end{equation}
-
-Los ejes principales de los contornos el\'ipticos de probabilidad constante, quedan determinados a partir de los autovalores $\lambda_{i,B}(i=1,2)$ y los autovectores $\bar{e}_{i,B}$ que resuelven la ecuaci\'on:
-
-\begin{equation}
-(C_{B} - \lambda_{i,B} I) \bar{e}_{i,B} = \bar{0}
-\end{equation}
-
-Donde $I$ es la matriz identidad $2x2$.
-
-Ahora, sea la elipse que representa los errores de posici\'on de $1\sigma$ en el B-plane:\\
-
-\begin{itemize}
-\item El {\bf{semieje mayor}} queda definido por: $a_{1\sigma,B}=\sqrt(max(\lambda_{1,B},\lambda_{2,B}))$
-\item El {\bf{semieje menor}} queda definido por: $b_{1\sigma,B}=\sqrt(min(\lambda_{1,B},\lambda_{2,B}))$
-\item La {\bf{direcci\'on del semieje mayor}} ser\'a $\bar{e}_{a,B}$, con vector unitario: $ \bar{x}_{B}=\frac{\bar{e}_{a,B}}{|\bar{e}_{a,B}|}$
-\item La {\bf{orientaci\'on de $\bar{e}_{a,B}$}} respecto a la direcci\'on de la conjunci\'on $X_{B}$ la indica el \'angulo $\Phi_{B}$ (ver \ref{fig:bplane})
-\end{itemize}
-
-\begin{equation}
-\Phi_{B}= arccos(\bar{x}_{B},X_{B})
-\end{equation}
-
-\begin{figure}[!h]
-\centering
-\includegraphics[width=0.5\textwidth]{imagenes/akellabplane}
-\caption{ B-plane (Adaptado de ....)}
-\label{fig:bplane}
-\end{figure}
-
-Bien, consideremos ahora una posici\'on relativa de acercamiento $\Delta r_{B}$ ya proyectada en el B-plane. La integral de volumen de la probabilidad de colisi\'on de la Eq. \ref{eq:poc3d} se reduce a una integral de superficie sobre la secci\'on circular de colisi\'on $R_{c}$, proyectada en el B-plane y centrada a la distancia relativa predicha en el instante de m\'aximo acercamiento, $\Delta r_{tca}$
-
-\begin{equation}
-P_{c} = \frac{1}{2 \pi \sqrt(det(C_{B}))} \int_{-R_{c}}^{+R_{c}} \int_{-\sqrt(R^{2}_{c}-x^{2}_{B})}^{+\sqrt(R^{2}_{c}-x^{2}_{B})} exp [- A_{B}] dy_{B} dx_{B}
-\end{equation}
-
-\begin{equation}
-A_{B}=\frac{1}{2}\Delta r^{T}_{B} C^{-1}_{B} \Delta r_{B}
-\end{equation}
+% \subsection*{M\'etodo de Akella}
+% En este trabajo para el c\'alculo de la PoC se utilizar\'a el m\'etodo de Alfriend \& Akella \citep{akellaAlfriend} ya que es conceptualmente simple y aunque tiene un alto costo computacional, es realizable por las m\'aquinas actuales en tiempos menores a un segundo.\\
+% 
+% El mismo requiere como entradas:
+% \begin{itemize}
+% \itemsep0em
+% \item Conocer el instante de m\'aximo acercamiento: TCA (Time of Closest Approach).
+% \item La posici\'on relativa del desecho respecto al objeto primario en el TCA.
+% \item La velocidad relativa del desecho respecto al objeto primario en el TCA.
+% \item Las matrices de error de ambos objetos.
+% \end{itemize}
+% 
+% En los momentos pr\'oximos al encuentro, la posici\'on relativa de riesgo $\Delta r$ puede expresarse en funci\'on de un intervalo de tiempo respecto del TCA, es decir, $\Delta t_{tca}=t-t_{tca}$.
+% 
+% \begin{equation}
+% \Delta r(t)=\Delta r_{tca}+\Delta v_{tca}(t-t_{tca})
+% \end{equation}
+% 
+% Las matrices de covarianza de los errores que son calculadas para un momento dado t previo al TCA, deben ser propagadas. ({\bf{ver metodolog\'ia}})
+% Dado que consideramos que los errores en las posiciones de ambos objetos no est\'an correlacionadas, ambas contribuciones pueden combinarse en una \'unica matriz, a partir de la suma de ambas.
+% 
+% \begin{equation}
+% C=C_{p}+C_{d}
+% \end{equation}
+% 
+% De $C$ s\'olo consideraremos la submatriz superior de la izquierda de dimensiones (3x3), que corresponde a los errores en las posiciones, con un $1 \sigma$.\\
+% Dado que adem\'as asumimos que los errores en la posici\'on son de distribuci\'on normal en 3D, la funci\'on densidad de probabilidad $p(\Delta r)$ en momentos pr\'oximos al m\'aximo acercamiento queda definida por la expresi\'on {\bf{eq ..bla}}:
+% 
+% \begin{equation}
+% p(\Delta r)=\frac{1}{\sqrt((2 \pi)^3det(C))} exp[-\frac{1}{2}\Delta r^TC^{-1}\Delta r]
+% \end{equation}
+% 
+% Sean $R_{t}$ y $R_{r}$ los radios de las esferas que encierran a nuestra misi\'on principal y al desecho de riesgo, respectivamente. Se considera una situaci\'on de {\it{encuentro}} o {\it{riesgo de colisi\'on}}, al hecho de que estas esferas se intersecten, o lo que es lo mismo, si ocurre un acercamiento dentro de una esfera de {\it{radio de colisi\'on}} $R_{c}$, secci\'on $A_{c}$,  volumen $V_{c}$.
+% 
+% \begin{equation}
+% R_{c}=R_{t}+R_{r} \qquad A_{c}=\pi R_{C}^{2} \qquad V_{c}=\frac{4}{3} \pi R_{c}^{3}
+% \end{equation}
+% 
+% La probabilidad de colisi\'on $P_{c}$ se calcula a partir de la integral de volumen de la funci\'on densidad de probabilidad (eq) sobre la regi\'on esf\'erica $V_{c}$, centrada en el desecho de riesgo.
+% \begin{equation}
+% PoC=\frac{1}{\sqrt((2\pi)^3det(C))} \int \limits_{Vc} exp[-\frac{1}{2}\Delta r^TC^{-1}\Delta r]dV
+% \label{eq:poc3d}
+% \end{equation}
+% 
+% Puede demostrarse que esta integral de volumen puede reducirse a una integral de superficie mapeando el elipsoide  de los errores en la posici\'on, en contornos el\'ipticos de probabilidad constante sobre el B-plane {\bf{(citar a Foster)}}.
+% 
+% El B-plane es perpendicular al vector velocidad relativa $\Delta v_{tca}$ en el momento de m\'aximo acercamiento.
+% A su vez, el vector $\Delta r_{tca}$ yace en el B-plane, como deja ver la ecuaci\'on de {\bf{zero-transit of the range-rate between the two objects}}:
+% \begin{equation}
+% \frac{\Delta v_{tca} \Delta r_{tca}}{\Delta r_{tca}}= \dot{\rho}_{tca}=0.0 \quad \rightarrow \quad t_{tca}
+% \end{equation}
+% 
+% Definamos los vectores directores unitarios del plano como $X_{B}$ e $Y_{B}$, de acuerdo a las expresiones:
+% 
+% \begin{equation}
+% X_{B}=\frac{\Delta r_{tca}}{|\Delta r_{tca}|} \quad Y_{B}=\frac{(\Delta r_{tca}) \times (\Delta v_{tca})}{|(\Delta r_{tca}) \times (\Delta v_{tca})|}
+% \end{equation}
+% 
+% 
+% A partir de estos vectores unitarios, se construye la matriz de transformaci\'on $R_{X_{B},Y_{B}}$ que mapea las matrices de covarianza en tres dimensiones $C=C_{x,y,z}$ a matrices de dos dimensiones en el B-plane $C_{B}$.
+% 
+% \begin{equation}
+% C_{B} = C_{{X_{B},Y_{B}}} = R_{X_{B},Y_{B}} C R^{T}_{X_{B},Y_{B}}\\
+% \end{equation}
+% 
+% \begin{equation}
+% R_{X_{B},Y_{B}} =
+% \begin{pmatrix}
+% X_{B,X} & X_{B,Y} & X_{B,Z}\\
+% Y_{B,X} & Y_{B,Y} & Y_{B,Z}
+% \end{pmatrix}
+% \end{equation}
+% 
+% Los ejes principales de los contornos el\'ipticos de probabilidad constante, quedan determinados a partir de los autovalores $\lambda_{i,B}(i=1,2)$ y los autovectores $\bar{e}_{i,B}$ que resuelven la ecuaci\'on:
+% 
+% \begin{equation}
+% (C_{B} - \lambda_{i,B} I) \bar{e}_{i,B} = \bar{0}
+% \end{equation}
+% 
+% Donde $I$ es la matriz identidad $2x2$.
+% 
+% Ahora, sea la elipse que representa los errores de posici\'on de $1\sigma$ en el B-plane:\\
+% 
+% \begin{itemize}
+% \item El {\bf{semieje mayor}} queda definido por: $a_{1\sigma,B}=\sqrt(max(\lambda_{1,B},\lambda_{2,B}))$
+% \item El {\bf{semieje menor}} queda definido por: $b_{1\sigma,B}=\sqrt(min(\lambda_{1,B},\lambda_{2,B}))$
+% \item La {\bf{direcci\'on del semieje mayor}} ser\'a $\bar{e}_{a,B}$, con vector unitario: $ \bar{x}_{B}=\frac{\bar{e}_{a,B}}{|\bar{e}_{a,B}|}$
+% \item La {\bf{orientaci\'on de $\bar{e}_{a,B}$}} respecto a la direcci\'on de la conjunci\'on $X_{B}$ la indica el \'angulo $\Phi_{B}$ (ver \ref{fig:bplane})
+% \end{itemize}
+% 
+% \begin{equation}
+% \Phi_{B}= arccos(\bar{x}_{B},X_{B})
+% \end{equation}
+% 
+% \begin{figure}[!h]
+% \centering
+% \includegraphics[width=0.5\textwidth]{imagenes/akellabplane}
+% \caption{ B-plane (Adaptado de ....)}
+% \label{fig:bplane}
+% \end{figure}
+% 
+% Bien, consideremos ahora una posici\'on relativa de acercamiento $\Delta r_{B}$ ya proyectada en el B-plane. La integral de volumen de la probabilidad de colisi\'on de la Eq. \ref{eq:poc3d} se reduce a una integral de superficie sobre la secci\'on circular de colisi\'on $R_{c}$, proyectada en el B-plane y centrada a la distancia relativa predicha en el instante de m\'aximo acercamiento, $\Delta r_{tca}$
+% 
+% \begin{equation}
+% P_{c} = \frac{1}{2 \pi \sqrt(det(C_{B}))} \int_{-R_{c}}^{+R_{c}} \int_{-\sqrt(R^{2}_{c}-x^{2}_{B})}^{+\sqrt(R^{2}_{c}-x^{2}_{B})} exp [- A_{B}] dy_{B} dx_{B}
+% \end{equation}
+% 
+% \begin{equation}
+% A_{B}=\frac{1}{2}\Delta r^{T}_{B} C^{-1}_{B} \Delta r_{B}
+% \end{equation}
 
 
 
@@ -518,8 +540,6 @@ A_{B}=\frac{1}{2}\Delta r^{T}_{B} C^{-1}_{B} \Delta r_{B}
 
 A partir de las primeros accidentes, y da\'~nos por impactos, las agencias u organismos capaces de rastrear el ambiente espacial, comenzaron a implementar sistemas de comunicaci\'on para advertir sobre posibles colisiones. Las comunicaciones, que en sus or\'igenes eran mails particulares, fueron migrando a un mensaje formal y estandarizado y finalmente en Junio del 2013, el Consejo Consultivo para los Sistemas de Datos Espaciales, \ac{CCSDS}, public\'o el mensaje est\'andar recomendado que se utiliza en la actualidad, el: \ac{CDM} \citep{CDMstd}.\\
 El {\it{CCSDS 508.0-B-1, Conjunction Data Message Recommended Standard}} describe en detalle la estructura del formato recomendado, aunque no propone formas de intercambio, dejando a las partes la potestad de acordar las distintas maneras de realizar la comunicaci\'on de los mismos, que, deber\'an ser detalladas en el documento de interfaces (ICD).\\
-
-(\textcolor{red}{se puede ampliar en contexto historico, mencionando a NASA y al CSM})\\
 
 \subsection{El CDM}\label{subsec:cdm}
 
@@ -662,6 +682,15 @@ id="CCSDS_CDM_VERS" version="1.0">
 </COLLISION_PROBABILITY_METHOD>
 </relativeMetadataData>
 \end{lstlisting}
+
+A diferencia de mensajes estandarizados anteriores, como el CSM:{\it{Conjunction Summery Message}}, el CDM ofrece un valor estimado para la PoC e indica el m\'etodo que se utiliz\'o para calcularlo. Estos m\'etodos (Ver tabla ), son adem\'as los m\'etodos que el est\'andard sugiere para la implementaci\'on de los c\'alculos de PoC.\\
+
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\textwidth]{imagenes/sanaPoCmetodos}
+\caption{ La imagen es una impresi\'on de pantalla de la Secci\'on Probabilidad de Colisi\'on, del sitio SANA: \textcolor{blue}{http://sanaregistry.org/r/ndmxml/ndmxml-1.0-cdm-1.0.xsd}, que se indica en el est\'andar del CCSDS, para la descripci\'on de los esquemas del formato XML del CDM.}
+\label{fig:pagsana}
+\end{figure}
 
 \section*{Resumen}
 A partir de la recepci\'on de informaci\'on respecto de una posible colisi\'on, ya sea mediante un mensaje estandarizado CDM o mediante otros medios, se inicia un an\'alisis de la situaci\'on.\\

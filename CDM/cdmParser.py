@@ -13,7 +13,7 @@ class CDM():
         root = self.tree.getroot() 
         self.TCA=None
         self.MISS_DISTANCE=None
-        self.POC=None
+        self.POC='---'
         self.mision_name=None
         self.noradID_mision=None
         self.r_sat=None
