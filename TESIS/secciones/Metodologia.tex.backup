@@ -5,22 +5,22 @@
 Para el desarrollo de este trabajo se opt\'o por un modelo de desarrollo de tipo incremental (que resulta iterativo por naturaleza).
 En cada iteraci\'on, se optimiz\'o el dise\~no y se fueron agregando nuevas funcionalidades y capacidades al sistema.\\
 
-El problema que nos propusimos resolver, requer\'ia de la implementaci\'on de distintos algoritmos en una estructura acoplada, es decir que los resultados de un m\'odulo se utilizan en el siguiente. Esto implica que para un an\'alisis completo cada una de las instancias deb\'ian estar previamente validadas.\\
-No obstante, las salidas de los m\'odulo que eran ingesta de otros m\'odulos pod\'ian reemplazarse por datos ya conocidos, y as\'i desarrollar y validar el m\'odulo siguiente, mientras se analizaba en paralelo c\'omo mejorar o corregir los resultados no satisfactorios. De esta manera se fue armando la estructura general del software a gran escala, y luego revisando y afinando cada uno de los paquetes.\\
+El problema que se propone resolver, requiere de la implementaci\'on de distintos algoritmos en una estructura en donde los resultados de un m\'odulo se utilizan en el siguiente. Esto implica que para un an\'alisis completo cada una de las instancias debi\'o estar previamente validada.\\
+No obstante, las salidas de los m\'odulos que eran ingesta de otros m\'odulos pod\'ian reemplazarse por datos ya conocidos, y as\'i desarrollar y validar el m\'odulo siguiente, mientras se analizaba en paralelo c\'omo mejorar o corregir los resultados no satisfactorios. De esta manera se fue armando el cuerpo general del software a gran escala, y luego se fue revisando y afinando cada uno de los paquetes.\\
 
-Esta forma de trabajo nos permiti\'o separar la complejidad del proyecto, y a su vez, desarrollar una estructura de biblioteca f\'acilmente modificables, sin alterar la estructura central.\\
+Esta forma de trabajo permiti\'o separar la complejidad del proyecto, y a su vez, desarrollar un conjunto de bibliotecas f\'acilmente modificables, sin alterar la estructura central.\\
 
 \section{Inicializaci\'on}
-En esta primera etapa evaluamos  el concepto del ARxCODE en el contexto de la Unidad de Desarrollo de Desechos Espaciales de CONAE. Fundamentalmente la vinculaci\'on con el departamento de Din\'amica Orbital y los procedimientos actuales que se realizan en relaci\'on a los riesgos de colisi\'on con desechos.\\
+En esta primera etapa se evalu\'o  el concepto del ARxCODE en el contexto de la Unidad de Desarrollo de Desechos Espaciales de CONAE. Fundamentalmente la vinculaci\'on con el departamento de Din\'amica Orbital y los procedimientos actuales que se realizan en relaci\'on a los riesgos de colisi\'on con desechos.
 
-Hicimos un estudio de las estructuras org\'anicas existentes y los sistemas asociados. Los distintos tipos de productos y usuarios, las interfaces que existen y el acceso a los datos reales con los que podr\'iamos contar.\\
+Se hizo un estudio de las estructuras org\'anicas existentes y los sistemas asociados. Los distintos tipos de productos y usuarios, las interfaces que existen y el acceso a los datos reales con los que podr\'ia contar.\\
 
-Analizamos c\'omo trabajan otras agencias espaciales la tem\'atica y concluimos qu\'e es lo que podr\'ia ofrecerse y bajo qu\'e premisas.\\
+Se anliz\'o c\'omo trabajan otras agencias espaciales la tem\'atica y se sacaron conclusiones respecto de qu\'e es lo que podr\'ia ofrecerse y bajo qu\'e premisas.\\
 De las consideraciones m\'as importantes que se desprendieron de esta etapa, cabe destacar que se decidi\'o un prototipo para funcionar montado sobre el software principal de Din\'amica Orbital, como un anexo que no interfiere de ninguna manera con los procesos actuales.\\
 Por otro lado, debido a la complejidad del problema y sus consecuencias, ser\'a un software diseñado para ser utilizado por un analista experto, con conocimientos de Din\'amica Orbital.\\
-En el mismo sentido, sus productos finales no ser\'an considerados en la toma de decisiones hasta tanto sus resultados no hayan sido validados durante un periodo suficiente, que permita verificar y mejorar su funcionamiento, valid\'andolo con un acumulado de situaciones reales.\\
+En el mismo sentido, sus productos finales no ser\'an considerados en la toma de decisiones hasta tanto sus resultados no hayan sido validados durante un periodo suficiente, que permita verificar y mejorar su funcionamiento, contrast\'andolo con un acumulado de situaciones reales.\\
 
-Para este planteo de definiciones, contamos con el asesoramiento y el intercambio de informaci\'on con personas de Din\'amica Orbital y otros departamentos de CONAE. Realizamos algunas reuniones e intercambio de mails, aunque por ser una tem\'atica que se aborda bajo reg\'imenes especiales de acuerdos de confidencialidad, no fue posible contar con la totalidad de la informaci\'on.
+Para este planteo de definiciones, se cont\'o con el asesoramiento y el intercambio de informaci\'on con personas de Din\'amica Orbital y otros departamentos de CONAE. Se realizaron algunas reuniones e intercambio de mails, aunque por ser una tem\'atica que se aborda bajo reg\'imenes especiales de acuerdos de confidencialidad, no fue posible contar con la totalidad de la informaci\'on.
 
 \section{Iteraci\'on}
 Ya conocido el planteo del problema, las distintas maneras de abordarlo y las restricciones que resultan, elaboramos un diseño preliminar del producto con sus requerimientos (Sec. \ref{sec:requerimientos}) y sus funcionalidades, que dadas las caracter\'isticas del problema resultan bastante deterministas.\\
@@ -56,8 +56,8 @@ Para el desarrollo utilizamos:\\
 \end{itemize}
 
 \subsection*{Eclipse}
-Eclipse (Ver. 3.8.1) es una plataforma de desarrollo, multiplataforma cuya estructura de perspectivas, editores y vistas, facilita el desarrollo en distintos lenguajes de programaci\'on. En nuestro caso incorporamos el IDE para python, {\it{Pydev}}.\\
-Eclipse ofrece excelentes capacidades para la gesti\'on del proyecto, permitiendo incorporar en un mismo proyecto distintos archivos y documentaci\'on, que en nuestro caso agrup\'o no s\'olo los distintos datos de entrada y salida, como TLE, CDM, productos orbitales, etc, sino que tambi\'en incluy\'o todos los poloteos y gr\'aficos que resultaban de los procesamientos y la propia documentaci\'on referida a la escritura de esta tesis. Esto fue muy productivo en lo que respecta al control de versiones, ya que se aprovech\'o el hecho de que Eclispe ya tiene icorporado el Git.\\
+Eclipse (Ver. 3.8.1) es una plataforma de desarrollo multiplataforma ampliamente utilizada y ya muy madura, cuya estructura de perspectivas, editores y vistas, facilita el desarrollo en distintos lenguajes de programaci\'on. En nuestro caso incorporamos el IDE para python, {\it{Pydev}}.\\
+Eclipse ofrece excelentes capacidades para la gesti\'on de proyectos, permitiendo incorporar en un mismo proyecto distintos archivos y documentaci\'on, que en nuestro caso agrup\'o no s\'olo los datos de entrada y salida, como los TLE, los CDM o los productos orbitales; sino que tambi\'en incluy\'o todos los ploteos y gr\'aficos que resultaban de los procesamientos y la propia documentaci\'on referida a la escritura de esta tesis. Esto fue muy productivo en lo que respecta al control de versiones, ya que se aprovech\'o el hecho de que Eclipse ya tiene incorporado el Git.\\
 Cabe destacar también, que ofrece una excelente herramientas de depuraci\'on.\\
 
 \subsection*{Python}
@@ -67,11 +67,12 @@ Finalmente su utilizaci\'on masiva permite tener acceso r\'apido a sus potencial
 
 \subsection*{QT}
 Para el desarrollo de la interfaz gr\'afica se utiliz\'o QT, a trav\'es del enlace PyQT.\\
-Esta herramienta facilita el desarrollo de aplicaciones multiplataforma. Su mecanismo de conexión de señales y eventos es simple, esto permite definir los eventos sencillos en la estructura del GUI, y luego invocar el c\'odigo python con las acciones m\'as avanzadas.\\
+QT es un framework ampliamente utilizado para el desarrollo de aplicaciones multiplataforma. Cuenta con mucha contribuci\'on de la comunidad y est\'a soportado por Nokia.\\ Su mecanismo de conexión de señales y eventos es simple, esto permite definir los eventos sencillos en la estructura del GUI, y luego invocar el c\'odigo python con las acciones m\'as avanzadas.\\
 Subyace su implementaci\'on en C++ que muchas veces dificulta la comprensi\'on para los que estamos familiarizados con la l\'ogica del python, y lo mismo ocurre con la documentaci\'on y prevalecen los ejemplos para C++.\\
 
 \subsection*{Git}
-Si bien, esta herramienta est\'a por debajo subexplotada en este trabajo, ya que se trata de un proyecto sencillo y desarrollada por dos personas, fue fundamental para agilizar la posibilidad de trabajar desde cualquier computadora siempre en la \'ultima versi\'on del desarrollo.\\
+Si bien, esta herramienta no fue aprovechada en todo su pontecial en este trabajo, por tratarse de un proyecto sencillo y desarrollada por dos personas, fue fundamental para agilizar la posibilidad de trabajar desde cualquier computadora, siempre en la \'ultima versi\'on del proyecto.\\
+As\'i mismo, el trabajo con control de versiones, permiti\'o realizar distintas pruebas e implementaciones que luego se descartaron o se quitaron del producto final, pero que pueden ser reutilizados en futuros proyectos. En particular en la utilizaci\'on de la interfaz intermedia que fue generada para una \'agil evaluaci\'on de los los resultados parciales.\\
 
 
 

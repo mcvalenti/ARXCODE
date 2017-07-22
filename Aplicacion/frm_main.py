@@ -292,7 +292,10 @@ class ProcCDM(QDialog):
         #Validacion del calculo POC a partir de datos CDM.
         mu_x,mu_y,sig2_xc,sig2_yc=proyecta_plano_de_encuentro(self.rsw_vect,self.cov_rtn,phi)
         poc, poc_int=calcula_Poc_manual(mu_x, mu_y, sig2_xc, sig2_yc)
-
+        print '======================'
+        print '------Ma. Cov---------'
+        print '======================'
+        print 
         print '======================'
         print '------POC-------------'
         print '======================'

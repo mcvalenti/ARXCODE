@@ -1,7 +1,6 @@
-This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: template_tesis_mdiae.aux
-A level-1 auxiliary file: secciones/Abstract.aux
 A level-1 auxiliary file: secciones/Resumen.aux
 A level-1 auxiliary file: secciones/Agradecimientos.aux
 A level-1 auxiliary file: secciones/Acronimos.aux
@@ -11,6 +10,11 @@ A level-1 auxiliary file: secciones/Metodologia.aux
 A level-1 auxiliary file: secciones/ARxCODE.aux
 A level-1 auxiliary file: secciones/Resultados.aux
 A level-1 auxiliary file: secciones/Conclusiones.aux
+Case mismatch error between cite keys osweiler and Osweiler
+---line 4 of file secciones/Conclusiones.aux
+ : \citation{osweiler
+ :                   }
+I'm skipping whatever remains of this command
 A level-1 auxiliary file: secciones/Apendice.aux
 The style file: apa.bst
 Database file #1: template_tesis_mdiae.bib
@@ -23,7 +27,7 @@ Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty year in nasaprogramme
 You've used 23 entries,
             1940 wiz_defined-function locations,
-            598 strings with 6601 characters,
+            597 strings with 6579 characters,
 and the built_in function-call counts, 7101 in all, are:
 = -- 688
 > -- 218
@@ -62,4 +66,4 @@ warning$ -- 5
 while$ -- 53
 width$ -- 0
 write$ -- 281
-(There were 7 warnings)
+(There was 1 error message)

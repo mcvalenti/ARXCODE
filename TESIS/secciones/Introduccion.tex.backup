@@ -164,9 +164,9 @@ part\'icula que genera el efecto & \\
 \label{tamanioDanio}
 \end{table}
 
-\subsection{El estudio del riesgo de colisi\'on}
+\subsection{El estudio del riesgo de colisi\'on}\label{subsec:estudiocolision}
 
-Un an\'alisis completo del Riesgo de Colisi\'on Fig. \ref{fig:estudiocolision}, abarca:
+Un an\'alisis completo del Riesgo de Colisi\'on abarca, (Fig. \ref{fig:estudiocolision}):
 
 \begin{itemize}
 \setlength{\itemsep}{0pt}
@@ -257,7 +257,7 @@ En lo que respecta a los l\'imites de este trabajo, podemos citar las siguientes
 \item Space Debris Mitigation Guidelines - IADC.
 \item ISO 24113:2011 {\it{Space Debris mitigation requirements.}}
 \item ISO/TR 16158:2013 {\it{Space Systems - Avoiding collision with orbiting objects.}}
-\item ISO 19389:2014 {\it{Space data and information transfer Systems.}}
+\item ISO 19389:2014 {\it{Space data and information transfer Systems.}} Conjunction Data Message: specifies a standard message format for use in exchanging spacecraft conjunction information between originators of Conjunction Assessments (CAs) and satellite owner/operators and other authorized parties.
 \item {\it{Guidelines for the long-term sustainability of outer space activities}}. Vienna, 8-17 de Junio de 2016.
 \end{itemize}
 
@@ -289,7 +289,7 @@ Espaciales (ESOC) - Darmstadt, Alemania. \cite{alarconRodriguez}\\
 \end{table}
 
 \section{La Unidad de Desechos Espaciales de la CONAE}
-De acuerdo con el Plan Nacional Espacial: {\bf{ Argentina en el Espacio 2004-2015}} [5], las misiones de la CONAE, fundamentalmente pensadas para observaci\'on de la Tierra, ocupan \'orbitas bajas de dise\~no estrat\'egico. Es decir, se ubican en regiones de mucha demanda y en consecuencia se encuentran expuestas a un alto riesgo de colisi\'on.\\
+De acuerdo con el Plan Nacional Espacial: {\bf{ Argentina en el Espacio 2004-2015}}, las misiones de la CONAE, fundamentalmente pensadas para observaci\'on de la Tierra, ocupan \'orbitas bajas de dise\~no estrat\'egico. Es decir, se ubican en regiones de mucha demanda y en consecuencia se encuentran expuestas a un alto riesgo de colisi\'on.\\
 En nuestro pa\'is, compete a la Unidad de Desechos Espaciales de la Secretaria General de la CONAE; quien tiene la facultad de mantener las relaciones con los organismos internacionales, garantizar que se cumplan los distintos convenios y acuerdos a los que Argentina ha adherido, como por ejemplo el {\it{Convenio sobre la Responsabilidad Internacional por da\~nos causados por objetos espaciales}}, suscripto por la Rep\'ublica Argentina el 29 de marzo de 1972. (LEY N 23.335, sancionada: Julio 30 de 1986 - promulgada: Agosto 19 de 1986.1).\\
 As\'i mismo, como miembro parte de la ONU, responde ante el COPUOS en materia de buenas pr\'acticas para la mitigaci\'on de la generaci\'on de desechos espaciales.\\
 
@@ -320,10 +320,8 @@ El mismo oficiar\'a de soporte al operador de din\'amica orbital, quien se encar
 
 \section{Objetivos}
 
-
-
 \subsection*{Objetivo principal}
-Diseñar un procedimiento operativo frente a situaciones de alerta por riesgo de posible
+Dise\~nar un procedimiento operativo frente a situaciones de alerta por riesgo de posible
 colisi\'on con desechos espaciales y desarrollar un prototipo de software: ARxCODE, que
 mejore el c\'alculo de los par\'ametros de caracterizaci\'on del riesgo y facilite al analista la
 toma de decisiones y/o el di\'alogo con los servicios de alerta externos.\\
@@ -332,7 +330,9 @@ toma de decisiones y/o el di\'alogo con los servicios de alerta externos.\\
 \begin{itemize}
 \item Automatizar la recepci\'on y gesti\'on de los mensajes de alertas (CDM) por posibles
 colisiones, que se reciben de organismos internacionales de rastreo.
-\item Desarrollar una t\'ecnica que mejore la determinaci\'on de la posici\'on del desecho espacial.
+\item Desarrollar una t\'ecnica que mejore la estimaci\'on de los errores en la posici\'on del desecho espacial.
 \item Calcular la \ac{PoC} para caracterizar la situaci\'on de encuentro.
 \item Desarrollar un prototipo de software (ARxCODE) para el procesamiento de la informaci\'on, el manejo de las notificaciones, la visualizaci\'on del evento y la generaci\'on de reportes.
 \end{itemize}
+
+\endinput

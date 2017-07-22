@@ -33,9 +33,9 @@ RTN, para verificar la transformacion.
 # dt=0.849
 # dn=0.413
 # poc=0.0014
-
-
-
+#=========================
+# MAILS
+#=========================
 # Escenario II - (MAIL 1 )
 # sat_id='32789'
 # deb_id='23657'
@@ -64,13 +64,13 @@ RTN, para verificar la transformacion.
 # dn=0.680
 
 # Escenario V - (MAIL 4)
-sat_id='32789'
-deb_id='24097'
-TCA=datetime(2013,3,31,3,24,0,0)
-min_d=0.783
-dr=0.096
-dt=0.006
-dn=0.783
+# sat_id='32789'
+# deb_id='24097'
+# TCA=datetime(2013,3,31,3,24,0,0)
+# min_d=0.783
+# dr=0.096
+# dt=0.006
+# dn=0.783
 
 # Escenario VI - (MAIL 5) - No existen los datos en NORAD
 # sat_id='38081'
@@ -81,29 +81,44 @@ dn=0.783
 # dt=0.030
 # dn=0.096
 
-#==========================
-# Valida Mails
-#==========================
-# 
-# tabla_mails=open('../CDM/mails/tabla_mails','r')
-# contenido=tabla_mails.readlines()
-# n=0
-# mail=contenido[n]
-# linea_data=mail.split()
-# sat_id=linea_data[0]
-# deb_id=linea_data[1]
-# TCA=linea_data[2]
-# dr=linea_data[3]
-# dt=linea_data[4]
-# dn=linea_data[5]
-# min_dist=linea_data[6]
-# var_r_sat=linea_data[7]
-# var_t_sat=linea_data[8]
-# var_n_sat=linea_data[9]
-# var_r_deb=linea_data[10]
-# var_t_deb=linea_data[11]
-# var_n_deb=linea_data[12]
-#  
+#=========================
+# CDM
+#=========================
+# MENSAJE # 1                    
+# sat_id='24793'
+# deb_id='27646'
+# TCA=datetime(2013,01,10,9,59,57,0)
+# min_d=0.17
+# dr=-0.1638  
+# dt=-0.0222
+# dn=-0.0404 
+# MENSAJE # 2                                        
+# sat_id='25273'
+# deb_id='31279'
+# TCA=datetime(2013,01,12,0,20,51,0)
+# min_d=0.175 
+# dr=0.1701
+# dt=0.0122
+# dn=0.0424
+# MENSAJE # 5
+# sat_id='28810'
+# deb_id='33315'
+# TCA=datetime(2012,11,22,13,3,44,823)
+# min_d=0.976
+# dr=0.0661 
+# dt=-0.2413 
+# dn=-0.9443
+# MENSAJE # 6                                                          
+sat_id='38755'
+deb_id='34115'
+TCA=datetime(2012,12,26,5,0,41,0)
+min_d= 0.617  
+dr=-0.0825 
+dt=-0.0509
+dn=0.6094   
+
+
+  
 #tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M")
 tle_sat=Tle.creadoxParam(sat_id, TCA)
 tle_deb=Tle.creadoxParam(deb_id, TCA)
@@ -127,3 +142,25 @@ print 'TCA publicado = ',TCA
 print 'Minima distancia total = ',min_d
 print 'Minima Distancia RTN = ',dr,dt,dn
 
+#==========================
+# Valida Mails
+#==========================
+# 
+# tabla_mails=open('../CDM/mails/tabla_mails','r')
+# contenido=tabla_mails.readlines()
+# n=0
+# mail=contenido[n]
+# linea_data=mail.split()
+# sat_id=linea_data[0]
+# deb_id=linea_data[1]
+# TCA=linea_data[2]
+# dr=linea_data[3]
+# dt=linea_data[4]
+# dn=linea_data[5]
+# min_dist=linea_data[6]
+# var_r_sat=linea_data[7]
+# var_t_sat=linea_data[8]
+# var_n_sat=linea_data[9]
+# var_r_deb=linea_data[10]
+# var_t_deb=linea_data[11]
+# var_n_deb=linea_data[12]

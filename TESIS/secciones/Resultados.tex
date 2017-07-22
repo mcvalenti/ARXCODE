@@ -193,10 +193,10 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
  Dif. $R_{c}$ & 0.000006 &  -0.000006 &   0.000004 \\
  \hline
  \end{tabular}
- \caption{Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler \citep{Oseweiler}}
+ \caption{Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler.}
 \end{table}
 
-\subsection*{Diferencias de los escenarios todos contra todos}
+\subsection*{Diferencias de los escenarios iterando el TLE primario en el m\'etodo de Osweiler}
 Estudio hecho sobre los errores que se producen en las propagaciones de los TLE en funci\'on de la cantidad de d\'ias que se propaguen.\\
 
 \begin{figure}[h!]
@@ -223,6 +223,10 @@ Estudio hecho sobre los errores que se producen en las propagaciones de los TLE 
   \label{fig:lageosTot}
 \end{figure}
 
+Los errores que se observan en la propagaci\'on de TLE, en funci\'on de la cantidad de d\'ias propagados, muestran comportamientos casi id\'enticos.\\
+En este estudio, puede apreciarse una clara diferencia en las cotas de los errores, siendo el sat\'elite ICESAT, de menor altura el que muestra errores mayores en un rango de -120 a 60 km, mientras que el LAGEOS, contiene las diferencias entre -2 y 1 km.\\
+No obstante, en ambos se distingue, que la componente asociada a la velocidad (V {\it{in-track}}) es la que mayor error acumula en propagaciones m\'as largas. Esto se debe a que el modelo es d\'ebil en cuanto a la perturbaci\'on que introduce la atm\'osfera, directamente vinculada a la velocidad de los objetos para el caso del ICESAT o en cuanto al modelo que describe la presi\'on de radiaci\'on solar en el caso del LAGEOS.\\
+
 
 \section{Estudio de errores de TLE con efem\'erides precisas}
 \subsection*{Sistema de referencia TOD}
@@ -233,29 +237,31 @@ En primer lugar fue necesario plasmar las posiciones en el mismo sistema de refe
 
 % \textcolor{red}{Para la validaci\'on del mismo, utilizamos TLE de la misi\'on y los propagamos con el SGP4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos de din\'amica orbital, para los mismos instantes.}\\
 
-Para la validaci\'on del mismo, utilizamos TLE de la misi\'on y los propagamos con el SGP4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos del STK, corridos para el mismo TLE y publicados en el sistema TOD que STK ofrece.
+Para la validaci\'on del mismo, utilizamos TLE de la misi\'on y los propagamos con el SGP4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos del STK, corridos para el mismo TLE y publicados en el sistema TOD que STK ofrece. Los resultados mostraron diferencias del orden de metros, o menores. Aceptables dentro de este trabajo, donde otros procedimientos abarcan errores m\'as amplios.
 
 \subsection*{Estad\'istica de Errores}
-Con la certeza de que los datos eran compatibles y pod\'ian ser comparados, se inici\'o el procesamiento de comparaci\'on de las posiciones y la generaci\'on de los resultados estad\'isticos para la propagaci\'on de errores que se describe en la Sec. \ref{subsec:errorProp}.
+Con la certeza de que los datos eran compatibles y pod\'ian ser comparados (ambos se referencian en el sistema TOD), se inici\'o el procesamiento de comparaci\'on de las posiciones y la generaci\'on de los resultados estad\'isticos para la propagaci\'on de errores que se describe en la Sec. \ref{subsec:errorProp}.
 
-En un pre-procesamiento sobre un periodo amplio de la misi\'on, constatamos que fuera de los intervalos de maniobras por {\it{commissioning}}\footnote{Puesta en \'orbita nominal} o maniobras de rutina, los TLE presentan un error que es {\it{acotado}}, {\it{estable}} y/o modelable.  
+En un pre-procesamiento sobre un periodo amplio de la misi\'on, constatamos que fuera de los intervalos de maniobras por {\it{commissioning}}\footnote{Puesta en \'orbita nominal} o maniobras de rutina, los TLE presentan un error que es {\it{acotado}}, {\it{estable}} y/o modelable. \\
+
+Las comparaciones de las propagaciones de los TLE mostraron significativas aleatoriedades y amplias diferencias en el estudio realizado con los datos correspondientes al a\~no 2012, no obstante los resultados del estudio con datos del a\~no 2013 mostraron la tendencia y estabilidad esperada, ver Fig. \ref{fig:sacd2013}, con errores m\'aximos del orden de las decenas de kil\'ometros.
+
 
 \begin{figure}[!h]
 \centering
   \textbf{Tendencia Anual 01/01/2013 - 30/08/2013}\par\medskip
   \includegraphics[width=\textwidth]{imagenes/SACD2013todEjesajustados}
   \caption{Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD}
+  \label{fig:sacd2013}
 \end{figure}
 
-\begin{itemize}
- \item Klinkrad Tabla para 14 misiones.
- \item Paper del research gate
- \item Peterson?!
-\end{itemize}
-
-FINALIZAR CON COMPARACI\'ON TLE vs TLE. 
-
-
+% \begin{itemize}
+%  \item Klinkrad Tabla para 14 misiones.
+%  \item Paper del research gate
+%  \item Peterson?!
+% \end{itemize}
+% 
+% FINALIZAR CON COMPARACI\'ON TLE vs TLE. 
 
 \section{C\'alculo de la Probabilidad de Colisi\'on}
 
@@ -304,6 +310,8 @@ $r_{a}$ & 0.01 [km]\\
 \end{mdframed}
 \end{minipage}
 
+Como se observa en el recuadro de las probabilidades de colisi\'on; las f\'ormulas implementadas coinciden con el valor de la bibliograf\'ia hasta el cuarto d\'igito significativo de la expresi\'on.\\
+
 Una vez verificada la implementaci\'on del c\'alculo de la PoC, es necesario ir verificando, paso a paso c\'omo llegar de los datos que pueden calcularse a partir de las inputs de ARxCODE, a estos par\'ametros de las ecuaciones. \\
 
 \subsection*{C\'alculos previos}
@@ -313,7 +321,9 @@ Pero es importante verificar, que a partir de las posiciones inerciales de los o
 Para ello, vamos a utilizar las posiciones de los objetos del ejemplo de la bibliograf\'ia y transformarlas con e m\'odulo de transformaci\'on {\it{sisRic}} del paquete {\it{SistReferencia.SistdeCoordenadas}} para corroborar los resultados.
 
 Vectores de Posiciones Inerciales al momento TCA:\\
+
 \begin{table}[!h]
+\centering
 \begin{tabular}{l|c|c|c|c|c|c}
 \hline
 Objeto & x [km] & y [km] &z[km] &vx [km] &vy [km] &vz [km]\\
@@ -341,14 +351,14 @@ ARxCODE & 0.0317978& 0.4622953 &0.5220131
 \end{table}
 
 Estos resultados se logran en una transformaci\'on en la que se considere al Obj2 como origen de la referencia. Los mismos muestran una coincidencia del orden de las decenas de metros, aceptable para estas estimaciones.\\
-No obstante, contando s\'olo con la informaci\'on de los vectores de posici\'on al momento del m\'aximo acercamiento, no es posible verificar el m\'etodo de Osweiler de la contrucci\'on de la matriz de covarianza para este ejemplo de la bibliograf\'ia.\\
+No obstante, contando s\'olo con la informaci\'on de los vectores de posici\'on al momento del m\'aximo acercamiento, no es posible verificar el m\'etodo de Osweiler de la construcci\'on de la matriz de covarianza para este ejemplo de la bibliograf\'ia.\\
 
 Bien, hasta ac\'a hemos ido validando cada uno de los procesos por separado.\\
-Resta hacer pruebas desde el origen, es decir a partir de identificar los objetos y el TCA, correr los procesamientos de ARxCODE y obtener los restultados para la PoC.\\
+Resta hacer pruebas desde el origen, es decir a partir de identificar los objetos y el TCA, correr los procesamientos de ARxCODE y obtener los resultados para la PoC.\\
 A tal fin, fue necesario conseguir registros que contuvieran la informaci\'on completa de una situaci\'on de encuentro.\\
 Esto no fue posible en su totalidad.Por un lado tuvimos acceso a mails de alerta p\'ublicos en internet, y por otro a CDM tambi\'en p\'ublicos\footnote{https://cwe.ccsds.org/moims/docs/Forms/AllItems.aspx?RootFolder=\%2Fmoims\%2Fdocs\%2FMOIMS-NAV\%2FDraft\%20Documents\%2FConjunction\%20Data\%20Message\%20\%28CDM\%29}, pero ninguno de esos datos se corresponden con la misi\'on operativa, cuyas efem\'erides precisas analizamos y utilizamos en la construcci\'on del modelo estad\'istico de propagaci\'on de errores.\\
 
-\subsubsection*{Validaci\'on de Mails}
+\subsubsection*{Validaci\'on con Mails de alerta p\'ublicos}
 
 Formato de los mails:\\
 \begin{center}
@@ -406,6 +416,43 @@ Valores de ARxCODE:\\
  \hline
  5 & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx \\
  \hline
- \end{tabular} }
+\end{tabular} }
 
- \subsubsection*{Validaci\'on de CDM}
+ \subsubsection*{Validaci\'on con CDM p\'ublicos}
+ 
+ \begin{figure}[h!]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{imagenes/tablaCDM}}
+  \caption{Contenido de los CDM utilizados para comparar los resultados.}
+  \label{fig:tablamails}
+\end{figure}
+ 
+ \resizebox{16cm}{!}{
+\begin{tabular}{|l|r|r|r|r|r|r|}
+ \hline \hline
+ \# & TCA arx & $\Delta r_{arx}$ [km] & $\Delta t_{arx}$ [km] & $\Delta n_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
+ \hline \hline
+ 1 & 2013-01-10 09:59:57 &0.295626&1.358542&1.321294&1.918033& 1.1e-05 / 1.1e-05\\
+ \hline
+ 2 & 2013-01-12 00:20:51 (\*)&0.405629&4.127385&1.632732&4.457091&0.0 / 0.0\\
+ \hline
+ 5 & 2012-11-22 13:03:45.000823 & 0.027395 & 4.661372 & 0.332569 & 4.673301 & 1.4e-05/1.4e-05 \\
+ \hline
+ 6 & 2012-12-26 05:00:41 & 0.183897& 4.661359&0.02668&4.665061& 1e-06 / 1e-06\\
+ \hline
+ \end{tabular} }
+ 
+ \section{An\'alisis}
+ 
+ A partir de estos resultados, se desprenden los siguientes an\'alisis:\\
+ 
+ \begin{itemize}
+  \item Las funcionalidades para la conexi\'on con NORAD para la descarga de TLE, y las propagaciones que se realizan de los mismos, funcionan correctamente.\\
+  \item El m\'etodo de Osweiler para la generaci\'on de la matriz de covarianza, resulta con diferencias del orden de los cent\'imetros respecto de los valores publicados. Resultado m\'as que aceptable dado que las \'orbitas m\'as precisas que se consideran en este trabajo tienen errores del orden de 20 metros.\\
+  \item El estudio de los errores en funci\'on de la cantidad de d\'ias que se propaguen los TLE coincide con los resultados publicados por Osweiler y respeta los valores esperados, de acuerdo a los efectos perturbativos y las caracter\'isticas de las \'orbitas de los sat\'elites analizados.\\
+  \item Las tendencias en los errores que se obtienen al comparar las propagaciones de los TLE con las efem\'erides precisas a lo largo de 8 meses del a\~no 2013, mostraron un comportamiento estable y acotado, como se esperaba. Con cotas superiores de decenas de kil\'ometros.\\
+  \item Las transformaciones al sistema de referencia RTN tienen diferencias del orden de las decenas de metros con las publicadas en el ejemplo de Lei-Chen.\\
+  \item No se cuenta con datos para poder validar las proyecciones de la posici\'on relativa y la matriz de covarianza al plano de encuentro.\\
+  \item Se utilizaron mails de alertas y CDM que son p\'ublicos en internet para validar las diferencias que se obtienen entre las distancias m\'inimas que estos datos contienen y las distancias m\'inimas calculadas por ARxCODE. Las diferencias son muy notorias, del orden de decenas de kil\'ometros y hasta centenas de kil\'ometros en algunos casos. No obstante, desconociendo el origen de los mails y los CDM, no todo puede atribuirse al procesamiento de ARxCODE.\\
+  \item Utilizando los mismos mails y CDM se calculan las probabilidades de colisi\'on con ARxCODE, aunque el resultado no puede compararse, ya que ni los mails, ni los CDM que se obtuvieron contienen esa informaci\'on. Los valores asociados a los mails (que son los que cuentan con mayor diferencia en las m\'inimas distancias) dan siempre nulos. En cambio, en los resultados asociados a los CDM se encuentran valores aceptables.\\
+ \end{itemize}
