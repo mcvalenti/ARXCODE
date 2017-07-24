@@ -12,12 +12,13 @@ def ajustar_diferencias(epoca_ffin,data,g):
     Toma los datos de fechas y coordenadas y realiza
     un ajuste de minimos cuadrados con la funcion del 
     grado que se le indica en g.
+    data=[fechas,posiciones,velocidades]
     ----------------------------------------------------
     devuelve la estadistica
     [residuals, rank, singular_values, rcond] : list
     """
-    t=data[0]
     dt=[]
+    t=data[0]
     dv=data[1]
     dn=data[2]
     dc=data[3]

@@ -476,12 +476,12 @@ class ProcEncuentro(QDialog):
         self.min_dist= encuentro1.mod_minDist
         self.tca_calc= encuentro1.tca_c
         self.ma_comb= encuentro1.calculaMacombinada()
-        self.poc_arx=encuentro1.calculaPoC_circ()
+        self.poc_arx, self.poc_int=encuentro1.calculaPoC_circ()
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
         self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
         self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(round(self.min_dist,7))))
-        self.tableEncuentro.setItem(0,4, QTableWidgetItem(str(round(self.poc_arx,7))))
+        self.tableEncuentro.setItem(0,4, QTableWidgetItem(str(self.poc_int)))
         # formato de tabla
         header = self.tableEncuentro.horizontalHeader()
         header.setResizeMode(0,QHeaderView.Stretch)
