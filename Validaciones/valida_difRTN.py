@@ -3,16 +3,31 @@ Created on 11/07/2017
 
 @author: mcvalenti
 '''
-from datetime import datetime
+import sys
+import numpy as np
+from datetime import datetime, timedelta
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+from matplotlib.dates import datestr2num
 from TleAdmin.TLE import Tle
+from SistReferencia.sist_deCoordenadas import ricSis
 from Encuentro.Encuentro import Encuentro
 
 """
 Dados dos objetos cuyos identificadores se conocen
 y un TCA entre ellos.
 Se calculan las posiciones relativas en las componentes
-RTN, para verificar la transformacion.
+RTN.
 """
+#Flohrer Krag Klinkrad - (ENVI - COSMOS)
+# sat_id='27386'
+# deb_id='15482'
+# TCA=datetime(2008,1,9,19,0,29,5)
+# min_d=0.300
+# dr=0.0103
+# dt=0.1028
+# dn=0.1566
+# poc=0.00343
 
 # Escenario I - (EUMETSAT)
 # sat_id='29499'
@@ -93,13 +108,13 @@ RTN, para verificar la transformacion.
 # dt=-0.0222
 # dn=-0.0404 
 # MENSAJE # 2                                        
-# sat_id='25273'
-# deb_id='31279'
-# TCA=datetime(2013,01,12,0,20,51,0)
-# min_d=0.175 
-# dr=0.1701
-# dt=0.0122
-# dn=0.0424
+sat_id='25273'
+deb_id='31279'
+TCA=datetime(2013,01,12,0,20,51,0)
+min_d=0.175 
+dr=0.1701
+dt=0.0122
+dn=0.0424
 # MENSAJE # 5
 # sat_id='28810'
 # deb_id='33315'
@@ -109,13 +124,13 @@ RTN, para verificar la transformacion.
 # dt=-0.2413 
 # dn=-0.9443
 # MENSAJE # 6                                                          
-sat_id='38755'
-deb_id='34115'
-TCA=datetime(2012,12,26,5,0,41,0)
-min_d= 0.617  
-dr=-0.0825 
-dt=-0.0509
-dn=0.6094   
+# sat_id='38755'
+# deb_id='34115'
+# TCA=datetime(2012,12,26,5,0,41,0)
+# min_d= 0.617  
+# dr=-0.0825 
+# dt=-0.0509
+# dn=0.6094   
 
 
   
@@ -123,10 +138,32 @@ dn=0.6094
 tle_sat=Tle.creadoxParam(sat_id, TCA)
 tle_deb=Tle.creadoxParam(deb_id, TCA)
 
-n=0
+n=2
 encuentro=Encuentro(tle_sat,tle_deb,TCA,n)
+
 rtn_dist=encuentro.DistRic_min
+set_data=encuentro.tca_min_data
 poc, poc_int=encuentro.calculaPoC_circ()
+
+# #==============================
+# # PLOTEO
+# #==============================
+# """
+# Gestion de Fechas
+# """
+
+# dt=[]
+# fecha0=set_data[0][0]
+# for fecha in set_data[0]:
+#     dt.append((fecha-fecha0).total_seconds())
+# plt.ylim(-3,3)
+# plt.title('Acercamiento ENVI vs COSMOS 2008/01/09 - 19:00:29')
+# plt.ylabel('Km')
+# plt.xlabel('Segundos')
+# plt.grid()
+# plt.plot(dt, set_data[1], 'r-', label='Minima Distancia')
+# plt.show()
+
 
 print '**************************************************'
 print 'Calculado'
@@ -141,7 +178,52 @@ print '**************************************************'
 print 'TCA publicado = ',TCA
 print 'Minima distancia total = ',min_d
 print 'Minima Distancia RTN = ',dr,dt,dn
-
+# -------------------------------
+# Prueba de ajuste de posiciones
+# -------------------------------
+# mod_minDist=sys.float_info.max
+# ajuste=np.array([0.055976182388,0.0469271749738,0.0274533794103])
+# TCA_ini=TCA-timedelta(seconds=3)
+# TCA_fin=TCA+timedelta(seconds=3)
+# fecha0_calculado=[]
+# dist_calcualda=[]
+# while TCA_ini <= TCA_fin:
+#     r_sat,v_sat=tle_sat.propagaTLE(TCA_ini)
+#     r_deb,v_deb=tle_deb.propagaTLE(TCA_ini)
+#     r=np.array([float(r_sat[0]),float(r_sat[1]),float(r_sat[2])])
+#     v=np.array([float(v_sat[0]),float(v_sat[1]),float(v_sat[2])])
+#     r1=np.array([float(r_deb[0]),float(r_deb[1]),float(r_deb[2])])
+#     v1=np.array([float(v_deb[0]),float(v_deb[1]),float(v_deb[2])])
+#     # Diferencias
+#     dist_pos=r1-r
+#     dist_vel=v1-v
+#     x_ric,y_ric,z_ric=ricSis(r,v,dist_pos)  # centro en satelite          
+#     DistRic=np.array([x_ric,y_ric,z_ric])
+#     mod_Dist1=np.sqrt(np.dot(DistRic,DistRic))
+#     if mod_Dist1 < mod_minDist:
+#         mod_minDist=mod_Dist1
+#         TCA_min=TCA_ini
+#     TCA_ini=TCA_ini+timedelta(microseconds=100000)
+#     fecha0_calculado.append(TCA_ini)
+#     dist_calcualda.append(mod_Dist1)
+# #    print TCA_ini, mod_Dist1
+# print '**************************************************'
+# print 'Calculado'
+# print '**************************************************'
+# print 'El TCA calculadO es = ', TCA_min
+# print 'La minima distancia calculada es = ', mod_minDist
+# fecha0=fecha0_calculado[0]
+# dt=[]
+# for fecha in fecha0_calculado:
+#     dt.append((fecha-fecha0).total_seconds())
+# plt.ylim(-3,3)
+# plt.title('Acercamiento ENVI vs COSMOS 2008/01/09 - 19:00:29')
+# plt.ylabel('Km')
+# plt.xlabel('Segundos')
+# plt.grid()
+# plt.plot(dt, dist_calcualda, 'r-', label='Minima Distancia')
+# plt.legend(loc=3)
+# plt.show()
 #==========================
 # Valida Mails
 #==========================

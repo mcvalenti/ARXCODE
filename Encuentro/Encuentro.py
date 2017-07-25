@@ -92,10 +92,12 @@ class Encuentro():
         objetos en el sistema RTN.
         """
 
-        self.epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
-        self.epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
+        self.epoca_ini=self.tca-timedelta(seconds=3) # 3 segundos antes de TCA
+        self.epoca_fin=self.tca+timedelta(seconds=3) # 3 segundos despues de TCA
         
         self.mod_minDist=sys.float_info.max
+        epoca_ini_list=[]
+        distancias_list=[]
         while self.epoca_ini < self.epoca_fin:
             r,v=self.tle_sat.propagaTLE(self.epoca_ini)
             r1,v1=self.tle_deb.propagaTLE(self.epoca_ini)
@@ -108,24 +110,23 @@ class Encuentro():
             #====================================
             # Posiciones en el ECI
             #====================================
-            pos1=Posicion(r,v,self.epoca_ini)
-            pos2=Posicion(r1,v1,self.epoca_ini)
+            self.pos1=Posicion(r,v,self.epoca_ini)
+            self.pos2=Posicion(r1,v1,self.epoca_ini)
             #====================================
             # Posiciones y vel relativas ECI
             #====================================
-            DistVector=pos1.r-pos2.r
-            VelVector=pos1.v-pos2.v
+            DistVector=self.pos1.r-self.pos2.r
+            VelVector=self.pos1.v-self.pos2.v
             #====================================
             # Posiciones y vel relativas RIC (RTN)
             #====================================           
-            x_ric,y_ric,z_ric=ricSis(pos1.r,pos1.v,DistVector)            
+            x_ric,y_ric,z_ric=ricSis(self.pos1.r,self.pos1.v,DistVector)            
             DistRic=np.array([x_ric,y_ric,z_ric])
-            vx_ric,vy_ric,vz_ric=ricSis(pos2.r,pos2.v,VelVector)
+            vx_ric,vy_ric,vz_ric=ricSis(self.pos2.r,self.pos2.v,VelVector)
             self.VelRic=np.array([vx_ric,vy_ric,vz_ric])
             mod_Dist1=np.sqrt(np.dot(DistRic,DistRic))
             
 #            self.mod_Dist1=np.sqrt(np.dot(self.DistVector,self.DistVector))
-
             # Calculo de la distancia minima. 
             if mod_Dist1 < self.mod_minDist:
                 self.mod_minDist=mod_Dist1
@@ -134,7 +135,10 @@ class Encuentro():
                 self.vel_sat_tca=v
                 self.vel_deb_tca=v1
 #                print self.tca_c, self.mod_minDist
-            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
+            self.epoca_ini=self.epoca_ini+timedelta(microseconds=100000)
+            epoca_ini_list.append(self.epoca_ini)
+            distancias_list.append(mod_Dist1)
+            self.tca_min_data=[epoca_ini_list,distancias_list]
             #====================================
             # Distancias Minimas en RTN.
             #====================================
@@ -146,13 +150,13 @@ class Encuentro():
             cos_phi=np.dot(self.vel_sat_tca,self.vel_deb_tca)/(np.sqrt(np.dot(self.vel_sat_tca,self.vel_sat_tca))*np.sqrt(np.dot(self.vel_deb_tca,self.vel_deb_tca)))
             self.phi=np.arccos(cos_phi)
             # Transformo a Coordenadas Geodesicas.
-            delta1, alpha1=pos1.getCoordenadasGEOD()
-            delta2, alpha2=pos2.getCoordenadasGEOD()
+            delta1, alpha1=self.pos1.getCoordenadasGEOD()
+            delta2, alpha2=self.pos2.getCoordenadasGEOD()
             # GUARDA EN ARCHIVO Posiciones en ALFA, DELTA (Seudo Geodesicas).
-            salida1.write(str(alpha1)+' '+str(delta1)+' '+datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
-            salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n') 
+            salida1.write(str(alpha1)+' '+str(delta1)+' '+datetime.strftime(self.pos1.epoca,'%Y-%m-%d %H:%M:%S')+'\n')
+            salida2.write(str(alpha2)+' '+str(delta2)+' '+datetime.strftime(self.pos2.epoca,'%Y-%m-%d %H:%M:%S')+'\n') 
             # GUARDA EN ARCHIVO Posiciones Relativas en RTN.
-            salida3.write(datetime.strftime(pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(DistRic[0])+' '+str(DistRic[1])+' '+str(DistRic[2])+'\n')
+            salida3.write(datetime.strftime(self.pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(DistRic[0])+' '+str(DistRic[1])+' '+str(DistRic[2])+'\n')
 
         print 'Fin del procesamiento de Encuentro'
         salida1.close()
