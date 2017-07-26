@@ -54,7 +54,7 @@ RTN.
 # Escenario II - (MAIL 1 )
 # sat_id='32789'
 # deb_id='23657'
-# TCA=datetime(2012,7,15,21,21,0,0)
+# TCA=datetime(2012,7,15,21,21,51,0)
 # min_d=0.760
 # dr=0.186
 # dt=0.389
@@ -63,7 +63,7 @@ RTN.
 # Escenario III - (MAIL 2)
 # sat_id='39417'
 # deb_id='30189'
-# TCA=datetime(2014,6,29,4,55,0,0)
+# TCA=datetime(2014,6,29,4,55,59,0)
 # min_d=0.334
 # dr=0.007
 # dt=0.249
@@ -72,7 +72,7 @@ RTN.
 # Escenario IV - (MAIL 3)
 # sat_id='24278'
 # deb_id='10470'
-# TCA=datetime(2012,11,23,23,38,0,0)
+# TCA=datetime(2012,11,23,23,38,42,0)
 # min_d=0.984
 # dr=0.174
 # dt=0.690
@@ -81,7 +81,7 @@ RTN.
 # Escenario V - (MAIL 4)
 # sat_id='32789'
 # deb_id='24097'
-# TCA=datetime(2013,3,31,3,24,0,0)
+# TCA=datetime(2013,3,31,3,25,45,0)
 # min_d=0.783
 # dr=0.096
 # dt=0.006
@@ -89,8 +89,8 @@ RTN.
 
 # Escenario VI - (MAIL 5) - No existen los datos en NORAD
 # sat_id='38081'
-# deb_id='19363'
-# TCA=datetime(2013,5,5,17,12,0,0)
+# deb_id='19336'
+# TCA=datetime(2013,5,2,17,12,2,0)
 # min_d=0.170
 # dr=0.138
 # dt=0.030
@@ -108,13 +108,13 @@ RTN.
 # dt=-0.0222
 # dn=-0.0404 
 # MENSAJE # 2                                        
-sat_id='25273'
-deb_id='31279'
-TCA=datetime(2013,01,12,0,20,51,0)
-min_d=0.175 
-dr=0.1701
-dt=0.0122
-dn=0.0424
+# sat_id='25273'
+# deb_id='31279'
+# TCA=datetime(2013,01,12,0,20,51,0)
+# min_d=0.175 
+# dr=0.1701
+# dt=0.0122
+# dn=0.0424
 # MENSAJE # 5
 # sat_id='28810'
 # deb_id='33315'
@@ -131,9 +131,24 @@ dn=0.0424
 # dr=-0.0825 
 # dt=-0.0509
 # dn=0.6094   
-
-
-  
+# MENSAJE # 7                                                          
+# sat_id='24903'
+# deb_id='33759'
+# TCA=datetime(2013,01,10,13,22,45)
+# min_d= 0.18
+# dr=0.0359
+# dt=-0.1488
+# dn=0.0957
+# MENSAJE # 8                                        
+sat_id='27372'
+deb_id='31413'
+TCA=datetime(2013,01,11,5,30,55,0)
+min_d= 0.15
+dr=-0.1191 
+dt=0.0003  
+dn=0.092
+   
+   
 #tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M")
 tle_sat=Tle.creadoxParam(sat_id, TCA)
 tle_deb=Tle.creadoxParam(deb_id, TCA)

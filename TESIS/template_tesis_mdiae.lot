@@ -19,5 +19,9 @@
 \contentsline {table}{\numberline {5.7}{\ignorespaces Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{54}{table.caption.96}
 \contentsline {table}{\numberline {5.8}{\ignorespaces Matriz de Covarianza de la Bibliograf\'ia \citep {Osweiler}- Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{54}{table.caption.96}
 \contentsline {table}{\numberline {5.9}{\ignorespaces Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler.\relax }}{54}{table.caption.97}
+\contentsline {table}{\numberline {5.10}{\ignorespaces Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los mails, propagando cada 1 segundo\relax }}{59}{table.caption.111}
+\contentsline {table}{\numberline {5.11}{\ignorespaces Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos\relax }}{60}{table.caption.112}
+\contentsline {table}{\numberline {5.12}{\ignorespaces Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los CDM, propagando cada 1 segundo\relax }}{61}{table.caption.116}
+\contentsline {table}{\numberline {5.13}{\ignorespaces Resultados que se obtienen con ARxCODE incorporando la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos\relax }}{61}{table.caption.117}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

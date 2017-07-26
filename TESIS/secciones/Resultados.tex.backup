@@ -193,7 +193,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
  Dif. $R_{c}$ & 0.000006 &  -0.000006 &   0.000004 \\
  \hline
  \end{tabular}
- \caption{Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler \citep{Oseweiler}}
+ \caption{Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler.}
 \end{table}
 
 \subsection*{Diferencias de los escenarios iterando el TLE primario en el m\'etodo de Osweiler}
@@ -224,7 +224,7 @@ Estudio hecho sobre los errores que se producen en las propagaciones de los TLE 
 \end{figure}
 
 Los errores que se observan en la propagaci\'on de TLE, en funci\'on de la cantidad de d\'ias propagados, muestran comportamientos casi id\'enticos.\\
-En este estudio, puede apreciarse una clara diferencia en las cotas de los errores, siendo el sat\'elite ICESAT, de menor altura el que muestra errores mayores en un rango de $[-120 a 60] km$, mientras que el LAGEOS, contiene las diferencias entre $-2 y 1 km$.\\
+En este estudio, puede apreciarse una clara diferencia en las cotas de los errores, siendo el sat\'elite ICESAT, de menor altura el que muestra errores mayores en un rango de -120 a 60 km, mientras que el LAGEOS, contiene las diferencias entre -2 y 1 km.\\
 No obstante, en ambos se distingue, que la componente asociada a la velocidad (V {\it{in-track}}) es la que mayor error acumula en propagaciones m\'as largas. Esto se debe a que el modelo es d\'ebil en cuanto a la perturbaci\'on que introduce la atm\'osfera, directamente vinculada a la velocidad de los objetos para el caso del ICESAT o en cuanto al modelo que describe la presi\'on de radiaci\'on solar en el caso del LAGEOS.\\
 
 
@@ -316,7 +316,7 @@ Una vez verificada la implementaci\'on del c\'alculo de la PoC, es necesario ir 
 
 \subsection*{C\'alculos previos}
 
-Una vez determinadas la posici\'on relativa de los objetos en el sistema RSW (equivalente al RTN) en el TCA, la proyecci\'on al plano, para \'orbitas circulares, no representa mayores problemas, como se detall\'o en la Sec. \ref{subsec:planoencuentro}.\\
+Una vez determinadas la posici\'on relativa de los objetos en el sistema RSW (equivalente al RTN) en el TCA, la proyecci\'on al plano, para \'orbitas circulares, no representa mayores problemas, como se detall\'o en la Sec. \ref{subsec:pocsimp}.\\
 Pero es importante verificar, que a partir de las posiciones inerciales de los objetos en el TCA, las transformaciones de la distancia relativa de los mismos al sistema RSW, coincide.\'
 Para ello, vamos a utilizar las posiciones de los objetos del ejemplo de la bibliograf\'ia y transformarlas con e m\'odulo de transformaci\'on {\it{sisRic}} del paquete {\it{SistReferencia.SistdeCoordenadas}} para corroborar los resultados.
 
@@ -344,7 +344,7 @@ Resultados seg\'un & R [km] & S [km] & W[km] \\
 \hline
 Lei Chen & 0.031731& 0.436476&0.543785\\
 \hline
-ARxCODE & 0.0317978& 0.4622953 &0.5220131
+ARxCODE & 0.031797& 0.462295 &0.522013
 \\
 \hline
 \end{tabular}
@@ -358,7 +358,7 @@ Resta hacer pruebas desde el origen, es decir a partir de identificar los objeto
 A tal fin, fue necesario conseguir registros que contuvieran la informaci\'on completa de una situaci\'on de encuentro.\\
 Esto no fue posible en su totalidad.Por un lado tuvimos acceso a mails de alerta p\'ublicos en internet, y por otro a CDM tambi\'en p\'ublicos\footnote{https://cwe.ccsds.org/moims/docs/Forms/AllItems.aspx?RootFolder=\%2Fmoims\%2Fdocs\%2FMOIMS-NAV\%2FDraft\%20Documents\%2FConjunction\%20Data\%20Message\%20\%28CDM\%29}, pero ninguno de esos datos se corresponden con la misi\'on operativa, cuyas efem\'erides precisas analizamos y utilizamos en la construcci\'on del modelo estad\'istico de propagaci\'on de errores.\\
 
-\subsubsection*{Validaci\'on de Mails}
+\subsubsection*{Validaci\'on con Mails de alerta p\'ublicos}
 
 Formato de los mails:\\
 \begin{center}
@@ -392,7 +392,7 @@ Secondary Cross-track Error (W): 2 meters\\
 
 Listado de Mails analizados:\\
 
-\begin{figure}[h!]
+\begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{imagenes/tablamails}}
   \caption{Contenido de los mails utilizados para comparar los resultados.}
@@ -400,11 +400,11 @@ Listado de Mails analizados:\\
 \end{figure}
 
 Valores de ARxCODE:\\
-
+\begin{table}[!h]
 \resizebox{16cm}{!}{
 \begin{tabular}{|l|r|r|r|r|r|r|}
  \hline \hline
- \# & TCA arx & $\Delta r_{arx}$ [m] & $\Delta t_{arx}$ [m] & $\Delta n_{arx}$ [m] & Min Dist. arx [m] & PoC arx\\
+ \# & TCA arx & $\Delta R_{arx}$ [m] & $\Delta T_{arx}$ [m] & $\Delta N_{arx}$ [m] & Min Dist. arx [m] & PoC arx\\
  \hline \hline
  1 & 2012-07-15 21:21:51 & 147.106 & 2749.095 &  2287.11 & 3579 & 6.426171e-22 \\
  \hline
@@ -417,20 +417,44 @@ Valores de ARxCODE:\\
  5 & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx \\
  \hline
 \end{tabular} }
+\caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los mails, propagando cada 1 segundo}
+\end{table}
 
- \subsubsection*{Validaci\'on de CDM}
+
+\begin{table}[!h]
+\resizebox{16cm}{!}{
+\begin{tabular}{|l|r|r|r|r|r|r|}
+ \hline \hline
+ \# & TCA arx & $\Delta R_{arx}$ [m] & $\Delta T_{arx}$ [m] & $\Delta N_{arx}$ [m] & Min Dist. arx [m] & PoC arx\\
+ \hline \hline
+ 1 & 2012-07-15 21:21:51.3 & 0.142965 & 0.512276 &  0.254972 & 0.58981 & 4e-06 \\
+ \hline
+ 2 & 2014-06-29 04:55:59.1 & 0.0824 & 3.253859 & 2.745704 & 4.25831 & 0.0 \\
+ \hline
+ 3 & 2012-11-23 23:38:42.1 & 0.258083 & 0.936411 & 1.595317 & 1.86775 & 1.7e-05 \\
+ \hline
+ 4 & 2013-03-31 03:25:45.1 & 68.075882 & 0.194278 & 426.131566 & 431.535022 & 0.0 \\
+ \hline
+ 5 & 2013-05-02 17:12:02.9 & 20.173626 & 504.135854 & 146.837803 & 525.47243 & 0.0\\
+ \hline
+\end{tabular} }
+\caption{Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos}
+\end{table}
+
+\subsubsection*{Validaci\'on con CDM p\'ublicos}
  
- \begin{figure}[h!]
+ \begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{imagenes/tablaCDM}}
   \caption{Contenido de los CDM utilizados para comparar los resultados.}
   \label{fig:tablamails}
 \end{figure}
  
+ \begin{table}[!h]
  \resizebox{16cm}{!}{
 \begin{tabular}{|l|r|r|r|r|r|r|}
  \hline \hline
- \# & TCA arx & $\Delta r_{arx}$ [km] & $\Delta t_{arx}$ [km] & $\Delta n_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
+ \# & TCA arx & $\Delta R_{arx}$ [km] & $\Delta T_{arx}$ [km] & $\Delta N_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
  \hline \hline
  1 & 2013-01-10 09:59:57 &0.295626&1.358542&1.321294&1.918033& 1.1e-05 / 1.1e-05\\
  \hline
@@ -441,9 +465,29 @@ Valores de ARxCODE:\\
  6 & 2012-12-26 05:00:41 & 0.183897& 4.661359&0.02668&4.665061& 1e-06 / 1e-06\\
  \hline
  \end{tabular} }
+ \caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los CDM, propagando cada 1 segundo}
+ \end{table}
  
- \section{An\'alisis}
+  \begin{table}[!h]
+ \resizebox{16cm}{!}{
+\begin{tabular}{|l|r|r|r|r|r|r|}
+ \hline \hline
+ \# & TCA arx & $\Delta R_{arx}$ [km] & $\Delta T_{arx}$ [km] & $\Delta N_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
+ \hline \hline
+ 1 &2013-01-10 09:59:57  &0.295626&1.358542& 1.321294&1.918033&1.4e-05 \\
+ \hline
+ 2 & 2013-01-12 00:20:51.3 &0.401158&0.140306&0.218037&0.477654&6.1e-05\\
+ \hline
+ 5 & 2012-11-22 13:03:44.700823 & 0.023908 & 0.436662& 0.758981 & 0.875955 & 2e-05 \\
+ \hline
+ 6 & 2012-12-26 05:00:40.7 & 0.183162& 0.1859&00.417861&0.492661& 1.24e-04\\
+ \hline
+ \end{tabular} }
+ \caption{Resultados que se obtienen con ARxCODE incorporando la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos}
+ \end{table}
+
  
+\section{An\'alisis} 
  A partir de estos resultados, se desprenden los siguientes an\'alisis:\\
  
  \begin{itemize}
@@ -451,7 +495,8 @@ Valores de ARxCODE:\\
   \item El m\'etodo de Osweiler para la generaci\'on de la matriz de covarianza, resulta con diferencias del orden de los cent\'imetros respecto de los valores publicados. Resultado m\'as que aceptable dado que las \'orbitas m\'as precisas que se consideran en este trabajo tienen errores del orden de 20 metros.\\
   \item El estudio de los errores en funci\'on de la cantidad de d\'ias que se propaguen los TLE coincide con los resultados publicados por Osweiler y respeta los valores esperados, de acuerdo a los efectos perturbativos y las caracter\'isticas de las \'orbitas de los sat\'elites analizados.\\
   \item Las tendencias en los errores que se obtienen al comparar las propagaciones de los TLE con las efem\'erides precisas a lo largo de 8 meses del a\~no 2013, mostraron un comportamiento estable y acotado, como se esperaba. Con cotas superiores de decenas de kil\'ometros.\\
-  \item 
-  
-  
+  \item Las transformaciones al sistema de referencia RTN tienen diferencias del orden de las decenas de metros con las publicadas en el ejemplo de Lei-Chen.\\
+  \item No se cuenta con datos para poder validar las proyecciones de la posici\'on relativa y la matriz de covarianza al plano de encuentro.\\
+  \item Se utilizaron mails de alertas y CDM que son p\'ublicos en internet para validar las diferencias que se obtienen entre las distancias m\'inimas que estos datos contienen y las distancias m\'inimas calculadas por ARxCODE. Las diferencias son muy notorias, del orden de decenas de kil\'ometros y hasta centenas de kil\'ometros en algunos casos. No obstante, desconociendo el origen de los mails y los CDM, no todo puede atribuirse al procesamiento de ARxCODE.\\
+  \item Utilizando los mismos mails y CDM se calculan las probabilidades de colisi\'on con ARxCODE, aunque el resultado no puede compararse, ya que ni los mails, ni los CDM que se obtuvieron contienen esa informaci\'on. Los valores asociados a los mails (que son los que cuentan con mayor diferencia en las m\'inimas distancias) dan siempre nulos. En cambio, en los resultados asociados a los CDM se encuentran valores aceptables.\\
  \end{itemize}

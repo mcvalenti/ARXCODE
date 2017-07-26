@@ -91,7 +91,8 @@ class Encuentro():
         Calcula las diferencias relativas entre los dos 
         objetos en el sistema RTN.
         """
-
+#        self.epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
+#        self.epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
         self.epoca_ini=self.tca-timedelta(seconds=3) # 3 segundos antes de TCA
         self.epoca_fin=self.tca+timedelta(seconds=3) # 3 segundos despues de TCA
         
@@ -135,6 +136,7 @@ class Encuentro():
                 self.vel_sat_tca=v
                 self.vel_deb_tca=v1
 #                print self.tca_c, self.mod_minDist
+#            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
             self.epoca_ini=self.epoca_ini+timedelta(microseconds=100000)
             epoca_ini_list.append(self.epoca_ini)
             distancias_list.append(mod_Dist1)

@@ -316,7 +316,7 @@ Una vez verificada la implementaci\'on del c\'alculo de la PoC, es necesario ir 
 
 \subsection*{C\'alculos previos}
 
-Una vez determinadas la posici\'on relativa de los objetos en el sistema RSW (equivalente al RTN) en el TCA, la proyecci\'on al plano, para \'orbitas circulares, no representa mayores problemas, como se detall\'o en la Sec. \ref{subsec:planoencuentro}.\\
+Una vez determinadas la posici\'on relativa de los objetos en el sistema RSW (equivalente al RTN) en el TCA, la proyecci\'on al plano, para \'orbitas circulares, no representa mayores problemas, como se detall\'o en la Sec. \ref{subsec:pocsimp}.\\
 Pero es importante verificar, que a partir de las posiciones inerciales de los objetos en el TCA, las transformaciones de la distancia relativa de los mismos al sistema RSW, coincide.\'
 Para ello, vamos a utilizar las posiciones de los objetos del ejemplo de la bibliograf\'ia y transformarlas con e m\'odulo de transformaci\'on {\it{sisRic}} del paquete {\it{SistReferencia.SistdeCoordenadas}} para corroborar los resultados.
 
@@ -344,7 +344,7 @@ Resultados seg\'un & R [km] & S [km] & W[km] \\
 \hline
 Lei Chen & 0.031731& 0.436476&0.543785\\
 \hline
-ARxCODE & 0.0317978& 0.4622953 &0.5220131
+ARxCODE & 0.031797& 0.462295 &0.522013
 \\
 \hline
 \end{tabular}
@@ -392,7 +392,7 @@ Secondary Cross-track Error (W): 2 meters\\
 
 Listado de Mails analizados:\\
 
-\begin{figure}[h!]
+\begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{imagenes/tablamails}}
   \caption{Contenido de los mails utilizados para comparar los resultados.}
@@ -400,11 +400,11 @@ Listado de Mails analizados:\\
 \end{figure}
 
 Valores de ARxCODE:\\
-
+\begin{table}[!h]
 \resizebox{16cm}{!}{
 \begin{tabular}{|l|r|r|r|r|r|r|}
  \hline \hline
- \# & TCA arx & $\Delta r_{arx}$ [m] & $\Delta t_{arx}$ [m] & $\Delta n_{arx}$ [m] & Min Dist. arx [m] & PoC arx\\
+ \# & TCA arx & $\Delta R_{arx}$ [m] & $\Delta T_{arx}$ [m] & $\Delta N_{arx}$ [m] & Min Dist. arx [m] & PoC arx\\
  \hline \hline
  1 & 2012-07-15 21:21:51 & 147.106 & 2749.095 &  2287.11 & 3579 & 6.426171e-22 \\
  \hline
@@ -417,33 +417,93 @@ Valores de ARxCODE:\\
  5 & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx \\
  \hline
 \end{tabular} }
+\caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los mails, propagando cada 1 segundo}
+\end{table}
 
- \subsubsection*{Validaci\'on con CDM p\'ublicos}
+
+\begin{table}[!h]
+\resizebox{16cm}{!}{
+\begin{tabular}{|l|r|r|r|r|r|r|}
+ \hline \hline
+ \# & TCA arx & $\Delta R_{arx}$ [m] & $\Delta T_{arx}$ [m] & $\Delta N_{arx}$ [m] & Min Dist. arx [m] & PoC arx\\
+ \hline \hline
+ 1 & 2012-07-15 21:21:51.3 & 0.142965 & 0.512276 &  0.254972 & 0.58981 & 4e-06 \\
+ \hline
+ 2 & 2014-06-29 04:55:59.1 & 0.0824 & 3.253859 & 2.745704 & 4.25831 & 0.0 \\
+ \hline
+ 3 & 2012-11-23 23:38:42.1 & 0.258083 & 0.936411 & 1.595317 & 1.86775 & 1.7e-05 \\
+ \hline
+ 4 & 2013-03-31 03:25:45.1 & 68.075882 & 0.194278 & 426.131566 & 431.535022 & 0.0 \\
+ \hline
+ 5 & 2013-05-02 17:12:02.9 & 20.173626 & 504.135854 & 146.837803 & 525.47243 & 0.0\\
+ \hline
+\end{tabular} }
+\caption{Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos}
+\end{table}
+
+Las matrices de covarianza no mejoran. Ver tabla \ref{fig:tablaMAmails}
+
+ \begin{figure}[!h]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{imagenes/tablaMAmails}}
+  \caption{Tabla con las matrices de covarianza para la misi\'on y el desecho.}
+  \label{fig:tablaMAmails}
+\end{figure}
+
+\subsubsection*{Validaci\'on con CDM p\'ublicos}
  
- \begin{figure}[h!]
+ \begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{imagenes/tablaCDM}}
   \caption{Contenido de los CDM utilizados para comparar los resultados.}
   \label{fig:tablamails}
 \end{figure}
  
+ \begin{table}[!h]
  \resizebox{16cm}{!}{
 \begin{tabular}{|l|r|r|r|r|r|r|}
  \hline \hline
- \# & TCA arx & $\Delta r_{arx}$ [km] & $\Delta t_{arx}$ [km] & $\Delta n_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
+ \# & TCA arx & $\Delta R_{arx}$ [km] & $\Delta T_{arx}$ [km] & $\Delta N_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
  \hline \hline
  1 & 2013-01-10 09:59:57 &0.295626&1.358542&1.321294&1.918033& 1.1e-05 / 1.1e-05\\
  \hline
- 2 & 2013-01-12 00:20:51 (\*)&0.405629&4.127385&1.632732&4.457091&0.0 / 0.0\\
- \hline
+ 2 & 2013-01-12 00:20:51 &0.405629&4.127385&1.632732&4.457091&0.0 / 0.0\\
+ \hline 
+ 3 & 2013-01-10 13:22:45 & 0.382972 & 1.173174  & 1.316177 & 1.804252 & 8e-06\\
+ \hline 
+ 4 & 2013-01-11 05:30:56 & 0.01038& 1.276203& 0.648991&1.431779&0.0\\
+ \hline 
  5 & 2012-11-22 13:03:45.000823 & 0.027395 & 4.661372 & 0.332569 & 4.673301 & 1.4e-05/1.4e-05 \\
  \hline
  6 & 2012-12-26 05:00:41 & 0.183897& 4.661359&0.02668&4.665061& 1e-06 / 1e-06\\
  \hline
  \end{tabular} }
+ \caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los CDM, propagando cada 1 segundo}
+ \end{table}
  
- \section{An\'alisis}
+\begin{table}[!h]
+ \resizebox{16cm}{!}{
+\begin{tabular}{|l|r|r|r|r|r|r|}
+ \hline \hline
+ \# & TCA arx & $\Delta R_{arx}$ [km] & $\Delta T_{arx}$ [km] & $\Delta N_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
+ \hline \hline
+ 1 &2013-01-10 09:59:57  &0.295626&1.358542& 1.321294&1.918033&1.4e-05 \\
+ \hline
+ 2 & 2013-01-12 00:20:51.3 &0.401158&0.140306&0.218037&0.477654&6.1e-05\\
+ \hline
+ 3 & 2013-01-10 13:22:45.2 & 0.382381 &0.288759& 0.043842&0.481165&9e-06\\
+ \hline
+ 4 &2013-01-11 05:30:55.9&0.016754 &0.215364 &0.573953&0.613257&0.0\\
+ \hline
+ 5 & 2012-11-22 13:03:44.700823 & 0.023908 & 0.436662& 0.758981 & 0.875955 & 2e-05 \\
+ \hline
+ 6 & 2012-12-26 05:00:40.7 & 0.183162& 0.1859&00.417861&0.492661& 1.24e-04\\
+ \hline
+ \end{tabular} }
+ \caption{Resultados que se obtienen con ARxCODE incorporando la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos}
+ \end{table}
  
+\section{An\'alisis} 
  A partir de estos resultados, se desprenden los siguientes an\'alisis:\\
  
  \begin{itemize}
