@@ -1,23 +1,63 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: template_tesis_mdiae.aux
 A level-1 auxiliary file: secciones/Resumen.aux
 A level-1 auxiliary file: secciones/Agradecimientos.aux
+Case mismatch error between cite keys Osweiler and osweiler
+---line 31 of file template_tesis_mdiae.aux
+ : \citation{Osweiler
+ :                   }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Osweiler and osweiler
+---line 33 of file template_tesis_mdiae.aux
+ : \citation{Osweiler
+ :                   }
+I'm skipping whatever remains of this command
 A level-1 auxiliary file: secciones/Acronimos.aux
 A level-1 auxiliary file: secciones/Introduccion.aux
 A level-1 auxiliary file: secciones/MarcoTeorico.aux
+Case mismatch error between cite keys Osweiler and osweiler
+---line 10 of file secciones/MarcoTeorico.aux
+ : \citation{Osweiler
+ :                   }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Osweiler and osweiler
+---line 35 of file secciones/MarcoTeorico.aux
+ : \citation{Osweiler
+ :                   }
+I'm skipping whatever remains of this command
 A level-1 auxiliary file: secciones/Metodologia.aux
 A level-1 auxiliary file: secciones/ARxCODE.aux
 A level-1 auxiliary file: secciones/Resultados.aux
-A level-1 auxiliary file: secciones/Conclusiones.aux
-Case mismatch error between cite keys osweiler and Osweiler
----line 4 of file secciones/Conclusiones.aux
- : \citation{osweiler
+Case mismatch error between cite keys Osweiler and osweiler
+---line 13 of file secciones/Resultados.aux
+ : \citation{Osweiler
  :                   }
 I'm skipping whatever remains of this command
+Case mismatch error between cite keys Osweiler and osweiler
+---line 14 of file secciones/Resultados.aux
+ : \citation{Osweiler
+ :                   }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Osweiler and osweiler
+---line 23 of file secciones/Resultados.aux
+ : \citation{Osweiler
+ :                   }
+I'm skipping whatever remains of this command
+Case mismatch error between cite keys Osweiler and osweiler
+---line 24 of file secciones/Resultados.aux
+ : \citation{Osweiler
+ :                   }
+I'm skipping whatever remains of this command
+A level-1 auxiliary file: secciones/Conclusiones.aux
 A level-1 auxiliary file: secciones/Apendice.aux
 The style file: apa.bst
 Database file #1: template_tesis_mdiae.bib
+I was expecting a `{' or a `('---line 249 of file template_tesis_mdiae.bib
+ : 
+ : @BOOK{osweiler,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Oseweiler"
 Warning--I didn't find a database entry for "CDMstd"
 Warning--empty year in stk
@@ -25,45 +65,46 @@ Warning--empty year in sgp4python
 Warning--empty journal in karacalioglu2016impact
 Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty year in nasaprogramme
+Warning--empty publisher in osweiler
 You've used 23 entries,
             1940 wiz_defined-function locations,
-            597 strings with 6579 characters,
-and the built_in function-call counts, 7101 in all, are:
-= -- 688
+            596 strings with 6571 characters,
+and the built_in function-call counts, 7112 in all, are:
+= -- 684
 > -- 218
 < -- 23
 + -- 77
 - -- 66
-* -- 538
-:= -- 1299
-add.period$ -- 66
+* -- 542
+:= -- 1295
+add.period$ -- 65
 call.type$ -- 23
-change.case$ -- 145
+change.case$ -- 144
 chr.to.int$ -- 20
-cite$ -- 28
-duplicate$ -- 302
-empty$ -- 508
+cite$ -- 29
+duplicate$ -- 305
+empty$ -- 514
 format.name$ -- 99
-if$ -- 1357
+if$ -- 1361
 int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 20
-newline$ -- 115
+missing$ -- 22
+newline$ -- 114
 num.names$ -- 69
-pop$ -- 128
+pop$ -- 133
 preamble$ -- 1
 purify$ -- 148
 quote$ -- 0
 skip$ -- 236
 stack$ -- 0
 substring$ -- 406
-swap$ -- 48
+swap$ -- 49
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 128
-warning$ -- 5
+type$ -- 126
+warning$ -- 6
 while$ -- 53
 width$ -- 0
-write$ -- 281
-(There was 1 error message)
+write$ -- 278
+(There were 9 error messages)

@@ -120,10 +120,9 @@ NASA (2017b).
 \newblock Space missions and satellite box score.
 \newblock {\em Orbital Debris Quarterly News}, 21.
 
-\bibitem[\protect\astroncite{{Osweiler}}{2006}]{Osweiler}
+\bibitem[\protect\astroncite{{Osweiler}}{2006}]{osweiler}
 {Osweiler}, V.~P. (2006).
-\newblock Covariance estimation and autocorrelation of norad two-line element
-  sets.
-\newblock Master's thesis, Air Force Institute of Technology, USA.
+\newblock {\em Covariance estimation and autocorrelation of NORAD Two-line
+  Element Sets}.
 
 \end{thebibliography}

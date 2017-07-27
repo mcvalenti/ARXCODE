@@ -4,25 +4,27 @@
 
 \section{Los Desechos Espaciales}
 
-El comienzo de la era satelital en el a\~no 1957 con el sat\'elite ruso Sputnik signific\'o la conquista de un nuevo espacio y un cambio de paradigma en lo que respecta a las tecnolog\'ias para las comunicaciones, los estudios de nuestro planeta, el sistema solar, las formas de navegar, de geoposicionarse y el intercambio de informaci\'on. Desde entonces el ambiente espacial cada vez suma m\'as colonos.\\
+El comienzo de la era satelital en el a\~no 1957 con el sat\'elite ruso Sputnik signific\'o la conquista de un nuevo espacio y un cambio de paradigma en lo que respecta a las tecnolog\'ias para las comunicaciones, los estudios de nuestro planeta, el sistema solar, las formas de navegar, de geoposicionarse y el intercambio de informaci\'on. Desde entonces el ambiente espacial cada vez suma m\'as colonos (Fig. \ref{fig:cantidad2014}).\\
 
 Las experiencias de las primeras misiones aportaron mucho conocimiento de este entorno con caracter\'isticas muy distintas a las de la superficie de la Tierra y permitieron ir mejorando las t\'ecnicas y los materiales para que los sat\'elites cumplieran sus objetivos sin mayores inconvenientes.\\
 Sin embargo, un hecho poco predicho o abordado empez\'o a ocupar prioridad en las dos \'ultimas d\'ecadas: los {\it{desechos espaciales}}.\\
 
 {\bf{Definici\'on:}}{\it{ Son Desechos Espaciales todos los objetos construidos por el hombre, incluyendo fragmentos o partes de los mismos, que orbitan la Tierra o reingresan a la atm\'osfera y no son funcionales, es decir, han perdido su capacidad operativa.}} \citep{iadcguide}\\
 
-La ocupaci\'on del espacio parec\'ia ilimitada, y los primeros a\~nos no se ten\'ian consideraciones respecto a los objetos que all\'i se depositaban, o se desprend\'ian de los cohetes y las misiones. Pero con el correr del tiempo, ciertas regiones cobraron inter\' es estrat\'egico, y la superpoblaci\' on en dichas zonas no tard\'o en mostrar complicaciones.\\
+La ocupaci\'on del espacio parec\'ia ilimitada, y los primeros a\~nos no se ten\'ian consideraciones respecto a los objetos que all\'i se depositaban, o se desprend\'ian de los cohetes y las misiones. Pero con el correr del tiempo, ciertas regiones cobraron inter\' es estrat\'egico, y la superpoblaci\'on en dichas zonas no tard\'o en mostrar complicaciones.\\
+Los desechos representan hoy el mayor porcentaje de los objetos que orbitan la Tierra y los estudios de su proliferaci\'on, indican que, de no existir planes de acci\'on para subsanar la situaci\'on, el efecto de las colisiones en cascada transformar\'a el ambiente espacial en un lugar inhabitable para cualquier misi\'on.\\
 
 La primera colisi\'on confirmada y claramente registrada entre una misi\'on operativa y un desecho, ocurri\'o el 24 de Julio de 1996, cuando el sat\'elite franc\'es Cerise (95-033B) fue embestido por un fagmento (86-019RF), remanente de la explosi\'on de la \'ultima etapa del Ariane-1 H-10, ocurrida el 13 de noviembre de 1986; nueve meses despu\'es de inyectar en \'orbita al sat\'elite SPOT-1. La reconstrucci\'on de la situaci\'on luego de la colisi\'on, coincide plenamente con una p\'erida de la actitud del Cerise que fue registrada en los datos hist\'oricos abordo. \citep{KlinkradChapter8}\\
 
-Existen distintos abordajes respecto a la problem\'atica de los desechos espaciales. La \ac{NASA} propone una clasificaci\'on general seg\'un sean estudios de: modelado, rastreo, protecci\'on, mitigaci\'on, remediaci\'on o reingreso.\\
+\subsection*{Distintos Abordajes para el estudio de los Desechos Espaciales}
+Existen distintos estudios respecto a la problem\'atica de los desechos espaciales. La \ac{NASA} propone una clasificaci\'on general seg\'un sean estudios de: modelado, rastreo, protecci\'on, mitigaci\'on, reparaci\'on o reingreso.\\
 \begin{itemize}
 %\setlength{\itemsep}{0pt}
 \item {\bf{Modelado:}} Consiste en el desarrollo y la actualizaci\'on de los modelos orbitales de los desechos, para describir y caracterizar el ambiente actual y la proyecci\'on futura.\\
 \item {\bf{Rastreo:}} Mediciones que se hacen con radares y telescopios \'opticos desde tierra, y tambi\'en con telescopios espaciales.\\
 \item {\bf{Protecci\'on:}} Estudios hechos en impactos de alta velocidad para el desarrollo de nuevos materiales y dise\~nos que ofrezcan una mayor protecci\'on.\\
 \item {\bf{Mitigaci\'on:}} Planifiaci\'on de estrategias para reducir la generaci\'on de nuevos desechos. Generaci\'on de documentaci\'on  de buenas pr\'acticas, est\'andares y promoci\'on de acuerdos internacionales.\\
-\item {\bf{Remediaci\'on:}} Dise\~no de misiones que se encarguen de reducir el n\'umero de objetos inactivos en \'orbita.\\
+\item {\bf{Reparaci\'on:}} Dise\~no de misiones con el \'unico objetivo de actuar sobre los desechos a fin de reducir el n\'umero de objetos inactivos en \'orbita.\\
 \item {\bf{Reingreso:}} Identificaci\'on de los reingresos no controlados, para hacer an\'alisis sobre las zonas de posibles impactos en Tierra y la planificaci\'on de reingresos controlados.\\
 \end{itemize}
 
@@ -32,12 +34,40 @@ Los modelos de evoluci\'on muestran la configuraci\'on actual y proyecciones de 
 
 Los modelos de ingenier\'ia se enfocan en distintas pruebas de laboratorio o de misiones espec\'ificas en \'orbita, que testean la respuesta de los materiales cuando se exponen a impactos con fragmentos de distinto tipo, particularmente en aquellos de tama\~nos muy chicos pero que colisionan a velocidades del orden de diez kil\'ometros por segundo.\\
 
-En este trabajo nos enfocamos en el an\'alisis de las situaciones de riesgo de colisi\'on, dentro del marco de la {\it{mitigaci\'on}}, y particularmente para las misiones y los desechos que se ubican en las \'orbitas bajas \ac{LEO}.\\
+En este trabajo nos enfocamos en el an\'alisis de las situaciones de riesgo de colisi\'on, dentro del marco de la {\it{mitigaci\'on}}, para las misiones y los desechos que se ubican en las  \ac{LEO}, u \'orbitas bajas.\\
 
-\subsection*{El entorno de los Desechos Espaciales}
-Seg\'un los informes de la Agencia Espacial Europea \citep{esaSD}, desde 1957 hasta la actualidad, 5250 lanzamientos han poblado el ambiente espacial con casi 23000 objetos de los cuales, s\'olo cerca de 1200 son sat\'elites operativos.\\
+\subsection*{El entorno de los Desechos Espaciales: presente y futuro}
+Seg\'un los informes de la \ac{ESA} \citep{esaSD}, desde 1957 hasta la actualidad, 5250 lanzamientos han poblado el ambiente espacial con casi 23000 objetos de los cuales, s\'olo cerca de 1200 son sat\'elites operativos.\\
 
-De a acuerdo a una publicaci\'on de la \cite{ODQNum}, hasta el 04 de Abril de 2017, se contabilizan $18347$ objetos catalogados que orbitan la Tierra, Fig. \ref{fig:catxpais}. Clasificados seg\'un sean: cargas \'utiles, cohetes, desechos de misi\'on, desechos an\'omalos o desechos de fragmentaci\'on.\\
+El \ac{IADC}, clasifica los desechos seg\'un sean: objetos relacionados a alguna misi\'on, Fragmentos, o cohetes y objetos que ya finalizaron su misi\'on. Ver tabla \ref{tab:desechosIADC}.\\
+
+\begin{table}[h]\renewcommand{\arraystretch}{1.3}
+\centering
+\resizebox{17cm}{!}{
+\begin{tabular}[c]{|l|l|l|}
+\hline 
+\rowcolor{lightgray}
+\bf{Clasificaci\'on}  &    \bf{Causas} & \bf{Recomendaciones del IADC}\\
+\hline
+\multirow{ 2}{*}{Objetos relacionados a una misi\'on} &   Liberados intencionalmente& Dise\~nos que reduzcan la liberaci\'on de desechos\\
+&Liberados sin intenci\'on& Dise\~nos robustos\\
+\hline
+\multirow{ 4}{*}{Fragmentos}& Destrucci\'on intencional & Evitar destrucciones intencionales.\\
+& Fragmentaciones durante las operaciones & Aseguramiento de la misi\'on.\\
+& Fragmentaciones ya finalizada la misi\'on & Reducci\'on de estas situaciones en el dise\~no.\\
+& Colisiones en \'orbita & Planificaci\'on de maniobras evasivas por riesgo\\
+&&de colisi\'on. Protecci\'on.\\
+\hline
+Objetos que ya finalizaron & Maniobras de disposal inadecuadas &Maniobras de reingreso\\
+su misi\'on y cohetes && \\
+\hline
+\end{tabular} }
+\caption[Clasificaci\'on de Desechos seg\'un la IADC]{Clasificaci\'on de Desechos, las causas y las recomendaciones adaptado de la gu\'ia de recomendaciones del \cite{iadcguide}}
+\label{tab:desechosIADC}
+\end{table}
+
+
+De a acuerdo a una publicaci\'on de la \cite{ODQNum}, hasta el 04 de Abril de 2017, se contabilizaron $18347$ objetos catalogados que orbitan la Tierra, Fig. \ref{fig:catxpais}. Clasificados seg\'un sean: cargas \'utiles, cohetes, desechos de misi\'on, desechos an\'omalos o desechos de fragmentaci\'on.\\
 
 \begin{figure}[!h]
 \centering
@@ -103,7 +133,7 @@ De los distintos modelos de evoluci\'on y de las descripciones del ambiente espa
 
 A su vez, se prevee que a partir del incremento de objetos, en particular en las \'orbitas bajas, aumenten las colisiones, convirti\'endose las mismas, en las principales fuentes de generaci\'on de desechos.\\ 
 
-La Fig. \ref{fig:causadesechos} muestra el porcentaje del remanente de desechos producto de rupturas debido a diferentes causas, fue modific\'andose en los \'ultimos a\~nos. Las distintas pol\'itcas de mitigaci\'on en relaci\'on a explosiones intencionales, el remanente de combustibles, un enfoque m\'as profundo en el tratamiento de las bater\'ias y la protecci\'on de los materiales frente a impactos, han reducido el n\'umero de desechos producto de explosiones intencionales, explosiones generadas por los combustibles, las fallas de las bater\'ias y  las causas desconcidas. Mientras que los desechos generados por colisiones han aumentado.\\
+La Fig. \ref{fig:causadesechos} muestra el porcentaje del remanente de desechos producto de rupturas debido a diferentes causas, fue modific\'andose en los \'ultimos a\~nos. Las distintas pol\'iticas de mitigaci\'on en relaci\'on a explosiones intencionales, el remanente de combustibles, un enfoque m\'as profundo en el tratamiento de las bater\'ias y la protecci\'on de los materiales frente a impactos, han reducido el n\'umero de desechos producto de explosiones intencionales, explosiones generadas por los combustibles, las fallas de las bater\'ias y  las causas desconocidas. Mientras que los desechos generados por colisiones han aumentado.\\
 
 \begin{figure}[!h]
   \centering
@@ -121,7 +151,7 @@ Conclusiones similares se desprenden del estudio de \citep{karacalioglu2016impac
   \label{fig:debriscollision}
 \end{figure}
 
-Ya en 1978  estudios predictivos hechos por D. Kessler y Cour-Palais
+Ya en 1978  estudios hechos por D. Kessler y Cour-Palais
  \cite{kessler0}, anunciaban el riesgo del efecto en cascada que podr\'ian producir las colisiones, aumentando los desechos en un camino catastr\'ofico sin fin y mostrando que los desechos generados por colisiones superar\'ian los impactos por meteoritos.\\
  
  Por su parte los modelos de ingenier\'ia ofrecen una descripci\'on de los distintos efectos que producen los impactos, dependiendo del tama\~no del desecho. Ver tabla \ref{tamanioDanio}\\
@@ -302,7 +332,7 @@ Dependiendo de las distintas capacidades con que cuentan las agencias, estos sis
 
 Es una de las situaciones que se aborda con mucha delicadeza dentro del \'area espacial y dado el nivel de riesgo que implica, la CONAE contrata un servicio de asesoramiento y control para la planificaci\'on de las operaciones vinculadas al alerta por colisi\'on.\\
 
-Ofrecer un servicio que reemplace al que se utiliza actualmente en CONAE, es impensado y escapa por mucho a los alcances de este trabajo. No obstante, hemos desarrollado una herramienta que permite una clara caracterizaci\'on de la situaci\'on y un mayor conocimiento para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento. As\'i mismo, se piensa como un planteo preliminar, con versatilidad para ser testeado, perfeccionado y ampliado a largo plazo.\\
+Ofrecer un servicio que reemplace al que se utiliza actualmente en CONAE, es impensado y escapa por mucho a los alcances de este trabajo. No obstante, se ha desarrollado una herramienta que permite una clara caracterizaci\'on de la situaci\'on y un mayor conocimiento para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento. As\'i mismo, este trabajo,  se piensa como un planteo preliminar, con versatilidad para ser testeado, perfeccionado y ampliado a largo plazo.\\
 
 La herramienta ARxCODE para el An\'alisis de Riesgo por Colisi\'on con Desechos, que presentamos en esta tesis, consiste en un prototipo de software para ser montado sobre la estructura actual con la que cuenta el departamento de Din\'amica Orbital, y que pueda ser evaluado por operadores del sector con amplios conocimientos del area.\\
 

@@ -1,55 +1,53 @@
 \select@language {spanish}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Objetos en \'Orbita}}{3}{figure.caption.12}
-\contentsline {subfigure}{\numberline {(c)}{\ignorespaces {Objetos en \'Orbita al 4 de Abril de 2017.}}}{3}{figure.caption.12}
-\contentsline {subfigure}{\numberline {(d)}{\ignorespaces {Porcentaje de Objetos en \'Orbita seg\'un su clasificaci\'on.}}}{3}{figure.caption.12}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Distribuci\'on de objetos en funci\'on del semieje mayor.}}{4}{figure.caption.13}
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Proyecci\'on de Sat\'elites 2016-2030}}{4}{figure.caption.14}
-\contentsline {figure}{\numberline {1.4}{\ignorespaces Fragmentos de Cohetes 2016-2030}}{5}{figure.caption.15}
-\contentsline {figure}{\numberline {1.5}{\ignorespaces Cantidad de Objetos catalogados al 2014}}{6}{figure.caption.16}
-\contentsline {figure}{\numberline {1.6}{\ignorespaces Evoluci\'on de las causas de la generaci\'on de Desechos}}{6}{figure.caption.17}
-\contentsline {figure}{\numberline {1.7}{\ignorespaces N\'umero de Desechos en las \'orbitas LEO desde 2015 al 2065}}{7}{figure.caption.18}
-\contentsline {figure}{\numberline {1.8}{\ignorespaces Estudio de Colisi\'on}}{9}{figure.caption.20}
-\contentsline {figure}{\numberline {1.9}{\ignorespaces USSTRATCOM - SSN}}{9}{figure.caption.21}
-\contentsline {figure}{\numberline {1.10}{\ignorespaces Interfaces del ARxCODE}}{13}{figure.caption.24}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Objetos en \'Orbita seg\'un NASA.}}{4}{figure.caption.21}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Distribuci\'on de objetos en funci\'on del semieje mayor.}}{5}{figure.caption.22}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Proyecci\'on de Sat\'elites 2016-2030}}{5}{figure.caption.23}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Fragmentos de Cohetes 2016-2030}}{6}{figure.caption.24}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Cantidad de Objetos catalogados al 2014}}{7}{figure.caption.25}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Evoluci\'on de las causas de la generaci\'on de Desechos}}{7}{figure.caption.26}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces N\'umero de Desechos en las \'orbitas LEO desde 2015 al 2065}}{8}{figure.caption.27}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Estudio de Colisi\'on}}{10}{figure.caption.29}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces USSTRATCOM - SSN}}{10}{figure.caption.30}
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Interfaces del ARxCODE}}{14}{figure.caption.33}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Sistemas de Referencia centrados en el Sat\'elite}}{20}{figure.caption.35}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces M\'etodo de Osweiler para la generaci\'on de la matriz de covarianza}}{22}{figure.caption.37}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Descripci\'on del m\'etodo propuesto para la propagaci\'on de errores}}{24}{figure.caption.39}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Tabla de Estimaci\'on de errores.}}{24}{figure.caption.40}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Plano de Encuentro}}{27}{figure.caption.46}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{32}{figure.caption.51}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{34}{figure.caption.53}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Sistemas de Referencia centrados en el Sat\'elite}}{21}{figure.caption.42}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces M\'etodo de Osweiler para la generaci\'on de la matriz de covarianza}}{23}{figure.caption.44}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Descripci\'on del m\'etodo propuesto para la propagaci\'on de errores}}{25}{figure.caption.46}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Tabla de Estimaci\'on de errores.}}{25}{figure.caption.47}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Plano de Encuentro}}{28}{figure.caption.53}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{33}{figure.caption.57}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{35}{figure.caption.59}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Interfaces del Sistema}}{41}{figure.caption.60}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{42}{figure.caption.61}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Casos de Uso de ARxCODE\relax }}{42}{figure.caption.62}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Componentes de ARxCODE\relax }}{44}{figure.caption.65}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Clases Tle y setTLE}}{45}{figure.caption.67}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{45}{figure.caption.67}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{45}{figure.caption.67}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Clases CDM y EphemCODS}}{46}{figure.caption.71}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{46}{figure.caption.71}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{46}{figure.caption.71}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Clase Encuentro}}{47}{figure.caption.76}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{49}{figure.caption.83}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Impresi\'on de la pantalla de inicio del ARxCODE\relax }}{50}{figure.caption.85}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Pantallas de Ingreso de Datos, ya sea selecci\'on del CDM o carga manual\relax }}{50}{figure.caption.86}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE}}}{50}{figure.caption.86}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE}}}{50}{figure.caption.86}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Vista con la carga del procesamiento manual.\relax }}{51}{figure.caption.87}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Vista con los resultados publicados y la incorporaci\'on de las trayectorias.\relax }}{51}{figure.caption.88}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Interfaces del Sistema}}{42}{figure.caption.66}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{43}{figure.caption.67}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Casos de Uso de ARxCODE\relax }}{43}{figure.caption.68}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Componentes de ARxCODE\relax }}{45}{figure.caption.71}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Clases Tle y setTLE}}{46}{figure.caption.73}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{46}{figure.caption.73}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{46}{figure.caption.73}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Clases CDM y EphemCODS}}{47}{figure.caption.77}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{47}{figure.caption.77}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{47}{figure.caption.77}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Clase Encuentro}}{48}{figure.caption.82}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{50}{figure.caption.89}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Impresi\'on de la pantalla de inicio del ARxCODE\relax }}{51}{figure.caption.91}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Pantallas de Ingreso de Datos, ya sea selecci\'on del CDM o carga manual\relax }}{51}{figure.caption.92}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE}}}{51}{figure.caption.92}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE}}}{51}{figure.caption.92}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Vista con la carga del procesamiento manual.\relax }}{52}{figure.caption.93}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Vista con los resultados publicados y la incorporaci\'on de las trayectorias.\relax }}{52}{figure.caption.94}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{55}{figure.caption.99}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{55}{figure.caption.99}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler}}}{55}{figure.caption.99}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{55}{figure.caption.100}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{55}{figure.caption.100}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler}}}{55}{figure.caption.100}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{57}{figure.caption.104}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Contenido de los mails utilizados para comparar los resultados.\relax }}{59}{figure.caption.110}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Tabla con las matrices de covarianza para la misi\'on y el desecho.\relax }}{60}{figure.caption.113}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{60}{figure.caption.115}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{56}{figure.caption.105}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{56}{figure.caption.105}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler}}}{56}{figure.caption.105}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{56}{figure.caption.106}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{56}{figure.caption.106}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler}}}{56}{figure.caption.106}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{58}{figure.caption.110}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Contenido de los mails utilizados para comparar los resultados.\relax }}{60}{figure.caption.116}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Tabla con las matrices de covarianza para la misi\'on y el desecho.\relax }}{61}{figure.caption.119}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{61}{figure.caption.121}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
