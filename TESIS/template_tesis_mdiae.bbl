@@ -84,6 +84,12 @@ Klinkrad, H. (2006b).
 \newblock {\em Space Debris. Models and Risk Analysis}.
 \newblock Springer.
 
+\bibitem[\protect\astroncite{Kozai}{1962}]{kozai1962second}
+Kozai, Y. (1962).
+\newblock Second-order solution of artificial satellite theory without air
+  drag.
+\newblock {\em The Astronomical Journal}, 67:446.
+
 \bibitem[\protect\astroncite{Laporte}{2014}]{laporte}
 Laporte, F. (2014).
 \newblock Jac software, dedicated to the analysis of conjunction messages.

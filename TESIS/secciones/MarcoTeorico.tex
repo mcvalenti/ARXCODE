@@ -7,7 +7,7 @@ Para el an\'alisis de posibles colisiones es necesario evaluar de forma anticipa
 
 La t\'ecnica de detecci\'on de encuentros, consiste en realizar propagaciones de las posiciones de todo el cat\'alogo a partir de un instante inicial, en intervalos que por lo general, abarcan una semana hacia el futuro. Se define un volumen seguro rodeando al sat\'elite de inter\'es, y si alg\'un objeto externo se introduce dentro del volumen de riesgo, es decir, se acerca a una distancia m\'inima por debajo del umbral determinado, se considera una situaci\'on de riesgo.\\ 
 Esta metodolog\'ia no tiene en cuenta los errores en la determinaci\'on de la posici\'on de los objetos, y por lo general deriva en falsas alarmas, con las que se corre el riesgo de realizar maniobras innecesarias o que pueden poner en mayor peligro a la misi\'on.\\
-Una vez identificado un encuentro, para un estudio m\'as exhaustivo de la situaci\'on, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la {\it{probabilidad de colisi\'on}}: PoC.  Esta \'ultima ofrece un panorama m\'as completo ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
+Una vez identificado un encuentro, para un estudio m\'as exhaustivo de la situaci\'on, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la PoC.  Esta \'ultima ofrece un panorama m\'as completo ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
 
 Como ya mencionamos (Sec. \ref{subsec:estudiocolision}), en este trabajo nos enfocamos en analizar las situaciones de encuentro ya identificadas y en particular, aquellas que involucran a misiones operativas y desechos espaciales.\\
 
@@ -15,14 +15,14 @@ En este cap\'itulo, en primer lugar, se presentan las distintas maneras en que s
 La posici\'on de la misi\'on operativa y los errores asociados a la misma, la provee el departamento de din\'amica orbital (Sec. \ref{sec:posMision}).
 La posici\'on de los desechos, s\'olo es posible conocerla, utilizamos los datos p\'ublicos que ofrece el comando de defensa norteamericano, \ac{NORAD} a trav\'es de su p\'agina Space-Track {\footnote{http://www.space-track.org}}. Las posiciones son publicadas en formato \ac{TLE} (Sec. \ref{subsec:tleformat}), sin errores asociados, y son propagadas hasta el momento del encuentro con el modelo SGP4  \citep{hoots1980models}, que tampoco ofrece informaci\'on sobre los errores de propagaci\'on. Se dedica un \'item para presentar el modelo de propagaci\'on SGP4 (Sec. \ref{subsec:sgp4model}) y se agrega en este espacio una breve descripci\'on de los sistemas de referencia con los que se trabaj\'o.\\
 
-La siguiente secci\'on describe el tratamiento de errores. Para el estudio de la estimaci\'on de los errores en la posici\'on inicial, se detalla el m\'etodo de Osweiler \citep{Osweiler} que permite la construcci\'on de las matrices de covarianza a partir de un conjunto de TLEs, cuando no se cuenta con datos m\'as precisos.\\
+La siguiente secci\'on describe el tratamiento de errores. Para el estudio de la estimaci\'on de los errores en la posici\'on inicial, se detalla el m\'etodo de Osweiler \citep{osweiler} que permite la construcci\'on de las matrices de covarianza a partir de un conjunto de TLEs, cuando no se cuenta con datos m\'as precisos.\\
 Una vez calculada la matriz de covarianza de errores, asociada a la posici\'on inicial, ser\'a necesario propagarla al instante predicho para el encuentro. Para ello se propone la implementaci\'on de una tabla con valores estad\'isticos inferidos del an\'alisis comparativo de efem\'erides precisas de la misi\'on operativa y las propagaciones de los TLE.\\
 Contin\'ua la secci\'on que explica el algoritmo para el c\'alculo de la PoC y finalmente se describe en detalle, la forma en que se comunican los acercamientos de riesgo (Sec. \ref{sec:anuncio}), por ejemplo mediante \ac{CDM}.
 % Incorporar los estados de alerta de Nasa. (texto de la aseguradora Britanica que me paso Juan ... bla de UNLAM.)
 
 
 \section{La posici\'on de los objetos involucrados}{\label{sec:posMision}}
-Al estudio de posiciones orbitales se lo puede dividir en tres etapas: medici\'on y/o rastreo, {\it{determinaci\'on orbital}} y {\it{propagaci\'on orbital}}.
+Al estudio de posiciones orbitales se lo puede dividir en tres etapas: medici\'on y/o rastreo, determinaci\'on orbital y propagaci\'on orbital.
 
 \begin{itemize}
 \itemsep0em
@@ -38,7 +38,7 @@ En nuestro planteo de riesgos de colisi\'on entre misiones operativas y desechos
 
 Con una misi\'on operativa se mantiene el contacto y se la puede comandar. Los sistemas de navegaci\'on abordo permiten un registro permanente de las posiciones y velocidades del sat\'elite. Esos registros se utilizan en los ajustes de los modelos de determinaci\'on orbital, que se realizan en procesamientos posteriores y se generan efem\'erides orbitales de mucha precisi\'on, cuyos errores resultan del propio procesamiento.\\
 Para este trabajo se tuvo acceso a los productos orbitales de una misi\'on operativa, cuyas efem\'erides se plasman en archivos de texto plano, tabuladas cada un segundo, en el sistema de referencia verdadero de la fecha TOD. Seg\'un se nos inform\'o, los mismos presentan errores del orden de  20 metros. (\textcolor{red}{comunicacion por mail}).\\
-Estas {\it{efem\'erides precisas}} y sus errores asociados, son las que deben utilizarse en los estudios de riesgo, no obstante, para las procesamientos de este trabajo, si bien fue posible contar con las efem\'erides precisas, no se tuvo acceso a datos de acercamientos de riesgos por motivos de confidencialidad. Raz\'on por la cual, las posiciones de todos los objetos se calcularon a partir de los TLE p\'ublicos y las efem\'erides precisa fueron utilizadas para el estudio de los errores de los TLE, en particular para la generaci\'on de la tabla con los valores estad\'isticos de las varianzas, que se utilizan para la propagaci\'on de errores al instante TCA, Sec. \ref{subsec:tablaprop} \\
+Estas {efem\'erides precisas y sus errores asociados, son las que deben utilizarse en los estudios de riesgo, no obstante, para las procesamientos de este trabajo, si bien fue posible contar con las efem\'erides precisas, no se tuvo acceso a datos de acercamientos de riesgos por motivos de confidencialidad. Raz\'on por la cual, las posiciones de todos los objetos se calcularon a partir de los TLE p\'ublicos y las efem\'erides precisa fueron utilizadas para el estudio de los errores de los TLE, en particular para la generaci\'on de la tabla con los valores estad\'isticos de las varianzas, que se utilizan para la propagaci\'on de errores al instante TCA, Sec. \ref{subsec:tablaprop}. \\
 
 \subsection{La posici\'on del desecho espacial}
 El desecho espacial no tiene capacidades operativas, de manera que la \'unica forma de determinar su posici\'on es mediante las redes de rastreo descritas en la introducci\'on.\\
@@ -95,7 +95,7 @@ Ejemplo de un TLE de la Estaci\'on Espacial Internacional (ISS) \\
 \end{center}
 
 \subsection{SGP4}\label{subsec:sgp4model}
-De acuerdo a una rese\~na hist\'orica presentada por Hoots \citep{hootshistoria}, los or\'igenes del SGP4 se remontan al a\~no 1960 en EE.UU, cuando se desarroll\'o el modelo General Simplificado de Perturbaciones SGP  ({\it{Simplified General Pertubations}}). Basado en los modelos anal\'iticos de predicci\'on orbital de Brower and Kozai, para su implementaci\'on, fue adaptado y modificado para evitar singularidades en \'orbitas particulares y para reducir el tiempo de c\'omputo. As\'i mismo se incluy\'o el efecto del frenado atmosf\'erico.\\
+De acuerdo a una rese\~na hist\'orica presentada por Hoots \citep{hootshistoria}, los or\'igenes del SGP4 se remontan al a\~no 1960 en EE.UU, cuando se desarroll\'o el modelo General Simplificado de Perturbaciones SGP  ({\it{Simplified General Pertubations}}). Basado en los modelos anal\'iticos de predicci\'on orbital de Brower \citep{brouwer1959solution} and Kozai \citep{kozai1962second}, para su implementaci\'on, fue adaptado y modificado para evitar singularidades en \'orbitas particulares y para reducir el tiempo de c\'omputo. As\'i mismo se incluy\'o el efecto del frenado atmosf\'erico.\\
 En 1964 se convirti\'o en el modelo de predicci\'on orbital principal del sistema de detecci\'on y rastreo de los Estados Unidos.
 Sin embargo, en 1969 la cantidad de objetos catalogados imped\'ian a las computadoras de la \'epoca procesar todos los t\'erminos del modelo, por lo que fue necesario desarrollar una nueva versi\'on m\'as simplificada, que result\'o en el SGP4 que se puso en operatividad en el a\~no 1970.\\
 
@@ -113,7 +113,7 @@ El SGP4 es actualmente, el \'unico modelo para el mantenimiento del cat\'alogo d
 \subsection{Sistemas de Referencia}\label{subsec:sistRef}
 
 \subsubsection*{TEME}
- Es un sistema inercial con origen en el centro de la Tierra, que utiliza como plano fundamental el Ecuador. El eje {\it{x}} se ubica en el plano del Ecuador y apunta en la direcci\'on del Equinoccio Medio, el eje {\it{y}} tambi\'en se ubica sobre el plano ecuatorial a $90^{\circ}$ del eje {\it{x}}, y el eje {\it{z}} apunta en la direcci\'on del eje de rotaci\'on de la Tierra, perpendicular al plano ecuatorial. Sus siglas hacen referencia a un Ecuador Verdadero y un Equinoccio Medio \ac{TEME}. Si bien no es un sistema convencional estandarizado, es el sistema que utiliza NORAD para la generaci\'on y propagaci\'on de los TLE, por lo que se encuentra ampliamente difundido.
+ Es un sistema inercial con origen en el centro de la Tierra, que utiliza como plano fundamental el Ecuador. El eje {\it{x}} se ubica en el plano del Ecuador y apunta en la direcci\'on del Equinoccio Medio, el eje {\it{y}} tambi\'en se ubica sobre el plano ecuatorial a $90^{\circ}$ del eje {\it{x}}, y el eje {\it{z}} apunta en la direcci\'on del eje de rotaci\'on de la Tierra, perpendicular al plano ecuatorial. Sus siglas hacen referencia a un Ecuador Verdadero y un Equinoccio Medio o \ac{TEME}. Si bien no es un sistema convencional estandarizado, es el sistema que utiliza NORAD para la generaci\'on y propagaci\'on de los TLE, por lo que se encuentra ampliamente difundido.
  
 \subsubsection*{TOD}
  Al igual que el TEME, es un sistema inercial definido con origen en el centro de la Tierra, con plano fundamental el Ecuador. Su eje {\it{x}} tambi\'en yace sobre el plano ecuatorial pero se orienta en la direcci\'on del Equinoccio Verdadero (de la fecha).\\
@@ -156,14 +156,15 @@ Notar que ambos sistemas dependen de la posici\'on y la velocidad, es decir, que
 
 \section{El estudio de los errores}
 
-La predicci\'on de un encuentro acumula, los errores de las mediciones y de modelos de la  {\it{determinaci\'on orbital}}, junto con los errores que se introducen en los modelos que extrapolan esas posiciones hacia el futuro, en el proceso de {\it{propagaci\'on orbital}}.\\
+La predicci\'on de un encuentro acumula, los errores de las mediciones y de los modelos de la  determinaci\'on orbital, junto con los errores que se introducen en los modelos que extrapolan esas posiciones hacia el futuro, en el proceso de propagaci\'on orbital.\\
 Para el estudio de la situaci\'on de riesgo es necesario tener conocimiento, no s\'olo de las posiciones, sino tambi\'en de esos errores asociados; raz\'on por la cual la estimaci\'on de errores es un proceso fundamental.\\ 
 Esta caracter\'istica del problema, es la que conduce a estudiar probabilidades, en los riesgos de colisi\'on.\\
 
-En este trabajo se organiz\'o el tratamiento de errores en dos grandes secciones, en primer lugar, hay que tener en cuenta que en nuestro planteo siempre estar\'a implicado un desecho, por lo que ser\'a necesario conocer los errores que resultan de estos productos, ya que los mismos no son publicados. A tal fin, implementamos el m\'etodo de construcci\'on de matrices de covarianzas que propone \cite{Osweiler}. Este m\'etodo permite construir una matriz de covarianza para la posici\'on de un TLE, utilizando el set de TLE de los \'ultimos 15 d\'ias anteriores al TLE en cuesti\'on. Es decir, es un m\'etodo que permite una estimaci\'on de error sobre una posici\'on que ya ha sido determinada.\\
-En segundo lugar, para el an\'alisis de la situaci\'on del encuentro, ser\'a necesario contar con una t\'ecnica que ofrezca los errores de las posiciones que se propagan hacia el futuro, es decir, hacia el momento del m\'aximo acercamiento, TCA. En este punto radica el aporte de nuestro trabajo, ya que proponemos una forma para calcular la propagaci\'on de errores, a partir de estudios estad\'isticos del comportamiento de errores de los TLE (Sec. \ref{subsec:tablaprop}).\\
+En este trabajo se organiz\'o el tratamiento de errores en dos grandes secciones, en primer lugar, hay que tener en cuenta que en nuestro planteo siempre estar\'a implicado un desecho, por lo que ser\'a necesario conocer los errores que resultan de estos productos, ya que los mismos no son publicados. A tal fin, implementamos el m\'etodo de construcci\'on de matrices de covarianzas que propone \cite{osweiler}. Este m\'etodo permite construir una matriz de covarianza para la posici\'on de un TLE, utilizando el set de TLE de los \'ultimos 15 d\'ias anteriores al TLE en cuesti\'on. Es decir, es un m\'etodo que permite una estimaci\'on de error sobre una posici\'on que ya ha sido determinada.\\
 
-Debe tenerse en cuenta, que al utilizar TLE y el modelo SGP4  los datos propagados resultan en un sistema de referencia que es propio de este tratamiento; el sistema de Ecuador Verdadero y Equinoccio Medio, \ac{TEME}. Esto implica que deben hacerse transformaciones para poder comparar estas propagaciones con efem\'erides calculadas por otros medios.\\
+En segundo lugar, para el an\'alisis de la situaci\'on del encuentro, ser\'a necesario contar con una t\'ecnica que ofrezca los errores de las posiciones que se propagan hacia el futuro, es decir, hacia el momento del m\'aximo acercamiento. En este punto radica el aporte de nuestro trabajo, ya que proponemos una forma para calcular la propagaci\'on de errores, a partir de estudios estad\'isticos del comportamiento de errores de los TLE (Sec. \ref{subsec:tablaprop}).\\
+
+Debe tenerse en cuenta, que al utilizar TLE y el modelo SGP4  los datos propagados resultan en un sistema de referencia que es propio de este tratamiento; el sistema \ac{TEME}. Esto implica que debe hacerse la transformaci\'on al sistema TOD para poder comparar estas propagaciones con efem\'erides precisas publicadas en el sistema TOD con las que se trabaj\'o.\\
 
 \subsection{M\'etodo de Osweiler}\label{subsec:osw}
 Es un m\'etodo que propone una manera de estimar los errores que se comenten en la utilizaci\'on de TLE para la determinaci\'on de la posici\'on y la velocidad de un objeto que orbita la Tierra.
@@ -267,14 +268,14 @@ Para el an\'alisis de una situaci\'on de riesgo, en general se utilizan como par
 \centering
 \itemsep0em
 \item La m\'inima distancia.
-\item La probabilidad de Colisi\'on (PoC).
+\item La PoC.
 \item La m\'axima PoC.
 \end{itemize}
 
 
 Estos par\'ametros se calculan a partir de: las \'orbitas predichas al momento TCA y las matrices de covarianza de los errores.
 
-Sean dos objetos; en nuestro caso una misi\'on operativa, {\it{sat}}, y un desecho, {\it{deb}}; de los cuales conocemos su posici\'on $\bar{X}_{sat0}=(\bar{x}_{sat},\bar{v}_{sat})$ y $\bar{X}_{deb0}=(\bar{x}_{deb},\bar{v}_{deb})$ y las matrices de covarianza de los errores, $C_{sat0}, C_{deb0}$, para un tiempo inicial, $t_{sat0}$, y $t_{deb0}$ respectivamente. Todo referenciado al mismo sistema inercial de referencia, ya sea un sistema geoc\'entrico (\ac{ECI}) o el sistema del sat\'elite (\ac{RTN}).\\
+Sean dos objetos; en nuestro caso una misi\'on operativa, {\it{sat}}, y un desecho, {\it{deb}}; de los cuales conocemos su posici\'on $\bar{X}_{sat0}=(\bar{x}_{sat},\bar{v}_{sat})$ y $\bar{X}_{deb0}=(\bar{x}_{deb},\bar{v}_{deb})$ y las matrices de covarianza de los errores, $C_{sat0}, C_{deb0}$, para un tiempo inicial, $t_{sat0}$, y $t_{deb0}$ respectivamente. Todo referenciado al mismo sistema inercial de referencia, ya sea un sistema geoc\'entrico o \ac{ECI}; o el sistema del sat\'elite, \ac{RTN}).\\
 En un planteo general, el estudio de una posible colisi\'on consiste en propagar hacia el futuro, mediante modelos (anal\'iticos y num\'ericos de alta precisi\'on), esas posiciones y matrices de covarianza de errores; definir radios seguros (o de colisi\'on) para los objetos, y calcular la probabilidad de que la m\'inimia distancia entre ellos, sea menor a la suma de esos radios.\\
 Un an\'alisis apropiado de situaciones de encuentro facilita la determinaci\'on del tiempo de m\'aximo acercamiento, TCA y las posiciones y matrices de covarianza para ese instante:  $\bar{X}_{sat}(TCA)$, $\bar{X}_{deb}(TCA)$, $C_{sat}(TCA), C_{deb}(TCA)$.
 
@@ -536,7 +537,7 @@ Ser\'a necesario incorporar m\'as t\'erminos en aquellos casos, en los que el ra
 \section{Comunicaciones de riesgo de colisi\'on}{\label{sec:anuncio}}
 
 
-A partir de las primeros accidentes, y da\'~nos por impactos, las agencias u organismos capaces de rastrear el ambiente espacial, comenzaron a implementar sistemas de comunicaci\'on para advertir sobre posibles colisiones. Las comunicaciones, que en sus or\'igenes eran mails particulares, fueron migrando a un mensaje formal y estandarizado y finalmente en Junio del 2013, el Consejo Consultivo para los Sistemas de Datos Espaciales, \ac{CCSDS}, public\'o el mensaje est\'andar recomendado que se utiliza en la actualidad, el: \ac{CDM} \citep{CDMstd}.\\
+A partir de las primeros accidentes, y da\'~nos por impactos, las agencias u organismos capaces de rastrear el ambiente espacial, comenzaron a implementar sistemas de comunicaci\'on para advertir sobre posibles colisiones. Las comunicaciones, que en sus or\'igenes eran mails particulares, fueron migrando a un mensaje formal y estandarizado y finalmente en Junio del 2013, el Consejo Consultivo para los Sistemas de Datos Espaciales, \ac{CCSDS}, public\'o el mensaje est\'andar recomendado que se utiliza en la actualidad, el: \ac{CDM} \citep{CDM}.\\
 El {\it{CCSDS 508.0-B-1, Conjunction Data Message Recommended Standard}} describe en detalle la estructura del formato recomendado, aunque no propone formas de intercambio, dejando a las partes la potestad de acordar las distintas maneras de realizar la comunicaci\'on de los mismos, que, deber\'an ser detalladas en el documento de interfaces (ICD).\\
 
 \subsection{El CDM}\label{subsec:cdm}
@@ -546,7 +547,7 @@ Los CDM se env\'ian 72 horas antes del encuentro a los operadores a cargo y/o se
 Los mismos se generan y se distribuyen de acuerdo a ciertos criterios.\\
 
 
-\underline{Criterios de generaci\'on y env\'io de CDMs}
+\underline{Criterios de generaci\'on y env\'io de CDM}
 \begin{itemize}
 \item Para las {\bf{\'orbitas bajas}}, se consideran las situaciones en las que la m\'inima distancia total es menor a 1 kil\'ometro y la distancia relativa en la componente radial es menor a los 200 metros.\\
 
@@ -559,7 +560,7 @@ Su formato estandarizado unifica la informaci\'on que all\'i se publica y facili
 Son exclusivamente informativos, no imprimen recomendaciones ni sugerencias de acci\'on.
 Y es importante destacar, que los centros de c\'omputo que los generan, no siempre cuentan con la informaci\'on de las pr\'oximas maniobras planificadas para los sat\'elites.\\
 
-Es un mensaje codificado en formato ASCII, que puede distribuirse mediante un texto plano (KVN), o por medio de un XML. Contiene la m\'inima distancia, la probabilidad de colisi\'on, el tiempo del m\'aximo acercamiento (TCA) y las posiciones y velocidades relativas en el momento de m\'inima distancia; entre muchos otros \citep{CDM}.\\
+Es un mensaje codificado en formato ASCII, que puede distribuirse mediante un texto plano KVN, o por medio de un \ac{XML}. Contiene la m\'inima distancia, la PoC, el TCA y las posiciones y velocidades relativas en el momento de m\'inima distancia; entre muchos otros \citep{CDM}.\\
 
 Ofrece la siguiente informaci\'on de un \'unico encuentro entre dos objetos: {\it{Object1}} y {\it{Object2}}:
 \begin{itemize}
@@ -572,7 +573,7 @@ Ofrece la siguiente informaci\'on de un \'unico encuentro entre dos objetos: {\i
 
 \subsubsection*{Estructura General del formato KVN}
 El CDM en su formato KVN, consiste en un texto plano, con palabras claves o {\it{keywords}}, con su valor correspondiente.\\
-El mensaje contiene una {\it{keyword}} por l\'inea, y el orden en que se presentan es fijo y est\'a determinado por el est\'andar, respetando la siguiente estructura:\\
+El mensaje contiene una {\it{keyword}} por l\'inea, y el orden en que se presentan es fijo y est\'a determinado por el est\'andar, respetando la siguiente estructura:
 
 \begin{itemize}
 \itemsep0em
@@ -605,7 +606,7 @@ COLLISION\_PROBABILITY\_METHOD &= FOSTER-1992&\\
 }}
 
 \subsubsection*{Estructura General del formato XML}
-El CDM en su formato XML (eXtensible Markup Language) proporciona un m\'etodo est\'andar para acceder a la informaci\'on, facilitando el intercambio de datos electr\'onicos. Su estructura define el tipo de informaci\'on que hay en el documento, acelerando los procesos de b\'usqueda.\\
+El CDM en su formato \ac{XML} proporciona un m\'etodo est\'andar para acceder a la informaci\'on, facilitando el intercambio de datos electr\'onicos. Su estructura define el tipo de informaci\'on que hay en el documento, acelerando los procesos de b\'usqueda.\\
 El XML del CDM, se agrupa como se muestra a continuaci\'on:
 
 \begin{verbbox}
@@ -681,7 +682,7 @@ id="CCSDS_CDM_VERS" version="1.0">
 </relativeMetadataData>
 \end{lstlisting}
 
-A diferencia de mensajes estandarizados anteriores, como el CSM:{\it{Conjunction Summery Message}}, el CDM ofrece un valor estimado para la PoC e indica el m\'etodo que se utiliz\'o para calcularlo. Estos m\'etodos (Ver tabla ), son adem\'as los m\'etodos que el est\'andard sugiere para la implementaci\'on de los c\'alculos de PoC.\\
+A diferencia de mensajes estandarizados anteriores, como el CSM:{\it{Conjunction Summery Message}}, el CDM ofrece un valor estimado para la PoC e indica el m\'etodo que se utiliz\'o para calcularlo. Estos m\'etodos (Ver Fig. \ref{fig:pagsana} ), son adem\'as los m\'etodos que el est\'andar sugiere para la implementaci\'on de los c\'alculos de PoC.\\
 
 \begin{figure}[!h]
 \centering
@@ -696,7 +697,7 @@ A tal fin Fig. \ref{fig:flujomain}:\\
 \begin{itemize}
 \itemsep0em
 \item Se identifican los objetos involucrados, y se extra su identificador en NORAD y el TCA.
-\item Se solicitan los TLEs de los \'ultimos 15 d\'ias, m\'as pr\'oximos a la fecha del encuentro para el desecho y para la misi\'on operativa en caso de no contar con datos m\'as precisos. Si para la misi\'on operativa se contara con productos orbitales propios se utilizar\'an los errores calculados asociados a los mismos.
+\item Se solicitan los TLE de los \'ultimos 15 d\'ias, m\'as pr\'oximos a la fecha del encuentro para el desecho y para la misi\'on operativa en caso de no contar con datos m\'as precisos. Si para la misi\'on operativa se contara con productos orbitales propios se utilizar\'an los errores calculados asociados a los mismos.
 \item Se calcula la matriz de covarianza con el m\'etodo de Osweiler para el desecho (y para la misi\'on si los datos orbitales de la misma no se conocieran).
 \item Se propagan ambas matrices hasta el TCA utilizando los datos estad\'isticos de la tabla generada, seg\'un la cantidad de d\'ias que se necesite propagar.
 \item Se proyectan los distintos par\'ametros a un plano de encuentro que simplifica los c\'alculos.

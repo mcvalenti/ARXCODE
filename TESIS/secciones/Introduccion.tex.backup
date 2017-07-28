@@ -12,9 +12,30 @@ Sin embargo, un hecho poco predicho o abordado empez\'o a ocupar prioridad en la
 {\bf{Definici\'on:}}{\it{ Son Desechos Espaciales todos los objetos construidos por el hombre, incluyendo fragmentos o partes de los mismos, que orbitan la Tierra o reingresan a la atm\'osfera y no son funcionales, es decir, han perdido su capacidad operativa.}} \citep{iadcguide}\\
 
 La ocupaci\'on del espacio parec\'ia ilimitada, y los primeros a\~nos no se ten\'ian consideraciones respecto a los objetos que all\'i se depositaban, o se desprend\'ian de los cohetes y las misiones. Pero con el correr del tiempo, ciertas regiones cobraron inter\' es estrat\'egico, y la superpoblaci\'on en dichas zonas no tard\'o en mostrar complicaciones.\\
+
 Los desechos representan hoy el mayor porcentaje de los objetos que orbitan la Tierra y los estudios de su proliferaci\'on, indican que, de no existir planes de acci\'on para subsanar la situaci\'on, el efecto de las colisiones en cascada transformar\'a el ambiente espacial en un lugar inhabitable para cualquier misi\'on.\\
 
 La primera colisi\'on confirmada y claramente registrada entre una misi\'on operativa y un desecho, ocurri\'o el 24 de Julio de 1996, cuando el sat\'elite franc\'es Cerise (95-033B) fue embestido por un fagmento (86-019RF), remanente de la explosi\'on de la \'ultima etapa del Ariane-1 H-10, ocurrida el 13 de noviembre de 1986; nueve meses despu\'es de inyectar en \'orbita al sat\'elite SPOT-1. La reconstrucci\'on de la situaci\'on luego de la colisi\'on, coincide plenamente con una p\'erida de la actitud del Cerise que fue registrada en los datos hist\'oricos abordo. \citep{KlinkradChapter8}\\
+
+Este accidente fue un disparador en lo que respecta al estudio de los desechos espaciales y las colisiones. Las estad\'isticas de la base de datos de Scopus \footnote{https://www.scopus.com/}, indican que las investigaciones respecto a la tem\'atica de desechos espaciales en general muestran un continuo crecimiento, ver figura \ref{fig:scopusSD}.\\
+Lo mismo ocurre en la tem\'atica de colisiones (figura \ref{fig:scopusCA}), destac\'andose el gran escal\'on a partir del a\~no 1993 (Colisi\'on del sat\'elite Cerise), un pico a partir del a\~no 1998, probablemente vinculado al lanzamiento de la estaci\'on espacial internacional o \ac{ISS}, y luego un notorio crecimiento a partir del a\~no 2007, vinculado a dos sucesos: la destrucci\'on intencional de China de uno de sus sat\'elites en una prueba misil\'istica y la colisi\'on catastr\'ofica accidental entre el sat\'elite ruso KOSMOS 2251, fuera de servicio y el sat\'elite IRIDIUM 33, operativo, de la constelaci\'on de IRIDIUM, en el a\~no 2009.\\
+
+
+\begin{figure}[!h]
+\centering
+  \textbf{Publicaciones sobre Desechos Espaciales (Scopus)}\par\medskip
+    \fbox{\includegraphics[width=0.8\columnwidth, keepaspectratio]{imagenes/scopusSD}}
+    \caption[Desechos Espaciales seg\'un Scopus]{Estad\'istica de las investigaciones realizadas en el \'area de desechos espaciales ({\it{Space Debris}}) de acuerdo a la base de datos de Scopus.}
+    \label{fig:scopusSD}
+\end{figure}
+
+\begin{figure}[!h]
+\centering
+   \textbf{Publicaciones sobre Colisiones (Scopus)}\par\medskip
+    \fbox{\includegraphics[width=0.7\columnwidth, keepaspectratio]{imagenes/scopusCA}}
+    \caption[Riesgos de Colisi\'on seg\'un Scopus]{Estad\'istica de las investigaciones realizadas en el \'area de riesgos de colisi\'on {\it{Collision Avoidance}} de acuerdo a la base de datos de Scopus.}
+    \label{fig:scopusCA}
+\end{figure} 
 
 \subsection*{Distintos Abordajes para el estudio de los Desechos Espaciales}
 Existen distintos estudios respecto a la problem\'atica de los desechos espaciales. La \ac{NASA} propone una clasificaci\'on general seg\'un sean estudios de: modelado, rastreo, protecci\'on, mitigaci\'on, reparaci\'on o reingreso.\\
@@ -55,7 +76,7 @@ El \ac{IADC}, clasifica los desechos seg\'un sean: objetos relacionados a alguna
 \multirow{ 4}{*}{Fragmentos}& Destrucci\'on intencional & Evitar destrucciones intencionales.\\
 & Fragmentaciones durante las operaciones & Aseguramiento de la misi\'on.\\
 & Fragmentaciones ya finalizada la misi\'on & Reducci\'on de estas situaciones en el dise\~no.\\
-& Colisiones en \'orbita & Planificaci\'on de maniobras evasivas por riesgo\\
+& \cellcolor{blue!25}{Colisiones en \'orbita} & Planificaci\'on de maniobras evasivas por riesgo\\
 &&de colisi\'on. Protecci\'on.\\
 \hline
 Objetos que ya finalizaron & Maniobras de disposal inadecuadas &Maniobras de reingreso\\
@@ -67,51 +88,77 @@ su misi\'on y cohetes && \\
 \end{table}
 
 
-De a acuerdo a una publicaci\'on de la \cite{ODQNum}, hasta el 04 de Abril de 2017, se contabilizaron $18347$ objetos catalogados que orbitan la Tierra, Fig. \ref{fig:catxpais}. Clasificados seg\'un sean: cargas \'utiles, cohetes, desechos de misi\'on, desechos an\'omalos o desechos de fragmentaci\'on.\\
+De a acuerdo a una publicaci\'on de la \cite{ODQNum}, hasta el 04 de Abril de 2017, se contabilizaron $18347$ objetos catalogados (Ver tabla \ref{tab:objpais}). Clasificados seg\'un sean: cargas \'utiles ({\it{payloads}}), cohetes ({\it{rocket bodies}}), desechos de misi\'on ({\it{mission-related bodies}}), desechos an\'omalos ({\it{anomalous debris}}) o desechos de fragmentaci\'on ({\it{breakup debris}}); ver figura \ref{fig:catxtipo}.\\
+
+\begin{table}
+ \centering
+ \begin{tabular}{|l|c|c|c|}
+  \hline \hline
+  \rowcolor{lightgray}
+  \bf{Pa\'is}  &    \bf{Cargas \'Utiles} & \bf{Cohetes y Desechos} & TOTAL\\
+  \hline \hline
+  China & 235 & 3566&3801\\
+  \hline
+  CIS & 1508&4993&6501\\
+  \hline
+  ESA &74&60&134\\
+  \hline
+  Francia & 62&470&532\\
+  \hline
+  India & 79 & 113 & 192\\
+  \hline
+  Jap\'on & 162 & 94 & 256\\
+  \hline
+  USA & 1513 & 4504 & 6017\\
+  \hline
+  Otros & 801 & 113 & 914 \\
+  \hline\hline
+  \rowcolor{lightgray}
+  TOTAL & 4434 & 13913 & 18347 \\
+  \hline\hline
+ \end{tabular}
+ \caption[Objetos en \'Orbita al 4 de Abril de 2017.]{Objetos en \'Orbita al 4 de Abril de 2017. Adatado de \cite{ODQN}}
+ \label{tab:objpais}
+\end{table}
 
 \begin{figure}[!h]
 \centering
-  \subfigure[Objetos en \'Orbita al 4 de Abril de 2017.]{
-    \includegraphics[width=0.35\columnwidth, keepaspectratio]{imagenes/catalogoXpais}
-    \label{fig:catxpais}
-  }
-  \subfigure[Porcentaje de Objetos en \'Orbita seg\'un su clasificaci\'on.]{
-    \includegraphics[width=0.5\columnwidth, keepaspectratio]{imagenes/clasificacion2016}
+    \fbox{\includegraphics[width=0.7\columnwidth, keepaspectratio]{imagenes/clasificacion2016}}
+    \caption[Objetos en \'Orbita seg\'un NASA.]{Porcentaje de Objetos en \'Orbita seg\'un la clasificaci\'on de NASA. Extra\'ido de \cite{ODQN}}
     \label{fig:catxtipo}
-  }
-  \caption[Objetos en \'Orbita]{Objetos que Orbitan la Tierra. Extra\'ido de \cite{ODQN}}
 \end{figure}
 
-Otra clasificac\'on podr\'ia ser por la altura, ya que la distribuci\'on no es homog\'enea. La relaci\'on entre la densidad de objetos y la altura a la que se encuentran, señala que existen regiones m\'as comprometidas.
-Las \'orbitas bajas o \ac{LEO} con un rango de alturas entre los 500 y los 2000 kil\'ometros, son las m\'as superpobladas y contienen casi el 70 \% de todos los objetos catalogados. Ver figura \ref{fig:Dvsaltura}
+Otra clasificac\'on podr\'ia ser en funci\'on de la altura, ya que la distribuci\'on no es homog\'enea. La relaci\'on entre la densidad de objetos y la altura a la que se encuentran, señala que existen regiones m\'as comprometidas.
+Las \'orbitas bajas o \ac{LEO} con un rango de alturas entre los 500 y los 2000 kil\'ometros, son las m\'as superpobladas y contienen casi el 70 \% de todos los objetos catalogados. 
+Cabe destacar que en esta regi\'on se ubican las misiones de la serie SAC de CONAE, las misiones futuras SAOCOM Y SABIAMAR. Ver figura \ref{fig:Dvsaltura}.\\
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.7\textwidth]{imagenes/SDvsaltura2011}
-  \caption[Distribuci\'on de objetos en funci\'on del semieje mayor.]{Distribuci\'on de objetos en funci\'on del semieje mayor. Adapatado de \citep{Klinkrad}}
+  \includegraphics[width=0.9\textwidth]{imagenes/SDvsaltura2011CONAE}
+  \caption[Distribuci\'on de objetos en funci\'on del semieje mayor.]{Distribuci\'on de objetos en funci\'on del semieje mayor en la regi\'on LEO. Adapatado de \citep{Klinkrad}. Se agregan en color azul las posiciones de las misiones de CONAE ya puestas en \'orbita (serie SAC) y en color naranja las posiciones de las futuras misiones SAOCOM y SABIAMAR}
   \label{fig:Dvsaltura}
 \end{figure}
 
-Si se mira hacia el futuro, las predicciones no parecen muy alentadoras. Si bien, los acuerdos internacionales en relaci\'on a acciones para reducir la proliferaci\'on de desechos avanzan y muestran buenos resultados, los proyectos de nuevas misiones tienden a aumentan el n\'umero de objetos, sobre todo en las \'orbitas bajas. Donde las colisiones pasar\'ian a ser las principales generadoras de desechos.\\
+Si se mira hacia el futuro, las predicciones no son alentadoras. Si bien, los acuerdos internacionales en relaci\'on a acciones para reducir la proliferaci\'on de desechos avanzan y muestran buenos resultados, los proyectos de nuevas misiones tienden a aumentan el n\'umero de objetos, sobre todo en las \'orbitas bajas. Donde las colisiones pasar\'ian a ser las principales generadoras de desechos.\\
 
 En un reporte t\'ecnico publicado por la NASA \citep{karacalioglu2016impact}, se eval\'uan las nuevas tendencias de la industria satelital y se analiza el futuro panorama del entorno espacial en las \'orbitas bajas, en funci\'on de los lanzamientos planificados y las misiones anunciadas, Fig. \ref{fig:satxlanz}.\\
 
-En los \'ultmos a\~nos se ha incrementado el n\'umero de agencias o empresas que se dedican al desarrollo espacial. El nuevo paradigma de constelaciones de peque\~nos sat\'elites, sistemas distribuidos o arquitecturas fragmentadas en reemplazo de los grandes y costosos sat\'elites tradicionales, ha permitido la democratizaci\'on del espacio, facilit\'andole el acceso a m\'as agencias y empresas.\\ 
+En los \'ultimos a\~nos se ha incrementado el n\'umero de agencias o empresas que se dedican al desarrollo espacial. El nuevo paradigma de constelaciones de peque\~nos sat\'elites, sistemas distribuidos o arquitecturas fragmentadas en reemplazo de los grandes y costosos sat\'elites tradicionales, ha permitido la democratizaci\'on del espacio, facilit\'andole el acceso a m\'as agencias y empresas.\\ 
 Un claro ejemplo son las constelaciones para comunicaciones anunciadas por OneWeb y SpaceX, que proyectan lanzar del orden de 600 sat\'elites cada una para fines del 2019.\\
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.6\textwidth]{imagenes/satelxlanz}
+  \includegraphics[width=0.7\textwidth]{imagenes/satelxlanz}
   \caption[Proyecci\'on de Sat\'elites 2016-2030]{Proyecci\'on de Sat\'elites 2016-2030. Extra\'ido de \citep{karacalioglu2016impact}}
   \label{fig:satxlanz}
 \end{figure}
 
-Estos sat\'elites aumentan la poblaci\'on de objetos en \'orbita durante su vida \'util pero, por sobre todo, dependiendo de sus caracter\'isticas, pueden permanecer en \'orbita inactivos por m\'as de 20 a\~nos si no se toman medidas de reingreso una vez finalizada su misi\'on.\\
-A su vez, aunque ya existen modelos experimentales y en desarrollo en lo que respecta a recuperar partes de los lanzadores, cada lanzamiento inyecta en \'orbita no s\'olo los sat\'elites sino tambi\'en las \'ultimas etapas de los cohetes {\it{rocket bodies}} Fig. \ref{fig:rocketbodies}.\\
+Estas futuras misiones, no s\'olo generan un aumento en la poblaci\'on espacial durante su vida \'util, sino que, una vez finalizada la misi\'on es importante definir acciones que remuevan esos objetos de la regi\'on de LEO; ya que dependiendo de sus caracter\'isticas, pueden permanecer en \'orbita inactivos por m\'as de 20 a\~nos.\\
+A su vez, aunque ya existen modelos experimentales y en desarrollo en lo que respecta a recuperar partes de los lanzadores, cada lanzamiento inyecta en \'orbita no s\'olo los sat\'elites sino tambi\'en las \'ultimas etapas de los cohetes lanzadores Fig. \ref{fig:rocketbodies}.\\
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.6\textwidth]{imagenes/rocketbodies}
+  \includegraphics[width=0.7\textwidth]{imagenes/rocketbodies}
   \caption[Fragmentos de Cohetes 2016-2030]{Fragmentos de Cohetes que permanecer\'an en \'orbita en el periodo 2016-2030. Extra\'ido de \cite{karacalioglu2016impact}}
   \label{fig:rocketbodies}
 \end{figure}
@@ -120,9 +167,9 @@ A su vez, aunque ya existen modelos experimentales y en desarrollo en lo que res
 
 La primera colisi\'on catastr\'ofica que se registra, sucedi\'o en el a\~no 2009, entre el sat\'elite ruso KOSMOS \- 2251 que hab\'ia quedado fuera de servicio y el sat\'elite operativo IRIDUM 33 de la constelaci\'on de IRIDIUM.\\
 
-El evento ocurri\'o a 790 kil\'ometros de altura y gener\'o m\'as de 2500 fragmentos, de los cuales, 500 a\'un permanecen en \'orbita. Este panorama, marc\'o la materializaci\'on de una situaci\'on que se preve\'ia que pod\'ia ocurrir y ofici\'o de catalizador de los estudios vinculados a la predicci\'on, an\'alisis y mitigaci\'on del riesgo de colisi\'on.\\
+El evento ocurri\'o a 790 kil\'ometros de altura y gener\'o m\'as de 2500 fragmentos, de los cuales, 500 a\'un permanecen en \'orbita. Este suceso, marc\'o la materializaci\'on de una situaci\'on que se preve\'ia que pod\'ia ocurrir y ofici\'o de catalizador de los estudios vinculados a la predicci\'on, an\'alisis y mitigaci\'on del riesgo de colisi\'on (Fig. \ref{fig:scopusCA}).\\
 
-De los distintos modelos de evoluci\'on y de las descripciones del ambiente espacial a trav\'es de los a\~nos, se distingue claramente como aumenta el n\'umero de desechos cuando ocurren colisiones significativas. As\'i puede apreciarse en la Fig. \ref{fig:cantidad2014}, donde la linea magenta que se\~nala los desechos producidos por fragmentaciones, sube abruptamente a comienzos del a\~no 2007 debido a la destrucci\'on intencional del sat\'elite chino Fengyun, en una prueba misil\'istica, y en 2009 con la colisi\'on entre el IRIDIUM 33 y el KOSMOS que mencion\'abamos m\'as arriba.\\
+De los distintos modelos de evoluci\'on y de las descripciones del ambiente espacial a trav\'es de los a\~nos, se distingue claramente, c\'omo aumenta el n\'umero de desechos cuando ocurren colisiones significativas. As\'i puede apreciarse en la Fig. \ref{fig:cantidad2014}, donde la curva magenta, que se\~nala los desechos producidos por fragmentaciones, sube abruptamente a comienzos del a\~no 2007 debido a la destrucci\'on intencional del sat\'elite chino Fengyun, en una prueba misil\'istica, y en 2009 con la colisi\'on entre el IRIDIUM 33 y el KOSMOS que mencion\'abamos m\'as arriba.\\
 
 \begin{figure}[!h]
   \centering
@@ -131,9 +178,9 @@ De los distintos modelos de evoluci\'on y de las descripciones del ambiente espa
   \label{fig:cantidad2014}
 \end{figure}
 
-A su vez, se prevee que a partir del incremento de objetos, en particular en las \'orbitas bajas, aumenten las colisiones, convirti\'endose las mismas, en las principales fuentes de generaci\'on de desechos.\\ 
+En esta problem\'atica, se produce una retroalimentaci\'on negativa, en donde, a partir del incremento de objetos, en particular en las \'orbitas LEO, aumentan las colisiones, convirti\'endose las mismas, a su vez, en las principales fuentes de generaci\'on de desechos.\\ 
 
-La Fig. \ref{fig:causadesechos} muestra el porcentaje del remanente de desechos producto de rupturas debido a diferentes causas, fue modific\'andose en los \'ultimos a\~nos. Las distintas pol\'iticas de mitigaci\'on en relaci\'on a explosiones intencionales, el remanente de combustibles, un enfoque m\'as profundo en el tratamiento de las bater\'ias y la protecci\'on de los materiales frente a impactos, han reducido el n\'umero de desechos producto de explosiones intencionales, explosiones generadas por los combustibles, las fallas de las bater\'ias y  las causas desconocidas. Mientras que los desechos generados por colisiones han aumentado.\\
+La Fig. \ref{fig:causadesechos} muestra que el porcentaje del remanente de desechos producto de rupturas debido a diferentes causas, fue modific\'andose en los \'ultimos a\~nos. Las distintas pol\'iticas de mitigaci\'on en relaci\'on a explosiones intencionales, restos de combustibles, el tratamiento de las bater\'ias y la protecci\'on de los materiales frente a impactos, han reducido el n\'umero de desechos asociados a estas cuestiones y a causas desconocidas; no obstante, los desechos generados por colisiones han aumentado.\\
 
 \begin{figure}[!h]
   \centering
@@ -142,12 +189,12 @@ La Fig. \ref{fig:causadesechos} muestra el porcentaje del remanente de desechos 
   \label{fig:causadesechos}
 \end{figure}
 
-Conclusiones similares se desprenden del estudio de \citep{karacalioglu2016impact}, cuyas simulaciones futuras se\~nalan que en los pr\'oximos a\~nos ser\'an las colisiones las que mayor n\'umero de desechos aporten al total de objetos que orbitan la Tierra en las \'orbitas bajas Fig. \ref{fig:debriscollision}\\
+Conclusiones similares se desprenden del estudio de Karacalioglu \citep{karacalioglu2016impact}, cuyas simulaciones futuras se\~nalan que en los pr\'oximos a\~nos ser\'an las colisiones las que mayor n\'umero de desechos aporten al total de objetos que orbitan la Tierra en las \'orbitas bajas Fig. \ref{fig:debriscollision}\\
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.7\textwidth]{imagenes/debriscollision}
-  \caption[N\'umero de Desechos en las \'orbitas LEO desde 2015 al 2065]{N\'umero de Desechos en las \'orbitas LEO desde 2015 al 2065. Extra\'ido de \citep{karacalioglu2016impact}}
+  \caption[N\'umero de Desechos en las \'orbitas LEO desde 2015 al 2065]{N\'umero de desechos mayores a 10 cm, en las \'orbitas LEO desde 2015 al 2065. La mayor cantidad de desechos en el futuro ser\'an generados producto de las colisiones (curva celeste). Extra\'ido de \citep{karacalioglu2016impact}}
   \label{fig:debriscollision}
 \end{figure}
 
@@ -170,14 +217,14 @@ part\'icula que genera el efecto & \\
 & * Corta ataduras, anclajes y cables.\\
 & * Penetraci\'on de las multicapas de aislaci\'on (MLI)\\
 & * Penetraci\'on de las paredes con grosores de 300 a 500 $\mu$m.\\
-& * Penetraci\'on de los tubos de calefacci\'on, \textcolor{red}{coolant loops} y radiadores.\\
+& * Penetraci\'on de los tubos de calefacci\'on y radiadores.\\
 & * Penetraci\'on de celdas solares.\\
 \hline 
 \multirow{ 5}{*}{1 mm }& * Cr\'ateres y perforaciones de 2 mm a 1 cm de di\'ametro\\
 & dependiendo del tipo del material y el grosor.\\
 & * Penetraci\'on de las paredes con grosores de 3-5 mm.\\
 & Da\~no del equipamiento detr\'as de las paredes.\\
-& *Penetraci\'on de tanques, \textcolor{red}{baffles, sun-shields} y cables externos.\\
+& *Penetraci\'on de tanques y cables externos.\\
 \hline
 \multirow{ 3}{*}{1 cm } & * Da\~no estructural y destrucci\'on de alguna parte impactada.\\
 & * Penetraci\'on de todas las capas\\ %, incluyendo modulos tripulados\\
@@ -190,7 +237,7 @@ part\'icula que genera el efecto & \\
 & y reingresar a la atmósfera, incluso alcanzando la superficie.\\
 \hline
 \end{tabular}
-\caption[Da\~no seg\'un el tama\~no del desecho.]{Da\~no seg\'un el tama\~no del desecho. Extra\'ido de IADC 08/03, Versi\'on 2.1, Abril 2013}
+\caption[Da\~no seg\'un el tama\~no del desecho.]{Da\~no producido por el impacto con un desecho, en funci\'on del tama\~no del desecho. Extra\'ido de IADC 08/03, Versi\'on 2.1, Abril 2013}
 \label{tamanioDanio}
 \end{table}
 
@@ -203,22 +250,23 @@ Un an\'alisis completo del Riesgo de Colisi\'on abarca, (Fig. \ref{fig:estudioco
 \item Identificar las situaciones de encuentro.
 \item Analizar la situaci\'on del encuentro.
 \item Ejecutar maniobras de mitigaci\'on del riesgo si fuera necesario.
-\item Iterar el proceso con minuciocidad para no ofrecer soluciones moment\'aneas que generen nuevos riesgos de colisi\'on.
+\item Iterar el proceso en forma minuciosa para no ofrecer soluciones moment\'aneas que generen nuevos riesgos de colisi\'on.
 \end{itemize}
 
-{\bf{Identificaci\'on de las situaciones de encuentro:}}\\
-A partir de los datos generados por las redes de rastreo (Ver \ref{subsec:redes}), se propagan las trayectorias orbitales y, bajo ciertos criterios definidos previamente, se detectan los acercamientos no deseados. En esta idea subyace la definici\'on de {\it{Encuentro}}.\\
+\subsubsection*{Identificaci\'on de las situaciones de encuentro:}
+A partir de los datos generados por las redes de rastreo (Sec.\ref{subsec:redes}), se propagan las trayectorias orbitales y, bajo ciertos criterios definidos previamente, se detectan los acercamientos no deseados.\\
+En esta idea subyace la definici\'on de {\it{Encuentro}}.\\
 Son pocos los organismos y agencias capaces de realizar este procedimiento, incorporando a sus predicciones todos los objetos catalogados y/o rastreados.\\
 En un formato m\'as simplificado, el inter\'es se enfoca en una misi\'on en particular y se desarrollan filtros, para procesar encuentros analizando una menor cantidad de objetos.\\
 
 
-{\bf{An\'alisis de la situaci\'on del encuentro: }}\\
-El mismo consiste en estudiar el encuentro con mayor profundidad y detalle, sumando informaci\'on m\'as confiable en la determinaci\'on orbital, y calculando par\'ametros estad\'isticos, como la Probabilidad de Colisi\'on (PoC).\\
+\subsubsection*{An\'alisis de la situaci\'on del encuentro: }
+El mismo consiste en estudiar el encuentro con mayor profundidad y detalle, sumando informaci\'on m\'as confiable en la determinaci\'on orbital, y calculando par\'ametros estad\'isticos, como la probabilidad de colisi\'on, \ac{PoC}.\\
 A medida que se aproxima la fecha en la que se predice el encuentro, se tiene mejor conocimiento de la \'orbita de los objetos involucrados, pero menor tiempo de reacci\'on en la toma de decisiones. Es decir, en el an\'alisis del encuentro se busca un balance entre los tiempos que conlleve el estudio para alcanzar la confiabilidad necesaria, y el margen que se requiere para, por ejemplo, planificar una maniobra.\\
 En este \'item en particular se enfoca este trabajo.\\
 
-{\bf{Realizaci\'on de una maniobra:}}\\
-Si la situaci\'on lo ameritara, la \'unica manera de evitar una colisi\'on es la {\bf{realizaci\'on de una maniobra}}, conocidas como Maniobras de Mitigaci\'on de Riesgo (RMM). No obstante, modificar la trayectoria de un objeto, siempre presupone una evaluaci\'on a priori de que no vaya a producirse una colisi\'on. De manera, que en este punto, se realizan propagaciones con las posiciones estimadas durante y luego de la maniobra, y se itera el proceso para estas nuevas posiciones contra el cat\'alogo de objetos.\\ 
+\subsubsection*{Realizaci\'on de una maniobra:}
+Si la situaci\'on lo ameritara, la \'unica manera de evitar una colisi\'on es la {\bf{realizaci\'on de una maniobra}}, conocidas como Maniobras de Mitigaci\'on de Riesgo o \ac{RMM}. No obstante, modificar la trayectoria de un objeto, siempre presupone una evaluaci\'on a priori de que no vaya a producirse una colisi\'on. De manera, que en este punto, se realizan propagaciones con las posiciones estimadas durante y luego de la maniobra, y se itera el proceso para estas nuevas posiciones contra el cat\'alogo de objetos.\\ 
 
 
 % La exitosa Misi\'on SAC-D/AQUARIUS de la CONAE en convenio con la \ac{NASA}, contabiliz\'o del orden de cinco RMM registradas, a lo largo de su vida \'util [10]. Mientras que la \ac{ISS} realiza casi una maniobra de riesgo de colisi\'on por año, dada su envergadura.\\
@@ -236,9 +284,9 @@ Si la situaci\'on lo ameritara, la \'unica manera de evitar una colisi\'on es la
 
 \subsection{Rastreo y cat\'alogos}\label{subsec:redes}
 
-En los catálogos actuales se registran objetos mayores a los 10 cm en las regiones LEO monitoreadas con radares, y mayores a 1 m en las órbitas GEO observadas con telescopios ópticos.\\
+En los catálogos actuales se registran objetos mayores a los 10 cent\'imetros en las regiones LEO monitoreadas con radares, y mayores a 1 metro en las \'orbitas \ac{GEO} observadas con telescopios \'opticos.\\
  
-La entidad militar US Strategic Command (USSTRATCOM) de EE.UU mantiene un catálogo con 18347 objetos conocidos (al 4 de Abril de 2017). Para su construcci\'on y mantenimiento, utiliza la Space Surveillance Network (SSN), Fig.\ref{fig:usnet}  que posee m\'as de 20 sensores civiles y militares a lo largo de todo el mundo.\\
+La entidad militar \ac{USSTRATCOM} de EE.UU mantiene un catálogo con 18347 objetos conocidos (al 4 de Abril de 2017). Para su construcci\'on y mantenimiento, utiliza la Space Surveillance Network (SSN), Fig.\ref{fig:usnet}  que posee m\'as de 20 sensores civiles y militares a lo largo de todo el mundo.\\
 
 \begin{figure}[!h]
   \centering
@@ -247,13 +295,13 @@ La entidad militar US Strategic Command (USSTRATCOM) de EE.UU mantiene un catál
   \label{fig:usnet}
 \end{figure}
 
-Rusia es la única nación, aparte de EE.UU, que cuenta con un sistema de rastreo que le proporciona una base de datos de objetos espaciales artificiales significativa y actualizada.\\
-A su vez, independiente del gobierno Ruso, el KIAM1 promueve la red internacional: International Scientific Optical Network (ISON), que ofrece uno de los programas coordinados de monitoreo de desechos más importante.
-La red cuenta con 30 telescopios en el rango de 0.5 a 2.6 m de diámetro, repartidos en 20 observatorios de 8 países en todo el mundo.\\
+Rusia es la \'unica naci\'on, aparte de EE.UU, que cuenta con un sistema de rastreo que le proporciona una base de datos de objetos espaciales artificiales significativa y actualizada.\\
+A su vez, independiente del gobierno Ruso, el KIAM promueve la red internacional: International Scientific Optical Network (ISON), que ofrece uno de los programas coordinados de monitoreo de desechos m\'as importante.
+La red cuenta con 30 telescopios en el rango de 0.5 a 2.6 metros de di\'ametro, repartidos en 20 observatorios de 8 pa\'ises en todo el mundo.\\
 
-Por su parte, la ESA inició programas de monitoreo hace ya varios años.\\
-En la actualidad predominan las investigaciones realizadas por las agencias espaciales: ASI (Italia), BSNC (UK), CNES (Francia), y DLR (Alemania), con el apoyo de la industria, institutos de investigación y universidades. En los últimos 10 años han estado trabajando en forma coordinada para implementar un Sistema Europeo de Vigilancia Espacial.
-A tal fin cuentan con varios telescopios ópticos como el Zeiss de 1 m de Tenerife, el Schimdt y Tarot en Francia, o los sensores PIMS (Passive Imaging Sensors) del Reino Unido, y con importantes radares, como el TIRA (Tracking and Imaging Radar) en Alemania, o los más modernos EISCAT Y EICAT 3D (European Incoherent Scatter Radar) que logran detecciones de objetos del orden de los centímetros a distancias de 800 km.
+Por su parte, la ESA inici\'o programas de monitoreo hace ya varios a\~nos.\\
+En la actualidad predominan las investigaciones realizadas por las agencias espaciales: ASI (Italia), BSNC (UK), CNES (Francia), y DLR (Alemania), con el apoyo de la industria, institutos de investigaci\'on y universidades. En los \'ultimos 10 a\~nos han estado trabajando en forma coordinada para implementar un Sistema Europeo de Vigilancia Espacial.
+A tal fin cuentan con varios telescopios \'opticos como el Zeiss de 1 metro de Tenerife, el Schimdt y Tarot en Francia, o los sensores PIMS (Passive Imaging Sensors) del Reino Unido, y con importantes radares, como el TIRA (Tracking and Imaging Radar) en Alemania, o los m\'as modernos EISCAT Y EICAT 3D (European Incoherent Scatter Radar) que logran detecciones de objetos del orden de los cent\'imetros a distancias de 800 kil\'ometros.
 
 
 % \begin{verbatim}
@@ -284,15 +332,16 @@ En lo que respecta a los l\'imites de este trabajo, podemos citar las siguientes
 \begin{itemize} 
 \item Convenio sobre Responsabilidad Internacional por da\~nos causados por objetos espaciales. ONU - (29-03-72)
 \item Ley 23.335 (19-08-86) - Arg. Suscribe al Convenio de ONU.
-\item Space Debris Mitigation Guidelines - IADC.
+\item Space Debris Mitigation Guidelines - \citep{IADC}
 \item ISO 24113:2011 {\it{Space Debris mitigation requirements.}}
 \item ISO/TR 16158:2013 {\it{Space Systems - Avoiding collision with orbiting objects.}}
 \item ISO 19389:2014 {\it{Space data and information transfer Systems.}} Conjunction Data Message: specifies a standard message format for use in exchanging spacecraft conjunction information between originators of Conjunction Assessments (CAs) and satellite owner/operators and other authorized parties.
 \item {\it{Guidelines for the long-term sustainability of outer space activities}}. Vienna, 8-17 de Junio de 2016.
+\item {\it{CCSDS 508.0-B-1, Conjunction Data Message Recommended Standard}} - \citep{CDM}
 \end{itemize}
 
 \section{Antecedentes}
-En este contexto, ya existen claros antecedentes que abordan la problem\'atica con sus respectivos soportes inform\'aticos. (ver tabla \ref{tab:sisal})
+En este contexto, ya existen claros antecedentes que abordan la problem\'atica con sus respectivos soportes inform\'aticos. Ver tabla \ref{tab:sisal}.
 \begin{table}[!h]
 \centering
 \begin{tabular}{|l|p{5cm}|p{6cm}|}
@@ -318,12 +367,12 @@ Espaciales (ESOC) - Darmstadt, Alemania. \cite{alarconRodriguez}\\
 \label{tab:sisal}
 \end{table}
 
-\section{La Unidad de Desechos Espaciales de la CONAE}
-De acuerdo con el Plan Nacional Espacial: {\bf{ Argentina en el Espacio 2004-2015}}, las misiones de la CONAE, fundamentalmente pensadas para observaci\'on de la Tierra, ocupan \'orbitas bajas de dise\~no estrat\'egico. Es decir, se ubican en regiones de mucha demanda y en consecuencia se encuentran expuestas a un alto riesgo de colisi\'on.\\
-En nuestro pa\'is, compete a la Unidad de Desechos Espaciales de la Secretaria General de la CONAE; quien tiene la facultad de mantener las relaciones con los organismos internacionales, garantizar que se cumplan los distintos convenios y acuerdos a los que Argentina ha adherido, como por ejemplo el {\it{Convenio sobre la Responsabilidad Internacional por da\~nos causados por objetos espaciales}}, suscripto por la Rep\'ublica Argentina el 29 de marzo de 1972. (LEY N 23.335, sancionada: Julio 30 de 1986 - promulgada: Agosto 19 de 1986.1).\\
+\section{La \ac{CONAE}}
+De acuerdo con el Plan Nacional Espacial: {\bf{ Argentina en el Espacio 2004-2015}}, las misiones de la CONAE, fundamentalmente pensadas para observaci\'on de la Tierra, ocupan \'orbitas bajas de dise\~no estrat\'egico \ref{fig:Dvsaltura}. Es decir, se ubican en regiones de mucha demanda y en consecuencia se encuentran expuestas a un alto riesgo de colisi\'on.\\
+En nuestro pa\'is, compete a la CONAE; quien tiene la facultad de mantener las relaciones con los organismos internacionales, garantizar que se cumplan los distintos convenios y acuerdos a los que Argentina ha adherido, como por ejemplo el {\it{Convenio sobre la Responsabilidad Internacional por da\~nos causados por objetos espaciales}}, suscrito por la Rep\'ublica Argentina el 29 de marzo de 1972. (LEY N 23.335, sancionada: Julio 30 de 1986 - promulgada: Agosto 19 de 1986.1).\\
 As\'i mismo, como miembro parte de la ONU, responde ante el COPUOS en materia de buenas pr\'acticas para la mitigaci\'on de la generaci\'on de desechos espaciales.\\
 
-Como ya mencionamos en la [Sec. \ref{subsec:redes}], las \'unicas naciones que cuentan con una red de rastreo con capacidad de detectar, rastrear y catalogar objetos son EE.UU y Rusia. De manera que Argentina planifica y ejecuta sus maniobras de riesgo (RMM) a partir de informaci\'on que le proveen servicios externos.\\
+Como ya mencionamos en la Sec. \ref{subsec:redes}, las \'unicas naciones que cuentan con una red de rastreo con capacidad de detectar, rastrear y catalogar objetos son EE.UU y Rusia. De manera que Argentina planifica y ejecuta sus maniobras de riesgo a partir de informaci\'on que le proveen servicios externos.\\
 
 \section{Planteo del Problema}
 
@@ -334,7 +383,7 @@ Es una de las situaciones que se aborda con mucha delicadeza dentro del \'area e
 
 Ofrecer un servicio que reemplace al que se utiliza actualmente en CONAE, es impensado y escapa por mucho a los alcances de este trabajo. No obstante, se ha desarrollado una herramienta que permite una clara caracterizaci\'on de la situaci\'on y un mayor conocimiento para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento. As\'i mismo, este trabajo,  se piensa como un planteo preliminar, con versatilidad para ser testeado, perfeccionado y ampliado a largo plazo.\\
 
-La herramienta ARxCODE para el An\'alisis de Riesgo por Colisi\'on con Desechos, que presentamos en esta tesis, consiste en un prototipo de software para ser montado sobre la estructura actual con la que cuenta el departamento de Din\'amica Orbital, y que pueda ser evaluado por operadores del sector con amplios conocimientos del area.\\
+La herramienta ARxCODE para el An\'alisis de Riesgo por Colisi\'on con Desechos, que presentamos en esta tesis, consiste en un prototipo de software para ser montado sobre la estructura actual con la que cuenta el departamento de Din\'amica Orbital, y que pueda ser evaluado por operadores del sector con amplios conocimientos del \'area.\\
 
 El mismo oficiar\'a de soporte al operador de din\'amica orbital, quien se encargar\'a de procesar la informaci\'on con las facilidades que ARxCODE provee y generar los reportes necesarios que faciliten el intercambio de informaci\'on y la toma de decisiones Fig. \ref{fig:arcodeInterface} \\ 
 
