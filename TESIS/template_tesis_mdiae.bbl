@@ -15,6 +15,11 @@
 {Brandon Rhodes}.
 \newblock sgp4-1.4.
 
+\bibitem[\protect\astroncite{Brouwer}{1959}]{brouwer1959solution}
+Brouwer, D. (1959).
+\newblock Solution of the problem of artificial satellite theory without drag.
+\newblock {\em The Astronomical Journal}, 64:378.
+
 \bibitem[\protect\astroncite{CCSDS}{2013}]{CDM}
 CCSDS (2013).
 \newblock {\em Conjunction Data Message - CCSDS 508.0-B-1 - Recommended
