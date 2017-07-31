@@ -5,25 +5,27 @@
 \contentsline {table}{\numberline {1.3}{\ignorespaces Da\~no seg\'un el tama\~no del desecho.}}{10}{table.caption.33}
 \contentsline {table}{\numberline {1.4}{\ignorespaces Sistemas de Alerta}}{14}{table.caption.43}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Tabla con los valores medios para la propagaci\'on de errores.}}{27}{table.caption.59}
-\contentsline {table}{\numberline {2.2}{\ignorespaces Trabajos sobre el c\'alculo de la PoC}}{29}{table.caption.62}
+\contentsline {table}{\numberline {2.1}{\ignorespaces Tabla con los valores medios para la propagaci\'on de errores.}}{27}{table.caption.60}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Trabajos sobre el c\'alculo de la PoC}}{29}{table.caption.63}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Tabla de Requerimientos}}{43}{table.caption.79}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Caso de Uso: Procesar Encuentro}}{46}{table.caption.83}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Tabla de Requerimientos}}{43}{table.caption.80}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Caso de Uso: Procesar Encuentro}}{46}{table.caption.84}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Resultados que genera ARxCODE utilizando la librer\'ia sgp4 de python para la propagaci\'on.\relax }}{56}{table.caption.109}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Resultados del Systems Tool Kit (STK) propagando el mismo TLE que ARxCODE.\relax }}{56}{table.caption.110}
-\contentsline {table}{\numberline {5.3}{\ignorespaces Sat\'elites de Estudio}}{57}{table.caption.111}
-\contentsline {table}{\numberline {5.4}{\ignorespaces Matriz de Covarianza de la Bibliograf\'ia \citep {osweiler} - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{57}{table.caption.113}
-\contentsline {table}{\numberline {5.5}{\ignorespaces Matriz de Covarianza que produce ARxCODE - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{57}{table.caption.113}
-\contentsline {table}{\numberline {5.6}{\ignorespaces Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler \citep {osweiler}\relax }}{57}{table.caption.114}
-\contentsline {table}{\numberline {5.7}{\ignorespaces Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{57}{table.caption.116}
-\contentsline {table}{\numberline {5.8}{\ignorespaces Matriz de Covarianza de la Bibliograf\'ia \citep {osweiler}- Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{57}{table.caption.116}
-\contentsline {table}{\numberline {5.9}{\ignorespaces Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler.\relax }}{57}{table.caption.117}
-\contentsline {table}{\numberline {5.10}{\ignorespaces Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los mails, propagando cada 1 segundo\relax }}{62}{table.caption.131}
-\contentsline {table}{\numberline {5.11}{\ignorespaces Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos\relax }}{63}{table.caption.132}
-\contentsline {table}{\numberline {5.12}{\ignorespaces Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los CDM, propagando cada 1 segundo\relax }}{64}{table.caption.136}
-\contentsline {table}{\numberline {5.13}{\ignorespaces Resultados que se obtienen con ARxCODE incorporando la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos\relax }}{64}{table.caption.137}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Resultados que genera ARxCODE utilizando la librer\'ia sgp4 de python para la propagaci\'on.\relax }}{57}{table.caption.111}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Resultados del Systems Tool Kit (STK) propagando el mismo TLE que ARxCODE.\relax }}{57}{table.caption.112}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Sat\'elites de Estudio}}{58}{table.caption.113}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Matriz de Covarianza de la Bibliograf\'ia \citep {osweiler} - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{58}{table.caption.115}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Matriz de Covarianza que produce ARxCODE - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{58}{table.caption.115}
+\contentsline {table}{\numberline {5.6}{\ignorespaces Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler \citep {osweiler}\relax }}{58}{table.caption.116}
+\contentsline {table}{\numberline {5.7}{\ignorespaces Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{58}{table.caption.118}
+\contentsline {table}{\numberline {5.8}{\ignorespaces Matriz de Covarianza de la Bibliograf\'ia \citep {osweiler}- Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{58}{table.caption.118}
+\contentsline {table}{\numberline {5.9}{\ignorespaces Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler.\relax }}{58}{table.caption.119}
+\contentsline {table}{\numberline {5.10}{\ignorespaces Valores Medios en la comparaci\'on de los resultados de la transformaci\'on de TEME a TOD de ARxCODE, con los resultados que ofrece el software STK. Propagaciones para todo el d\'ia 1 de Enero de 2013, con paso 1 minuto.\relax }}{61}{table.caption.125}
+\contentsline {table}{\numberline {5.11}{\ignorespaces Tabla con los valores medios para la propagaci\'on de errores.}}{62}{table.caption.129}
+\contentsline {table}{\numberline {5.12}{\ignorespaces Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los mails, propagando cada 1 segundo\relax }}{65}{table.caption.137}
+\contentsline {table}{\numberline {5.13}{\ignorespaces Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos\relax }}{66}{table.caption.138}
+\contentsline {table}{\numberline {5.14}{\ignorespaces Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los CDM, propagando cada 1 segundo\relax }}{67}{table.caption.142}
+\contentsline {table}{\numberline {5.15}{\ignorespaces Resultados que se obtienen con ARxCODE incorporando la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos\relax }}{67}{table.caption.143}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

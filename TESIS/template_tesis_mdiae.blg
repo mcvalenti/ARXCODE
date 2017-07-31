@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: template_tesis_mdiae.aux
 A level-1 auxiliary file: secciones/Resumen.aux
@@ -25,45 +25,45 @@ Warning--empty journal in karacalioglu2016impact
 Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty year in nasaprogramme
 Warning--empty publisher in osweiler
-You've used 25 entries,
+You've used 26 entries,
             1940 wiz_defined-function locations,
-            606 strings with 6786 characters,
-and the built_in function-call counts, 7736 in all, are:
-= -- 744
-> -- 232
+            613 strings with 6946 characters,
+and the built_in function-call counts, 8150 in all, are:
+= -- 785
+> -- 250
 < -- 25
-+ -- 81
-- -- 70
-* -- 592
-:= -- 1409
-add.period$ -- 71
-call.type$ -- 25
-change.case$ -- 156
-chr.to.int$ -- 22
-cite$ -- 31
-duplicate$ -- 333
-empty$ -- 564
-format.name$ -- 105
-if$ -- 1481
++ -- 87
+- -- 76
+* -- 633
+:= -- 1481
+add.period$ -- 74
+call.type$ -- 26
+change.case$ -- 164
+chr.to.int$ -- 23
+cite$ -- 32
+duplicate$ -- 347
+empty$ -- 592
+format.name$ -- 112
+if$ -- 1559
 int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 24
-newline$ -- 124
-num.names$ -- 75
-pop$ -- 139
+missing$ -- 25
+newline$ -- 129
+num.names$ -- 78
+pop$ -- 145
 preamble$ -- 1
-purify$ -- 160
+purify$ -- 168
 quote$ -- 0
-skip$ -- 258
+skip$ -- 268
 stack$ -- 0
-substring$ -- 448
-swap$ -- 53
+substring$ -- 479
+swap$ -- 55
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 138
+type$ -- 144
 warning$ -- 6
-while$ -- 59
+while$ -- 63
 width$ -- 0
-write$ -- 304
+write$ -- 317
 (There was 1 error message)

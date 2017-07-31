@@ -6,16 +6,20 @@
 
 import numpy as np
 
+
+u=np.sqrt(115)
+v=np.sqrt(517)
+w=np.sqrt(137)
 #a=[[1,2,3,4,5,6,7,8],[23,24,35,12,12,23,78,69],[233,254,345,112,112,223,718,649],[33,2,34,12,12,23,78,69]]
-a=np.matrix([[2,3,4,5]])
-# a=[2,3,1,4]
-# b=[3,2,1,4]
-# c=[4,5,6,4]
-#  
-sigma=3.99
-sigma_marce=0.42*0.42
-sigma_raiz=np.sqrt(sigma)
-print sigma_marce
+# a=np.matrix([[2,3,4,5]])
+# # a=[2,3,1,4]
+# # b=[3,2,1,4]
+# # c=[4,5,6,4]
+# #  
+# sigma=3.99
+# sigma_marce=0.42*0.42
+# sigma_raiz=np.sqrt(sigma)
+print u, v, w
 
 
 

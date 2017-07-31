@@ -13,46 +13,47 @@
 \contentsline {figure}{\numberline {1.11}{\ignorespaces USSTRATCOM - SSN}}{12}{figure.caption.41}
 \contentsline {figure}{\numberline {1.12}{\ignorespaces Interfaces del ARxCODE}}{16}{figure.caption.44}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Sistemas de Referencia centrados en el Sat\'elite}}{22}{figure.caption.52}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces M\'etodo de Osweiler para la generaci\'on de la matriz de covarianza}}{24}{figure.caption.55}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Descripci\'on del m\'etodo propuesto para la propagaci\'on de errores}}{26}{figure.caption.57}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Tabla de Estimaci\'on de errores.}}{26}{figure.caption.58}
-\contentsline {figure}{\numberline {2.5}{\ignorespaces Plano de Encuentro}}{30}{figure.caption.63}
-\contentsline {figure}{\numberline {2.6}{\ignorespaces M\'aximo acercamiento en \'orbitas circulares}}{31}{figure.caption.65}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{31}{figure.caption.66}
-\contentsline {figure}{\numberline {2.9}{\ignorespaces Proyecci\'on de los elipsoides de error al plano de encuentro}}{31}{figure.caption.66}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{36}{figure.caption.71}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{37}{figure.caption.73}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Sistemas de Referencia centrados en el Sat\'elite}}{22}{figure.caption.53}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces M\'etodo de Osweiler para la generaci\'on de la matriz de covarianza}}{24}{figure.caption.56}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Descripci\'on del m\'etodo propuesto para la propagaci\'on de errores}}{26}{figure.caption.58}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Tabla de Estimaci\'on de errores.}}{26}{figure.caption.59}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Plano de Encuentro}}{30}{figure.caption.64}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces M\'aximo acercamiento en \'orbitas circulares}}{31}{figure.caption.66}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{31}{figure.caption.67}
+\contentsline {figure}{\numberline {2.9}{\ignorespaces Proyecci\'on de los elipsoides de error al plano de encuentro}}{31}{figure.caption.67}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{36}{figure.caption.72}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{37}{figure.caption.74}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Interfaces del Sistema}}{44}{figure.caption.80}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{45}{figure.caption.81}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Casos de Uso de ARxCODE\relax }}{45}{figure.caption.82}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Componentes de ARxCODE\relax }}{47}{figure.caption.85}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Clases Tle y setTLE}}{48}{figure.caption.87}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{48}{figure.caption.87}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{48}{figure.caption.87}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Clases CDM y EphemCODS}}{49}{figure.caption.91}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{49}{figure.caption.91}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{49}{figure.caption.91}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Clase Encuentro}}{50}{figure.caption.96}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{52}{figure.caption.103}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Impresi\'on de la pantalla de inicio del ARxCODE\relax }}{53}{figure.caption.105}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Pantallas de Ingreso de Datos, ya sea selecci\'on del CDM o carga manual\relax }}{53}{figure.caption.106}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE}}}{53}{figure.caption.106}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE}}}{53}{figure.caption.106}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Vista con la carga del procesamiento manual.\relax }}{54}{figure.caption.107}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Vista con los resultados publicados y la incorporaci\'on de las trayectorias.\relax }}{54}{figure.caption.108}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Interfaces del Sistema}}{44}{figure.caption.81}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{45}{figure.caption.82}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Casos de Uso de ARxCODE\relax }}{45}{figure.caption.83}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Componentes de ARxCODE\relax }}{47}{figure.caption.86}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Clases Tle y setTLE}}{48}{figure.caption.88}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{48}{figure.caption.88}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{48}{figure.caption.88}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Clases CDM y EphemCODS}}{49}{figure.caption.92}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{49}{figure.caption.92}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{49}{figure.caption.92}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Clase Encuentro}}{50}{figure.caption.97}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{52}{figure.caption.104}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Impresi\'on de la pantalla de inicio del ARxCODE\relax }}{53}{figure.caption.106}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE.\relax }}{53}{figure.caption.107}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE\relax }}{54}{figure.caption.108}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Vista con la carga del procesamiento manual.\relax }}{54}{figure.caption.109}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Vista con los resultados publicados y la incorporaci\'on de las trayectorias.\relax }}{55}{figure.caption.110}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{58}{figure.caption.119}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{58}{figure.caption.119}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler}}}{58}{figure.caption.119}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{58}{figure.caption.120}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{58}{figure.caption.120}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler}}}{58}{figure.caption.120}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{60}{figure.caption.124}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Contenido de los mails utilizados para comparar los resultados.\relax }}{62}{figure.caption.130}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Tabla con las matrices de covarianza para la misi\'on y el desecho.\relax }}{63}{figure.caption.133}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{63}{figure.caption.135}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquematizaci\'on del algoritmo para comparar la propagaci\'on de cada TLE del set hacia fechas futuras de los TLE del set. Extra\'ido de \cite {osweiler}\relax }}{59}{figure.caption.121}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{59}{figure.caption.122}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{59}{figure.caption.122}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler}}}{59}{figure.caption.122}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{60}{figure.caption.123}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{60}{figure.caption.123}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler}}}{60}{figure.caption.123}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{62}{figure.caption.127}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces {\it {Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 01 de Enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de \cite {flohrer2008assessment}\relax }}{63}{figure.caption.130}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Contenido de los mails utilizados para comparar los resultados.\relax }}{65}{figure.caption.136}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Tabla con las matrices de covarianza para la misi\'on y el desecho.\relax }}{66}{figure.caption.139}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{66}{figure.caption.141}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

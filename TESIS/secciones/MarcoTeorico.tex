@@ -37,7 +37,7 @@ En nuestro planteo de riesgos de colisi\'on entre misiones operativas y desechos
 \subsection{La posici\'on de la misi\'on operativa}
 
 Con una misi\'on operativa se mantiene el contacto y se la puede comandar. Los sistemas de navegaci\'on abordo permiten un registro permanente de las posiciones y velocidades del sat\'elite. Esos registros se utilizan en los ajustes de los modelos de determinaci\'on orbital, que se realizan en procesamientos posteriores y se generan efem\'erides orbitales de mucha precisi\'on, cuyos errores resultan del propio procesamiento.\\
-Para este trabajo se tuvo acceso a los productos orbitales de una misi\'on operativa, cuyas efem\'erides se plasman en archivos de texto plano, tabuladas cada un segundo, en el sistema de referencia verdadero de la fecha TOD. Seg\'un se nos inform\'o, los mismos presentan errores del orden de  20 metros. (\textcolor{red}{comunicacion por mail}).\\
+Para este trabajo se tuvo acceso a los productos orbitales de una misi\'on operativa, cuyas efem\'erides se plasman en archivos de texto plano, tabuladas cada un segundo, en el sistema de referencia verdadero de la fecha TOD. Seg\'un se nos inform\'o, los mismos presentan errores del orden de  20 metros, (comunicaci\'on por mail).\\
 Estas {efem\'erides precisas y sus errores asociados, son las que deben utilizarse en los estudios de riesgo, no obstante, para las procesamientos de este trabajo, si bien fue posible contar con las efem\'erides precisas, no se tuvo acceso a datos de acercamientos de riesgos por motivos de confidencialidad. Raz\'on por la cual, las posiciones de todos los objetos se calcularon a partir de los TLE p\'ublicos y las efem\'erides precisa fueron utilizadas para el estudio de los errores de los TLE, en particular para la generaci\'on de la tabla con los valores estad\'isticos de las varianzas, que se utilizan para la propagaci\'on de errores al instante TCA, Sec. \ref{subsec:tablaprop}. \\
 
 \subsection{La posici\'on del desecho espacial}
@@ -115,7 +115,7 @@ El SGP4 es actualmente, el \'unico modelo para el mantenimiento del cat\'alogo d
 \subsubsection*{TEME}
  Es un sistema inercial con origen en el centro de la Tierra, que utiliza como plano fundamental el Ecuador Verdadero. El eje {\it{x}} se ubica en el plano del Ecuador Verdadero y apunta en la direcci\'on del Equinoccio Medio, el eje {\it{y}} tambi\'en se ubica sobre el plano ecuatorial a $90^{\circ}$ del eje {\it{x}}, y el eje {\it{z}} apunta en la direcci\'on del eje de rotaci\'on de la Tierra, perpendicular al plano ecuatorial. Sus siglas hacen referencia a un Ecuador Verdadero y un Equinoccio Medio o \ac{TEME}. Si bien no es un sistema convencional estandarizado, es el sistema que utiliza NORAD para la generaci\'on y propagaci\'on de los TLE, por lo que se encuentra ampliamente difundido.
  
-\subsubsection*{TOD}
+\subsubsection*{\ac{TOD}}
  Al igual que el TEME, es un sistema inercial definido con origen en el centro de la Tierra, con plano fundamental el Ecuador Verdadero. Su eje {\it{x}} tambi\'en yace sobre el plano ecuatorial pero se orienta en la direcci\'on del Equinoccio Verdadero (de la fecha).\\
  En el ap\'endice \ref{App1} se describe en forma detallada la transformaci\'on de coordenadas del sistema TEME al sistema TOD.
  
@@ -247,7 +247,7 @@ Luego se agrupan los valores seg\'un el intervalo de propagaci\'on, es decir, si
 \begin{tabular}{|l|c|c|c|}
 \hline \hline
 \rowcolor{yellow!35}
-&$\sigma_R [km]$ &$\sigma_T [km]$ &$\sigma_N [km]$\\
+&$\sigma^{2}_R [km]$ &$\sigma^{2}_T [km]$ &$\sigma^{2}_N [km]$\\
 \hline \hline
 < 1 d\'ia & 0.05287535953&0.5110606907&0.09802202353\\
 \hline
@@ -675,7 +675,7 @@ El XML del CDM, se agrupa como se muestra a continuaci\'on:
 
 
 \subsubsection*{Ejemplo de CDM}
-A continuaci\'on se muestra un fragmento de ejemplo de un CDM en formato XML. Un ejemplo completo se adjunta en el (\textcolor{red}{Ap\'endice}).\\
+A continuaci\'on se muestra un fragmento de ejemplo de un CDM en formato XML. Un ejemplo completo se adjunta en Ap\'endice \ref{App2}.\\
 
 \lstset{language=XML,basicstyle=\small}
 \begin{lstlisting}

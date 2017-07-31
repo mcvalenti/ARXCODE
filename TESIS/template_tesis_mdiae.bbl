@@ -37,6 +37,12 @@ ESA (2013).
 \newblock {Space Debris}.
 \newblock http://www.esa.int/Our\_Activities/Operations/Space\_Debris.
 
+\bibitem[\protect\astroncite{Flohrer et~al.}{2008}]{flohrer2008assessment}
+Flohrer, T., Krag, H., and Klinkrad, H. (2008).
+\newblock Assessment and categorization of tle orbit errors for the us ssn
+  catalogue.
+\newblock {\em risk}, 8(9):10--11.
+
 \bibitem[\protect\astroncite{Hoots and Roehrich}{1980a}]{hoots1980models}
 Hoots, F.~R. and Roehrich, R.~L. (1980a).
 \newblock Models for propagation of norad element sets.

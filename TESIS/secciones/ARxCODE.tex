@@ -26,7 +26,7 @@ Pensada con una filosof\'ia de expansi\'on y perfeccionamiento, su arquitectura 
 
 Se pretende que ARxCODE sea una herramienta que oficie de soporte al operador en el di\'alogo con los organismos internacionales que proveen los mensajes de alerta, frente a una situaci\'on de riesgo de colisi\'on. A tal fin, el sistema debe tener la capacidad de interpretar los mensajes estandarizados CDM y presentar la informaci\'on que all\'i se registra, en forma clara al operador.\\
 Por otro lado, debe tener la capacidad de colectar datos ingresados manualmente por el operador y ofrecer los par\'ametros que resulten del procesamiento propio del ARxCODE, como m\'inima distancia, TCA calculado y PoC.\\
-Esta \'ultima funcionalidad implica que ARxCODE debe poder solicitar a la p\'agina Space-Track los TLEs correspondientes a los objetos involucrados, debe poder estimar las matrices de covarianza de ambos objetos, ya sea mediante el m\'etodo de Osweiler o incorporando efem\'erides predichas del departamento de din\'amica orbital; debe poder propagar esos errores al momento del TCA y finalmente calcular la PoC, con un \textcolor{red}{error aceptable.}\\
+Esta \'ultima funcionalidad implica que ARxCODE debe poder solicitar a la p\'agina Space-Track los TLEs correspondientes a los objetos involucrados, debe poder estimar las matrices de covarianza de ambos objetos, ya sea mediante el m\'etodo de Osweiler o incorporando efem\'erides predichas del departamento de din\'amica orbital; debe poder propagar esos errores al momento del TCA y finalmente calcular la PoC.\\
 En la tabla \ref{tab:req}, se listan todos los requerimientos del sistema.\\
 
 \begin{table}[!h]\renewcommand{\arraystretch}{1.15}
@@ -366,23 +366,23 @@ Finalizada esta etapa de procesamiento y publicaci\'on de los datos por pantalla
 
 \begin{figure}[h!]
   \centering
-  \fbox{\includegraphics[width=0.7\textwidth]{imagenes/pantalla0}}
+  \fbox{\includegraphics[width=0.8\textwidth]{imagenes/pantalla0}}
   \caption{Impresi\'on de la pantalla de inicio del ARxCODE}
   \label{fig:pantInicio}
 \end{figure}
 
-
-\begin{figure}[!h]
-\centering
-  \subfigure[Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE]{
-    \fbox{\includegraphics[width=0.45\textwidth]{imagenes/pantalla1}}
-  }
-  \hspace{0.5cm}
-  \subfigure[Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE]{
-   \fbox{ \includegraphics[width=0.45\columnwidth, keepaspectratio]{imagenes/pantalla2}}
-  }
-  \caption{Pantallas de Ingreso de Datos, ya sea selecci\'on del CDM o carga manual}
+\begin{figure}[h!]
+  \centering
+  \fbox{\includegraphics[width=0.8\textwidth]{imagenes/pantalla1}}
+  \caption{Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE.}
   \label{fig:ingresadatosPant}
+\end{figure}
+
+\begin{figure}[h!]
+  \centering
+  \fbox{\includegraphics[width=0.8\textwidth]{imagenes/pantalla2}}
+  \caption{Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE}
+  \label{fig:ingresadatosPant1}
 \end{figure}
 
 \begin{figure}[h!]
