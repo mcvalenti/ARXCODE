@@ -2,23 +2,23 @@
 \label{chap:introduccion}
 
 
-\section{Los Desechos Espaciales}
+\section{Los desechos espaciales}
 
-El comienzo de la era satelital en el a\~no 1957 con el sat\'elite ruso Sputnik signific\'o la conquista de un nuevo espacio y un cambio de paradigma en lo que respecta a las tecnolog\'ias para las comunicaciones, los estudios de nuestro planeta, el sistema solar, las formas de navegar, de geoposicionarse y el intercambio de informaci\'on. Desde entonces el ambiente espacial cada vez suma m\'as colonos (Fig. \ref{fig:cantidad2014}).\\
+El comienzo de la era satelital en el a\~no 1957 con la puesta en \'orbita del sat\'elite ruso Sputnik signific\'o la conquista de un nuevo espacio y un cambio de paradigma en lo que respecta a las tecnolog\'ias para las comunicaciones, los estudios de nuestro planeta, el sistema solar, las formas de navegar, de geoposicionarse y el intercambio de informaci\'on. Desde entonces el ambiente espacial cada vez suma m\'as colonos (Fig. \ref{fig:cantidad2014}).\\
 
 Las experiencias de las primeras misiones aportaron mucho conocimiento de este entorno con caracter\'isticas muy distintas a las de la superficie de la Tierra y permitieron ir mejorando las t\'ecnicas y los materiales para que los sat\'elites cumplieran sus objetivos sin mayores inconvenientes.\\
 Sin embargo, un hecho poco predicho o abordado empez\'o a ocupar prioridad en las dos \'ultimas d\'ecadas: los {\it{desechos espaciales}}.\\
 
 {\bf{Definici\'on:}}{\it{ Son Desechos Espaciales todos los objetos construidos por el hombre, incluyendo fragmentos o partes de los mismos, que orbitan la Tierra o reingresan a la atm\'osfera y no son funcionales, es decir, han perdido su capacidad operativa.}} \citep{iadcguide}\\
 
-La ocupaci\'on del espacio parec\'ia ilimitada, y los primeros a\~nos no se ten\'ian consideraciones respecto a los objetos que all\'i se depositaban, o se desprend\'ian de los cohetes y las misiones. Pero con el correr del tiempo, ciertas regiones cobraron inter\' es estrat\'egico, y la superpoblaci\'on en dichas zonas no tard\'o en mostrar complicaciones.\\
+La disponibilidad del espacio parec\'ia ilimitada, y los primeros a\~nos no se ten\'ian consideraciones respecto a los objetos que all\'i se depositaban, o se desprend\'ian de los cohetes y las misiones. Pero con el correr del tiempo, ciertas regiones del espacio cobraron inter\' es estrat\'egico, y la superpoblaci\'on en dichas zonas no tard\'o en mostrar complicaciones.\\
 
 Los desechos representan hoy el mayor porcentaje de los objetos que orbitan la Tierra y los estudios de su proliferaci\'on, indican que, de no existir planes de acci\'on para subsanar la situaci\'on, el efecto de las colisiones en cascada transformar\'a el ambiente espacial en un lugar inhabitable para cualquier misi\'on.\\
 
-La primera colisi\'on confirmada y claramente registrada entre una misi\'on operativa y un desecho, ocurri\'o el 24 de Julio de 1996, cuando el sat\'elite franc\'es Cerise (95-033B) fue embestido por un fagmento (86-019RF), remanente de la explosi\'on de la \'ultima etapa del Ariane-1 H-10, ocurrida el 13 de noviembre de 1986; nueve meses despu\'es de inyectar en \'orbita al sat\'elite SPOT-1. La reconstrucci\'on de la situaci\'on luego de la colisi\'on, coincide plenamente con una p\'erida de la actitud del Cerise que fue registrada en los datos hist\'oricos abordo. \citep{KlinkradChapter8}\\
+La primera colisi\'on confirmada y claramente registrada entre una misi\'on operativa y un desecho, ocurri\'o el 24 de Julio de 1996, cuando el sat\'elite franc\'es Cerise (95-033B) fue embestido por un fragmento (86-019RF), remanente de la explosi\'on de la \'ultima etapa del cohete Ariane-1 H-10, ocurrida el 13 de noviembre de 1986; nueve meses despu\'es de inyectar en \'orbita al sat\'elite SPOT-1. La reconstrucci\'on de la situaci\'on luego de la colisi\'on, coincide plenamente con una p\'erdida de la actitud del Cerise que fue registrada en los datos hist\'oricos abordo. \citep{KlinkradChapter8}\\
 
 Este accidente fue un disparador en lo que respecta al estudio de los desechos espaciales y las colisiones. Las estad\'isticas de la base de datos de Scopus \footnote{https://www.scopus.com/}, indican que las investigaciones respecto a la tem\'atica de desechos espaciales en general muestran un continuo crecimiento, ver figura \ref{fig:scopusSD}.\\
-Lo mismo ocurre en la tem\'atica de colisiones (figura \ref{fig:scopusCA}), destac\'andose el gran escal\'on a partir del a\~no 1993 (Colisi\'on del sat\'elite Cerise), un pico a partir del a\~no 1998, probablemente vinculado al lanzamiento de la estaci\'on espacial internacional o \ac{ISS}, y luego un notorio crecimiento a partir del a\~no 2007, vinculado a dos sucesos: la destrucci\'on intencional de China de uno de sus sat\'elites en una prueba misil\'istica y la colisi\'on catastr\'ofica accidental entre el sat\'elite ruso KOSMOS 2251, fuera de servicio y el sat\'elite IRIDIUM 33, operativo, de la constelaci\'on de IRIDIUM, en el a\~no 2009.\\
+Lo mismo ocurre en la tem\'atica de colisiones (figura \ref{fig:scopusCA}), destac\'andose el gran escal\'on a partir del a\~no 1993 (colisi\'on del sat\'elite Cerise), un pico a partir del a\~no 1998, probablemente vinculado al lanzamiento de la estaci\'on espacial internacional o \ac{ISS}, y luego un notorio crecimiento a partir del a\~no 2007, vinculado a dos sucesos: la destrucci\'on intencional de China de uno de sus sat\'elites en una prueba misil\'istica y la colisi\'on catastr\'ofica accidental entre el sat\'elite ruso KOSMOS 2251, fuera de servicio y el sat\'elite IRIDIUM 33, operativo, de la constelaci\'on de IRIDIUM, en el a\~no 2009.\\
 
 
 \begin{figure}[!h]
@@ -37,7 +37,7 @@ Lo mismo ocurre en la tem\'atica de colisiones (figura \ref{fig:scopusCA}), dest
     \label{fig:scopusCA}
 \end{figure} 
 
-\subsection*{Distintos Abordajes para el estudio de los Desechos Espaciales}
+\subsection*{Distintos abordajes para el estudio de los desechos espaciales}
 Existen distintos estudios respecto a la problem\'atica de los desechos espaciales. La \ac{NASA} propone una clasificaci\'on general seg\'un sean estudios de: modelado, rastreo, protecci\'on, mitigaci\'on, reparaci\'on o reingreso.\\
 \begin{itemize}
 %\setlength{\itemsep}{0pt}
@@ -53,11 +53,11 @@ Organismos como el Centro Principal de Inteligencia Espacial Ruso, el Departamen
 
 Los modelos de evoluci\'on muestran la configuraci\'on actual y proyecciones de configuraciones futuras del ambiente espacial incluyendo todos los objetos que orbitan la Tierra.\\
 
-Los modelos de ingenier\'ia se enfocan en distintas pruebas de laboratorio o de misiones espec\'ificas en \'orbita, que testean la respuesta de los materiales cuando se exponen a impactos con fragmentos de distinto tipo, particularmente en aquellos de tama\~nos muy chicos pero que colisionan a velocidades del orden de diez kil\'ometros por segundo.\\
+Los modelos de ingenier\'ia se enfocan en distintas pruebas de laboratorio o de misiones espec\'ificas en \'orbita, que analizan la respuesta de los materiales cuando se exponen a impactos con fragmentos de distinto tipo, particularmente en aquellos de tama\~nos muy chicos pero que colisionan a velocidades del orden de diez kil\'ometros por segundo.\\
 
 En este trabajo nos enfocamos en el an\'alisis de las situaciones de riesgo de colisi\'on, dentro del marco de la {\it{mitigaci\'on}}, para las misiones y los desechos que se ubican en las  \ac{LEO}, u \'orbitas bajas.\\
 
-\subsection*{El entorno de los Desechos Espaciales: presente y futuro}
+\subsection*{El entorno de los desechos espaciales: presente y futuro}
 Seg\'un los informes de la \ac{ESA} \citep{esaSD}, desde 1957 hasta la actualidad, 5250 lanzamientos han poblado el ambiente espacial con casi 23000 objetos de los cuales, s\'olo cerca de 1200 son sat\'elites operativos.\\
 
 El \ac{IADC}, clasifica los desechos seg\'un sean: objetos relacionados a alguna misi\'on, Fragmentos, o cohetes y objetos que ya finalizaron su misi\'on. Ver tabla \ref{tab:desechosIADC}.\\
@@ -128,9 +128,9 @@ De a acuerdo a una publicaci\'on de la \cite{ODQNum}, hasta el 04 de Abril de 20
     \label{fig:catxtipo}
 \end{figure}
 
-Otra clasificac\'on podr\'ia ser en funci\'on de la altura, ya que la distribuci\'on no es homog\'enea. La relaci\'on entre la densidad de objetos y la altura a la que se encuentran, señala que existen regiones m\'as comprometidas.
+Otra clasificaci\'on podr\'ia ser en funci\'on de la distancia a la superficie de la Tierra, ya que la distribuci\'on no es homog\'enea. La relaci\'on entre la densidad de objetos y la altura a la que se encuentran, señala que existen regiones m\'as comprometidas.
 Las \'orbitas bajas o \ac{LEO} con un rango de alturas entre los 500 y los 2000 kil\'ometros, son las m\'as superpobladas y contienen casi el 70 \% de todos los objetos catalogados. 
-Cabe destacar que en esta regi\'on se ubican las misiones de la serie SAC de CONAE, las misiones futuras SAOCOM Y SABIAMAR. Ver figura \ref{fig:Dvsaltura}.\\
+Cabe destacar que en esta regi\'on se ubican las misiones de la serie SAC de la CONAE, las misiones futuras SAOCOM Y SABIAMAR. Ver figura \ref{fig:Dvsaltura}.\\
 
 \begin{figure}[!h]
   \centering
@@ -139,7 +139,7 @@ Cabe destacar que en esta regi\'on se ubican las misiones de la serie SAC de CON
   \label{fig:Dvsaltura}
 \end{figure}
 
-Si se mira hacia el futuro, las predicciones no son alentadoras. Si bien, los acuerdos internacionales en relaci\'on a acciones para reducir la proliferaci\'on de desechos avanzan y muestran buenos resultados, los proyectos de nuevas misiones tienden a aumentan el n\'umero de objetos, sobre todo en las \'orbitas bajas. Donde las colisiones pasar\'ian a ser las principales generadoras de desechos.\\
+Si se mira hacia el futuro, las predicciones no son alentadoras. Si bien, los acuerdos internacionales en relaci\'on a acciones para reducir la proliferaci\'on de desechos avanzan y muestran buenos resultados, los proyectos de nuevas misiones tienden a aumentar el n\'umero de objetos, sobre todo en las \'orbitas bajas. Para estas \'orbitas las colisiones pasar\'ian a ser las principales generadoras de desechos.\\
 
 En un reporte t\'ecnico publicado por la NASA \citep{karacalioglu2016impact}, se eval\'uan las nuevas tendencias de la industria satelital y se analiza el futuro panorama del entorno espacial en las \'orbitas bajas, en funci\'on de los lanzamientos planificados y las misiones anunciadas, Fig. \ref{fig:satxlanz}.\\
 
@@ -163,7 +163,7 @@ A su vez, aunque ya existen modelos experimentales y en desarrollo en lo que res
   \label{fig:rocketbodies}
 \end{figure}
 
-\section{El Riesgo de Colisi\'on}
+\section{El riesgo de colisi\'on}
 
 La primera colisi\'on catastr\'ofica que se registra, sucedi\'o en el a\~no 2009, entre el sat\'elite ruso KOSMOS \- 2251 que hab\'ia quedado fuera de servicio y el sat\'elite operativo IRIDUM 33 de la constelaci\'on de IRIDIUM.\\
 
@@ -243,7 +243,7 @@ part\'icula que genera el efecto & \\
 
 \subsection{El estudio del riesgo de colisi\'on}\label{subsec:estudiocolision}
 
-Un an\'alisis completo del Riesgo de Colisi\'on abarca, (Fig. \ref{fig:estudiocolision}):
+Un an\'alisis completo del riesgo de colisi\'on abarca, (Fig. \ref{fig:estudiocolision}):
 
 \begin{itemize}
 \setlength{\itemsep}{0pt}
@@ -286,7 +286,7 @@ Si la situaci\'on lo ameritara, la \'unica manera de evitar una colisi\'on es la
 
 En los catálogos actuales se registran objetos mayores a los 10 cent\'imetros en las regiones LEO monitoreadas con radares, y mayores a 1 metro en las \'orbitas \ac{GEO} observadas con telescopios \'opticos.\\
  
-La entidad militar \ac{USSTRATCOM} de EE.UU mantiene un catálogo con 18347 objetos conocidos (al 4 de Abril de 2017). Para su construcci\'on y mantenimiento, utiliza la Space Surveillance Network (SSN), Fig.\ref{fig:usnet}  que posee m\'as de 20 sensores civiles y militares a lo largo de todo el mundo.\\
+La entidad militar \ac{USSTRATCOM} de los Estados Unidos de Am\'erica (EE.UU) mantiene un catálogo con 18347 objetos conocidos (al 4 de Abril de 2017). Para su construcci\'on y mantenimiento, utiliza la Space Surveillance Network (SSN), Fig.\ref{fig:usnet}  que posee m\'as de 20 sensores civiles y militares a lo largo de todo el mundo.\\
 
 \begin{figure}[!h]
   \centering
@@ -295,12 +295,12 @@ La entidad militar \ac{USSTRATCOM} de EE.UU mantiene un catálogo con 18347 obje
   \label{fig:usnet}
 \end{figure}
 
-Rusia es la \'unica naci\'on, aparte de EE.UU, que cuenta con un sistema de rastreo que le proporciona una base de datos de objetos espaciales artificiales significativa y actualizada.\\
-A su vez, independiente del gobierno Ruso, el KIAM promueve la red internacional: International Scientific Optical Network (ISON), que ofrece uno de los programas coordinados de monitoreo de desechos m\'as importante.
+Rusia es la \'unica naci\'on, aparte de los EE.UU, que cuenta con un sistema de rastreo que le proporciona una base de datos de objetos espaciales artificiales significativa y actualizada.\\
+A su vez, independiente del gobierno Ruso, el Keldysh Institute of Applied Mathematics (KIAM) promueve la red internacional: International Scientific Optical Network (ISON), que ofrece uno de los programas coordinados de monitoreo de desechos m\'as importante.
 La red cuenta con 30 telescopios en el rango de 0.5 a 2.6 metros de di\'ametro, repartidos en 20 observatorios de 8 pa\'ises en todo el mundo.\\
 
 Por su parte, la ESA inici\'o programas de monitoreo hace ya varios a\~nos.\\
-En la actualidad predominan las investigaciones realizadas por las agencias espaciales: ASI (Italia), BSNC (UK), CNES (Francia), y DLR (Alemania), con el apoyo de la industria, institutos de investigaci\'on y universidades. En los \'ultimos 10 a\~nos han estado trabajando en forma coordinada para implementar un Sistema Europeo de Vigilancia Espacial.
+En la actualidad predominan las investigaciones realizadas por las agencias espaciales: la Agenzia Spaziale Italiana (ASI) de Italia, el  British National Space Centre (BNSC) de  Inglaterra, CNES (Francia), y DLR (Alemania), con el apoyo de la industria, institutos de investigaci\'on y universidades. En los \'ultimos 10 a\~nos han estado trabajando en forma coordinada para implementar un Sistema Europeo de Vigilancia Espacial.
 A tal fin cuentan con varios telescopios \'opticos como el Zeiss de 1 metro de Tenerife, el Schimdt y Tarot en Francia, o los sensores PIMS (Passive Imaging Sensors) del Reino Unido, y con importantes radares, como el TIRA (Tracking and Imaging Radar) en Alemania, o los m\'as modernos EISCAT Y EICAT 3D (European Incoherent Scatter Radar) que logran detecciones de objetos del orden de los cent\'imetros a distancias de 800 kil\'ometros.
 
 
@@ -379,7 +379,7 @@ Como se indica en la Sec. \ref{subsec:redes}, las \'unicas naciones que cuentan 
 El desfavorable panorama futuro en materia de colisiones en \'orbita, obliga a los centros de operaciones a incorporar procedimientos y soportes, para la gesti\'on, el an\'alisis y la prevenci\'on de las colisiones.\\
 Dependiendo de las distintas capacidades con que cuentan las agencias, estos sistemas incluyen desde: redes o instrumentos espec\'ificos de rastreo propios, cat\'alogos completos de los objetos capaces de ser rastreados, sistemas de detecci\'on anticipada de acercamientos de riesgo, sistemas de an\'alisis de situaciones de riesgo alertadas por agentes externos o contrataci\'on de servicios externos que resuelven la totalidad del an\'alisis incluyendo la sugerencia de las maniobras pertinentes.\\
 
-Es una de las situaciones que se aborda con mucha delicadeza dentro del \'area espacial y dado el nivel de riesgo que implica, la CONAE contrata un servicio de asesoramiento y control para la planificaci\'on de las operaciones vinculadas al alerta por colisi\'on.\\
+El riesgo de colisi\'on se aborda con mucha delicadeza dentro del \'area espacial y dado el nivel de da\~no que representa, la CONAE contrata un servicio de asesoramiento y control para la planificaci\'on de las operaciones vinculadas a los alertas por colisiones.\\
 
 Ofrecer un servicio que reemplace al que se utiliza actualmente en CONAE, es impensado y escapa por mucho a los alcances de este trabajo. No obstante, se ha desarrollado una herramienta que permite una clara caracterizaci\'on de la situaci\'on y un mayor conocimiento para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento. As\'i mismo, este trabajo,  se piensa como un planteo preliminar, con versatilidad para ser testeado, perfeccionado y ampliado a largo plazo.\\
 
