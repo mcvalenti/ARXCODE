@@ -6,13 +6,13 @@
 \section{Introducci\'on}
 En este cap\'itulo se presentan los distintos escenarios que fueron planteados para la validaci\'on de los procesos.\\
 Dado que para la metodolog\'ia de estimaci\'on de errores que proponemos, utilizamos datos reales de una misi\'on operativa argentina, hubiera sido
-deseable contar con datos de alertas de colisiones reales propios de esa misi\'on, ya que esto hubiera permitido hacer una validaci\'on end-to-end de todo el prototipo. No obstante, por cuestiones de confidencialidad y pol\'iticas que fueron modific\'andose, no fue posible tener acceso a esa informaci\'on.\\
+deseable contar con datos de alertas de colisiones reales propios de esa misi\'on, ya que esto hubiera permitido hacer una validaci\'on end-to-end de todo el prototipo. No obstante, por cuestiones de confidencialidad, no fue posible tener acceso a esa informaci\'on.\\
 Frente a este panorama, se detalla a continuaci\'on la secuencia de etapas de validaci\'on que permiten evaluar, cada una de las instancias del procesamiento.\\
 
 En primer lugar fue fundamental corroborar las propagaciones de los TLE realizadas con la librer\'ia de python {\it{sgp4-1}} \citep{sgp4python}, para ello utilizamos la versi\'on de prueba que ofrece el software STK: {\it{System Tool Kit}} de \cite{stk}\\
 Para la validaci\'on de los resultados de la implementaci\'on del m\'etodo de Osweiler en la generaci\'on de matrices de covarianza, se compararon los resultados de ARxCODE para dos de los escenarios que se publican en el trabajo.\\
 
-El m\'etodo que se propone para la estimaci\'on de la propagaci\'on de errores, es el que m\'as dificultades present\'o para ser validado. Al basarse plenamente en los datos de la misi\'on cuyos resultados de colisi\'on de alerta no fueron suministrados, fue analizado en comparaci\'on con resultados estad\'isticos globales, o sobre el estudio de encuentros de otras misiones.\\
+El m\'etodo que se propone para la estimaci\'on de la propagaci\'on de errores, es el que m\'as dificultades present\'o para ser validado. Al basarse plenamente en los datos de la misi\'on cuyos resultados de colisi\'on de alerta no pudieron ser suministrados, fue analizado en comparaci\'on con resultados estad\'isticos globales, o sobre el estudio de encuentros de otras misiones.\\
 
 Finalmente la implementaci\'on del c\'alculo de probabilidad de colisi\'on fue evaluado a partir de la recopilaci\'on de bibliograf\'ia con datos de encuentros anteriores.\\
 
@@ -203,7 +203,7 @@ En particular LAGEOS muestra errores menores que ICESAT, ya que al ser un sat\'e
 \subsection*{Diferencias de los escenarios iterando el TLE primario en el m\'etodo de Osweiler}
 Estudio hecho sobre los errores que se producen en las propagaciones de los TLE en funci\'on de la cantidad de d\'ias que se propaguen.\\
 Estos resultados ofrecen mayor informaci\'on respecto a los errores que se comenten en funci\'on de la cantidad de d\'ias que se propagan los TLE.\\
-Para la generaci\'on de los datos, se propagaron todos los TLE del set hacia las fechas de todos los TLE con fechas m\'as actualizadas, dentro del set, Fig. \ref{fig:todosOSW}. Las diferencias que resultaron se plasman en funci\'on del intervalo de propagaci\'on, en las Fig. \ref{fig:icesatTot} y Fig. \ref{fig:lageosTot} para el ICESAT y el LAGEOS respectivamente. 
+Para la generaci\'on de los datos, se propagaron todos los TLE del conjunto hacia las fechas de todos los TLE con fechas m\'as actualizadas, dentro del conjunto, Fig. \ref{fig:todosOSW}. Las diferencias que resultaron se plasman en funci\'on del intervalo de propagaci\'on, en las Fig. \ref{fig:icesatTot} y Fig. \ref{fig:lageosTot} para el ICESAT y el LAGEOS respectivamente. 
 
 
 \begin{figure}[!h]
@@ -283,7 +283,7 @@ Las comparaciones de las propagaciones de los TLE mostraron significativas aleat
 
 \subsection*{Generaci\'on de la tabla de propagaci\'on de errores}
 
-Como se explic\' en la Sec. \ref{subsec:errorProp}, para estimar los errores en la propagaci\'on se propone un m\'etodo que utiliza una tabla generada a partir de la estad\'istica que resulta de comparar las propagaciones de los TLE de la misi\'on operativa, con las efem\'erides precisas. Las comparaciones se hacen en el periodo de Enero a Junio del a\~no 2013, en intervalos de 1 a 6 d\'ias, con paso 1 segundo.\\
+Como se explic\'o en la Sec. \ref{subsec:errorProp}, para estimar los errores en la propagaci\'on se propone un m\'etodo que utiliza una tabla generada a partir de la estad\'istica que resulta de comparar las propagaciones de los TLE de la misi\'on operativa, con las efem\'erides precisas. Las comparaciones se hacen en el periodo de Enero a Junio del a\~no 2013, en intervalos de 1 a 6 d\'ias, con paso 1 segundo.\\
 Los resultados que se encuentran, no es posible validarlos directamente. No obstante, son comparables a los que proponen \cite{flohrer2008assessment}, en la {\it{lookup table}} generada considerando todos los objetos del cat\'alogo al 01 de Enero de 2008, ver Fig. \ref{fig:flohrer}. Los valores de las desviaciones est\'andar que resultan del m\'etodo propuesto son menores casi en un orden de magnitud a las tablas gen\'ericas que publican \cite{flohrer2008assessment}, esto es de esperar, ya que los estudios de la publicaci\'on son m\'as abarcativos y gen\'ericos.\\
 
 \begin{table}[!h]
@@ -421,15 +421,15 @@ ARxCODE & 0.031797& 0.462295 &0.522013
 Estos resultados se logran en una transformaci\'on en la que se considere al Obj2 como origen de la referencia. Los mismos muestran una coincidencia del orden de las decenas de metros, aceptable para estas estimaciones.\\
 No obstante, contando s\'olo con la informaci\'on de los vectores de posici\'on al momento del m\'aximo acercamiento, no es posible verificar el m\'etodo de Osweiler de la construcci\'on de la matriz de covarianza para este ejemplo de la bibliograf\'ia.\\
 
-Bien, hasta ac\'a hemos ido validando cada uno de los procesos por separado.\\
+Hasta este punto, se han ido validando cada uno de los procesos por separado.\\
 Resta hacer pruebas desde el origen, es decir a partir de identificar los objetos y el TCA, correr los procesamientos de ARxCODE y obtener los resultados de la PoC.\\
 A tal fin, fue necesario conseguir registros que contuvieran la informaci\'on completa de una situaci\'on de encuentro.\\
 Esto no fue posible en su totalidad. Por un lado tuvimos acceso a mails de alerta p\'ublicos en internet, y por otro a CDM tambi\'en p\'ublicos\footnote{https://cwe.ccsds.org/moims/docs/Forms/AllItems.aspx?RootFolder=\%2Fmoims\%2Fdocs\%2FMOIMS-NAV\%2FDraft\%20Documents\%2FConjunction\%20Data\%20Message\%20\%28CDM\%29}, pero ninguno de esos datos se corresponden con la misi\'on operativa, cuyas efem\'erides precisas analizamos y utilizamos en la construcci\'on del modelo estad\'istico de propagaci\'on de errores.\\
 As\'i mismo, ni los mails encontrados ni los CDM descargados, contienen informaci\'on de la PoC asociada al encuentro. \\
 
-\subsubsection*{Validaci\'on con Mails de alerta p\'ublicos}
+\subsubsection*{Validaci\'on con correos electr\'onicos de alerta p\'ublicos}
 
-Formato de los mails:\\
+Formato de los correos electr\'onicos:\\
 \begin{center}
 \fbox{\parbox[b]{0.8\linewidth}{
 The United States Joint Space Operations Center (JSpOC) has identified a\\
@@ -454,14 +454,14 @@ Secondary Cross-track Error (W): 2 meters\\
 }}
 \end{center}
 
-{\bf{Nota:}} Los mails no informan los segundos del TCA. Fue necesario primero hacer una primera estimaci\'on m\'as precisa del TCA del encuetnro y luego volver a procesar incorporando los segundos. 
+{\bf{Nota:}} Los los correos electr\'onicos no informan los segundos del TCA. Fue necesario primero hacer una primera estimaci\'on m\'as precisa del TCA del encuetnro y luego volver a procesar incorporando los segundos. 
 
 Listado de Mails analizados:\\
 
 \begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{imagenes/tablamails}}
-  \caption{Contenido de los mails utilizados para comparar los resultados.}
+  \caption{Contenido de los correos electr\'onicos utilizados para comparar los resultados.}
   \label{fig:tablamails}
 \end{figure}
 
@@ -483,7 +483,7 @@ Valores de ARxCODE:\\
  5 & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx \\
  \hline
 \end{tabular} }
-\caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los mails, propagando cada 1 segundo}
+\caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los correos electr\'onicos, propagando cada 1 segundo}
 \end{table}
 
 
@@ -504,7 +504,7 @@ Valores de ARxCODE:\\
  5 & 2013-05-02 17:12:02.9 & 20.173626 & 504.135854 & 146.837803 & 525.47243 & 0.0\\
  \hline
 \end{tabular} }
-\caption{Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos}
+\caption{Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los correos electr\'onicos, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos}
 \end{table}
 
 Las matrices de covarianza no mejoran. Ver tabla \ref{fig:tablaMAmails}
@@ -581,6 +581,6 @@ Las matrices de covarianza no mejoran. Ver tabla \ref{fig:tablaMAmails}
   \item La metodolog\'ia utilizada para estimar errores en la propagaci\'on, mostr\'o resultados comparables y a\'un mejores que los propuestos por \cite{flohrer2008assessment}.
   \item Las transformaciones al sistema de referencia RTN tienen diferencias del orden de las decenas de metros con las publicadas en el ejemplo de Lei-Chen.\\
   \item No se cuenta con datos para poder validar las proyecciones de la posici\'on relativa y la matriz de covarianza al plano de encuentro.\\
-  \item Se utilizaron mails de alertas y CDM que son p\'ublicos en internet para validar las diferencias que se obtienen entre las distancias m\'inimas que estos datos contienen y las distancias m\'inimas calculadas por ARxCODE. Las diferencias resultan muy notorias en la primera instanca en la que se itera con paso un segundo, pero mejoran significativamente reduciendo el paso de integraci\'on a las de\'ecimas de segundos. No obstante, desconociendo el origen de los mails y los CDM, no todo puede atribuirse al procesamiento de ARxCODE.\\
-  \item Utilizando los mismos mails y CDM se calculan las probabilidades de colisi\'on con ARxCODE, aunque el resultado no puede compararse, ya que ni los mails, ni los CDM que se obtuvieron contienen esa informaci\'on. Los valores asociados a los mails (que son los que cuentan con mayor diferencia en las m\'inimas distancias) dan siempre nulos en las propagaciones con pasos del segundo, y algunos resultados mejoran al achicar el paso. En cambio, en los resultados asociados a los CDM se encuentran valores aceptables en ambos casos, aunque mejores para las iteraciones menores al segundo.\\
+  \item Se utilizaron correos electr\'onicos de alertas y CDM que son p\'ublicos en internet para validar las diferencias que se obtienen entre las distancias m\'inimas que estos datos contienen y las distancias m\'inimas calculadas por ARxCODE. Las diferencias resultan muy notorias en la primera instanca en la que se itera con paso un segundo, pero mejoran significativamente reduciendo el paso de integraci\'on a las d\'ecimas de segundos. No obstante, desconociendo el origen de los correos electr\'onicos y los CDM, no todo puede atribuirse al procesamiento de ARxCODE.\\
+  \item Utilizando los mismos correos electr\'onicos y CDM se calculan las probabilidades de colisi\'on con ARxCODE, aunque el resultado no puede compararse, ya que ni los correos electr\'onicos, ni los CDM que se obtuvieron contienen esa informaci\'on. Los valores asociados a los correos electr\'onicos (que son los que cuentan con mayor diferencia en las m\'inimas distancias) dan siempre nulos en las propagaciones con pasos del segundo, y algunos resultados mejoran al achicar el paso. En cambio, en los resultados asociados a los CDM se encuentran valores aceptables en ambos casos, aunque mejores para las iteraciones menores al segundo.\\
  \end{itemize}

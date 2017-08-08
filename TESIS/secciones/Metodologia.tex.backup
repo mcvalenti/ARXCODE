@@ -8,14 +8,14 @@ En cada iteraci\'on, se optimiz\'o el dise\~no y se fueron agregando nuevas func
 El problema que se propone resolver, requiere de la implementaci\'on de distintos algoritmos en una estructura en donde los resultados de un m\'odulo se utilizan en el siguiente. Esto implica que para un an\'alisis completo cada una de las instancias debi\'o estar previamente validada.\\
 No obstante, las salidas de los m\'odulos que eran ingesta de otros m\'odulos pod\'ian reemplazarse por datos ya conocidos, y as\'i desarrollar y validar el m\'odulo siguiente, mientras se analizaba en paralelo c\'omo mejorar o corregir los resultados no satisfactorios. De esta manera se fue armando el cuerpo general del software a gran escala, y luego se fue revisando y afinando cada uno de los paquetes.\\
 
-Esta forma de trabajo permiti\'o separar la complejidad del proyecto, y a su vez, desarrollar un conjunto de bibliotecas f\'acilmente modificables, sin alterar la estructura central.\\
+Esta forma de trabajo permiti\'o dividir la complejidad del proyecto, y a su vez, desarrollar un conjunto de bibliotecas f\'acilmente modificables, sin alterar la estructura central.\\
 
 \section{Inicializaci\'on}
-En esta primera etapa se evalu\'o  el concepto del ARxCODE en el contexto de la Unidad de Desarrollo de Desechos Espaciales de CONAE. Fundamentalmente la vinculaci\'on con el departamento de Din\'amica Orbital y los procedimientos actuales que se realizan en relaci\'on a los riesgos de colisi\'on con desechos.
+En esta primera etapa se evalu\'o  el concepto del ARxCODE en el contexto de la Unidad de Desarrollo de Desechos Espaciales de la CONAE. Fundamentalmente la vinculaci\'on con el departamento de Din\'amica Orbital y los procedimientos actuales que se realizan en relaci\'on a los riesgos de colisi\'on con desechos.
 
-Se hizo un estudio de las estructuras org\'anicas existentes y los sistemas asociados. Los distintos tipos de productos y usuarios, las interfaces que existen y el acceso a los datos reales con los que podr\'ia contar.\\
+Se hizo un estudio de las estructuras org\'anicas existentes y los sistemas asociados. Los distintos tipos de productos y usuarios, las interfaces que existen y el acceso a los datos reales con los que se  podr\'ia contar.\\
 
-Se anliz\'o c\'omo trabajan otras agencias espaciales la tem\'atica y se sacaron conclusiones respecto de qu\'e es lo que podr\'ia ofrecerse y bajo qu\'e premisas.\\
+Se analiz\'o c\'omo trabajan otras agencias espaciales el problema de los desechos espaciales y se sacaron conclusiones respecto de qu\'e es lo que podr\'ia ofrecerse y bajo qu\'e premisas.\\
 De las consideraciones m\'as importantes que se desprendieron de esta etapa, cabe destacar que se decidi\'o un prototipo para funcionar montado sobre el software principal de Din\'amica Orbital, como un anexo que no interfiere de ninguna manera con los procesos actuales.\\
 Por otro lado, debido a la complejidad del problema y sus consecuencias, ser\'a un software diseñado para ser utilizado por un analista experto, con conocimientos de Din\'amica Orbital.\\
 En el mismo sentido, sus productos finales no ser\'an considerados en la toma de decisiones hasta tanto sus resultados no hayan sido validados durante un periodo suficiente, que permita verificar y mejorar su funcionamiento, contrast\'andolo con un acumulado de situaciones reales.\\
@@ -23,9 +23,9 @@ En el mismo sentido, sus productos finales no ser\'an considerados en la toma de
 Para este planteo de definiciones, se cont\'o con el asesoramiento y el intercambio de informaci\'on con personas de Din\'amica Orbital y otros departamentos de CONAE. Se realizaron algunas reuniones e intercambio de mails, aunque por ser una tem\'atica que se aborda bajo reg\'imenes especiales de acuerdos de confidencialidad, no fue posible contar con la totalidad de la informaci\'on.
 
 \section{Iteraci\'on}
-Ya conocido el planteo del problema, las distintas maneras de abordarlo y las restricciones que resultan, elaboramos un diseño preliminar del producto con sus requerimientos (Sec. \ref{sec:requerimientos}) y sus funcionalidades, que dadas las caracter\'isticas del problema resultan bastante deterministas.\\
+Ya conocido el planteo del problema, las distintas maneras de abordarlo y las restricciones, se elabor\'o un diseño preliminar del producto con sus requerimientos (Sec. \ref{sec:requerimientos}) y sus funcionalidades, que dadas las caracter\'isticas del problema result\'o bastante determinista.\\
 
-Para el desarrollo definimos distintos paquetes o componentes (Sec. \ref{subsec:componentes}):\\
+Para el desarrollo se definieron distintos paquetes o componentes (Sec. \ref{subsec:componentes}):\\
 
 \begin{itemize}
 \itemsep0em
@@ -35,34 +35,32 @@ Para el desarrollo definimos distintos paquetes o componentes (Sec. \ref{subsec:
  \item Paquetes de visualizaci\'on e interfaz gr\'afica: {\it{Aplicaci\'on}}, {\it{visual}}.
 \end{itemize}
 
-Esta metodolog\'ia nos permiti\'o importar funciones que resuelven cuestiones espec\'ificas desde cualquier  m\'odulo y a su vez modificar las funciones cuando fuera necesario.\\
-Cuando empezamos con el diseño y el desarrollo de la interfaz, fuimos modificando mucho las opciones, en tanto utilizamos la interfaz para seguimiento de pasos intermedios que a medida que iban siendo validados se iban retirando de las opciones del usuario.\\
+Esta metodolog\'ia permiti\'o importar funciones que resuelven cuestiones espec\'ificas desde cualquier  m\'odulo y a su vez modificar las funciones cuando fuera necesario.\\
+Durante el diseño y el desarrollo de la interfaz, se fueron modificando mucho las opciones, en tanto se utiliz\'o la interfaz para seguimiento de pasos intermedios que a medida que iban siendo validados se iban retirando de las opciones del usuario.\\
 
 \section{Control}
-Al tratarse de un sistema que implementa distintas metodolog\'ias para el c\'alculo de par\'ametros, el control se bas\'o en analizar que los resultados de los algoritmos implementados fueran coherentes y coincidieran con los que exist\'ian en publicaciones que pudi\'eramos reproducir.\\
-Fue fundamental implementar un control sobre la implementaci\'on de la solicitud y propagaci\'on de los datos TLE y sobre los algoritmos de transformaci\'on de coordenadas.\\
+Al tratarse de un sistema que implementa distintas metodolog\'ias para el c\'alculo de par\'ametros, el control se bas\'o en analizar que los resultados de los algoritmos implementados fueran coherentes y coincidieran con los que exist\'ian en publicaciones bibliogr\'aficas que se pod\'ian reproducir.\\
+Fue fundamental implementar un control sobre la implementaci\'on de la solicitud a NORAD y la propagaci\'on de los TLE y sobre los algoritmos de transformaci\'on de coordenadas.\\
 Para cada una de las instancias de validaci\'on se configuraron distintos escenarios de prueba y en muchas oportunidades se verificaron los resultados parciales, con pruebas realizadas con otros programas como Excel.\\
 
 \section{Entorno de Desarrollo}
 
-Para el desarrollo utilizamos:\\
+Para el desarrollo se utiliz\'o:\\
 \begin{itemize}
  \item Plataforma de Desarrollo (\ac{IDE}): Eclipse Ver. 3.8.1.
- \item Leguaje de Programaci\'on: Python 2.7
+ \item Lenguaje de Programaci\'on: Python 2.7
  \item Biblioteca de Interfaz gr\'afica: QT por medio del enlace PyQT.
  \item Gestor de Configuraci\'on: Git.
- \item Generador de Documentaci\'on: Doxygen.
- \item Bibliotecas utilizadas: SGP4 \citep{sgp4python}
 \end{itemize}
 
 \subsection*{Eclipse}
-Eclipse (Ver. 3.8.1) es una plataforma de desarrollo multiplataforma ampliamente utilizada y ya muy madura, cuya estructura de perspectivas, editores y vistas, facilita el desarrollo en distintos lenguajes de programaci\'on. En nuestro caso incorporamos el IDE para python, {\it{Pydev}}.\\
-Eclipse ofrece excelentes capacidades para la gesti\'on de proyectos, permitiendo incorporar en un mismo proyecto distintos archivos y documentaci\'on, que en nuestro caso agrup\'o no s\'olo los datos de entrada y salida, como los TLE, los CDM o los productos orbitales; sino que tambi\'en incluy\'o todos los ploteos y gr\'aficos que resultaban de los procesamientos y la propia documentaci\'on referida a la escritura de esta tesis. Esto fue muy productivo en lo que respecta al control de versiones, ya que se aprovech\'o el hecho de que Eclipse ya tiene incorporado el Git.\\
+Eclipse (Ver. 3.8.1) es una plataforma de desarrollo multiplataforma ampliamente utilizada y ya muy madura, cuya estructura de perspectivas, editores y vistas, facilita el desarrollo en distintos lenguajes de programaci\'on. En este trabajo se incorpor\'o el IDE para python, {\it{Pydev}}.\\
+Eclipse ofrece excelentes capacidades para la gesti\'on de proyectos, permitiendo incorporar en un mismo proyecto distintos archivos y documentaci\'on, que, en esta tesis, agrup\'o no s\'olo los datos de entrada y salida, como los TLE, los CDM o los productos orbitales; sino que tambi\'en incluy\'o todos los ploteos y gr\'aficos que resultaban de los procesamientos y la propia documentaci\'on referida a la escritura de este documento. Esto fue muy productivo en lo que respecta al control de versiones, ya que se aprovech\'o el hecho de que Eclipse ya tiene incorporado el Git.\\
 Cabe destacar también, que ofrece una excelente herramientas de depuraci\'on.\\
 
 \subsection*{Python}
 El lenguaje de programaci\'on Python se destaca en sus capacidades tanto de c\'alculo como de manejo de texto. Esto agiliza mucho los procesos que involucran el manejo de tablas de datos plasmadas en texto plano, como son por ejemplo los datos TLE y las efem\'erides orbitales que se generan como productos del departamento de Din\'amica Orbital. As\'i mismo facilita el manejo de las nomenclaturas de los distintos archivos de datos o im\'agenes generadas. (Referencia correlacional ¡?)\\
-Existen numerosas, potentes y optimizadas bibliotecas para la realizaci\'on de c\'alculos, y el tratamiento vectorial. En nuestro caso explotamos particularmente la biblioteca {\it{numpy}}, y muy poco de {\it{scipy}} para interpolar datos espec\'ificamente.\\
+Existen numerosas, potentes y optimizadas bibliotecas para la realizaci\'on de c\'alculos, y el tratamiento vectorial. En nuestro caso se aprovech\'o particularmente la biblioteca {\it{numpy}}, y muy poco de {\it{scipy}} espec\'ificamente, para interpolar datos .\\
 Finalmente su utilizaci\'on masiva permite tener acceso r\'apido a sus potencialidades.\\
 
 \subsection*{QT}
@@ -71,8 +69,8 @@ QT es un framework ampliamente utilizado para el desarrollo de aplicaciones mult
 Subyace su implementaci\'on en C++ que muchas veces dificulta la comprensi\'on para los que estamos familiarizados con la l\'ogica del python, y lo mismo ocurre con la documentaci\'on y prevalecen los ejemplos para C++.\\
 
 \subsection*{Git}
-Si bien, esta herramienta no fue aprovechada en todo su pontecial en este trabajo, por tratarse de un proyecto sencillo y desarrollada por dos personas, fue fundamental para agilizar la posibilidad de trabajar desde cualquier computadora, siempre en la \'ultima versi\'on del proyecto.\\
-As\'i mismo, el trabajo con control de versiones, permiti\'o realizar distintas pruebas e implementaciones que luego se descartaron o se quitaron del producto final, pero que pueden ser reutilizados en futuros proyectos. En particular en la utilizaci\'on de la interfaz intermedia que fue generada para una \'agil evaluaci\'on de los los resultados parciales.\\
+Si bien, esta herramienta no fue aprovechada en todo su potencial en este trabajo, por tratarse de un proyecto sencillo y desarrollada por dos personas, fue fundamental para agilizar la posibilidad de trabajar desde cualquier computadora, siempre en la \'ultima versi\'on del proyecto.\\
+As\'i mismo, el trabajo con control de versiones, permiti\'o realizar distintas pruebas e implementaciones que luego se descartaron o se quitaron del producto final, pero que pueden ser reutilizados en futuros proyectos. En particular, en la utilizaci\'on de la interfaz intermedia que fue generada para una \'agil evaluaci\'on de los los resultados parciales.\\
 
 
 

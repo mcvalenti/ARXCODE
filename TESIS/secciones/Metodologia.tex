@@ -20,7 +20,7 @@ De las consideraciones m\'as importantes que se desprendieron de esta etapa, cab
 Por otro lado, debido a la complejidad del problema y sus consecuencias, ser\'a un software diseñado para ser utilizado por un analista experto, con conocimientos de Din\'amica Orbital.\\
 En el mismo sentido, sus productos finales no ser\'an considerados en la toma de decisiones hasta tanto sus resultados no hayan sido validados durante un periodo suficiente, que permita verificar y mejorar su funcionamiento, contrast\'andolo con un acumulado de situaciones reales.\\
 
-Para este planteo de definiciones, se cont\'o con el asesoramiento y el intercambio de informaci\'on con personas de Din\'amica Orbital y otros departamentos de CONAE. Se realizaron algunas reuniones e intercambio de mails, aunque por ser una tem\'atica que se aborda bajo reg\'imenes especiales de acuerdos de confidencialidad, no fue posible contar con la totalidad de la informaci\'on.
+Para este planteo de definiciones, se cont\'o con el asesoramiento y el intercambio de informaci\'on con personas del \'area de Din\'amica Orbital y otros departamentos de la CONAE. Se realizaron algunas reuniones e intercambio de correos electr\'onicos, aunque por ser una tem\'atica que se aborda bajo reg\'imenes especiales de acuerdos de confidencialidad, no fue posible contar con la totalidad de la informaci\'on.
 
 \section{Iteraci\'on}
 Ya conocido el planteo del problema, las distintas maneras de abordarlo y las restricciones, se elabor\'o un diseño preliminar del producto con sus requerimientos (Sec. \ref{sec:requerimientos}) y sus funcionalidades, que dadas las caracter\'isticas del problema result\'o bastante determinista.\\
@@ -41,7 +41,7 @@ Durante el diseño y el desarrollo de la interfaz, se fueron modificando mucho l
 \section{Control}
 Al tratarse de un sistema que implementa distintas metodolog\'ias para el c\'alculo de par\'ametros, el control se bas\'o en analizar que los resultados de los algoritmos implementados fueran coherentes y coincidieran con los que exist\'ian en publicaciones bibliogr\'aficas que se pod\'ian reproducir.\\
 Fue fundamental implementar un control sobre la implementaci\'on de la solicitud a NORAD y la propagaci\'on de los TLE y sobre los algoritmos de transformaci\'on de coordenadas.\\
-Para cada una de las instancias de validaci\'on se configuraron distintos escenarios de prueba y en muchas oportunidades se verificaron los resultados parciales, con pruebas realizadas con otros programas como Excel.\\
+Para cada una de las instancias de validaci\'on se configuraron distintos escenarios de prueba y en muchas oportunidades se verificaron los resultados parciales con pruebas realizadas en Microsoft Excel.\\
 
 \section{Entorno de Desarrollo}
 
@@ -55,11 +55,11 @@ Para el desarrollo se utiliz\'o:\\
 
 \subsection*{Eclipse}
 Eclipse (Ver. 3.8.1) es una plataforma de desarrollo multiplataforma ampliamente utilizada y ya muy madura, cuya estructura de perspectivas, editores y vistas, facilita el desarrollo en distintos lenguajes de programaci\'on. En este trabajo se incorpor\'o el IDE para python, {\it{Pydev}}.\\
-Eclipse ofrece excelentes capacidades para la gesti\'on de proyectos, permitiendo incorporar en un mismo proyecto distintos archivos y documentaci\'on, que, en esta tesis, agrup\'o no s\'olo los datos de entrada y salida, como los TLE, los CDM o los productos orbitales; sino que tambi\'en incluy\'o todos los ploteos y gr\'aficos que resultaban de los procesamientos y la propia documentaci\'on referida a la escritura de este documento. Esto fue muy productivo en lo que respecta al control de versiones, ya que se aprovech\'o el hecho de que Eclipse ya tiene incorporado el Git.\\
+Eclipse ofrece excelentes capacidades para la gesti\'on de proyectos, permitiendo incorporar en un mismo proyecto distintos archivos y documentaci\'on, que, en esta tesis, agrup\'o no s\'olo los datos de entrada y salida, como los TLE, los CDM o los productos orbitales; sino que tambi\'en incluy\'o todos los ploteos y gr\'aficos que resultaban de los procesamientos y la propia documentaci\'on referida a la escritura de este documento. Esto fue muy productivo en lo que respecta al control de versiones, ya que se aprovech\'o el hecho de que Eclipse ya tiene incorporado el gestor Git.\\
 Cabe destacar también, que ofrece una excelente herramientas de depuraci\'on.\\
 
 \subsection*{Python}
-El lenguaje de programaci\'on Python se destaca en sus capacidades tanto de c\'alculo como de manejo de texto. Esto agiliza mucho los procesos que involucran el manejo de tablas de datos plasmadas en texto plano, como son por ejemplo los datos TLE y las efem\'erides orbitales que se generan como productos del departamento de Din\'amica Orbital. As\'i mismo facilita el manejo de las nomenclaturas de los distintos archivos de datos o im\'agenes generadas. (Referencia correlacional ¡?)\\
+El lenguaje de programaci\'on Python se destaca en sus capacidades tanto de c\'alculo como de manejo de texto. Esto agiliza mucho los procesos que involucran el manejo de tablas de datos plasmadas en texto plano, como son por ejemplo los datos TLE y las efem\'erides orbitales que se generan como productos del departamento de Din\'amica Orbital. As\'i mismo facilita el manejo de las nomenclaturas de los distintos archivos de datos o im\'agenes generadas.\\
 Existen numerosas, potentes y optimizadas bibliotecas para la realizaci\'on de c\'alculos, y el tratamiento vectorial. En nuestro caso se aprovech\'o particularmente la biblioteca {\it{numpy}}, y muy poco de {\it{scipy}} espec\'ificamente, para interpolar datos .\\
 Finalmente su utilizaci\'on masiva permite tener acceso r\'apido a sus potencialidades.\\
 

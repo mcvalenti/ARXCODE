@@ -1,11 +1,11 @@
 \BOOKMARK [0][-]{chapter.1}{Introducci\363n}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Los Desechos Espaciales}{chapter.1}% 2
-\BOOKMARK [1][-]{section.1.2}{El Riesgo de Colisi\363n}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.1}{Los desechos espaciales}{chapter.1}% 2
+\BOOKMARK [1][-]{section.1.2}{El riesgo de colisi\363n}{chapter.1}% 3
 \BOOKMARK [2][-]{subsection.1.2.1}{El estudio del riesgo de colisi\363n}{section.1.2}% 4
 \BOOKMARK [2][-]{subsection.1.2.2}{Rastreo y cat\341logos}{section.1.2}% 5
-\BOOKMARK [1][-]{section.1.3}{Las Regulaciones Nacionales e Internacionales}{chapter.1}% 6
+\BOOKMARK [1][-]{section.1.3}{Las regulaciones nacionales e internacionales}{chapter.1}% 6
 \BOOKMARK [1][-]{section.1.4}{Antecedentes}{chapter.1}% 7
-\BOOKMARK [1][-]{section.1.5}{La CONAE}{chapter.1}% 8
+\BOOKMARK [1][-]{section.1.5}{La Comisi\363n Nacional de Actividades Espaciales \(CONAE\)}{chapter.1}% 8
 \BOOKMARK [1][-]{section.1.6}{Planteo del Problema}{chapter.1}% 9
 \BOOKMARK [1][-]{section.1.7}{Objetivos}{chapter.1}% 10
 \BOOKMARK [0][-]{chapter.2}{Marco Te\363rico}{}% 11
@@ -17,10 +17,10 @@
 \BOOKMARK [2][-]{subsection.2.2.4}{El propagador SGP4}{section.2.2}% 17
 \BOOKMARK [2][-]{subsection.2.2.5}{Sistemas de Referencia}{section.2.2}% 18
 \BOOKMARK [1][-]{section.2.3}{El estudio de los errores}{chapter.2}% 19
-\BOOKMARK [2][-]{subsection.2.3.1}{M\351todo de Osweiler}{section.2.3}% 20
-\BOOKMARK [2][-]{subsection.2.3.2}{Propagaci\363n de errores utilizando TLE y efem\351rides precisas}{section.2.3}% 21
-\BOOKMARK [1][-]{section.2.4}{La Probabilidad de Colisi\363n}{chapter.2}% 22
-\BOOKMARK [2][-]{subsection.2.4.1}{C\341lculo Simplificado de Lei-Chen}{section.2.4}% 23
+\BOOKMARK [2][-]{subsection.2.3.1}{ El m\351todo de Osweiler}{section.2.3}% 20
+\BOOKMARK [2][-]{subsection.2.3.2}{Propagaci\363n de errores utilizando datos de TLE y efem\351rides precisas}{section.2.3}% 21
+\BOOKMARK [1][-]{section.2.4}{La probabilidad de colisi\363n}{chapter.2}% 22
+\BOOKMARK [2][-]{subsection.2.4.1}{C\341lculo simplificado de Lei-Chen}{section.2.4}% 23
 \BOOKMARK [1][-]{section.2.5}{Comunicaciones de riesgo de colisi\363n}{chapter.2}% 24
 \BOOKMARK [2][-]{subsection.2.5.1}{El CDM}{section.2.5}% 25
 \BOOKMARK [0][-]{chapter.3}{Metodolog\355a de Desarrollo}{}% 26
@@ -45,4 +45,4 @@
 \BOOKMARK [0][-]{chapter.6}{Conclusiones}{}% 45
 \BOOKMARK [0][-]{chapter.7}{Ap\351ndice}{}% 46
 \BOOKMARK [1][-]{section.7.1}{Appendix 1: Transformaci\363n de Coordenadas}{chapter.7}% 47
-\BOOKMARK [1][-]{section.7.2}{Appendix 2: El CDM}{chapter.7}% 48
+\BOOKMARK [1][-]{section.7.2}{Appendix 2: El archivo CDM}{chapter.7}% 48

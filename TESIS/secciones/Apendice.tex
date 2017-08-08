@@ -40,30 +40,38 @@ Donde:
 
 \begin{align*}
  \epsilon &= {\bar{\epsilon}} + \Delta \epsilon\\
- \Delta \Psi &= (A_{p} + A_{pl} tt) sin(a_{p_{i}})\\
- \Delta \epsilon &= (A_{e} + A_{el} tt) cos(a_{p_{i}})
+ \Delta \Psi &= \sum_{i=1}^{106}  (A_{p} + A_{pl} tt) sin(a_{p_{i}})\\
+ \Delta \epsilon &= \sum_{i=1}^{106}  (A_{e} + A_{el} tt) cos(a_{p_{i}})
 \end{align*}
 
 \begin{align*}
- tt &= (jd - 51544.5)/36525.0\\
+tt &=(jd-2451544.5)/36525.0 \\
  {\bar{\epsilon}} &= 84381.448 \textquotedbl - 46.8150 \textquotedbl tt - 0.00059 \textquotedbl tt^{2} + 0.001813 tt^{3}\\
  a_{p_{i}} &= a_{n1}M_{(}+a_{n2}M_{o}+a_{n3}\mu_{(}+a_{n4}D_{o}+a_{n5}\Omega_{(}
 \end{align*}
 
-Los coeficientes: $A_{p}$,$A_{pl}$,$A_{e}$,$A_{el}$,$A_{n_{i}}$ se extraen de la tabla de coeficientes de nutaci\'on de Seidelman(citar).
+Los coeficientes: $A_{p}$,$A_{pl}$,$A_{e}$,$A_{el}$,$a_{n_{i}}$ se extraen de la tabla de coeficientes de nutaci\'on de Seidelman, del libro de  \citep{montenbruck2012satellite}.
 
 Y el resto de los par\'ametros se calcula seg\'un las expresiones:\\
 
 \begin{align*}
- M_{(} & = M(tt)\\
- M_{o} & = M(tt)\\
- \mu_{(} &= \mu(tt)\\
- D_{o} &= D(tt)\\
- \Omega_{(} &= \Omega(tt)
+    M_{(} &  = 134.96340251+1717915923.2178 tt+31.8792 tt^{2}+0.051 tt^{3}\\
+    M_{o} & = 357.52910918+129596581.0481 tt-0.5532 tt^{2}-0.000136 tt^{3}\\
+    \mu_{(} &= 93.27209062+1739527262.8478 tt-12.7512 tt^{2}-0.00103 tt^{3}\\
+    D_{o} & = 297.85019547+1602961601.2090 tt-6.3706 tt^{2}+0.06593 tt^{3}\\
+    \Omega_{(} & = 125.04455501-6962890.2665 tt+7.4722 tt^{2}+0.007702tt^{3}
 \end{align*}
 
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=\textwidth]{imagenes/tablanutacion}
+  \caption{Teor\'ia de Nutaci\'on - \ac{IAU} 1980 - Tabla extra\'ida del libro de \citep{montenbruck2012satellite}}
+  \label{fig:tablaseidelman}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Appendix 2: El CDM}
+\section{Appendix 2: El archivo CDM}
 \label{App2}
 
 \lstset{language=XML,basicstyle=\small}

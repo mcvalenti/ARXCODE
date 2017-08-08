@@ -26,7 +26,7 @@ Pensada con una filosof\'ia de expansi\'on y perfeccionamiento, su arquitectura 
 
 Se pretende que ARxCODE sea una herramienta que oficie de soporte al operador en el di\'alogo con los organismos internacionales que proveen los mensajes de alerta, frente a una situaci\'on de riesgo de colisi\'on. A tal fin, el sistema debe tener la capacidad de interpretar los mensajes estandarizados CDM y presentar la informaci\'on que all\'i se registra, en forma clara al operador.\\
 Por otro lado, debe tener la capacidad de colectar datos ingresados manualmente por el operador y ofrecer los par\'ametros que resulten del procesamiento propio del ARxCODE, como m\'inima distancia, TCA calculado y PoC.\\
-Esta \'ultima funcionalidad implica que ARxCODE debe poder solicitar a la p\'agina Space-Track los TLEs correspondientes a los objetos involucrados, debe poder estimar las matrices de covarianza de ambos objetos, ya sea mediante el m\'etodo de Osweiler o incorporando efem\'erides predichas del departamento de din\'amica orbital; debe poder propagar esos errores al momento del TCA y finalmente calcular la PoC.\\
+Esta \'ultima funcionalidad implica que ARxCODE debe poder solicitar a la p\'agina Space-Track los TLEs correspondientes a los objetos involucrados, debe poder estimar las matrices de covarianza de ambos objetos, ya sea mediante el m\'etodo de Osweiler o incorporando efem\'erides predichas del departamento de Din\'amica Orbital; debe poder propagar esos errores al momento del TCA y finalmente calcular la PoC.\\
 En la tabla \ref{tab:req}, se listan todos los requerimientos del sistema.\\
 
 \begin{table}[!h]\renewcommand{\arraystretch}{1.15}
@@ -54,7 +54,7 @@ En la tabla \ref{tab:req}, se listan todos los requerimientos del sistema.\\
   \multirow{2}{*}{ARR-060}& ARxCODE debe permitir al operador analista experto visualizar el encuentro,\\
   & generar reportes y notificaciones.\\
   \hline
-  \multirow{2}{*}{ARR-070} & ARxCODE debe extraer el set de TLEs de los objetos involucrados \\
+  \multirow{2}{*}{ARR-070} & ARxCODE debe extraer el conjunto de TLEs de los objetos involucrados \\
   & de los \'ultimos 15 d\'ias anteriores al TCA.\\
   \hline
   ARR-080 & ARxCODE debe estimar los errores en la posici\'on incial del desecho y de la misi\'on operativa.\\
@@ -99,7 +99,7 @@ En la tabla \ref{tab:req}, se listan todos los requerimientos del sistema.\\
   \hline
   ARR-510& ARxCODE ser\'a implementado en el entorno de desarrollo Eclipse.\\
   \hline
-  ARR-520& El control de versiones se realizar\'a con Git.\\
+  ARR-520& El control de versiones se realizar\'a con el gestor Git.\\
   \hline
     \rowcolor{lightgray}
   7 & Requerimientos de REUSABILIDAD\\
@@ -121,7 +121,7 @@ En la tabla \ref{tab:req}, se listan todos los requerimientos del sistema.\\
 
 \section{Interfaces}
 ARxCODE fue pensado para ser un sistema anexo a las estructuras ya existentes dentro del departamento de Din\'amica Orbital.\\
-El dise\~no completo, contempla un acceso directo al servidor de la base de datos de los productos de Din\'amica Orbital para la obtenci\'on de: las efem\'erides propagadas de la misi\'on operativa, y los mensajes de alerta (CDM). Estos \'ultimos tambi\'en podr\'an ser recibidos por mail de los organismos internacionales de alerta, como por ejemplo JSpOC o mediante una solicitud a la p\'agina Space-track, previa notificaci\'on y registro autorizado del operador a cargo. (Ver Fig. \ref{fig:interfaces})\\
+El dise\~no completo, contempla un acceso directo al servidor de la base de datos de los productos de Din\'amica Orbital para la obtenci\'on de: las efem\'erides propagadas de la misi\'on operativa, y los mensajes de alerta (CDM). Estos \'ultimos tambi\'en podr\'an ser recibidos por correos electr\'onicos de los organismos internacionales de alerta, como por ejemplo JSpOC o mediante una solicitud a la p\'agina Space-track, previa notificaci\'on y registro autorizado del operador a cargo. (Ver Fig. \ref{fig:interfaces})\\
 
 \begin{figure}
 \centering
@@ -130,7 +130,7 @@ El dise\~no completo, contempla un acceso directo al servidor de la base de dato
   \label{fig:interfaces}
 \end{figure}
 
-No obstante, por cuestiones de tiempo y de accesibilidad, para el desarrollo de este trabajo, los datos que provee el departamento de Din\'amica Orbital fueron descargados y se extraen de un directorio, al igual que los mensajes de alerta CDM, que fueron descargados de pa\'aginas de internet , ya que no nos han facilitado ninguno vinculado a la misi\'on operativa con la que trabajamos, por motivos de confidencialidad.\\
+No obstante, por cuestiones de tiempo y de accesibilidad, para el desarrollo de este trabajo, los datos que provee el departamento de Din\'amica Orbital fueron descargados y se extraen de un directorio, al igual que los mensajes de alerta CDM, que fueron descargados de p\'aginas de internet , ya que no nos han facilitado ninguno vinculado a la misi\'on operativa con la que trabajamos, por motivos de confidencialidad.\\
 Se realiz\'o la automatizaci\'on de la descarga de TLEs de la p\'agina Space-Track y se habilit\'o en la interfaz la pantalla que permite la carga manual de los datos del encuentro.\\
 
 En conclusi\'on, las interfaces implementadas, son:\\
@@ -211,7 +211,7 @@ Postcondiciones & El informe de an\'alisis de riesgo fue generado y almacenado.\
 \section{Arquitectura}
 
 \subsection*{Componentes}\label{subsec:componentes}
-En un planteo conceptual, con alto grado de abstracci\'on, los distintos paquetes de ARxCODE pueden agruparse en cinco componentes Fig.  \ref{fig:componentes}: PROCESAMIENTO, ADMINISTRACI\'ON DE DATOS, INTERFAZ GR\'AFICA Y VISUALIZACI\'ON, Sistemas de Referencia y VALIDACIONES.\\
+En un planteo conceptual, con alto grado de abstracci\'on, los distintos paquetes de ARxCODE pueden agruparse en cinco componentes (Fig.  \ref{fig:componentes}): PROCESAMIENTO, ADMINISTRACI\'ON DE DATOS, INTERFAZ GR\'AFICA Y VISUALIZACI\'ON, Sistemas de Referencia y VALIDACIONES.\\
 
 \begin{itemize}
  \item PROCESAMIENTO: Involucra los cuatro paquetes que, no s\'olo operan con los datos ingresados, sino que tambi\'en los manipulan y procesan para generar nuevos productos. Estos m\'odulos son, de alguna manera, los distintos n\'ucleos del c\'odigo.\\
@@ -224,7 +224,7 @@ En un planteo conceptual, con alto grado de abstracci\'on, los distintos paquete
   \item {\it{Encuentro}}
  \end{itemize}
 
- \item ADMINISTRACI\'ON DE DATOS: Son aquellos paquetes que se encargan de la obtenci\'on, el desgloce y el preprocesamiento de los datos que ser\'an utilizados por el resto de los m\'odulos.
+ \item ADMINISTRACI\'ON DE DATOS: Son aquellos paquetes que se encargan de la obtenci\'on, el desglose y el preprocesamiento de los datos que ser\'an utilizados por el resto de los m\'odulos.
 
  \begin{itemize}
  \itemsep0em
@@ -233,7 +233,7 @@ En un planteo conceptual, con alto grado de abstracci\'on, los distintos paquete
   \item {\it{CDM}}
  \end{itemize}
 
- \item INTERFAZ Y VISUALIZACI\'ON: Agrupa el paquete que genera la interfaz gr\'afica y el paquete que contiene todos los m\'odulos que generan representaciones visuales, como los ploteos o los tracks de las trayectorias de los objetos.\\
+ \item INTERFAZ Y VISUALIZACI\'ON: Agrupa el paquete que genera la interfaz gr\'afica y el paquete que contiene todos los m\'odulos que generan representaciones visuales, como los gr\'aficos o las proyecciones de las trayectorias sobre el mapa.\\
  \begin{itemize}
  \itemsep0em
  \item {\it{Aplicacion}}
@@ -293,13 +293,13 @@ Cuenta con varias carpetas que almacenan los productos previamente descargados y
 \end{figure}
 
 \subsubsection*{PROCESAMIENTO: AjustarTle}
-Este paquete incluye el m\'odulo con el mismo nombre {\it{AjustarTle}}, que cuenta con varias funciones que reagrupan la informaci\'on del set de TLEs a fin de poder hacer ordenamientos y comparaciones, entre TLEs de distintas fechas que son propagados a una misma \'epoca (pr\'actica necesaria para la implementaci\'on del m\'etodo de Osweiler para la construcci\'on de las matrices de covarianza).\\
+Este paquete incluye el m\'odulo con el mismo nombre {\it{AjustarTle}}, que cuenta con varias funciones que reagrupan la informaci\'on del conjunto de TLEs a fin de poder hacer ordenamientos y comparaciones, entre los TLE de distintas fechas que son propagados a una misma \'epoca (pr\'actica necesaria para la implementaci\'on del m\'etodo de Osweiler para la construcci\'on de las matrices de covarianza).\\
 
 \subsubsection*{PROCESAMIENTO: Comparar}
-En el paquete {\it{Comprar}} se nuclean todos los m\'odulos y funciones que permiten la selecci\'on y la extracci\'on de los datos de los productos de Din\'amica Orbital (CODS), y sus respectivas comparaciones con los resultados que provienen de la propagaci\'on de los TLEs. Este tipo de comparaciones son necesarias en la estimaci\'on de errores que se comenten al utilizar propagaciones de TLE con SGP4. 
+En el paquete {\it{Comparar}} se nuclean todos los m\'odulos y funciones que permiten la selecci\'on y la extracci\'on de los datos de los productos de Din\'amica Orbital (CODS), y sus respectivas comparaciones con los resultados que provienen de la propagaci\'on de los TLEs. Este tipo de comparaciones son necesarias en la estimaci\'on de errores que se comenten al utilizar propagaciones de los TLE con SGP4. 
 
 \subsubsection*{PROCESAMIENTO: Estad\'istica}
-Dentro de este paquete se encuentran los desarrollos referidos a los c\'alculos estad\'isticos, m\'as precisamente los m\'odulos que calculan las matrices de covarianza. En este paquete se encuentra el m\'odulo que implementa el m\'etodo de Oswiler {\bf{matrizOsweiler}}.
+Dentro de este paquete se encuentran los desarrollos referidos a los c\'alculos estad\'isticos, m\'as precisamente los m\'odulos que calculan las matrices de covarianza. En este paquete se encuentra el m\'odulo que implementa el m\'etodo de Osweiler {\bf{matrizOsweiler}}.
 
 \subsubsection*{PROCESAMIENTO: Encuentro}
 Este es el paquete n\'ucleo del software. En \'el se encuentra la clase {\bf{Encuentro}}  Fig. \ref{fig:claseencuentro}, que instancia la generaci\'on del encuentro, incorporando ambos objetos mediante sus identificadores de NORAD y el TCA, generando las propagaciones necesarias, y las matrices de error, para calcular la m\'inima distancia y la probabilidad de colisi\'on. A tal fin, cuenta con los m\'etodos (Fig. \ref{fig:claseencuentro}): {\bf{calculaMacombinada}}, {\bf{proyecta\_alplano\_encuentro}}, {\bf{calculaPoC\_circ}} y  {\bf{calculaPoC\_gral}}\\
@@ -317,7 +317,7 @@ Este paquete contiene, principalmente el m\'odulo con el formulario de interfaz 
 
 \subsubsection*{INTERFAZ GR\'AFICA Y VISUALIZACI\'ON: visual}
 {\bf{Visual}} es el paquete que agrupa todos los m\'odulos de generaci\'on de gr\'aficos y ploteos. Los gr\'aficos se utilizaron principalmente para el estudio de la tendencia de errores de los TLE y otros an\'alisis y validaciones.\\
-Dentro de este paquete se encuentra el m\'odulo que genera el track de las \'orbitas, proyectadas sobre el mapa en el momento del encuentro.\\
+Dentro de este paquete se encuentra el m\'odulo que genera las trayectorias de las \'orbitas, proyectadas sobre el mapa en el momento del encuentro.\\
 
 \subsubsection*{Sistemas de Referencia}
 Este paquete contiene m\'odulos para realizar transformaciones entre los distintos sistemas de referencia. Entre ellos, los dos m\'as utilizados son:
