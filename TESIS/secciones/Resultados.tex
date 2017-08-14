@@ -74,8 +74,8 @@ Epoca & x [km] & y [km] & z [km] & vx $[km/s]$ & vy $[km/s]$ & vz $[km/s]$\\
 \section{Estudio de errores de TLE con datos hist\'oricos}
 
 El trabajo de Osweiler publica los resultados de las matrices de covarianza generadas, para 6 misiones y 8 ventanas de tiempo.\\
-Para la validaci\'on se tomaron dos escenarios muy diferentes en cuanto a la altura del sat\'elite: LAGEOS-1 a m\'as de $5000 km$ y ICESAT a $600 km$.
-Se presentan a continuaci\'on las tablas con los resultados comparativos, entre los valores publicados y los valores obtenidos por ARxCODE para una unica ventana temporal.\\
+Para la validaci\'on se tomaron dos escenarios muy diferentes en cuanto a la altura del sat\'elite: LAGEOS-1 a m\'as de $5000$ km y ICESAT a $600 $ km, Tabla \ref{tab:satescenarios}.
+Se presentan a continuaci\'on las tablas con los resultados comparativos, entre los valores publicados (Tablas \ref{tab:icesatOSW} y \ref{tab:lageosOSW}) y los valores obtenidos por ARxCODE (Tablas \ref{tab:icesatARX} y \ref{tab:lageosARX})para una \'unica ventana temporal.\\
 Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura, que se ve m\'as perturbado por el efecto atmosf\'erico, que no es modelable con precisión; mientras que el LAGEOS-1 presenta errores muchos \'ordenes de magnitud menor.\\
 
 \begin{table}
@@ -88,7 +88,8 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
       ICESAT & 27642 & $600$ & $0.0002 - 0.001$ & $94$ & var\'ia \\
       \hline
       \end{tabular}
-    \caption[Sat\'elites de Estudio]{Resumen de las caracter\'isticas de los sat\'elites a analizar}
+    \caption[Sat\'elites de Estudio]{Resumen de las caracter\'isticas de los sat\'elites a analizar.}
+    \label{tab:satescenarios}
 \end{table}
 
 \subsection*{Tablas comparativas ICESAT}
@@ -108,7 +109,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
     \hline
     \end{tabular}}
       \caption{Matriz de Covarianza de la Bibliograf\'ia \citep{osweiler} - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03}
-      \label{tab:singlebest}
+      \label{tab:icesatOSW}
     \end{minipage}
     \begin{minipage}[t]{0.48\hsize}\centering
     \resizebox{8cm}{!}{
@@ -122,7 +123,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
       \hline
       \end{tabular}}
         \caption{Matriz de Covarianza que produce ARxCODE - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03}
-        \label{tab:twobest}
+        \label{tab:icesatARX}
     \end{minipage}
     \hfill
 }}
@@ -140,6 +141,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
  \hline
  \end{tabular}
  \caption{Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler \citep{osweiler}}
+ \label{tab:icesatcomp}
 \end{table}
 
 
@@ -149,21 +151,6 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
 \begin{table}[!h]
 \centering
 \makebox[0pt][c]{\parbox{1.0\textwidth}{%
-    \begin{minipage}[b]{0.48\hsize}\centering
-     \resizebox{8cm}{!}{
-    \begin{tabular}{cccc}
-      \hline
-    Vent 1 & $R_{v}$ (km) & $R_{n}$ (km) & $R_{c}$ (km)\\
-    \hline
-    $R_{v}$ & 0.378619 & -0.0343598 & 0.02771527 \\
-    $R_{n}$ & -0.0343598 &  0.004002 & -0.0027171 \\
-    $R_{c}$ & 0.02771527 & -0.0027171 &  0.0084302 \\
-    \hline
-    \end{tabular}}
-      \caption{Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
-      \label{tab:singlebest}
-    \end{minipage}
-    \hfill
     \begin{minipage}[b]{0.48\hsize}\centering
     \resizebox{8cm}{!}{
       \begin{tabular}{cccc}
@@ -176,8 +163,23 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
       \hline
       \end{tabular}}
         \caption{Matriz de Covarianza de la Bibliograf\'ia \citep{osweiler}- Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
-        \label{tab:twobest}
+        \label{tab:lageosOSW}
     \end{minipage}
+    \hfill
+    \begin{minipage}[b]{0.48\hsize}\centering
+     \resizebox{7.5cm}{!}{
+    \begin{tabular}{cccc}
+      \hline
+    Vent 1 & $R_{v}$ (km) & $R_{n}$ (km) & $R_{c}$ (km)\\
+    \hline
+    $R_{v}$ & 0.378619 & -0.0343598 & 0.02771527 \\
+    $R_{n}$ & -0.0343598 &  0.004002 & -0.0027171 \\
+    $R_{c}$ & 0.02771527 & -0.0027171 &  0.0084302 \\
+    \hline
+    \end{tabular}}
+      \caption{Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03}
+      \label{tab:lageosARX}
+   \end{minipage}
     \hfill
 }}
 \end{table}
@@ -194,9 +196,10 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
  \hline
  \end{tabular}
  \caption{Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler.}
+ \label{tab:lageoscomp}
 \end{table}
 
-Las diferencias que resultan en la comparaci\'on con los resultados que arroja ARxCODE, son todas menores a los metros.\\
+Las diferencias que resultan en la comparaci\'on con los resultados que arroja ARxCODE, son todas menores a los metros (Tablas \ref{tab:icesatcomp} y \ref{tab:lageoscomp}).\\
 En particular LAGEOS muestra errores menores que ICESAT, ya que al ser un sat\'elite a mayor altura, el efecto atmosf\'erico es menor y el modelo de propaci\'on, se adapta mejor.\\
 
 
@@ -242,7 +245,7 @@ Los errores que se observan en la propagaci\'on de TLE, en funci\'on de la canti
 En este estudio, puede apreciarse una clara diferencia en las cotas de los errores, siendo el sat\'elite ICESAT, de menor altura el que muestra errores mayores en un rango de -120 a 60 km, mientras que el LAGEOS, contiene las diferencias entre -2 y 1 km.\\
 No obstante, en ambos se distingue, que la componente asociada a la velocidad (V {\it{in-track}}) es la que mayor error acumula en propagaciones m\'as largas. Esto se debe a que el modelo es d\'ebil en cuanto a la perturbaci\'on que introduce la atm\'osfera, directamente vinculada a la velocidad de los objetos para el caso del ICESAT o en cuanto al modelo que describe la presi\'on de radiaci\'on solar en el caso del LAGEOS.\\
 
-Se concluye a partir de esta secci\'on, que ARxCODE implementa el m\'etodo de Osweiler y la contrucci\'on de las diferencias de pares correctamente. 
+Se concluye a partir de esta secci\'on, que ARxCODE implementa el m\'etodo de Osweiler y la construcci\'on de las diferencias de pares correctamente. 
 
 \section{Estudio de errores de TLE con efem\'erides precisas}
 \subsection*{Sistema de referencia TOD}
@@ -283,12 +286,12 @@ Las comparaciones de las propagaciones de los TLE mostraron significativas aleat
 
 \subsection*{Generaci\'on de la tabla de propagaci\'on de errores}
 
-Como se explic\'o en la Sec. \ref{subsec:errorProp}, para estimar los errores en la propagaci\'on se propone un m\'etodo que utiliza una tabla generada a partir de la estad\'istica que resulta de comparar las propagaciones de los TLE de la misi\'on operativa, con las efem\'erides precisas. Las comparaciones se hacen en el periodo de Enero a Junio del a\~no 2013, en intervalos de 1 a 6 d\'ias, con paso 1 segundo.\\
+Como se explic\'o en la Sec. \ref{subsec:errorProp}, para estimar los errores en la propagaci\'on se propone un m\'etodo que utiliza una tabla, Tab. \ref{tab:resultatabla}, generada a partir de la estad\'istica que resulta de comparar las propagaciones de los TLE de la misi\'on operativa, con las efem\'erides precisas. Las comparaciones se hacen en el periodo de Enero a Junio del a\~no 2013, en intervalos de 1 a 6 d\'ias, con paso 1 segundo.\\
 Los resultados que se encuentran, no es posible validarlos directamente. No obstante, son comparables a los que proponen \cite{flohrer2008assessment}, en la {\it{lookup table}} generada considerando todos los objetos del cat\'alogo al 01 de Enero de 2008, ver Fig. \ref{fig:flohrer}. Los valores de las desviaciones est\'andar que resultan del m\'etodo propuesto son menores casi en un orden de magnitud a las tablas gen\'ericas que publican \cite{flohrer2008assessment}, esto es de esperar, ya que los estudios de la publicaci\'on son m\'as abarcativos y gen\'ericos.\\
 
 \begin{table}[!h]
 \centering
-\caption[Tabla con los valores medios para la propagaci\'on de errores.]{Resultados finales de los valores medios de las varianzas calculadas para la propagaci\'on de errores en funci\'on de los d\'ias de propagaci\'on}
+
 \begin{tabular}{|l|c|c|c|}
 \hline \hline
 \rowcolor{yellow!35}
@@ -309,12 +312,13 @@ Los resultados que se encuentran, no es posible validarlos directamente. No obst
 6 d\'ias & 0.01524829841&0.365815954&0.1607439516\\
 \hline
 \end{tabular}
+\caption[Tabla con los valores medios para la propagaci\'on de errores.]{Resultados finales de los valores medios de las varianzas calculadas para la propagaci\'on de errores en funci\'on de los d\'ias de propagaci\'on. Autor\'ia propia.}
 \label{tab:resultatabla}
 \end{table}
 
 \begin{figure}[!h]
   \centering
-  \fbox{\includegraphics[width=0.4\textwidth]{imagenes/flohrertabla}}
+  \fbox{\includegraphics[width=0.6\textwidth]{imagenes/flohrertabla}}
   \caption{{\it{Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 01 de Enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de \cite{flohrer2008assessment}}
   \label{fig:flohrer}
 \end{figure}
@@ -336,7 +340,7 @@ El c\'alculo de la PoC, implementa la expresi\'on presentada por  \cite{leichen}
 Con el objeto de verificar los c\'alculos que se realizan en el m\'odulo, se toman como datos iniciales, los valores publicados por el propio autor Lei-Chen, y se calcula la PoC, tanto para la expresi\'on anal\'itica como la integral. Para esta \'ultima se utiliza la biblioteca {\it{scipy.integrate}}  de python.
 
 De las expresiones para el c\'alculo de la PoC (Eq. \ref{eq:pocintegral} y Eq. \ref{eq:pocexpress}), se desprende que ser\'an necesarios los datos: ($\mu_{x}, \mu_{y}$), ($\sigma_{x}, \sigma_{y}$), $r_{a}$.\\
-Se tomaron los datos que utiliza Lei-Chen en el ejemplo para el caso de las \'orbitas circulares y se calcul\'o la PoC a partir de la expresi\'on expl\'isita y realizando la integral.\\
+Se tomaron los datos que utiliza Lei-Chen en el ejemplo para el caso de las \'orbitas circulares y se calcul\'o la PoC a partir de la expresi\'on expl\'icita y realizando la integral.\\
 
 \begin{minipage}[t]{0.28\textwidth}
 {\bf{Valores iniciales.}}\\
@@ -365,30 +369,32 @@ $r_{a}$ & 0.01 [km]\\
         outerlinewidth=1.25pt
     ]
 \large
+
 \begin{tabular}{|l|l|l|}
   \hline
  Te\'orico & Expresi\'on & Valor de la Integral\\
  \hline
  1.8079750e-04 & 1.8079124e-04 & 1.8071110e-04\\
  \hline
-\end{tabular} 
+\end{tabular}
+\captionof{table}{Resultados Comparativos del c\'alculo de la PoC.}
+\label{tab:poccomp}
 \end{mdframed}
 \end{minipage}
 
-
-Como se observa en el recuadro de las probabilidades de colisi\'on; las f\'ormulas implementadas coinciden con el valor de la bibliograf\'ia hasta el cuarto d\'igito significativo de la expresi\'on.\\
+\vspace{0.5cm}
+Como se observa en el recuadro de las probabilidades de colisi\'on (Tabla \ref{tab:poccomp}); las f\'ormulas implementadas coinciden con el valor de la bibliograf\'ia hasta el cuarto d\'igito significativo de la expresi\'on.\\
 
 En este punto se confirma que, una vez que se obtiene: $\mu_{x}$, $\mu_{x}$, $\sigma_{x}$, $\sigma_{y}$ y el radio de colisi\'on $r_{a}$, ya puede calcularse la PoC. 
-Ahora resta verificar, paso a paso c\'omo llegar de los inputs de ARxCODE, a estos par\'ametros de las ecuaciones. \\
+Ahora resta verificar, paso a paso c\'omo llegar de los inputs de ARxCODE, a estos par\'ametros que se introducen en de las ecuaciones. \\
 
 \subsection*{C\'alculos previos}
 
-Una vez determinadas la posici\'on relativa de los objetos en el sistema RSW o RTN en el TCA, la proyecci\'on al plano, para \'orbitas circulares, no representa mayores problemas, como se detall\'o en la Sec. \ref{subsec:pocsimp}.\\
+Una vez determinadas la posici\'on relativa de los objetos en el sistema RSW o RTN en el TCA, la proyecci\'on al plano para \'orbitas circulares, no representa mayores problemas, como se detall\'o en la Sec. \ref{subsec:pocsimp}.\\
 
 Pero es importante verificar, que a partir de las posiciones inerciales de los objetos en el TCA, las transformaciones de la distancia relativa de los mismos al sistema RSW, coincide.\\
-Para ello, vamos a utilizar las posiciones de los objetos del ejemplo de la bibliograf\'ia y transformarlas con el m\'odulo de transformaci\'on {\it{sisRic}} del paquete {\it{SistReferencia.SistdeCoordenadas}} para corroborar los resultados.
-
-Vectores de Posiciones Inerciales al momento TCA:\\
+Para ello, vamos a utilizar las posiciones de los objetos del ejemplo de la bibliograf\'ia (Tabla \ref{tab:vectejemplo}) y transformarlas con el m\'odulo de transformaci\'on {\it{sisRic}} del paquete {\it{SistReferencia.SistdeCoordenadas}} para corroborar los resultados.
+\\
 
 \begin{table}[!h]
 \centering
@@ -401,6 +407,8 @@ Obj1 & 1457.273246 &1589.568484&6814.189959&7.001731&2.439512&0.926209\\
 Obj2 & 1457.532155&1588.932671&6814.316188&3.578705&6.172896&2.200215\\
 \hline
 \end{tabular}
+\caption{Vectores de Posiciones Inerciales al momento TCA. Extra\'idos del ejemplo de la bibliograf\'ia \citep{leichen}}
+\label{tab:vectejemplo}
 \end{table}
 
 \begin{table}[!h]
@@ -416,11 +424,14 @@ ARxCODE & 0.031797& 0.462295 &0.522013
 \\
 \hline
 \end{tabular}
+\caption{Resultados comparativos de la transformaci\'on entre sistemas de referencia utilizando el m\'odulo {\it{sisRic}} de autor\'ia propia y los datos de la bibliograf\'ia \citep{leichen}.}
+\label{tab:rswcomp}
 \end{table}
 
-Estos resultados se logran en una transformaci\'on en la que se considere al Obj2 como origen de la referencia. Los mismos muestran una coincidencia del orden de las decenas de metros, aceptable para estas estimaciones.\\
+Estos resultados que se publican en la tabla \ref{tab:rswcomp}, se logran en una transformaci\'on en la que se considere al Obj2 como origen de la referencia. Los mismos muestran una coincidencia del orden de las decenas de metros, aceptable para estas estimaciones.\\
 No obstante, contando s\'olo con la informaci\'on de los vectores de posici\'on al momento del m\'aximo acercamiento, no es posible verificar el m\'etodo de Osweiler de la construcci\'on de la matriz de covarianza para este ejemplo de la bibliograf\'ia.\\
 
+\subsection*{Validaci\'on end-to-end}
 Hasta este punto, se han ido validando cada uno de los procesos por separado.\\
 Resta hacer pruebas desde el origen, es decir a partir de identificar los objetos y el TCA, correr los procesamientos de ARxCODE y obtener los resultados de la PoC.\\
 A tal fin, fue necesario conseguir registros que contuvieran la informaci\'on completa de una situaci\'on de encuentro.\\
@@ -428,6 +439,9 @@ Esto no fue posible en su totalidad. Por un lado tuvimos acceso a mails de alert
 As\'i mismo, ni los mails encontrados ni los CDM descargados, contienen informaci\'on de la PoC asociada al encuentro. \\
 
 \subsubsection*{Validaci\'on con correos electr\'onicos de alerta p\'ublicos}
+
+El proceso de validaci\'on utilizando los correos electr\'onicos obtenidos en la web, consiste de extraer de los correos los identificadores de norad de ambos objetos y el TCA asociado al encuentro. A partir de all\'i se calcula la m\'inima distancia total, o sea el m\'odulo de la misma, y  en componentes en el sistema RTN y finalmente la PoC.\\
+Dado que el TCA que se publica en los correos no tiene informaci\'on de los segundos, se realiza una primera estimaci\'on, y luego se profundiza en an\'alisis de la situaci\'on.\\
 
 Formato de los correos electr\'onicos:\\
 \begin{center}
@@ -454,7 +468,7 @@ Secondary Cross-track Error (W): 2 meters\\
 }}
 \end{center}
 
-{\bf{Nota:}} Los los correos electr\'onicos no informan los segundos del TCA. Fue necesario primero hacer una primera estimaci\'on m\'as precisa del TCA del encuetnro y luego volver a procesar incorporando los segundos. 
+{\bf{Nota:}} Los los correos electr\'onicos no informan los segundos del TCA. Fue necesario primero hacer una primera estimaci\'on m\'as precisa del TCA del encuentro y luego volver a procesar incorporando los segundos. 
 
 Listado de Mails analizados:\\
 

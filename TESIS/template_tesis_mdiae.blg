@@ -25,45 +25,45 @@ Warning--empty journal in karacalioglu2016impact
 Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty year in nasaprogramme
 Warning--empty publisher in osweiler
-You've used 26 entries,
+You've used 27 entries,
             1940 wiz_defined-function locations,
-            613 strings with 6946 characters,
-and the built_in function-call counts, 8150 in all, are:
-= -- 785
-> -- 250
-< -- 25
-+ -- 87
-- -- 76
-* -- 633
-:= -- 1481
-add.period$ -- 74
-call.type$ -- 26
-change.case$ -- 164
-chr.to.int$ -- 23
-cite$ -- 32
-duplicate$ -- 347
-empty$ -- 592
-format.name$ -- 112
-if$ -- 1559
+            617 strings with 7092 characters,
+and the built_in function-call counts, 8469 in all, are:
+= -- 814
+> -- 263
+< -- 26
++ -- 91
+- -- 80
+* -- 658
+:= -- 1538
+add.period$ -- 77
+call.type$ -- 27
+change.case$ -- 170
+chr.to.int$ -- 24
+cite$ -- 33
+duplicate$ -- 361
+empty$ -- 615
+format.name$ -- 119
+if$ -- 1621
 int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 25
-newline$ -- 129
-num.names$ -- 78
-pop$ -- 145
+missing$ -- 27
+newline$ -- 134
+num.names$ -- 81
+pop$ -- 154
 preamble$ -- 1
-purify$ -- 168
+purify$ -- 175
 quote$ -- 0
-skip$ -- 268
+skip$ -- 278
 stack$ -- 0
-substring$ -- 479
-swap$ -- 55
+substring$ -- 491
+swap$ -- 57
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 144
+type$ -- 148
 warning$ -- 6
-while$ -- 63
+while$ -- 65
 width$ -- 0
-write$ -- 317
+write$ -- 329
 (There was 1 error message)
