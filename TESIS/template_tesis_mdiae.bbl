@@ -148,4 +148,10 @@ NASA (2017b).
 \newblock {\em Covariance estimation and autocorrelation of NORAD Two-line
   Element Sets}.
 
+\bibitem[\protect\astroncite{Xu and Xiong}{2014}]{xu2014method}
+Xu, X.-L. and Xiong, Y.-Q. (2014).
+\newblock A method for calculating probability of collision between space
+  objects.
+\newblock {\em Research in Astronomy and Astrophysics}, 14(5):601.
+
 \end{thebibliography}

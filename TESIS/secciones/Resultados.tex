@@ -14,7 +14,7 @@ Para la validaci\'on de los resultados de la implementaci\'on del m\'etodo de Os
 
 El m\'etodo que se propone para la estimaci\'on de la propagaci\'on de errores, es el que m\'as dificultades present\'o para ser validado. Al basarse plenamente en los datos de la misi\'on cuyos resultados de colisi\'on de alerta no pudieron ser suministrados, fue analizado en comparaci\'on con resultados estad\'isticos globales, o sobre el estudio de encuentros de otras misiones.\\
 
-Finalmente la implementaci\'on del c\'alculo de probabilidad de colisi\'on fue evaluado a partir de la recopilaci\'on de bibliograf\'ia con datos de encuentros anteriores.\\
+Finalmente la implementaci\'on del c\'alculo de probabilidad de colisi\'on fue evaluado a partir de la recopilaci\'on de bibliograf\'ia con datos de encuentros anteriores, adquiridos a trav\'es de correos electr\'onicos o CDM p\'ublicos.\\
 
 \section{Implentenaci\'on del modelo SGP4 en Python}
 
@@ -470,7 +470,7 @@ Secondary Cross-track Error (W): 2 meters\\
 
 {\bf{Nota:}} Los los correos electr\'onicos no informan los segundos del TCA. Fue necesario primero hacer una primera estimaci\'on m\'as precisa del TCA del encuentro y luego volver a procesar incorporando los segundos. 
 
-Listado de Mails analizados:\\
+Se listan a continuaci\'on los cinco correos electr\'onicos cuyos datos fueron procesados con ARxCODE. La figura \ref{fig:tablamails}, muestra el resumen de la informaci\'on de todos los correos electr\'onicos. A partir de esa informaci\'on se carg\'o manualmente el identificador de NORAD del sat\'elite (sat\_id), el identificador de NORAD del desecho (deb\_id), y el TCA de cada situaci\'on; en un primer paso se utiliz\'o ARxCODE para obtener el valor de los segundos del TCA. Luego se propag\'o para el TCA que inclu\'ia los segundos, con pasos de propagaci\'on distintos, en un caso cada un segundo (Tabla \ref{tab:mails1seg}) y en otro caso para un paso menor, de cien mil microsegundos (Tabla \ref{tab:mails100mseg}).\\
 
 \begin{figure}[!h]
   \centering
@@ -479,25 +479,25 @@ Listado de Mails analizados:\\
   \label{fig:tablamails}
 \end{figure}
 
-Valores de ARxCODE:\\
 \begin{table}[!h]
 \resizebox{16cm}{!}{
 \begin{tabular}{|l|r|r|r|r|r|r|}
  \hline \hline
- \# & TCA arx & $\Delta R_{arx}$ [m] & $\Delta T_{arx}$ [m] & $\Delta N_{arx}$ [m] & Min Dist. arx [m] & PoC arx\\
+ \# & TCA arx & $\Delta R_{arx}$ [km] & $\Delta T_{arx}$ [km] & $\Delta N_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
  \hline \hline
- 1 & 2012-07-15 21:21:51 & 147.106 & 2749.095 &  2287.11 & 3579 & 6.426171e-22 \\
+ 1 & 2012-07-15 21:21:51 & 0.147 & 2.749 &  2.287 & 3.579 & 4e-06 \\
  \hline
- 2 & 2014-06-29 04:55:59 & 81.349 & 3921.163 & 2002.826 & 4403 & 0.0 \\
+ 2 & 2014-06-29 04:55:59 & 0.081 & 3.921 & 2.002 & 4.403 & 0.0 \\
+ \hline 
+ 3 & 2012-11-23 23:38:42 & 0.300 & 1.668 & 0.841 & 1.892 & 0.0 \\
  \hline
- 3 & 2012-11-23 23:38:42 & 0300.62 & 1668.766 & 841.432 & 1892 & 0.0 \\
+ 4 & 2013-03-31 03:25:45 & 68.07& 1.318 & 426.1 & 431.5 & 0.0 \\
  \hline
- 4 & 2013-03-31 03:25:45 & 68.072008 & 1.318496 & 426.131856 & 431.536667 & 0.0 \\
- \hline
- 5 & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx & xxxxxx \\
+ 5 & 2013-05-02 17:12:04 & 19.07 & 489.6 & 142.7 & 510.3& 0.0 \\
  \hline
 \end{tabular} }
-\caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los correos electr\'onicos, propagando cada 1 segundo}
+\caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los correos electr\'onicos, propagando cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km)}
+\label{tab:mails1seg}
 \end{table}
 
 
@@ -505,32 +505,61 @@ Valores de ARxCODE:\\
 \resizebox{16cm}{!}{
 \begin{tabular}{|l|r|r|r|r|r|r|}
  \hline \hline
- \# & TCA arx & $\Delta R_{arx}$ [m] & $\Delta T_{arx}$ [m] & $\Delta N_{arx}$ [m] & Min Dist. arx [m] & PoC arx\\
+ \# & TCA arx & $\Delta R_{arx}$ [km] & $\Delta T_{arx}$ [km] & $\Delta N_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
  \hline \hline
- 1 & 2012-07-15 21:21:51.3 & 0.142965 & 0.512276 &  0.254972 & 0.58981 & 4e-06 \\
+ 1 & 2012-07-15 21:21:51.3 & 0.142 & 0.512 &  0.254 & 0.589 & 4e-06 \\
  \hline
- 2 & 2014-06-29 04:55:59.1 & 0.0824 & 3.253859 & 2.745704 & 4.25831 & 0.0 \\
+ 2 & 2014-06-29 04:55:59.1 & 0.082 & 3.253 & 2.745 & 4.258 & 0.0 \\
  \hline
- 3 & 2012-11-23 23:38:42.1 & 0.258083 & 0.936411 & 1.595317 & 1.86775 & 1.7e-05 \\
+ 3 & 2012-11-23 23:38:42.1 & 0.258 & 0.936 & 1.595 & 1.867 & 1.7e-05 \\
  \hline
- 4 & 2013-03-31 03:25:45.1 & 68.075882 & 0.194278 & 426.131566 & 431.535022 & 0.0 \\
+ 4 & 2013-03-31 03:25:45.1 & 68.07 & 0.194 & 426.1 & 431.5 & 0.0 \\
  \hline
- 5 & 2013-05-02 17:12:02.9 & 20.173626 & 504.135854 & 146.837803 & 525.47243 & 0.0\\
+ 5 & 2013-05-02 17:12:02.9 & 20.17 & 504.1 & 146.8 & 525.4 & 0.0\\
  \hline
 \end{tabular} }
-\caption{Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los correos electr\'onicos, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos}
+\caption{Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los correos electr\'onicos, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km)}
+\label{tab:mails100mseg}
 \end{table}
 
-Las matrices de covarianza no mejoran. Ver tabla \ref{fig:tablaMAmails}
+\begin{table}[!h]
+\centering
+%\resizebox{8cm}{!}{
+\begin{tabular}{|l|c|c|c|}
+ \hline \hline
+  \rowcolor{lightgray}
+ \# & Dist (1 seg) [km] & Dist (100 mil $\mu$ seg) [km] & Dist. correo\\
+ \hline \hline
+ 1 & 3.579 &  0.589 &  0.760  \\
+ \hline
+ 2 & 4.403 & 4.258 & 0.334  \\
+ \hline
+ 3 & 1.892 & 1.867 & 0.984 \\
+ \hline
+ 4 & 431.5 & 431.5 & 0.789 \\
+ \hline
+ 5 & 510.3 & 525.4 & 0.170 \\
+ \hline
+\end{tabular} %}
+\caption{Comparaci\'on de las m\'inimas distancias de acercamiento utilizando ARxCODE con distintos pasos de propagaci\'on, correspondientes a un segundo y cien mil micro segundos, con los resultados que indican los correos electr\'onicos.}
+\label{tab:mailsMinD}
+\end{table}
+
+Como puede apreciarse en la tabla de comparaciones, Tab. \ref{tab:mailsMinD}, los distintos pasos de propagaci\'on no modifican los resultados significativamente, salvo en el primer caso. De manera que resulta importante revisar instancias previas, es decir analizar las matrices de error de cada objeto generadas por ARxCODE (Figura \ref{fig:tablaMAmails}).\\
 
  \begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{imagenes/tablaMAmails}}
-  \caption{Tabla con las matrices de covarianza para la misi\'on y el desecho.}
+  \caption{Tabla con las matrices de covarianza calculadas por ARxCODE (m\'etodo de Osweiler) para la misi\'on y el desecho. Se resaltan los valores que con errores grandes}
   \label{fig:tablaMAmails}
 \end{figure}
 
+Se observa, que las matrices calculadas para introducir en el c\'alculo del encuentro de ARxCODE, introducen errores muy grandes y los elementos de su diagonal, correspondientes a las varianzas en cada una de las componentes RTN, son mucho mayores a las que se indican en los mails.\\
+De estos resultados se desprende que los valores publicados en los mails, son m\'as precisos a los que se pueden lograr con ARxCODE y seguramente han sido calculados con datos observacionales de rastreo m\'as precisos que la informaci\'on orbital que ofrecen los TLE. 
+
 \subsubsection*{Validaci\'on con CDM p\'ublicos}
+
+Se listan a continuaci\'on los seis CDM cuyos datos fueron procesados con ARxCODE (Figura \ref{fig:cdmsproc}). A partir de esa informaci\'on se carg\'o manualmente el identificador de NORAD del sat\'elite (sat\_id), el identificador de NORAD del desecho (deb\_id), el TCA de cada situaci\'on. Se calcul\'o la m\'inima distancia y la PoC, con pasos de propagaci\'on distintos, en un caso cada un segundo (Tabla \ref{tab:cdmsproc1seg}) y en otro caso para un paso menor, de cien mil microsegundos (Tabla \ref{tab:cdmsproc100mseg}).\\
  
  \begin{figure}[!h]
   \centering
@@ -540,12 +569,13 @@ Las matrices de covarianza no mejoran. Ver tabla \ref{fig:tablaMAmails}
 \end{figure}
  
  \begin{table}[!h]
+ \centering
  \resizebox{16cm}{!}{
 \begin{tabular}{|l|r|r|r|r|r|r|}
  \hline \hline
  \# & TCA arx & $\Delta R_{arx}$ [km] & $\Delta T_{arx}$ [km] & $\Delta N_{arx}$ [km] & Min Dist. arx [km] & PoC arx\\
  \hline \hline
- 1 & 2013-01-10 09:59:57 &0.295626&1.358542&1.321294&1.918033& 1.1e-05 / 1.1e-05\\
+ 1 & 2013-01-10 09:59:57 &0.295626&1.358542&1.321294&1.918033& 1.4e-05 / 1.4e-05\\
  \hline
  2 & 2013-01-12 00:20:51 &0.405629&4.127385&1.632732&4.457091&0.0 / 0.0\\
  \hline 
@@ -553,15 +583,17 @@ Las matrices de covarianza no mejoran. Ver tabla \ref{fig:tablaMAmails}
  \hline 
  4 & 2013-01-11 05:30:56 & 0.01038& 1.276203& 0.648991&1.431779&0.0\\
  \hline 
- 5 & 2012-11-22 13:03:45.000823 & 0.027395 & 4.661372 & 0.332569 & 4.673301 & 1.4e-05/1.4e-05 \\
+ 5 & 2012-11-22 13:03:45.0 & 0.027395 & 4.661372 & 0.332569 & 4.673301 & 1.4e-05/1.4e-05 \\
  \hline
- 6 & 2012-12-26 05:00:41 & 0.183897& 4.661359&0.02668&4.665061& 1e-06 / 1e-06\\
+ 6 & 2012-12-26 05:00:41 & 0.183897& 4.661359&0.02668&4.665061& 0.0 / 0.0\\
  \hline
  \end{tabular} }
- \caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los CDM, propagando cada 1 segundo}
+ \caption{Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los CDM, propagando cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km)}
+ \label{tab:cdmsproc1seg}
  \end{table}
  
 \begin{table}[!h]
+\centering
  \resizebox{16cm}{!}{
 \begin{tabular}{|l|r|r|r|r|r|r|}
  \hline \hline
@@ -575,13 +607,112 @@ Las matrices de covarianza no mejoran. Ver tabla \ref{fig:tablaMAmails}
  \hline
  4 &2013-01-11 05:30:55.9&0.016754 &0.215364 &0.573953&0.613257&0.0\\
  \hline
- 5 & 2012-11-22 13:03:44.700823 & 0.023908 & 0.436662& 0.758981 & 0.875955 & 2e-05 \\
+ 5 & 2012-11-22 13:03:44.7 & 0.023908 & 0.436662& 0.758981 & 0.875955 & 2e-05 \\
  \hline
- 6 & 2012-12-26 05:00:40.7 & 0.183162& 0.1859&00.417861&0.492661& 1.24e-04\\
+ 6 & 2012-12-26 05:00:40.7 & 0.183162& 0.1859&0.417861&0.492661& 1.24e-04\\
  \hline
  \end{tabular} }
- \caption{Resultados que se obtienen con ARxCODE incorporando la informaci\'on de los mails, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos}
+ \caption{Resultados que se obtienen con ARxCODE incorporando la informaci\'on de los correos electr\'onicos, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km)}
+ \label{tab:cdmsproc100mseg}
  \end{table}
+
+ \begin{table}[!h]
+\centering
+\begin{tabular}{|l|c|c|c|}
+ \hline \hline
+  \rowcolor{lightgray}
+ \# & Dist (1 seg) [km] & Dist (100 mil $\mu$ seg) [km] & Dist. CDM\\
+ \hline \hline
+ 1 & 1.918 &  1.918&  0.170 \\
+ \hline
+ 2 & 4.457 & 0.477 & 0.175  \\
+ \hline
+ 3 & 1.804 & 0.481 & 0.180\\
+ \hline
+ 4 & 1.431 & 0.613 & 0.150\\
+ \hline
+ 5 & 4.665 & 0.875 & 0.976 \\
+ \hline
+ 6 & 4.665 & 0.492 & 0.617\\
+ \hline
+\end{tabular} 
+\caption{Comparaci\'on de las m\'inimas distancias de acercamiento utilizando ARxCODE con distintos pasos de propagaci\'on, correspondientes a un segundo y cien mil micro segundos, con los resultados que indican los CDM. (Radio de colisi\'on $r_{a}=0.01$ km)}
+\label{tab:cdmsMinD}
+\end{table}
+
+Para estos \'ultimos procesamientos es notoria la diferencia que se produce cuando se incrementa el paso de propagaci\'on al orden de los cien mil microsegundos; logrando as\'i que los valores calculados por ARxCODE para las m\'inimas distancias se aproximen al valor que publican los CDM.\\
+No se pudo identificar a qu\'e se debe esta distinci\'on entre las mejoras que se logran en los CDM, que no se logran en la informaci\'on que proviene de los correos electr\'onicos, aunque probablemente se deba a la incerteza en el TCA que introducen los correos al no informar el TCA con precisi\'on del segundo.\\
+
+\subsubsection*{Validaci\'on con bibliograf\'ia que incluye PoC}
+
+En el cap\'itulo ocho de su libro, Klinkrad \citep{Klinkrad}, publica una tabla que contiene siete situaciones de encuentros de riesgo para las misiones ENVISAT y ERS-2. De esos escenarios s\'olo se han podido reproducir dos, ya que no fue posible identificar los c\'odigos de NORAD de los desechos involucrados en los encuentros.\\
+Para esos dos escenarios, se calcularon la m\'inima distancia y la PoC, y se compararon los resultados con los publicados en el libro de Klinkrad (Tabla \ref{tab:escenariosKlinkrad}).\\
+
+ \begin{table}[!h]
+\centering
+\resizebox{16cm}{!}{
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+ \hline \hline
+  \rowcolor{lightgray}
+ \multirow{2}{*}{\#} & sat id & deb id & TCA & Min Dist [km] & Min Dist [km]& PoC  & Poc \\
+ \rowcolor{lightgray}
+ &&&& (Klinkard)&ARxCODE &(Klinkard)&ARxCODE\\
+ \hline
+ 1 & 27386 &  12442&  2004-09-02 19:14:11 &1.297& 1.443&2.186e-04  &3.1e-05 \\
+ \hline
+ 2 & 23560 & 16681 & 2004-09-29 23:56:02 &0.067&0.557&1.546e-04& 2e-05 \\
+ \hline
+\end{tabular} }
+\caption{Comparaci\'on de las m\'inimas distancias de acercamiento y las PoC calculadas con ARxCODE con los resultados publicados por Klinkrad \citep{Klinkard}. Paso de propagaci\'on cien mil $\mu$s y radio de colisi\'on $r_{a}=0.01$ km}
+\label{tab:escenariosKlinkrad}
+\end{table}
+
+Por otro lado, en el trabajo de Xu y  Xiong, \citep{xu2014method} se publican las estimaciones de la m\'inima distancia y la Poc tanto utilizando un m\'etodo general y el m\'etodo desarrollados por ellos (tabla de ). Se utiliz\'o la informaci\'on de los encuentros que se listan en ese trabajo para intentar reproducir los resultados con ARxCODE. \\
+
+ \begin{table}[!h]
+\centering
+\resizebox{16cm}{!}{
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+ \hline \hline
+  \rowcolor{lightgray}
+ \multirow{2}{*}{\#} & sat id & deb id & TCA & Min Dist [km] & Min Dist [km]& Poc & PoC  & Poc \\
+ \rowcolor{lightgray}
+ &&&& (Xu\&Xiong)&ARxCODE &(General)&(Xu\&Xiong)&ARxCODE\\
+ \hline
+ 1 & 25415 &  31445&  2013-03-18 14:44:34 &0.115&0.951 & 1.24e-05 &1.52e-05 &8e-06\\
+ \hline
+ 2 & 20737 & 20738 &2013-03-17 10:39:31 &0.104&0.0365&1.706e-06& 2.15e-06& 6.06e-04\\
+ \hline
+ 3 & 27939 & 31588 &2013-03-16 13:46:21 &0.098&1.048&3.01e-05&3.51e-05&9e-06 \\
+ \hline
+ 4 & 11308 & 32315 &2013-03-15 03:02:16 &0.094&0.263&1.8e-05& 2.05e-05& 1.04-03\\
+ \hline
+ 5 & 17583 & 37442 &2013-03-16 14:02:50 &0.039& (*)&9.39e-05& 1.88e-04& (*) \\
+ \hline
+\end{tabular} }
+\caption{Comparaci\'on de las m\'inimas distancias de acercamiento y las PoC calculadas con ARxCODE con los resultados publicados por  Xu \& Xiong \citep{xu2014method}. Paso de propagaci\'on cien mil $\mu$s y radio de colisi\'on $r_{a}=0.01$ km. (*) No se obtuvieron TLEs del desecho para la fecha publicada. }
+\label{tab:escenariosxx}
+\end{table}
+
+\subsubsection*{C\'alculo de la PoC en funci\'on del radio de colisi\'on}
+
+ 
+\begin{figure}[!h]
+  \centering
+  \fbox{\includegraphics[width=0.7\textwidth]{imagenes/klinkradEsc4}}
+  \caption{An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on}
+  \label{fig:pocvsraEsc4}
+\end{figure}
+
+\begin{figure}[!h]
+  \centering
+  \fbox{\includegraphics[width=0.7\textwidth]{imagenes/klinkradEsc5}}
+  \caption{An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on}
+  \label{fig:pocvsraEsc5}
+\end{figure}
+
+
+
 
 \newpage
 \section{An\'alisis} 

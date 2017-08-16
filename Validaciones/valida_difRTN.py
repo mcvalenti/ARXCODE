@@ -19,6 +19,29 @@ y un TCA entre ellos.
 Se calculan las posiciones relativas en las componentes
 RTN.
 """
+#==================================================
+# Kilnkrad tabla (pag 236)
+#==================================================
+# ESCENARIO #4 
+# sat_id='27386'
+# deb_id='12442'
+# TCA=datetime(2004,9,2,19,14,11,0)
+# min_d=1.297
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.0002186
+
+# ESCENARIO #5
+sat_id='23560'
+deb_id='16681'
+TCA=datetime(2004,9,29,23,56,02,0)
+min_d=0.067
+dr='xxx'
+dt='xxx'
+dn='xxx'
+poc_p=0.0001546
+
 #Flohrer Krag Klinkrad - (ENVI - COSMOS)
 # sat_id='27386'
 # deb_id='15482'
@@ -29,10 +52,66 @@ RTN.
 # dn=0.1566
 # poc=0.00343
 
+#==================================================
+# Xu - Xiong - Method for calculating probability
+# of collision between space objects.
+#==================================================
+# linea 1
+# sat_id='25415'
+# deb_id='31445'
+# TCA=datetime(2013,3,18,14,44,34,0)
+# min_d=0.115
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.0000124
+
+# linea 2
+# sat_id='20737'
+# deb_id='20738'
+# TCA=datetime(2013,3,17,10,39,31,0)
+# min_d=0.104
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.0000017
+
+# linea 3
+# sat_id='27939'
+# deb_id='31588'
+# TCA=datetime(2013,3,16,13,46,21,0)
+# min_d=0.098
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.0000301
+
+# linea 4
+# sat_id='11308'
+# deb_id='32315'
+# TCA=datetime(2013,3,15,03,02,16,0)
+# min_d=0.094
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.000018
+
+# linea 5
+# sat_id='17583'
+# deb_id='37442'
+# TCA=datetime(2013,3,16,14,02,50,0)
+# min_d=0.039
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.0000939
+
+#==================================================
+
 # Escenario I - (EUMETSAT)
 # sat_id='29499'
 # deb_id='29096'
-# tca_epoca=datetime(2010,11,20,18,30,12,421*1000)
+# TCA=datetime(2010,11,20,18,30,12,421*1000)
 # min_d=0.187
 # dr=0.0103
 # dt=0.1028
@@ -107,6 +186,7 @@ RTN.
 # dr=-0.1638  
 # dt=-0.0222
 # dn=-0.0404 
+
 # MENSAJE # 2                                        
 # sat_id='25273'
 # deb_id='31279'
@@ -115,6 +195,7 @@ RTN.
 # dr=0.1701
 # dt=0.0122
 # dn=0.0424
+
 # MENSAJE # 5
 # sat_id='28810'
 # deb_id='33315'
@@ -123,6 +204,7 @@ RTN.
 # dr=0.0661 
 # dt=-0.2413 
 # dn=-0.9443
+
 # MENSAJE # 6                                                          
 # sat_id='38755'
 # deb_id='34115'
@@ -131,6 +213,7 @@ RTN.
 # dr=-0.0825 
 # dt=-0.0509
 # dn=0.6094   
+
 # MENSAJE # 7                                                          
 # sat_id='24903'
 # deb_id='33759'
@@ -139,14 +222,16 @@ RTN.
 # dr=0.0359
 # dt=-0.1488
 # dn=0.0957
+
 # MENSAJE # 8                                        
-sat_id='27372'
-deb_id='31413'
-TCA=datetime(2013,01,11,5,30,55,0)
-min_d= 0.15
-dr=-0.1191 
-dt=0.0003  
-dn=0.092
+# sat_id='27372'
+# deb_id='31413'
+# TCA=datetime(2013,01,11,5,30,55,0)
+# min_d= 0.15
+# dr=-0.1191 
+# dt=0.0003  
+# dn=0.092
+
    
    
 #tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M")
@@ -193,6 +278,7 @@ print '**************************************************'
 print 'TCA publicado = ',TCA
 print 'Minima distancia total = ',min_d
 print 'Minima Distancia RTN = ',dr,dt,dn
+print 'PoC publicada =', poc_p
 # -------------------------------
 # Prueba de ajuste de posiciones
 # -------------------------------

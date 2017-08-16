@@ -1,0 +1,12 @@
+
+set title 'Probabilidad de Colision. Sat=23560 & Deb=16681 TCA= 2004-9-29 23:56:02'
+set xlabel 'r_a = radio de colision [km]'
+set ylabel 'PoC'
+set grid
+pk(x)=0.0001546
+parx(x)=0.00002
+plot pk(x) t 'PoC (Klinkrad)=0.0001546', parx(x) t 'PoC (ARxCODE) = 0.00002', 'pocvsra.txt' u 1:2 t 'Escenario 5'
+set terminal postscript eps enhanced color font 'Helvetica,10'
+set output 'klinkradEsc5.eps'
+replot
+set term x11

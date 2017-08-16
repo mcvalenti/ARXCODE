@@ -18,6 +18,7 @@ I was expecting a `{' or a `('---line 249 of file template_tesis_mdiae.bib
  : @BOOK{osweiler,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "Klinkard"
 Warning--I didn't find a database entry for "IADC"
 Warning--empty year in stk
 Warning--empty year in sgp4python
@@ -25,45 +26,45 @@ Warning--empty journal in karacalioglu2016impact
 Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty year in nasaprogramme
 Warning--empty publisher in osweiler
-You've used 27 entries,
+You've used 28 entries,
             1940 wiz_defined-function locations,
-            617 strings with 7092 characters,
-and the built_in function-call counts, 8469 in all, are:
-= -- 814
-> -- 263
-< -- 26
-+ -- 91
-- -- 80
-* -- 658
-:= -- 1538
-add.period$ -- 77
-call.type$ -- 27
-change.case$ -- 170
-chr.to.int$ -- 24
-cite$ -- 33
-duplicate$ -- 361
-empty$ -- 615
-format.name$ -- 119
-if$ -- 1621
+            627 strings with 7281 characters,
+and the built_in function-call counts, 8831 in all, are:
+= -- 848
+> -- 276
+< -- 27
++ -- 97
+- -- 84
+* -- 692
+:= -- 1601
+add.period$ -- 80
+call.type$ -- 28
+change.case$ -- 177
+chr.to.int$ -- 25
+cite$ -- 34
+duplicate$ -- 375
+empty$ -- 641
+format.name$ -- 126
+if$ -- 1690
 int.to.chr$ -- 4
 int.to.str$ -- 0
-missing$ -- 27
-newline$ -- 134
-num.names$ -- 81
-pop$ -- 154
+missing$ -- 28
+newline$ -- 139
+num.names$ -- 84
+pop$ -- 158
 preamble$ -- 1
-purify$ -- 175
+purify$ -- 182
 quote$ -- 0
-skip$ -- 278
+skip$ -- 289
 stack$ -- 0
-substring$ -- 491
-swap$ -- 57
+substring$ -- 514
+swap$ -- 59
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 148
+type$ -- 154
 warning$ -- 6
-while$ -- 65
+while$ -- 68
 width$ -- 0
-write$ -- 329
+write$ -- 342
 (There was 1 error message)

@@ -300,7 +300,7 @@ A su vez, independiente del gobierno Ruso, el Keldysh Institute of Applied Mathe
 La red cuenta con 30 telescopios en el rango de 0.5 a 2.6 metros de di\'ametro, repartidos en 20 observatorios de 8 pa\'ises en todo el mundo.\\
 
 Por su parte, la ESA inici\'o programas de monitoreo hace ya varios a\~nos.\\
-En la actualidad predominan las investigaciones realizadas por las agencias espaciales: la Agenzia Spaziale Italiana (ASI) de Italia, el  British National Space Centre (BNSC) de  Inglaterra, CNES (Francia), y DLR (Alemania), con el apoyo de la industria, institutos de investigaci\'on y universidades. En los \'ultimos 10 a\~nos han estado trabajando en forma coordinada para implementar un Sistema Europeo de Vigilancia Espacial.
+En la actualidad predominan las investigaciones realizadas por las agencias espaciales: la Agenzia Spaziale Italiana (ASI) de Italia, el  British National Space Centre (BNSC) de  Inglaterra, el Centre National d'Études Spatiales (CNES) de Francia, y el Deutsche Zentrum fur Luft- und Raumfahrt  (DLR) de Alemania, con el apoyo de la industria, institutos de investigaci\'on y universidades. En los \'ultimos 10 a\~nos han estado trabajando en forma coordinada para implementar un Sistema Europeo de Vigilancia Espacial.
 A tal fin cuentan con varios telescopios \'opticos como el Zeiss de 1 metro de Tenerife, el Schimdt y Tarot en Francia, o los sensores PIMS (Passive Imaging Sensors) del Reino Unido, y con importantes radares, como el TIRA (Tracking and Imaging Radar) en Alemania, o los m\'as modernos EISCAT Y EICAT 3D (European Incoherent Scatter Radar) que logran detecciones de objetos del orden de los cent\'imetros a distancias de 800 kil\'ometros.
 
 
@@ -313,7 +313,7 @@ A tal fin cuentan con varios telescopios \'opticos como el Zeiss de 1 metro de T
 
 
 
-\section{Las Regulaciones Nacionales e Internacionales}
+\section{Las regulaciones nacionales e internacionales}
 
 Dado el car\'acter global de esta problem\'atica, distintas naciones y agencias internacionales con gran desarrollo y actividad espacial, se han estado organizado en la b\'usqueda de acuerdos y buenas pr\'acticas. Entre los organismos que coordinan las recomendaciones, se encuentran:\\
 
@@ -323,7 +323,7 @@ Dado el car\'acter global de esta problem\'atica, distintas naciones y agencias 
 \item CCSDS: Consultative Committee for Space Data Systems
 \end{itemize}
 
-La NASA fue la primera en adoptar un set de lineamientos para la mitigaci\'on de los desechos espaciales en 1995, que fueron posteriormente incorporados por el gobierno de EE.UU en 1997.\\
+La NASA fue la primera en adoptar un conjunto de lineamientos para la mitigaci\'on de los desechos espaciales en 1995, que fueron posteriormente incorporados por el gobierno de EE.UU en 1997.\\
 En el a\~no 2002 el IADC conformado por diez pa\'ises y la ESA, elabor\'o un nuevo conjunto de lineamientos.
 Finalmente en 2007 el subcomit\'e cient\'ifico y tecnol\'ogico del COPUOS aun\'o los esfuerzos y reuni\'o todos los trabajos previos, logrando un consenso en los lineamientos definitivos promulgados por la ONU en 2008 \citep{nasaprogramme}.\\
 
@@ -367,12 +367,12 @@ Espaciales (ESOC) - Darmstadt, Alemania. \cite{alarconRodriguez}\\
 \label{tab:sisal}
 \end{table}
 
-\section{La \ac{CONAE}}
+\section{La Comisi\'on Nacional de Actividades Espaciales (CONAE)}
 De acuerdo con el Plan Nacional Espacial: {\bf{ Argentina en el Espacio 2004-2015}}, las misiones de la CONAE, fundamentalmente pensadas para observaci\'on de la Tierra, ocupan \'orbitas bajas de dise\~no estrat\'egico Fig. \ref{fig:Dvsaltura}. Es decir, se ubican en regiones de mucha demanda y en consecuencia se encuentran expuestas a un alto riesgo de colisi\'on.\\
 En nuestro pa\'is, compete a la CONAE; quien tiene la facultad de mantener las relaciones con los organismos internacionales, garantizar que se cumplan los distintos convenios y acuerdos a los que Argentina ha adherido, como por ejemplo el {\it{Convenio sobre la Responsabilidad Internacional por da\~nos causados por objetos espaciales}}, suscrito por la Rep\'ublica Argentina el 29 de marzo de 1972 (LEY N 23.335, sancionada: Julio 30 de 1986 - promulgada: Agosto 19 de 1986.1).\\
 As\'i mismo, como miembro parte de la ONU, responde ante el COPUOS en materia de buenas pr\'acticas para la mitigaci\'on de la generaci\'on de desechos espaciales.\\
 
-Como se indica en la Sec. \ref{subsec:redes}, las \'unicas naciones que cuentan con una red de rastreo con capacidad de detectar, rastrear y catalogar objetos son EE.UU y Rusia. De manera que Argentina planifica y ejecuta sus maniobras de riesgo a partir de informaci\'on que le proveen servicios externos.\\
+Como se indica en la Sec. \ref{subsec:redes}, las \'unicas naciones que cuentan con una red de rastreo con capacidad de detectar, rastrear y catalogar objetos son los EE.UU y Rusia. De manera que la Argentina planifica y ejecuta sus maniobras de riesgo a partir de informaci\'on que le proveen servicios externos.\\
 
 \section{Planteo del Problema}
 
@@ -413,5 +413,14 @@ colisiones, que se reciben de organismos internacionales de rastreo.
 \item Calcular la \ac{PoC} para caracterizar la situaci\'on de encuentro.
 \item Desarrollar un prototipo de software (ARxCODE) para el procesamiento de la informaci\'on, el manejo de las notificaciones, la visualizaci\'on del evento y la generaci\'on de reportes.
 \end{itemize}
+
+\section{Estructura del trabajo}
+
+Se presenta en esta secci\'on la estructura de este trabajo.\\
+
+En el siguiente cap\'itulo: {\bf{Marco Te\'orico}}, se describen los conceptos te\'oricos que se relacionan a la problem\'atica de las colisiones. Se detallan las distintas maneras en que se calculan las posiciones de los objetos seg\'un sean misiones operativas o desechos espaciales, los modelos de propagaci\'on, los formatos de publicaci\'on de la informaci\'on y los sistemas de referencia que utilizamos en este trabajo. En este cap\'itulo se dedica una secci\'on especial para el tratamiento de los errores en las posiciones y en las propagaciones, donde se describen el m\'etodo de Osweiler y el m\'etodo de propagaci\'on propuesto. Contin\'ua la secci\'on que contiene la informaci\'on te\'orica referida al c\'alculo de la probabilidad de colisi\'on (m\'etodo de Lei-Chen) y finalmente una secci\'on dedicada al mensaje estandarizado de alerta \ac{CDM}.
+
+En el cap\'itulo 3 de {\bf{Metodolog\'ia de Desarrollo}}, se indican las distintas fases del desarrollo incremental del prototipo de software ARxCODE    y las especificaciones correspondientes al entorno de desarrollo. 
+
 
 \endinput
