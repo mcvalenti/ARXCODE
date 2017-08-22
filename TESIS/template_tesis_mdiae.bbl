@@ -1,7 +1,7 @@
 \begin{thebibliography}{}
 
-\bibitem[\protect\astroncite{{Analytical Graphics, Inc.}}{}]{stk}
-{Analytical Graphics, Inc.}
+\bibitem[\protect\astroncite{{Analytical Graphics, Inc.}}{2016}]{stk}
+{Analytical Graphics, Inc.} (2016).
 \newblock System tool kit - stk 11x64.
 
 \bibitem[\protect\astroncite{{Babiker} et~al.}{2012}]{babiker}
@@ -11,8 +11,8 @@
   challenges.
 \newblock In {\em SpaceOps Conference}.
 
-\bibitem[\protect\astroncite{{Brandon Rhodes}}{}]{sgp4python}
-{Brandon Rhodes}.
+\bibitem[\protect\astroncite{{Brandon Rhodes}}{2015}]{sgp4python}
+{Brandon Rhodes} (2015).
 \newblock sgp4-1.4.
 
 \bibitem[\protect\astroncite{Brouwer}{1959}]{brouwer1959solution}
@@ -84,15 +84,15 @@ Kessler, D. and Cour-Palais, B. (1978).
   debris belt.
 \newblock {\em Journal of Geophysical Research}, 83:2637--2646.
 
-\bibitem[\protect\astroncite{Klinkrad}{2006a}]{KlinkradChapter8}
+\bibitem[\protect\astroncite{Klinkrad}{2006a}]{Klinkrad}
 Klinkrad, H. (2006a).
-\newblock {\em Space Debris. Models and Risk Analysis}, chapter~8, pages
-  215--241.
+\newblock {\em Space Debris. Models and Risk Analysis}.
 \newblock Springer.
 
-\bibitem[\protect\astroncite{Klinkrad}{2006b}]{Klinkrad}
+\bibitem[\protect\astroncite{Klinkrad}{2006b}]{KlinkradChapter8}
 Klinkrad, H. (2006b).
-\newblock {\em Space Debris. Models and Risk Analysis}.
+\newblock {\em Space Debris. Models and Risk Analysis}, chapter~8, pages
+  215--241.
 \newblock Springer.
 
 \bibitem[\protect\astroncite{Kozai}{1962}]{kozai1962second}

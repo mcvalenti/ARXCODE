@@ -33,14 +33,14 @@ RTN.
 # poc_p=0.0002186
 
 # ESCENARIO #5
-sat_id='23560'
-deb_id='16681'
-TCA=datetime(2004,9,29,23,56,02,0)
-min_d=0.067
-dr='xxx'
-dt='xxx'
-dn='xxx'
-poc_p=0.0001546
+# sat_id='23560'
+# deb_id='16681'
+# TCA=datetime(2004,9,29,23,56,02,0)
+# min_d=0.067
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.0001546
 
 #Flohrer Krag Klinkrad - (ENVI - COSMOS)
 # sat_id='27386'
@@ -97,14 +97,14 @@ poc_p=0.0001546
 # poc_p=0.000018
 
 # linea 5
-# sat_id='17583'
-# deb_id='37442'
-# TCA=datetime(2013,3,16,14,02,50,0)
-# min_d=0.039
-# dr='xxx'
-# dt='xxx'
-# dn='xxx'
-# poc_p=0.0000939
+sat_id='17583'
+deb_id='37442'
+TCA=datetime(2013,3,16,14,02,50,0)
+min_d=0.039
+dr='xxx'
+dt='xxx'
+dn='xxx'
+poc_p=0.0000939
 
 #==================================================
 
