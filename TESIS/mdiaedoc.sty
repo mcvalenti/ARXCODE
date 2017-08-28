@@ -15,7 +15,14 @@
 
 %------------------------------------------------------------------------------
 %Paquete para modificar el caption de las figuras (letra mas chica y en negrita)
+\usepackage{booktabs,setspace}
 \usepackage[footnotesize,bf,justification=centering]{caption}
+\DeclareCaptionLabelSeparator*{spaced}{\\[2ex]}
+\captionsetup[table]{textfont=it,format=plain,justification=justified,
+  singlelinecheck=false,labelsep=spaced,skip=0pt} 
+\captionsetup[figure]{labelsep=period,labelfont=it,justification=centering,
+  singlelinecheck=false} % ,font=doublespacing
+
 
 %------------------------------------------------------------------------------
 %Paquete para agregar footnotes a las tablas
@@ -147,6 +154,7 @@
 \renewcommand{\spanishlisttablename}{Índice de tablas}
 
 %\renewcommand{\subsectionmark}[1]{\markright{\textit{#1}}}
+\renewcommand{\arraystretch}{1.2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Para enumerar las subsubsecciones
@@ -158,7 +166,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\setcounter{tocdepth}{3}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Eliminar la linea encima de los footnotes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \renewcommand\footnoterule{\rule{\linewidth}{0pt}}
@@ -356,3 +364,8 @@ Por
 
 \definecolor{LightCyan}{rgb}{0.8,0.8,0.8}
 \definecolor{LightBlue}{RGB}{160,160,160}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% formato de identacion de parrafos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parindent}{12pt}

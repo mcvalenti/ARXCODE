@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: template_tesis_mdiae.aux
 A level-1 auxiliary file: secciones/Resumen.aux
@@ -19,41 +19,39 @@ I was expecting a `{' or a `('---line 249 of file template_tesis_mdiae.bib
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--I didn't find a database entry for "Klinkard"
-Warning--I didn't find a database entry for "IADC"
 Warning--empty journal in karacalioglu2016impact
 Warning--can't use both author and editor fields in KlinkradChapter8
-Warning--empty year in nasaprogramme
 Warning--empty publisher in osweiler
 You've used 28 entries,
             1940 wiz_defined-function locations,
-            628 strings with 7285 characters,
-and the built_in function-call counts, 8835 in all, are:
+            627 strings with 7280 characters,
+and the built_in function-call counts, 8837 in all, are:
 = -- 848
 > -- 276
 < -- 27
-+ -- 97
++ -- 98
 - -- 84
-* -- 696
+* -- 698
 := -- 1603
 add.period$ -- 80
 call.type$ -- 28
 change.case$ -- 177
-chr.to.int$ -- 25
-cite$ -- 32
+chr.to.int$ -- 24
+cite$ -- 31
 duplicate$ -- 375
 empty$ -- 641
 format.name$ -- 126
 if$ -- 1690
-int.to.chr$ -- 4
+int.to.chr$ -- 5
 int.to.str$ -- 0
 missing$ -- 28
 newline$ -- 139
 num.names$ -- 84
-pop$ -- 154
+pop$ -- 152
 preamble$ -- 1
 purify$ -- 182
 quote$ -- 0
-skip$ -- 293
+skip$ -- 295
 stack$ -- 0
 substring$ -- 514
 swap$ -- 59
@@ -61,8 +59,8 @@ text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 154
-warning$ -- 4
+warning$ -- 3
 while$ -- 68
 width$ -- 0
-write$ -- 344
+write$ -- 345
 (There was 1 error message)

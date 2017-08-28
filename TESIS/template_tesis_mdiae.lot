@@ -1,38 +1,38 @@
 \select@language {spanish}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {1.1}{\ignorespaces Clasificaci\'on de Desechos seg\'un la IADC}}{4}{table.caption.23}
-\contentsline {table}{\numberline {1.2}{\ignorespaces Objetos en \'Orbita al 4 de Abril de 2017.}}{5}{table.caption.24}
-\contentsline {table}{\numberline {1.3}{\ignorespaces Da\~no seg\'un el tama\~no del desecho.}}{10}{table.caption.32}
-\contentsline {table}{\numberline {1.4}{\ignorespaces Sistemas de Alerta}}{14}{table.caption.42}
+\contentsline {table}{\numberline {1.1}{\ignorespaces Clasificaci\'on de Desechos seg\'un la IADC}}{4}{table.caption.24}
+\contentsline {table}{\numberline {1.2}{\ignorespaces Objetos en \'Orbita al 4 de Abril de 2017.}}{5}{table.caption.25}
+\contentsline {table}{\numberline {1.3}{\ignorespaces Da\~no seg\'un el tama\~no del desecho.}}{10}{table.caption.33}
+\contentsline {table}{\numberline {1.4}{\ignorespaces Sistemas de Alerta}}{14}{table.caption.43}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {2.1}{\ignorespaces Tabla con los valores medios para la propagaci\'on de errores.}}{28}{table.caption.61}
-\contentsline {table}{\numberline {2.2}{\ignorespaces Trabajos sobre el c\'alculo de la PoC}}{30}{table.caption.64}
+\contentsline {table}{\numberline {2.1}{\ignorespaces Tabla con los valores medios para la propagaci\'on de errores.}}{28}{table.caption.62}
+\contentsline {table}{\numberline {2.2}{\ignorespaces Trabajos sobre el c\'alculo de la PoC}}{30}{table.caption.65}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {4.1}{\ignorespaces Tabla de Requerimientos}}{44}{table.caption.81}
-\contentsline {table}{\numberline {4.2}{\ignorespaces Caso de Uso: Procesar Encuentro}}{47}{table.caption.85}
+\contentsline {table}{\numberline {4.1}{\ignorespaces Tabla de Requerimientos}}{45}{table.caption.82}
+\contentsline {table}{\numberline {4.2}{\ignorespaces Caso de Uso: Procesar Encuentro}}{49}{table.caption.86}
 \addvspace {10\p@ }
-\contentsline {table}{\numberline {5.1}{\ignorespaces Resultados que genera ARxCODE utilizando la librer\'ia sgp4 de python para la propagaci\'on.\relax }}{58}{table.caption.112}
-\contentsline {table}{\numberline {5.2}{\ignorespaces Resultados del Systems Tool Kit (STK) propagando el mismo TLE que ARxCODE.\relax }}{58}{table.caption.113}
-\contentsline {table}{\numberline {5.3}{\ignorespaces Sat\'elites de Estudio}}{59}{table.caption.114}
-\contentsline {table}{\numberline {5.4}{\ignorespaces Matriz de Covarianza de la Bibliograf\'ia \citep {osweiler} - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{59}{table.caption.116}
-\contentsline {table}{\numberline {5.5}{\ignorespaces Matriz de Covarianza que produce ARxCODE - Sat\'elite ICESAT en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{59}{table.caption.116}
-\contentsline {table}{\numberline {5.6}{\ignorespaces Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler \citep {osweiler}\relax }}{59}{table.caption.117}
-\contentsline {table}{\numberline {5.7}{\ignorespaces Matriz de Covarianza de la Bibliograf\'ia \citep {osweiler}- Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{59}{table.caption.119}
-\contentsline {table}{\numberline {5.8}{\ignorespaces Matriz de Covarianza que produce ARxCODE - Sat\'elite LAGEOS-1 en la ventana temporal del 1-Mar-03 al 16-Mar-03\relax }}{59}{table.caption.119}
-\contentsline {table}{\numberline {5.9}{\ignorespaces Diferencias de los valores calculados por ARxCODE respecto a los valores publicados en el trabajo de Osweiler.\relax }}{59}{table.caption.120}
-\contentsline {table}{\numberline {5.10}{\ignorespaces Valores Medios en la comparaci\'on de los resultados de la transformaci\'on de TEME a TOD de ARxCODE, con los resultados que ofrece el software STK. Propagaciones para todo el d\'ia 1 de Enero de 2013, con paso 1 minuto.\relax }}{62}{table.caption.126}
-\contentsline {table}{\numberline {5.11}{\ignorespaces Tabla con los valores medios para la propagaci\'on de errores.}}{63}{table.caption.130}
-\contentsline {table}{\numberline {5.12}{\ignorespaces Resultados Comparativos del c\'alculo de la PoC.\relax }}{64}{table.5.12}
-\contentsline {table}{\numberline {5.13}{\ignorespaces Vectores de Posiciones Inerciales al momento TCA. Extra\'idos del ejemplo de la bibliograf\'ia \citep {leichen}\relax }}{65}{table.caption.134}
-\contentsline {table}{\numberline {5.14}{\ignorespaces Resultados comparativos de la transformaci\'on entre sistemas de referencia utilizando el m\'odulo {\it {sisRic}} de autor\'ia propia y los datos de la bibliograf\'ia \citep {leichen}.\relax }}{65}{table.caption.135}
-\contentsline {table}{\numberline {5.15}{\ignorespaces Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los correos electr\'onicos, propagando cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{67}{table.caption.139}
-\contentsline {table}{\numberline {5.16}{\ignorespaces Resultados que se obtienen con ARxCODE incorporando a la informaci\'on de los correos electr\'onicos, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{67}{table.caption.140}
-\contentsline {table}{\numberline {5.17}{\ignorespaces Comparaci\'on de las m\'inimas distancias de acercamiento utilizando ARxCODE con distintos pasos de propagaci\'on, correspondientes a un segundo y cien mil micro segundos, con los resultados que indican los correos electr\'onicos.\relax }}{67}{table.caption.141}
-\contentsline {table}{\numberline {5.18}{\ignorespaces Resultados que se obtienen con ARxCODE a partir de la informaci\'on de los CDM, propagando cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{68}{table.caption.145}
-\contentsline {table}{\numberline {5.19}{\ignorespaces Resultados que se obtienen con ARxCODE incorporando la informaci\'on de los correos electr\'onicos, el valor de los segundos en el TCA y propagando cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{69}{table.caption.146}
-\contentsline {table}{\numberline {5.20}{\ignorespaces Comparaci\'on de las m\'inimas distancias de acercamiento utilizando ARxCODE con distintos pasos de propagaci\'on, correspondientes a un segundo y cien mil micro segundos, con los resultados que indican los CDM. (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{69}{table.caption.147}
-\contentsline {table}{\numberline {5.21}{\ignorespaces Comparaci\'on de las m\'inimas distancias de acercamiento y las PoC calculadas con ARxCODE con los resultados publicados por Klinkrad \citep {Klinkard}. Paso de propagaci\'on cien mil $\mu $s y radio de colisi\'on $r_{a}=0.01$ km\relax }}{69}{table.caption.149}
-\contentsline {table}{\numberline {5.22}{\ignorespaces Comparaci\'on de las m\'inimas distancias de acercamiento y las PoC calculadas con ARxCODE con los resultados publicados por Xu \& Xiong \citep {xu2014method}. Paso de propagaci\'on cien mil $\mu $s y radio de colisi\'on $r_{a}=0.01$ km. (*) No se obtuvieron TLEs del desecho para la fecha publicada. \relax }}{70}{table.caption.150}
+\contentsline {table}{\numberline {5.1}{\ignorespaces Resultados que genera ARxCODE utilizando la librer\'ia sgp4 de python para la propagaci\'on.\relax }}{59}{table.caption.113}
+\contentsline {table}{\numberline {5.2}{\ignorespaces Resultados del Systems Tool Kit (STK) propagando el mismo TLE que ARxCODE.\relax }}{59}{table.caption.114}
+\contentsline {table}{\numberline {5.3}{\ignorespaces Sat\'elites de Estudio}}{60}{table.caption.115}
+\contentsline {table}{\numberline {5.4}{\ignorespaces Matriz de Covarianza. \citep {osweiler} ICESAT del 1-Mar-03 al 16-Mar-03.\relax }}{60}{table.caption.117}
+\contentsline {table}{\numberline {5.5}{\ignorespaces Matriz de Covarianza de ARxCODE. ICESAT del 1-Mar-03 al 16-Mar-03.\relax }}{60}{table.caption.117}
+\contentsline {table}{\numberline {5.6}{\ignorespaces Diferencias de ARxCODE respecto a Osweiler \citep {osweiler}\relax }}{60}{table.caption.118}
+\contentsline {table}{\numberline {5.7}{\ignorespaces Matriz de Covarianza. \citep {osweiler} LAGEOS-1 del 1-Mar-03 al 16-Mar-03\relax }}{61}{table.caption.120}
+\contentsline {table}{\numberline {5.8}{\ignorespaces Matriz de Covarianza de ARxCODE LAGEOS-1 del 1-Mar-03 al 16-Mar-03\relax }}{61}{table.caption.120}
+\contentsline {table}{\numberline {5.9}{\ignorespaces Diferencias de ARxCODE respecto a Osweiler, \citep {osweiler}.\relax }}{61}{table.caption.121}
+\contentsline {table}{\numberline {5.10}{\ignorespaces Comparaci\'on entre ARxCODE y STK de la transformaci\'on de TEME a TOD.\relax }}{63}{table.caption.127}
+\contentsline {table}{\numberline {5.11}{\ignorespaces Tabla con los valores medios para la propagaci\'on de errores.}}{65}{table.caption.131}
+\contentsline {table}{\numberline {5.12}{\ignorespaces Resultados Comparativos del c\'alculo de la PoC.\relax }}{66}{table.5.12}
+\contentsline {table}{\numberline {5.13}{\ignorespaces Vectores de Posiciones Inerciales al momento TCA.\relax }}{66}{table.caption.135}
+\contentsline {table}{\numberline {5.14}{\ignorespaces Comparaci\'on entre el m\'odulo {\it {sisRic}} de autor\'ia propia y los datos de Lei-Chen \citep {leichen}.\relax }}{67}{table.caption.136}
+\contentsline {table}{\numberline {5.15}{\ignorespaces ARxCODE a partir de correos electr\'onicos Propagaciones cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{69}{table.caption.140}
+\contentsline {table}{\numberline {5.16}{\ignorespaces ARxCODE a partir de correos electr\'onicos Propagaciones cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{69}{table.caption.141}
+\contentsline {table}{\numberline {5.17}{\ignorespaces M\'inimas distancias de acercamiento para distintos pasos de propagaci\'on y resultados de los los correos electr\'onicos.\relax }}{69}{table.caption.142}
+\contentsline {table}{\numberline {5.18}{\ignorespaces ARxCODE a partir de los CDM Propagaciones cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{70}{table.caption.146}
+\contentsline {table}{\numberline {5.19}{\ignorespaces ARxCODE a partir de los CDM Propagaciones cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{71}{table.caption.147}
+\contentsline {table}{\numberline {5.20}{\ignorespaces M\'inimas distancias de acercamiento para distintos pasos de propagaci\'on y resultados de los CDM. (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{71}{table.caption.148}
+\contentsline {table}{\numberline {5.21}{\ignorespaces Comparaci\'on de ARxCODE con los resultados de Klinkrad \citep {Klinkrad}. Paso de propagaci\'on, cien mil $\mu $s y radio de colisi\'on $r_{a}=0.01$ km\relax }}{71}{table.caption.150}
+\contentsline {table}{\numberline {5.22}{\ignorespaces Comparaci\'on de ARxCODE con los resultados de Xu \& Xiong \citep {xu2014method}. Paso de propagaci\'on cien mil $\mu $s y radio de colisi\'on $r_{a}=0.01$ km. \relax }}{72}{table.caption.151}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

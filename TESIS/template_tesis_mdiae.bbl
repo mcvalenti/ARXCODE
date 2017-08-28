@@ -123,11 +123,6 @@ Montenbruck, O. and Gill, E. (2012).
 \newblock {\em Satellite orbits: models, methods and applications}.
 \newblock Springer Science \& Business Media.
 
-\bibitem[\protect\astroncite{NASA}{}]{nasaprogramme}
-NASA.
-\newblock {Orbital Debris Program Office}.
-\newblock https://orbitaldebris.jsc.nasa.gov/.
-
 \bibitem[\protect\astroncite{NASA}{2014}]{ODQN14}
 NASA (2014).
 \newblock Space missions and satellite box score.
@@ -138,8 +133,13 @@ NASA (2017a).
 \newblock The od environment in numbers.
 \newblock {\em Orbital Debris Quarterly News}, 21.
 
-\bibitem[\protect\astroncite{NASA}{2017b}]{ODQN}
+\bibitem[\protect\astroncite{NASA}{2017b}]{nasaprogramme}
 NASA (2017b).
+\newblock {Orbital Debris Program Office}.
+\newblock http://orbitaldebris.jsc.nasa.gov/.
+
+\bibitem[\protect\astroncite{NASA}{2017c}]{ODQN}
+NASA (2017c).
 \newblock Space missions and satellite box score.
 \newblock {\em Orbital Debris Quarterly News}, 21.
 
