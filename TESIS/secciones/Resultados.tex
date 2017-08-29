@@ -5,23 +5,25 @@
 
 \section{Introducci\'on}
 En este cap\'itulo se presentan los distintos escenarios que fueron planteados para la validaci\'on de los procesos.\\
+
 Dado que para la metodolog\'ia de estimaci\'on de errores que proponemos, utilizamos datos reales de una misi\'on operativa argentina, hubiera sido
-deseable contar con datos de alertas de colisiones reales propios de esa misi\'on, ya que esto hubiera permitido hacer una validaci\'on end-to-end de todo el prototipo. No obstante, por cuestiones de confidencialidad, no fue posible tener acceso a esa informaci\'on.\\
+deseable contar con datos de alertas de colisiones reales propios de esa misi\'on, ya que esto hubiera permitido hacer una validaci\'on end-to-end de todo el prototipo. No obstante, por cuestiones de confidencialidad, no fue posible tener acceso a esa informaci\'on.
 Frente a este panorama, se detalla a continuaci\'on la secuencia de etapas de validaci\'on que permiten evaluar, cada una de las instancias del procesamiento.\\
 
 En primer lugar fue fundamental corroborar las propagaciones de los TLE realizadas con la librer\'ia de python {\it{sgp4-1}} \citep{sgp4python}, para ello utilizamos la versi\'on de prueba que ofrece el software STK: {\it{System Tool Kit}}, \citep{stk}.\\
+
 Para la validaci\'on de los resultados de la implementaci\'on del m\'etodo de Osweiler en la generaci\'on de matrices de covarianza, se compararon los resultados de ARxCODE para dos de los escenarios que se publican en el trabajo.\\
 
 El m\'etodo que se propone para la estimaci\'on de la propagaci\'on de errores, es el que m\'as dificultades present\'o para ser validado. Al basarse plenamente en los datos de la misi\'on cuyos resultados de colisi\'on de alerta no pudieron ser suministrados, fue analizado en comparaci\'on con resultados estad\'isticos globales, o sobre el estudio de encuentros de otras misiones.\\
 
 Finalmente la implementaci\'on del c\'alculo de probabilidad de colisi\'on fue evaluada a partir de registros p\'ublicos de encuentros anteriores recopilados de internet en formato de correos electr\'onicos o CDM; y tomando datos de estudios publicados en el libro de Klinkrad \citep{Klinkrad} y en el trabajo de Xu y Xiong \citep{xu2014method}\\
 
-\section{Implentenaci\'on del modelo SGP4 en Python}
+\section{Implementaci\'on del modelo SGP4 en Python}
 
 Para la propagaci\'on de las posiciones orbitales con el modelo SGP4 (Sec. \ref{subsec:sgp4model}) utilizamos la librer\'ia de python {\bf{sgp4-1}} \citep{sgp4python}.
 Luego usamos el software STK para comparar nuestras propagaciones y asegurarnos la correcta utilizaci\'on y configuraci\'on de la librer\'ia sgp4-1.\\
 
-Se listan a continuaci\'on dos tablas con las efem\'erides de la misi\'on operativa durante los primeros cuatro minutos del d\'ia 01/01/2013.
+Las Tablas \ref{tab:arcode}  y \ref{tab:stk} muestran las efem\'erides de la misi\'on operativa durante los primeros cuatro minutos del d\'ia 01/01/2013.
 Ambas fueron generadas a partir del mismo TLE y presentan resultados que difieren en algunos metros para los peores casos. Resultado aceptable, teniendo en cuenta que las estimaciones groseras de errores para las propagaciones hechas con TLEs y SGP4 acarrean errores de kil\'ometros o decenas de kil\'ometros.\\
 
 \underline{TLE.}
@@ -75,12 +77,10 @@ Epoca & x [km] & y [km] & z [km] & vx $[km/s]$ & vy $[km/s]$ & vz $[km/s]$\\
 
 \section{Estudio de errores de TLE con datos hist\'oricos}
 
-El trabajo de Osweiler publica los resultados de las matrices de covarianza generadas, para 6 misiones y 8 ventanas de tiempo.\\
-Para la validaci\'on se tomaron dos escenarios muy diferentes en cuanto a la altura del sat\'elite: LAGEOS-1 a m\'as de $5000$ km y ICESAT a $600 $ km, Tabla \ref{tab:satescenarios}.
-Se presentan a continuaci\'on las tablas con los resultados comparativos, entre los valores publicados (Tablas \ref{tab:icesatOSW} y \ref{tab:lageosOSW}) y los valores obtenidos por ARxCODE (Tablas \ref{tab:icesatARX} y \ref{tab:lageosARX}) para una \'unica ventana temporal.\\
-Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura, que se ve m\'as perturbado por el efecto atmosf\'erico, que no es modelable con precisión; mientras que el LAGEOS-1 presenta errores muchos \'ordenes de magnitud menor.\\
+El trabajo de Osweiler publica los resultados de las matrices de covarianza generadas, para 6 misiones y 8 ventanas de tiempo.
+Para la validaci\'on se tomaron dos escenarios muy diferentes en cuanto a la altura del sat\'elite: LAGEOS-1 a m\'as de $5000$ km y ICESAT a $600 $ km, (Tabla \ref{tab:satescenarios}).
 
-\begin{table}
+\begin{table}[!h]
 \caption[Sat\'elites de Estudio]{Resumen de las caracter\'isticas de los sat\'elites a analizar.}
 
       \begin{tabular}{cccccc}
@@ -93,6 +93,10 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
       \end{tabular}
     \label{tab:satescenarios}
 \end{table}
+
+Se presentan a continuaci\'on las tablas con los resultados comparativos, entre los valores publicados (Tablas \ref{tab:icesatOSW} y \ref{tab:lageosOSW}) y los valores obtenidos por ARxCODE (Tablas \ref{tab:icesatARX} y \ref{tab:lageosARX}) para una \'unica ventana temporal.\\
+
+Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura, que se ve m\'as perturbado por el efecto atmosf\'erico, que no es modelable con precisión; mientras que el LAGEOS-1 presenta errores muchos \'ordenes de magnitud menor.\\
 
 \subsection*{Tablas comparativas ICESAT}
 
@@ -149,8 +153,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
 
 \subsection*{Tablas comparativas LAGEOS-1}
 
-
-\begin{table}[!h]
+\begin{table}
 \centering
 \makebox[0pt][c]{\parbox{1.0\textwidth}{%
     \begin{minipage}[b]{0.48\hsize}
@@ -186,7 +189,7 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
 }}
 \end{table}
 
-\begin{table}[!h]
+\begin{table}
 \caption{Diferencias de ARxCODE respecto a Osweiler, \citep{osweiler}.}
  \begin{tabular}{cccc}
   \hline
@@ -200,14 +203,13 @@ Puede apreciarse, que los errores son muy grandes para el ICESAT, de baja altura
  \label{tab:lageoscomp}
 \end{table}
 
-Las diferencias que resultan en la comparaci\'on con los resultados que arroja ARxCODE, son todas menores a los metros (Tablas \ref{tab:icesatcomp} y \ref{tab:lageoscomp}).\\
-En particular LAGEOS muestra errores menores que ICESAT, ya que al ser un sat\'elite a mayor altura, el efecto atmosf\'erico es menor y el modelo de propaci\'on, se adapta mejor.\\
-
+Las diferencias que resultan en la comparaci\'on con los resultados que arroja ARxCODE, son todas menores a los metros (Tablas \ref{tab:icesatcomp} y \ref{tab:lageoscomp}). En particular LAGEOS muestra errores menores que ICESAT, ya que al ser un sat\'elite a mayor altura, el efecto atmosf\'erico es menor y el modelo de propagaci\'on, se adapta mejor.\\
 
 \subsection*{Diferencias de los escenarios iterando el TLE primario en el m\'etodo de Osweiler}
-Estudio hecho sobre los errores que se producen en las propagaciones de los TLE en funci\'on de la cantidad de d\'ias que se propaguen.\\
+Estudio hecho sobre los errores que se producen en las propagaciones de los TLE en funci\'on de la cantidad de d\'ias que se propaguen.
 Estos resultados ofrecen mayor informaci\'on respecto a los errores que se comenten en funci\'on de la cantidad de d\'ias que se propagan los TLE.\\
-Para la generaci\'on de los datos, se propagaron todos los TLE del conjunto hacia las fechas de todos los TLE con fechas m\'as actualizadas, dentro del conjunto, Fig. \ref{fig:todosOSW}. Las diferencias que resultaron se plasman en funci\'on del intervalo de propagaci\'on, en las Fig. \ref{fig:icesatTot} y Fig. \ref{fig:lageosTot} para el ICESAT y el LAGEOS respectivamente. 
+
+Para la generaci\'on de los datos, se propagaron todos los TLE del conjunto hacia las fechas de todos los TLE con fechas m\'as actualizadas, dentro del conjunto (Fig. \ref{fig:todosOSW}). Las diferencias que resultaron se plasman en funci\'on del intervalo de propagaci\'on, en las Figuras \ref{fig:icesatTot} y \ref{fig:lageosTot} para el ICESAT y el LAGEOS respectivamente. 
 
 
 \begin{figure}[!h]
@@ -243,21 +245,22 @@ Para la generaci\'on de los datos, se propagaron todos los TLE del conjunto haci
 \end{figure}
 
 Los errores que se observan en la propagaci\'on de TLE, en funci\'on de la cantidad de d\'ias propagados, muestran comportamientos casi id\'enticos.\\
+
 En este estudio, puede apreciarse una clara diferencia en las cotas de los errores, siendo el sat\'elite ICESAT, de menor altura el que muestra errores mayores en un rango de -120 a 60 km, mientras que el LAGEOS, contiene las diferencias entre -2 y 1 km.\\
+
 No obstante, en ambos se distingue, que la componente asociada a la velocidad (V {\it{in-track}}) es la que mayor error acumula en propagaciones m\'as largas. Esto se debe a que el modelo es d\'ebil en cuanto a la perturbaci\'on que introduce la atm\'osfera, directamente vinculada a la velocidad de los objetos para el caso del ICESAT o en cuanto al modelo que describe la presi\'on de radiaci\'on solar en el caso del LAGEOS.\\
 
 Se concluye a partir de esta secci\'on, que ARxCODE implementa el m\'etodo de Osweiler y la construcci\'on de las diferencias de pares correctamente. 
 
 \section{Estudio de errores de TLE con efem\'erides precisas}
 \subsection*{Sistema de referencia TOD}
-La misi\'on operativa ofrece mediciones propias de sus efem\'erides.\\
-En esta secci\'on se muestran los resultados de comparar las posiciones obtenidas mediante los datos p\'ublicos TLE, propagadas con SGP4, contra las efem\'erides precisas.\\ 
+La misi\'on operativa ofrece mediciones propias de sus efem\'erides. En esta secci\'on se muestran los resultados de comparar las posiciones obtenidas mediante los datos p\'ublicos TLE, propagadas con SGP4, contra las efem\'erides precisas.\\ 
 
 En primer lugar fue necesario plasmar las posiciones en el mismo sistema de referencia, ya que los productos del departamento de din\'amica orbital con los que trabajamos ofrecen las posiciones orbitales en el sistema de referencia verdadero de la fecha \ac{TOD}, mientras que los resultados de las propagaciones con el SGP4 se encuentran en el sistema \ac{TEME}. Para poder hacer comparaciones desarrollamos un m\'odulo que transforma las coordenadas y velocidades, del sistema TEME al sistema TOD (Ap\'endice. \ref{App1}).\\
 
-Para la validaci\'on del mismo, utilizamos TLE de la misi\'on y los propagamos con el SGP4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos del STK, corridos para el mismo TLE y publicados en el sistema TOD que STK ofrece. Las comparaciones se hicieron para propagaciones con paso de 1 minuto a lo largo de todo el dia 01 de Enero de 2013. Los resultados mostraron diferencias menores a los mil\'imetros, de manera que el algoritmo puede usarse sin que incorpore errores significativos.\\
+Para la validaci\'on del mismo, utilizamos TLE de la misi\'on y los propagamos con el SGP4. Los resultados que obtuvimos (en el sistema TEME), los transformamos al sistema TOD con el m\'odulo de transformaci\'on desarrollado y luego lo comparamos con los productos del STK, corridos para el mismo TLE y publicados en el sistema TOD que STK ofrece. Las comparaciones se hicieron para propagaciones con paso de 1 minuto a lo largo de todo el dia 01 de Enero de 2013. Los resultados mostraron diferencias menores a los mil\'imetros, de manera que el algoritmo puede usarse sin que incorpore errores significativos  (Tabla \ref{tab:compprecisas}).\\
 
-\begin{table}
+\begin{table}[!h]
 \caption{Comparaci\'on entre ARxCODE y STK de \\la transformaci\'on de TEME a TOD.}
 \begin{tabular}{l|c}
   \hline
@@ -266,32 +269,32 @@ Para la validaci\'on del mismo, utilizamos TLE de la misi\'on y los propagamos c
   Coordenada Z &  0.0005133 [m]\\
   \hline
 \end{tabular}
+\label{tab:compprecisas}
 \begin{flushleft}
-\small {\it{Nota.}} 1 de Enero de 2013, paso 1 minuto.
+\small 1 de Enero de 2013, paso 1 minuto.
 \end{flushleft}
 
 \end{table}
 
 \subsection*{Estad\'istica de Errores}
-Con la certeza de que los datos eran compatibles y pod\'ian ser comparados (ambos se referencian en el sistema TOD), se inici\'o el procesamiento de comparaci\'on de las posiciones de las efem\'erides precisas de la misi\'on y las propagaciones de los TLE, para la estimaci\'on de los errores de la propagaci\'on, (Sec. \ref{subsec:errorProp}).
+Con la certeza de que los datos eran compatibles y pod\'ian ser comparados (ambos se referencian en el sistema TOD), se inici\'o el procesamiento de comparaci\'on de las posiciones de las efem\'erides precisas de la misi\'on y las propagaciones de los TLE, para la estimaci\'on de los errores de la propagaci\'on, (Sec. \ref{subsec:errorProp}).\\
 
 En un pre-procesamiento sobre un periodo amplio de la misi\'on, constatamos que fuera de los intervalos de maniobras por {\it{commissioning}}\footnote{Puesta en \'orbita nominal} o maniobras de rutina, los TLE presentan un error que es {\it{acotado}}, {\it{estable}} y/o modelable. \\
 
-Las comparaciones de las propagaciones de los TLE mostraron significativas aleatoriedades y amplias diferencias en el estudio realizado con los datos correspondientes al a\~no 2012, no obstante los resultados del estudio con datos del a\~no 2013 mostraron la tendencia y estabilidad esperada, ver Fig. \ref{fig:sacd2013}, con errores m\'aximos del orden de las decenas de kil\'ometros.
+Las comparaciones de las propagaciones de los TLE mostraron significativas aleatoriedades y amplias diferencias en el estudio realizado con los datos correspondientes al a\~no 2012, no obstante los resultados del estudio con datos del a\~no 2013 mostraron la tendencia y estabilidad esperada, con errores m\'aximos del orden de las decenas de kil\'ometros (Fig. \ref{fig:sacd2013}).
 
 
 \begin{figure}[!h]
 \centering
   \textbf{Tendencia Anual 01/01/2013 - 30/08/2013}\par\medskip
-  \includegraphics[width=0.9\textwidth]{imagenes/SACD2013todEjesajustados}
+  \includegraphics[width=\textwidth]{imagenes/SACD2013todEjesajustados}
   \caption{Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD}
   \label{fig:sacd2013}
 \end{figure}
 
 \subsection*{Generaci\'on de la tabla de propagaci\'on de errores}
 
-Como se explic\'o en la Sec. \ref{subsec:errorProp}, para estimar los errores en la propagaci\'on se propone un m\'etodo que utiliza una tabla, Tab. \ref{tab:resultatabla}, generada a partir de la estad\'istica que resulta de comparar las propagaciones de los TLE de la misi\'on operativa, con las efem\'erides precisas. Las comparaciones se hacen en el periodo de Enero a Junio del a\~no 2013, en intervalos de 1 a 6 d\'ias, con paso 1 segundo.\\
-Los resultados que se encuentran, no es posible validarlos directamente. No obstante, son comparables a los que proponen Flohrer et al., \citep{flohrer2008assessment}, en la {\it{lookup table}} generada considerando todos los objetos del cat\'alogo al 01 de Enero de 2008, ver Fig. \ref{fig:flohrer}. Los valores de las desviaciones est\'andar que resultan del m\'etodo propuesto son menores casi en un orden de magnitud a las tablas gen\'ericas que publican Flohrer et al., \citep{flohrer2008assessment}, esto es de esperar, ya que los estudios de la publicaci\'on son m\'as abarcativos y gen\'ericos.\\
+Como se explic\'o en la Sec. \ref{subsec:errorProp}, para estimar los errores en la propagaci\'on se propone un m\'etodo que utiliza una tabla (Tabla \ref{tab:resultatabla}), generada a partir de la estad\'istica que resulta de comparar las propagaciones de los TLE de la misi\'on operativa, con las efem\'erides precisas. Las comparaciones se hacen en el periodo de Enero a Junio del a\~no 2013, en intervalos de 1 a 6 d\'ias, con paso 1 segundo.\\
 
 \begin{table}[!h]
 \caption[Tabla con los valores medios para la propagaci\'on de errores.]{Valores medios de las varianzas calculadas para la propagaci\'on de errores.\\ Autor\'ia propia.}
@@ -318,6 +321,8 @@ Los resultados que se encuentran, no es posible validarlos directamente. No obst
 \label{tab:resultatabla}
 \end{table}
 
+Los resultados que se encuentran, no es posible validarlos directamente. No obstante, son comparables a los que proponen Flohrer et al., \citep{flohrer2008assessment}, en la {\it{lookup table}} generada considerando todos los objetos del cat\'alogo al 01 de Enero de 2008 (Fig.  \ref{fig:flohrer}). Los valores de las desviaciones est\'andar que resultan del m\'etodo propuesto son menores casi en un orden de magnitud a las tablas gen\'ericas que publican Flohrer et al., \citep{flohrer2008assessment}, esto es de esperar, ya que los estudios de la publicaci\'on son m\'as abarcativos y gen\'ericos.\\
+
 \begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=0.6\textwidth]{imagenes/flohrertabla}}
@@ -339,9 +344,10 @@ El c\'alculo de la PoC implementa la expresi\'on presentada por Lei-Chen, \citep
 
 
 \subsection*{Comparaci\'on de los resultados con la resoluci\'on de la integral}
-Con el objeto de verificar los c\'alculos que se realizan en el m\'odulo, se toman como datos iniciales, los valores publicados por el propio autor Lei-Chen, \citep{leichen}, y se calcula la PoC, tanto para la expresi\'on anal\'itica como la integral. Para esta \'ultima se utiliza la biblioteca {\it{scipy.integrate}}  de python.
+Con el objeto de verificar los c\'alculos que se realizan en el m\'odulo, se toman como datos iniciales, los valores publicados por el propio autor Lei-Chen, \citep{leichen}, y se calcula la PoC, tanto para la expresi\'on anal\'itica como la integral. Para esta \'ultima se utiliza la biblioteca {\it{scipy.integrate}}  de python.\\
 
 De las expresiones para el c\'alculo de la PoC (Eq. \ref{eq:pocintegral} y Eq. \ref{eq:pocexpress}), se desprende que ser\'an necesarios los datos: ($\mu_{x}, \mu_{y}$), ($\sigma_{x}, \sigma_{y}$), $r_{a}$.\\
+
 Se tomaron los datos que utiliza Lei-Chen en el ejemplo para el caso de las \'orbitas circulares y se calcul\'o la PoC a partir de la expresi\'on expl\'icita y realizando la integral.\\
 
 \begin{minipage}[t]{0.28\textwidth}
@@ -393,7 +399,7 @@ Ahora resta verificar, paso a paso c\'omo llegar de los inputs de ARxCODE, a est
 
 Una vez determinadas la posici\'on relativa de los objetos en el sistema RSW o RTN en el TCA, la proyecci\'on al plano para \'orbitas circulares, no representa mayores problemas, como se detall\'o en la Sec. \ref{subsec:pocsimp}.\\
 
-Pero es importante verificar, que a partir de las posiciones inerciales de los objetos en el TCA, las transformaciones de la distancia relativa de los mismos al sistema RSW, coincide.\\
+Pero es importante verificar, que a partir de las posiciones inerciales de los objetos en el TCA, las transformaciones de la distancia relativa de los mismos al sistema RSW, coincide.
 Para ello, vamos a utilizar las posiciones de los objetos del ejemplo de la bibliograf\'ia (Tabla \ref{tab:vectejemplo}) y transformarlas con el m\'odulo de transformaci\'on {\it{sisRic}} del paquete {\it{SistReferencia.SistdeCoordenadas}} para corroborar los resultados.
 \\
 
@@ -427,21 +433,23 @@ ARxCODE & 0.031797& 0.462295 &0.522013
 \label{tab:rswcomp}
 \end{table}
 
-Estos resultados que se publican en la tabla \ref{tab:rswcomp}, se logran en una transformaci\'on en la que se considere al Obj2 como origen de la referencia. Los mismos muestran una coincidencia del orden de las decenas de metros, aceptable para estas estimaciones.\\
+Estos resultados que se publican en la Tabla \ref{tab:rswcomp}, se logran en una transformaci\'on en la que se considere al Obj2 como origen de la referencia. Los mismos muestran una coincidencia del orden de las decenas de metros, aceptable para estas estimaciones.
 No obstante, contando s\'olo con la informaci\'on de los vectores de posici\'on al momento del m\'aximo acercamiento, no es posible verificar el m\'etodo de Osweiler de la construcci\'on de la matriz de covarianza para este ejemplo de la bibliograf\'ia.\\
 
-\subsection*{Validaci\'on end-to-end}
-Hasta este punto, se han ido validando cada uno de los procesos por separado.\\
-Resta hacer pruebas desde el origen, es decir a partir de identificar los objetos y el TCA, correr los procesamientos de ARxCODE y obtener los resultados de la PoC.\\
+\subsection*{Validaci\'on {\it{end-to-end}}}
+Hasta este punto, se han validado cada uno de los procesos por separado.
+Resta hacer pruebas desde el origen, es decir a partir de identificar los objetos y el TCA, correr los procesamientos de ARxCODE y obtener los resultados de la PoC.
 A tal fin, fue necesario conseguir registros que contuvieran la informaci\'on completa de una situaci\'on de encuentro.\\
-Por un lado tuvimos acceso a correos electr\'onicos de alerta p\'ublicos en internet, y por otro a CDM tambi\'en p\'ublicos\footnote{https://cwe.ccsds.org/moims/docs/Forms/AllItems.aspx?RootFolder=\%2Fmoims\%2Fdocs\%2FMOIMS-NAV\%2FDraft\%20Documents\%2FConjunction\%20Data\%20Message\%20\%28CDM\%29}, pero ninguno de esos datos se corresponden con la misi\'on operativa, cuyas efem\'erides precisas analizamos y utilizamos en la construcci\'on del modelo estad\'istico de propagaci\'on de errores.\\
-As\'i mismo, ni los correos encontrados ni los CDM descargados, contienen informaci\'on de la PoC asociada al encuentro. \\
+
+Por un lado tuvimos acceso a correos electr\'onicos de alerta p\'ublicos en internet, y por otro a CDM tambi\'en p\'ublicos\footnote{https://cwe.ccsds.org/moims/docs/Forms/AllItems.aspx?RootFolder=\%2Fmoims\%2Fdocs\%2FMOIMS-NAV\%2FDraft\%20Documents\%2FConjunction\%20Data\%20Message\%20\%28CDM\%29}, pero ninguno de esos datos se corresponden con la misi\'on operativa, cuyas efem\'erides precisas analizamos y utilizamos en la construcci\'on del modelo estad\'istico de propagaci\'on de errores.
+As\'i mismo, ni los correos encontrados ni los CDM descargados contienen informaci\'on de la PoC asociada al encuentro. \\
+
 Finalmente se analizaron casos presentados en libros o publicaciones, que contienen los datos iniciales necesarios para disparar el procesamiento y valores de la PoC.\\
 
 
 \subsubsection*{Validaci\'on con correos electr\'onicos de alerta p\'ublicos}
 
-El proceso de validaci\'on utilizando los correos electr\'onicos obtenidos en la web, consiste de extraer de los correos los identificadores de norad de ambos objetos y el TCA asociado al encuentro. A partir de all\'i se calcula la m\'inima distancia total, o sea el m\'odulo de la misma, y  en componentes en el sistema RTN y finalmente la PoC.\\
+El proceso de validaci\'on utilizando los correos electr\'onicos obtenidos en la web, consiste de extraer de los correos los identificadores de norad de ambos objetos y el TCA asociado al encuentro. A partir de all\'i se calcula la m\'inima distancia total, o sea el m\'odulo de la misma, y  en componentes en el sistema RTN y finalmente la PoC.
 Dado que el TCA que se publica en los correos no tiene informaci\'on de los segundos, se realiza una primera estimaci\'on, y luego se profundiza en an\'alisis de la situaci\'on.\\
 
 Formato de los correos electr\'onicos:\\
@@ -471,14 +479,15 @@ Secondary Cross-track Error (W): 2 meters\\
 
 {\bf{Nota:}} Los los correos electr\'onicos no informan los segundos del TCA. Fue necesario primero hacer una primera estimaci\'on m\'as precisa del TCA del encuentro y luego volver a procesar incorporando los segundos. 
 
-Se listan a continuaci\'on los cinco correos electr\'onicos cuyos datos fueron procesados con ARxCODE. La figura \ref{fig:tablamails}, muestra el resumen de la informaci\'on de todos los correos electr\'onicos. A partir de esa informaci\'on se carg\'o manualmente el identificador de NORAD del sat\'elite (sat\_id), el identificador de NORAD del desecho (deb\_id), y el TCA de cada situaci\'on; en un primer paso se utiliz\'o ARxCODE para obtener el valor de los segundos del TCA. Luego se propag\'o para el TCA que inclu\'ia los segundos, con pasos de propagaci\'on distintos, en un caso cada un segundo (Tabla \ref{tab:mails1seg}) y en otro caso para un paso menor, de cien mil microsegundos (Tabla \ref{tab:mails100mseg}).\\
-
+Se listan a continuaci\'on los cinco correos electr\'onicos cuyos datos fueron procesados con ARxCODE. La Figura \ref{fig:tablamails}, muestra el resumen de la informaci\'on de todos los correos electr\'onicos. 
 \begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{imagenes/tablamails}}
   \caption{Contenido de los correos electr\'onicos utilizados para comparar los resultados.}
   \label{fig:tablamails}
 \end{figure}
+
+A partir de esa informaci\'on se carg\'o manualmente el identificador de NORAD del sat\'elite (sat\_id), el identificador de NORAD del desecho (deb\_id), y el TCA de cada situaci\'on; en un primer paso se utiliz\'o ARxCODE para obtener el valor de los segundos del TCA. Luego se propag\'o para el TCA que inclu\'ia los segundos, con pasos de propagaci\'on distintos, en un caso cada un segundo (Tabla \ref{tab:mails1seg}) y en otro caso para un paso menor, de cien mil microsegundos (Tabla \ref{tab:mails100mseg}).\\
 
 \begin{table}[!h]
 \caption{ARxCODE a partir de correos electr\'onicos\\ Propagaciones cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km)}
@@ -546,7 +555,7 @@ Se listan a continuaci\'on los cinco correos electr\'onicos cuyos datos fueron p
 \label{tab:mailsMinD}
 \end{table}
 
-Como puede apreciarse en la tabla de comparaciones, Tab. \ref{tab:mailsMinD}, los distintos pasos de propagaci\'on no modifican los resultados significativamente, salvo en el primer caso. De manera que resulta importante revisar instancias previas, es decir analizar las matrices de error de cada objeto generadas por ARxCODE (Figura \ref{fig:tablaMAmails}).\\
+Como puede apreciarse en la Tabla \ref{tab:mailsMinD} de las comparaciones, los distintos pasos de propagaci\'on no modifican los resultados significativamente, salvo en el primer caso. De manera que resulta importante revisar instancias previas, es decir analizar las matrices de error de cada objeto generadas por ARxCODE (Fig. \ref{fig:tablaMAmails}).\\
 
  \begin{figure}[!h]
   \centering
@@ -556,17 +565,18 @@ Como puede apreciarse en la tabla de comparaciones, Tab. \ref{tab:mailsMinD}, lo
 \end{figure}
 
 Se observa, que las matrices calculadas para introducir en el c\'alculo del encuentro de ARxCODE, introducen errores muy grandes y los elementos de su diagonal, correspondientes a las varianzas en cada una de las componentes RTN, son mucho mayores a las que se indican en los mails.\\
+
 De estos resultados se desprende que los valores publicados en los mails, son m\'as precisos a los que se pueden lograr con ARxCODE y seguramente han sido calculados con datos observacionales de rastreo m\'as precisos que la informaci\'on orbital que ofrecen los TLE. 
 
 \subsubsection*{Validaci\'on con CDM p\'ublicos}
 
-Se listan a continuaci\'on los seis CDM cuyos datos fueron procesados con ARxCODE (Figura \ref{fig:cdmsproc}). A partir de esa informaci\'on se carg\'o manualmente el identificador de NORAD del sat\'elite (sat\_id), el identificador de NORAD del desecho (deb\_id), el TCA de cada situaci\'on. Se calcul\'o la m\'inima distancia y la PoC, con pasos de propagaci\'on distintos, en un caso cada un segundo (Tabla \ref{tab:cdmsproc1seg}) y en otro caso para un paso menor, de cien mil microsegundos (Tabla \ref{tab:cdmsproc100mseg}).\\
+Se listan a continuaci\'on los seis CDM cuyos datos fueron procesados con ARxCODE (Fig. \ref{fig:cdmsproc}). A partir de esa informaci\'on se carg\'o manualmente el identificador de NORAD del sat\'elite (sat\_id), el identificador de NORAD del desecho (deb\_id), el TCA de cada situaci\'on. Se calcul\'o la m\'inima distancia y la PoC, con pasos de propagaci\'on distintos, en un caso cada un segundo (Tabla \ref{tab:cdmsproc1seg}) y en otro caso para un paso menor, de cien mil microsegundos (Tabla \ref{tab:cdmsproc100mseg}).\\
  
  \begin{figure}[!h]
   \centering
   \fbox{\includegraphics[width=\textwidth]{imagenes/tablaCDM}}
   \caption{Contenido de los CDM utilizados para comparar los resultados.}
-  \label{fig:tablamails}
+  \label{fig:cdmsproc}
 \end{figure}
  
  \begin{table}[!h]
@@ -642,11 +652,12 @@ Se listan a continuaci\'on los seis CDM cuyos datos fueron procesados con ARxCOD
 \end{table}
 
 Para estos \'ultimos procesamientos es notoria la diferencia que se produce cuando se incrementa el paso de propagaci\'on al orden de los cien mil microsegundos; logrando as\'i que los valores calculados por ARxCODE para las m\'inimas distancias se aproximen al valor que publican los CDM.\\
+
 No se pudo identificar a qu\'e se debe esta distinci\'on entre las mejoras que se logran en los CDM, que no se logran en la informaci\'on que proviene de los correos electr\'onicos, aunque probablemente se deba a la incerteza en el TCA que introducen los correos al no informar el TCA con precisi\'on del segundo.\\
 
 \subsubsection*{Validaci\'on con bibliograf\'ia que incluye PoC}
 
-En el cap\'itulo ocho de su libro, Klinkrad \citep{Klinkrad}, publica una tabla que contiene siete situaciones de encuentros de riesgo para las misiones ENVISAT y ERS-2. De esos escenarios s\'olo se han podido reproducir dos, ya que no fue posible identificar los c\'odigos de NORAD de los desechos involucrados en el resto de los encuentros.\\
+En el cap\'itulo ocho de su libro, Klinkrad \citep{Klinkrad}, publica una tabla que contiene siete situaciones de encuentros de riesgo para las misiones ENVISAT y ERS-2. De esos escenarios s\'olo se han podido reproducir dos, ya que no fue posible identificar los c\'odigos de NORAD de los desechos involucrados en el resto de los encuentros.
 Para esos dos escenarios, se calcularon la m\'inima distancia y la PoC, y se compararon los resultados con los publicados en el libro de Klinkrad (Tabla \ref{tab:escenariosKlinkrad}).\\
 
  \begin{table}[!h]
@@ -695,17 +706,18 @@ En un mismo sentido, se utilizaron los valores publicados en el trabajo de Xu y 
 \label{tab:escenariosxx}
 \end{table}
 
-En las comparaciones se observa que los resultados de ARxCODE distan en centenares de metros con los datos encontrados en la bibliograf\'ia para la determinaci\'on de la m\'inima distacia, y en uno o dos \'ordenes de magnitud en el c\'alculo de la PoC.\\
+En las comparaciones se observa que los resultados de ARxCODE distan en centenares de metros con los datos encontrados en la bibliograf\'ia para la determinaci\'on de la m\'inima distacia, y en uno o dos \'ordenes de magnitud en el c\'alculo de la PoC.
 Mientras que para el caso de las m\'inimas distancias, los valores de ARxCODE son siempre superiores a los valores d e la bibliograf\'ia, en el caso de las PoC no hay un comportamiento repetido, siendo que para algunos casos en por mucho mayor al valor de la bibliograf\'ia y en otros caso menor.\\ 
 
 \subsubsection*{C\'alculo de la PoC en funci\'on del radio de colisi\'on}
 
-Las \'ultimas situaciones (trabajos de Klinkrad \citep{Klinkrad} y Xi \& Xiong \citep{xu2014method}) que se utilizaron para comparar los resultados de ARxCODE, dan informaci\'on de los objetos involucrados y del TCA, no obstante, no se informa sobre la estimaci\'on que han hecho para el radio de colisi\'on.\\
+Las \'ultimas situaciones; trabajos de Klinkrad \citep{Klinkrad} y Xi \& Xiong \citep{xu2014method}; que se utilizaron para comparar los resultados de ARxCODE, dan informaci\'on de los objetos involucrados y del TCA, no obstante, no se informa sobre la estimaci\'on que han hecho para el radio de colisi\'on.\\
 
-A continuaci\'on las figuras \ref{fig:pocvsraEsc4} y \ref{fig:pocvsraEsc5} muestran los valores de la PoC calculados con ARxCODE en funci\'on del radio de colisi\'on elegido, para los escenarios del libro de Klinkrad descriptos previamente.\\
+A continuaci\'on las Figuras \ref{fig:pocvsraEsc4} y \ref{fig:pocvsraEsc5} muestran los valores de la PoC calculados con ARxCODE en funci\'on del radio de colisi\'on elegido, para los escenarios del libro de Klinkrad descriptos previamente.\\
+
 Como puede verse, el c\'alculo de la PoC resulta muy sensible al radio de colisi\'on considerado. Se desconoce cu\'al es el radio utilizado por Klinkrad, pero puede distinguirse que en un rango de radios de $r_{a}=0.001$ hasta $r_{a}=0.03$ kil\'ometros, se ubican las soluciones de la bibliograf\'ia.\\
 
-Se adjuntan en el ap\'endice \ref{App2}, los gr\'aficos an\'alogos para los resultados del trabajo de Xu \& Xiong.\\
+Se adjuntan en el Ap\'endice \ref{App2}, los gr\'aficos an\'alogos para los resultados del trabajo de Xu \& Xiong.\\
 
  
 \begin{figure}[!h]

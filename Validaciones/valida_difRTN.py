@@ -14,23 +14,23 @@ from SistReferencia.sist_deCoordenadas import ricSis
 from Encuentro.Encuentro import Encuentro
 
 """
-Dados dos objetos cuyos identificadores se conocen
-y un TCA entre ellos.
-Se calculan las posiciones relativas en las componentes
-RTN.
+Para cada una de las situaciones ejemplo
+calcula la Min Dist. y la PoC. 
+Luego imprime las diferencias entre lo calculado
+y publicado. 
 """
 #==================================================
 # Kilnkrad tabla (pag 236)
 #==================================================
-# ESCENARIO #4 
-# sat_id='27386'
-# deb_id='12442'
-# TCA=datetime(2004,9,2,19,14,11,0)
-# min_d=1.297
-# dr='xxx'
-# dt='xxx'
-# dn='xxx'
-# poc_p=0.0002186
+#ESCENARIO #4 
+sat_id='27386'
+deb_id='12442'
+TCA=datetime(2004,9,2,19,14,11,0)
+min_d=1.297
+dr='xxx'
+dt='xxx'
+dn='xxx'
+poc_p=0.0002186
 
 # ESCENARIO #5
 # sat_id='23560'
@@ -97,14 +97,14 @@ RTN.
 # poc_p=0.000018
 
 # linea 5
-sat_id='17583'
-deb_id='37442'
-TCA=datetime(2013,3,16,14,02,50,0)
-min_d=0.039
-dr='xxx'
-dt='xxx'
-dn='xxx'
-poc_p=0.0000939
+# sat_id='17583'
+# deb_id='37442'
+# TCA=datetime(2013,3,16,14,02,50,0)
+# min_d=0.039
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.0000939
 
 #==================================================
 
@@ -279,71 +279,3 @@ print 'TCA publicado = ',TCA
 print 'Minima distancia total = ',min_d
 print 'Minima Distancia RTN = ',dr,dt,dn
 print 'PoC publicada =', poc_p
-# -------------------------------
-# Prueba de ajuste de posiciones
-# -------------------------------
-# mod_minDist=sys.float_info.max
-# ajuste=np.array([0.055976182388,0.0469271749738,0.0274533794103])
-# TCA_ini=TCA-timedelta(seconds=3)
-# TCA_fin=TCA+timedelta(seconds=3)
-# fecha0_calculado=[]
-# dist_calcualda=[]
-# while TCA_ini <= TCA_fin:
-#     r_sat,v_sat=tle_sat.propagaTLE(TCA_ini)
-#     r_deb,v_deb=tle_deb.propagaTLE(TCA_ini)
-#     r=np.array([float(r_sat[0]),float(r_sat[1]),float(r_sat[2])])
-#     v=np.array([float(v_sat[0]),float(v_sat[1]),float(v_sat[2])])
-#     r1=np.array([float(r_deb[0]),float(r_deb[1]),float(r_deb[2])])
-#     v1=np.array([float(v_deb[0]),float(v_deb[1]),float(v_deb[2])])
-#     # Diferencias
-#     dist_pos=r1-r
-#     dist_vel=v1-v
-#     x_ric,y_ric,z_ric=ricSis(r,v,dist_pos)  # centro en satelite          
-#     DistRic=np.array([x_ric,y_ric,z_ric])
-#     mod_Dist1=np.sqrt(np.dot(DistRic,DistRic))
-#     if mod_Dist1 < mod_minDist:
-#         mod_minDist=mod_Dist1
-#         TCA_min=TCA_ini
-#     TCA_ini=TCA_ini+timedelta(microseconds=100000)
-#     fecha0_calculado.append(TCA_ini)
-#     dist_calcualda.append(mod_Dist1)
-# #    print TCA_ini, mod_Dist1
-# print '**************************************************'
-# print 'Calculado'
-# print '**************************************************'
-# print 'El TCA calculadO es = ', TCA_min
-# print 'La minima distancia calculada es = ', mod_minDist
-# fecha0=fecha0_calculado[0]
-# dt=[]
-# for fecha in fecha0_calculado:
-#     dt.append((fecha-fecha0).total_seconds())
-# plt.ylim(-3,3)
-# plt.title('Acercamiento ENVI vs COSMOS 2008/01/09 - 19:00:29')
-# plt.ylabel('Km')
-# plt.xlabel('Segundos')
-# plt.grid()
-# plt.plot(dt, dist_calcualda, 'r-', label='Minima Distancia')
-# plt.legend(loc=3)
-# plt.show()
-#==========================
-# Valida Mails
-#==========================
-# 
-# tabla_mails=open('../CDM/mails/tabla_mails','r')
-# contenido=tabla_mails.readlines()
-# n=0
-# mail=contenido[n]
-# linea_data=mail.split()
-# sat_id=linea_data[0]
-# deb_id=linea_data[1]
-# TCA=linea_data[2]
-# dr=linea_data[3]
-# dt=linea_data[4]
-# dn=linea_data[5]
-# min_dist=linea_data[6]
-# var_r_sat=linea_data[7]
-# var_t_sat=linea_data[8]
-# var_n_sat=linea_data[9]
-# var_r_deb=linea_data[10]
-# var_t_deb=linea_data[11]
-# var_n_deb=linea_data[12]

@@ -39,7 +39,7 @@
 \BOOKMARK [1][-]{section.4.6}{Flujo din\341mico de ARxCODE}{chapter.4}% 39
 \BOOKMARK [0][-]{chapter.5}{Validaci\363n y Resultados}{}% 40
 \BOOKMARK [1][-]{section.5.1}{Introducci\363n}{chapter.5}% 41
-\BOOKMARK [1][-]{section.5.2}{Implentenaci\363n del modelo SGP4 en Python}{chapter.5}% 42
+\BOOKMARK [1][-]{section.5.2}{Implementaci\363n del modelo SGP4 en Python}{chapter.5}% 42
 \BOOKMARK [1][-]{section.5.3}{Estudio de errores de TLE con datos hist\363ricos}{chapter.5}% 43
 \BOOKMARK [1][-]{section.5.4}{Estudio de errores de TLE con efem\351rides precisas}{chapter.5}% 44
 \BOOKMARK [1][-]{section.5.5}{C\341lculo de la Probabilidad de Colisi\363n}{chapter.5}% 45
