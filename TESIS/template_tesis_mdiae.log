@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.9.3)  29 AUG 2017 14:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.9.3)  1 SEP 2017 11:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -7713,15 +7713,9 @@ LaTeX Info: Redefining \% on input line 25.
 (./secciones/Conclusiones.aux) (./secciones/Apendice.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 111.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 111.
+Package rerunfilecheck Info: File `template_tesis_mdiae.out' has not changed.
+(rerunfilecheck)             Checksum: C2E532810A3162F069EEEFD352CA8442;3725.
 
-
-Package rerunfilecheck Warning: File `template_tesis_mdiae.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `template_tesis_mdiae.out':
-(rerunfilecheck)             Before: 26224406E9CFE2518B55BD2199F5A349;3725
-(rerunfilecheck)             After:  C2E532810A3162F069EEEFD352CA8442;3725.
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -7752,7 +7746,7 @@ sr/share/texlive/texmf-dist/fonts/type1/urw/symbol/usyr.pfb></usr/share/texlive
 ts/type1/urw/times/utmb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/ti
 mes/utmbi8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on template_tesis_mdiae.pdf (106 pages, 4693918 bytes).
+Output written on template_tesis_mdiae.pdf (106 pages, 4693700 bytes).
 PDF statistics:
  1953 PDF objects out of 2073 (max. 8388607)
  1739 compressed objects within 18 object streams
