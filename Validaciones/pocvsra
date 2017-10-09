@@ -1,7 +1,7 @@
-
+set encoding utf8
 set title 'Probabilidad de Colision. Sat=23560 & Deb=16681 TCA= 2004-9-29 23:56:02'
-set xlabel 'r_a = radio de colision [km]'
-set ylabel 'PoC'
+set xlabel 'Radio de colision [km]' font "Times-Roman,20"
+set ylabel 'PoC' font "Times-Roman,20"
 set grid
 pk(x)=0.0001546
 parx(x)=0.00002

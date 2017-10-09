@@ -231,7 +231,6 @@ poc_p=0.0002186
 # dr=-0.1191 
 # dt=0.0003  
 # dn=0.092
-
    
    
 #tca_epoca=datetime.strptime(TCA,"%Y-%m-%dT%H:%M")
