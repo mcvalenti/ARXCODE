@@ -346,8 +346,7 @@ class ProcEncuentro(QDialog):
     def initUI(self):
         self.palette = QPalette()
         self.palette.setColor(QPalette.Background,Qt.white)
-        self.setPalette(self.palette)
-        
+        self.setPalette(self.palette)       
         """
         Etiquetas
         """
@@ -372,18 +371,14 @@ class ProcEncuentro(QDialog):
         Campos de Edicion
         """
         self.sat_id_text = QLineEdit()
+        self.sat_id_text.setText("25415")
         self.deb_id_text = QLineEdit() 
+        self.deb_id_text.setText("31445")
         # calendario
         # nice widget for editing the date  
         self.tca_text    = QDateEdit()  
+        self.tca_text.setDate(QDate(2013,03,18))
         self.tca_text.setCalendarPopup(True)
-
-#         self.fecha = self.tca_text.selectedDate()
-#        self.tca_text    = QCalendarWidget()
-        self.hs_tex      = QLineEdit()
-        self.min_tex     = QLineEdit()
-        self.seg_tex     = QLineEdit()
-        self.mseg_tex    = QLineEdit()
         """
         Otros
         """
@@ -394,8 +389,9 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)      
 #       # Fecha y Hora
         self.hora = QTimeEdit()
+        self.hora.setDisplayFormat("HH:mm:ss.zzz")
         self.progress = QProgressBar(self)
-#       self.hora.setTime(QTime(19,14,11))
+        self.hora.setTime(QTime(14,44,34.0))
         """
         Plantilla
         """
@@ -410,15 +406,7 @@ class ProcEncuentro(QDialog):
         grid.addWidget(self.time_lab,4,1)
 #        grid.addWidget(self.tca_text,4,2)
         grid.addWidget(self.tca_text,4,2)
-        grid.addWidget(self.hora,5,2)
-#         grid.addWidget(self.hs_tex,4,3)
-#         grid.addWidget(self.hs_lab,4,4)
-#         grid.addWidget(self.min_tex,4,5)
-#         grid.addWidget(self.min_lab,4,6)
-#         grid.addWidget(self.seg_tex,4,7)
-#         grid.addWidget(self.seg_lab,4,8)
-#         grid.addWidget(self.mseg_tex,4,9)
-#         grid.addWidget(self.mseg_lab,4,10)        
+        grid.addWidget(self.hora,5,2)       
         grid.addWidget(self.tableEncuentro,8,1,2,5)
         grid.addWidget(self.progress,10,1)
         grid.addWidget(self.track,2,4,5,3)
@@ -459,12 +447,7 @@ class ProcEncuentro(QDialog):
 #         # Importar los TLE de NORAD.    
         self.sat_id=str(self.sat_id_text.text())
         self.deb_id=str(self.deb_id_text.text())
-#         hs =int(self.hs_tex.text())
-#         min=int(self.min_tex.text())
-#         seg=int(self.seg_tex.text())
-#         fecha = self.tca_text.selectedDate()#.toPyDate()
-#         hora = QTime(hs,min,seg)
-#        self.tca=datetime(2004,9,2,19,14,11)#QDateTime(fecha,hora).toPyDateTime()
+
         tle_sat=Tle.creadoxParam(self.sat_id, self.tca)
         tle_deb=Tle.creadoxParam(self.deb_id, self.tca)
 #         
@@ -480,11 +463,11 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
         self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
-        self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(round(self.min_dist,7))))
-        self.tableEncuentro.setItem(0,4, QTableWidgetItem(str(self.poc_int)))
+        self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(round(self.min_dist,6))))
+        self.tableEncuentro.setItem(0,4, QTableWidgetItem(str(round(self.poc_int,8))))
         # formato de tabla
         header = self.tableEncuentro.horizontalHeader()
-        header.setResizeMode(0,QHeaderView.Stretch)
+        header.setResizeMode(0,QHeaderView.ResizeToContents)
         header.setResizeMode(1,QHeaderView.ResizeToContents)
         header.setResizeMode(2,QHeaderView.ResizeToContents)
         header.setResizeMode(3,QHeaderView.ResizeToContents)
@@ -1132,7 +1115,7 @@ if __name__ == '__main__':
     """
     INICIA LA INTERFAZ
     """
-    QApplication.setStyle("mac") # plastique, cde, motif, sgi, windows, cleanlooks, mac
+    QApplication.setStyle("windows") # plastique, cde, motif, sgi, windows, cleanlooks, mac
     app = QApplication(sys.argv)
     ex = ProcARxCODE()
     sys.exit(app.exec_())

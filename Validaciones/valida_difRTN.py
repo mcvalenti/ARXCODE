@@ -23,24 +23,24 @@ y publicado.
 # Kilnkrad tabla (pag 236)
 #==================================================
 #ESCENARIO #4 
-sat_id='27386'
-deb_id='12442'
-TCA=datetime(2004,9,2,19,14,11,0)
-min_d=1.297
-dr='xxx'
-dt='xxx'
-dn='xxx'
-poc_p=0.0002186
-
-# ESCENARIO #5
-# sat_id='23560'
-# deb_id='16681'
-# TCA=datetime(2004,9,29,23,56,02,0)
-# min_d=0.067
+# sat_id='27386'
+# deb_id='12442'
+# TCA=datetime(2004,9,2,19,14,11,0)
+# min_d=1.297
 # dr='xxx'
 # dt='xxx'
 # dn='xxx'
-# poc_p=0.0001546
+# poc_p=0.0002186
+
+# ESCENARIO #5
+sat_id='23560'
+deb_id='16681'
+TCA=datetime(2004,9,29,23,56,02,0)
+min_d=0.067
+dr='xxx'
+dt='xxx'
+dn='xxx'
+poc_p=0.0001546
 
 #Flohrer Krag Klinkrad - (ENVI - COSMOS)
 # sat_id='27386'

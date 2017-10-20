@@ -7,7 +7,7 @@ Extrae la informacion de los TLE
 """
 import os,glob
 from datetime import datetime
-from sgp4.earth_gravity import wgs72
+from sgp4.earth_gravity import wgs72, wgs84
 from sgp4.io import twoline2rv
 from requests import session, exceptions
 from datetime import timedelta
@@ -98,12 +98,12 @@ class Tle:
         return self.linea1.split()[1] #self.catID
         
     def epoca(self):
-        whichconst = wgs72
+        whichconst = wgs84
         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
         return satrec.epoch
     
     def propagaTLE(self,date=None):
-        whichconst = wgs72
+        whichconst = wgs84
         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
         if date==None:
             ffin=satrec.epoch
@@ -195,6 +195,9 @@ class SetTLE():
         Esta funcion particiona el archivo en muchos archivos, uno por cada tle.
         Y los guarda en TleAdmin/tle
         """
+        ruta_tle = r'../TleAdmin/tle/' 
+        if not os.path.exists(ruta_tle): os.makedirs(ruta_tle)
+        
         files=glob.glob('../TleAdmin/tle/*')
         for filename in files:
             os.unlink(filename)
