@@ -34,23 +34,22 @@ class ProcARxCODE(QMainWindow):
         super(ProcARxCODE, self).__init__()
         
         self.setWindowTitle('ARxCODE')
-        self.setWindowIcon(QIcon('nave.png'))
         extractAction = QAction("Salir", self)
         extractAction.setShortcut("Ctrl+Q")
         extractAction.setStatusTip('Leave The App')
         extractAction.triggered.connect(self.close_application)
         
-        """
-        Intento de correr desde el menu
-        """
-#         tleAction= QWidgetAction('TLE',self)
-#         tleAction.setStatusTip('Procesa datos TLE')
-#         tleAction.triggered.connect(self.ProcManual)
+        extractAction1 = QAction("&Matrices de Covarianza", self)
+        extractAction1.setStatusTip('Analisis de Errores')
+        extractAction1.triggered.connect(self.mostrar_matrices)
+        
         self.center()
-        self.statusBar()
+        self.statusBar().showMessage('Ready')
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
+        VerMenu = mainMenu.addMenu('&Ver')
+        VerMenu.addAction(extractAction1)
     
         self.inicio = QLabel() 
         figura_inicio = QPixmap('../visual/imagenes/orbitas') #nubeDebris') #cords_contol.jpg')
@@ -126,6 +125,11 @@ class ProcARxCODE(QMainWindow):
         ventana2=ProcEncuentro()
         self.setCentralWidget(ventana2)
         ventana2.exec_()
+        
+    def mostrar_matrices(self):
+        ventana3=MostrarMatrices()
+        self.setCentralWidget(ventana3)
+        ventana3.showNormal()
         
 #     def item_click(self):       
 #         cdm_click=self.listWidget.currentItem().text()
@@ -385,8 +389,12 @@ class ProcEncuentro(QDialog):
         self.tableEncuentro   = QTableWidget()
         self.tableEncuentro.setRowCount(1)
         self.tableEncuentro.setColumnCount(5)
-        listaLabels=['Sat Id','Deb Id','TCAarx','MinD arx','PoC']
-        self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)      
+        listaLabels=['Sat Id','Deb Id','TCA','MinD [km]','PoC']
+        self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
+        header = self.tableEncuentro.horizontalHeader()
+        header.setResizeMode(QHeaderView.Stretch) 
+        width = self.tableEncuentro.verticalHeader()
+        width.setResizeMode(QHeaderView.Stretch)    
 #       # Fecha y Hora
         self.hora = QTimeEdit()
         self.hora.setDisplayFormat("HH:mm:ss.zzz")
@@ -497,7 +505,67 @@ class ProcEncuentro(QDialog):
         
     def salir(self):
         self.accept()    
+    
+    
+class MostrarMatrices(QWidget):
+    def __init__(self, parent=None):
+        super(MostrarMatrices, self).__init__(parent)
         
+        self.initUI()
+        
+    def initUI(self):
+        
+        # group boxes
+        satellite_gbox = QGroupBox('&Satellite Data') 
+        refsist_gbox   = QGroupBox('&Reference System')
+        macovar_gbox   = QGroupBox('& COVARIANCE MATRIX')           
+        
+        # Satellite Data
+        self.norad_id   = QLabel('NORAD ID')
+        self.norad_text = QLineEdit()
+        self.date_time  = QLabel('Date and Time')
+        self.date_input = QDateEdit()
+        self.date_input.setCalendarPopup(True)
+        
+        # satellite GBOX layout
+        hlayout = QHBoxLayout()
+        hlayout.addWidget(self.norad_id)
+        hlayout.addWidget(self.norad_text)
+        hlayout.addWidget(self.date_time)
+        hlayout.addWidget(self.date_input)
+        satellite_gbox.setLayout(hlayout) 
+
+        # radiobuttons
+        eci_rbtn = QRadioButton('ECI')
+        rtn_rbtn = QRadioButton('RTN')
+        rtn_rbtn.setChecked(True)  # default option
+
+        # radiobuttons' layout
+        rb_vlayout =QVBoxLayout()
+        rb_vlayout.addWidget(eci_rbtn)
+        rb_vlayout.addWidget(rtn_rbtn)
+        refsist_gbox.setLayout(rb_vlayout)
+        
+        self.tableEncuentro   = QTableWidget()
+        self.tableEncuentro.setRowCount(3)
+        self.tableEncuentro.setColumnCount(3)
+        listaLabels=['Radial','Transverse','Normal']
+        header = self.tableEncuentro.horizontalHeader()
+        header.setResizeMode(QHeaderView.Stretch)
+        width = self.tableEncuentro.verticalHeader()
+        width.setResizeMode(QHeaderView.Stretch)
+        self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)  
+ 
+        # vertical box layout
+        vlayout = QVBoxLayout()
+        vlayout.addWidget(satellite_gbox)
+        vlayout.addWidget(refsist_gbox)
+        vlayout.addWidget(self.tableEncuentro)
+        vlayout.addStretch()
+        self.setLayout(vlayout)
+
+        self.setWindowTitle('Matrices de Error')    
+        self.show()
         
 # class ProcTle(QDialog):
 # 
