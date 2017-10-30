@@ -180,15 +180,26 @@ class ProcCDM(QDialog):
         self.palette.setColor(QPalette.Background,Qt.white)
         self.setPalette(self.palette)
         
+        # group boxes
+        cdmFile_gbox       = QGroupBox('&Seleccion de CDM')
+        configuration_gbox = QGroupBox('&Configuracion')
+        results_gbox       = QGroupBox('&Resultados del Procesamiento')
+        
         """
         Etiquetas
         """
         self.cdm_archivo = QLabel('Archivo CDM: ')   
-        self.opciones   = QLabel('Opciones')
+        self.opciones    = QLabel('Opciones')
+        self.object1     = QLabel('Objeto 1')
+        self.object2     = QLabel('Objeto 2')
+        self.noradId     = QLabel('NORAD ID')
+        
         """
         Campos de Edicion
         """   
-        self.archivo_tex=QLineEdit('cdmTerraPegasus10.xml') # seteo el archivo para las pruebas
+        self.archivo_tex  =QLineEdit('cdmTerraPegasus10.xml') # seteo el archivo para las pruebas
+        self.noradId_obj1 =QLineEdit()
+        self.noradId_obj2 =QLineEdit()
         """
         Botones
         """
@@ -199,32 +210,57 @@ class ProcCDM(QDialog):
         self.boton_salirCdm = QPushButton('SALIR')
         """
         OTROS
-        """                
-        moods = [QCheckBox("Posiciones Relativas en RTN"), QCheckBox("Procesamiento ARxCODE")] # botones de seleccion
+        """    
+        pos_rtn         = QCheckBox("Posiciones Relativas en RTN")
+        proc_arxcode    = QCheckBox("Procesamiento ARxCODE")
         self.tablePOC   = QTableWidget() # Tabla con los resultados
         self.tablePOC.setRowCount(2)
         self.tablePOC.setColumnCount(8)
         listaLabels=['Norad Id','Nombre','TCAcdm','TCAarx','MinD cdm','MinD arx','PoC cdm','PoC arx']
+        header = self.tablePOC.horizontalHeader()
+        header.setResizeMode(QHeaderView.Stretch)
+        width = self.tablePOC.verticalHeader()
+        width.setResizeMode(QHeaderView.Stretch)
         self.tablePOC.setHorizontalHeaderLabels(listaLabels)
-
         
-        grid = QGridLayout()
-        grid.setSpacing(5)
+        # CDM box layout
+        cdm_hlayout = QHBoxLayout()
+        cdm_hlayout.addWidget(self.cdm_archivo)
+        cdm_hlayout.addWidget(self.archivo_tex)
+        cdm_hlayout.addWidget(self.boton_dir)
+        cdmFile_gbox.setLayout(cdm_hlayout)
         
-        grid.addWidget(self.cdm_archivo,2,1)
-        grid.addWidget(self.archivo_tex,2,2)
-        grid.addWidget(self.boton_dir,2,3)
-        grid.addWidget( self.opciones,3,1)
-        grid.addWidget(moods[0],4,2)     
-        grid.addWidget(moods[1],5,2)
-        grid.addWidget(self.boton_cargar,6,3)
-#         grid.addWidget(self.boton_grafCdm,4,2)
-#         grid.addWidget(self.boton_informe,5,2)
-        grid.addWidget(self.boton_salirCdm,18,2)
-        grid.addWidget(self.tablePOC,8,1,3,7)
-
+        # Configuration layout 
+        configuration_hlayout = QHBoxLayout()
+        configuration_hlayout.addWidget(pos_rtn)
+        configuration_hlayout.addWidget(proc_arxcode)
+        configuration_gbox.setLayout(configuration_hlayout)
         
-        self.setLayout(grid)
+        #------------------
+        # Results layout
+        #------------------
+        result_vlayout = QVBoxLayout()
+        # Data Grid layout
+        data_glayout = QGridLayout()
+        data_glayout.addWidget(self.object1,0,1)
+        data_glayout.addWidget(self.object2,0,2)
+        data_glayout.addWidget(self.noradId,1,0)
+        data_glayout.addWidget(self.noradId_obj1,1,1)
+        data_glayout.addWidget(self.noradId_obj2,1,2)
+        result_vlayout.addLayout(data_glayout)
+        result_vlayout.addWidget(self.tablePOC)
+        results_gbox.setLayout(result_vlayout)
+                
+        # vertical box layout
+        vlayout = QVBoxLayout()
+        vlayout.addWidget(cdmFile_gbox)
+        vlayout.addWidget(configuration_gbox)
+        vlayout.addWidget(results_gbox)
+#         vlayout.addWidget(refsist_gbox)
+#         vlayout.addWidget(self.tableEncuentro)
+        vlayout.addStretch()
+        self.setLayout(vlayout)
+        
         self.setWindowTitle('Procesamiento de CDM')    
         self.show()
         
@@ -518,7 +554,7 @@ class MostrarMatrices(QWidget):
         # group boxes
         satellite_gbox = QGroupBox('&Satellite Data') 
         refsist_gbox   = QGroupBox('&Reference System')
-        macovar_gbox   = QGroupBox('& COVARIANCE MATRIX')           
+        macovar_gbox   = QGroupBox('&COVARIANCE MATRIX')           
         
         # Satellite Data
         self.norad_id   = QLabel('NORAD ID')
