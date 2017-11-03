@@ -56,21 +56,11 @@ class ProcARxCODE(QMainWindow):
         self.inicio.setPixmap(figura_inicio)
         self.setCentralWidget(self.inicio)
 
-        
-        #IMAGEN
-#         palette    = QPalette()
-#         palette.setBrush(QPalette.Background,QBrush(QPixmap('../visual/imagenes/cords_contol.jpg')))
-#         self.setPalette(palette)
         """
         DockWidgets
         """
         # Lista de Encuentros.
         self.encuentros = QDockWidget("Carga de Encuentros", self)
-#         self.listWidget = QListWidget()
-#         self.listWidget.addItem("CARGAR CDM")
-#         self.listWidget.addItem("Carga Manual")
-#         self.listwidget.addItem("Encuentros Anteriores")
-#        self.encuentros.setWidget(self.listWidget)
 
         self.encuentros.setFloating(False)
         self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros) #
@@ -167,24 +157,19 @@ class ProcCDM(QDialog):
         QDialog.__init__(self,parent)
         
         self.setWindowModality(Qt.ApplicationModal)
-        self.initUI()
-        
+        self.initUI()        
         # Construccion
         self.TCA=None
         self.MISS_DISTANCE=None
         self.POC=None
 
-
     def initUI(self):
         self.palette = QPalette()
-        self.palette.setColor(QPalette.Background,Qt.white)
+        self.palette.setColor(QPalette.Background,Qt.blue)
         self.setPalette(self.palette)
-        
         # group boxes
         cdmFile_gbox       = QGroupBox('&Seleccion de CDM')
-        configuration_gbox = QGroupBox('&Configuracion')
-        results_gbox       = QGroupBox('&Resultados del Procesamiento')
-        
+        results_gbox       = QGroupBox('&Resultados del Procesamiento')     
         """
         Etiquetas
         """
@@ -192,8 +177,7 @@ class ProcCDM(QDialog):
         self.opciones    = QLabel('Opciones')
         self.object1     = QLabel('Objeto 1')
         self.object2     = QLabel('Objeto 2')
-        self.noradId     = QLabel('NORAD ID')
-        
+        self.noradId     = QLabel('NORAD ID')      
         """
         Campos de Edicion
         """   
@@ -210,32 +194,24 @@ class ProcCDM(QDialog):
         self.boton_salirCdm = QPushButton('SALIR')
         """
         OTROS
-        """    
-        pos_rtn         = QCheckBox("Posiciones Relativas en RTN")
-        proc_arxcode    = QCheckBox("Procesamiento ARxCODE")
+        """
         self.tablePOC   = QTableWidget() # Tabla con los resultados
         self.tablePOC.setRowCount(2)
-        self.tablePOC.setColumnCount(8)
-        listaLabels=['Norad Id','Nombre','TCAcdm','TCAarx','MinD cdm','MinD arx','PoC cdm','PoC arx']
+        self.tablePOC.setColumnCount(3)
+        listaHLabels=['TCA','Dist. total','PoC']
+        listaVLabels=['CDM','ARxCODE']
         header = self.tablePOC.horizontalHeader()
         header.setResizeMode(QHeaderView.Stretch)
         width = self.tablePOC.verticalHeader()
         width.setResizeMode(QHeaderView.Stretch)
-        self.tablePOC.setHorizontalHeaderLabels(listaLabels)
-        
+        self.tablePOC.setHorizontalHeaderLabels(listaHLabels)
+        self.tablePOC.setVerticalHeaderLabels(listaVLabels)        
         # CDM box layout
         cdm_hlayout = QHBoxLayout()
         cdm_hlayout.addWidget(self.cdm_archivo)
         cdm_hlayout.addWidget(self.archivo_tex)
         cdm_hlayout.addWidget(self.boton_dir)
-        cdmFile_gbox.setLayout(cdm_hlayout)
-        
-        # Configuration layout 
-        configuration_hlayout = QHBoxLayout()
-        configuration_hlayout.addWidget(pos_rtn)
-        configuration_hlayout.addWidget(proc_arxcode)
-        configuration_gbox.setLayout(configuration_hlayout)
-        
+        cdmFile_gbox.setLayout(cdm_hlayout)       
         #------------------
         # Results layout
         #------------------
@@ -249,15 +225,13 @@ class ProcCDM(QDialog):
         data_glayout.addWidget(self.noradId_obj2,1,2)
         result_vlayout.addLayout(data_glayout)
         result_vlayout.addWidget(self.tablePOC)
-        results_gbox.setLayout(result_vlayout)
-                
+        result_vlayout.addWidget(self.boton_salirCdm)
+        results_gbox.setLayout(result_vlayout)                
         # vertical box layout
         vlayout = QVBoxLayout()
         vlayout.addWidget(cdmFile_gbox)
-        vlayout.addWidget(configuration_gbox)
+        vlayout.addWidget(self.boton_cargar)
         vlayout.addWidget(results_gbox)
-#         vlayout.addWidget(refsist_gbox)
-#         vlayout.addWidget(self.tableEncuentro)
         vlayout.addStretch()
         self.setLayout(vlayout)
         
@@ -286,7 +260,7 @@ class ProcCDM(QDialog):
         
     def Carga_CDM(self):
 #        self.cdm_nombre='cdmEnviCosmos08.xml' # seteo el archivo para las pruebas
-#        self.cdm_nombre='cdmTerraPegasus10.xml' # seteo el archivo para las pruebas
+        self.cdm_nombre='cdmTerraPegasus10.xml' # seteo el archivo para las pruebas
         self.CDM=CDM(self.cdm_nombre)
         self.TCA=self.CDM.TCA
         self.MISS_DISTANCE=self.CDM.MISS_DISTANCE
@@ -343,27 +317,16 @@ class ProcCDM(QDialog):
         """
         Carga de Informacion 
         """
+        self.noradId_obj1.setText(self.noradID_mision)
+        self.noradId_obj2.setText(self.noradID_deb)
         # Cargar la tabla
-        self.tablePOC.setItem(0,0, QTableWidgetItem(self.noradID_mision))
-        self.tablePOC.setItem(1,0, QTableWidgetItem(self.noradID_deb))
-        self.tablePOC.setItem(0,1, QTableWidgetItem( self.mision_name))
-        self.tablePOC.setItem(1,1, QTableWidgetItem(self.deb_name))
-        self.tablePOC.setItem(0,2, QTableWidgetItem(self.TCA))
-        self.tablePOC.setItem(0,3, QTableWidgetItem('TCA arx'))
-        self.tablePOC.setItem(0,4, QTableWidgetItem(self.MISS_DISTANCE))
-        self.tablePOC.setItem(0,5, QTableWidgetItem('M_dist arx'))
-        self.tablePOC.setItem(0,6, QTableWidgetItem(str(round(poc_int[0],10))))
-        self.tablePOC.setItem(0,7, QTableWidgetItem('POC arx'))
-        # formato de tabla
-        header = self.tablePOC.horizontalHeader()
-        header.setResizeMode(0,QHeaderView.Stretch)
-        header.setResizeMode(1,QHeaderView.ResizeToContents)
-        header.setResizeMode(2,QHeaderView.ResizeToContents)
-        header.setResizeMode(3,QHeaderView.ResizeToContents)
-        header.setResizeMode(4,QHeaderView.ResizeToContents)
-        header.setResizeMode(5,QHeaderView.ResizeToContents)
-        header.setResizeMode(6,QHeaderView.ResizeToContents)        
-        header.setResizeMode(7,QHeaderView.ResizeToContents)
+        self.tablePOC.setItem(0,0, QTableWidgetItem(self.TCA))
+        self.tablePOC.setItem(0,1, QTableWidgetItem(self.MISS_DISTANCE))
+        self.tablePOC.setItem(0,2, QTableWidgetItem(str(round(poc_int[0],10))))
+        self.tablePOC.setItem(1,0, QTableWidgetItem('---'))        
+        self.tablePOC.setItem(1,1, QTableWidgetItem('---'))       
+        self.tablePOC.setItem(1,2, QTableWidgetItem('---'))
+
         print 'FIN DE LA CARGA'
         
     def salirCdm(self):
