@@ -6,8 +6,8 @@ Track del encuentro ENVI-COSMOS
 @author: mcvalenti
 """
 
-from gmtpy import GMT
-
+#from gmtpy import GMT
+"""
 def grafica_track(satelite,debris):
     gmt = GMT( config={'BASEMAP_TYPE':'fancy'})
      
@@ -39,3 +39,4 @@ def grafica_track(satelite,debris):
     gmt.save('../visual/archivos/ploteo_track.ps')
      
     print 'Grafico Terminado'
+    """

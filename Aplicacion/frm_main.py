@@ -19,7 +19,7 @@ from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
 #from Encuentro.akellaPoC import evaluaEncuentro
 from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
 from visual import ploteos
-from visual.trackencuentro import grafica_track
+#from visual.trackencuentro import grafica_track
 from visual.TleOsweiler import VerGrafico
 # #from visual.TlevsCodsGraf import VerGraficoMision
 # from visual.CodsOsweiler import VerGraficoCods
@@ -34,27 +34,32 @@ class ProcARxCODE(QMainWindow):
         super(ProcARxCODE, self).__init__()
         
         self.setWindowTitle('ARxCODE')
+        
         extractAction = QAction("Salir", self)
         extractAction.setShortcut("Ctrl+Q")
-        extractAction.setStatusTip('Leave The App')
+        extractAction.setStatusTip("Salir de ARxCODE")
         extractAction.triggered.connect(self.close_application)
         
-        extractAction1 = QAction("&Matrices de Covarianza", self)
-        extractAction1.setStatusTip('Analisis de Errores')
-        extractAction1.triggered.connect(self.mostrar_matrices)
+        extractAction1 = QAction("&Gestion de Claves", self)
+        extractAction2 = QAction("&Directorios para inputs/outputs", self)
         
         self.center()
         self.statusBar().showMessage('Ready')
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&File')
         fileMenu.addAction(extractAction)
-        VerMenu = mainMenu.addMenu('&Ver')
+        VerMenu = mainMenu.addMenu('&Settings')
         VerMenu.addAction(extractAction1)
-    
+        VerMenu.addAction(extractAction2) 
+        
+        self.central_widget = QStackedWidget()
+        self.setCentralWidget(self.central_widget)
+
         self.inicio = QLabel() 
         figura_inicio = QPixmap('../visual/imagenes/orbitas') #nubeDebris') #cords_contol.jpg')
         self.inicio.setPixmap(figura_inicio)
-        self.setCentralWidget(self.inicio)
+        self.central_widget.addWidget(self.inicio)
+
 
         """
         DockWidgets
@@ -63,7 +68,8 @@ class ProcARxCODE(QMainWindow):
         self.encuentros = QDockWidget("Carga de Encuentros", self)
 
         self.encuentros.setFloating(False)
-        self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros) #
+        self.addDockWidget(Qt.LeftDockWidgetArea, self.encuentros) 
+        self.encuentros.setFeatures(QDockWidget.NoDockWidgetFeatures)
         #Lista de Botones en el Dock
         midock = QWidget()
         self.boton_cargarCDM = QPushButton('CARGAR CDM')
@@ -90,48 +96,20 @@ class ProcARxCODE(QMainWindow):
         self.boton_cargarCDM.clicked.connect(self.cargar_CDM)
         self.boton_carga_manual.clicked.connect(self.carga_manual)
 
-        # Lista de Procesamientos.
-#         self.procesamientos = QDockWidget("Procesamientos", self)
-#         self.listWidget1 = QListWidget()
-#         self.listWidget1.addItem("Procesamiento de un set de TLE")
-#         self.listWidget1.addItem("Procesamiento de Datos de Mision")
-#         self.procesamientos.setWidget(self.listWidget1)
-#         self.procesamientos.setFloating(False)
-#         self.addDockWidget(Qt.LeftDockWidgetArea, self.procesamientos)
-        
-        """
-        Acciones
-        """
-#        self.listWidget.itemClicked.connect(self.item_click)
-#         self.listWidget1.itemClicked.connect(self.item_click1)
-
         self.show()
 
     def cargar_CDM(self):
         ventana1=ProcCDM()
-        self.setCentralWidget(ventana1)
-        ventana1.exec_()
+        self.central_widget.addWidget(ventana1)
+        self.central_widget.setCurrentWidget(ventana1)
+      
+         
     def carga_manual(self):
         ventana2=ProcEncuentro()
-        self.setCentralWidget(ventana2)
-        ventana2.exec_()
+        self.central_widget.addWidget(ventana2)
+        self.central_widget.setCurrentWidget(ventana2)
         
-    def mostrar_matrices(self):
-        ventana3=MostrarMatrices()
-        self.setCentralWidget(ventana3)
-        ventana3.showNormal()
-        
-#     def item_click(self):       
-#         cdm_click=self.listWidget.currentItem().text()
-#         if cdm_click == 'CARGAR CDM':
-#             ventana1=ProcCDM()
-#             self.setCentralWidget(ventana1)
-#             ventana1.exec_()
-#         else:
-#             ventana2=ProcEncuentro()
-#             self.setCentralWidget(ventana2)
-#             ventana2.exec_()
-# 
+
 #     def item_click1(self):
 #         c_item=self.listWidget1.currentItem().text()
 #         if c_item == 'Procesamiento de un set de TLE':
@@ -152,16 +130,19 @@ class ProcARxCODE(QMainWindow):
         sys.exit()
 
     
-class ProcCDM(QDialog):
+class ProcCDM(QWidget):
     def __init__(self,parent=None):
-        QDialog.__init__(self,parent)
         
+        super(ProcCDM, self).__init__(parent)
+
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()        
         # Construccion
         self.TCA=None
         self.MISS_DISTANCE=None
         self.POC=None
+        self.cov_rtn=None
+        self.propagacion_errores=[]
 
     def initUI(self):
         self.palette = QPalette()
@@ -191,6 +172,7 @@ class ProcCDM(QDialog):
         self.boton_cargar   = QPushButton('CARGAR')
         self.boton_grafCdm  = QPushButton('Graficos')
         self.boton_informe  = QPushButton('Generar Informe')
+        self.boton_errores  = QPushButton('Analisis de Errores')
         self.boton_salirCdm = QPushButton('SALIR')
         """
         OTROS
@@ -225,6 +207,7 @@ class ProcCDM(QDialog):
         data_glayout.addWidget(self.noradId_obj2,1,2)
         result_vlayout.addLayout(data_glayout)
         result_vlayout.addWidget(self.tablePOC)
+        result_vlayout.addWidget(self.boton_errores)
         result_vlayout.addWidget(self.boton_salirCdm)
         results_gbox.setLayout(result_vlayout)                
         # vertical box layout
@@ -234,15 +217,15 @@ class ProcCDM(QDialog):
         vlayout.addWidget(results_gbox)
         vlayout.addStretch()
         self.setLayout(vlayout)
+    #    self.setFixedSize(vlayout.sizeHint())
         
         self.setWindowTitle('Procesamiento de CDM')    
-        self.show()
-        
         """
         Acciones
         """
         self.boton_dir.clicked.connect(self.Archivo)
         self.boton_cargar.clicked.connect(self.Carga_CDM)
+        self.boton_errores.clicked.connect(self.analizar_errores)
         self.boton_salirCdm.clicked.connect(self.salirCdm)
         
 
@@ -259,8 +242,7 @@ class ProcCDM(QDialog):
         
         
     def Carga_CDM(self):
-#        self.cdm_nombre='cdmEnviCosmos08.xml' # seteo el archivo para las pruebas
-        self.cdm_nombre='cdmTerraPegasus10.xml' # seteo el archivo para las pruebas
+#        self.cdm_nombre='cdmTerraPegasus10.xml' # seteo el archivo para las pruebas
         self.CDM=CDM(self.cdm_nombre)
         self.TCA=self.CDM.TCA
         self.MISS_DISTANCE=self.CDM.MISS_DISTANCE
@@ -322,20 +304,35 @@ class ProcCDM(QDialog):
         # Cargar la tabla
         self.tablePOC.setItem(0,0, QTableWidgetItem(self.TCA))
         self.tablePOC.setItem(0,1, QTableWidgetItem(self.MISS_DISTANCE))
-        self.tablePOC.setItem(0,2, QTableWidgetItem(str(round(poc_int[0],10))))
+        self.tablePOC.setItem(0,2, QTableWidgetItem(self.POC))
         self.tablePOC.setItem(1,0, QTableWidgetItem('---'))        
         self.tablePOC.setItem(1,1, QTableWidgetItem('---'))       
-        self.tablePOC.setItem(1,2, QTableWidgetItem('---'))
+        self.tablePOC.setItem(1,2, QTableWidgetItem(str(round(poc_int[0],10))))
 
         print 'FIN DE LA CARGA'
+    
+    def analizar_errores(self):
+        """
+        DATA SET
+        data_set[0] : satelite norad id
+        data_set[1] : desecho norad id
+        data_set[2] : minima distancia
+        data_set[3] : PoC
+        data_set[4] : Matriz del satelite
+        data_set[5] : Matriz del desecho
+        data_set[6] : vector de errores (n dias, sigmas)
+        """
+        
+        data_set=[self.noradID_mision,self.noradID_deb,self.MISS_DISTANCE,self.POC,self.cov_rtn, self.cov_rtn,self.propagacion_errores]
+        ventana3=Errores(data_set)
+        ventana3.exec_()
         
     def salirCdm(self):
-        self.accept()
-
+        self.close()
         
-class ProcEncuentro(QDialog):
+class ProcEncuentro(QWidget):
     def __init__(self,parent=None):
-        QDialog.__init__(self,parent)
+        super(ProcEncuentro, self).__init__(parent)
 
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
@@ -344,12 +341,20 @@ class ProcEncuentro(QDialog):
         self.deb_id=''
         self.tca=''
         self.min_dist=None
-        self.tca_calc=None       
+        self.tca_calc=None 
+        self.ma_comb=None   
+        self.propagacion_errores=[]   
         
     def initUI(self):
         self.palette = QPalette()
         self.palette.setColor(QPalette.Background,Qt.white)
-        self.setPalette(self.palette)       
+        self.setPalette(self.palette)  
+        """
+        Group Boxes
+        """     
+        gbox_evento      = QGroupBox('&Cargar EVENTO')
+        gbox_poc_config  = QGroupBox('&Configurar Procesamiento')
+        gbox_resultados  = QGroupBox('&Resultados')
         """
         Etiquetas
         """
@@ -369,6 +374,7 @@ class ProcEncuentro(QDialog):
         self.boton_encuetro = QPushButton('Procesar Encuentro')
 #        self.boton_dif      = QPushButton('Ver diferencias')
         self.boton_track    = QPushButton('Track')
+        btn_errores         = QPushButton('Analizar Errores')
         self.boton_salir    = QPushButton('Salir')
         """
         Campos de Edicion
@@ -397,42 +403,67 @@ class ProcEncuentro(QDialog):
 #       # Fecha y Hora
         self.hora = QTimeEdit()
         self.hora.setDisplayFormat("HH:mm:ss.zzz")
-        self.progress = QProgressBar(self)
         self.hora.setTime(QTime(14,44,34.0))
         """
         Plantilla
         """
-        grid = QGridLayout()
-        grid.setSpacing(5)
-        scroll = QScrollArea()
+        #####
+        # Gbox - Evento
+        layGrid_evento = QGridLayout()
+        layGrid_evento.addWidget(self.sat_lab,2,1)
+        layGrid_evento.addWidget(self.sat_id_text,2,2)
+        layGrid_evento.addWidget(self.deb_lab,3,1)
+        layGrid_evento.addWidget(self.deb_id_text,3,2)
+        layGrid_evento.addWidget(self.time_lab,4,1)
+        layGrid_evento.addWidget(self.tca_text,4,2)
+        layGrid_evento.addWidget(self.tca_text,4,2)
+        layGrid_evento.addWidget(self.hora,5,2) 
+        gbox_evento.setLayout(layGrid_evento)
+        # Gbox - Configuracion PoC
+        layH_config = QHBoxLayout()
+        lab_metodo     = QLabel('METODO')
+        lab_hitradio   = QLabel('HR (hitradius) [km]')
+        le_hitradio    = QLineEdit()
+        cbox_metodos   = QComboBox()
+        metodos_list   = ['Lei-Chen','Akella','Max Poc']
+        cbox_metodos.addItems(metodos_list)
+        layH_config.addWidget(lab_metodo)
+        layH_config.addWidget(cbox_metodos)
+        layH_config.addWidget(lab_hitradio)
+        layH_config.addWidget(le_hitradio)
+        gbox_poc_config.setLayout(layH_config)
+        # Gbox - Resultados
+        layH_resultados = QHBoxLayout()
+        layH_resultados.addWidget(self.tableEncuentro)
+        gbox_resultados.setLayout(layH_resultados)
+        
+        # Layout Principal
+        layV_principal = QVBoxLayout()
+        layV_principal.addWidget(gbox_evento)  
+        layV_principal.addWidget(gbox_poc_config)
+        layV_principal.addWidget(self.boton_encuetro)
+        layV_principal.addWidget(gbox_resultados)
+        layV_principal.addWidget(btn_errores)
+        layV_principal.addWidget(self.boton_salir)
+     
+#         grid.addWidget(self.progress,10,1)
+#         grid.addWidget(self.track,2,4,5,3)
+#         grid.addWidget(self.dif,12,4)
+#         grid.addWidget(self.boton_dif,12,10)
+#         grid.addWidget(self.boton_track,13,10)
 
-        grid.addWidget(self.sat_lab,2,1)
-        grid.addWidget(self.sat_id_text,2,2)
-        grid.addWidget(self.deb_lab,3,1)
-        grid.addWidget(self.deb_id_text,3,2)
-        grid.addWidget(self.time_lab,4,1)
-#        grid.addWidget(self.tca_text,4,2)
-        grid.addWidget(self.tca_text,4,2)
-        grid.addWidget(self.hora,5,2)       
-        grid.addWidget(self.tableEncuentro,8,1,2,5)
-        grid.addWidget(self.progress,10,1)
-        grid.addWidget(self.track,2,4,5,3)
-        grid.addWidget(self.dif,12,4)
-        grid.addWidget(self.boton_encuetro,11,10)
-#        grid.addWidget(self.boton_dif,12,10)
-        grid.addWidget(self.boton_track,13,10)
-        grid.addWidget(self.boton_salir,14,10)
         """
         Acciones
         """
         self.boton_encuetro.clicked.connect(self.procesoSimple)
+        btn_errores.clicked.connect(self.analizar_errores)
         self.boton_salir.clicked.connect(self.salir)
         self.boton_track.clicked.connect(self.mostrarTrack)
 #        self.boton_dif.clicked.connect(self.mostrarDif)
         self.boton_track.setEnabled(False)
 #        self.boton_dif.setEnabled(False)
 
-        self.setLayout(grid)
+        self.setLayout(layV_principal)
         self.setWindowTitle('Procesamiento de Encuentro')    
         self.show()
 
@@ -487,12 +518,6 @@ class ProcEncuentro(QDialog):
         self.boton_track.setEnabled(True)
 #        self.boton_dif.setEnabled(True)
         
-        #barra de progreso.
-        self.completo=0
-        while self.completo < 100:
-            self.completo = self.completo + 0.01
-        self.progress.setValue(self.completo)
-    
     def mostrarDif(self):
         self.grafico_dif= ploteos.grafica_diferenciasRIC(self.archivo_dif)
         self.pixmap1 = QPixmap(self.grafico_dif)
@@ -502,69 +527,153 @@ class ProcEncuentro(QDialog):
         self.track_graf = QPixmap('../visual/archivos/ploteo_track.ps')
         self.track.setPixmap( self.track_graf)
         
-    def salir(self):
-        self.accept()    
-    
-    
-class MostrarMatrices(QWidget):
-    def __init__(self, parent=None):
-        super(MostrarMatrices, self).__init__(parent)
+    def analizar_errores(self):
+        """
+        DATA SET
+        data_set[0] : satelite norad id
+        data_set[1] : desecho norad id
+        data_set[2] : minima distancia
+        data_set[3] : PoC
+        data_set[4] : Matriz del satelite
+        data_set[5] : Matriz del desecho
+        data_set[6] : vector de errores (n dias, sigmas)
+        """
         
+        data_set=[self.sat_id_text,self.deb_id_text,self.min_dist,self.poc_arx,self.ma_comb, self.ma_comb,self.propagacion_errores]
+        ventana3=Errores(data_set)
+        ventana3.exec_()
+        
+    def salir(self):
+        self.close() 
+    
+    
+class Errores(QDialog):
+    def __init__(self, data_set, parent=None):
+        super(Errores, self).__init__(parent)
+        """
+        DATA SET
+        data_set[0] : satelite norad id
+        data_set[1] : desecho norad id
+        data_set[2] : minima distancia
+        data_set[3] : PoC
+        data_set[4] : Matriz del satelite
+        data_set[5] : Matriz del desecho
+        data_set[6] : vector de errores (n dias, sigmas)
+        """
+        self.satId   =data_set[0]
+        self.debId   =data_set[1]
+        self.minDist =data_set[2]
+        self.poc     =data_set[3]
+        self.maSat   =data_set[4]
+        self.maDeb   =data_set[5]
+        self.propag  =data_set[6]
+
         self.initUI()
         
     def initUI(self):
         
         # group boxes
-        satellite_gbox = QGroupBox('&Satellite Data') 
-        refsist_gbox   = QGroupBox('&Reference System')
-        macovar_gbox   = QGroupBox('&COVARIANCE MATRIX')           
+        gbox_sitRiesgo = QGroupBox('&Situacion de Riesgo') 
+        gbox_satMa     = QGroupBox('&Satelite MaCovar')    
+        gbox_debMa     = QGroupBox('&Desecho  MaCovar') 
+        gbox_prop      = QGroupBox('&Propagacion de Errores')      
         
         # Satellite Data
-        self.norad_id   = QLabel('NORAD ID')
-        self.norad_text = QLineEdit()
-        self.date_time  = QLabel('Date and Time')
-        self.date_input = QDateEdit()
-        self.date_input.setCalendarPopup(True)
+        self.sat_id         = QLabel('SATELITE')
+        self.noradSAT_text  = QLineEdit(self.satId)
+        self.deb_id         = QLabel('DESECHO')
+        self.noradDEB_text  = QLineEdit(self.debId)
+        self.min_dist       = QLabel('Min. Dist [m]')
+        self.mindist_text   = QLineEdit(self.minDist)
+        self.min_dist_r     = QLabel('Dist. radial')
+        self.rdist_text     = QLineEdit('1200')
+        self.lbl_poc        = QLabel('PoC')
+        self.poc_text       = QLineEdit(self.poc)
+        self.btn_salir      = QPushButton('Salir')
         
-        # satellite GBOX layout
-        hlayout = QHBoxLayout()
-        hlayout.addWidget(self.norad_id)
-        hlayout.addWidget(self.norad_text)
-        hlayout.addWidget(self.date_time)
-        hlayout.addWidget(self.date_input)
-        satellite_gbox.setLayout(hlayout) 
-
-        # radiobuttons
-        eci_rbtn = QRadioButton('ECI')
-        rtn_rbtn = QRadioButton('RTN')
-        rtn_rbtn.setChecked(True)  # default option
-
-        # radiobuttons' layout
-        rb_vlayout =QVBoxLayout()
-        rb_vlayout.addWidget(eci_rbtn)
-        rb_vlayout.addWidget(rtn_rbtn)
-        refsist_gbox.setLayout(rb_vlayout)
+        # GBOX Situacion de Riesgo
+        layG_sitRiesgo  = QGridLayout()
+        layG_sitRiesgo.addWidget(self.sat_id,1,1)
+        layG_sitRiesgo.addWidget(self.noradSAT_text,1,2)
+        layG_sitRiesgo.addWidget(self.min_dist,1,3)
+        layG_sitRiesgo.addWidget(self.mindist_text,1,4)
+        layG_sitRiesgo.addWidget(self.deb_id,2,1)
+        layG_sitRiesgo.addWidget(self.noradDEB_text,2,2)
+        layG_sitRiesgo.addWidget(self.lbl_poc,2,3)
+        layG_sitRiesgo.addWidget(self.poc_text,2,4)
+        gbox_sitRiesgo.setLayout(layG_sitRiesgo)
         
-        self.tableEncuentro   = QTableWidget()
-        self.tableEncuentro.setRowCount(3)
-        self.tableEncuentro.setColumnCount(3)
+        # Ma. del satelite
+        self.tablesatelite   = QTableWidget()
+        self.tablesatelite.setRowCount(3)
+        self.tablesatelite.setColumnCount(3)
         listaLabels=['Radial','Transverse','Normal']
-        header = self.tableEncuentro.horizontalHeader()
+        header = self.tablesatelite.horizontalHeader()
         header.setResizeMode(QHeaderView.Stretch)
-        width = self.tableEncuentro.verticalHeader()
+        width = self.tablesatelite.verticalHeader()
         width.setResizeMode(QHeaderView.Stretch)
-        self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)  
- 
-        # vertical box layout
-        vlayout = QVBoxLayout()
-        vlayout.addWidget(satellite_gbox)
-        vlayout.addWidget(refsist_gbox)
-        vlayout.addWidget(self.tableEncuentro)
-        vlayout.addStretch()
-        self.setLayout(vlayout)
+        self.tablesatelite.setHorizontalHeaderLabels(listaLabels)
+        self.tablesatelite.setItem(0,0, QTableWidgetItem(str(3)))
+        # Ma. del desecho
+        self.tabledesecho   = QTableWidget()
+        self.tabledesecho.setRowCount(3)
+        self.tabledesecho.setColumnCount(3)
+        listaLabels=['Radial','Transverse','Normal']
+        header = self.tabledesecho.horizontalHeader()
+        header.setResizeMode(QHeaderView.Stretch)
+        width = self.tabledesecho.verticalHeader()
+        width.setResizeMode(QHeaderView.Stretch)
+        self.tabledesecho.setHorizontalHeaderLabels(listaLabels)  
+        
+        
+        # GBOX matriz del satelite
+        layH_masat = QHBoxLayout()
+        layH_masat.addWidget(self.tablesatelite)
+        gbox_satMa.setLayout(layH_masat)   
+        # GBOX matriz del satelite
+        layH_madeb = QHBoxLayout()
+        layH_madeb.addWidget(self.tabledesecho)
+        gbox_debMa.setLayout(layH_madeb)
 
-        self.setWindowTitle('Matrices de Error')    
-        self.show()
+        # Layout Matrices
+        layH_matrices = QHBoxLayout()
+        layH_matrices.addWidget(gbox_satMa)
+        layH_matrices.addWidget(gbox_debMa)
+        
+        # GBOX propagacion de errores
+        layG_errores = QGridLayout()
+        lab_prop     = QLabel('Tiempo propagado [dias]')
+        le_prop      = QLineEdit()
+        lab_sigx     = QLabel('Sigma2 X')
+        le_sigx      = QLineEdit()
+        lab_sigy     = QLabel('Sigma2 Y')
+        le_sigy      = QLineEdit()
+        lab_sigz     = QLabel('Sigma2 Z')
+        le_sigz      = QLineEdit()
+        layG_errores.addWidget(lab_prop,1,1)
+        layG_errores.addWidget(le_prop,1,2)
+        layG_errores.addWidget(lab_sigx,2,1)
+        layG_errores.addWidget(le_sigx,2,2)
+        layG_errores.addWidget(lab_sigy,2,3)
+        layG_errores.addWidget(le_sigy,2,4)
+        layG_errores.addWidget(lab_sigz,2,5)
+        layG_errores.addWidget(le_sigz,2,6)
+        gbox_prop.setLayout(layG_errores)       
+
+        # Layout Principal
+        layV_principal = QVBoxLayout()
+        layV_principal.addWidget(gbox_sitRiesgo)
+        layV_principal.addLayout(layH_matrices)
+        layV_principal.addWidget(gbox_prop)
+        layV_principal.addWidget(self.btn_salir)
+        self.setLayout(layV_principal)
+        
+        self.btn_salir.clicked.connect(self.salir)
+
+        self.setWindowTitle('Analisis de Errores')
+        
+    def salir(self):
+        self.accept()
         
 # class ProcTle(QDialog):
 # 
