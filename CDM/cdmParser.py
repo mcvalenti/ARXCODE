@@ -23,12 +23,18 @@ class CDM():
         self.dr=None
         self.ds=None
         self.dw=None
-        self.cr_r=None
-        self.ct_r=None
-        self_cr_t=None
-        self.cn_r=None
-        self.cn_t=None
-        self.cn_n=None
+        self.cr_r_1=None
+        self.ct_r_1=None
+        self.ct_t_1=None
+        self.cn_r_1=None
+        self.cn_t_1=None
+        self.cn_n_1=None
+        self.cr_r_2=None
+        self.ct_r_2=None
+        self_cr_t_2=None
+        self.cn_r_2=None
+        self.cn_t_2=None
+        self.cn_n_2=None
         
         n=0    
         for meta in root.iter('metadata'):
@@ -60,16 +66,25 @@ class CDM():
             self.dr=rel[0].text
             self.ds=rel[1].text
             self.dw=rel[2].text
-#             
+#
+        m=0
         for cov in root.iter('covarianceMatrix'):
-            self.cr_r=cov[1].text
-            self.ct_r=cov[2].text
-            self.ct_t=cov[3].text
-            self.cn_r=cov[4].text
-            self.cn_t=cov[5].text
-            self.cn_n=cov[6].text
-      
-        
+            if m == 0:
+                self.cr_r_1=cov[1].text
+                self.ct_r_1=cov[2].text
+                self.ct_t_1=cov[3].text
+                self.cn_r_1=cov[4].text
+                self.cn_t_1=cov[5].text
+                self.cn_n_1=cov[6].text
+            else:
+                self.cr_r_2=cov[1].text
+                self.ct_r_2=cov[2].text
+                self.ct_t_2=cov[3].text
+                self.cn_r_2=cov[4].text
+                self.cn_t_2=cov[5].text
+                self.cn_n_2=cov[6].text
+            m=m+1
+            
 def extraeCDM(archivo):
     """
     Extrae los datos de un CDM en formato XML.

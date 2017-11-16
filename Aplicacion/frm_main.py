@@ -150,7 +150,9 @@ class ProcCDM(QWidget):
         self.setPalette(self.palette)
         # group boxes
         cdmFile_gbox       = QGroupBox('&Seleccion de CDM')
-        results_gbox       = QGroupBox('&Resultados del Procesamiento')     
+        results_gbox       = QGroupBox('&Resultados del Procesamiento')
+        gbox_satMa         = QGroupBox('&Satelite MaCovar')    
+        gbox_debMa         = QGroupBox('&Desecho  MaCovar')   
         """
         Etiquetas
         """
@@ -172,16 +174,16 @@ class ProcCDM(QWidget):
         self.boton_cargar   = QPushButton('CARGAR')
         self.boton_grafCdm  = QPushButton('Graficos')
         self.boton_informe  = QPushButton('Generar Informe')
-        self.boton_errores  = QPushButton('Analisis de Errores')
+        self.boton_arcode   = QPushButton('Procesar con ARxCODE')
         self.boton_salirCdm = QPushButton('SALIR')
         """
         OTROS
         """
         self.tablePOC   = QTableWidget() # Tabla con los resultados
-        self.tablePOC.setRowCount(2)
+        self.tablePOC.setRowCount(1)
         self.tablePOC.setColumnCount(3)
-        listaHLabels=['TCA','Dist. total','PoC']
-        listaVLabels=['CDM','ARxCODE']
+        listaHLabels=['TCA','Dist. total [m]','PoC']
+        listaVLabels=['CDM']
         header = self.tablePOC.horizontalHeader()
         header.setResizeMode(QHeaderView.Stretch)
         width = self.tablePOC.verticalHeader()
@@ -207,17 +209,55 @@ class ProcCDM(QWidget):
         data_glayout.addWidget(self.noradId_obj2,1,2)
         result_vlayout.addLayout(data_glayout)
         result_vlayout.addWidget(self.tablePOC)
-        result_vlayout.addWidget(self.boton_errores)
-        result_vlayout.addWidget(self.boton_salirCdm)
-        results_gbox.setLayout(result_vlayout)                
+        results_gbox.setLayout(result_vlayout)   
+        #--------------------
+        # MATRICES
+        #--------------------
+        # Ma. del satelite
+        self.tablesatelite   = QTableWidget()
+        self.tablesatelite.setRowCount(3)
+        self.tablesatelite.setColumnCount(3)
+        listaLabels=['Radial','Transverse','Normal']
+        header = self.tablesatelite.horizontalHeader()
+        header.setResizeMode(QHeaderView.Stretch)
+        width = self.tablesatelite.verticalHeader()
+        width.setResizeMode(QHeaderView.Stretch)
+        self.tablesatelite.setHorizontalHeaderLabels(listaLabels)
+        # Ma. del desecho
+        self.tabledesecho   = QTableWidget()
+        self.tabledesecho.setRowCount(3)
+        self.tabledesecho.setColumnCount(3)
+        listaLabels=['Radial','Transverse','Normal']
+        header = self.tabledesecho.horizontalHeader()
+        header.setResizeMode(QHeaderView.Stretch)
+        width = self.tabledesecho.verticalHeader()
+        width.setResizeMode(QHeaderView.Stretch)
+        self.tabledesecho.setHorizontalHeaderLabels(listaLabels) 
+        
+        # GBOX matriz del satelite
+        layH_masat = QHBoxLayout()
+        layH_masat.addWidget(self.tablesatelite)
+        gbox_satMa.setLayout(layH_masat)   
+        # GBOX matriz del satelite
+        layH_madeb = QHBoxLayout()
+        layH_madeb.addWidget(self.tabledesecho)
+        gbox_debMa.setLayout(layH_madeb)
+
+        # Layout Matrices
+        layH_matrices = QHBoxLayout()
+        layH_matrices.addWidget(gbox_satMa)
+        layH_matrices.addWidget(gbox_debMa)
+                     
         # vertical box layout
         vlayout = QVBoxLayout()
         vlayout.addWidget(cdmFile_gbox)
         vlayout.addWidget(self.boton_cargar)
         vlayout.addWidget(results_gbox)
-        vlayout.addStretch()
+        vlayout.addLayout(layH_matrices)
+        vlayout.addWidget(self.boton_arcode)
+        vlayout.addWidget(self.boton_salirCdm)
         self.setLayout(vlayout)
-    #    self.setFixedSize(vlayout.sizeHint())
+        self.setFixedSize(vlayout.sizeHint())
         
         self.setWindowTitle('Procesamiento de CDM')    
         """
@@ -225,15 +265,12 @@ class ProcCDM(QWidget):
         """
         self.boton_dir.clicked.connect(self.Archivo)
         self.boton_cargar.clicked.connect(self.Carga_CDM)
-        self.boton_errores.clicked.connect(self.analizar_errores)
-        self.boton_salirCdm.clicked.connect(self.salirCdm)
-        
-
+        self.boton_arcode.clicked.connect(self.procesa_arcode)
+        self.boton_salirCdm.clicked.connect(self.salirCdm)      
 #         TCAc,mod_dif,poc=evaluaEncuentro(self.TCA,self.sat_idc,self.deb_idc,Cd,Cm)
 #         TCAstr=datetime.strftime(TCAc,'%Y-%m-%d %H:%M:%S.%f')
 #         mod_dif=int(mod_dif*1000.0)
 #         # set data self.TCA, self.MISS_DISTANCE,self.POC
-
 
     def Archivo(self):    
         self.cdm_xml=QFileDialog.getOpenFileName(self, 'Seleccione el CDM a Procesar', "../CDM/archivos/*")
@@ -260,14 +297,22 @@ class ProcCDM(QWidget):
         self.ds=float(self.CDM.ds)/1000.0
         self.dw=float(self.CDM.dw)/1000.0
         self.rsw_vect=[self.dr,self.ds,self.dw]
-        # Estadistica 
-        self.cr_r=float(self.CDM.cr_r)*(0.001*0.001)
-        self.ct_r=float(self.CDM.ct_r)*(0.001*0.001)
-        self.ct_t=float(self.CDM.ct_t)*(0.001*0.001)
-        self.cn_r=float(self.CDM.cn_r)*(0.001*0.001)
-        self.cn_t=float(self.CDM.cn_t)*(0.001*0.001)
-        self.cn_n=float(self.CDM.cn_n)*(0.001*0.001) 
-        self.cov_rtn=np.array([[self.cr_r,self.ct_r,self.cn_r],[self.ct_r,self.ct_t,self.cn_t],[self.cn_r,self.cn_t,self.cn_n]])     
+        # Ma. Covarianza - objeto 1
+        self.cr_r_1=float(self.CDM.cr_r_1)*(0.001*0.001)
+        self.ct_r_1=float(self.CDM.ct_r_1)*(0.001*0.001)
+        self.ct_t_1=float(self.CDM.ct_t_1)*(0.001*0.001)
+        self.cn_r_1=float(self.CDM.cn_r_1)*(0.001*0.001)
+        self.cn_t_1=float(self.CDM.cn_t_1)*(0.001*0.001)
+        self.cn_n_1=float(self.CDM.cn_n_1)*(0.001*0.001) 
+        self.cov_rtn_1=np.array([[self.cr_r_1,self.ct_r_1,self.cn_r_1],[self.ct_r_1,self.ct_t_1,self.cn_t_1],[self.cn_r_1,self.cn_t_1,self.cn_n_1]])
+        # Ma. Covarianza - objeto 2
+        self.cr_r_2=float(self.CDM.cr_r_2)*(0.001*0.001)
+        self.ct_r_2=float(self.CDM.ct_r_2)*(0.001*0.001)
+        self.ct_t_2=float(self.CDM.ct_t_2)*(0.001*0.001)
+        self.cn_r_2=float(self.CDM.cn_r_2)*(0.001*0.001)
+        self.cn_t_2=float(self.CDM.cn_t_2)*(0.001*0.001)
+        self.cn_n_2=float(self.CDM.cn_n_2)*(0.001*0.001) 
+        self.cov_rtn_2=np.array([[self.cr_r_2,self.ct_r_2,self.cn_r_2],[self.ct_r_2,self.ct_t_2,self.cn_t_2],[self.cn_r_2,self.cn_t_2,self.cn_n_2]])     
         print'**********************'
         print 'r_sat = ',self.r_sat
         print 'v_sat = ',self.v_sat
@@ -278,20 +323,16 @@ class ProcCDM(QWidget):
         print '======================'
         print self.dr,self.ds,self.dw
         print '*********************'
-        print self.cr_r
-        print self.ct_r,self.ct_t
-        print self.cn_r,self.cn_t,self.cn_n        
+        print self.cr_r_1
+        print self.ct_r_1,self.ct_t_1
+        print self.cn_r_1,self.cn_t_1,self.cn_n_1        
         #Calculo el angulo entre los vectores velocidad.
         cos_phi=np.dot(self.v_sat,self.v_deb)/(np.sqrt(np.dot(self.v_sat,self.v_sat))*np.sqrt(np.dot(self.v_deb,self.v_deb)))
         phi=np.arccos(cos_phi) 
     
         #Validacion del calculo POC a partir de datos CDM.
-        mu_x,mu_y,sig2_xc,sig2_yc=proyecta_plano_de_encuentro(self.rsw_vect,self.cov_rtn,phi)
+        mu_x,mu_y,sig2_xc,sig2_yc=proyecta_plano_de_encuentro(self.rsw_vect,self.cov_rtn_1,phi)
         poc, poc_int=calcula_Poc_manual(mu_x, mu_y, sig2_xc, sig2_yc)
-        print '======================'
-        print '------Ma. Cov---------'
-        print '======================'
-        print 
         print '======================'
         print '------POC-------------'
         print '======================'
@@ -308,37 +349,44 @@ class ProcCDM(QWidget):
         self.tablePOC.setItem(1,0, QTableWidgetItem('---'))        
         self.tablePOC.setItem(1,1, QTableWidgetItem('---'))       
         self.tablePOC.setItem(1,2, QTableWidgetItem(str(round(poc_int[0],10))))
+        #------------------------
+        # Cargar Matrices
+        #------------------------
+        # OBJ 1
+        self.tablesatelite.setItem(0,0,QTableWidgetItem(str(self.cr_r_1)))
+        self.tablesatelite.setItem(1,0,QTableWidgetItem(str(self.ct_r_1)))
+        self.tablesatelite.setItem(1,1,QTableWidgetItem(str(self.ct_t_1)))
+        self.tablesatelite.setItem(2,0,QTableWidgetItem(str(self.cn_r_1)))
+        self.tablesatelite.setItem(2,1,QTableWidgetItem(str(self.cn_t_1)))
+        self.tablesatelite.setItem(2,2,QTableWidgetItem(str(self.cn_n_1)))
+        # OBJ 2
+        self.tabledesecho.setItem(0,0,QTableWidgetItem(str(self.cr_r_2)))
+        self.tabledesecho.setItem(1,0,QTableWidgetItem(str(self.ct_r_2)))
+        self.tabledesecho.setItem(1,1,QTableWidgetItem(str(self.ct_t_2)))
+        self.tabledesecho.setItem(2,0,QTableWidgetItem(str(self.cn_r_2)))
+        self.tabledesecho.setItem(2,1,QTableWidgetItem(str(self.cn_t_2)))
+        self.tabledesecho.setItem(2,2,QTableWidgetItem(str(self.cn_n_2)))      
 
         print 'FIN DE LA CARGA'
     
-    def analizar_errores(self):
-        """
-        DATA SET
-        data_set[0] : satelite norad id
-        data_set[1] : desecho norad id
-        data_set[2] : minima distancia
-        data_set[3] : PoC
-        data_set[4] : Matriz del satelite
-        data_set[5] : Matriz del desecho
-        data_set[6] : vector de errores (n dias, sigmas)
-        """
-        
-        data_set=[self.noradID_mision,self.noradID_deb,self.MISS_DISTANCE,self.POC,self.cov_rtn, self.cov_rtn,self.propagacion_errores]
-        ventana3=Errores(data_set)
-        ventana3.exec_()
-        
+    def procesa_arcode(self):
+        ventana2=ProcEncuentro(norad_sat=self.noradId_obj1,norad_deb=self.noradId_obj2)
+        self.central_widget.addWidget(ventana2)
+        self.central_widget.setCurrentWidget(ventana2)
+    
     def salirCdm(self):
         self.close()
         
 class ProcEncuentro(QWidget):
-    def __init__(self,parent=None):
-        super(ProcEncuentro, self).__init__(parent)
+ #   def __init__(self,parent=None):
+    def __init__(self,**kwargs):
+        super(ProcEncuentro, self).__init__(**kwargs) #parent)
 
         self.setWindowModality(Qt.ApplicationModal)
         self.initUI()
     # Parametros
-        self.sat_id=''
-        self.deb_id=''
+        self.sat_id=kwargs["norad_sat"]
+        self.deb_id=kwargs["norad_deb"]
         self.tca=''
         self.min_dist=None
         self.tca_calc=None 
