@@ -54,7 +54,7 @@ class EphemCODS():
 if __name__=='__main__':
      
     archivo='CODS_20130602_135850_SACD_DENSEPHEM_TOD_XYZ_O.TXT'
-    ephem=EphemCODS('../CodsAdmin/sacDdensos/'+archivo)
+    ephem=EphemCODS('../CodsAdmin/CUSS_CODS/DENSEPHEM_TOD_XYZ/'+archivo)
      
     ephem_dic=ephem.genera_diccionario()
     d1=datetime(2013,05,31,14,10,10)

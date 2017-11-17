@@ -12,7 +12,7 @@ from os import system
 import numpy as np
 import numpy.polynomial as P
 from datetime import datetime
-from astropy.time import Time,TimeJD
+from astropy.time import Time
 from funcionesUtiles.funciones import toTimestamp
 
 def funcionDeAjuste(arch1,arch2):

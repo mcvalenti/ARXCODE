@@ -11,7 +11,7 @@ generacion del crudo total para los pasos siguientes.
 import gzip, re
 import os, sys, glob
 from datetime import datetime
-import pysftp
+#import pysftp
 
 directorio = '../CodsAdmin/DatoMision/'
 
@@ -37,12 +37,12 @@ else:
 #path = './CodsAdmin/DatoMision/'#hard-coded
 # localpath = sys.argv[1]
  
-host = "cods.conae.gov.ar"                    #hard-coded
-password = "mcvalenti"                #hard-coded
-username = "9Fd3-&(N"                #hard-coded
-
-with pysftp.Connection(host, username=username, password=password) as sftp:
-    sftp.isdir('ORBEPHEM_TOD_XYZ')
+#host = "cods.conae.gov.ar"                    #hard-coded
+# password = "mcvalenti"                #hard-coded
+# username = "9Fd3-&(N"                #hard-coded
+# 
+# with pysftp.Connection(host, username=username, password=password) as sftp:
+#     sftp.isdir('ORBEPHEM_TOD_XYZ')
 #     sftp.get_d('ORBEPHEM_TOD_XYZ', path, preserve_mtime=True)
 
 print 'Upload done.'

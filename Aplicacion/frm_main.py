@@ -60,7 +60,6 @@ class ProcARxCODE(QMainWindow):
         self.inicio.setPixmap(figura_inicio)
         self.central_widget.addWidget(self.inicio)
 
-
         """
         DockWidgets
         """
@@ -95,20 +94,17 @@ class ProcARxCODE(QMainWindow):
         # Acciones
         self.boton_cargarCDM.clicked.connect(self.cargar_CDM)
         self.boton_carga_manual.clicked.connect(self.carga_manual)
-
         self.show()
 
     def cargar_CDM(self):
         ventana1=ProcCDM()
         self.central_widget.addWidget(ventana1)
-        self.central_widget.setCurrentWidget(ventana1)
-      
+        self.central_widget.setCurrentWidget(ventana1)      
          
     def carga_manual(self):
         ventana2=ProcEncuentro()
         self.central_widget.addWidget(ventana2)
-        self.central_widget.setCurrentWidget(ventana2)
-        
+        self.central_widget.setCurrentWidget(ventana2)    
 
 #     def item_click1(self):
 #         c_item=self.listWidget1.currentItem().text()
@@ -150,7 +146,7 @@ class ProcCDM(QWidget):
         self.setPalette(self.palette)
         # group boxes
         cdmFile_gbox       = QGroupBox('&Seleccion de CDM')
-        results_gbox       = QGroupBox('&Resultados del Procesamiento')
+        results_gbox       = QGroupBox('&Datos del CDM')
         gbox_satMa         = QGroupBox('&Satelite MaCovar')    
         gbox_debMa         = QGroupBox('&Desecho  MaCovar')   
         """
@@ -370,28 +366,36 @@ class ProcCDM(QWidget):
         print 'FIN DE LA CARGA'
     
     def procesa_arcode(self):
-        ventana2=ProcEncuentro(norad_sat=self.noradId_obj1,norad_deb=self.noradId_obj2)
+        ventana2=ProcEncuentro(norad_sat=self.noradID_mision,norad_deb=self.noradID_deb,TCA=self.TCA)
         self.central_widget.addWidget(ventana2)
-        self.central_widget.setCurrentWidget(ventana2)
+        self.central_widget.setCurrentWidget(ventana2)   
     
     def salirCdm(self):
         self.close()
         
 class ProcEncuentro(QWidget):
  #   def __init__(self,parent=None):
-    def __init__(self,**kwargs):
-        super(ProcEncuentro, self).__init__(**kwargs) #parent)
+    def __init__(self, **kwargs):
+        QWidget.__init__(self)
 
-        self.setWindowModality(Qt.ApplicationModal)
+        self.setWindowModality(Qt.ApplicationModal)      
+        # Parametros
+        if not bool(kwargs):
+            self.sat_id="25415"
+            self.deb_id="31445"
+            self.qdate= QDate(2013,03,18)
+            self.qhora=QTime(14,44,34.0)
+        else:            
+            self.sat_id=kwargs["norad_sat"]
+            self.deb_id=kwargs["norad_deb"]
+            self.tca=kwargs["TCA"]
+            self.qdate= QDate(2013,03,18)
+            self.qhora=QTime(14,44,34.0)
+            self.min_dist=None
+            self.tca_calc=None 
+            self.ma_comb=None   
+            self.propagacion_errores=[]   
         self.initUI()
-    # Parametros
-        self.sat_id=kwargs["norad_sat"]
-        self.deb_id=kwargs["norad_deb"]
-        self.tca=''
-        self.min_dist=None
-        self.tca_calc=None 
-        self.ma_comb=None   
-        self.propagacion_errores=[]   
         
     def initUI(self):
         self.palette = QPalette()
@@ -403,16 +407,15 @@ class ProcEncuentro(QWidget):
         gbox_evento      = QGroupBox('&Cargar EVENTO')
         gbox_poc_config  = QGroupBox('&Configurar Procesamiento')
         gbox_resultados  = QGroupBox('&Resultados')
+        gbox_satMa         = QGroupBox('&Satelite MaCovar')    
+        gbox_debMa         = QGroupBox('&Desecho  MaCovar')  
         """
         Etiquetas
         """
         self.sat_lab  = QLabel('Satelite NORAD ID')
         self.deb_lab  = QLabel('Desecho NORAD ID')
         self.time_lab = QLabel('TCA')
-        self.hs_lab   = QLabel('Hs:')
-        self.min_lab  = QLabel('min:')
-        self.seg_lab  = QLabel('seg')
-        self.mseg_lab = QLabel('mseg')
+
         # imagen 
         self.track = QLabel() 
         self.dif   = QLabel()
@@ -428,21 +431,21 @@ class ProcEncuentro(QWidget):
         Campos de Edicion
         """
         self.sat_id_text = QLineEdit()
-        self.sat_id_text.setText("25415")
+        self.sat_id_text.setText(str(self.sat_id))
         self.deb_id_text = QLineEdit() 
-        self.deb_id_text.setText("31445")
+        self.deb_id_text.setText(str(self.deb_id))
         # calendario
         # nice widget for editing the date  
         self.tca_text    = QDateEdit()  
-        self.tca_text.setDate(QDate(2013,03,18))
+        self.tca_text.setDate(self.qdate)
         self.tca_text.setCalendarPopup(True)
         """
         Otros
         """
         self.tableEncuentro   = QTableWidget()
         self.tableEncuentro.setRowCount(1)
-        self.tableEncuentro.setColumnCount(5)
-        listaLabels=['Sat Id','Deb Id','TCA','MinD [km]','PoC']
+        self.tableEncuentro.setColumnCount(3)
+        listaLabels=['TCA','MinD [km]','PoC']
         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
         header = self.tableEncuentro.horizontalHeader()
         header.setResizeMode(QHeaderView.Stretch) 
@@ -451,7 +454,7 @@ class ProcEncuentro(QWidget):
 #       # Fecha y Hora
         self.hora = QTimeEdit()
         self.hora.setDisplayFormat("HH:mm:ss.zzz")
-        self.hora.setTime(QTime(14,44,34.0))
+        self.hora.setTime(self.qhora)
         """
         Plantilla
         """
@@ -484,6 +487,44 @@ class ProcEncuentro(QWidget):
         layH_resultados = QHBoxLayout()
         layH_resultados.addWidget(self.tableEncuentro)
         gbox_resultados.setLayout(layH_resultados)
+        self.setFixedSize(layH_resultados.sizeHint())
+        #--------------------
+        # MATRICES
+        #--------------------
+        # Ma. del satelite
+        self.tablesatelite   = QTableWidget()
+        self.tablesatelite.setRowCount(3)
+        self.tablesatelite.setColumnCount(3)
+        listaLabels=['Radial','Transverse','Normal']
+        header = self.tablesatelite.horizontalHeader()
+        header.setResizeMode(QHeaderView.Stretch)
+        width = self.tablesatelite.verticalHeader()
+        width.setResizeMode(QHeaderView.Stretch)
+        self.tablesatelite.setHorizontalHeaderLabels(listaLabels)
+        # Ma. del desecho
+        self.tabledesecho   = QTableWidget()
+        self.tabledesecho.setRowCount(3)
+        self.tabledesecho.setColumnCount(3)
+        listaLabels=['Radial','Transverse','Normal']
+        header = self.tabledesecho.horizontalHeader()
+        header.setResizeMode(QHeaderView.Stretch)
+        width = self.tabledesecho.verticalHeader()
+        width.setResizeMode(QHeaderView.Stretch)
+        self.tabledesecho.setHorizontalHeaderLabels(listaLabels) 
+        
+        # GBOX matriz del satelite
+        layH_masat = QHBoxLayout()
+        layH_masat.addWidget(self.tablesatelite)
+        gbox_satMa.setLayout(layH_masat)   
+        # GBOX matriz del satelite
+        layH_madeb = QHBoxLayout()
+        layH_madeb.addWidget(self.tabledesecho)
+        gbox_debMa.setLayout(layH_madeb)
+
+        # Layout Matrices
+        layH_matrices = QHBoxLayout()
+        layH_matrices.addWidget(gbox_satMa)
+        layH_matrices.addWidget(gbox_debMa)
         
         # Layout Principal
         layV_principal = QVBoxLayout()
@@ -491,6 +532,7 @@ class ProcEncuentro(QWidget):
         layV_principal.addWidget(gbox_poc_config)
         layV_principal.addWidget(self.boton_encuetro)
         layV_principal.addWidget(gbox_resultados)
+        layV_principal.addLayout(layH_matrices)
         layV_principal.addWidget(btn_errores)
         layV_principal.addWidget(self.boton_salir)
      
@@ -512,7 +554,8 @@ class ProcEncuentro(QWidget):
 #        self.boton_dif.setEnabled(False)
 
         self.setLayout(layV_principal)
-        self.setWindowTitle('Procesamiento de Encuentro')    
+        self.setFixedSize(layV_principal.sizeHint())
+        self.setWindowTitle('Procesamiento con ARxCODE')    
         self.show()
 
     def procesoSimple(self):
@@ -546,11 +589,9 @@ class ProcEncuentro(QWidget):
         self.tca_calc= encuentro1.tca_c
         self.ma_comb= encuentro1.calculaMacombinada()
         self.poc_arx, self.poc_int=encuentro1.calculaPoC_circ()
-        self.tableEncuentro.setItem(0,0, QTableWidgetItem(self.sat_id))
-        self.tableEncuentro.setItem(0,1, QTableWidgetItem(self.deb_id))
-        self.tableEncuentro.setItem(0,2, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
-        self.tableEncuentro.setItem(0,3, QTableWidgetItem(str(round(self.min_dist,6))))
-        self.tableEncuentro.setItem(0,4, QTableWidgetItem(str(round(self.poc_int,8))))
+        self.tableEncuentro.setItem(0,0, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
+        self.tableEncuentro.setItem(0,1, QTableWidgetItem(str(round(self.min_dist,6))))
+        self.tableEncuentro.setItem(0,2, QTableWidgetItem(str(round(self.poc_int,8))))
         # formato de tabla
         header = self.tableEncuentro.horizontalHeader()
         header.setResizeMode(0,QHeaderView.ResizeToContents)

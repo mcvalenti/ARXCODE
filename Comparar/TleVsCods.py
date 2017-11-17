@@ -179,8 +179,7 @@ if __name__=='__main__':
     
     #=======================================
     # Propaga TLE y compara con CODS
-    #=======================================
-     
+    #=======================================   
 
     while fecha_ini < datetime(2013,1,2,0,0,0,0)+timedelta(minutes=5):
         r_teme,v_teme=tle0.propagaTLE(fecha_ini)
