@@ -103,6 +103,13 @@ class Tle:
         return satrec.epoch
     
     def propagaTLE(self,date=None):
+        """
+        Devuelve las coordenadas cartesianas x,y,z.
+        Si no se introduce una fecha, devuelve las coordenadas correspondientes
+        a la fecha y hora del TLE.
+        Si se le introduce una fecha y hora, propaga hasta ese momento y devuelve
+        las coordenadas de la propagacion. 
+        """
         whichconst = wgs84
         satrec = twoline2rv(self.linea1, self.linea2, whichconst)
         if date==None:
