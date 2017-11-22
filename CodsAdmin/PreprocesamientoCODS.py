@@ -95,6 +95,6 @@ def unpack_gzFiles(dir):
 
 if __name__=="__main__":
     
-    dir='../CodsAdmin/CUSS_CODS/DENSEPHEM_2012'
+    dir='../CodsAdmin/CUSS_CODS/DENSEPHEM_2013'
     unpack_gzFiles(dir)
     print 'FIN'

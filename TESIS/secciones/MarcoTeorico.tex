@@ -43,7 +43,7 @@ Con una misi\'on operativa se mantiene el contacto y se la puede comandar. Los s
 
 Para este trabajo se tuvo acceso a los productos orbitales de una misi\'on operativa, cuyas efem\'erides se plasman en archivos de texto plano, tabuladas cada un segundo, en el sistema de referencia verdadero de la fecha \ac{TOD}. Seg\'un se nos inform\'o, los mismos presentan errores del orden de  20 metros, (comunicaci\'on por mail).\\
 
-Estas {efem\'erides precisas y sus errores asociados, son las que deben utilizarse en los estudios de riesgo, no obstante, para las procesamientos de este trabajo, si bien fue posible contar con las efem\'erides precisas, no se tuvo acceso a datos de acercamientos de riesgos por motivos de confidencialidad. Raz\'on por la cual, las posiciones de todos los objetos se calcularon a partir de los TLE p\'ublicos y las efem\'erides precisa fueron utilizadas para el estudio de los errores de los TLE, en particular para la generaci\'on de la tabla con los valores estad\'isticos de las varianzas, que se utilizan para la propagaci\'on de errores al instante TCA, (Sec. \ref{subsec:tablaprop}). \\
+Estas {efem\'erides precisas y sus errores asociados son las que deben utilizarse en los estudios de riesgo, no obstante, para los procesamientos de este trabajo, si bien fue posible contar con las efem\'erides precisas, no se tuvo acceso a datos de acercamientos de riesgos por motivos de confidencialidad. Raz\'on por la cual, las posiciones de todos los objetos se calcularon a partir de los TLE p\'ublicos y las efem\'erides precisas fueron utilizadas para el estudio de los errores de los TLE, en particular para la generaci\'on de la tabla con los valores estad\'isticos de las varianzas, que se utilizan para la propagaci\'on de errores al instante TCA, (Sec. \ref{subsec:tablaprop}). \\
 
 \subsection{La posici\'on del desecho espacial}
 El desecho espacial no tiene capacidades operativas, de manera que la \'unica forma de determinar su posici\'on es mediante las redes de rastreo descritas en la introducci\'on.\\
@@ -79,7 +79,7 @@ Ejemplo de un TLE de la Estaci\'on Espacial Internacional (ISS) \\
 9   34–43   Derivada primera del movimiento medio dividida por dos.   −.00002182\\
 10  45–52   Derivada segunda del movimiento medio. 00000-0\\
 11  54–61   BSTAR término de frenado atmosférico. -11606-4\\
-12  63–63   El número 0. (originalemente traía el tipo de efemérides) 0\\
+12  63–63   El número 0. (originalmente traía el tipo de efemérides) 0\\
 13  65–68   Número de set. I\\
 14  69–69   Checksum (modulo 10)  7\\
 
@@ -100,7 +100,7 @@ Ejemplo de un TLE de la Estaci\'on Espacial Internacional (ISS) \\
 En la segunda l\'inea se ubican los elementos orbitales cl\'asicos medios: inclinaci\'on, longitud del nodo, excentricidad, argumento del perigeo, anomal\'ia media y el movimiento medio, de donde se extrae el valor del semieje. En este punto es importante resaltar el hecho de que se trata de elementos medios, promediados bajo ciertos criterios y metodologías no siempre especificadas, de manera que no son una exacta analog\'ia con los elementos orbitales de la posici\'on real para el instante indicado.
 
 \subsection{El propagador SGP4}\label{subsec:sgp4model}
-De acuerdo a una rese\~na hist\'orica presentada por Hoots \citep{hootshistoria}, los or\'igenes del propagador SGP4 se remontan al a\~no 1960 en EE.UU, cuando se desarroll\'o el modelo General Simplificado de Perturbaciones SGP  ({\it{Simplified General Pertubations}}). Basado en los modelos anal\'iticos de predicci\'on orbital de Brower \citep{brouwer1959solution} y Kozai \citep{kozai1962second}, para su implementaci\'on, fue adaptado y modificado para evitar singularidades en \'orbitas particulares y para reducir el tiempo de c\'omputo. As\'i mismo se incluy\'o el efecto del frenado atmosf\'erico.\\
+De acuerdo a una rese\~na hist\'orica presentada por Hoots \citep{hootshistoria}, los or\'igenes del propagador SGP4 se remontan al a\~no 1960 en EE.UU, cuando se desarroll\'o el modelo General Simplificado de Perturbaciones SGP  ({\it{Simplified General Pertubations}}). Basado en los modelos anal\'iticos de predicci\'on orbital de Brouwer \citep{brouwer1959solution} y Kozai \citep{kozai1962second}, para su implementaci\'on, fue adaptado y modificado para evitar singularidades en \'orbitas particulares y para reducir el tiempo de c\'omputo. As\'i mismo se incluy\'o el efecto del frenado atmosf\'erico.\\
 
 En 1964 se convirti\'o en el modelo de predicci\'on orbital principal del sistema de detecci\'on y rastreo de los Estados Unidos de Am\'erica.
 Sin embargo, en 1969 la cantidad de objetos catalogados imped\'ian a las computadoras de la \'epoca procesar todos los t\'erminos del modelo, por lo que fue necesario desarrollar una nueva versi\'on m\'as simplificada, que result\'o en el propagador SGP4 que se puso en operatividad en el a\~no 1970.\\
@@ -215,7 +215,7 @@ Este mismo m\'etodo se aplica a la misi\'on operativa, en aquellos escenarios en
 Una vez que ya se conoce la matriz de covarianza del desecho para la posici\'on inicial, ser\'a necesario propagar esos errores al momento de m\'aximo acercamiento.
 Dado que se desconocen los errores que introduce el propagador SGP4, fue necesario pensar una metodolog\'ia que permita hacer una estimaci\'on independiente.\\
 
-Se propone un m\'etodo que utiliza las diferencias que resultan de los valores que ofrecen las efem\'erides precisas, en comparaci\'on con los valores que resultan de las propagaciones de TLE mediante SGP4. Se eval\'o la tendencia en una ventana temporal de seis meses y se calcularon los valores medios de los errores, en funci\'on de la cantidad de d\'ias de propagaci\'on.
+Se propone un m\'etodo que utiliza las diferencias que resultan de los valores que ofrecen las efem\'erides precisas, en comparaci\'on con los valores que resultan de las propagaciones de TLE mediante SGP4. Se evalu\'o la tendencia en una ventana temporal de seis meses y se calcularon los valores medios de los errores, en funci\'on de la cantidad de d\'ias de propagaci\'on.
 
 \subsubsection*{Metodolog\'ia del estudio de la propagaci\'on de errores}\label{subsec:errorProp}
 Pasos que se realizan, (Fig. \ref{fig:metodotabla}):
@@ -293,7 +293,7 @@ Para el an\'alisis de una situaci\'on de riesgo, en general, se utilizan los par
 \end{itemize}
 
 
-Estos par\'ametros se calculan a partir de las \'orbitas predichas y las matrices de covarianza de los errores en el TCA.
+Estos par\'ametros se calculan a partir de las \'orbitas predichas y las matrices de covarianza de los errores en el TCA (Time of Closest Approach).
 
 Sean dos objetos; en nuestro caso una misi\'on operativa, {\it{sat}}, y un desecho, {\it{deb}}; de los cuales conocemos su posici\'on $\bar{X}_{sat0}=(\bar{x}_{sat},\bar{v}_{sat})$ y $\bar{X}_{deb0}=(\bar{x}_{deb}$,  $\bar{v}_{deb})$ y las matrices de covarianza de los errores, $C_{sat0}$, $C_{deb0}$, en un tiempo inicial,  $t_{sat0}$, y $t_{deb0}$ respectivamente. Todo referenciado al mismo sistema inercial de referencia, ya sea un sistema geoc\'entrico o \ac{ECI}; o el sistema del sat\'elite, \ac{RTN}.\\
 
@@ -301,7 +301,7 @@ En un planteo general, el estudio de una posible colisi\'on consiste en propagar
 
 Un an\'alisis apropiado de situaciones de encuentro facilita la determinaci\'on del tiempo de m\'aximo acercamiento y las posiciones y matrices de covarianza para ese instante:  $\bar{X}_{sat}(TCA)$, $\bar{X}_{deb}(TCA)$, $C_{sat}(TCA)$, $C_{deb}(TCA)$.\\
 
-Para su estudio, los encuentros pueden clasificarse seg\'un sean, encuentros cortos o largos. En particular en este trabajo, analizamos las situaciones de encuentros cortos.\\
+Para su estudio, los encuentros pueden clasificarse seg\'un sean, encuentros cortos o largos. En particular en este trabajo, analizamos las situaciones de encuentros cortos considerando las hip\'otesis que propone Lei-Chen \citep{leichen}.\\
 
 \begin{itemize}
  \item {\bf{Encuentros cortos}}: se asume que el movimiento relativo presenta comportamiento lineal durante el breve intervalo del encuentro.
@@ -397,7 +397,7 @@ La secci\'on circular de colisi\'on que se proyecta en el plano de encuentro, co
 \label{fig:planoenc}
 \end{figure}
 
-Finalemente, la expresi\'on del c\'alculo de la integral en dos dimensiones (2D), resulta:\\
+Finalmente, la expresi\'on del c\'alculo de la integral en dos dimensiones (2D), resulta:\\
 
 \begin{equation}
  PoC=\int \int_{(x-\mu_{x})^{2}+(y-\mu_{y})^{2}\leq r_{a}^{2}} \frac{1}{2\pi\sigma_{x}\sigma_{y}} exp [-\frac{1}{2}(\frac{\mu_{x}^{2}}{\sigma_{x}^{2}}+\frac{\mu_{y}^{2}}{\sigma_{y}^{2}}) ] dy dx
@@ -599,7 +599,7 @@ Donde:
 \section{Comunicaciones de riesgo de colisi\'on}{\label{sec:anuncio}}
 
 
-A partir de las primeros accidentes, y da\~nos por impactos, las agencias u organismos capaces de rastrear el ambiente espacial comenzaron a implementar sistemas de comunicaci\'on para advertir sobre posibles colisiones. Las comunicaciones, que en sus or\'igenes eran correos electr\'onicos particulares, fueron migrando a un mensaje formal y estandarizado y finalmente en Junio del 2013, el \ac{CCSDS}, public\'o el mensaje est\'andar recomendado que se utiliza en la actualidad, el: \ac{CDM} \citep{CDM}.\\
+A partir de los primeros accidentes y da\~nos por impactos, las agencias u organismos capaces de rastrear el ambiente espacial comenzaron a implementar sistemas de comunicaci\'on para advertir sobre posibles colisiones. Las comunicaciones, que en sus or\'igenes eran correos electr\'onicos particulares, fueron migrando a un mensaje formal y estandarizado y finalmente en Junio del 2013, el \ac{CCSDS}, public\'o el mensaje est\'andar recomendado que se utiliza en la actualidad, el: \ac{CDM} \citep{CDM}.\\
 
 El {\it{CCSDS 508.0-B-1, Conjunction Data Message Recommended Standard}} describe en detalle la estructura del formato recomendado, aunque no propone formas de intercambio, dejando a las partes la potestad de acordar las distintas maneras de realizar la comunicaci\'on de los mismos, que, deber\'an ser detalladas en el documento de interfaces (ICD).\\
 

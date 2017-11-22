@@ -4,7 +4,11 @@ Created on 21 nov. 2017
 @author: curso
 '''
 import os, glob, re
+import numpy as np
 from datetime import datetime, timedelta
+import datetime as dt
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 from TleAdmin.TLE import Tle
 from SistReferencia.sist_deCoordenadas import teme2tod
 from CodsAdmin.EphemCODS import EphemCODS
@@ -57,47 +61,96 @@ if __name__=='__main__':
         cods_date_dic[datetime(int(y_cods), int(mon_cods),int(d_cods))]={'nombre':fcods}
         cods_dates.append(datetime(int(y_cods), int(mon_cods),int(d_cods)))
 
-    cn=0
+    error_file_number=0
+    epoca_tle_list=[]
+    dx=[]
+    dy=[]
+    dz=[]
     for f in tle_files:
         # TLE data - transformacion al sistema TOD
         tle=Tle.creadoxArchivo(f)
         epoca_tle=tle.epoca()
-        r,v=tle.propagaTLE()
+        r,v=tle.propagaTLE(datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second))
         r_tod=teme2tod(epoca_tle, r)
-        date_tle=datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day)        
-         
-        for cd in cods_dates:
-            if cd == date_tle:                
-                nombre_cods=cods_date_dic[cd]['nombre']
+        date_tle=datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day)
+        
+        # Busqueda del archivo correspondiente.
+
+        cods_date=date_tle+timedelta(days=2)
+        existe_dosmas=cods_date_dic.has_key(cods_date)
+        if existe_dosmas:
+            nombre_cods=cods_date_dic[cods_date]['nombre']
+            ephem_sv = EphemCODS(nombre_cods)
+            ephem_dic= ephem_sv.genera_diccionario() 
+        else:
+            cods_date=date_tle+timedelta(days=1)
+            existe_unomas=cods_date_dic.has_key(cods_date)
+            if existe_unomas:
+                nombre_cods=cods_date_dic[cods_date]['nombre']
                 ephem_sv = EphemCODS(nombre_cods)
-                ephem_dic= ephem_sv.genera_diccionario() 
-                exite=ephem_dic.has_key(datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)) 
-                if exite:
-                    pass
-                else:
-                    cd1=cd+timedelta(days=1) 
-                    nombre_cods=cods_date_dic[cd1]['nombre']
-                    ephem_sv = EphemCODS(nombre_cods)
-                    ephem_dic= ephem_sv.genera_diccionario() 
-                    existe=ephem_dic.has_key(datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second))
-                    if exite:
-                        pass
-                    else:
-                        cd2=cd+timedelta(days=2) 
-                        nombre_cods=cods_date_dic[cd2]['nombre']
-                        ephem_sv = EphemCODS(nombre_cods)
-                        ephem_dic= ephem_sv.genera_diccionario() 
-                        existe=ephem_dic.has_key(datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second))
-                            
-                x=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['x']
-                y=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['y']
-                z=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['z']
-                print '======================================================================================'
-                print nombre_cods
-                print epoca_tle, r_tod
-                print epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second, x, y ,z
-                print '======================================================================================'
+                ephem_dic= ephem_sv.genera_diccionario()
+            else:
+                pass
+
+        if ephem_dic.has_key(datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)) :                   
+            x=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['x']
+            y=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['y']
+            z=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['z']
+#             print '======================================================================================'
+#             print nombre_cods
+#             print epoca_tle, r_tod
+#             print epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second, x, y ,z
+#             print '======================================================================================'
+            epoca_tle_list.append(epoca_tle)
+            r_tod_array=np.array(r_tod)
+            difx=r_tod_array[0][0]-float(x)
+            dify=r_tod_array[0][1]-float(y)
+            difz=r_tod_array[0][2]-float(z)
+            dx.append(difx) 
+            dy.append(dify)
+            dz.append(difz)
+        else:
+            error_file_number=error_file_number+1
+        
+           
                 
-                
-                
-    print 'FIN'
+    print '======================================================================================' 
+    info = 'Proceso finalizado con: '+ str(len(tle_files))+' TLE registrados \n'
+    info2 = 'TLE no comparados: '+str(error_file_number)+'\n'     
+    print info
+    print info2
+    
+    """
+    Grafico
+    """   
+    fig, (ax1, ax2, ax3) = plt.subplots(3, 1)
+    """
+    Gestion de Fechas
+    """
+    date_fmt = '%Y-%m-%d %H:%M:%S.%f'
+    epoca=[dt.datetime.strptime(str(i), date_fmt) for i in epoca_tle_list]
+    x = [mdates.date2num(i) for i in epoca]
+    date_formatter = mdates.DateFormatter('%d/%m')
+
+    ax1.xaxis.set_major_formatter(date_formatter)
+    ax2.xaxis.set_major_formatter(date_formatter)
+    ax3.xaxis.set_major_formatter(date_formatter)
+    ax1.grid(True)
+    ax2.grid(True)
+    ax3.grid(True)
+    
+    ax1.set_ylim(-30,30 )
+    ax1.set_ylabel('[km]')
+    ax1.plot_date(x, dx,'rx',label='X')
+    ax2.set_ylim(-20,10)
+    ax2.set_ylabel('Diferencias')
+    ax2.plot_date(x, dy,'rx',label='Y')
+    ax3.set_ylim(-20,20 )
+    ax3.set_ylabel('[km]')
+    ax3.plot_date(x, dz,'rx',label='Z')
+
+    fig.suptitle('Diferencias posicion del TLE y coordenadas precisas (SAC-D 2012)')
+    plt.xlabel('Epoca del TLE [dia/mes]')
+
+
+    plt.show()
