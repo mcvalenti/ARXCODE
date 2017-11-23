@@ -33,14 +33,14 @@ y publicado.
 # poc_p=0.0002186
 
 # ESCENARIO #5
-sat_id='23560'
-deb_id='16681'
-TCA=datetime(2004,9,29,23,56,02,0)
-min_d=0.067
-dr='xxx'
-dt='xxx'
-dn='xxx'
-poc_p=0.0001546
+# sat_id='23560'
+# deb_id='16681'
+# TCA=datetime(2004,9,29,23,56,02,0)
+# min_d=0.067
+# dr='xxx'
+# dt='xxx'
+# dn='xxx'
+# poc_p=0.0001546
 
 #Flohrer Krag Klinkrad - (ENVI - COSMOS)
 # sat_id='27386'
@@ -131,13 +131,13 @@ poc_p=0.0001546
 # MAILS
 #=========================
 # Escenario II - (MAIL 1 )
-# sat_id='32789'
-# deb_id='23657'
-# TCA=datetime(2012,7,15,21,21,51,0)
-# min_d=0.760
-# dr=0.186
-# dt=0.389
-# dn=0.626
+sat_id='32789'
+deb_id='23657'
+TCA=datetime(2012,7,15,21,21,51,0)
+min_d=0.760
+dr=0.186
+dt=0.389
+dn=0.626
 
 # Escenario III - (MAIL 2)
 # sat_id='39417'
@@ -277,4 +277,4 @@ print '**************************************************'
 print 'TCA publicado = ',TCA
 print 'Minima distancia total = ',min_d
 print 'Minima Distancia RTN = ',dr,dt,dn
-print 'PoC publicada =', poc_p
+#print 'PoC publicada =', poc_p

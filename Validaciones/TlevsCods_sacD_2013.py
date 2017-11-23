@@ -67,7 +67,7 @@ if __name__=='__main__':
     dx=[]
     dy=[]
     dz=[]
-    for f in tle_files[1:200]:
+    for f in tle_files:
         # TLE data - transformacion al sistema TOD
         tle=Tle.creadoxArchivo(f)
         epoca_tle=tle.epoca()

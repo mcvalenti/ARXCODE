@@ -66,7 +66,7 @@ if __name__=='__main__':
     dx=[]
     dy=[]
     dz=[]
-    for f in tle_files:
+    for f in tle_files[1:3]:
         # TLE data - transformacion al sistema TOD
         tle=Tle.creadoxArchivo(f)
         epoca_tle=tle.epoca()
@@ -96,11 +96,11 @@ if __name__=='__main__':
             x=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['x']
             y=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['y']
             z=ephem_dic[datetime(epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second)]['z']
-#             print '======================================================================================'
-#             print nombre_cods
-#             print epoca_tle, r_tod
-#             print epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second, x, y ,z
-#             print '======================================================================================'
+            print '======================================================================================'
+            print nombre_cods
+            print epoca_tle, r_tod
+            print epoca_tle.year,epoca_tle.month,epoca_tle.day,epoca_tle.hour,epoca_tle.minute,epoca_tle.second, x, y ,z
+            print '======================================================================================'
             epoca_tle_list.append(epoca_tle)
             r_tod_array=np.array(r_tod)
             difx=r_tod_array[0][0]-float(x)
