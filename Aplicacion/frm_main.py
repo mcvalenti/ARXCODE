@@ -393,7 +393,9 @@ class ProcEncuentro(QWidget):
             self.qhora=QTime(14,44,34.0)
             self.min_dist=None
             self.tca_calc=None 
-            self.ma_comb=None   
+            self.ma_comb=None 
+            self.maCovar_sat=None
+            self.maCovar_deb=None  
             self.propagacion_errores=[]   
         self.initUI()
         
@@ -587,7 +589,7 @@ class ProcEncuentro(QWidget):
         encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.n)
         self.min_dist= encuentro1.mod_minDist
         self.tca_calc= encuentro1.tca_c
-        self.ma_comb= encuentro1.calculaMacombinada()
+        self.ma_comb, self.maCovar_sat, self.maCovar_deb= encuentro1.calculaMacombinada()
         self.poc_arx, self.poc_int=encuentro1.calculaPoC_circ()
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(str(round(self.min_dist,6))))
@@ -606,7 +608,22 @@ class ProcEncuentro(QWidget):
        
         self.boton_track.setEnabled(True)
 #        self.boton_dif.setEnabled(True)
-        
+
+        # Tablas de Satelite y de Desecho
+        self.tablesatelite.setItem(0,0,QTableWidgetItem(str(round(self.maCovar_sat[0][0],4))))
+        self.tablesatelite.setItem(0,1,QTableWidgetItem(str(round(self.maCovar_sat[0][1],4))))
+        self.tablesatelite.setItem(0,2,QTableWidgetItem(str(round(self.maCovar_sat[0][2],4))))
+        self.tablesatelite.setItem(1,1,QTableWidgetItem(str(round(self.maCovar_sat[1][1],4))))
+        self.tablesatelite.setItem(1,2,QTableWidgetItem(str(round(self.maCovar_sat[1][2],4))))
+        self.tablesatelite.setItem(2,2,QTableWidgetItem(str(round(self.maCovar_sat[2][2],4))))
+        #--------------------
+        self.tabledesecho.setItem(0,0,QTableWidgetItem(str(round(self.maCovar_deb[0][0],4))))
+        self.tabledesecho.setItem(0,1,QTableWidgetItem(str(round(self.maCovar_deb[0][1],4))))
+        self.tabledesecho.setItem(0,2,QTableWidgetItem(str(round(self.maCovar_deb[0][2],4))))
+        self.tabledesecho.setItem(1,1,QTableWidgetItem(str(round(self.maCovar_deb[1][1],4))))
+        self.tabledesecho.setItem(1,2,QTableWidgetItem(str(round(self.maCovar_deb[1][2],4))))
+        self.tabledesecho.setItem(2,2,QTableWidgetItem(str(round(self.maCovar_deb[2][2],4))))
+
     def mostrarDif(self):
         self.grafico_dif= ploteos.grafica_diferenciasRIC(self.archivo_dif)
         self.pixmap1 = QPixmap(self.grafico_dif)

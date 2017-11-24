@@ -181,7 +181,7 @@ class Encuentro():
         fin_set_deb=self.tle_deb.epoca()
         
         #=============================================================
-        # 1 - MATRIZ DEL DESECHO (calculada para TCA - n dias)
+        # 1 - MATRIZ DEL DESECHO 
         #=============================================================
         archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
         nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
@@ -199,7 +199,7 @@ class Encuentro():
         for k in maCovar_deb[:3]:
             print k[:3]
         #=============================================================    
-        # 2 - MATRIZ DE LA MISION (calculada para TCA - n dias)
+        # 2 - MATRIZ DE LA MISION 
         #=============================================================
         ini_set_sat=self.tle_sat.epoca()-timedelta(days=15)
         fin_set_sat=self.tle_sat.epoca()
@@ -216,8 +216,8 @@ class Encuentro():
         print '*******************************************************'
         print '-----------------Ma. MISION----------------------------'
         print '*******************************************************'
-        for k in maCovar_sat[:3]:
-            print k[:3]
+ #       for k in maCovar_sat[:3]:
+ #           print k[:3]
         #=============================================================
         # 3 -Corrijo ambas matrices por tabla de Marce al TCA -
         # n dias adelante.
@@ -239,7 +239,7 @@ class Encuentro():
         #=============================================================    
         self.matriz_combinada=maCovar_sat+maCovar_deb
 
-        return self.matriz_combinada
+        return self.matriz_combinada, maCovar_sat, maCovar_deb
     
     def proyecta_alplano_encuentro(self):
     #============================================
