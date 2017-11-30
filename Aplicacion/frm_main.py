@@ -391,6 +391,7 @@ class ProcEncuentro(QWidget):
             self.tca=kwargs["TCA"]
             self.qdate= QDate(2013,03,18)
             self.qhora=QTime(14,44,34.0)
+            self.hit_rad='0.01'
             self.min_dist=None
             self.tca_calc=None 
             self.ma_comb=None 
@@ -476,14 +477,14 @@ class ProcEncuentro(QWidget):
         layH_config = QHBoxLayout()
         lab_metodo     = QLabel('METODO')
         lab_hitradio   = QLabel('HR (hitradius) [km]')
-        le_hitradio    = QLineEdit()
+        self.le_hitradio    = QLineEdit()
         cbox_metodos   = QComboBox()
         metodos_list   = ['Lei-Chen','Akella','Max Poc']
         cbox_metodos.addItems(metodos_list)
         layH_config.addWidget(lab_metodo)
         layH_config.addWidget(cbox_metodos)
         layH_config.addWidget(lab_hitradio)
-        layH_config.addWidget(le_hitradio)
+        layH_config.addWidget(self.le_hitradio)
         gbox_poc_config.setLayout(layH_config)
         # Gbox - Resultados
         layH_resultados = QHBoxLayout()
@@ -586,20 +587,21 @@ class ProcEncuentro(QWidget):
         Propagacion hasta el Encuentro
         """
         self.n=3
-        encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.n)
+        self.hit_rad=float(self.le_hitradio.text())
+        encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.hit_rad,self.n)
         self.min_dist= encuentro1.mod_minDist
         self.tca_calc= encuentro1.tca_c
         self.ma_comb, self.maCovar_sat, self.maCovar_deb= encuentro1.calculaMacombinada()
         self.poc_arx, self.poc_int=encuentro1.calculaPoC_circ()
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(str(round(self.min_dist,6))))
-        self.tableEncuentro.setItem(0,2, QTableWidgetItem(str(round(self.poc_int,8))))
+        self.tableEncuentro.setItem(0,2, QTableWidgetItem(str(round(self.poc_arx,8))))
         # formato de tabla
-        header = self.tableEncuentro.horizontalHeader()
-        header.setResizeMode(0,QHeaderView.ResizeToContents)
-        header.setResizeMode(1,QHeaderView.ResizeToContents)
-        header.setResizeMode(2,QHeaderView.ResizeToContents)
-        header.setResizeMode(3,QHeaderView.ResizeToContents)
+#         header = self.tableEncuentro.horizontalHeader()
+#         header.setResizeMode(0,QHeaderView.ResizeToContents)
+#         header.setResizeMode(1,QHeaderView.ResizeToContents)
+#         header.setResizeMode(2,QHeaderView.ResizeToContents)
+#         header.setResizeMode(3,QHeaderView.ResizeToContents)
         # archivo de diferencias.
         self.archivo_dif=encuentro1.archivo_dif
         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini

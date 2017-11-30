@@ -44,7 +44,7 @@ class Posicion:
 
 class Encuentro():
     
-    def __init__(self,tle_sat,tle_deb,tca,n):
+    def __init__(self,tle_sat,tle_deb,tca,hr,n):
         """
         Calcula las diferencias en posiciones y velocidades 
         para dos objetos en situacion de acercamiento, durante un 
@@ -76,7 +76,8 @@ class Encuentro():
         self.tle_sat=tle_sat
         self.tle_deb=tle_deb
         self.tca=tca  
-        self.ndias_prev=n      
+        self.ndias_prev=n     
+        self.hit_rad=hr 
         """
         Genera Archivos
         """
@@ -91,10 +92,10 @@ class Encuentro():
         Calcula las diferencias relativas entre los dos 
         objetos en el sistema RTN.
         """
-#        self.epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
-#        self.epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
-        self.epoca_ini=self.tca-timedelta(seconds=3) # 3 segundos antes de TCA
-        self.epoca_fin=self.tca+timedelta(seconds=3) # 3 segundos despues de TCA
+        self.epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
+        self.epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
+#         self.epoca_ini=self.tca-timedelta(seconds=3) # 3 segundos antes de TCA
+#         self.epoca_fin=self.tca+timedelta(seconds=3) # 3 segundos despues de TCA
         
         self.mod_minDist=sys.float_info.max
         epoca_ini_list=[]
@@ -173,16 +174,14 @@ class Encuentro():
         4 - Calculo la matriz combinada, suma de las matrices anteriores.
         --------------------------------------------------------------        
         """
-        deb_id=self.tle_deb.catID()
-        ini_set_sat=self.tle_sat.epoca()-timedelta(days=15)
-        fin_set_sat=self.tle_sat.epoca()
-        sat_id=self.tle_sat.catID()
-        ini_set_deb=self.tle_deb.epoca()-timedelta(days=15)
-        fin_set_deb=self.tle_deb.epoca()
+        
         
         #=============================================================
         # 1 - MATRIZ DEL DESECHO 
         #=============================================================
+        deb_id=self.tle_deb.catID()
+        ini_set_deb=self.tle_deb.epoca()-timedelta(days=15)
+        fin_set_deb=self.tle_deb.epoca()
         archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
         nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
         maCovar_deb, ma_archivo=EjecutaMaCovar(nombre_archivo)
@@ -201,6 +200,7 @@ class Encuentro():
         #=============================================================    
         # 2 - MATRIZ DE LA MISION 
         #=============================================================
+        sat_id=self.tle_sat.catID()
         ini_set_sat=self.tle_sat.epoca()-timedelta(days=15)
         fin_set_sat=self.tle_sat.epoca()
         archivo_sat=sat_id+'_'+datetime.strftime(ini_set_sat,'%Y%m%d')+'.crudo'    
@@ -225,11 +225,11 @@ class Encuentro():
 #         var_tab_r=tabla[self.ndias_prev][0]
 #         var_tab_t=tabla[self.ndias_prev][1]
 #         var_tab_c=tabla[self.ndias_prev][2]
-#         
+#          
 #         maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r
 #         maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t
 #         maCovar_deb[2][2]=maCovar_deb[2][2]+var_tab_c
-# 
+#  
 #         maCovar_sat[0][0]=maCovar_sat[0][0]-var_tab_r
 #         maCovar_sat[1][1]=maCovar_sat[1][1]-var_tab_t
 #         maCovar_sat[2][2]=maCovar_sat[2][2]-var_tab_c 
@@ -256,7 +256,7 @@ class Encuentro():
     def calculaPoC_circ(self):
         mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro()
         pocVsra=open('../Validaciones/pocvsra.txt','w')
-        ra=0.01
+        ra=self.hit_rad
         PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra*ra/(2.0*np.sqrt(var_x)*np.sqrt(var_y))))
         PoC_int=PoC_int=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/(var_x))+(y*y/(var_y)))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
         pocVsra.write(str(ra)+' '+str(PoC)+'\n')

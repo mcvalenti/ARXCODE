@@ -87,14 +87,14 @@ y publicado.
 # poc_p=0.0000301
 
 # linea 4
-# sat_id='11308'
-# deb_id='32315'
-# TCA=datetime(2013,3,15,03,02,16,0)
-# min_d=0.094
-# dr='xxx'
-# dt='xxx'
-# dn='xxx'
-# poc_p=0.000018
+sat_id='11308'
+deb_id='32315'
+TCA=datetime(2013,3,15,03,02,16,0)
+min_d=0.094
+dr='xxx'
+dt='xxx'
+dn='xxx'
+poc_p=0.000018
 
 # linea 5
 # sat_id='17583'
@@ -131,13 +131,13 @@ y publicado.
 # MAILS
 #=========================
 # Escenario II - (MAIL 1 )
-sat_id='32789'
-deb_id='23657'
-TCA=datetime(2012,7,15,21,21,51,0)
-min_d=0.760
-dr=0.186
-dt=0.389
-dn=0.626
+# sat_id='32789'
+# deb_id='23657'
+# TCA=datetime(2012,7,15,21,21,51,0)
+# min_d=0.760
+# dr=0.186
+# dt=0.389
+# dn=0.626
 
 # Escenario III - (MAIL 2)
 # sat_id='39417'
@@ -237,7 +237,7 @@ dn=0.626
 tle_sat=Tle.creadoxParam(sat_id, TCA)
 tle_deb=Tle.creadoxParam(deb_id, TCA)
 
-n=2
+n=3
 encuentro=Encuentro(tle_sat,tle_deb,TCA,n)
 
 rtn_dist=encuentro.DistRic_min
@@ -277,4 +277,4 @@ print '**************************************************'
 print 'TCA publicado = ',TCA
 print 'Minima distancia total = ',min_d
 print 'Minima Distancia RTN = ',dr,dt,dn
-#print 'PoC publicada =', poc_p
+print 'PoC publicada =', poc_p

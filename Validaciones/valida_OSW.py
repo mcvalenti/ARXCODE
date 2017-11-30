@@ -6,6 +6,7 @@ mediante el metodo de Osweiler.
 
 @author: ceci
 '''
+import glob
 import numpy as np
 from datetime import datetime
 from TleAdmin.TLE import Tle,SetTLE
@@ -70,6 +71,8 @@ crudo='27642_escenario54.setTle'
 
 set_deb=SetTLE(sat_id,ini_epoca,fin_epoca,crudo)
 set_deb.divide_setTLE()
+print '=================================='
+print 'Cantidad de TLE: ',len(glob.glob('../TleAdmin/tle/*'))
 
 print '********************************'
 nombre_archivo_sat,var_r_sat,var_t_sat,var_n_sat=calcula_matriz_Tles(sat_id,ini_epoca,fin_epoca,crudo)
