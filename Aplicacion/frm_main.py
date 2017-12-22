@@ -254,7 +254,7 @@ class ProcCDM(QWidget):
         vlayout.addWidget(self.boton_salirCdm)
         self.setLayout(vlayout)
         self.setFixedSize(vlayout.sizeHint())
-        
+               
         self.setWindowTitle('Procesamiento de CDM')    
         """
         Acciones
@@ -372,6 +372,13 @@ class ProcCDM(QWidget):
     
     def salirCdm(self):
         self.close()
+
+class EmittingStream(QObject):
+
+    textWritten = pyqtSignal(str)
+
+    def write(self, text):
+        self.textWritten.emit(str(text))
         
 class ProcEncuentro(QWidget):
  #   def __init__(self,parent=None):
@@ -399,6 +406,8 @@ class ProcEncuentro(QWidget):
             self.maCovar_deb=None  
             self.propagacion_errores=[]   
         self.initUI()
+        
+        sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
         
     def initUI(self):
         self.palette = QPalette()
@@ -442,6 +451,7 @@ class ProcEncuentro(QWidget):
         self.tca_text    = QDateEdit()  
         self.tca_text.setDate(self.qdate)
         self.tca_text.setCalendarPopup(True)
+        self.te_process   =QTextEdit()
         """
         Otros
         """
@@ -538,6 +548,13 @@ class ProcEncuentro(QWidget):
         layV_principal.addLayout(layH_matrices)
         layV_principal.addWidget(btn_errores)
         layV_principal.addWidget(self.boton_salir)
+        
+        # horizontal box layout
+        hlayout_principal = QHBoxLayout()
+        hlayout_principal.addLayout(layV_principal)
+        hlayout_principal.addWidget(self.te_process)
+        self.setLayout(hlayout_principal)
+        self.setFixedSize(hlayout_principal.sizeHint())
      
 #         grid.addWidget(self.progress,10,1)
 #         grid.addWidget(self.track,2,4,5,3)
@@ -556,8 +573,8 @@ class ProcEncuentro(QWidget):
         self.boton_track.setEnabled(False)
 #        self.boton_dif.setEnabled(False)
 
-        self.setLayout(layV_principal)
-        self.setFixedSize(layV_principal.sizeHint())
+#         self.setLayout(layV_principal)
+#         self.setFixedSize(layV_principal.sizeHint())
         self.setWindowTitle('Procesamiento con ARxCODE')    
         self.show()
 
@@ -650,6 +667,19 @@ class ProcEncuentro(QWidget):
         data_set=[self.sat_id_text,self.deb_id_text,self.min_dist,self.poc_arx,self.ma_comb, self.ma_comb,self.propagacion_errores]
         ventana3=Errores(data_set)
         ventana3.exec_()
+        
+    def __del__(self):
+        # Restore sys.stdout
+        sys.stdout = sys.__stdout__
+     
+    def normalOutputWritten(self, text):
+        """Append text to the QTextEdit."""
+        # Maybe QTextEdit.append() works as well, but this is how I do it:
+        cursor = self.te_process.textCursor()
+        cursor.movePosition(QTextCursor.End)
+        cursor.insertText(text)
+        self.te_process.setTextCursor(cursor)
+        self.te_process.ensureCursorVisible()
         
     def salir(self):
         self.close() 
