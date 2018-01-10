@@ -30,17 +30,17 @@ de los TLE agrupadas por dia. (Osweiler bines).
 #===================================================
 # Escenario LAGEOS
 #===================================================
-# sat_id='8820'
-# ini_epoca=datetime(2003,3,1)
-# fin_epoca=datetime(2003,3,16)
-# crudo='8820_escenario11.setTle'
+sat_id='8820'
+ini_epoca=datetime(2003,3,1)
+fin_epoca=datetime(2003,3,16)
+crudo='8820_escenario11.setTle'
 #===================================================
 # Escenario SAC-D #7 - Ventana 1
 #===================================================
-sat_id='37673'
-ini_epoca=datetime(2013,4,1)
-fin_epoca=datetime(2013,4,16)
-crudo='37673_escenario71.setTle'
+# sat_id='37673'
+# ini_epoca=datetime(2013,4,1)
+# fin_epoca=datetime(2013,4,16)
+# crudo='37673_escenario71.setTle'
 
 set_sat=SetTLE(sat_id,ini_epoca,fin_epoca,crudo)
 set_sat.divide_setTLE()

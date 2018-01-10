@@ -1,6 +1,10 @@
 '''
 Created on 20/10/2017
-
+----------------------------------------------------
+A partir de una lista de NORAD ID.
+El codigo se trae un TLE de Space-track y verifica
+si el satelite en cuestion es LEO o DEEP SPACE
+----------------------------------------------------
 @author: mcvalenti
 '''
 
@@ -9,7 +13,7 @@ from sgp4.earth_gravity import wgs72, wgs84
 from sgp4.io import twoline2rv
 from TleAdmin.TLE import Tle
 
-object_list=['25415','31445','20737','20738','27939','31588','11308','32315','37442','17583']
+object_list=['25415','31445','20737','20738','27939','31588','11308','32315','17583']
 epocaf=datetime(2013,03,15)
 whichconst = wgs84
         

@@ -222,17 +222,17 @@ class Encuentro():
         # 3 -Corrijo ambas matrices por tabla de Marce al TCA -
         # n dias adelante.
         #=============================================================
-#         var_tab_r=tabla[self.ndias_prev][0]
-#         var_tab_t=tabla[self.ndias_prev][1]
-#         var_tab_c=tabla[self.ndias_prev][2]
-#          
-#         maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r
-#         maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t
-#         maCovar_deb[2][2]=maCovar_deb[2][2]+var_tab_c
-#  
-#         maCovar_sat[0][0]=maCovar_sat[0][0]-var_tab_r
-#         maCovar_sat[1][1]=maCovar_sat[1][1]-var_tab_t
-#         maCovar_sat[2][2]=maCovar_sat[2][2]-var_tab_c 
+        var_tab_r=tabla[self.ndias_prev][0]
+        var_tab_t=tabla[self.ndias_prev][1]
+        var_tab_c=tabla[self.ndias_prev][2]
+          
+        maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r
+        maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t
+        maCovar_deb[2][2]=maCovar_deb[2][2]+var_tab_c
+  
+        maCovar_sat[0][0]=maCovar_sat[0][0]-var_tab_r
+        maCovar_sat[1][1]=maCovar_sat[1][1]-var_tab_t
+        maCovar_sat[2][2]=maCovar_sat[2][2]-var_tab_c 
         #=============================================================
         # 4 - Calculo la matriz combinada, suma de las matrices
         # anteriores. En el sistema RTN.
