@@ -246,6 +246,10 @@ part\'icula que genera el efecto & \\
 
 \subsection{El estudio del riesgo de colisi\'on}\label{subsec:estudiocolision}
 
+Para evitar impactos que comprometan significativamente la salud del sat\'elite, la nave debe contar con la capacidad de realizar una maniobra en los casos en los que el objeto de choque tenga un tama\~no considerable, a saber, mayor a los 10 cm de di\'ametro. No obstante, objetos de este tama\~no, pueden ser rastreados y catalogados, lo que permite predecir acercamientos y hacer an\'alisis de las distintas situaciones.\\
+
+A partir del estudio de la situaci\'on orbital de los objetos y los errores involucrados, se estiman ciertos par\'ametros (Ver Sec. \ref{sec:probcol}) que luego son comparados a valores definidos bajo ciertos criterios para concluir si el sat\'elite se encuentra en una situaci\'on de riesgo.\\ 
+
 Un an\'alisis completo del riesgo de colisi\'on abarca, (Fig. \ref{fig:estudiocolision}):
 
 \begin{itemize}
@@ -383,11 +387,19 @@ El desfavorable panorama futuro en materia de colisiones en \'orbita, obliga a l
 
 Dependiendo de las distintas capacidades con que cuentan las agencias, estos sistemas incluyen desde: redes o instrumentos espec\'ificos de rastreo propios, cat\'alogos completos de los objetos capaces de ser rastreados, sistemas de detecci\'on anticipada de acercamientos de riesgo, sistemas de an\'alisis de situaciones de riesgo alertadas por agentes externos o contrataci\'on de servicios externos que resuelven la totalidad del an\'alisis incluyendo la sugerencia de las maniobras pertinentes.\\
 
-El riesgo de colisi\'on se aborda con mucha delicadeza dentro del \'area espacial y dado el nivel de da\~no que representa, la CONAE contrata un servicio de asesoramiento y control para la planificaci\'on de las operaciones vinculadas a los alertas por colisiones.\\
+Argentina no cuenta actualmente con una red de rastreo para generar sus propios cat\'alogos y tampoco se desarroll\'o a\'un un sistema que permita
+analizar los cat\'alogos ya existentes de acceso p\'ublico para el estudio de riesgo de colisi\'on de sus misiones.\\
 
-Ofrecer un servicio que reemplace al que se utiliza actualmente en CONAE, es impensado y escapa por mucho a los alcances de este trabajo. No obstante, se ha desarrollado una herramienta que permite una clara caracterizaci\'on de la situaci\'on y un mayor conocimiento para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento. As\'i mismo, este trabajo,  se piensa como un planteo preliminar, con versatilidad para ser probado, perfeccionado y ampliado a largo plazo.\\
+Para cubrir este aspecto, la CONAE contrata un servicio externo de asesoramiento y control para la predicci\'on de los acercamientos de riesgo y la planificaci\'on de las operaciones necesarias. Ofrecer un servicio que lo reemplace, es impensado y escapa por mucho a los alcances de este trabajo.\\
 
-La herramienta ARxCODE para el An\'alisis de Riesgo por Colisi\'on con Desechos, que presentamos en esta tesis, consiste en un prototipo de software para ser montado sobre la estructura actual con la que cuenta el departamento de Din\'amica Orbital, y que pueda ser evaluado por operadores del sector con amplios conocimientos del \'area.\\
+En este trabajo se presenta una herramienta que tiene la capacidad de incorporar alertas de riesgo de colisi\'on; ya sea a trav\'es de un \ac{CDM} o por ingesta manual, mostrar mediante una interfaz gr\'afica amigable esos valores que se ingresaron, hacer un registro ordenado de las distintas situaciones y, en paralelo, calcular con sus propios m\'etodos, los par\'ametros de caracterizaci\'on del riesgo, a fin de evaluar la precisi\'on y las limitaciones del software.\\
+
+La herramienta ARxCODE para el An\'alisis de Riesgo por Colisi\'on con Desechos, que presentamos en esta tesis, consiste en un prototipo de software para ser utilizado por operadores con amplios conocimientos de din\'amica orbital y operaciones.\\
+
+Su capacidad para automatizar la recepci\'on de mensajes de alerta y desglozar el contenido, para presentarlo en forma m\'as amigable, pretende ofrecer una clara visualizaci\'on de la situaci\'on y un mayor conocimiento al operador, para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento.\\
+
+La facilidad de utilizar la informaci\'on predicha (o recibida), seleccionar la configuraci\'on deseada y realizar un procesamiento propio, se piensa como un planteo preliminar, con versatilidad para ser probado, perfeccionado y ampliado a largo plazo.\\
+
 
 El mismo oficiar\'a de soporte al operador de din\'amica orbital, quien se encargar\'a de procesar la informaci\'on con las facilidades que ARxCODE provee y generar los reportes necesarios que faciliten el intercambio de informaci\'on y la toma de decisiones, (Fig. \ref{fig:arcodeInterface}). \\ 
 
@@ -406,8 +418,8 @@ El mismo oficiar\'a de soporte al operador de din\'amica orbital, quien se encar
 \subsection*{Objetivo principal}
 Dise\~nar un procedimiento operativo frente a situaciones de alerta por riesgo de posible
 colisi\'on con desechos espaciales y desarrollar un prototipo de software: ARxCODE, que
-mejore el c\'alculo de los par\'ametros de caracterizaci\'on del riesgo y facilite al analista la
-toma de decisiones y/o el di\'alogo con los servicios de alerta externos.\\
+permita el c\'alculo de los par\'ametros de caracterizaci\'on del riesgo y facilite al analista la
+la comprensi\'on y visualizaci\'on de la situaci\'on de riesgo en el di\'alogo con los servicios de alerta externos.\\
 
 \subsection*{Objetivos espec\'ificos}
 \begin{itemize}
