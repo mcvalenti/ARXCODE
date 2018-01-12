@@ -108,7 +108,7 @@ Sin embargo, en 1969 la cantidad de objetos catalogados imped\'ian a las computa
 Esta \'ultima simplificaci\'on (Lane and Hoots, 1979) consisti\'o en :\\
 \begin{itemize}
  \item Retener s\'olo los principales t\'erminos que modelan el efecto secular que produce el frenado atmosf\'erico.
- \item Restringir el modelo gravitacional de Brower s\'olo a los t\'erminos de per\'iodo largo o corto, que no contengan a la excentricidad como factor.
+ \item Restringir el modelo gravitacional de Brouwer s\'olo a los t\'erminos de per\'iodo largo o corto, que no contengan a la excentricidad como factor.
 \end{itemize}
 
 La primera versi\'on liberada del c\'odigo fuente del propagador SGP4 se public\'o en el Spacetrack Report Number 3 \citep{spacetrackreport3}.\\
@@ -165,15 +165,20 @@ Notar que ambos sistemas dependen de la posici\'on y la velocidad, es decir, que
 
 \section{El estudio de los errores}
 
-La predicci\'on de un encuentro acumula los errores de las mediciones y de los modelos de la  determinaci\'on orbital, junto con los errores que introducen los modelos que extrapolan las posiciones hacia el futuro, en el proceso de propagaci\'on orbital.\\
-Para el estudio de la situaci\'on de riesgo es necesario tener conocimiento, no s\'olo de las posiciones, sino tambi\'en de los errores asociados; raz\'on por la cual la estimaci\'on de errores es un proceso fundamental.\\ 
-Esta caracter\'istica del problema, es la que conduce a estudiar probabilidades en los riesgos de colisi\'on.\\
+La predicci\'on de un encuentro siempre involucra la propagaci\'on de las posiciones de los objetos hacia el futuro. Se consideran ciertos momentos cuya posici\'on se toma como dato inicial y se utilizan modelos de propagaci\'on orbital para obtener las posiciones en el futuro. Este proceso acumula los errores de las mediciones y de los modelos de la determinaci\'on orbital de las posiciones iniciales, m\'as los errores que introduce la propagaci\'on orbital. Es decir, que en el estudio de las situaciones de riesgo, debe tenerse en cuenta el error en la posici\'on de los objetos y la propagaci\'on de esos errores hasta el momento en que fue predicho el acercamiento.\\
 
-En este trabajo se organiz\'o el tratamiento de errores en dos grandes secciones, en primer lugar, hay que tener en cuenta que en nuestro planteo siempre estar\'a involucrado un desecho, por lo que ser\'a necesario conocer los errores que resultan del uso de los TLE, ya que los mismos no son publicados. A tal fin, implementamos el m\'etodo de construcci\'on de matrices de covarianzas que propone Osweiler, \citep{osweiler}. Este m\'etodo permite construir una matriz de covarianza para la posici\'on de un TLE, utilizando el conjunto de TLE de los \'ultimos 15 d\'ias anteriores al TLE en cuesti\'on. Este m\'etodo permite conocer los errores asociados a la posici\'on inicial.\\
+Debido a estas incertezas, el simple procedimiento de propagar las posiciones, calcular la distancia entre los objetos y definir acercamientos de riesgo a partir de ciertos valores m\'inimos, no es suficiente, es muy poco confiable y genera falsas alarmas que limitan la capacidad de maniobra futura o puede poner en mayor riesgo al sat\'elite.\\
 
-En segundo lugar, para el an\'alisis de la situaci\'on del encuentro, ser\'a necesario contar con una t\'ecnica que permita obtener los errores que introducen la propagaci\'on del TLE hacia el futuro, es decir, hacia el momento predicho para le m\'aximo acercamiento. En este trabajo se propone una forma para calcular la propagaci\'on de errores, a partir de estudios estad\'isticos del comportamiento de errores de los TLE (Sec. \ref{subsec:tablaprop}).\\
+En la actualidad, en vez de rodear al sat\'elite con una esfera de radio seguro, se calcula la probabilidad de colisi\'on (Ver Sec. \ref{sec:probcol}) y si la probabilidad de colisi\'on supera cierto valor, entonces podr\'ia ser necesario hacer una maniobra. Para el estudio de la probabilidad de colisi\'on es necesario tener conocimiento, no s\'olo de las posiciones, sino tambi\'en de los errores asociados.\\
 
-Debe tenerse en cuenta, que al utilizar los TLE y el modelo SGP4  los datos propagados resultan en el sistema de referencia \ac{TEME}. Para poder comparar esos datos con las efem\'erides precisas publicadas en el sistema TOD, fue necesario hacer la transformaci\'on del Ap\'endice \ref{App1}.\\
+En este trabajo se organiz\'o el tratamiento de errores en dos grandes secciones, en primer lugar, hay que tener en cuenta que en nuestro planteo siempre estar\'a involucrado un desecho, es decir que los TLE ser\'an la \'unica fuente de informaci\'on de la posici\'on que tendremos para ese objeto. Ser\'a necesario estimar los errores que resultan del uso de los TLE, ya que los mismos no son publicados. A tal fin, implementamos el m\'etodo de construcci\'on de matrices de covarianzas que propone Osweiler, \citep{osweiler}. Este m\'etodo permite construir una matriz de covarianza para la posici\'on de un TLE, utilizando el conjunto de TLE de los \'ultimos 15 d\'ias anteriores al TLE en cuesti\'on. Este m\'etodo permite conocer los errores asociados a la posici\'on inicial.\\
+
+En segundo lugar, para el an\'alisis de la situaci\'on del encuentro, ser\'a necesario contar con una t\'ecnica que permita obtener los errores que introduce la propagaci\'on del TLE hasta el momento predicho para el m\'aximo acercamiento. En este trabajo se propone una forma para calcular la propagaci\'on de errores, a partir de estudios estad\'isticos del comportamiento de errores de los TLE (Sec. \ref{subsec:tablaprop}).\\
+
+Debe tenerse en cuenta que al utilizar los TLE y el modelo SGP4  los datos propagados resultan en el sistema de referencia \ac{TEME}. Para poder comparar esos datos con las efem\'erides precisas publicadas en el sistema TOD, fue necesario hacer la transformaci\'on que se detalla en el Ap\'endice \ref{App1}.\\
+
+\subsubsection{como se suman los errores}
+Como se explica en detalle en la secci\'on ..bla bla, las matrices de covarianza de los errores de ambos objetos, pueden ser sumados y atribuidos a una unica posicios ....
 
 \subsection{ El m\'etodo de Osweiler}\label{subsec:osw}
 Es un m\'etodo que propone una manera de estimar los errores que se cometen al utilizar los TLE para determinar la posici\'on y la velocidad de un objeto que orbita la Tierra.

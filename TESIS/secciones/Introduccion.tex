@@ -390,18 +390,25 @@ Dependiendo de las distintas capacidades con que cuentan las agencias, estos sis
 Argentina no cuenta actualmente con una red de rastreo para generar sus propios cat\'alogos y tampoco se desarroll\'o a\'un un sistema que permita
 analizar los cat\'alogos ya existentes de acceso p\'ublico para el estudio de riesgo de colisi\'on de sus misiones.\\
 
-Para cubrir este aspecto, la CONAE contrata un servicio externo de asesoramiento y control para la predicci\'on de los acercamientos de riesgo y la planificaci\'on de las operaciones necesarias. Ofrecer un servicio que lo reemplace, es impensado y escapa por mucho a los alcances de este trabajo.\\
+Para cubrir este aspecto, la CONAE contrata un servicio externo de asesoramiento y control para la predicci\'on de los acercamientos de riesgo y la planificaci\'on de las operaciones necesarias. Ofrecer un servicio que lo reemplace, es impensado y escapa por mucho a los alcances de este trabajo. Sin embargo, pueden ir realiz\'andose desarrollos que permitan una mayor comprensi\'on,  caracterizaci\'on y registro de los eventos, y a partir de esa informaci\'on evaluar la posibilidad de impulsar proyectos que involucren el abordaje de esta problem\'atica, ya sea en busca de poder poder predecir los acercamientos utilizando cat\'alogos ya existentes, o mismo de instalar/adaptar instrumental para el rastreo de los objetos espaciales.\\
 
-En este trabajo se presenta una herramienta que tiene la capacidad de incorporar alertas de riesgo de colisi\'on; ya sea a trav\'es de un \ac{CDM} o por ingesta manual, mostrar mediante una interfaz gr\'afica amigable esos valores que se ingresaron, hacer un registro ordenado de las distintas situaciones y, en paralelo, calcular con sus propios m\'etodos, los par\'ametros de caracterizaci\'on del riesgo, a fin de evaluar la precisi\'on y las limitaciones del software.\\
+
+En este trabajo se presenta una herramienta que tiene la capacidad de:
+
+\begin{itemize}
+\item Incorporar alertas de riesgo de colisi\'on, ya sea a trav\'es de un mensaje estandarizado o ingresados manualmente por un operador.
+\item Mostrar mediante una interfaz gr\'afica amigable esos valores que se ingresaron.
+\item Hacer un registro ordenado de las distintas situaciones.
+\item Calcular con sus propios m\'etodos, los par\'ametros de caracterizaci\'on del riesgo, a fin de evaluar la precisi\'on y las limitaciones del software.\\
+\end{itemize}
 
 La herramienta ARxCODE para el An\'alisis de Riesgo por Colisi\'on con Desechos, que presentamos en esta tesis, consiste en un prototipo de software para ser utilizado por operadores con amplios conocimientos de din\'amica orbital y operaciones.\\
 
-Su capacidad para automatizar la recepci\'on de mensajes de alerta y desglozar el contenido, para presentarlo en forma m\'as amigable, pretende ofrecer una clara visualizaci\'on de la situaci\'on y un mayor conocimiento al operador, para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen el servicio y asesoramiento.\\
+Su capacidad para automatizar la recepci\'on de mensajes de alerta y desglozar el contenido, para presentarlo en forma m\'as amigable, pretende ofrecer una clara visualizaci\'on del evento y un mayor conocimiento al operador, para enriquecer el di\'alogo e intercambio de informaci\'on con los organismos y agencias que proveen servicio y asesoramiento en las situaciones de riesgo.\\
 
-La facilidad de utilizar la informaci\'on predicha (o recibida), seleccionar la configuraci\'on deseada y realizar un procesamiento propio, se piensa como un planteo preliminar, con versatilidad para ser probado, perfeccionado y ampliado a largo plazo.\\
+Por otro lado, conociendo los objetos involucrados en un acercamiento y el instante de acercamiento m\'aximo, ARxCODE cuenta con la facilidad de realizar un procesamiento propio de los par\'ametros de riesgo. Este desarrollo se piensa como un planteo preliminar, para ser probado, perfeccionado y ampliado a largo plazo, con la intenci\'on de lograr cierta autonom\'ia en la generaci\'on de los alertas.\\
 
-
-El mismo oficiar\'a de soporte al operador de din\'amica orbital, quien se encargar\'a de procesar la informaci\'on con las facilidades que ARxCODE provee y generar los reportes necesarios que faciliten el intercambio de informaci\'on y la toma de decisiones, (Fig. \ref{fig:arcodeInterface}). \\ 
+En un esquema operativo, ARxCODE funcionar\'ia incorporado a los servicios de Din\'amica Orbital, cuyas interfaces con los organismos externos y el centro de operaciones se representa en la Figura \ref{fig:arcodeInterface}.\\ 
 
 
 \begin{figure}[!h]
