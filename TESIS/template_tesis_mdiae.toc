@@ -19,10 +19,10 @@
 \contentsline {subsection}{\numberline {2.2.4}El propagador SGP4}{23}{subsection.2.2.4}
 \contentsline {subsection}{\numberline {2.2.5}Sistemas de Referencia}{23}{subsection.2.2.5}
 \contentsline {section}{\numberline {2.3}El estudio de los errores}{25}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1} El m\'etodo de Osweiler}{26}{subsection.2.3.1}
+\contentsline {subsection}{\numberline {2.3.1} El m\'etodo de Osweiler}{27}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Propagaci\'on de errores utilizando datos de TLE y efem\'erides precisas}{27}{subsection.2.3.2}
 \contentsline {section}{\numberline {2.4}La probabilidad de colisi\'on}{30}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}C\'alculo simplificado de Lei-Chen}{31}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}C\'alculo simplificado de Lei-Chen}{32}{subsection.2.4.1}
 \contentsline {section}{\numberline {2.5}Comunicaciones de riesgo de colisi\'on}{35}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}El mensaje de alerta CDM}{36}{subsection.2.5.1}
 \contentsline {section}{\numberline {2.6}Resumen}{40}{section.2.6}

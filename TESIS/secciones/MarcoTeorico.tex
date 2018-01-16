@@ -5,10 +5,10 @@
 
 Para el an\'alisis de posibles colisiones es necesario evaluar de forma anticipada las trayectorias de todos los objetos que orbitan la Tierra y detectar los acercamientos de riesgo. Si la predicci\'on de las posiciones fuera exacta, este estudio s\'olo implicar\'ia un esfuerzo computacional a resolver. No obstante, el movimiento orbital de los objetos no es ideal y las posiciones medidas o estimadas siempre acarrean una indeterminaci\'on; ya sea por: errores en la medici\'on, errores en el modelo de determinaci\'on orbital o errores en los modelos de predicci\'on orbital. A su vez, las indeterminaciones son mayores cuando se trata de desechos espaciales.\\
 
-La t\'ecnica de detecci\'on de encuentros, consiste en realizar propagaciones de las posiciones de todo el cat\'alogo a partir de un instante inicial, en intervalos que por lo general, abarcan una semana hacia el futuro y medir las distancias entre los objetos. Se define un volumen seguro rodeando al sat\'elite de inter\'es, y si alg\'un objeto externo se introduce dentro del volumen de riesgo, es decir, se acerca a una distancia m\'inima por debajo del umbral determinado, se considera una situaci\'on de riesgo. 
-Esta metodolog\'ia no tiene en cuenta los errores en la determinaci\'on de la posici\'on de los objetos, y por lo general deriva en falsas alarmas, con las que se corre el riesgo de realizar maniobras innecesarias o que pueden poner en mayor peligro a la misi\'on.\\
+La t\'ecnica de detecci\'on de encuentros, consisti\'o durante muchos a\~nos en realizar propagaciones de las posiciones de todo el cat\'alogo a partir de un instante inicial, en intervalos que por lo general, abarcan una semana hacia el futuro y medir las distancias entre los objetos. Se defin\'ia un volumen seguro rodeando al sat\'elite de inter\'es, y si alg\'un objeto externo se introduc\'ia dentro del volumen de riesgo, es decir, se acercaba a una distancia m\'inima por debajo del umbral determinado, se consideraba una situaci\'on de riesgo. 
+Esta metodolog\'ia no tiene en cuenta los errores en la determinaci\'on de la posici\'on de los objetos, y por lo general deriva en falsas alarmas, con las que se corre el riesgo de realizar maniobras innecesarias o que pueden poner en mayor peligro a la misi\'on, por lo que fue necesario complementarla.\\
 
-Una vez identificado un encuentro, para un estudio m\'as exhaustivo de la situaci\'on, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la PoC.  Esta \'ultima ofrece un panorama m\'as completo ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
+En la actualidad, para un estudio m\'as exhaustivo de la situaci\'on, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la PoC.  Esta \'ultima ofrece un panorama m\'as completo ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
 
 Como ya mencionamos (Sec. \ref{subsec:estudiocolision}), en este trabajo nos enfocamos en analizar las situaciones de encuentro ya identificadas y en particular, aquellas que involucran a misiones operativas y desechos espaciales.\\
 
@@ -165,20 +165,37 @@ Notar que ambos sistemas dependen de la posici\'on y la velocidad, es decir, que
 
 \section{El estudio de los errores}
 
-La predicci\'on de un encuentro siempre involucra la propagaci\'on de las posiciones de los objetos hacia el futuro. Se consideran ciertos momentos cuya posici\'on se toma como dato inicial y se utilizan modelos de propagaci\'on orbital para obtener las posiciones en el futuro. Este proceso acumula los errores de las mediciones y de los modelos de la determinaci\'on orbital de las posiciones iniciales, m\'as los errores que introduce la propagaci\'on orbital. Es decir, que en el estudio de las situaciones de riesgo, debe tenerse en cuenta el error en la posici\'on de los objetos y la propagaci\'on de esos errores hasta el momento en que fue predicho el acercamiento.\\
+La predicci\'on de un encuentro siempre involucra la propagaci\'on de las posiciones de los objetos hacia el futuro. Se consideran ciertos momentos cuya posici\'on se toma como dato inicial y se utilizan modelos de propagaci\'on orbital para obtener las posiciones en el futuro. Este proceso acumula los errores de las mediciones y de los modelos de la determinaci\'on orbital de las posiciones iniciales, m\'as los errores que introduce la propagaci\'on orbital. Es decir, que en el estudio de las situaciones de riesgo, debe tenerse en cuenta: el error en la posici\'on de los objetos y la propagaci\'on de esos errores hasta el momento en que fue predicho el acercamiento.\\
 
-Debido a estas incertezas, el simple procedimiento de propagar las posiciones, calcular la distancia entre los objetos y definir acercamientos de riesgo a partir de ciertos valores m\'inimos, no es suficiente, es muy poco confiable y genera falsas alarmas que limitan la capacidad de maniobra futura o puede poner en mayor riesgo al sat\'elite.\\
+{\color{red}{Esquema}}
 
-En la actualidad, en vez de rodear al sat\'elite con una esfera de radio seguro, se calcula la probabilidad de colisi\'on (Ver Sec. \ref{sec:probcol}) y si la probabilidad de colisi\'on supera cierto valor, entonces podr\'ia ser necesario hacer una maniobra. Para el estudio de la probabilidad de colisi\'on es necesario tener conocimiento, no s\'olo de las posiciones, sino tambi\'en de los errores asociados.\\
+Debido a estas incertezas, el simple procedimiento de propagar las posiciones, calcular la distancia entre los objetos y definir acercamientos de riesgo a partir de ciertas distancias m\'inimas, no es suficiente, es muy poco confiable y genera falsas alarmas que limitan la capacidad de maniobra futura o pueden poner en mayor riesgo al sat\'elite.\\
 
-En este trabajo se organiz\'o el tratamiento de errores en dos grandes secciones, en primer lugar, hay que tener en cuenta que en nuestro planteo siempre estar\'a involucrado un desecho, es decir que los TLE ser\'an la \'unica fuente de informaci\'on de la posici\'on que tendremos para ese objeto. Ser\'a necesario estimar los errores que resultan del uso de los TLE, ya que los mismos no son publicados. A tal fin, implementamos el m\'etodo de construcci\'on de matrices de covarianzas que propone Osweiler, \citep{osweiler}. Este m\'etodo permite construir una matriz de covarianza para la posici\'on de un TLE, utilizando el conjunto de TLE de los \'ultimos 15 d\'ias anteriores al TLE en cuesti\'on. Este m\'etodo permite conocer los errores asociados a la posici\'on inicial.\\
+En la actualidad, en vez de rodear al sat\'elite con una esfera de radio seguro, se calcula la probabilidad de colisi\'on (Ver Sec. \ref{sec:probcol}) y si la probabilidad de colisi\'on supera cierto valor, entonces podr\'ia ser necesario hacer una maniobra. Para el estudio de la probabilidad de colisi\'on se debe contar, no s\'olo con el dato de las posiciones, sino tambi\'en con informaci\'on de los errores asociados.\\
 
-En segundo lugar, para el an\'alisis de la situaci\'on del encuentro, ser\'a necesario contar con una t\'ecnica que permita obtener los errores que introduce la propagaci\'on del TLE hasta el momento predicho para el m\'aximo acercamiento. En este trabajo se propone una forma para calcular la propagaci\'on de errores, a partir de estudios estad\'isticos del comportamiento de errores de los TLE (Sec. \ref{subsec:tablaprop}).\\
+En este trabajo se organiz\'o el tratamiento de errores en dos grandes secciones. En primer lugar, hay que tener en cuenta que en nuestro planteo siempre estar\'a involucrado un desecho, es decir que los TLE ser\'an la \'unica fuente de informaci\'on de la posici\'on que tendremos para ese objeto. Esto implica que se deben estimar los errores que resultan del uso de los TLE, ya que los mismos no son publicados.\\
+
+Tal como lo menciona Lei-Chen \citep{leichen}, muchos estudios analizan la precisi\'on de las posiciones de los TLE compar\'andolas con efem\'erides precisas ({\color{red}{hacer/Ver tabla}}). Pero como se menciona en el p\'arrafo anterior, esto no es pr\'actico cuando se trata de desechos, ya que no se tienen efem\'erides precisas de los mismos. En estos casos, los m\'etodos de comparaci\'on de pares resultan una opci\'on v\'alida. El concepto b\'asico consiste en comparar posiciones orbitales en la \'epoca del TLE contra posiciones predichas usando TLE anteriores y el modelo de propagaci\'on SGP4. Los residuos se analizan estad\'isticamente para obtener informaci\'on de los errores. ({\color{red}{resumen de trabajos sobre esto}})
+
+\begin{table}
+ \centering
+  \begin{tabular}{lc}
+  \hline \hline
+  Autore/s & Descripci\'on del trabajo \\
+  \hline \hline
+  Flohrer  & look-up\\
+  Wang \citep{wang2009propagation}& B\\
+  \end{tabular}
+\end{table}
+
+
+{\color{red}{Elegimos OSW}}A tal fin, implementamos el m\'etodo de construcci\'on de matrices de covarianzas que propone Osweiler, \citep{osweiler}. Este m\'etodo permite construir una matriz de covarianza para la posici\'on de un TLE, utilizando el conjunto de TLE de los \'ultimos 15 d\'ias anteriores al TLE en cuesti\'on. Resultando los errores asociados a la posici\'on inicial. Es decir, dado un TLE que utilizaremos para hacer las propagaciones, el m\'etodo de Osweiler nos sirve para calcular los errores iniciales de ese TLE (Ver Sec. \ref{subsec:osw})\\
+
+En segundo lugar, para obtener los errores que introduce la propagaci\'on del TLE hasta el momento predicho para el m\'aximo acercamiento, no se utilizan comparaciones s\'olo con TLE, sino que se propone una forma para calcular la propagaci\'on de errores, a partir de estudios estad\'isticos del comportamiento de errores de los TLE (Sec. \ref{subsec:tablaprop}) comparados con efem\'erides precisas.\\
 
 Debe tenerse en cuenta que al utilizar los TLE y el modelo SGP4  los datos propagados resultan en el sistema de referencia \ac{TEME}. Para poder comparar esos datos con las efem\'erides precisas publicadas en el sistema TOD, fue necesario hacer la transformaci\'on que se detalla en el Ap\'endice \ref{App1}.\\
 
-\subsubsection{como se suman los errores}
-Como se explica en detalle en la secci\'on ..bla bla, las matrices de covarianza de los errores de ambos objetos, pueden ser sumados y atribuidos a una unica posicios ....
+Finalmente, las matrices de error de cada objeto en el instante de m\'aximo acercamiento, se construyen sumando a las matrices de error inicial, las matrices de error de propagaci\'on que resultan del estudio estad\'istico de la comparaci\'on de las posiciones de los TLE propagados y las efem\'erides precisas.
 
 \subsection{ El m\'etodo de Osweiler}\label{subsec:osw}
 Es un m\'etodo que propone una manera de estimar los errores que se cometen al utilizar los TLE para determinar la posici\'on y la velocidad de un objeto que orbita la Tierra.

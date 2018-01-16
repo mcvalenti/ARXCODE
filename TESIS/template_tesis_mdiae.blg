@@ -18,49 +18,48 @@ I was expecting a `{' or a `('---line 249 of file template_tesis_mdiae.bib
  : @BOOK{osweiler,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
-Warning--I didn't find a database entry for "Klinkard"
 Warning--empty journal in karacalioglu2016impact
 Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty publisher in osweiler
-You've used 28 entries,
+You've used 29 entries,
             1940 wiz_defined-function locations,
-            627 strings with 7280 characters,
-and the built_in function-call counts, 8837 in all, are:
-= -- 848
-> -- 276
+            632 strings with 7375 characters,
+and the built_in function-call counts, 9287 in all, are:
+= -- 893
+> -- 294
 < -- 27
-+ -- 98
-- -- 84
-* -- 698
-:= -- 1603
-add.period$ -- 80
-call.type$ -- 28
-change.case$ -- 177
-chr.to.int$ -- 24
-cite$ -- 31
-duplicate$ -- 375
-empty$ -- 641
-format.name$ -- 126
-if$ -- 1690
++ -- 104
+- -- 90
+* -- 743
+:= -- 1679
+add.period$ -- 83
+call.type$ -- 29
+change.case$ -- 185
+chr.to.int$ -- 25
+cite$ -- 32
+duplicate$ -- 389
+empty$ -- 673
+format.name$ -- 133
+if$ -- 1776
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 28
-newline$ -- 139
-num.names$ -- 84
-pop$ -- 152
+missing$ -- 29
+newline$ -- 144
+num.names$ -- 87
+pop$ -- 158
 preamble$ -- 1
-purify$ -- 182
+purify$ -- 190
 quote$ -- 0
-skip$ -- 295
+skip$ -- 305
 stack$ -- 0
-substring$ -- 514
-swap$ -- 59
+substring$ -- 557
+swap$ -- 61
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 154
+type$ -- 160
 warning$ -- 3
-while$ -- 68
+while$ -- 72
 width$ -- 0
-write$ -- 345
+write$ -- 358
 (There was 1 error message)

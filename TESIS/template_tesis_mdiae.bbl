@@ -148,6 +148,11 @@ NASA (2017c).
 \newblock {\em Covariance estimation and autocorrelation of NORAD Two-line
   Element Sets}.
 
+\bibitem[\protect\astroncite{Wang et~al.}{2009}]{wang2009propagation}
+Wang, R., Liu, J., and Zhang, Q. (2009).
+\newblock Propagation errors analysis of tle data.
+\newblock {\em Advances in Space Research}, 43(7):1065--1069.
+
 \bibitem[\protect\astroncite{Xu and Xiong}{2014}]{xu2014method}
 Xu, X.-L. and Xiong, Y.-Q. (2014).
 \newblock A method for calculating probability of collision between space
