@@ -259,6 +259,7 @@ booktitle = {Space Debris},
   url = {https://pypi.python.org/pypi/sgp4/},
   version = {1.4},
   date = {2015-01-15},
+  year={2015},
 }
 
 @misc{stk,
@@ -266,7 +267,7 @@ booktitle = {Space Debris},
   title = {System Tool Kit - STK 11x64},
   url = {http://www.agi.com/resources},
   version = {11.1},
-  date = {2016},
+  year = {2016},
 }
 
 @article{karacalioglu2016impact,
@@ -278,9 +279,9 @@ booktitle = {Space Debris},
 @MISC{nasaprogramme,
   author = {NASA},
   title={{Orbital Debris Program Office}},
-  howpublished = {https://orbitaldebris.jsc.nasa.gov/},
+  howpublished = {http://orbitaldebris.jsc.nasa.gov/},
   owner = {Ceci},
-  year = {},
+  year = {2017},
 }
 
 @techreport{hoots1980models,
@@ -329,3 +330,55 @@ note= {Third US-Russian Space Surveillance Workshop. Washington, D.C},
   pages={446},
   year={1962}
 }
+
+@article{brouwer1959solution,
+  title={Solution of the problem of artificial satellite theory without drag},
+  author={Brouwer, Dirk},
+  journal={The Astronomical Journal},
+  volume={64},
+  pages={378},
+  year={1959}
+}
+
+@article{flohrer2008assessment,
+  title={Assessment and categorization of TLE orbit errors for the US SSN catalogue},
+  author={Flohrer, Tim and Krag, Holger and Klinkrad, Heiner},
+  journal={risk},
+  volume={8},
+  number={9},
+  pages={10--11},
+  year={2008}
+}
+
+@book{montenbruck2012satellite,
+  title={Satellite orbits: models, methods and applications},
+  author={Montenbruck, Oliver and Gill, Eberhard},
+  year={2012},
+  publisher={Springer Science \& Business Media}
+}
+
+@article{xu2014method,
+  title={A method for calculating probability of collision between space objects},
+  author={Xu, Xiao-Li and Xiong, Yong-Qing},
+  journal={Research in Astronomy and Astrophysics},
+  volume={14},
+  number={5},
+  pages={601},
+  year={2014},
+  publisher={IOP Publishing}
+}
+
+@article{kelso2007validation,
+  title={Validation of SGP4 and IS-GPS-200D against GPS precision ephemerides},
+  author={Kelso, TS and others},
+  year={2007}
+}
+
+@inproceedings{krag2007assessment,
+  title={Assessment of orbit uncertainties for collision risk predictions at ESA},
+  author={Krag, H and Klinkrad, H and Alarcon-Rodriguez, JR},
+  booktitle={Second IAASS conference “Space safety in a global world},
+  pages={14--16},
+  year={2007}
+}
+

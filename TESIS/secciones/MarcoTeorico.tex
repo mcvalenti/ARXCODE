@@ -175,17 +175,24 @@ En la actualidad, en vez de rodear al sat\'elite con una esfera de radio seguro,
 
 En este trabajo se organiz\'o el tratamiento de errores en dos grandes secciones. En primer lugar, hay que tener en cuenta que en nuestro planteo siempre estar\'a involucrado un desecho, es decir que los TLE ser\'an la \'unica fuente de informaci\'on de la posici\'on que tendremos para ese objeto. Esto implica que se deben estimar los errores que resultan del uso de los TLE, ya que los mismos no son publicados.\\
 
-Tal como lo menciona Lei-Chen \citep{leichen}, muchos estudios analizan la precisi\'on de las posiciones de los TLE compar\'andolas con efem\'erides precisas ({\color{red}{hacer/Ver tabla}}). Pero como se menciona en el p\'arrafo anterior, esto no es pr\'actico cuando se trata de desechos, ya que no se tienen efem\'erides precisas de los mismos. En estos casos, los m\'etodos de comparaci\'on de pares resultan una opci\'on v\'alida. El concepto b\'asico consiste en comparar posiciones orbitales en la \'epoca del TLE contra posiciones predichas usando TLE anteriores y el modelo de propagaci\'on SGP4. Los residuos se analizan estad\'isticamente para obtener informaci\'on de los errores. ({\color{red}{resumen de trabajos sobre esto}})
+Tal como lo menciona Lei-Chen \citep{leichen}, muchos estudios analizan la precisi\'on de las posiciones de los TLE compar\'andolas con efem\'erides precisas ({\color{red}{resumen de trabajos sobre esto}}). Pero como se menciona en el p\'arrafo anterior, esto no es pr\'actico cuando se trata de desechos, ya que no se tienen efem\'erides precisas de los mismos. En estos casos, los m\'etodos de comparaci\'on de pares resultan una opci\'on v\'alida. El concepto b\'asico consiste en comparar posiciones orbitales en la \'epoca del TLE contra posiciones predichas usando TLE anteriores y el modelo de propagaci\'on SGP4. Los residuos se analizan estad\'isticamente para obtener informaci\'on de los errores. (Ver Tabla \ref{tab:trabajosprecisas})
 
 \begin{table}
- \centering
-  \begin{tabular}{lc}
+\caption[Estimaciones con TLE]{Trabajos que estiman los errores de los TLE utilizando TLE hist\'oricos y el m\'etodo de comparaci\'on de pares}
+  \begin{tabular}{p{5cm}p{12cm}}
   \hline \hline
-  Autore/s & Descripci\'on del trabajo \\
+  Trabajo y Autor/es & Descripci\'on del trabajo \\
   \hline \hline
-  Flohrer  & look-up\\
-  Wang \citep{wang2009propagation}& B\\
+   {\it{Assessment and categorization of TLE orbit errors for the US SSN catalogue.}}  \citep{krag2007assessment} & Se construyen tablas {\it{look up}} predefinidas, con covarianzas iniciales que se producen a partir de la propagación de TLE durante 24 hs y se clasifican seg\'un la excentricidad, la inclinaci\'on y la altitud del perigeo de la \'orbita. A tal fin se comparan las posiciones de los TLE, con aquellas que resultan de utilizar pseudo\-observaciones derivadas de TLE a trav\'es de un propagador num\'erico. La covarianza inicial obtenida se aplica a la propagaci\'on y a la covarianza resultante del propagador num\'erico. De modo que la informaci\'on de covarianza resultante de este procedimiento refleja las limitaciones del modelo TLE (SGP4) y las propias del propagador num\'erico. El estudio se realiza considerando todo el cat\'alogo de objetos del a\~no 2008 cuyos TLE son p\'ublicos. Se recopilan 11470 objetos de los cuales 11286 fueron procesados satisfactoriamente.\\
+  \hline
+  {\it{Propagation errors analysis of TLE data}} \citep{wang2009propagation} & Se calculan los errores en las posiciones de los TLE para las \'orbitas sol s\'incr\'onas, utilizando s\'olo TLE y el propagador SGP4. Finalmente se hacen an\'alisis sobre la influencia del frenado atmosf\'erico como principal causante del decaimiento de los objetos, y se modifican los valores del par\'ametro BSTAR para obtener mejores resutlados.\\
+  \hline
+  {\it{Validation of SGP4 and IS—GPS-200D against GPS precision ephemerides}} \citep{kelso2007validation} & Se realizan propagaciones hacia adelante y hacia atr\'as de la \'epoca del TLE. Se Resalta el hecho de que cada objeto debe ser considerado individualmente ya que los errores para objetos de \'orbitas similares resultan muy diferentes. No obstante se aclara que este m\'etodo resulta complejo e ineficiente para el estudio de grandes cantidades de objetos.\\
+  \hline
+  mason &\\
+  \hline
   \end{tabular}
+  \label{tab:trabajosprecisas}
 \end{table}
 
 
