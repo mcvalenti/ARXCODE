@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: template_tesis_mdiae.aux
 A level-1 auxiliary file: secciones/Resumen.aux
@@ -19,47 +19,48 @@ I was expecting a `{' or a `('---line 249 of file template_tesis_mdiae.bib
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
 Warning--empty journal in karacalioglu2016impact
+Warning--empty journal in kelso2007validation
 Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty publisher in osweiler
-You've used 29 entries,
+You've used 40 entries,
             1940 wiz_defined-function locations,
-            632 strings with 7375 characters,
-and the built_in function-call counts, 9287 in all, are:
-= -- 893
-> -- 294
-< -- 27
-+ -- 104
-- -- 90
-* -- 743
-:= -- 1679
-add.period$ -- 83
-call.type$ -- 29
-change.case$ -- 185
-chr.to.int$ -- 25
-cite$ -- 32
-duplicate$ -- 389
-empty$ -- 673
-format.name$ -- 133
-if$ -- 1776
+            687 strings with 8998 characters,
+and the built_in function-call counts, 13140 in all, are:
+= -- 1269
+> -- 422
+< -- 38
++ -- 152
+- -- 130
+* -- 1040
+:= -- 2353
+add.period$ -- 115
+call.type$ -- 40
+change.case$ -- 262
+chr.to.int$ -- 36
+cite$ -- 44
+duplicate$ -- 563
+empty$ -- 951
+format.name$ -- 189
+if$ -- 2536
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 29
-newline$ -- 144
-num.names$ -- 87
-pop$ -- 158
+missing$ -- 37
+newline$ -- 198
+num.names$ -- 120
+pop$ -- 231
 preamble$ -- 1
-purify$ -- 190
+purify$ -- 264
 quote$ -- 0
-skip$ -- 305
+skip$ -- 437
 stack$ -- 0
-substring$ -- 557
-swap$ -- 61
-text.length$ -- 2
+substring$ -- 774
+swap$ -- 98
+text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 160
-warning$ -- 3
-while$ -- 72
+type$ -- 226
+warning$ -- 4
+while$ -- 103
 width$ -- 0
-write$ -- 358
+write$ -- 497
 (There was 1 error message)

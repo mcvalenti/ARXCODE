@@ -4,12 +4,23 @@
 {Analytical Graphics, Inc.} (2016).
 \newblock System tool kit - stk 11x64.
 
+\bibitem[\protect\astroncite{Arsenault et~al.}{1964}]{arsenault1964general}
+Arsenault, J., Chaffee, L., and Kuhlman, J. (1964).
+\newblock General ephemeris routine formulation document.
+\newblock Technical report, Report ESDTDR-64-522, Aeronutronic Publ. U-2731.
+
 \bibitem[\protect\astroncite{{Babiker} et~al.}{2012}]{babiker}
 {Babiker}, F., {Doyon}, M., and {Abbasi}, V. (2012).
 \newblock The canadian space agency (csa) collision risk assessment and
   mitigation system (crams): Sharing the development and the operational
   challenges.
 \newblock In {\em SpaceOps Conference}.
+
+\bibitem[\protect\astroncite{Bowman}{1971}]{bowman1971first}
+Bowman, B. (1971).
+\newblock A first order semi-analytic perturbation theory for highly eccentric
+  12 hour resonating satellite orbits.
+\newblock {\em NORAD document, Nov}.
 
 \bibitem[\protect\astroncite{{Brandon Rhodes}}{2015}]{sgp4python}
 {Brandon Rhodes} (2015).
@@ -19,6 +30,12 @@
 Brouwer, D. (1959).
 \newblock Solution of the problem of artificial satellite theory without drag.
 \newblock {\em The Astronomical Journal}, 64:378.
+
+\bibitem[\protect\astroncite{Brouwer and Hori}{1961}]{brouwer1961theoretical}
+Brouwer, D. and Hori, G.-i. (1961).
+\newblock Theoretical evaluation of atmospheric drag effects in the motion of
+  an artificial satellite.
+\newblock {\em The Astronomical Journal}, 66:193.
 
 \bibitem[\protect\astroncite{CCSDS}{2013}]{CDM}
 CCSDS (2013).
@@ -31,6 +48,12 @@ Chan, K. (2003).
 \newblock Improved analytical expressions for computing spacecraft collision
   probabilities.
 \newblock {\em Advances in the Astronautical Sciences}, 114:1197--1216.
+
+\bibitem[\protect\astroncite{Cranford}{1969}]{cranfordimproved}
+Cranford, K. (1969).
+\newblock An improved analytical drag theory for the artificial satellite
+  problem.
+\newblock In {\em Astrodynamics Conference}, page 925.
 
 \bibitem[\protect\astroncite{ESA}{2013}]{esaSD}
 ESA (2013).
@@ -61,6 +84,19 @@ Hoots, F.~R. and Roehrich, R.~L. (1998).
   Surveillance System}.
 \newblock Third US-Russian Space Surveillance Workshop. Washington, D.C.
 
+\bibitem[\protect\astroncite{Hoots et~al.}{2004}]{hoots2004history}
+Hoots, F.~R., Schumacher~Jr, P.~W., and Glover, R.~A. (2004).
+\newblock History of analytical orbit modeling in the us space surveillance
+  system.
+\newblock {\em Journal of Guidance, Control, and Dynamics}, 27(2):174--185.
+
+\bibitem[\protect\astroncite{Hujsak}{1979}]{hujsak1979restricted}
+Hujsak, R.~S. (1979).
+\newblock A restricted four body solution for resonating satellites without
+  drag.
+\newblock Technical report, AEROSPACE DEFENSE COMMAND PETERSON AFB CO OFFICE OF
+  ASTRODYNAMICS.
+
 \bibitem[\protect\astroncite{IADC}{2007}]{iadcguide}
 IADC (2007).
 \newblock {\em Space Debris Mitigation Guidelines}.
@@ -77,6 +113,10 @@ J.R. Alarc\'on~Rodr\'iguez, F.M. Mart\'inez-Fadrique, H.~K. (2004).
 Karacalioglu, A.~G. and Stupl, J. (2016).
 \newblock The impact of new trends in satellite launches on the orbital debris
   environment.
+
+\bibitem[\protect\astroncite{Kelso et~al.}{2007}]{kelso2007validation}
+Kelso, T. et~al. (2007).
+\newblock Validation of sgp4 and is-gps-200d against gps precision ephemerides.
 
 \bibitem[\protect\astroncite{Kessler and Cour-Palais}{1978}]{kessler0}
 Kessler, D. and Cour-Palais, B. (1978).
@@ -101,6 +141,26 @@ Kozai, Y. (1962).
   drag.
 \newblock {\em The Astronomical Journal}, 67:446.
 
+\bibitem[\protect\astroncite{Krag et~al.}{2007}]{krag2007assessment}
+Krag, H., Klinkrad, H., and Alarcon-Rodriguez, J. (2007).
+\newblock Assessment of orbit uncertainties for collision risk predictions at
+  esa.
+\newblock In {\em Second IAASS conference “Space safety in a global world},
+  pages 14--16.
+
+\bibitem[\protect\astroncite{Lane}{1965}]{lane1965development}
+Lane, M. (1965).
+\newblock The development of an artificial satellite theory using a power-law
+  atmospheric density representation.
+\newblock In {\em 2nd Aerospace Sciences Meeting}, page~35.
+
+\bibitem[\protect\astroncite{Lane and Hoots}{1979}]{lane1979general}
+Lane, M.~H. and Hoots, F.~R. (1979).
+\newblock General perturbations theories derived from the 1965 lane drag
+  theory.
+\newblock Technical report, AEROSPACE DEFENSE COMMAND PETERSON AFB CO OFFICE OF
+  ASTRODYNAMICS.
+
 \bibitem[\protect\astroncite{Laporte}{2014}]{laporte}
 Laporte, F. (2014).
 \newblock Jac software, dedicated to the analysis of conjunction messages.
@@ -116,6 +176,12 @@ LEI, B. X.~C. (2009).
 Lei, C., Xian-Zong, B., Yan-Gang, L., and Ke-Bo, L. (2017).
 \newblock {\em Orbital Data Applications for Space Objects}.
 \newblock Springer.
+
+\bibitem[\protect\astroncite{Lyddane}{1963}]{lyddane1963small}
+Lyddane, R. (1963).
+\newblock Small eccentricities or inclinations in the brouwer theory of the
+  artificial satellite.
+\newblock {\em The Astronomical Journal}, 68:555.
 
 \bibitem[\protect\astroncite{Montenbruck and
   Gill}{2012}]{montenbruck2012satellite}
