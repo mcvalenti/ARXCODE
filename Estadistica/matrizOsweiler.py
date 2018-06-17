@@ -60,8 +60,8 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
     for j in item:
         tle1=Tle.creadoxArchivo('../TleAdmin/tle/'+tle_ordenados[j][0])
         fsec=tle1.epoca()
-        print '======================================='
-        print 'Epoca del TLE: ',fsec
+#        print '======================================='
+#        print 'Epoca del TLE: ',fsec
         pos,vel=tle1.propagaTLE(epoca_primario)
         pos=np.array([pos[0],pos[1],pos[2]])
         vel=np.array([vel[0],vel[1],vel[2]]) 

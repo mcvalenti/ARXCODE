@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cdm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="http://sanaregistry.org/r/ndmxml/ndmxml-1.0-master.xsd"
+id="CCSDS_CDM_VERS" version="1.0">
+	<header>
+		<COMMENT>JSPOC - CDM Test Message</COMMENT>
+		<COMMENT>NOTES:</COMMENT>
+		<COMMENT> -- TIME OF CLOSEST APPROACH IS THE VECTOR AND COVARIANCE TIME TAG </COMMENT>
+		<COMMENT> -- DC SPAN IS THE TIME SPAN FOR THE LISTED NUMBER OF TRACKS       </COMMENT>
+		<COMMENT> -- NUMBER OF TRACKS IS THE NUMBER OF 1 OR MORE OBSERVATION SENSOR </COMMENT>
+		<COMMENT>    TRACKS ACQUIRED FROM A QUALITY SENSOR DURING THE DC TIME SPAN  </COMMENT>
+		<COMMENT> -- TDR (EFG) STATE VECTORS ARE EARTH-FIXED ROTATING VECTORS       </COMMENT>
+		<COMMENT>    REFERENCED TO THE TRUE EQUATOR OF DATE.                        </COMMENT>
+		<COMMENT> -- RELATIVE VECTORS ARE IN ASSET-CENTERED INERTIAL UVW            </COMMENT>
+		<COMMENT>    (RADIAL, IN-TRACK, CROSS-TRACK) COORDINATES                    </COMMENT>
+		<COMMENT> -- COVARIANCE MATRICES ARE IN THEIR RESPECTIVE INERTIAL UVW       </COMMENT>
+		<COMMENT>    (RADIAL, IN-TRACK, CROSS-TRACK) COORDINATES                    </COMMENT>
+		<COMMENT> -- COVARIANCE MATRICES REPRESENT UNSCALED VALUES                  </COMMENT>
+		<COMMENT> -- THE (7,X),(X,7) COMPONENTS OF THE COVARIANCE MATRICES ARE FOR  </COMMENT>
+		<COMMENT>    ATMOSPHERIC DRAG EFFECTS                                       </COMMENT>
+		<COMMENT> -- THE (8,X),(X,8) COMPONENTS OF THE COVARIANCE MATRICES ARE FOR  </COMMENT>
+		<COMMENT>    SOLAR RADIATION PRESSURE EFFECTS                               </COMMENT>
+		
+		
+		
+		
+		
+		<CREATION_DATE>2013-01-09T20:59:57.000</CREATION_DATE>
+		<ORIGINATOR>JSpOC</ORIGINATOR>
+		<MESSAGE_FOR>IRIDIUM 91</MESSAGE_FOR>
+		<MESSAGE_ID>2013009205957Z</MESSAGE_ID>
+	</header>
+	<body>
+		<relativeMetadataData>
+			<COMMENT>RELATIVE DATA</COMMENT>
+			
+			<TCA>2013-01-11T05:30:55.540</TCA>
+			<MISS_DISTANCE units="m">150</MISS_DISTANCE>
+			<RELATIVE_SPEED units="m/s">14931</RELATIVE_SPEED>
+			<relativeStateVector>
+				<RELATIVE_POSITION_R units="m">-119.1</RELATIVE_POSITION_R>
+				<RELATIVE_POSITION_T units="m">0.3</RELATIVE_POSITION_T>
+				<RELATIVE_POSITION_N units="m">92.0</RELATIVE_POSITION_N>
+				<RELATIVE_VELOCITY_R units="m/s">63.9</RELATIVE_VELOCITY_R>
+				<RELATIVE_VELOCITY_T units="m/s">-14912.7</RELATIVE_VELOCITY_T>
+				<RELATIVE_VELOCITY_N units="m/s">749.5</RELATIVE_VELOCITY_N>
+			</relativeStateVector>
+			
+			
+		</relativeMetadataData>
+		<segment>
+			<metadata>
+				<COMMENT>ASSET SATELLITE</COMMENT>
+				<OBJECT>OBJECT1</OBJECT>
+				<OBJECT_DESIGNATOR>27372</OBJECT_DESIGNATOR>
+				<CATALOG_NAME>US SATCAT</CATALOG_NAME>
+				<OBJECT_NAME>IRIDIUM 91</OBJECT_NAME>
+				<INTERNATIONAL_DESIGNATOR>2002-005A</INTERNATIONAL_DESIGNATOR>
+				<EPHEMERIS_NAME>NONE</EPHEMERIS_NAME>
+				<COVARIANCE_METHOD>CALCULATED</COVARIANCE_METHOD>
+				<MANEUVERABLE>N/A</MANEUVERABLE>
+				<ORBIT_CENTER>EARTH</ORBIT_CENTER>
+				<REF_FRAME>ITRF</REF_FRAME>
+				<GRAVITY_MODEL>EGM-96: 36D 36O</GRAVITY_MODEL>
+				<ATMOSPHERIC_MODEL>JACCHIA 70 DCA</ATMOSPHERIC_MODEL>
+				<N_BODY_PERTUBATIONS>MOON,SUN</N_BODY_PERTUBATIONS>
+				<SOLAR_RAD_PRESSURE>NO</SOLAR_RAD_PRESSURE>
+				<EARTH_TIDES>NO</EARTH_TIDES>
+				<INTRACK_THRUST>NO</INTRACK_THRUST>
+			</metadata>
+			<data>
+				<COMMENT>ASSET SATELLITE Data</COMMENT>
+				<odParameters>
+					<COMMENT>OD Parameters</COMMENT>
+					
+					
+					<RECOMMENDED_OD_SPAN units="d">7.48</RECOMMENDED_OD_SPAN>
+					<ACTUAL_OD_SPAN units="d">0.65</ACTUAL_OD_SPAN>
+					<OBS_AVAILABLE>585</OBS_AVAILABLE>
+					<OBS_USED>62</OBS_USED>
+					
+					
+					<RESIDUALS_ACCEPTED units="%">98.7</RESIDUALS_ACCEPTED>
+					<WEIGHTED_RMS>0.940</WEIGHTED_RMS>
+				</odParameters>
+				<additionalParameters>
+					
+					
+					
+					
+					
+					<CD_AREA_OVER_MASS units="m**2/kg">0.037701</CD_AREA_OVER_MASS>
+					<CR_AREA_OVER_MASS units="m**2/kg">0.000000</CR_AREA_OVER_MASS>
+					<SEDR units="W/kg">7.55709E-05</SEDR>
+				</additionalParameters>
+				<stateVector>
+					<COMMENT>State Vector</COMMENT>
+					<X units="km">4043.211060618</X>
+					<Y units="km">5136.277467917</Y>
+					<Z units="km">2909.854501340</Z>
+					<X_DOT units="km/s">-1.909680281</X_DOT>
+					<Y_DOT units="km/s">-2.366405759</Y_DOT>
+					<Z_DOT units="km/s">6.799118080</Z_DOT>
+				</stateVector>
+				<covarianceMatrix>
+					<COMMENT>Covariance Matrix</COMMENT>
+					<CR_R units="m**2">1.582E+03</CR_R>
+					<CT_R units="m**2">1.844E+04</CT_R>
+					<CT_T units="m**2">1.285E+06</CT_T>
+					<CN_R units="m**2">-2.943E+02</CN_R>
+					<CN_T units="m**2">8.978E+03</CN_T>
+					<CN_N units="m**2">1.668E+03</CN_N>
+					<CRDOT_R units="m**2/s">0.000E+00</CRDOT_R>
+					<CRDOT_T units="m**2/s">0.000E+00</CRDOT_T>
+					<CRDOT_N units="m**2/s">0.000E+00</CRDOT_N>
+					<CRDOT_RDOT units="m**2/s**2">0.000E+00</CRDOT_RDOT>
+					<CTDOT_R units="m**2/s">0.000E+00</CTDOT_R>
+					<CTDOT_T units="m**2/s">0.000E+00</CTDOT_T>
+					<CTDOT_N units="m**2/s">0.000E+00</CTDOT_N>
+					<CTDOT_RDOT units="m**2/s**2">0.000E+00</CTDOT_RDOT>
+					<CTDOT_TDOT units="m**2/s**2">0.000E+00</CTDOT_TDOT>
+					<CNDOT_R units="m**2/s">0.000E+00</CNDOT_R>
+					<CNDOT_T units="m**2/s">0.000E+00</CNDOT_T>
+					<CNDOT_N units="m**2/s">0.000E+00</CNDOT_N>
+					<CNDOT_RDOT units="m**2/s**2">0.000E+00</CNDOT_RDOT>
+					<CNDOT_TDOT units="m**2/s**2">0.000E+00</CNDOT_TDOT>
+					<CNDOT_NDOT units="m**2/s**2">0.000E+00</CNDOT_NDOT>
+				</covarianceMatrix>
+			</data>
+		</segment>
+		<segment>
+			<metadata>
+				<COMMENT>CONJUNCTING SATELLITE</COMMENT>
+				<OBJECT>OBJECT2</OBJECT>
+				<OBJECT_DESIGNATOR>31413</OBJECT_DESIGNATOR>
+				<CATALOG_NAME>US SATCAT</CATALOG_NAME>
+				<OBJECT_NAME>FENGYUN 1C DEB</OBJECT_NAME>
+				<INTERNATIONAL_DESIGNATOR>1999-025BS</INTERNATIONAL_DESIGNATOR>
+				<EPHEMERIS_NAME>NONE</EPHEMERIS_NAME>
+				<COVARIANCE_METHOD>CALCULATED</COVARIANCE_METHOD>
+				<MANEUVERABLE>N/A</MANEUVERABLE>
+				<ORBIT_CENTER>EARTH</ORBIT_CENTER>
+				<REF_FRAME>ITRF</REF_FRAME>
+				<GRAVITY_MODEL>EGM-96: 36D 36O</GRAVITY_MODEL>
+				<ATMOSPHERIC_MODEL>JACCHIA 70 DCA</ATMOSPHERIC_MODEL>
+				<N_BODY_PERTUBATIONS>MOON,SUN</N_BODY_PERTUBATIONS>
+				<SOLAR_RAD_PRESSURE>YES</SOLAR_RAD_PRESSURE>
+				<EARTH_TIDES>NO</EARTH_TIDES>
+				<INTRACK_THRUST>NO</INTRACK_THRUST>
+			</metadata>
+			<data>
+				<COMMENT>CONJUNCTING SATELLITE Data</COMMENT>
+				<odParameters>
+					<COMMENT>OD Parameters</COMMENT>
+					
+					
+					<RECOMMENDED_OD_SPAN units="d">22.99</RECOMMENDED_OD_SPAN>
+					<ACTUAL_OD_SPAN units="d">22.99</ACTUAL_OD_SPAN>
+					<OBS_AVAILABLE>21</OBS_AVAILABLE>
+					<OBS_USED>21</OBS_USED>
+					
+					
+					<RESIDUALS_ACCEPTED units="%">100.0</RESIDUALS_ACCEPTED>
+					<WEIGHTED_RMS>1.678</WEIGHTED_RMS>
+				</odParameters>
+				<additionalParameters>
+					
+					
+					
+					
+					
+					<CD_AREA_OVER_MASS units="m**2/kg">0.179542</CD_AREA_OVER_MASS>
+					<CR_AREA_OVER_MASS units="m**2/kg">0.130015</CR_AREA_OVER_MASS>
+					<SEDR units="W/kg">2.56588E-04</SEDR>
+				</additionalParameters>
+				<stateVector>
+					<COMMENT>State Vector</COMMENT>
+					<X units="km">4043.214158604</X>
+					<Y units="km">5136.133111978</Y>
+					<Z units="km">2909.812118132</Z>
+					<X_DOT units="km/s">3.249250090</X_DOT>
+					<Y_DOT units="km/s">1.320144935</Y_DOT>
+					<Z_DOT units="km/s">-6.719315471</Z_DOT>
+				</stateVector>
+				<covarianceMatrix>
+					<COMMENT>Covariance Matrix</COMMENT>
+					<CR_R units="m**2">1.364E+03</CR_R>
+					<CT_R units="m**2">1.209E+04</CT_R>
+					<CT_T units="m**2">3.050E+06</CT_T>
+					<CN_R units="m**2">2.460E+03</CN_R>
+					<CN_T units="m**2">-4.218E+03</CN_T>
+					<CN_N units="m**2">5.752E+03</CN_N>
+					<CRDOT_R units="m**2/s">0.000E+00</CRDOT_R>
+					<CRDOT_T units="m**2/s">0.000E+00</CRDOT_T>
+					<CRDOT_N units="m**2/s">0.000E+00</CRDOT_N>
+					<CRDOT_RDOT units="m**2/s**2">0.000E+00</CRDOT_RDOT>
+					<CTDOT_R units="m**2/s">0.000E+00</CTDOT_R>
+					<CTDOT_T units="m**2/s">0.000E+00</CTDOT_T>
+					<CTDOT_N units="m**2/s">0.000E+00</CTDOT_N>
+					<CTDOT_RDOT units="m**2/s**2">0.000E+00</CTDOT_RDOT>
+					<CTDOT_TDOT units="m**2/s**2">0.000E+00</CTDOT_TDOT>
+					<CNDOT_R units="m**2/s">0.000E+00</CNDOT_R>
+					<CNDOT_T units="m**2/s">0.000E+00</CNDOT_T>
+					<CNDOT_N units="m**2/s">0.000E+00</CNDOT_N>
+					<CNDOT_RDOT units="m**2/s**2">0.000E+00</CNDOT_RDOT>
+					<CNDOT_TDOT units="m**2/s**2">0.000E+00</CNDOT_TDOT>
+					<CNDOT_NDOT units="m**2/s**2">0.000E+00</CNDOT_NDOT>
+				</covarianceMatrix>
+			</data>
+		</segment>
+	</body>
+</cdm>
