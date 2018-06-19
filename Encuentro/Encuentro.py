@@ -5,6 +5,7 @@ Created on 23/06/2017
 '''
 import numpy as np
 from scipy.integrate import dblquad
+import scipy.integrate as integrate
 import sys
 from Aplicacion.globals import tabla
 from SistReferencia.sist_deCoordenadas import ricSis
@@ -48,8 +49,7 @@ class Encuentro():
         """
         Calcula las diferencias en posiciones y velocidades 
         para dos objetos en situacion de acercamiento, durante un 
-        intervalo que inicia 5 minutos antes y termina 5 minutos
-        despues del TCA.
+        intervalo que se configura en el codigo (linea 94,95).
         Devuelve los parametros del encuentro:
         * minima distancia en modulo (RTN)
         * componentes de la minima distancia (R, T, N)
@@ -92,10 +92,10 @@ class Encuentro():
         Calcula las diferencias relativas entre los dos 
         objetos en el sistema RTN.
         """
-        self.epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
-        self.epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
-#         self.epoca_ini=self.tca-timedelta(seconds=3) # 3 segundos antes de TCA
-#         self.epoca_fin=self.tca+timedelta(seconds=3) # 3 segundos despues de TCA
+#         self.epoca_ini=self.tca-timedelta(minutes=5) # 5 minutos antes de TCA
+#         self.epoca_fin=self.tca+timedelta(minutes=5) # 5 minutos despues de TCA
+        self.epoca_ini=self.tca-timedelta(seconds=1) # 1 segundos antes de TCA
+        self.epoca_fin=self.tca+timedelta(seconds=1) # 1 segundos despues de TCA
         
         self.mod_minDist=sys.float_info.max
         epoca_ini_list=[]
@@ -138,7 +138,7 @@ class Encuentro():
                 self.vel_deb_tca=v1
 #                print self.tca_c, self.mod_minDist
 #            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
-            self.epoca_ini=self.epoca_ini+timedelta(microseconds=100000)
+            self.epoca_ini=self.epoca_ini+timedelta(microseconds=100)
             epoca_ini_list.append(self.epoca_ini)
             distancias_list.append(mod_Dist1)
             self.tca_min_data=[epoca_ini_list,distancias_list]
@@ -185,6 +185,7 @@ class Encuentro():
         archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
         nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
         maCovar_deb, ma_archivo=EjecutaMaCovar(nombre_archivo)
+        maCovar_deb=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
          
         print '*******************************************************'
         print '-----------------Varianzas DESECHO---------------------'
@@ -206,33 +207,33 @@ class Encuentro():
         archivo_sat=sat_id+'_'+datetime.strftime(ini_set_sat,'%Y%m%d')+'.crudo'    
         nombre_archivo_sat,var_r_sat,var_t_sat,var_n_sat=calcula_matriz_Tles(sat_id,ini_set_sat,fin_set_sat,archivo_sat)
         maCovar_sat, ma_archivo_sat=EjecutaMaCovar(nombre_archivo_sat)
-        
-        print '*******************************************************'
-        print '-----------------Varianzas MISION----------------------'
-        print '*******************************************************'
+        maCovar_sat=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        print '*********************************'
+        print '---------Varianzas MISION--------'
+        print '*********************************'
         print 'Var en R = ', var_r_sat
         print 'Var en T = ', var_t_sat
         print 'Var en N = ', var_n_sat
-        print '*******************************************************'
-        print '-----------------Ma. MISION----------------------------'
-        print '*******************************************************'
+        print '*********************************'
+        print '----------Ma. MISION-------------'
+        print '*********************************'
  #       for k in maCovar_sat[:3]:
  #           print k[:3]
         #=============================================================
         # 3 -Corrijo ambas matrices por tabla de Marce al TCA -
         # n dias adelante.
         #=============================================================
-        var_tab_r=tabla[self.ndias_prev][0]
-        var_tab_t=tabla[self.ndias_prev][1]
-        var_tab_c=tabla[self.ndias_prev][2]
-          
-        maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r
-        maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t
-        maCovar_deb[2][2]=maCovar_deb[2][2]+var_tab_c
-  
-        maCovar_sat[0][0]=maCovar_sat[0][0]-var_tab_r
-        maCovar_sat[1][1]=maCovar_sat[1][1]-var_tab_t
-        maCovar_sat[2][2]=maCovar_sat[2][2]-var_tab_c 
+#         var_tab_r=tabla[self.ndias_prev][0]
+#         var_tab_t=tabla[self.ndias_prev][1]
+#         var_tab_c=tabla[self.ndias_prev][2]
+#           
+#         maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r
+#         maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t
+#         maCovar_deb[2][2]=maCovar_deb[2][2]+var_tab_c
+#   
+#         maCovar_sat[0][0]=maCovar_sat[0][0]-var_tab_r
+#         maCovar_sat[1][1]=maCovar_sat[1][1]-var_tab_t
+#         maCovar_sat[2][2]=maCovar_sat[2][2]-var_tab_c 
         #=============================================================
         # 4 - Calculo la matriz combinada, suma de las matrices
         # anteriores. En el sistema RTN.
@@ -265,8 +266,27 @@ class Encuentro():
 #             PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra*ra/(2.0*np.sqrt(var_x)*np.sqrt(var_y))))
 #             PoC_int=PoC_int=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/(var_x))+(y*y/(var_y)))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
 #             pocVsra.write(str(ra)+' '+str(PoC)+'\n')
-#             ra=ra+0.0003            
+#             ra=ra+0.0003  
+        print 'POC explicita de CHAN = ', PoC 
+        print 'PoC integral = ,', PoC_int[0] 
+        #===============
+        # POC limit
+        #================
+        erre=ra/self.mod_minDist
+        if erre < 0.8:
+            PoC_limit=0.48394*erre
+        else:
+            PoC_limit=0.21329*np.exp(1.01511*erre)-0.09025
+        print 'PoC limit = ,', PoC_limit
+        #===============
+        # POC 1D
+        #================
+        sigma_r=0.3
+        coef=1.0/(np.sqrt(2*np.pi)* sigma_r)
+        result = integrate.quad(lambda r:np.exp(-(r-self.mod_minDist)*(r-self.mod_minDist)/(2*sigma_r)) , -ra,ra)
+        print 'PoC 1D = ,', coef*result[0]            
         return PoC, PoC_int[0]
+
     
     def calculaPoC_gral(self):
         pass

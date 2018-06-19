@@ -500,7 +500,7 @@ class ProcEncuentro(QWidget):
         layH_resultados = QHBoxLayout()
         layH_resultados.addWidget(self.tableEncuentro)
         gbox_resultados.setLayout(layH_resultados)
-        self.setFixedSize(layH_resultados.sizeHint())
+        #self.setFixedSize(layH_resultados.sizeHint())
         #--------------------
         # MATRICES
         #--------------------
@@ -554,7 +554,7 @@ class ProcEncuentro(QWidget):
         hlayout_principal.addLayout(layV_principal)
         hlayout_principal.addWidget(self.te_process)
         self.setLayout(hlayout_principal)
-        self.setFixedSize(hlayout_principal.sizeHint())
+        #self.setFixedSize(hlayout_principal.sizeHint()) !agranda verticalmente la pantalla y no se lee!!
      
 #         grid.addWidget(self.progress,10,1)
 #         grid.addWidget(self.track,2,4,5,3)
