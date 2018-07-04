@@ -217,6 +217,23 @@ def ricSis(r,rp,dr):
     c=np.abs(np.dot(ec,dr))
     
     return rr,i,c
+
+def ric_matrix(r,rp):
+    """
+    -------------------------------------------------------------
+    Transforma las coordenadas del sistema inercial cartesiano,
+    al sistema de referecia de la nave. 
+    -------------------------------------------------------------
+    """
+    r_mod=np.sqrt(np.dot(r,r))
+    er=np.dot(1.0/r_mod,r)
+    rxrp_int=np.cross(r,rp)
+    rxrp_mod=np.sqrt(np.dot(rxrp_int,rxrp_int))
+    ec=np.dot(1.0/rxrp_mod,rxrp_int)
+    ei=np.cross(ec,er)
+    
+    maT_teme2ric=np.array([[er],[ei],[ec]])
+    return maT_teme2ric
     
 def lof_qsw(rt,vt):
     """

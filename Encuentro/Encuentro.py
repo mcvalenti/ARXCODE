@@ -6,9 +6,10 @@ Created on 23/06/2017
 import numpy as np
 from scipy.integrate import dblquad
 import scipy.integrate as integrate
+from numpy.linalg import inv
 import sys
 from Aplicacion.globals import tabla
-from SistReferencia.sist_deCoordenadas import ricSis
+from SistReferencia.sist_deCoordenadas import ricSis, ric_matrix
 from datetime import datetime,timedelta
 #from TleAdmin.TLE import Tle, SetTLE
 from Estadistica.matrizOsweiler import calcula_matriz_Tles
@@ -136,6 +137,8 @@ class Encuentro():
                 self.DistRic_min=np.array([x_ric,y_ric,z_ric])
                 self.vel_sat_tca=v
                 self.vel_deb_tca=v1
+                self.DistVector_min=DistVector
+                self.VelVector_min=VelVector
 #                print self.tca_c, self.mod_minDist
 #            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
             self.epoca_ini=self.epoca_ini+timedelta(microseconds=100)
@@ -179,14 +182,17 @@ class Encuentro():
         #=============================================================
         # 1 - MATRIZ DEL DESECHO 
         #=============================================================
-        deb_id=self.tle_deb.catID()
-        ini_set_deb=self.tle_deb.epoca()-timedelta(days=15)
-        fin_set_deb=self.tle_deb.epoca()
-        archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
-        nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
-        maCovar_deb, ma_archivo=EjecutaMaCovar(nombre_archivo)
+#         deb_id=self.tle_deb.catID()
+#         ini_set_deb=self.tle_deb.epoca()-timedelta(days=15)
+#         fin_set_deb=self.tle_deb.epoca()
+#         archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
+#         nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
+#         maCovar_deb, ma_archivo=EjecutaMaCovar(nombre_archivo)
         maCovar_deb=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
-         
+        var_r=0.1*0.1
+        var_t=0.3*0.3
+        var_n=0.1*0.1
+        
         print '*******************************************************'
         print '-----------------Varianzas DESECHO---------------------'
         print '*******************************************************'
@@ -201,13 +207,16 @@ class Encuentro():
         #=============================================================    
         # 2 - MATRIZ DE LA MISION 
         #=============================================================
-        sat_id=self.tle_sat.catID()
-        ini_set_sat=self.tle_sat.epoca()-timedelta(days=15)
-        fin_set_sat=self.tle_sat.epoca()
-        archivo_sat=sat_id+'_'+datetime.strftime(ini_set_sat,'%Y%m%d')+'.crudo'    
-        nombre_archivo_sat,var_r_sat,var_t_sat,var_n_sat=calcula_matriz_Tles(sat_id,ini_set_sat,fin_set_sat,archivo_sat)
-        maCovar_sat, ma_archivo_sat=EjecutaMaCovar(nombre_archivo_sat)
+#         sat_id=self.tle_sat.catID()
+#         ini_set_sat=self.tle_sat.epoca()-timedelta(days=15)
+#         fin_set_sat=self.tle_sat.epoca()
+#         archivo_sat=sat_id+'_'+datetime.strftime(ini_set_sat,'%Y%m%d')+'.crudo'    
+#         nombre_archivo_sat,var_r_sat,var_t_sat,var_n_sat=calcula_matriz_Tles(sat_id,ini_set_sat,fin_set_sat,archivo_sat)
+#         maCovar_sat, ma_archivo_sat=EjecutaMaCovar(nombre_archivo_sat)
         maCovar_sat=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        var_r_sat=0.1*0.1
+        var_t_sat=0.3*0.3
+        var_n_sat=0.1*0.1
         print '*********************************'
         print '---------Varianzas MISION--------'
         print '*********************************'
@@ -285,8 +294,55 @@ class Encuentro():
         coef=1.0/(np.sqrt(2*np.pi)* sigma_r)
         result = integrate.quad(lambda r:np.exp(-(r-self.mod_minDist)*(r-self.mod_minDist)/(2*sigma_r)) , -ra,ra)
         print 'PoC 1D = ,', coef*result[0]            
-        return PoC, PoC_int[0]
-
     
-    def calculaPoC_gral(self):
-        pass
+        #===============
+        # POC max Klinkrad
+        #================
+        r_relative_mod=np.sqrt(np.dot(self.DistVector_min, self.DistVector_min))
+        Xb=np.dot(1.0/r_relative_mod, self.DistVector_min)
+        rxv=np.cross(self.DistVector_min, self.VelVector_min)
+        rxv_mod=np.dot(rxv, rxv)
+        Yb=np.dot(1.0/rxv_mod,  rxv)
+        maB_planeXY=np.array([Xb,Yb])
+        r_relative_Bplane=np.dot(maB_planeXY, self.DistVector_min.transpose())
+        C_B=np.dot(maB_planeXY, np.dot(self.matriz_combinada, maB_planeXY.transpose()))
+        # Poc max Formula
+        vect_prod=np.dot(r_relative_Bplane.transpose(), np.dot(inv(C_B),r_relative_Bplane))
+        coef1=np.exp(1)*np.sqrt(np.linalg.det(C_B))*vect_prod
+        # Verificar por consola
+        print '--------------Klinkrad -----------------'
+        print 'min distance = ', r_relative_mod
+        print 'Matriz B= ', C_B
+        PoCmax=ra*ra/coef1
+        print 'Pc,max Klinkrad = ', PoCmax
+        
+        return PoC, PoC_int[0]
+    
+    def calculaPoC_akella(self,):
+#         self.tle_sat=tle_sat
+#         self.tle_deb=tle_deb
+#         self.tca=tca
+        """
+        * posiciones y velocidades al tca
+        * matriz de covarianza al GCRF ?!?!!?
+        * construccion de C = B-plane matrix transformation
+        * contruccion de T* y T
+        * transformar ma_covar a P*
+        * construir la integral y sus elementos
+        """
+        r,v=self.tle_sat.propagaTLE(self.tca_c)
+        r1,v1=self.tle_deb.propagaTLE(self.tca_c)        
+        r=np.array([float(r[0]),float(r[1]),float(r[2])])
+        v=np.array([float(v[0]),float(v[1]),float(v[2])])
+        r1=np.array([float(r1[0]),float(r1[1]),float(r1[2])])
+        v1=np.array([float(v1[0]),float(v1[1]),float(v1[2])])
+        # transformo la matriz de covarianzas al sistema inercial 
+        # usando la inversa de la transformacion al rtn
+        maT_teme2ric=ric_matrix(r, v)
+        ma_socrates=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        ma_socrates_ric=np.dot(maT_teme2ric,np.dot(ma_socrates,maT_teme2ric.transpose()))
+        #proyecto al plano - b-plane Akella (v1xv2)
+        
+        
+        
+        return {}

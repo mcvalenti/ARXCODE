@@ -416,7 +416,7 @@ En este trabajo se implement\'o la estimaci\'on de un c\'alculo simplificado par
 Lei-Chen se basa en el desarrollo anal\'itco de Chan \citep{chan2003improved} y otros estudios anteriores del problema del c\'alculo de la probabilidad de colisi\'on en encuentros cortos, que reducen el problema en tres dimensiones a un plano de encuentro.
 Con este planteo, se reduce el problema a calcular la integral de la funci\'on de densidad de probabilidad (PDF) en dos dimensiones, sobre el \'area de la secci\'on circular de colisi\'on que se proyecta en el plano de encuentro.\\
 
-La secci\'on circular de colisi\'on que se proyecta en el plano de encuentro, con radio $r_{a}$, est\'a centrada en las coordenadas $\mu_{x}$, $\mu_{y}$ del plano. Las desviaciones est\'andar que resultan de la matriz combinada de covarianzas de ambos objetos, proyectadas, son $\sigma_{x}$ y $\sigma_{y}$,  (Fig. \ref{fig:planoenc}).\\
+La secci\'on circular de colisi\'on que se proyecta en el plano de encuentro, con radio $r_{a}$, est\'a centrada en las coordenadas $\mu_{x}$, $\mu_{y}$ del plano. Las desviaciones est\'andar que resultan de la matriz combinada de covarianzas de ambos objetos, proyectadas, son $\sigma_{x}$ y $\sigma_{y}$  (Fig. \ref{fig:planoenc}).\\
 
 \begin{figure}[!h]
 \centering
@@ -446,7 +446,21 @@ Ser\'a necesario incorporar m\'as t\'erminos en aquellos casos, en los que el ra
 
 \subsubsection*{Expresi\'on de la PoC para \'orbitas circulares}
 
-En la mayor\'ia de los casos, las \'orbitas son circulares o casi circulares. En esta configuraci\'on  los puntos de m\'aximo acercamiento entre las \'orbitas se ubican a lo largo de la l\'inea de intercci\'on de los planos orbitales, (Fig. \ref{fig:pocorbcirc}).\\ %el m\'aximo acercamiento de los objetos ocurre siempre en posiciones cercanas a los puntos de m\'aximo acercamiento de las \'orbitas; y para las \'orbitas circulares esto se da exactamente en la l\'inea de intersecci\'on de los planos orbitales de los dos objetos, 
+En la mayor\'ia de los casos, las \'orbitas son circulares o casi circulares. En esta configuraci\'on  los puntos de m\'aximo acercamiento entre las \'orbitas se ubican a lo largo de la l\'inea de intersecci\'on de los planos orbitales (Fig. \ref{fig:pocorbcirc}).\\ 
+
+A continuaci\'on se describe el desarrollo que propone Lei-Chen para arribar a la expresi\'on de la PoC en el caso de las \'orbitas circulares. Para este planteo se va a asumir que:
+
+\begin{itemize}
+ \item Ambos objetos se ubican en \'orbitas circulares.
+ \item Las altitudes de los objetos son similares, es decir que sus velocidades ser\'an del mismo orden de magnitud.
+ \item El \'angulo entre los vectores de velocidad es igual al \'angulo entre los dos planos orbitales.
+ \item Los errores de covarianza est\'an alineados con las direcciones radial, in-track y cross-track. Es decir que no hay elementos por fuera de la diagonal en la matriz de covarianza expresada en el sistema RSW (radial, in-track, cross-track).
+\end{itemize}
+
+A partir de estas consideraciones, se muestran los pasos que conducen a la expresi\'on de la PoC en t\'erminos de la posici\'on y velocidad relativa en el sistema RSW. 
+ 
+En el momento de m\'aximo acercamiento el vector de posici\'on relativa $\Delta {\bf{r}}_{tca}$ es perpendicular a los vectores de velocidad de ambos objetos, o sea, es paralelo a la l\'inea perpendicular a ambas velocidades, que para el caso circular, coincide con la l\'inea de intersecci\'on de los planos. Del mismo razonamiento se desprende que $\Delta {\bf{r}}_{tca}$ es perpendicular al vector de velocidades relativas en el momento de m\'aximo acercamiento $\Delta {\bf{v}}_{tca}$ y por lo tanto $\Delta {\bf{r}}_{tca}$ yace en el plano de encuentro. 
+
 
 \begin{figure}[!h]
 \begin{minipage}[t]{0.48\textwidth}
@@ -458,21 +472,32 @@ En la mayor\'ia de los casos, las \'orbitas son circulares o casi circulares. En
 \begin{minipage}[t]{0.48\textwidth}
  \centering
  \fbox{\includegraphics[width=\textwidth]{imagenes/poccirc2}}
- \caption[]{El m\'aximo acercamiento entre las \'orbitas $\Delta r_{rad}$ y el vector de m\'aximo acercamiento entre los objetos en el TCA, $\Delta r_{tca}$.}
+ \caption[]{El m\'aximo acercamiento entre las \'orbitas $\Delta {\bf{r}}_{rad}$ y el vector de m\'aximo acercamiento entre los objetos en el TCA, $\Delta {\bf{r}}_{tca}$ \citep{leichen}.}
  \label{fig:pocdistancia}
 \end{minipage}
 \end{figure}
- 
-Para el TCA, las coordenadas del centro del elipsoide de posici\'on del objeto secundario, son:\\
+
+La Figura \ref{fig:pocdistancia} ilustra el m\'aximo acercamiento entre las \'orbitas $\Delta {\bf{r}}_{rad}$ y el m\'aximo acercamiento entre los objetos $\Delta {\bf{r}}_{tca}$. El plano de encuentro se representa por el rect\'angulo de l\'inea punteada que es perpendicular a la direcci\'on de la velocidad relativa. Los objetos se ubican en los v\'ertices de la diagonal del rect\'angulo en el TCA.
+
+El vector posici\'on relativa al instante TCA, $\Delta {\bf{r}}_{tca}$, se compone de: el vector de m\'aximo acercamiento entre \'orbitas $\Delta {\bf{r}}_{rad}$, cuya direcci\'on, para el caso circular, coincide con la direcci\'on radial y el vector de m\'aximo acercamiento en el plano perpendicular a la l\'inea perpendicular a ambas velocidades $\Delta {\bf{r}}_{vel}$.
+
+Lei-Chen define un sistema de coordenadas para el plano de encuentro, tal que (Fig. \ref{fig:pocplano}):
+\begin{itemize}
+ \item El origen O se ubica en el objeto primario.
+ \item El eje z se orienta en la direcci\'on de $\Delta {\bf{v}}_{tca}$.
+ \item El eje x se orienta en la direcci\'on del m\'aximo acercamiento entre \'orbitas.
+ \item El eje y yace en el plano horizontal completando la terna directa.
+\end{itemize}
+
+Para este sistema en el TCA, las coordenadas del centro del elipsoide de posici\'on del objeto secundario, son:\\
 % 
 \begin{gather}
  \mu_{x}=\Delta r_{rad}\\
  \mu_{y}=\Delta r_{vel}\\
 \end{gather}
-% 
-Donde $\Delta r_{rad}$ es el vector de m\'aximo acercamiento entre las \'orbitas en la direcci\'on de la l\'inea perpendicular a ambas velocidades, que para el caso de \'orbitas circulares coincide con la direcci\'on radial; y $\Delta r_{vel}$ es el vector de m\'aximo acercamiento en el plano perpendicular a la direcci\'on de $\Delta r_{rad}$ (Figura \ref{fig:pocdistancia}). 
 
-Estas expresiones, proyectadas en el sistema RSW, (Fig. \ref{fig:pocplano} y \ref{fig:pochorizontal}), resultan en:
+Ahora, si se utiliza el sistema de coordenadas RSW centrado en el objeto primario, alineado con la direcci\'on radial, la direcci\'on de la velocidad (caso circular) y la direcci\'on perpendicular al plano orbital respectivamente, resulta que: 
+el eje R comparte la direcci\'on con el eje x y la distancia de m\'aximo acercamiento en el plano horizontal $\Delta {\bf{r}}_{vel}$ quedar\'a determinada por las componentes S y W (Fig. \ref{fig:pocplano} y \ref{fig:pochorizontal}).  Es decir que las expresiones para $\mu_{x}$ y $\mu_{y}$, resultan:
 
 \begin{gather}
  \mu_{x}=R\\
@@ -494,21 +519,94 @@ Estas expresiones, proyectadas en el sistema RSW, (Fig. \ref{fig:pocplano} y \re
 \end{minipage}
 \end{figure}
 
+Bien, a continuaci\'on se describe, c\'omo se proyectan al plano de encuentro, los errores en el sistema RSW .
+Generalmente las matrices de covarianza de los errores en la posici\'on, se definen en el sistema RSW centrado en uno de los objetos y alineados con las direcciones RSW, considerando las componentes en R y W iguales y asumiendo que el eje mayor del elipsoide de error coincide con la direcci\'on de la velocidad. Planteo razonable ya que la incerteza de la posici\'on en la direcci\'on de la velocidad suele ser siempre mayor. Esta alineaci\'on de los errores con los ejes, simplifica significativamente el an\'alisis sin perder la esencia de los errores. 
+
+De este modo, las matrices de covarianza de los dos objetos resultan:
+
+
+$$
+ P_{1,RWS}=
+\begin{bmatrix}
+    \sigma^{2}_{1R} & 0 & 0  \\
+    0 & \sigma^{2}_{1S}  & 0  \\
+    0 & 0 & \sigma^{2}_{1W} 
+\end{bmatrix}
+\quad
+ P_{2,RWS}=
+\begin{bmatrix}
+    \sigma^{2}_{2R} & 0 & 0  \\
+    0 & \sigma^{2}_{2S}  & 0  \\
+    0 & 0 & \sigma^{2}_{2W} 
+\end{bmatrix}
+$$
+
+Donde $\sigma_{R}, \sigma_{S}, \sigma_{W}$ son las varianzas en las direcciones radial, in-track y cross-track respectivamente. 
+
+Para transformar estas matrices en el sistema RSW al sistema de encuentro O-xyz, s\'olo ser\'a necesario realizar una rotaci\'on respecto del eje R, ya que R y x coinciden (Fig. \ref{fig:covarRSW}). Los \'angulos de rotaci\'on son $\phi/2$ y $-\phi/2$ y las matrices de rotaci\'on $M_{1}$ respecto del eje x resultan:
+
+$$
+M_{1,RSW \rightarrow xyz} = M_{1}(\phi/2) \quad M_{2,RSW \rightarrow xyz} = M_{1}(-\phi/2)
+$$
+
+\begin{figure}[!h]
+ \centering
+ \fbox{\includegraphics[width=0.5\textwidth]{imagenes/poccirc5}}
+ \caption[Plano de encuentro y proyecci\'on del sistema RSW]{Representaci\'on de los elipsoides de error de cada uno de los objetos, primario y secundario. Extra\'ido de Lei-Chen, \citep{leichen}.}
+ \label{fig:covarRSW}
+\end{figure}
+
+Luego las matrices de covarianza en el sistema de encuentro $P_{1}$ y $P_{2}$ se construyen a partir de:
+
+$$
+P_{1,2}=M_{1,RSW \rightarrow xyz} P_{1,2,RWS} M_{1,RSW \rightarrow xyz}^{T}
+$$
+$$
+P_{1,2}= 
+\begin{bmatrix}
+    \sigma_{1,2 R}^{2} & 0 & 0  \\
+    0 & \sigma_{1,2 S}^{2} \cos^{2}\frac{\phi}{2}+ \sigma_{1,2 W}^{2} \sin^{2}\frac{\phi}{2} & \frac{\sigma_{1,2 W}^{2}-\sigma_{1,2 S}^{2}}{2} \sin \phi \\
+    0 & \frac{\sigma_{1,2 W}^{2}-\sigma_{1,2 S}^{2}}{2} \sin \phi & \sigma_{1,2 S}^{2} \sin^{2}\frac{\phi}{2}+ \sigma_{1,2 W}^{2} \cos^{2}\frac{\phi}{2} 
+\end{bmatrix}
+$$
+
+Donde los sub\'indices 1,2 indican que las matrices ser\'an similares tanto para $P_{1}$ como para $P_{2}$ reemplazando por el \'indice correspondiente.
+
+Ahora, bajo la consideraci\'on de covarianzas no correlacionadas, la matriz de covarianza combinada, que considere los errores de ambos objetos, ser\'a suma de estas dos matrices. A su vez, para el plano de encuentro, vamos a tener en cuenta s\'olo las componentes correspondientes a x e y. De modo que resulta:
+
+$$
+P=
+\begin{bmatrix}
+    (\sigma_{1R}^{2}+\sigma_{2R}^{2})& 0 \\
+    0 & (\sigma_{1S}^{2}+\sigma_{2S}^{2}) \cos^{2}\frac{\phi}{2}+ (\sigma_{1W}^{2}+\sigma_{2W}^{2}) \sin^{2}\frac{\phi}{2}   
+\end{bmatrix}
+$$
+
+Reagrupando las varianzas combinadas, seg\'un:
+
+$$
+\sigma_{R}^{2}=\sigma_{1R}^{2}+\sigma_{2R}^{2}, \quad \sigma_{S}^{2}=\sigma_{1S}^{2}+\sigma_{2S}^{2}, \quad \sigma_{W}^{2}=\sigma_{1W}^{2}+\sigma_{2W}^{2}
+$$
+
+Los errores en la direcci\'on de R est\'an desacoplados, de modo que pueden sumarse directamente para obtener el error combinado en esa direcci\'on, mientras que en las direcciones S y W los errores est\'an acoplados por el \'angulo entre sus planos orbitales. Se define la varianza combinada para S y W, en el plano orbital como:
+
+$$
+\sigma_{SW}^{2}=\sigma_{S}^{2} \cos^{2} \frac{\phi}{2}+\sigma_{W}^{2} \sin^{2} \frac{\phi}{2}
+$$
+
+A partir de estas definiciones, pueden expresarse las varianzas de los errores combinados en el plano xy.
+
 \begin{gather*}
 \sigma_{x}^{2}=\sigma_{R}^{2}=\sigma_{1R}^{2}+\sigma_{2R}^{2}\\
 \sigma_{y}^{2}=\sigma_{SR}^{2}=\sigma_{S}^{2}cos^{2}(\frac{\phi}{2})+\sigma_{W}^{2}sin^{2}(\frac{\phi}{2})\\
-\sigma_{S}^{2}=\sigma_{1S}^{2}+\sigma_{2S}^{2}\\
-\sigma_{W}^{2}=\sigma_{1W}^{2}+\sigma_{2W}^{2}\\
 \end{gather*}
 
-Donde:
-\begin{itemize}
- \item $\sigma_{1R}^{2}$ y $\sigma_{2R}^{2}$  son las varianzas en la radial de ambos objetos.
- \item $\sigma_{R}^{2}$ es la suma de las varianzas $\sigma_{1R}^{2}$,$\sigma_{2R}^{2}$.
- \item $\sigma_{S}^{2}$ y $\sigma_{W}^{2}$ son las sumas de las varianzas de las componentes S y W, respectivamente.
- \item $\sigma_{SR}^{2}$ es el vector resultante de S y W, que se proyecta en la coordenada $y$ del plano de encuentro.
- \item $\phi$ es el \'angulo entre las direcciones de las velocidades de ambos objetos.
-\end{itemize}
+Finalmente, si se reemplazan los valores de $\mu_{x}, \mu_{y}, \sigma_{x}$ y $\sigma_{y}$ en funci\'on de las componentes R, S, W, $\sigma_{R}$ y $\sigma_{SW}$ en la Ecuaci\'on {\ref{eq:pocexpress}}, resulta:
+
+\begin{equation}
+ PoC= \exp[-\frac{1}{2}(\frac{R^{2}}{\sigma_{R}^{2}}+\frac{S^{2}+W^{2}}{\sigma_{SW}^{2}})][1-\exp(\frac{r_{a}^{2}}{2\sigma_{R}\sigma_{SW}})]
+ \label{eq:pocexpressRSW}
+\end{equation}
 
 
 % \subsection*{M\'etodo de Akella}

@@ -104,7 +104,7 @@ class Tle:
     
     def propagaTLE(self,date=None):
         """
-        Devuelve las coordenadas cartesianas x,y,z.
+        Devuelve las coordenadas cartesianas x,y,z. !! EN TEME!!
         Si no se introduce una fecha, devuelve las coordenadas correspondientes
         a la fecha y hora del TLE.
         Si se le introduce una fecha y hora, propaga hasta ese momento y devuelve

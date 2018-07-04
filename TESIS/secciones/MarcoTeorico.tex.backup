@@ -100,7 +100,7 @@ Ejemplo de un TLE de la Estaci\'on Espacial Internacional (ISS) \\
 En la segunda l\'inea se ubican los elementos orbitales cl\'asicos medios: inclinaci\'on, longitud del nodo, excentricidad, argumento del perigeo, anomal\'ia media y el movimiento medio, de donde se extrae el valor del semieje. En este punto es importante resaltar el hecho de que se trata de elementos medios, promediados bajo ciertos criterios y metodologías no siempre especificadas, de manera que no son una exacta analog\'ia con los elementos orbitales de la posici\'on real para el instante indicado.
 
 \subsection{El propagador SGP4}\label{subsec:sgp4model}
-De acuerdo a las rese\~nas hist\'orica presentada por Hoots \citep{hootshistoria}, \citep{hoots2004history}, los or\'igenes del propagador SGP4 se remontan al a\~no 1960 en EE.UU, cuando se desarroll\'o el modelo General Simplificado de Perturbaciones o SGP ({\it{Simplified General Pertubations}}).
+De acuerdo a las rese\~nas hist\'orica presentadas por Hoots \citep{hootshistoria}, \citep{hoots2004history}, los or\'igenes del propagador SGP4 se remontan al a\~no 1960 en EE.UU, cuando se desarroll\'o el modelo General Simplificado de Perturbaciones o SGP ({\it{Simplified General Pertubations}}).
 
 Los fundametos te\'oricos inician en el a\~no 1959, durante ese a\~no bajo el proyecto SPACETRACK, Dirk Brouwer desarroll\'o una soluci\'on para calcular las \'orbitas de sat\'elites cercanos a la Tierra considerando la influecia de las perturbaciones gravitatorias de los arm\'onicos $J_{2}$, $J_{3}$ y $J_{4}$ \citep{brouwer1959solution}. En paralelo Yoshihide Kozai preset\'o otra soluci\'on al mismo problema \citep{kozai1962second}.
 
@@ -110,7 +110,9 @@ La implementaci\'on operativa de estas teor\'ias transcurri\'o entre los a\~nos 
 
 Una mejora al SGP se logr\'o incorporando el modelo anal\'itico de densidad desarrollado por Lane y Cranford, pero luego el crecimiento de la cantidad de objetos en el cat\'alogo no hizo posible procesar el gran n\'umero de t\'erminos en el modelo. Esto condujo a una versi\'on simplificada del trabajo de Lane y Cranford que adem\'as, s\'olo retiene los t\'erminos principales del efecto secular del frenado atmosf\'erico \citep{lane1979general}. Las nuevas implementaciones se materializaron en el SGP4 desarrollado en 1970. En el mismo, se recorta el modelo de gravedad s\'olo a los t\'erminos de corto y largo per\'iodo que no contienen a la excentricidad como factor. 
 
-La primera versi\'on liberada del c\'odigo fuente del propagador SGP4 se public\'o en el Spacetrack Report Number 3 \citep{spacetrackreport3}. En 2004 Hoots public\'o un documento completo \citep{hoots2004history} con todas las ecuaciones (incluidas las correspondientes al modelo para espacio profundo); incorporando resonancias, las fuerzas que ejercen otros cuerpos, el frenado atmosf\'erico y otras perturbaciones en las t\'ecnicas matem\'aticas.\\
+En el a\~no 1965 el lanzamiento del primer sat\'elite con una \'orbita de gran excentridad y per\'iodo de 12 horas motiv\'o la incorporaci\'on al modelo de los efectos gravitacionales del Sol y la Luna, as\'i como tambi\'en el efecto de las resonancias que producen los arm\'onicos teserales terrestres. En 1967 Bruce Bowman \citep{bowman1971first} presenta un tratamiento semianal\'itico para este tipo especial de \'orbitas y en 1977 Dick Hujsak \citep{hujsak1979restricted} incorpora parte del trabajo de Bowman a un nuevo modelo del SGP4. Esta incorporaci\'on completa el modelo SGP4 que se utiliza hoy en d\'ia.
+
+La primera versi\'on liberada del c\'odigo fuente del propagador SGP4 se public\'o en el Spacetrack Report Number 3 \citep{spacetrackreport3}. En 2004 Hoots public\'o un documento completo \citep{hoots2004history} con todas las ecuaciones (incluidas las correspondientes al modelo para espacio profundo); incorporando resonancias, las fuerzas que ejercen otros cuerpos, el frenado atmosf\'erico y otras perturbaciones en las t\'ecnicas matem\'aticas.
 
 El propagador SGP4 es actualmente, el \'unico modelo para el mantenimiento del cat\'alogo de objetos a bajas alturas que orbitan la Tierra. 
 
@@ -444,7 +446,21 @@ Ser\'a necesario incorporar m\'as t\'erminos en aquellos casos, en los que el ra
 
 \subsubsection*{Expresi\'on de la PoC para \'orbitas circulares}
 
-En la mayor\'ia de los casos, las \'orbitas son circulares o casi circulares. En esta configuraci\'on  los puntos de m\'aximo acercamiento entre las \'orbitas se ubican a lo largo de la l\'inea de intercci\'on de los planos orbitales, (Fig. \ref{fig:pocorbcirc}).\\ %el m\'aximo acercamiento de los objetos ocurre siempre en posiciones cercanas a los puntos de m\'aximo acercamiento de las \'orbitas; y para las \'orbitas circulares esto se da exactamente en la l\'inea de intersecci\'on de los planos orbitales de los dos objetos, 
+En la mayor\'ia de los casos, las \'orbitas son circulares o casi circulares. En esta configuraci\'on  los puntos de m\'aximo acercamiento entre las \'orbitas se ubican a lo largo de la l\'inea de intersecci\'on de los planos orbitales, (Fig. \ref{fig:pocorbcirc}).\\ 
+
+A continuaci\'on se describe el desarrollo que propone Lei-Chen para arribar a la expresi\'on de la PoC en el caso de las \'orbitas circulares. Para este planteo se va a asumir que:
+
+\begin{itemize}
+ \item Ambos objetos se ubican en \'orbitas circulares.
+ \item Las altitudes de los objetos son similares, es decir que sus velocidades ser\'an del mismo orden de magnitud.
+ \item El \'angulo entre los vectores de velocidad es igual al \'angulo entre los dos planos orbitales.
+ \item Los errores de covarianza est\'an alineados con las direcciones radial, in-track y cross-track. Es decir que no hay elementos por fuera de la diagonal en la matriz de covarianza expresada en el sistema RSW (radial, in-track, cross-track).
+\end{itemize}
+
+A partir de estas consideraciones, se muestran los pasos que conducen a la expresi\'on de la PoC en t\'erminos de la posici\'on y velocidad relativa en el sistema RSW. 
+ 
+Se analiza primero el vector de la posici\'on relativa. En el momento de m\'aximo acercamiento el vector de posici\'on relativa $\Delta {\bf{r}}_{tca}$ es perpendicular a los vectores de velocidad de ambos objetos, o sea, es paralelo a la l\'inea perpendicular a ambas velocidades, que para el caso circular, coincide con la l\'inea de intersecci\'on de los planos. Del mismo razonamiento se desprende que $\Delta {\bf{r}}_{tca}$ es perpendicular al vector de velocidades relativas en el momento de m\'aximo acercamiento $\Delta {\bf{v}}_{tca}$ y por lo tanto $\Delta {\bf{r}}_{tca}$ yace en el plano de encuentro. 
+
 
 \begin{figure}[!h]
 \begin{minipage}[t]{0.48\textwidth}
@@ -456,21 +472,32 @@ En la mayor\'ia de los casos, las \'orbitas son circulares o casi circulares. En
 \begin{minipage}[t]{0.48\textwidth}
  \centering
  \fbox{\includegraphics[width=\textwidth]{imagenes/poccirc2}}
- \caption[]{El m\'aximo acercamiento entre las \'orbitas $\Delta r_{rad}$ y el vector de m\'aximo acercamiento entre los objetos en el TCA, $\Delta r_{tca}$.}
+ \caption[]{El m\'aximo acercamiento entre las \'orbitas $\Delta {\bf{r}}_{rad}$ y el vector de m\'aximo acercamiento entre los objetos en el TCA, $\Delta {\bf{r}}_{tca}$ (\citep{leichen}).}
  \label{fig:pocdistancia}
 \end{minipage}
 \end{figure}
- 
-Para el TCA, las coordenadas del centro del elipsoide de posici\'on del objeto secundario, son:\\
+
+La figura \ref{fig:pocdistancia} ilustra el m\'aximo acercamiento entre las \'orbitas $\Delta {\bf{r}}_{rad}$ y el m\'aximo acercamiento entre los objetos $\Delta {\bf{r}}_{tca}$. El plano de encuentro se representa por el rect\'angulo de l\'inea punteada que es perpendicular a la direcci\'on de la velocidad relativa. Los objetos se ubican en los v\'ertices de la diagonal del rect\'angulo en el TCA.
+
+El vector posici\'on relativa al instante TCA, $\Delta {\bf{r}}_{tca}$, se compone de: el vector de m\'aximo acercamiento entre \'orbitas $\Delta {\bf{r}}_{rad}$, cuya direcci\'on para el caso circular coincide con la direcci\'on radial y el vector de m\'aximo acercamiento en el plano perpendicular a la l\'inea perpendicular a ambas velocidades $\Delta {\bf{r}}_{vel}$.
+
+Lei-Chen define un sistema de coordenadas para el plano de encuentro, tal que (Fig. \ref{fig:pocplano}):
+\begin{itemize}
+ \item El origen O se ubica en el objeto primario.
+ \item El eje z se orienta en la direcci\'on de $\Delta {\bf{v}}_{tca}$.
+ \item El eje x se orienta en la direcci\'on del m\'aximo acercamiento entre \'orbitas.
+ \item El eje y yace en el plano horizontal completando la terna directa.
+\end{itemize}
+
+Para este sistema en el TCA, las coordenadas del centro del elipsoide de posici\'on del objeto secundario, son:\\
 % 
 \begin{gather}
  \mu_{x}=\Delta r_{rad}\\
  \mu_{y}=\Delta r_{vel}\\
 \end{gather}
-% 
-Donde $\Delta r_{rad}$ es el vector de m\'aximo acercamiento entre las \'orbitas en la direcci\'on de la l\'inea perpendicular a ambas velocidades, que para el caso de \'orbitas circulares coincide con la direcci\'on radial; y $\Delta r_{vel}$ es el vector de m\'aximo acercamiento en el plano perpendicular a la direcci\'on de $\Delta r_{rad}$ (Figura \ref{fig:pocdistancia}). 
 
-Estas expresiones, proyectadas en el sistema RSW, (Fig. \ref{fig:pocplano} y \ref{fig:pochorizontal}), resultan en:
+Ahora, si se utiliza el sistema de coordenadas RSW centrado en el objeto primario, alineado con la direcci\'on radial, la direcci\'on de la velocidad (caso circular) y la direcci\'on perpendicular al plano orbital respectivamente, resulta que: 
+el eje R comparte la direcci\'on con el eje x y la distancia de m\'aximo acercamiento en el plano horizontal $\Delta {\bf{r}}_{vel}$ quedar\'a determinada por las componentes S y W (Fig. \ref{fig:pocplano} y \ref{fig:pochorizontal}).  Es decir que las expresiones para $\mu_{x}$ y $\mu_{y}$, resultan:
 
 \begin{gather}
  \mu_{x}=R\\
@@ -492,21 +519,84 @@ Estas expresiones, proyectadas en el sistema RSW, (Fig. \ref{fig:pocplano} y \re
 \end{minipage}
 \end{figure}
 
+Bien, a continuaci\'on se describe, c\'omo se proyectan los errores, en el sistema RSW al plano de encuentro.
+Generalmente las matrices de covarianza de los errores en la posici\'on, se definen en el sistema RSW centrado en uno de los objetos y alineados con las direcciones RSW, considerando las componentes en R y W iguales y asumiendo que el eje mayor del elipsoide de error coincide con la direcci\'on de la velocidad. Planteo razonable ya que la incerteza de la posici\'on en la direcci\'on de la velocidad suele ser siempre mayor. Esta alineaci\'on de los errores con los ejes, simplifica significativamente el an\'alisis sin perder la esencia de los errores de la posici\'on. 
+
+De este modo, las matrices de covarianza de los dos objetos resultan:
+
+
+$$
+ P_{1,RWS}=
+\begin{bmatrix}
+    \sigma^{2}_{1R} & 0 & 0  \\
+    0 & \sigma^{2}_{1S}  & 0  \\
+    0 & 0 & \sigma^{2}_{1W} 
+\end{bmatrix}
+\quad
+ P_{2,RWS}=
+\begin{bmatrix}
+    \sigma^{2}_{2R} & 0 & 0  \\
+    0 & \sigma^{2}_{2S}  & 0  \\
+    0 & 0 & \sigma^{2}_{2W} 
+\end{bmatrix}
+$$
+
+Donde $\sigma_{R}, \sigma_{S}, \sigma_{W}$ son las varianzas en las direcciones radial, in-track y croos-track respectivamente. 
+
+Para transformar estas matrices en el sistema RSW al sistema de encuentro O-xyz, s\'olo ser\'a necesario realizar una rotaci\'on respecto del eje R, ya que R y x coinciden (Fig. ...bla ). {\color{red}{agregar imagen con ambos elipsoides de error Fig 5.9 de lei chen}}. Los \'angulos de rotaci\'on son $\phi/2$ y $-\phi/2$ y las matrices de rotaci\'on $M_{1}$ respecto del eje x resultan:
+
+$$
+M_{1,RSW \rightarrow xyz} = M_{1}(\phi/2) \quad M_{2,RSW \rightarrow xyz} = M_{1}(-\phi/2)
+$$
+
+Luego las matrices de covarianza en el sistema de encuentro $P_{1}$ y $P_{2}$ se construyen a partir de:
+
+$$
+P_{1,2}=M_{1,RSW \rightarrow xyz} P_{1,2,RWS} M_{1,RSW \rightarrow xyz}^{T}
+$$
+$$
+P_{1,2}= 
+\begin{bmatrix}
+    \sigma_{1,2 R}^{2} & 0 & 0  \\
+    0 & \sigma_{1,2 S}^{2} \cos^{2}\frac{\phi}{2}+ \sigma_{1,2 W}^{2} \sin^{2}\frac{\phi}{2} & \frac{\sigma_{1,2 W}^{2}-\sigma_{1,2 S}^{2}}{2} \sin \phi \\
+    0 & \frac{\sigma_{1,2 W}^{2}-\sigma_{1,2 S}^{2}}{2} \sin \phi & \sigma_{1,2 S}^{2} \sin^{2}\frac{\phi}{2}+ \sigma_{1,2 W}^{2} \cos^{2}\frac{\phi}{2} 
+\end{bmatrix}
+$$
+
+Donde los sub\'indices 1,2 indican que las matrices ser\'an similares tanto para $P_{1}$ como para $P_{2}$ y reemplazando por el \'indice correspondiente.
+
+Ahora, bajo la consideraci\'on de covarianzas no correlacionadas, la matriz de covarianza combinada, que considere los errores de ambos objetos, ser\'a suma de estas dos matrices. A su vez, para el plano de encuentro, vamos a tener en cuenta s\'olo las componentes correspondientes a x e y. De modo que resulta:
+
+$$
+P=
+\begin{bmatrix}
+    (\sigma_{1R}^{2}+\sigma_{2R}^{2})& 0 \\
+    0 & (\sigma_{1S}^{2}+\sigma_{2S}^{2}) \cos^{2}\frac{\phi}{2}+ (\sigma_{1W}^{2}+\sigma_{2W}^{2}) \sin^{2}\frac{\phi}{2}   
+\end{bmatrix}
+$$
+
+Reagrupando las varianzas combinadas, seg\'un:
+
+$$
+\sigma_{R}^{2}=\sigma_{1R}^{2}+\sigma_{2R}^{2}, \quad \sigma_{S}^{2}=\sigma_{1S}^{2}+\sigma_{2S}^{2}, \quad \sigma_{W}^{2}=\sigma_{1W}^{2}+\sigma_{2W}^{2}
+$$
+
+Los errores en la direcci\'on de R est\'an desacoplados, de modo que pueden sumarse directamente para obtener el error combinado en esa direcci\'on, mientras que en las direcciones S y W los errores est\'an acoplados por el \'angulo entre sus planos orbitales. Se define la varianza combinada para S y W, en el plano orbital como:
+
+$$
+\sigma_{SW}^{2}=\sigma_{S}^{2} \cos^{2} \frac{\phi}{2}+\sigma_{W}^{2} \sin^{2} \frac{\phi}{2}
+$$
+
+A partir de estas definiciones, pueden expresarse las varianzas de los errores combinados en el plano xy.
+
 \begin{gather*}
 \sigma_{x}^{2}=\sigma_{R}^{2}=\sigma_{1R}^{2}+\sigma_{2R}^{2}\\
 \sigma_{y}^{2}=\sigma_{SR}^{2}=\sigma_{S}^{2}cos^{2}(\frac{\phi}{2})+\sigma_{W}^{2}sin^{2}(\frac{\phi}{2})\\
-\sigma_{S}^{2}=\sigma_{1S}^{2}+\sigma_{2S}^{2}\\
-\sigma_{W}^{2}=\sigma_{1W}^{2}+\sigma_{2W}^{2}\\
 \end{gather*}
 
-Donde:
-\begin{itemize}
- \item $\sigma_{1R}^{2}$ y $\sigma_{2R}^{2}$  son las varianzas en la radial de ambos objetos.
- \item $\sigma_{R}^{2}$ es la suma de las varianzas $\sigma_{1R}^{2}$,$\sigma_{2R}^{2}$.
- \item $\sigma_{S}^{2}$ y $\sigma_{W}^{2}$ son las sumas de las varianzas de las componentes S y W, respectivamente.
- \item $\sigma_{SR}^{2}$ es el vector resultante de S y W, que se proyecta en la coordenada $y$ del plano de encuentro.
- \item $\phi$ es el \'angulo entre las direcciones de las velocidades de ambos objetos.
-\end{itemize}
+Finalmente, si se reemplazan los valores de $\mu_{x}, \mu_{y}, \sigma_{x} y \sigma_{y}$ en funci\'on de las componentes R,S y W en la ecuaci\'on {\ref{eq:pocintegral}}, resulta:
+
+
 
 
 % \subsection*{M\'etodo de Akella}
