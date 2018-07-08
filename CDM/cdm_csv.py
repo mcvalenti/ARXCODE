@@ -24,7 +24,7 @@ relative_position_r=[]
 relative_position_t=[]
 relative_position_n=[]
 # Looks for the CDMs already in CDM folder
-path_files=glob.glob('test_CDM/CDM1.txt')
+path_files=glob.glob('test_CDM/*.txt')
 print path_files
 for pf in path_files:
     print pf

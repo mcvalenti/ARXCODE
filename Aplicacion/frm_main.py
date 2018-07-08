@@ -599,6 +599,23 @@ class ProcEncuentro(QWidget):
 
         tle_sat=Tle.creadoxParam(self.sat_id, self.tca)
         tle_deb=Tle.creadoxParam(self.deb_id, self.tca)
+        
+        # Corroborar que el TLE es anterior en fecha y hora al tca
+        if tle_sat.epoca() >= self.tca:
+            print 'Comparacion de epocas'
+            print tle_sat.epoca(), self.tca
+            tca_sust=self.tca-timedelta(days=1)
+            tle_sat=Tle.creadoxParam(self.sat_id,tca_sust)
+            print 'Nuevas epocas'
+            print tle_sat.epoca(),tca_sust
+            
+        if tle_deb.epoca() >= self.tca:
+            print 'Comparacion de epocas'
+            print tle_deb.epoca(), self.tca
+            tca_sust=self.tca-timedelta(days=1)
+            tle_deb=Tle.creadoxParam(self.deb_id,tca_sust)
+            print 'Nuevas epocas'
+            print tle_deb.epoca(),tca_sust
 #         
         """
         Propagacion hasta el Encuentro
@@ -621,7 +638,7 @@ class ProcEncuentro(QWidget):
 #         header.setResizeMode(3,QHeaderView.ResizeToContents)
         # archivo de diferencias.
         self.archivo_dif=encuentro1.archivo_dif
-        print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.epoca_ini
+        print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.tca_c
 #        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
 #        print 'fin del procesamiento.'
        

@@ -232,7 +232,7 @@ def ric_matrix(r,rp):
     ec=np.dot(1.0/rxrp_mod,rxrp_int)
     ei=np.cross(ec,er)
     
-    maT_teme2ric=np.array([[er],[ei],[ec]])
+    maT_teme2ric=np.array([er,ei,ec])
     return maT_teme2ric
     
 def lof_qsw(rt,vt):

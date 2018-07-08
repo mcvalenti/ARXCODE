@@ -22,31 +22,33 @@
 \contentsline {subsection}{\numberline {2.3.1} El m\'etodo de Osweiler}{28}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Propagaci\'on de errores utilizando datos de TLE y efem\'erides precisas}{29}{subsection.2.3.2}
 \contentsline {section}{\numberline {2.4}La probabilidad de colisi\'on}{31}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}C\'alculo simplificado de Lei-Chen}{34}{subsection.2.4.1}
-\contentsline {section}{\numberline {2.5}Comunicaciones de riesgo de colisi\'on}{39}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}El mensaje de alerta CDM}{39}{subsection.2.5.1}
-\contentsline {section}{\numberline {2.6}Resumen}{43}{section.2.6}
-\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de Desarrollo}{45}{chapter.3}
-\contentsline {section}{\numberline {3.1}Inicializaci\'on}{45}{section.3.1}
-\contentsline {section}{\numberline {3.2}Iteraci\'on}{46}{section.3.2}
-\contentsline {section}{\numberline {3.3}Control}{47}{section.3.3}
-\contentsline {section}{\numberline {3.4}Entorno de Desarrollo}{47}{section.3.4}
-\contentsline {chapter}{\numberline {4}ARxCODE}{49}{chapter.4}
-\contentsline {section}{\numberline {4.1}Especificaciones generales}{49}{section.4.1}
-\contentsline {section}{\numberline {4.2}Requerimientos}{49}{section.4.2}
-\contentsline {section}{\numberline {4.3}Interfaces}{51}{section.4.3}
-\contentsline {section}{\numberline {4.4}Casos de Uso}{52}{section.4.4}
-\contentsline {section}{\numberline {4.5}Arquitectura}{53}{section.4.5}
-\contentsline {section}{\numberline {4.6}Flujo din\'amico de ARxCODE}{58}{section.4.6}
-\contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{63}{chapter.5}
-\contentsline {section}{\numberline {5.1}Introducci\'on}{63}{section.5.1}
-\contentsline {section}{\numberline {5.2}Implementaci\'on del modelo SGP4 en Python}{64}{section.5.2}
-\contentsline {section}{\numberline {5.3}Estudio de errores de TLE con datos hist\'oricos}{65}{section.5.3}
-\contentsline {section}{\numberline {5.4}Estudio de errores de TLE con efem\'erides precisas}{68}{section.5.4}
-\contentsline {section}{\numberline {5.5}C\'alculo de la Probabilidad de Colisi\'on}{70}{section.5.5}
-\contentsline {section}{\numberline {5.6}An\'alisis}{78}{section.5.6}
-\contentsline {chapter}{\numberline {6}Conclusiones}{81}{chapter.6}
-\contentsline {chapter}{\numberline {7}Ap\'endice}{84}{chapter.7}
-\contentsline {section}{\numberline {7.1}Appendix 1: Transformaci\'on de Coordenadas}{84}{section.7.1}
-\contentsline {section}{\numberline {7.2}Appendix 2: El archivo CDM}{86}{section.7.2}
-\contentsline {section}{\numberline {7.3}Appendix 3: Gr\'aficos de las probabilidades de colisi\'on}{91}{section.7.3}
+\contentsline {subsection}{\numberline {2.4.1}El planteo general del problema}{32}{subsection.2.4.1}
+\contentsline {subsubsection}{\numberline {2.4.1.1}Objetos esf\'ericos}{33}{subsubsection.2.4.1.1}
+\contentsline {subsection}{\numberline {2.4.2}C\'alculo simplificado de Lei-Chen}{35}{subsection.2.4.2}
+\contentsline {section}{\numberline {2.5}Comunicaciones de riesgo de colisi\'on}{41}{section.2.5}
+\contentsline {subsection}{\numberline {2.5.1}El mensaje de alerta CDM}{41}{subsection.2.5.1}
+\contentsline {section}{\numberline {2.6}Resumen}{45}{section.2.6}
+\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de Desarrollo}{47}{chapter.3}
+\contentsline {section}{\numberline {3.1}Inicializaci\'on}{47}{section.3.1}
+\contentsline {section}{\numberline {3.2}Iteraci\'on}{48}{section.3.2}
+\contentsline {section}{\numberline {3.3}Control}{49}{section.3.3}
+\contentsline {section}{\numberline {3.4}Entorno de Desarrollo}{49}{section.3.4}
+\contentsline {chapter}{\numberline {4}ARxCODE}{51}{chapter.4}
+\contentsline {section}{\numberline {4.1}Especificaciones generales}{51}{section.4.1}
+\contentsline {section}{\numberline {4.2}Requerimientos}{51}{section.4.2}
+\contentsline {section}{\numberline {4.3}Interfaces}{53}{section.4.3}
+\contentsline {section}{\numberline {4.4}Casos de Uso}{54}{section.4.4}
+\contentsline {section}{\numberline {4.5}Arquitectura}{55}{section.4.5}
+\contentsline {section}{\numberline {4.6}Flujo din\'amico de ARxCODE}{60}{section.4.6}
+\contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{65}{chapter.5}
+\contentsline {section}{\numberline {5.1}Introducci\'on}{65}{section.5.1}
+\contentsline {section}{\numberline {5.2}Implementaci\'on del modelo SGP4 en Python}{66}{section.5.2}
+\contentsline {section}{\numberline {5.3}Estudio de errores de TLE con datos hist\'oricos}{67}{section.5.3}
+\contentsline {section}{\numberline {5.4}Estudio de errores de TLE con efem\'erides precisas}{70}{section.5.4}
+\contentsline {section}{\numberline {5.5}C\'alculo de la Probabilidad de Colisi\'on}{72}{section.5.5}
+\contentsline {section}{\numberline {5.6}An\'alisis}{80}{section.5.6}
+\contentsline {chapter}{\numberline {6}Conclusiones}{83}{chapter.6}
+\contentsline {chapter}{\numberline {7}Ap\'endice}{86}{chapter.7}
+\contentsline {section}{\numberline {7.1}Appendix 1: Transformaci\'on de Coordenadas}{86}{section.7.1}
+\contentsline {section}{\numberline {7.2}Appendix 2: El archivo CDM}{88}{section.7.2}
+\contentsline {section}{\numberline {7.3}Appendix 3: Gr\'aficos de las probabilidades de colisi\'on}{93}{section.7.3}

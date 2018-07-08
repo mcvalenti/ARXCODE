@@ -8,7 +8,7 @@ Para el an\'alisis de posibles colisiones es necesario evaluar de forma anticipa
 La t\'ecnica de detecci\'on de encuentros, consisti\'o durante muchos a\~nos en realizar propagaciones de las posiciones de todo el cat\'alogo a partir de un instante inicial, en intervalos que por lo general, abarcan una semana hacia el futuro y medir las distancias entre los objetos. Se defin\'ia un volumen seguro rodeando al sat\'elite de inter\'es, y si alg\'un objeto externo se introduc\'ia dentro del volumen de riesgo, es decir, se acercaba a una distancia m\'inima por debajo del umbral determinado, se consideraba una situaci\'on de riesgo. 
 Esta metodolog\'ia no tiene en cuenta los errores en la determinaci\'on de la posici\'on de los objetos, y por lo general deriva en falsas alarmas, con las que se corre el riesgo de realizar maniobras innecesarias o que pueden poner en mayor peligro a la misi\'on, por lo que fue necesario complementarla.\\
 
-En la actualidad, para un estudio m\'as exhaustivo de la situaci\'on, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la PoC.  Esta \'ultima ofrece un panorama m\'as completo ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
+En la actualidad, para un estudio m\'as exhaustivo de la situaci\'on, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la {\it{probabilidad de colisi\'on}}, PoC.  Esta \'ultima ofrece un panorama m\'as completo ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
 
 Como ya mencionamos (Sec. \ref{subsec:estudiocolision}), en este trabajo nos enfocamos en analizar las situaciones de encuentro ya identificadas y en particular, aquellas que involucran a misiones operativas y desechos espaciales.\\
 
@@ -16,11 +16,11 @@ En este cap\'itulo, en primer lugar, se presentan las distintas maneras en que s
 La posici\'on de la misi\'on operativa y los errores asociados a la misma, la provee el departamento de din\'amica orbital (Sec. \ref{sec:posMision}).
 La posici\'on de los desechos, s\'olo es posible conocerla, utilizamos los datos p\'ublicos que ofrece el comando de defensa norteamericano, \ac{NORAD} a trav\'es de su p\'agina Space-Track {\footnote{http://www.space-track.org}}. Las posiciones son publicadas en formato \ac{TLE} (Sec. \ref{subsec:tleformat}), sin errores asociados, y son propagadas hasta el momento del encuentro con el modelo SGP4  \citep{hoots1980models}, que tampoco ofrece informaci\'on sobre los errores de propagaci\'on. Se dedica un \'item para presentar el modelo de propagaci\'on SGP4 (Sec. \ref{subsec:sgp4model}) y se agrega en este espacio una breve descripci\'on de los sistemas de referencia con los que se trabaj\'o.\\
 
-La siguiente secci\'on describe el tratamiento de errores. Para el estudio de la estimaci\'on de los errores en la posici\'on inicial, se detalla el m\'etodo de Osweiler \citep{osweiler} que permite la construcci\'on de las matrices de covarianza a partir de un conjunto de TLEs, cuando no se cuenta con datos m\'as precisos.\\
+La siguiente secci\'on describe el tratamiento de errores. Para el estudio de la estimaci\'on de los errores en la posici\'on inicial, se detalla el m\'etodo de Osweiler \citep{osweiler} que permite la construcci\'on de las matrices de covarianza a partir de un conjunto de TLEs hist\'oricos, cuando no se cuenta con datos m\'as precisos.\\
 
 Una vez calculada la matriz de covarianza de errores, asociada a la posici\'on inicial, ser\'a necesario propagarla al instante predicho para el encuentro. Para ello se propone la implementaci\'on de una tabla con valores estad\'isticos inferidos del an\'alisis comparativo de efem\'erides precisas de la misi\'on operativa y las propagaciones de los TLE.\\
 
-Contin\'ua la secci\'on que explica el algoritmo para el c\'alculo de la PoC y finalmente se describe en detalle, la forma en que se comunican los acercamientos de riesgo (Sec. \ref{sec:anuncio}), por ejemplo mediante \ac{CDM}.
+Contin\'ua la secci\'on que explica el algoritmo para el c\'alculo de la PoC y finalmente se describe en detalle, la forma en que se comunican los acercamientos de riesgo (Sec. \ref{sec:anuncio}), por ejemplo mediante {\it{Conjunction Data Messages}} \ac{CDM}.
 % Incorporar los estados de alerta de Nasa. (texto de la aseguradora Britanica que me paso Juan ... bla de UNLAM.)
 
 
@@ -310,6 +310,71 @@ Luego se agrupan los valores seg\'un el intervalo de propagaci\'on, es decir, si
 De la Tabla \ref{tab:resultatabla0} se extrae que la componente T es la que mayor error introduce; con valores del orden de centenas de metros. Esto se debe a que el modelo de propagaci\'on SGP4 es d\'ebil en su representaci\'on del efecto que imprime el frenado atmosf\'erico en la componente asociada al movimiento o {\it{along-track}} T. 
 
 \section{La probabilidad de colisi\'on}\label{sec:probcol}
+
+Como ya se ha mencionado, adem\'as de estimar la distancia entre los objetos, en los distintos procedimientos de otras agencias u organismos espaciales se incluye la PoC como uno de los par\'ametros m\'as importantes para el estudio de las situaciones de riesgo y la toma de decisiones.
+
+\subsection{El planteo general del problema}
+Sean dos objetos que orbitan la Tierra, una misi\'on operativa y un desecho espacial. Evaluar el resigo de que colisionen se traduce en estimar la probabilidad de que uno intercepte al otro.
+
+Para el estudio del problema se asume que los errores en las posiciones de los objetos son de distribuci\'on gaussiana y se los representa mediante matrices de covarianza y sus respectivos elipsoides de error. Se considera que las matrices de covarianza de los objetos no est\'an correlacionadas, y entonces se puede construir una \'unica matriz combinada sumando ambas matrices. Se suman los radios de cada uno de los objetos involucrados  y se piensa en un \'unico objeto esf\'erico de radio igual a la suma de los radios. 
+
+Se centrar\'a en uno de los objetos (por ejemplo en el desecho, aunque depende del autor) el elipsoide de error de la matriz combinada, y en el otro objeto el centro de masa de un cuerpo esf\'erico con los radios combinados. 
+
+Si se centra el elipsoide de errores combinados en el desecho, se estudia la situaci\'on de riesgo en la que la misi\'on operativa atraviesa ese elipsoide, generando una trayectoria con forma de tubo. Ese tubo representar\'a un c\'irculo, si se lo proyecta en el plano del corte del elipsoide que se corresponde con el momento de m\'aximo acercamiento (plano de encuentro), es decir la situaci\'on en el instante del TCA. 
+
+As\'i lo describe Alfano en su trabajo \citep{alfano2007review} y lo representa con las siguintes figuras:
+
+
+\begin{figure}[!h]
+\begin{minipage}[t]{0.48\textwidth}
+ \centering
+ \fbox{\includegraphics[width=\textwidth]{imagenes/alfanoElipsoideANDtube}}
+ \caption[El planteo general de la PoC]{Planteo de la situaci\'on de encuentro  \citep{alfano2007review}}
+ \label{fig:pocproblema}
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+ \centering
+ \fbox{\includegraphics[width=0.8\textwidth]{imagenes/alfano2Dplane}}
+ \caption[El plano de encuentro]{Proyecci\'on del problema al plano de encuentro \citep{alfano2007review}}
+ \label{fig:poc2d}
+\end{minipage}
+\end{figure}
+
+ACA DEFINIR Y EXPLICAR LA DENSIDAD PROBABILIDAD DE COLISION (TAL VEZ COMO LO ESCRIBE KLINKRAD)
+
+La probabilidad de colisi\'on total resulta de la integraci\'on de la funci\'on densidad de probabilidad en el volumen contenido dentro del tubo y enmarcado por el elipsoide. Es decir: 
+
+
+\begin{equation}
+ PoC=\frac{1}{2 \pi \sqrt{det(P)}} \int_{V} exp [-S] dv
+ \label{eq:pocintegralVolumen}
+\end{equation}
+
+\begin{itemize}
+ \item P $=$ matriz de covarianzas combinadas
+ \item S $ (\tilde{\rho}-\bar{\rho})^{T} P^{-1} (\tilde{\rho}-\bar{\rho}) / 2 )$
+ \item $\tilde{\rho} = $ distancia relativa
+ \item $\bar{\rho} = $ distancia relativa al momento del TCA
+\end{itemize}
+
+Sin embargo, retomando ciertas consideraciones: 
+
+\begin{itemize}
+ \item Objetos esf\'ericos
+ \item Matrices de covarianzas no correlacionadas
+ \item Movimiento lineal
+ \item Errores en la velocidad despreciables
+\end{itemize}
+
+
+la resoluci\'on compleja de esta integral de 3 dimensiones se simplifica en una integral de 2 dimensiones. 
+
+\subsubsection{Objetos esf\'ericos}
+Considerar objetos esf\'ericos evita tener que tener en cuenta la actitud de los objetos, lo que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos en los que los desechos orbitan con actitud fuera de control no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamintos en este punto. 
+
+
+
+AQUI COMIENZA LO ANTERIOR\\
 Para el an\'alisis de una situaci\'on de riesgo, en general, se utilizan los par\'ametros:\\
 
 

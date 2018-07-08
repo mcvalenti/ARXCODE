@@ -8,7 +8,7 @@ Para el an\'alisis de posibles colisiones es necesario evaluar de forma anticipa
 La t\'ecnica de detecci\'on de encuentros, consisti\'o durante muchos a\~nos en realizar propagaciones de las posiciones de todo el cat\'alogo a partir de un instante inicial, en intervalos que por lo general, abarcan una semana hacia el futuro y medir las distancias entre los objetos. Se defin\'ia un volumen seguro rodeando al sat\'elite de inter\'es, y si alg\'un objeto externo se introduc\'ia dentro del volumen de riesgo, es decir, se acercaba a una distancia m\'inima por debajo del umbral determinado, se consideraba una situaci\'on de riesgo. 
 Esta metodolog\'ia no tiene en cuenta los errores en la determinaci\'on de la posici\'on de los objetos, y por lo general deriva en falsas alarmas, con las que se corre el riesgo de realizar maniobras innecesarias o que pueden poner en mayor peligro a la misi\'on, por lo que fue necesario complementarla.\\
 
-En la actualidad, para un estudio m\'as exhaustivo de la situaci\'on, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la PoC.  Esta \'ultima ofrece un panorama m\'as completo ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
+En la actualidad, para un estudio m\'as exhaustivo de la situaci\'on, adem\'as de la m\'inima distancia de acercamiento o {\it{miss distance}}, se calcula la {\it{probabilidad de colisi\'on}}, PoC.  Esta \'ultima ofrece un panorama m\'as completo ya que incorpora los errores en las posiciones a trav\'es de las matrices de covarianza.\\
 
 Como ya mencionamos (Sec. \ref{subsec:estudiocolision}), en este trabajo nos enfocamos en analizar las situaciones de encuentro ya identificadas y en particular, aquellas que involucran a misiones operativas y desechos espaciales.\\
 
@@ -16,11 +16,11 @@ En este cap\'itulo, en primer lugar, se presentan las distintas maneras en que s
 La posici\'on de la misi\'on operativa y los errores asociados a la misma, la provee el departamento de din\'amica orbital (Sec. \ref{sec:posMision}).
 La posici\'on de los desechos, s\'olo es posible conocerla, utilizamos los datos p\'ublicos que ofrece el comando de defensa norteamericano, \ac{NORAD} a trav\'es de su p\'agina Space-Track {\footnote{http://www.space-track.org}}. Las posiciones son publicadas en formato \ac{TLE} (Sec. \ref{subsec:tleformat}), sin errores asociados, y son propagadas hasta el momento del encuentro con el modelo SGP4  \citep{hoots1980models}, que tampoco ofrece informaci\'on sobre los errores de propagaci\'on. Se dedica un \'item para presentar el modelo de propagaci\'on SGP4 (Sec. \ref{subsec:sgp4model}) y se agrega en este espacio una breve descripci\'on de los sistemas de referencia con los que se trabaj\'o.\\
 
-La siguiente secci\'on describe el tratamiento de errores. Para el estudio de la estimaci\'on de los errores en la posici\'on inicial, se detalla el m\'etodo de Osweiler \citep{osweiler} que permite la construcci\'on de las matrices de covarianza a partir de un conjunto de TLEs, cuando no se cuenta con datos m\'as precisos.\\
+La siguiente secci\'on describe el tratamiento de errores. Para el estudio de la estimaci\'on de los errores en la posici\'on inicial, se detalla el m\'etodo de Osweiler \citep{osweiler} que permite la construcci\'on de las matrices de covarianza a partir de un conjunto de TLEs hist\'oricos, cuando no se cuenta con datos m\'as precisos.\\
 
 Una vez calculada la matriz de covarianza de errores, asociada a la posici\'on inicial, ser\'a necesario propagarla al instante predicho para el encuentro. Para ello se propone la implementaci\'on de una tabla con valores estad\'isticos inferidos del an\'alisis comparativo de efem\'erides precisas de la misi\'on operativa y las propagaciones de los TLE.\\
 
-Contin\'ua la secci\'on que explica el algoritmo para el c\'alculo de la PoC y finalmente se describe en detalle, la forma en que se comunican los acercamientos de riesgo (Sec. \ref{sec:anuncio}), por ejemplo mediante \ac{CDM}.
+Contin\'ua la secci\'on que explica el algoritmo para el c\'alculo de la PoC y finalmente se describe en detalle, la forma en que se comunican los acercamientos de riesgo (Sec. \ref{sec:anuncio}), por ejemplo mediante {\it{Conjunction Data Messages}} \ac{CDM}.
 % Incorporar los estados de alerta de Nasa. (texto de la aseguradora Britanica que me paso Juan ... bla de UNLAM.)
 
 
@@ -310,6 +310,55 @@ Luego se agrupan los valores seg\'un el intervalo de propagaci\'on, es decir, si
 De la Tabla \ref{tab:resultatabla0} se extrae que la componente T es la que mayor error introduce; con valores del orden de centenas de metros. Esto se debe a que el modelo de propagaci\'on SGP4 es d\'ebil en su representaci\'on del efecto que imprime el frenado atmosf\'erico en la componente asociada al movimiento o {\it{along-track}} T. 
 
 \section{La probabilidad de colisi\'on}\label{sec:probcol}
+
+Como ya se ha mencionado, adem\'as de estimar la distancia entre los objetos, en los distintos procedimientos de otras agencias u organismos espaciales se incluye la PoC como uno de los par\'ametros m\'as importantes para el estudio de las situaciones de riesgo y la toma de decisiones.
+
+\subsection{El planteo general del problema}
+Sean dos objetos que orbitan la Tierra, una misi\'on operativa y un desecho espacial. Evaluar el resigo de que colisionen se traduce en estimar la probabilidad de que uno intercepte al otro.
+
+Para el estudio del problema se asume que los errores en las posiciones de los objetos son de distribuci\'on gaussiana y se los representa mediante matrices de covarianza y sus respectivos elipsoides de error. Se considera que las matrices de covarianza de los objetos no est\'an correlacionadas, y entonces se puede construir una \'unica matriz combinada sumando ambas matrices. Se suman los radios de cada uno de los objetos involucrados  y se piensa en un \'unico objeto esf\'erico de radio igual a la suma de los radios. 
+
+Se centrar\'a en uno de los objetos (por ejemplo en el desecho, aunque depende del autor) el elipsoide de error de la matriz combinada, y en el otro objeto el centro de masa de un cuerpo esf\'erico con los radios combinados. 
+
+Si se centra el elipsoide de errores combinados en el desecho, se estudia la situaci\'on de riesgo en la que la misi\'on operativa atraviesa ese elipsoide, generando una trayectoria con forma de tubo. Ese tubo representar\'a un c\'irculo, si se lo proyecta en el plano del corte del elipsoide que se corresponde con el momento de m\'aximo acercamiento (plano de encuentro), es decir la situaci\'on en el instante del TCA. 
+
+As\'i lo describe Alfano en su trabajo \citep{alfano2007review} y lo representa con las siguintes figuras:
+
+
+\begin{figure}[!h]
+\begin{minipage}[t]{0.48\textwidth}
+ \centering
+ \fbox{\includegraphics[width=\textwidth]{imagenes/alfanoElipsoideANDtube}}
+ \caption[El planteo general de la PoC]{Planteo de la situaci\'on de encuentro  \citep{alfano2007review}}
+ \label{fig:pocproblema}
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+ \centering
+ \fbox{\includegraphics[width=0.8\textwidth]{imagenes/alfano2Dplane}}
+ \caption[El plano de encuentro]{Proyecci\'on del problema al plano de encuentro \citep{alfano2007review}}
+ \label{fig:poc2d}
+\end{minipage}
+\end{figure}
+
+ACA DEFINIR Y EXPLICAR LA DENSIDAD PROBABILIDAD DE COLISION (TAL VEZ COMO LO ESCRIBE KLINKRAD)
+
+La probabilidad de colisi\'on total resulta de la integraci\'on de la funci\'on densidad de probabilidad en el volumen contenido dentro del tubo y enmarcado por el elipsoide. Es decir: 
+
+
+\begin{equation}
+ PoC=\frac{1}{2 \pi \sqrt{det(P)}} \int_{V} exp [-S] dv
+ \label{eq:pocintegralVolumen}
+\end{equation}
+
+\begin{itemize}
+ \item P $=$ matriz de covarianzas combinadas
+ \item S $ (\tilde{\rho}-\bar{\rho})^{T} P^{-1} (\tilde{\rho}-\bar{\rho}) / 2 )$
+ \item $\tilde{\rho} = $ distancia relativa
+ \item $\bar{\rho} = $ distancia relativa al momento del TCA
+\end{itemize}
+
+
+AQUI COMIENZA LO ANTERIOR\\
 Para el an\'alisis de una situaci\'on de riesgo, en general, se utilizan los par\'ametros:\\
 
 
@@ -416,7 +465,7 @@ En este trabajo se implement\'o la estimaci\'on de un c\'alculo simplificado par
 Lei-Chen se basa en el desarrollo anal\'itco de Chan \citep{chan2003improved} y otros estudios anteriores del problema del c\'alculo de la probabilidad de colisi\'on en encuentros cortos, que reducen el problema en tres dimensiones a un plano de encuentro.
 Con este planteo, se reduce el problema a calcular la integral de la funci\'on de densidad de probabilidad (PDF) en dos dimensiones, sobre el \'area de la secci\'on circular de colisi\'on que se proyecta en el plano de encuentro.\\
 
-La secci\'on circular de colisi\'on que se proyecta en el plano de encuentro, con radio $r_{a}$, est\'a centrada en las coordenadas $\mu_{x}$, $\mu_{y}$ del plano. Las desviaciones est\'andar que resultan de la matriz combinada de covarianzas de ambos objetos, proyectadas, son $\sigma_{x}$ y $\sigma_{y}$,  (Fig. \ref{fig:planoenc}).\\
+La secci\'on circular de colisi\'on que se proyecta en el plano de encuentro, con radio $r_{a}$, est\'a centrada en las coordenadas $\mu_{x}$, $\mu_{y}$ del plano. Las desviaciones est\'andar que resultan de la matriz combinada de covarianzas de ambos objetos, proyectadas, son $\sigma_{x}$ y $\sigma_{y}$  (Fig. \ref{fig:planoenc}).\\
 
 \begin{figure}[!h]
 \centering
@@ -446,7 +495,7 @@ Ser\'a necesario incorporar m\'as t\'erminos en aquellos casos, en los que el ra
 
 \subsubsection*{Expresi\'on de la PoC para \'orbitas circulares}
 
-En la mayor\'ia de los casos, las \'orbitas son circulares o casi circulares. En esta configuraci\'on  los puntos de m\'aximo acercamiento entre las \'orbitas se ubican a lo largo de la l\'inea de intersecci\'on de los planos orbitales, (Fig. \ref{fig:pocorbcirc}).\\ 
+En la mayor\'ia de los casos, las \'orbitas son circulares o casi circulares. En esta configuraci\'on  los puntos de m\'aximo acercamiento entre las \'orbitas se ubican a lo largo de la l\'inea de intersecci\'on de los planos orbitales (Fig. \ref{fig:pocorbcirc}).\\ 
 
 A continuaci\'on se describe el desarrollo que propone Lei-Chen para arribar a la expresi\'on de la PoC en el caso de las \'orbitas circulares. Para este planteo se va a asumir que:
 
@@ -459,7 +508,7 @@ A continuaci\'on se describe el desarrollo que propone Lei-Chen para arribar a l
 
 A partir de estas consideraciones, se muestran los pasos que conducen a la expresi\'on de la PoC en t\'erminos de la posici\'on y velocidad relativa en el sistema RSW. 
  
-Se analiza primero el vector de la posici\'on relativa. En el momento de m\'aximo acercamiento el vector de posici\'on relativa $\Delta {\bf{r}}_{tca}$ es perpendicular a los vectores de velocidad de ambos objetos, o sea, es paralelo a la l\'inea perpendicular a ambas velocidades, que para el caso circular, coincide con la l\'inea de intersecci\'on de los planos. Del mismo razonamiento se desprende que $\Delta {\bf{r}}_{tca}$ es perpendicular al vector de velocidades relativas en el momento de m\'aximo acercamiento $\Delta {\bf{v}}_{tca}$ y por lo tanto $\Delta {\bf{r}}_{tca}$ yace en el plano de encuentro. 
+En el momento de m\'aximo acercamiento el vector de posici\'on relativa $\Delta {\bf{r}}_{tca}$ es perpendicular a los vectores de velocidad de ambos objetos, o sea, es paralelo a la l\'inea perpendicular a ambas velocidades, que para el caso circular, coincide con la l\'inea de intersecci\'on de los planos. Del mismo razonamiento se desprende que $\Delta {\bf{r}}_{tca}$ es perpendicular al vector de velocidades relativas en el momento de m\'aximo acercamiento $\Delta {\bf{v}}_{tca}$ y por lo tanto $\Delta {\bf{r}}_{tca}$ yace en el plano de encuentro. 
 
 
 \begin{figure}[!h]
@@ -472,14 +521,14 @@ Se analiza primero el vector de la posici\'on relativa. En el momento de m\'axim
 \begin{minipage}[t]{0.48\textwidth}
  \centering
  \fbox{\includegraphics[width=\textwidth]{imagenes/poccirc2}}
- \caption[]{El m\'aximo acercamiento entre las \'orbitas $\Delta {\bf{r}}_{rad}$ y el vector de m\'aximo acercamiento entre los objetos en el TCA, $\Delta {\bf{r}}_{tca}$ (\citep{leichen}).}
+ \caption[]{El m\'aximo acercamiento entre las \'orbitas $\Delta {\bf{r}}_{rad}$ y el vector de m\'aximo acercamiento entre los objetos en el TCA, $\Delta {\bf{r}}_{tca}$ \citep{leichen}.}
  \label{fig:pocdistancia}
 \end{minipage}
 \end{figure}
 
-La figura \ref{fig:pocdistancia} ilustra el m\'aximo acercamiento entre las \'orbitas $\Delta {\bf{r}}_{rad}$ y el m\'aximo acercamiento entre los objetos $\Delta {\bf{r}}_{tca}$. El plano de encuentro se representa por el rect\'angulo de l\'inea punteada que es perpendicular a la direcci\'on de la velocidad relativa. Los objetos se ubican en los v\'ertices de la diagonal del rect\'angulo en el TCA.
+La Figura \ref{fig:pocdistancia} ilustra el m\'aximo acercamiento entre las \'orbitas $\Delta {\bf{r}}_{rad}$ y el m\'aximo acercamiento entre los objetos $\Delta {\bf{r}}_{tca}$. El plano de encuentro se representa por el rect\'angulo de l\'inea punteada que es perpendicular a la direcci\'on de la velocidad relativa. Los objetos se ubican en los v\'ertices de la diagonal del rect\'angulo en el TCA.
 
-El vector posici\'on relativa al instante TCA, $\Delta {\bf{r}}_{tca}$, se compone de: el vector de m\'aximo acercamiento entre \'orbitas $\Delta {\bf{r}}_{rad}$, cuya direcci\'on para el caso circular coincide con la direcci\'on radial y el vector de m\'aximo acercamiento en el plano perpendicular a la l\'inea perpendicular a ambas velocidades $\Delta {\bf{r}}_{vel}$.
+El vector posici\'on relativa al instante TCA, $\Delta {\bf{r}}_{tca}$, se compone de: el vector de m\'aximo acercamiento entre \'orbitas $\Delta {\bf{r}}_{rad}$, cuya direcci\'on, para el caso circular, coincide con la direcci\'on radial y el vector de m\'aximo acercamiento en el plano perpendicular a la l\'inea perpendicular a ambas velocidades $\Delta {\bf{r}}_{vel}$.
 
 Lei-Chen define un sistema de coordenadas para el plano de encuentro, tal que (Fig. \ref{fig:pocplano}):
 \begin{itemize}
@@ -519,8 +568,8 @@ el eje R comparte la direcci\'on con el eje x y la distancia de m\'aximo acercam
 \end{minipage}
 \end{figure}
 
-Bien, a continuaci\'on se describe, c\'omo se proyectan los errores, en el sistema RSW al plano de encuentro.
-Generalmente las matrices de covarianza de los errores en la posici\'on, se definen en el sistema RSW centrado en uno de los objetos y alineados con las direcciones RSW, considerando las componentes en R y W iguales y asumiendo que el eje mayor del elipsoide de error coincide con la direcci\'on de la velocidad. Planteo razonable ya que la incerteza de la posici\'on en la direcci\'on de la velocidad suele ser siempre mayor. Esta alineaci\'on de los errores con los ejes, simplifica significativamente el an\'alisis sin perder la esencia de los errores de la posici\'on. 
+Bien, a continuaci\'on se describe, c\'omo se proyectan al plano de encuentro, los errores en el sistema RSW .
+Generalmente las matrices de covarianza de los errores en la posici\'on, se definen en el sistema RSW centrado en uno de los objetos y alineados con las direcciones RSW, considerando las componentes en R y W iguales y asumiendo que el eje mayor del elipsoide de error coincide con la direcci\'on de la velocidad. Planteo razonable ya que la incerteza de la posici\'on en la direcci\'on de la velocidad suele ser siempre mayor. Esta alineaci\'on de los errores con los ejes, simplifica significativamente el an\'alisis sin perder la esencia de los errores. 
 
 De este modo, las matrices de covarianza de los dos objetos resultan:
 
@@ -541,13 +590,20 @@ $$
 \end{bmatrix}
 $$
 
-Donde $\sigma_{R}, \sigma_{S}, \sigma_{W}$ son las varianzas en las direcciones radial, in-track y croos-track respectivamente. 
+Donde $\sigma_{R}, \sigma_{S}, \sigma_{W}$ son las varianzas en las direcciones radial, in-track y cross-track respectivamente. 
 
-Para transformar estas matrices en el sistema RSW al sistema de encuentro O-xyz, s\'olo ser\'a necesario realizar una rotaci\'on respecto del eje R, ya que R y x coinciden (Fig. ...bla ). {\color{red}{agregar imagen con ambos elipsoides de error Fig 5.9 de lei chen}}. Los \'angulos de rotaci\'on son $\phi/2$ y $-\phi/2$ y las matrices de rotaci\'on $M_{1}$ respecto del eje x resultan:
+Para transformar estas matrices en el sistema RSW al sistema de encuentro O-xyz, s\'olo ser\'a necesario realizar una rotaci\'on respecto del eje R, ya que R y x coinciden (Fig. \ref{fig:covarRSW}). Los \'angulos de rotaci\'on son $\phi/2$ y $-\phi/2$ y las matrices de rotaci\'on $M_{1}$ respecto del eje x resultan:
 
 $$
 M_{1,RSW \rightarrow xyz} = M_{1}(\phi/2) \quad M_{2,RSW \rightarrow xyz} = M_{1}(-\phi/2)
 $$
+
+\begin{figure}[!h]
+ \centering
+ \fbox{\includegraphics[width=0.5\textwidth]{imagenes/poccirc5}}
+ \caption[Plano de encuentro y proyecci\'on del sistema RSW]{Representaci\'on de los elipsoides de error de cada uno de los objetos, primario y secundario. Extra\'ido de Lei-Chen, \citep{leichen}.}
+ \label{fig:covarRSW}
+\end{figure}
 
 Luego las matrices de covarianza en el sistema de encuentro $P_{1}$ y $P_{2}$ se construyen a partir de:
 
@@ -563,7 +619,7 @@ P_{1,2}=
 \end{bmatrix}
 $$
 
-Donde los sub\'indices 1,2 indican que las matrices ser\'an similares tanto para $P_{1}$ como para $P_{2}$ y reemplazando por el \'indice correspondiente.
+Donde los sub\'indices 1,2 indican que las matrices ser\'an similares tanto para $P_{1}$ como para $P_{2}$ reemplazando por el \'indice correspondiente.
 
 Ahora, bajo la consideraci\'on de covarianzas no correlacionadas, la matriz de covarianza combinada, que considere los errores de ambos objetos, ser\'a suma de estas dos matrices. A su vez, para el plano de encuentro, vamos a tener en cuenta s\'olo las componentes correspondientes a x e y. De modo que resulta:
 
@@ -594,9 +650,12 @@ A partir de estas definiciones, pueden expresarse las varianzas de los errores c
 \sigma_{y}^{2}=\sigma_{SR}^{2}=\sigma_{S}^{2}cos^{2}(\frac{\phi}{2})+\sigma_{W}^{2}sin^{2}(\frac{\phi}{2})\\
 \end{gather*}
 
-Finalmente, si se reemplazan los valores de $\mu_{x}, \mu_{y}, \sigma_{x} y \sigma_{y}$ en funci\'on de las componentes R,S y W en la ecuaci\'on {\ref{eq:pocintegral}}, resulta:
+Finalmente, si se reemplazan los valores de $\mu_{x}, \mu_{y}, \sigma_{x}$ y $\sigma_{y}$ en funci\'on de las componentes R, S, W, $\sigma_{R}$ y $\sigma_{SW}$ en la Ecuaci\'on {\ref{eq:pocexpress}}, resulta:
 
-
+\begin{equation}
+ PoC= \exp[-\frac{1}{2}(\frac{R^{2}}{\sigma_{R}^{2}}+\frac{S^{2}+W^{2}}{\sigma_{SW}^{2}})][1-\exp(\frac{r_{a}^{2}}{2\sigma_{R}\sigma_{SW}})]
+ \label{eq:pocexpressRSW}
+\end{equation}
 
 
 % \subsection*{M\'etodo de Akella}
