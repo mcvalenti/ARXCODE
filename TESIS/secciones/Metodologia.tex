@@ -24,6 +24,19 @@ En el mismo sentido, sus productos finales no ser\'an considerados en la toma de
 
 Para este planteo de definiciones, se cont\'o con el asesoramiento y el intercambio de informaci\'on con personas del \'area de Din\'amica Orbital y otros departamentos de la CONAE. Se realizaron algunas reuniones e intercambio de correos electr\'onicos, aunque por ser una tem\'atica que se aborda bajo reg\'imenes especiales de acuerdos de confidencialidad, no fue posible contar con la totalidad de la informaci\'on.
 
+\subsection{Plan de Desarrollo}
+
+Dado que el trabajo se realizaba en el contexto de la maestr\'ia en general y que las tareas y los cronogramas se modificaban frecuentemente, al principio se planific\'o una distribuci\'on horaria independiente de las fechas.
+
+\begin{figure}[h!]
+  \centering
+  \fbox{\includegraphics[width=0.7\textwidth]{imagenes/distribucionhs}}
+  \caption{Planificaci\'on de la distribuci\'on del total de horas asignadas dentro de la maestr\'ia al desarrollo y la escritura del trabajo de tesis.}
+  \label{fig:actdiag}
+\end{figure}
+
+AGREGAR DIAGRAMA DE GANTT \\
+
 \section{Iteraci\'on}
 Ya conocido el planteo del problema, las distintas maneras de abordarlo y las restricciones, se elabor\'o un diseño preliminar del producto con sus requerimientos (Sec. \ref{sec:requerimientos}) y sus funcionalidades, que dadas las caracter\'isticas del problema result\'o bastante determinista.\\
 
@@ -39,16 +52,68 @@ Para el desarrollo se definieron distintos paquetes o componentes (Sec. \ref{sub
 
 Esta metodolog\'ia permiti\'o importar funciones que resuelven cuestiones espec\'ificas desde cualquier  m\'odulo y a su vez modificar las funciones cuando fuera necesario.\\
 
-Durante el diseño y el desarrollo de la interfaz, se fueron modificando mucho las opciones, en tanto se utiliz\'o la interfaz para seguimiento de pasos intermedios que a medida que iban siendo validados se iban retirando de las opciones del usuario.\\
+Durante el diseño y el desarrollo de la interfaz, se fueron modificando mucho las opciones, en tanto se utiliz\'o la interfaz para seguimiento de pasos intermedios que a medida que iban siendo verificados se iban retirando de las opciones del usuario.\\
 
-\section{Control}
-Al tratarse de un sistema que implementa distintas metodolog\'ias para el c\'alculo de par\'ametros, el control se bas\'o en analizar que los resultados de los algoritmos implementados fueran coherentes y coincidieran con los que exist\'ian en publicaciones bibliogr\'aficas que se pod\'ian reproducir.\\
+\section{Seguimiento y Control}
 
-Fue fundamental implementar un control sobre la implementaci\'on de la solicitud a NORAD y la propagaci\'on de los TLE y sobre los algoritmos de transformaci\'on de coordenadas.\\
+\subsection{Verificaci\'on y Validaci\'on}
 
-Para cada una de las instancias de validaci\'on se configuraron distintos escenarios de prueba y en muchas oportunidades se verificaron los resultados parciales con pruebas realizadas en Microsoft Excel.\\
+\subsubsection*{Verificaci\'on}
+Se realizaron distintas pruebas de unidad y de integraci\'on.  
+Los distintos casos de prueba se diseñaban a partir extrayendo datos de prueba de la bibliograf\'ia recabada para cada una de las metodolog\'ias implementadas. As\'i, se ejecutaban las pruebas para los casos publicados y luego se comparaban los resultados. 
+ESQUEMA 1.\\
 
-\section{Entorno de Desarrollo}
+A medida que se desarrollaba un nuevo m\'odulo, se realizaban los casos de prueba para ese m\'odulo y una prueba de integraci\'on, que incorporaba todos los m\'odulos hasta el momento verificados.
+
+ESQUEMA 2.\\
+
+\paragraph*{TleAdmin, CDM}
+Dado que tanto los TLE como los CDM son los elementos fundamentales que dan inicio al an\'alisis de la probabilidad de colisi\'on, es fundamental tener un control sobre la correcta adquisici\'on de estos inputs. Sobre ellos se diseñaron pruebas funcionales. Se prueba siempre que los TLE de ambos objetos hayan sido adquiridos; si esto no fuera as\'i ya sea por complicaciones en la conexi\'on a internet, o porque los TLE para las fechas solicitadas no est\'an disponibles, el software interrumpe el proceso e indica a cu\'al de las situaciones se debe el problema. Mientras que para el caso de los CDM, el programa se interrumpe si el archivo ingresado no respeta el formato .xml capaz de procesar y anuncia un mensaje de alerta cuando el CDM a sido procesado pero no todos los campos de inter\'es se encuentran en \'el. 
+
+\paragraph*{Comparar, SistReferencia}
+Las pruebas realizadas para garantizar los correctos procedimientos respecto de la propagaci\'on y las transformaciones de los sistemas de referencia fueron fundamentales, pero s\'olo se realizaron en las primeras etapas del desarrollo, ya que no dependen de cada ejecuci\'on en particular, sino de la correcta implementaci\'on de los algoritmos.  
+
+\paragraph*{Estad\'istica}
+Para verificar la correcta implementaci\'on del m\'etodo de Osweiler para la generaci\'on de las matrices de covarianza, se gener\'o un caso de prueba que permite comparar los resultados con los que se publican en el trabajo del autor. Dada la dependencia de este m\'odulo con el m\'odulo de administraci\'on de los TLE, es importante que esta prueba es naturalmente de integraci\'on y es muy importante que se realice frecuentemente. ! LA DIAGONAL DE LA MATRIZ DEBE SER POSITIVA. 
+
+\paragraph{Comparar, CodsAdmin}
+El procedimiento que se realiza para la generaci\'on de la matriz de propagacio\'on de errores involucra la utilizaci\'on de los datos de misi\'on (o Datos de CODS). Esta tarea fue realmente compleja y se realizaron varias ejecuciones de la prueba sobre la manipulaci\'on de estos datos, ya que los mismos muchas veces no respetaban un formato estandarizado por ejemplo sobre las fechas o conten\'ian intervalos sin datos significativos, etc. Estas verificaciones se realizaron una s\'ola vez hasta lograr que los datos resultaran ordenados dentro del per\'iodo de an\'alisis que se utiliz\'o para generar la matriz de propagaci\'on de errores. Por cuestiones de tiempo no se implement\'o una verifiaci\'on automatizada sobre estos inputs, lo que debe ser tenido en cuenta si se desean generar matrices de propagaci\'on de errores actualizadas o en forma din\'amica.  
+
+\paragraph{Encuentro}
+Las pruebas realizada en el m\'odulo para la estimaci\'on de las probabilidades de colisi\'on tienen tambi\'en una fuerte dependencia del m\'odulo que gestiona los TLE, mientras que pueden configurarse o no para que la matriz de covarianza que utilizan sea generada por el m\'odulo de Osweiler o no. Salvo para el caso del m\'etodo de Lei-Chen, ya que en su trabajo existe un ejemplo que indica todos los par\'ametros que se utilizan en la ecuaci\'on final, y entonces se puede hacer una prueba s\'olo para esa unidad.
+
+\paragraph{Aplicaci\'on}
+En lo que respecta a la aplicaci\'on que nuclea y despliega la intefaz gr\'afica, se realizaron inspecciones para depurar la correcta inicializaci\'on de variables y el flujo de las distintas vistas. 
+
+
+ESQUEMA FINAL\\
+
+\subsubsection{Validaci\'on}
+
+Al tratarse de un sistema que implementa distintas metodolog\'ias para el c\'alculo de par\'ametros, el control m\'as exhaustivo se bas\'o en analizar que los resultados de los algoritmos implementados fueran coherentes y coincidieran con los que exist\'ian en publicaciones bibliogr\'aficas o situaciones reales que se pod\'ian reproducir. 
+
+
+Un desarrollo detallado de los resultados de las pruebas y validaciones se describe en la Sec. \ref{chap:resultados}\\
+
+\subsection{Gesti\'on de la Configuraci\'on}
+
+Al ser ARxCODE un prototipo sencillo desarrollado por una sola persona, no fue necesario implementar una compleja gesti\'on de configuraci\'on. Se utiliz\'o el repositorio Git (Ver Sec. \ref{sec:entorno}) para el control de versiones, al que d\'ia a d\'ia se incorporaba el proyecto. Se paut\'o realizar un release una vez por mes, ya que era la frecuencia con la que se planific\'o que existieran nuevos m\'odulos y pruebas de unidad y/o de integraci\'on. 
+
+
+\subsection{Aseguramiento de la Calidad}
+
+\begin{itemize}
+ \item Que los TLE no se aparten demasiado de la fecha predicha
+ \item Que los CDMs provengan en el formato estandarizado CCSDS
+ \item Que el modelo de propagaci\'on sea bueno
+ \item Que las matrices de covarianza contengan errores acotados. 
+ \item Que los m\'etodos implementados en el c\'alculo de la PoC sean los aceptados
+ \item Que los c\'alculos de las distintas ecuaciones se realicen correctamente en todos los casos
+\end{itemize}
+
+
+
+\section{Entorno de Desarrollo}\label{sec:entorno}
 
 Para el desarrollo se utiliz\'o:\\
 \begin{itemize}

@@ -388,10 +388,10 @@ class ProcEncuentro(QWidget):
         self.setWindowModality(Qt.ApplicationModal)      
         # Parametros
         if not bool(kwargs):
-            self.sat_id="25415"
-            self.deb_id="31445"
-            self.qdate= QDate(2013,03,18)
-            self.qhora=QTime(14,44,34.0)
+            self.sat_id="41456"
+            self.deb_id="35732"
+            self.qdate= QDate(2018,06,29)
+            self.qhora=QTime(22,22,48.14)
         else:            
             self.sat_id=kwargs["norad_sat"]
             self.deb_id=kwargs["norad_deb"]
@@ -607,7 +607,7 @@ class ProcEncuentro(QWidget):
             tca_sust=self.tca-timedelta(days=1)
             tle_sat=Tle.creadoxParam(self.sat_id,tca_sust)
             print 'Nuevas epocas'
-            print tle_sat.epoca(),tca_sust
+            print tle_sat.epoca()
             
         if tle_deb.epoca() >= self.tca:
             print 'Comparacion de epocas'
@@ -615,7 +615,7 @@ class ProcEncuentro(QWidget):
             tca_sust=self.tca-timedelta(days=1)
             tle_deb=Tle.creadoxParam(self.deb_id,tca_sust)
             print 'Nuevas epocas'
-            print tle_deb.epoca(),tca_sust
+            print tle_deb.epoca()
 #         
         """
         Propagacion hasta el Encuentro

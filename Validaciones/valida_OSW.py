@@ -29,17 +29,17 @@ Osewiler y valida el metodo para el calculo de la matriz.
 #===========================================================================
 # ESCENARIO ICESAT(sat 5) 27642- ventana #3 (27 Sep 2003 - 12 Oct 2003)
 #===========================================================================
-# sat_id='27642'
-# ini_epoca=datetime(2003,9,27)
-# fin_epoca=datetime(2003,10,12)
-# crudo='27642_escenario53.setTle'
+sat_id='27642'
+ini_epoca=datetime(2003,9,27)
+fin_epoca=datetime(2003,10,12)
+crudo='27642_escenario53.setTle'
 #===========================================================================
 # ESCENARIO ICESAT(sat 5) 27642- ventana # 4 (17 Oct 03 - 1 Nov 03 )
 #===========================================================================
-sat_id='27642'
-ini_epoca=datetime(2003,10,17)
-fin_epoca=datetime(2003,11,1)
-crudo='27642_escenario54.setTle'
+# sat_id='27642'
+# ini_epoca=datetime(2003,10,17)
+# fin_epoca=datetime(2003,11,1)
+# crudo='27642_escenario54.setTle'
 #===========================================================================
 # ESCENARIO ICESAT(sat 5) 27642- ventana #5 (14 Feb 2004 - 29 Feb 2004)
 #===========================================================================

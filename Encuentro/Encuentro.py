@@ -91,7 +91,12 @@ class Encuentro():
         salida1=open('../Encuentro/archivos/'+str(self.sat_id),'w+')
         salida2=open('../Encuentro/archivos/'+str(self.deb_id),'w+')
         salida3=open(self.archivo_dif,'w+')
-
+        # Se calcula la cantidad de dias entre TLE y tca
+        self.ndias_prev_sat=abs(int((self.tle_sat.epoca()-self.tca).total_seconds()/86400))
+        self.ndias_prev_deb=abs(int((self.tle_deb.epoca()-self.tca).total_seconds()/86400))
+        print 'Delta Dias satelite: ',abs((self.tle_sat.epoca()-self.tca).total_seconds()/86400.0)
+        print 'Delta Dias satelite: ',abs((self.tle_deb.epoca()-self.tca).total_seconds()/86400)
+        
         """
         Calcula las diferencias relativas entre los dos 
         objetos en el sistema RTN.
@@ -190,25 +195,43 @@ class Encuentro():
         4 - Calculo la matriz combinada, suma de las matrices anteriores.
         --------------------------------------------------------------        
         """
+        #=============================================================
+        # Cargo valores para corregir matrices por tabla de Marce
+        # al TCA, n dias adelante.
+        #=============================================================
+        var_tab_r_deb=tabla[self.ndias_prev_deb][0]
+        var_tab_t_deb=tabla[self.ndias_prev_deb][1]
+        var_tab_c_deb=tabla[self.ndias_prev_deb][2]
         
         #=============================================================
-        # 1 - MATRIZ DEL DESECHO 
+        # MATRIZ DEL DESECHO 
         #=============================================================
-#         deb_id=self.tle_deb.catID()
-#         ini_set_deb=self.tle_deb.epoca()-timedelta(days=15)
-#         fin_set_deb=self.tle_deb.epoca()
-#         archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
-#         nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
-#         maCovar_deb, ma_archivo=EjecutaMaCovar(nombre_archivo)
-        maCovar_deb=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]]) # SOCRATES VALUES
-        var_r=0.1*0.1
-        var_t=0.3*0.3
-        var_n=0.1*0.1
+        deb_id=self.tle_deb.catID()
+        ini_set_deb=self.tle_deb.epoca()-timedelta(days=15)
+        fin_set_deb=self.tle_deb.epoca()
+        archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
+        nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
+        maCovar_deb, ma_archivo=EjecutaMaCovar(nombre_archivo)
+#         maCovar_deb=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]]) # SOCRATES VALUES
+#         var_r=0.1*0.1
+#         var_t=0.3*0.3
+#         var_n=0.1*0.1
+        maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r_deb
+        maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t_deb
+        maCovar_deb[2][2]=maCovar_deb[2][2]+var_tab_c_deb
         
         # Transformacion al sistema inercial
         maT_teme2ric_deb=ric_matrix(self.r1_tca,self.v1_tca)
         R2_eci=maT_teme2ric_deb.transpose()
-        C2_eci=np.dot(R2_eci.transpose(),np.dot(maCovar_deb,R2_eci))
+        a_x=[]
+        a_y=[]
+        a_z=[]
+        for i in range(3):
+            a_x.append(maCovar_deb[0][i])
+            a_y.append(maCovar_deb[1][i])
+            a_z.append(maCovar_deb[2][i])
+        maCovar_deb=np.array([a_x,a_y,a_z])
+        C2_eci=np.dot(R2_eci.transpose(),np.dot(maCovar_deb[:3],R2_eci))
 #         
 #         print '*******************************************************'
 #         print '-----------------Varianzas DESECHO---------------------'
@@ -221,22 +244,41 @@ class Encuentro():
 #         print '*******************************************************'
 #         for k in maCovar_deb[:3]:
 #             print k[:3]
+        #=============================================================
+        # Cargo valores para corregir matrices por tabla de Marce
+        # al TCA, n dias adelante.
+        #=============================================================
+        var_tab_r_sat=tabla[self.ndias_prev_sat][0]
+        var_tab_t_sat=tabla[self.ndias_prev_sat][1]
+        var_tab_c_sat=tabla[self.ndias_prev_sat][2]
         #=============================================================    
         # 2 - MATRIZ DE LA MISION 
         #=============================================================
-#         sat_id=self.tle_sat.catID()
-#         ini_set_sat=self.tle_sat.epoca()-timedelta(days=15)
-#         fin_set_sat=self.tle_sat.epoca()
-#         archivo_sat=sat_id+'_'+datetime.strftime(ini_set_sat,'%Y%m%d')+'.crudo'    
-#         nombre_archivo_sat,var_r_sat,var_t_sat,var_n_sat=calcula_matriz_Tles(sat_id,ini_set_sat,fin_set_sat,archivo_sat)
-#         maCovar_sat, ma_archivo_sat=EjecutaMaCovar(nombre_archivo_sat)
-        maCovar_sat=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
-        var_r_sat=0.1*0.1
-        var_t_sat=0.3*0.3
-        var_n_sat=0.1*0.1
+        sat_id=self.tle_sat.catID()
+        ini_set_sat=self.tle_sat.epoca()-timedelta(days=15)
+        fin_set_sat=self.tle_sat.epoca()
+        archivo_sat=sat_id+'_'+datetime.strftime(ini_set_sat,'%Y%m%d')+'.crudo'    
+        nombre_archivo_sat,var_r_sat,var_t_sat,var_n_sat=calcula_matriz_Tles(sat_id,ini_set_sat,fin_set_sat,archivo_sat)
+        maCovar_sat, ma_archivo_sat=EjecutaMaCovar(nombre_archivo_sat)
+#         maCovar_sat=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+#         var_r_sat=0.1*0.1
+#         var_t_sat=0.3*0.3
+#         var_n_sat=0.1*0.1
+        maCovar_sat[0][0]=maCovar_sat[0][0]+var_tab_r_sat
+        maCovar_sat[1][1]=maCovar_sat[1][1]+var_tab_t_sat
+        maCovar_sat[2][2]=maCovar_sat[2][2]+var_tab_c_sat
         # Transformacion al sistema inercial
         maT_teme2ric_sat=ric_matrix(self.r_tca,self.v_tca)
         R1_eci=maT_teme2ric_sat.transpose()
+        a_x=[]
+        a_y=[]
+        a_z=[]
+        for i in range(3):
+            a_x.append(maCovar_sat[0][i])
+            a_y.append(maCovar_sat[1][i])
+            a_z.append(maCovar_sat[2][i])
+        maCovar_sat=np.array([a_x,a_y,a_z])
+                    
         C1_eci=np.dot(R1_eci.transpose(),np.dot(maCovar_sat,R1_eci))
 #         print '*********************************'
 #         print '---------Varianzas MISION--------'
@@ -249,21 +291,7 @@ class Encuentro():
 #         print '*********************************'
  #       for k in maCovar_sat[:3]:
  #           print k[:3]
-        #=============================================================
-        # 3 -Corrijo ambas matrices por tabla de Marce al TCA -
-        # n dias adelante.
-        #=============================================================
-#         var_tab_r=tabla[self.ndias_prev][0]
-#         var_tab_t=tabla[self.ndias_prev][1]
-#         var_tab_c=tabla[self.ndias_prev][2]
-#           
-#         maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r
-#         maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t
-#         maCovar_deb[2][2]=maCovar_deb[2][2]+var_tab_c
 #   
-#         maCovar_sat[0][0]=maCovar_sat[0][0]-var_tab_r
-#         maCovar_sat[1][1]=maCovar_sat[1][1]-var_tab_t
-#         maCovar_sat[2][2]=maCovar_sat[2][2]-var_tab_c 
         #=============================================================
         # 4 - Calculo la matriz combinada, suma de las matrices
         # anteriores. En el sistema RTN.
@@ -357,7 +385,9 @@ class Encuentro():
         #================
         # POC 1D
         #================
-        sigma_r=np.sqrt(0.1*0.1+0.3*0.3+0.1*0.1)
+        #sigma_r=np.sqrt(0.1*0.1+0.3*0.3+0.1*0.1)
+        C, C1_eci, C2_eci=self.calculaMacombinada()
+        sigma_r=np.sqrt(C[0][0]+C[1][1]+C[2][2])
         coef=1.0/(np.sqrt(2*np.pi)* sigma_r)
         result = integrate.quad(lambda r:np.exp(-(r-self.mod_minDist)*(r-self.mod_minDist)/(2*sigma_r)) , -ra,ra)
         print 'PoC 1D = ', coef*result[0]                     

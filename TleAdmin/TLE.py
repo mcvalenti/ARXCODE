@@ -182,7 +182,7 @@ class SetTLE():
             fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+f0+'--'+f1+'/NORAD_CAT_ID/'+self.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
             r = s.get(fquery1)
             if r.text !='' and r.status_code == 200:
-                print 'Se ha generado el archivo= ', self.archivo
+                pass #print 'Se ha generado el archivo= ', self.archivo
             else:
                 print 'No pudo completarse la solicitud'
             

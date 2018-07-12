@@ -36,8 +36,8 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
     set_deb.divide_setTLE()
     
     tles=glob.glob('../TleAdmin/tle/*')
-    print "=============================================="
-    print "Cantidad de TLE: ", len(tles)
+#     print "=============================================="
+#     print "Cantidad de TLE: ", len(tles)
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)        
     

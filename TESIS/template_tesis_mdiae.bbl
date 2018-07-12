@@ -1,10 +1,21 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\astroncite{{Akella} and {Alfriend}}{2000}]{akellaAlfriend}
+{Akella}, M.~R. and {Alfriend}, K.~T. (2000).
+\newblock {Probability of Collision Between Space Objects}.
+\newblock {\em Journal of Guidance Control Dynamics}, 23:769--772.
+
 \bibitem[\protect\astroncite{Alfano}{2007}]{alfano2007review}
 Alfano, S. (2007).
 \newblock Review of conjunction probability methods for short-term encounters
   (aas 07-148).
 \newblock {\em Advances in the Astronautical Sciences}, 127(1):719.
+
+\bibitem[\protect\astroncite{Alfano}{2008}]{alfano2008method}
+Alfano, S. (2008).
+\newblock Method for determining maximum conjunction probability of
+  rectangular-shaped objects.
+\newblock US Patent 7,383,153.
 
 \bibitem[\protect\astroncite{{Analytical Graphics, Inc.}}{2016}]{stk}
 {Analytical Graphics, Inc.} (2016).
