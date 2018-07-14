@@ -46,7 +46,7 @@ class Posicion:
 
 class Encuentro():
     
-    def __init__(self,tle_sat,tle_deb,tca,hr,n):
+    def __init__(self,tle_sat,tle_deb,tca,hr):
         """
         Calcula las diferencias en posiciones y velocidades 
         para dos objetos en situacion de acercamiento, durante un 
@@ -76,12 +76,16 @@ class Encuentro():
         
         self.tle_sat=tle_sat
         self.tle_deb=tle_deb
-        print 'Fecha del TLE del Satelite: ', self.tle_sat.epoca()
-        print 'Fecha del TLE del Desecho: ',self.tle_deb.epoca()
-        self.tca=tca  
-        self.ndias_prev=n     
+#         print 'Fecha del TLE del Satelite: ', self.tle_sat.epoca()
+#         print 'Fecha del TLE del Desecho: ',self.tle_deb.epoca()
+        self.tca=tca      
         self.hit_rad=hr 
-        self.matriz_combinada=None
+        self.ma_sat_RTN_tca=None
+        self.ma_deb_RTN_tca=None
+        self.ndias_prev_sat=abs(int((self.tle_sat.epoca()-self.tca).total_seconds()/86400))
+        self.ndias_prev_deb=abs(int((self.tle_deb.epoca()-self.tca).total_seconds()/86400))
+#         print 'Delta Dias satelite: ',self.ndias_prev_sat
+#         print 'Delta Dias Desecho: ',self.ndias_prev_deb
         """
         Genera Archivos
         """
@@ -91,11 +95,6 @@ class Encuentro():
         salida1=open('../Encuentro/archivos/'+str(self.sat_id),'w+')
         salida2=open('../Encuentro/archivos/'+str(self.deb_id),'w+')
         salida3=open(self.archivo_dif,'w+')
-        # Se calcula la cantidad de dias entre TLE y tca
-        self.ndias_prev_sat=abs(int((self.tle_sat.epoca()-self.tca).total_seconds()/86400))
-        self.ndias_prev_deb=abs(int((self.tle_deb.epoca()-self.tca).total_seconds()/86400))
-        print 'Delta Dias satelite: ',abs((self.tle_sat.epoca()-self.tca).total_seconds()/86400.0)
-        print 'Delta Dias satelite: ',abs((self.tle_deb.epoca()-self.tca).total_seconds()/86400)
         
         """
         Calcula las diferencias relativas entre los dos 
@@ -164,10 +163,6 @@ class Encuentro():
             self.r_comp=self.DistRic_min[0]
             self.s_comp=self.DistRic_min[1]
             self.w_comp=self.DistRic_min[2]
-    
-            #Calculo el angulo entre los vectores velocidad.
-            cos_phi=np.dot(self.vel_sat_tca,self.vel_deb_tca)/(np.sqrt(np.dot(self.vel_sat_tca,self.vel_sat_tca))*np.sqrt(np.dot(self.vel_deb_tca,self.vel_deb_tca)))
-            self.phi=np.arccos(cos_phi)
             # Transformo a Coordenadas Geodesicas.
             delta1, alpha1=self.pos1.getCoordenadasGEOD()
             delta2, alpha2=self.pos2.getCoordenadasGEOD()
@@ -187,140 +182,79 @@ class Encuentro():
         radius2=1.0 # [m]        
         return radius1,  radius2    
     
-    def calculaMacombinada(self):
-        """
-        1 - Calculo la matriz del desecho x OSW.
-        2 - Calculo la matriz de la mision x OSW (con TLEs).
-        3 - Corrijo ambas matrices por tabla de Marce al TCA - n dias adelante.
-        4 - Calculo la matriz combinada, suma de las matrices anteriores.
-        --------------------------------------------------------------        
-        """
-        #=============================================================
-        # Cargo valores para corregir matrices por tabla de Marce
-        # al TCA, n dias adelante.
-        #=============================================================
-        var_tab_r_deb=tabla[self.ndias_prev_deb][0]
-        var_tab_t_deb=tabla[self.ndias_prev_deb][1]
-        var_tab_c_deb=tabla[self.ndias_prev_deb][2]
-        
-        #=============================================================
-        # MATRIZ DEL DESECHO 
-        #=============================================================
-        deb_id=self.tle_deb.catID()
-        ini_set_deb=self.tle_deb.epoca()-timedelta(days=15)
-        fin_set_deb=self.tle_deb.epoca()
-        archivo=deb_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
-        nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(deb_id,ini_set_deb,fin_set_deb,archivo)
-        maCovar_deb, ma_archivo=EjecutaMaCovar(nombre_archivo)
-#         maCovar_deb=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]]) # SOCRATES VALUES
-#         var_r=0.1*0.1
-#         var_t=0.3*0.3
-#         var_n=0.1*0.1
-        maCovar_deb[0][0]=maCovar_deb[0][0]+var_tab_r_deb
-        maCovar_deb[1][1]=maCovar_deb[1][1]+var_tab_t_deb
-        maCovar_deb[2][2]=maCovar_deb[2][2]+var_tab_c_deb
-        
-        # Transformacion al sistema inercial
-        maT_teme2ric_deb=ric_matrix(self.r1_tca,self.v1_tca)
-        R2_eci=maT_teme2ric_deb.transpose()
-        a_x=[]
-        a_y=[]
-        a_z=[]
-        for i in range(3):
-            a_x.append(maCovar_deb[0][i])
-            a_y.append(maCovar_deb[1][i])
-            a_z.append(maCovar_deb[2][i])
-        maCovar_deb=np.array([a_x,a_y,a_z])
-        C2_eci=np.dot(R2_eci.transpose(),np.dot(maCovar_deb[:3],R2_eci))
-#         
-#         print '*******************************************************'
-#         print '-----------------Varianzas DESECHO---------------------'
-#         print '*******************************************************'
-#         print 'Var en R = ', var_r 
-#         print 'Var en T = ', var_t
-#         print 'Var en N = ', var_n
-#         print '*******************************************************'
-#         print '-----------------Ma. Desecho---------------------------'
-#         print '*******************************************************'
-#         for k in maCovar_deb[:3]:
-#             print k[:3]
-        #=============================================================
-        # Cargo valores para corregir matrices por tabla de Marce
-        # al TCA, n dias adelante.
-        #=============================================================
+    """Operaciones con Matrices"""
+    
+    def genera_maOSW_RTN(self,obj_id,epoch):
+        """Ejecuta Osweiler para calcular la matriz de covarianza"""
+        ini_set_deb=epoch-timedelta(days=15)
+        archivo=obj_id+'_'+datetime.strftime(ini_set_deb,'%Y%m%d')+'.crudo'    
+        nombre_archivo,var_r,var_t,var_n=calcula_matriz_Tles(obj_id,ini_set_deb,epoch,archivo)
+        maCovar, ma_archivo=EjecutaMaCovar(nombre_archivo)
+        return maCovar
+    
+    def suma_prop_errores(self,ma_sat_RTN,ma_deb_RTN):
+        """Se calcula la cantidad de dias entre la epoca del TLE y el tca"""
+        # propagacion de errores de la matriz de mision
         var_tab_r_sat=tabla[self.ndias_prev_sat][0]
         var_tab_t_sat=tabla[self.ndias_prev_sat][1]
         var_tab_c_sat=tabla[self.ndias_prev_sat][2]
-        #=============================================================    
-        # 2 - MATRIZ DE LA MISION 
-        #=============================================================
-        sat_id=self.tle_sat.catID()
-        ini_set_sat=self.tle_sat.epoca()-timedelta(days=15)
-        fin_set_sat=self.tle_sat.epoca()
-        archivo_sat=sat_id+'_'+datetime.strftime(ini_set_sat,'%Y%m%d')+'.crudo'    
-        nombre_archivo_sat,var_r_sat,var_t_sat,var_n_sat=calcula_matriz_Tles(sat_id,ini_set_sat,fin_set_sat,archivo_sat)
-        maCovar_sat, ma_archivo_sat=EjecutaMaCovar(nombre_archivo_sat)
-#         maCovar_sat=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
-#         var_r_sat=0.1*0.1
-#         var_t_sat=0.3*0.3
-#         var_n_sat=0.1*0.1
-        maCovar_sat[0][0]=maCovar_sat[0][0]+var_tab_r_sat
-        maCovar_sat[1][1]=maCovar_sat[1][1]+var_tab_t_sat
-        maCovar_sat[2][2]=maCovar_sat[2][2]+var_tab_c_sat
+        ma_sat_prop_tca=ma_sat_RTN
+        ma_sat_prop_tca[0][0]=ma_sat_RTN[0][0]+var_tab_r_sat
+        ma_sat_prop_tca[1][1]=ma_sat_RTN[1][1]+var_tab_t_sat
+        ma_sat_prop_tca[2][2]=ma_sat_RTN[2][2]+var_tab_c_sat       
+        # propagacion de errores de la matriz del desecho
+        var_tab_r_deb=tabla[self.ndias_prev_deb][0]
+        var_tab_t_deb=tabla[self.ndias_prev_deb][1]
+        var_tab_c_deb=tabla[self.ndias_prev_deb][2]
+        ma_deb_prop_tca=ma_deb_RTN
+        ma_deb_prop_tca[0][0]=ma_deb_RTN[0][0]+var_tab_r_deb
+        ma_deb_prop_tca[1][1]=ma_deb_RTN[1][1]+var_tab_t_deb
+        ma_deb_prop_tca[2][2]=ma_deb_RTN[2][2]+var_tab_c_deb      
+        return ma_sat_prop_tca, ma_deb_prop_tca
+    
+    def maT_rtn_eci(self,r,v,ma_RTN):
         # Transformacion al sistema inercial
-        maT_teme2ric_sat=ric_matrix(self.r_tca,self.v_tca)
+        maT_teme2ric_sat=ric_matrix(r,v)
         R1_eci=maT_teme2ric_sat.transpose()
         a_x=[]
         a_y=[]
         a_z=[]
         for i in range(3):
-            a_x.append(maCovar_sat[0][i])
-            a_y.append(maCovar_sat[1][i])
-            a_z.append(maCovar_sat[2][i])
-        maCovar_sat=np.array([a_x,a_y,a_z])
-                    
-        C1_eci=np.dot(R1_eci.transpose(),np.dot(maCovar_sat,R1_eci))
-#         print '*********************************'
-#         print '---------Varianzas MISION--------'
-#         print '*********************************'
-#         print 'Var en R = ', var_r_sat
-#         print 'Var en T = ', var_t_sat
-#         print 'Var en N = ', var_n_sat
-#         print '*********************************'
-# #         print '----------Ma. MISION-------------'
-#         print '*********************************'
- #       for k in maCovar_sat[:3]:
- #           print k[:3]
-#   
-        #=============================================================
-        # 4 - Calculo la matriz combinada, suma de las matrices
-        # anteriores. En el sistema RTN.
-        #=============================================================    
-        #self.matriz_combinada=maCovar_sat+maCovar_deb
-        self.matriz_combinada=C1_eci+C2_eci
-        return self.matriz_combinada, C1_eci, C2_eci#maCovar_sat, maCovar_deb
+            a_x.append(ma_RTN[0][i])
+            a_y.append(ma_RTN[1][i])
+            a_z.append(ma_RTN[2][i])
+        ma_RTN=np.array([a_x,a_y,a_z])                   
+        ma_eci=np.dot(R1_eci.transpose(),np.dot(ma_RTN,R1_eci))
+        return ma_eci
+        
     
-    def proyecta_alplano_encuentro(self):
-    #============================================
-    # Calcula los errores combinados proyectados.
-    #============================================
-        self.calculaMacombinada()
+    """Proyecciones al Plano"""
+    
+    def proyecta_alplano_encuentro(self,sat_maOSW_RTN,deb_maOSW_RTN):
+        """Proyecta al plano de encuentro simplificado Lei-Chen"""
+        #self.calculaMacombinada()
+        #Calculo el angulo entre los vectores velocidad.
+        cos_phi=np.dot(self.vel_sat_tca,self.vel_deb_tca)/(np.sqrt(np.dot(self.vel_sat_tca,self.vel_sat_tca))*np.sqrt(np.dot(self.vel_deb_tca,self.vel_deb_tca)))
+        self.phi=np.arccos(cos_phi)
+        sigma2_R=sat_maOSW_RTN[0][0]+deb_maOSW_RTN[0][0]
+        sigma2_S=sat_maOSW_RTN[1][1]+deb_maOSW_RTN[1][1]
+        sigma2_W=sat_maOSW_RTN[2][2]+deb_maOSW_RTN[2][2]
         mu_x=self.r_comp
         mu_y=np.sqrt(self.s_comp*self.s_comp+self.w_comp*self.w_comp)
-        var_x=self.matriz_combinada[0][0]
-        var_y=self.matriz_combinada[1][1]*np.cos(self.phi/2.0)*np.cos(self.phi/2.0)+self.matriz_combinada[2][2]*np.sin(self.phi/2.0)*np.sin(self.phi/2.0)        
-        return mu_x,mu_y,var_x,var_y
+        sigma2_x=sigma2_R
+        sigma2_y=sigma2_S*np.cos(self.phi/2.0)*np.cos(self.phi/2.0)+sigma2_W*np.sin(self.phi/2.0)*np.sin(self.phi/2.0)        
+        return mu_x,mu_y,sigma2_x,sigma2_y
     
-    def _project_Klinkrad_Bplane(self):
+    def _project_Klinkrad_Bplane(self,C1,C2):
         "Returns covariance matrix and relative distance projected in B-plane"
-        self.matriz_combinada, C1_eci, C2_eci=self.calculaMacombinada()
+        ma_combinada_klinkrad=C1+C2
         r_relative_module=np.sqrt(np.dot(self.DistVector_min, self.DistVector_min))
         Xb=np.dot(1.0/ r_relative_module, self.DistVector_min)
         r_rel_x_v_rel=np.cross(self.DistVector_min, self.VelVector_min)
         r_rel_x_v_rel_mod=np.sqrt(np.dot(r_rel_x_v_rel,r_rel_x_v_rel))
         Yb=np.dot(1.0/r_rel_x_v_rel_mod, r_rel_x_v_rel)
         R_xy=np.array([Xb, Yb])
-        C_B = np.dot(R_xy, (np.dot(self.matriz_combinada, R_xy.transpose())))
+        C_B = np.dot(R_xy, (np.dot(ma_combinada_klinkrad, R_xy.transpose())))
         r_relative_B = np.dot(R_xy, self.DistVector_min.transpose())
         return  C_B,  r_relative_B 
     
@@ -343,12 +277,17 @@ class Encuentro():
         return [-np.sqrt(ra*ra-y*y), np.sqrt(ra*ra-y*y)]
     
     """ Calculos de PoC """
+        
     def calculaPoC_circ(self):
-        mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro()
+        """PoC - Metodo simplificado de Lei-Chen"""
+        sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
+        deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
+        #PROPAGACION DE ERRORES
+        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+        mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
         pocVsra=open('../Validaciones/pocvsra.txt','w')
         ra=self.hit_rad
         PoC=np.exp((-1.0/2.0)*((mu_x*mu_x/var_x)+(mu_y*mu_y/var_y)))*(1-np.exp(-ra*ra/(2.0*np.sqrt(var_x)*np.sqrt(var_y))))
-        PoC_int=PoC_int=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/(var_x))+(y*y/(var_y)))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
         pocVsra.write(str(ra)+' '+str(PoC)+'\n')
 #         ra=0.001
 #         while ra<0.03:
@@ -357,24 +296,29 @@ class Encuentro():
 #             pocVsra.write(str(ra)+' '+str(PoC)+'\n')
 #             ra=ra+0.0003  
         print 'POC explicita de CHAN =%e ' % PoC 
-        print 'PoC integral =%e ' %  PoC_int[0] 
-        #===============
-        # POC limit
-        #================
-        erre=ra/self.mod_minDist
-        if erre < 0.8:
-            PoC_limit=0.48394*erre
-        else:
-            PoC_limit=0.21329*np.exp(1.01511*erre)-0.09025
-        print 'PoC limit = %e ' %  PoC_limit        
-        #==================
-        # POC max Klinkrad
-        #==================         
-        #PoC_maxima(self,  C_GCRF,  r_relative_GCRF):
-        """ Klinkrad expression based on the most adverse posible configuration """
+#         #===============
+#         # POC limit
+#         #================
+#         erre=ra/self.mod_minDist
+#         if erre < 0.8:
+#             PoC_limit=0.48394*erre
+#         else:
+#             PoC_limit=0.21329*np.exp(1.01511*erre)-0.09025
+#         print 'PoC limit = %e ' %  PoC_limit 
+#         return PoC       
+       
+    def calculaPoC_klinkrad(self):
+        """ Klinkrad expression based on the most adverse possible configuration """
         radius_obj1,  radius_obj2=self._get_radius()
         r_c=radius_obj1/1000.0+radius_obj2/1000.0
-        C_B,  r_relative_B=self._project_Klinkrad_Bplane()
+        # Generacion, propagacion y transformaciones de la matriz de covarianzas
+        sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
+        deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
+        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+        ma_sat_eci=maT_rtn2eci(self.r_tca,self.v_tca,self.ma_sat_RTN_tca)
+        ma_deb_eci=maT_rtn2eci(self.r1_tca,self.v_tca,self.ma_deb_RTN_tca)
+        # Proyeccion al plano
+        C_B,  r_relative_B=self._project_Klinkrad_Bplane(ma_sat_eci,ma_deb_eci)
         vector_product=np.dot(r_relative_B.transpose(), np.dot(inv(C_B),r_relative_B))
         det=np.linalg.det(C_B)
         if det < 0:
@@ -382,54 +326,54 @@ class Encuentro():
             raise myError
         poc_max=r_c*r_c/(np.exp(1.0)*np.sqrt(det)*vector_product)
         print 'PoC max KLINKRAD =%e ' %  poc_max         
-        #================
-        # POC 1D
-        #================
-        #sigma_r=np.sqrt(0.1*0.1+0.3*0.3+0.1*0.1)
-        C, C1_eci, C2_eci=self.calculaMacombinada()
-        sigma_r=np.sqrt(C[0][0]+C[1][1]+C[2][2])
-        coef=1.0/(np.sqrt(2*np.pi)* sigma_r)
-        result = integrate.quad(lambda r:np.exp(-(r-self.mod_minDist)*(r-self.mod_minDist)/(2*sigma_r)) , -ra,ra)
-        print 'PoC 1D = ', coef*result[0]                     
-        #================
-        # POC AKELLA
-        #================
-        """
-        * C matrix generation (b-plane)
-        * T and T* generation
-        *   P* generation
-        """
-        # Construyo R_B: transformation matrix to B-plane
-        v_relative_module=np.sqrt(np.dot(self.VelVector_min,self.VelVector_min))
-        i_ax=np.dot(1.0/v_relative_module, self.VelVector_min)
-        v1_ak=self.v_tca
-        v2_ak=self.v1_tca
-        v2xv1=np.cross(v2_ak, v1_ak)
-        v2xv1_mod=np.sqrt(np.dot(v2xv1, v2xv1))
-        j_ax=np.dot(1.0/v2xv1_mod, v2xv1)
-        k_ax=np.cross(i_ax, j_ax)
-        R_B=np.array([i_ax, j_ax, k_ax])
-        #  t* and t
-        t_star=np.array([[0,1,0],[0,0,1]])
-        R_B0=np.concatenate((-R_B,R_B),axis=1)
-        t=np.dot(t_star, R_B0)
-        # p* covariances matrices
-        z=(3, 3)
-        z=np.zeros(z)
-        self.matriz_combinada, C1_eci, C2_eci=self.calculaMacombinada()
-        p_star0=np.concatenate((C1_eci, z), axis=0)
-        p_star1=np.concatenate((z, C2_eci), axis=0)
-        p_star2=np.concatenate((p_star0,p_star1),axis=1)
-        p_star=np.dot(t,np.dot(p_star2,t.transpose()))
-        # PoC integral partial calculus
-        rho_0=self.DistVector_min
-        #rho_0_star=np.dot(t_star, np.dot(R_B, rho_0.transpose()))
-        # PoC 
-        radius_obj1,  radius_obj2=self._get_radius()
-        r_c=radius_obj1/1000.0+radius_obj2/1000.0
-        coeff=1.0/(2*np.pi*np.sqrt(np.linalg.det(p_star)))
-        poc_integral,  err= nquad(self.f, [self.bounds_z, self.bounds_y], args=(rho_0, R_B, p_star, r_c)) # double integrals 
-        poc_ak = coeff*poc_integral
-        print 'PoC Akella =%e ' %  poc_ak
-        return PoC, PoC_int[0]
+#         #================
+#         # POC 1D
+#         #================
+#         #sigma_r=np.sqrt(0.1*0.1+0.3*0.3+0.1*0.1)
+#         C, C1_eci, C2_eci=self.calculaMacombinada()
+#         sigma_r=np.sqrt(C[0][0]+C[1][1]+C[2][2])
+#         coef=1.0/(np.sqrt(2*np.pi)* sigma_r)
+#         result = integrate.quad(lambda r:np.exp(-(r-self.mod_minDist)*(r-self.mod_minDist)/(2*sigma_r)) , -ra,ra)
+#         print 'PoC 1D = ', coef*result[0]                     
+#         #================
+#         # POC AKELLA
+#         #================
+#         """
+#         * C matrix generation (b-plane)
+#         * T and T* generation
+#         *   P* generation
+#         """
+#         # Construyo R_B: transformation matrix to B-plane
+#         v_relative_module=np.sqrt(np.dot(self.VelVector_min,self.VelVector_min))
+#         i_ax=np.dot(1.0/v_relative_module, self.VelVector_min)
+#         v1_ak=self.v_tca
+#         v2_ak=self.v1_tca
+#         v2xv1=np.cross(v2_ak, v1_ak)
+#         v2xv1_mod=np.sqrt(np.dot(v2xv1, v2xv1))
+#         j_ax=np.dot(1.0/v2xv1_mod, v2xv1)
+#         k_ax=np.cross(i_ax, j_ax)
+#         R_B=np.array([i_ax, j_ax, k_ax])
+#         #  t* and t
+#         t_star=np.array([[0,1,0],[0,0,1]])
+#         R_B0=np.concatenate((-R_B,R_B),axis=1)
+#         t=np.dot(t_star, R_B0)
+#         # p* covariances matrices
+#         z=(3, 3)
+#         z=np.zeros(z)
+#         self.matriz_combinada, C1_eci, C2_eci=self.calculaMacombinada()
+#         p_star0=np.concatenate((C1_eci, z), axis=0)
+#         p_star1=np.concatenate((z, C2_eci), axis=0)
+#         p_star2=np.concatenate((p_star0,p_star1),axis=1)
+#         p_star=np.dot(t,np.dot(p_star2,t.transpose()))
+#         # PoC integral partial calculus
+#         rho_0=self.DistVector_min
+#         #rho_0_star=np.dot(t_star, np.dot(R_B, rho_0.transpose()))
+#         # PoC 
+#         radius_obj1,  radius_obj2=self._get_radius()
+#         r_c=radius_obj1/1000.0+radius_obj2/1000.0
+#         coeff=1.0/(2*np.pi*np.sqrt(np.linalg.det(p_star)))
+#         poc_integral,  err= nquad(self.f, [self.bounds_z, self.bounds_y], args=(rho_0, R_B, p_star, r_c)) # double integrals 
+#         poc_ak = coeff*poc_integral
+#         print 'PoC Akella =%e ' %  poc_ak
+        
     

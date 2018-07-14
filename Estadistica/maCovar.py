@@ -95,9 +95,10 @@ def maCovTLE(u, v, w, uv, vv, wv):
 
 
 def EjecutaMaCovar(archivo):
-#     files=glob.glob('../main/matrices/*')
-#     for filename in files:
-#         os.unlink(filename)
+    files=os.listdir('../main/matrices/')
+    for name in files:
+        if name.endswith('.csv'):
+            os.remove('../main/matrices/'+name)
 #    datoTipo=raw_input()
     u=[]
     v=[]

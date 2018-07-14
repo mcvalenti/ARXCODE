@@ -45,4 +45,4 @@ fila6=[0.01566073584,0.3999363404,0.1961215052]
 
 
 
-tabla=np.array([fila0,fila1,fila2,fila3])
+tabla=np.array([fila0,fila1,fila2,fila3,fila4,fila5,fila6])

@@ -620,13 +620,14 @@ class ProcEncuentro(QWidget):
         """
         Propagacion hasta el Encuentro
         """
-        self.n=3
         self.hit_rad=float(self.le_hitradio.text())
-        encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.hit_rad,self.n)
+        encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.hit_rad)
         self.min_dist= encuentro1.mod_minDist
         self.tca_calc= encuentro1.tca_c
-        self.ma_comb, self.maCovar_sat, self.maCovar_deb= encuentro1.calculaMacombinada()
-        self.poc_arx, self.poc_int=encuentro1.calculaPoC_circ()
+        #self.ma_comb, self.maCovar_sat, self.maCovar_deb= encuentro1.calculaMacombinada() # ! Ojo!! devuelve siempre lo mismo!
+        self.poc_arx=encuentro1.calculaPoC_circ()
+        self.maCovar_sat=encuentro1.ma_sat_RTN_tca
+        self.maCovar_deb=encuentro1.ma_deb_RTN_tca
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(str(round(self.min_dist,6))))
         self.tableEncuentro.setItem(0,2, QTableWidgetItem(str(round(self.poc_arx,8))))

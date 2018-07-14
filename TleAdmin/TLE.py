@@ -174,7 +174,7 @@ class SetTLE():
             sincero=[str(sincero[0]),str(sincero[1]),str(sincero[2]),str(sincero[3])]
             f0=str(self.tca0.year)+'-'+sincero[0]+'-'+sincero[2]
             f1=str(self.tca1.year)+'-'+sincero[1]+'-'+sincero[3]
-            print f0, f1
+    #        print f0, f1
     #        data = self.ConsultaAutentica()
             data = {'identity': usuario , 'password': clave}
             s=session() 

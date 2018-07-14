@@ -13,9 +13,9 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
     """
     Metodo de Osweiler.
     Dado un objeto y un intervalo temporal.
-    Ejecuta el metodo de Osweiler de pair-wisse para comparar las 
+    Ejecuta el metodo de Osweiler de pair-wise para comparar las 
     propagaciones de cada TLE a la epoca del ultimo TLE del set,
-     y generar el archivo de    diferencias.
+     y generar el archivo de diferencias.
     ------------------------------------------------------------------
     inputs
         cat_id: identificador NORAD del objeto (String)
@@ -62,6 +62,7 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
         fsec=tle1.epoca()
 #        print '======================================='
 #        print 'Epoca del TLE: ',fsec
+#        print '=======================================
         pos,vel=tle1.propagaTLE(epoca_primario)
         pos=np.array([pos[0],pos[1],pos[2]])
         vel=np.array([vel[0],vel[1],vel[2]]) 
@@ -91,9 +92,6 @@ def calcula_matriz_Tles(cat_id,tca0,tca1,crudo):
     
     return nombre_archivo,var_r,var_t,var_n
 
-def calcula_matriz_mision():
-
-    pass
 
 def calcula_matriz_OSWcorregido(cat_id,tca0,tca1,crudo,diferencias):
     """
@@ -159,4 +157,3 @@ def calcula_matriz_OSWcorregido(cat_id,tca0,tca1,crudo,diferencias):
     var_n=np.var(dn)
     
     return nombre_archivo,var_r,var_t,var_n
-    pass

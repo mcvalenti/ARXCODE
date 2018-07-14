@@ -26,16 +26,30 @@ Para este planteo de definiciones, se cont\'o con el asesoramiento y el intercam
 
 \subsection{Plan de Desarrollo}
 
-Dado que el trabajo se realizaba en el contexto de la maestr\'ia en general y que las tareas y los cronogramas se modificaban frecuentemente, al principio se planific\'o una distribuci\'on horaria independiente de las fechas.
+Dado que el trabajo se realizaba en el contexto de la maestr\'ia en general y que las tareas y los cronogramas se modificaban frecuentemente, ajust\'andose al dictado de cursos y tareas del proyecto integrador que tambi\'en formaba parte del ciclo lectivo; al principio no era posible armar un cronograma fijo de las tareas. Se planific\'o una distribuci\'on horaria (Fig. \ref{fig:disths}) y una planificaci\'on general (Fig. \ref{fig:plan2016}) para los semestres I,III y IV del año 2016.
 
 \begin{figure}[h!]
   \centering
   \fbox{\includegraphics[width=0.7\textwidth]{imagenes/distribucionhs}}
   \caption{Planificaci\'on de la distribuci\'on del total de horas asignadas dentro de la maestr\'ia al desarrollo y la escritura del trabajo de tesis.}
-  \label{fig:actdiag}
+  \label{fig:disths}
 \end{figure}
 
-AGREGAR DIAGRAMA DE GANTT \\
+\begin{figure}[h!]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{imagenes/plan2016}}
+  \caption{Planificaci\'on de las tareas agrupadas por semestres para el año 2016}
+  \label{fig:plan2016}
+\end{figure}
+
+Ya a comienzos del año 2017 se contaba con un cronograma fijo que pautaba tres semanas por mes de dedicaci\'on exclusiva a la elaboraci\'on de la tesis. Eso permiti\'o realizar una planificaci\'on semanal (Fig. \ref{fig:plan2017}) de las tareas. 
+
+\begin{figure}[h!]
+  \centering
+  \fbox{\includegraphics[width=\textwidth]{imagenes/plan2017}}
+  \caption{Planificaci\'on de las tareas agrupadas por semanas para el año 2017}
+  \label{fig:plan2017}
+\end{figure}
 
 \section{Iteraci\'on}
 Ya conocido el planteo del problema, las distintas maneras de abordarlo y las restricciones, se elabor\'o un diseño preliminar del producto con sus requerimientos (Sec. \ref{sec:requerimientos}) y sus funcionalidades, que dadas las caracter\'isticas del problema result\'o bastante determinista.\\
@@ -60,39 +74,56 @@ Durante el diseño y el desarrollo de la interfaz, se fueron modificando mucho l
 
 \subsubsection*{Verificaci\'on}
 Se realizaron distintas pruebas de unidad y de integraci\'on.  
-Los distintos casos de prueba se diseñaban a partir extrayendo datos de prueba de la bibliograf\'ia recabada para cada una de las metodolog\'ias implementadas. As\'i, se ejecutaban las pruebas para los casos publicados y luego se comparaban los resultados. 
-ESQUEMA 1.\\
+Los distintos casos de prueba se diseñaban a partir de datos de prueba de la bibliograf\'ia recabada para cada una de las metodolog\'ias o sobre situaciones reales. Los resultados de la ejecución de las pruebas se comparaba luego con los valores de  los casos publicados \ref{fig:metodoprueba}. 
+
+\begin{figure}[h!]
+  \centering
+  \fbox{\includegraphics[width=0.7\textwidth]{imagenes/metodoprueba}}
+  \caption{Esquema de la metodología para realizar las pruebas de unidad sobre los módulos.}
+  \label{fig:metodoprueba}
+\end{figure}
 
 A medida que se desarrollaba un nuevo m\'odulo, se realizaban los casos de prueba para ese m\'odulo y una prueba de integraci\'on, que incorporaba todos los m\'odulos hasta el momento verificados.
 
-ESQUEMA 2.\\
-
-\paragraph*{TleAdmin, CDM}
+\paragraph*{TleAdmin y CDM}
 Dado que tanto los TLE como los CDM son los elementos fundamentales que dan inicio al an\'alisis de la probabilidad de colisi\'on, es fundamental tener un control sobre la correcta adquisici\'on de estos inputs. Sobre ellos se diseñaron pruebas funcionales. Se prueba siempre que los TLE de ambos objetos hayan sido adquiridos; si esto no fuera as\'i ya sea por complicaciones en la conexi\'on a internet, o porque los TLE para las fechas solicitadas no est\'an disponibles, el software interrumpe el proceso e indica a cu\'al de las situaciones se debe el problema. Mientras que para el caso de los CDM, el programa se interrumpe si el archivo ingresado no respeta el formato .xml capaz de procesar y anuncia un mensaje de alerta cuando el CDM a sido procesado pero no todos los campos de inter\'es se encuentran en \'el. 
 
-\paragraph*{Comparar, SistReferencia}
+\paragraph*{Comparar y SistReferencia}
 Las pruebas realizadas para garantizar los correctos procedimientos respecto de la propagaci\'on y las transformaciones de los sistemas de referencia fueron fundamentales, pero s\'olo se realizaron en las primeras etapas del desarrollo, ya que no dependen de cada ejecuci\'on en particular, sino de la correcta implementaci\'on de los algoritmos.  
 
 \paragraph*{Estad\'istica}
 Para verificar la correcta implementaci\'on del m\'etodo de Osweiler para la generaci\'on de las matrices de covarianza, se gener\'o un caso de prueba que permite comparar los resultados con los que se publican en el trabajo del autor. Dada la dependencia de este m\'odulo con el m\'odulo de administraci\'on de los TLE, es importante que esta prueba es naturalmente de integraci\'on y es muy importante que se realice frecuentemente. ! LA DIAGONAL DE LA MATRIZ DEBE SER POSITIVA. 
 
-\paragraph{Comparar, CodsAdmin}
-El procedimiento que se realiza para la generaci\'on de la matriz de propagacio\'on de errores involucra la utilizaci\'on de los datos de misi\'on (o Datos de CODS). Esta tarea fue realmente compleja y se realizaron varias ejecuciones de la prueba sobre la manipulaci\'on de estos datos, ya que los mismos muchas veces no respetaban un formato estandarizado por ejemplo sobre las fechas o conten\'ian intervalos sin datos significativos, etc. Estas verificaciones se realizaron una s\'ola vez hasta lograr que los datos resultaran ordenados dentro del per\'iodo de an\'alisis que se utiliz\'o para generar la matriz de propagaci\'on de errores. Por cuestiones de tiempo no se implement\'o una verifiaci\'on automatizada sobre estos inputs, lo que debe ser tenido en cuenta si se desean generar matrices de propagaci\'on de errores actualizadas o en forma din\'amica.  
+\paragraph*{Comparar y CodsAdmin}
+El procedimiento que se realiza para la generaci\'on de la matriz de propagaci\'on de errores involucra la utilizaci\'on de los datos de misi\'on (o Datos de CODS). Esta tarea fue realmente compleja y se realizaron varias ejecuciones de la prueba sobre la manipulaci\'on de estos datos, ya que los mismos muchas veces no respetaban un formato estandarizado por ejemplo sobre las fechas o conten\'ian intervalos sin datos significativos, etc. Estas verificaciones se realizaron una sola vez hasta lograr que los datos resultaran ordenados dentro del per\'iodo de an\'alisis que se utiliz\'o para generar la matriz de propagaci\'on de errores. Por cuestiones de tiempo no se implement\'o una verificaci\'on automatizada sobre estos inputs, lo que debe ser tenido en cuenta si se desean generar matrices de propagaci\'on de errores actualizadas o en forma din\'amica.  
 
-\paragraph{Encuentro}
+\paragraph*{Encuentro}
 Las pruebas realizada en el m\'odulo para la estimaci\'on de las probabilidades de colisi\'on tienen tambi\'en una fuerte dependencia del m\'odulo que gestiona los TLE, mientras que pueden configurarse o no para que la matriz de covarianza que utilizan sea generada por el m\'odulo de Osweiler o no. Salvo para el caso del m\'etodo de Lei-Chen, ya que en su trabajo existe un ejemplo que indica todos los par\'ametros que se utilizan en la ecuaci\'on final, y entonces se puede hacer una prueba s\'olo para esa unidad.
 
 \paragraph{Aplicaci\'on}
-En lo que respecta a la aplicaci\'on que nuclea y despliega la intefaz gr\'afica, se realizaron inspecciones para depurar la correcta inicializaci\'on de variables y el flujo de las distintas vistas. 
+En lo que respecta a la aplicaci\'on que nuclea y despliega la interfaz gr\'afica, se realizaron inspecciones para depurar la correcta inicializaci\'on de variables y el flujo de las distintas vistas. 
 
 
-ESQUEMA FINAL\\
+\begin{figure}[!h]
+\begin{minipage}[t]{0.48\textwidth}
+ \centering
+ \fbox{\includegraphics[width=0.9\textwidth]{imagenes/pruebasCods}}
+ \caption[Casos de Prueba I]{Casos de prueba para los módulos que interactúan con los datos de Misión.}
+ \label{fig:pruebaCods}
+\end{minipage}
+\begin{minipage}[t]{0.48\textwidth}
+ \centering
+ \fbox{\includegraphics[width=0.9\textwidth]{imagenes/pruebasEncuentro}}
+ \caption[Casos de Prueba II]{Casos de prueba del bloque completo, desde los inputs hasta el cálculo de la PoC.}
+ \label{fig:pruebaEncuentro}
+\end{minipage}
+\end{figure}
 
-\subsubsection{Validaci\'on}
+\subsubsection*{Validaci\'on}
 
-Al tratarse de un sistema que implementa distintas metodolog\'ias para el c\'alculo de par\'ametros, el control m\'as exhaustivo se bas\'o en analizar que los resultados de los algoritmos implementados fueran coherentes y coincidieran con los que exist\'ian en publicaciones bibliogr\'aficas o situaciones reales que se pod\'ian reproducir. 
+Al tratarse de un sistema que implementa distintas metodolog\'ias para el c\'alculo de par\'ametros, el control m\'as exhaustivo se bas\'o en analizar que los resultados de los algoritmos implementados fueran coherentes y coincidieran con los que exist\'ian en publicaciones bibliogr\'aficas o situaciones reales que se pod\'ian reproducir. \\
 
-
+En conclusi\'on se han realizado distintas pruebas e inspecciones, pero no pruebas exhaustivas.
 Un desarrollo detallado de los resultados de las pruebas y validaciones se describe en la Sec. \ref{chap:resultados}\\
 
 \subsection{Gesti\'on de la Configuraci\'on}

@@ -28,42 +28,47 @@
 \contentsline {figure}{\numberline {2.14}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{47}{figure.caption.77}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Planificaci\'on de la distribuci\'on del total de horas asignadas dentro de la maestr\'ia al desarrollo y la escritura del trabajo de tesis.\relax }}{49}{figure.caption.78}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Planificaci\'on de las tareas agrupadas por semestres para el a\IeC {\~n}o 2016\relax }}{50}{figure.caption.79}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Planificaci\'on de las tareas agrupadas por semanas para el a\IeC {\~n}o 2017\relax }}{50}{figure.caption.80}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Esquema de la metodolog\IeC {\'\i }a para realizar las pruebas de unidad sobre los m\IeC {\'o}dulos.\relax }}{52}{figure.caption.82}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Casos de Prueba I}}{53}{figure.caption.89}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Casos de Prueba II}}{53}{figure.caption.89}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Interfaces del Sistema}}{57}{figure.caption.92}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{58}{figure.caption.93}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Casos de Uso de ARxCODE\relax }}{59}{figure.caption.94}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Componentes de ARxCODE\relax }}{60}{figure.caption.97}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Clases Tle y setTLE}}{61}{figure.caption.99}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{61}{figure.caption.99}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{61}{figure.caption.99}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Clases CDM y EphemCODS}}{62}{figure.caption.103}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{62}{figure.caption.103}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{62}{figure.caption.103}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Clase Encuentro}}{63}{figure.caption.108}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{65}{figure.caption.115}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Impresi\'on de la pantalla de inicio del ARxCODE\relax }}{66}{figure.caption.117}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE.\relax }}{66}{figure.caption.118}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE\relax }}{67}{figure.caption.119}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Vista con la carga del procesamiento manual.\relax }}{67}{figure.caption.120}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Vista con los resultados publicados y la incorporaci\'on de las trayectorias.\relax }}{68}{figure.caption.121}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama de Interfaces del Sistema}}{58}{figure.caption.97}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{59}{figure.caption.98}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Casos de Uso de ARxCODE\relax }}{60}{figure.caption.99}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Componentes de ARxCODE\relax }}{61}{figure.caption.102}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Clases Tle y setTLE}}{62}{figure.caption.104}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{62}{figure.caption.104}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{62}{figure.caption.104}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Clases CDM y EphemCODS}}{63}{figure.caption.108}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{63}{figure.caption.108}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{63}{figure.caption.108}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Clase Encuentro}}{64}{figure.caption.113}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{66}{figure.caption.120}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Impresi\'on de la pantalla de inicio del ARxCODE\relax }}{67}{figure.caption.122}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Impresi\'on de la pantalla de Procesamiento de CDM del ARxCODE.\relax }}{67}{figure.caption.123}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Impresi\'on de la pantalla del ingreso manual de datos del ARxCODE\relax }}{68}{figure.caption.124}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Vista con la carga del procesamiento manual.\relax }}{68}{figure.caption.125}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Vista con los resultados publicados y la incorporaci\'on de las trayectorias.\relax }}{69}{figure.caption.126}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquematizaci\'on del algoritmo para comparar la propagaci\'on de cada TLE del set hacia fechas futuras de los TLE del set. Extra\'ido del trabajo de Osweiler, \citep {osweiler}\relax }}{72}{figure.caption.132}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{73}{figure.caption.133}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{73}{figure.caption.133}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler, \citep {osweiler}}}}{73}{figure.caption.133}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{73}{figure.caption.134}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{73}{figure.caption.134}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler, \citep {osweiler}}}}{73}{figure.caption.134}
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{75}{figure.caption.138}
-\contentsline {figure}{\numberline {5.5}{\ignorespaces {\it {Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 01 de Enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de Flohrer et al., \citep {flohrer2008assessment}\relax }}{76}{figure.caption.141}
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Contenido de los correos electr\'onicos utilizados para comparar los resultados.\relax }}{79}{figure.caption.148}
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Tabla con las matrices de covarianza calculadas por ARxCODE (m\'etodo de Osweiler) para la misi\'on y el desecho. Se resaltan los valores que con errores grandes\relax }}{81}{figure.caption.152}
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{81}{figure.caption.154}
-\contentsline {figure}{\numberline {5.9}{\ignorespaces An\'alisis de la PoC en funci\'on del radio de colisi\'on. La l\'inea roja indica el valor de la PoC calculada por Klinkrad \citep {Klinkrad} y el c\'irculo se\~nala el cruce con el radio $r_{a}$ correspondiente. La l\'inea verde indica la PoC calculada por ARxCODE para un $r_{a}=0.01$ km. (Escenario 1)\relax }}{84}{figure.caption.162}
-\contentsline {figure}{\numberline {5.10}{\ignorespaces An\'alisis de la PoC en funci\'on del radio de colisi\'on. La l\'inea roja indica el valor de la PoC calculada por Klinkrad \citep {Klinkrad} y el c\'irculo se\~nala el cruce con el radio $r_{a}$ correspondiente. La l\'inea verde indica la PoC calculada por ARxCODE para un $r_{a}=0.01$ km. (Escenario 2)\relax }}{85}{figure.caption.163}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquematizaci\'on del algoritmo para comparar la propagaci\'on de cada TLE del set hacia fechas futuras de los TLE del set. Extra\'ido del trabajo de Osweiler, \citep {osweiler}\relax }}{73}{figure.caption.137}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{74}{figure.caption.138}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{74}{figure.caption.138}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler, \citep {osweiler}}}}{74}{figure.caption.138}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{74}{figure.caption.139}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{74}{figure.caption.139}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler, \citep {osweiler}}}}{74}{figure.caption.139}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{76}{figure.caption.143}
+\contentsline {figure}{\numberline {5.5}{\ignorespaces {\it {Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 01 de Enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de Flohrer et al., \citep {flohrer2008assessment}\relax }}{77}{figure.caption.146}
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Contenido de los correos electr\'onicos utilizados para comparar los resultados.\relax }}{80}{figure.caption.153}
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Tabla con las matrices de covarianza calculadas por ARxCODE (m\'etodo de Osweiler) para la misi\'on y el desecho. Se resaltan los valores que con errores grandes\relax }}{82}{figure.caption.157}
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{82}{figure.caption.159}
+\contentsline {figure}{\numberline {5.9}{\ignorespaces An\'alisis de la PoC en funci\'on del radio de colisi\'on. La l\'inea roja indica el valor de la PoC calculada por Klinkrad \citep {Klinkrad} y el c\'irculo se\~nala el cruce con el radio $r_{a}$ correspondiente. La l\'inea verde indica la PoC calculada por ARxCODE para un $r_{a}=0.01$ km. (Escenario 1)\relax }}{85}{figure.caption.167}
+\contentsline {figure}{\numberline {5.10}{\ignorespaces An\'alisis de la PoC en funci\'on del radio de colisi\'on. La l\'inea roja indica el valor de la PoC calculada por Klinkrad \citep {Klinkrad} y el c\'irculo se\~nala el cruce con el radio $r_{a}$ correspondiente. La l\'inea verde indica la PoC calculada por ARxCODE para un $r_{a}=0.01$ km. (Escenario 2)\relax }}{86}{figure.caption.168}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{97}{figure.caption.166}
-\contentsline {figure}{\numberline {7.2}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{97}{figure.caption.167}
-\contentsline {figure}{\numberline {7.3}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{98}{figure.caption.168}
-\contentsline {figure}{\numberline {7.4}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{98}{figure.caption.169}
+\contentsline {figure}{\numberline {7.1}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{98}{figure.caption.171}
+\contentsline {figure}{\numberline {7.2}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{98}{figure.caption.172}
+\contentsline {figure}{\numberline {7.3}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{99}{figure.caption.173}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{99}{figure.caption.174}
