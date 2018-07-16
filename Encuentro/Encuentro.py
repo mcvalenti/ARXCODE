@@ -280,10 +280,20 @@ class Encuentro():
         
     def calculaPoC_circ(self):
         """PoC - Metodo simplificado de Lei-Chen"""
-        sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
-        deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
-        #PROPAGACION DE ERRORES
-        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+        #=======================================================================
+        # Generacion, propagacion y transformaciones de la matriz de covarianzas
+        #=======================================================================
+        # OSWEILER
+#         sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
+#         deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
+#         # Propagacion de errores.
+#         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+        #------------------------------------------------------------------------
+        # SOCRATES
+        sat_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        deb_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        # Propagacion de errores.
+        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maSOC_RTN, deb_maSOC_RTN)
         mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
         pocVsra=open('../Validaciones/pocvsra.txt','w')
         ra=self.hit_rad
@@ -305,13 +315,16 @@ class Encuentro():
 #         else:
 #             PoC_limit=0.21329*np.exp(1.01511*erre)-0.09025
 #         print 'PoC limit = %e ' %  PoC_limit 
-#         return PoC       
+        return PoC       
        
     def calculaPoC_klinkrad(self):
         """ Klinkrad expression based on the most adverse possible configuration """
         radius_obj1,  radius_obj2=self._get_radius()
         r_c=radius_obj1/1000.0+radius_obj2/1000.0
+        #=======================================================================
         # Generacion, propagacion y transformaciones de la matriz de covarianzas
+        #=======================================================================
+        # OSWEILER
         sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
         deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)

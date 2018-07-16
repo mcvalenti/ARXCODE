@@ -311,16 +311,16 @@ De la Tabla \ref{tab:resultatabla0} se extrae que la componente T es la que mayo
 
 \section{La probabilidad de colisi\'on}\label{sec:probcol}
 
-Como ya se ha mencionado, adem\'as de estimar la distancia entre los objetos, en los distintos procedimientos de otras agencias u organismos espaciales se incluye la PoC como uno de los par\'ametros m\'as importantes para el estudio de las situaciones de riesgo y la toma de decisiones.
+En los distintos procedimientos de las agencias u organismos espaciales se incluye la PoC como uno de los par\'ametros m\'as importantes para el estudio de las situaciones de riesgo y la toma de decisiones.
 
 \subsection{El planteo general del problema}
-Sean dos objetos que orbitan la Tierra: una misi\'on operativa y un desecho espacial. Evaluar el riesgo de que colisionen se traduce en estimar la probabilidad de que uno intercepte al otro.
+Sean dos objetos que orbitan la Tierra: una misi\'on operativa y un desecho espacial. Evaluar el riesgo de que colisionen se traduce en estimar la probabilidad de que uno intercepte al otro.\\
 
 Para el estudio del problema que planteamos a continuaci\'on se asumen ciertas simplificaciones. En primer lugar se asume que los errores en las posiciones de los objetos son de distribuci\'on gaussiana y se los representa mediante matrices de covarianza y sus respectivos elipsoides de error. Se considera que las matrices de covarianza de los objetos no est\'an correlacionadas, y entonces se puede construir una \'unica matriz combinada sumando ambas matrices. Se suman los radios de cada uno de los objetos involucrados  y se piensa en un \'unico objeto esf\'erico de radio igual a la suma de los radios. 
 
-Se centrar\'a en uno de los objetos (por ejemplo en el desecho, aunque depende del autor) el elipsoide de error de la matriz combinada, y en el otro objeto el centro de masa de un cuerpo esf\'erico con los radios combinados. 
+El elipsoide de error de la matriz combinada, se centrar\'a en uno de los objetos (por ejemplo en el desecho, aunque depende del autor) y en el otro objeto se centrar\'a el centro de masa de un cuerpo esf\'erico con los radios combinados. \\
 
-Si se centra el elipsoide de errores combinados en el desecho, se estudia la situaci\'on en la que la misi\'on operativa atraviesa ese elipsoide, generando una trayectoria con forma de tubo. Ese tubo representar\'a un c\'irculo, si se lo proyecta en el plano del corte del elipsoide que se corresponde con el momento de m\'aximo acercamiento (plano de encuentro), es decir la situaci\'on en el instante del TCA. 
+Si se centra el elipsoide de errores combinados en el desecho, se estudia la situaci\'on en la que la misi\'on operativa atraviesa ese elipsoide, generando una trayectoria con forma de tubo. Ese tubo representar\'a un c\'irculo, si se lo proyecta en el plano del corte del elipsoide que se corresponde con el momento de m\'aximo acercamiento (plano de encuentro). 
 
 As\'i lo describe Alfano en su trabajo \citep{alfano2007review} y lo representa con las siguientes figuras:
 
@@ -340,7 +340,7 @@ As\'i lo describe Alfano en su trabajo \citep{alfano2007review} y lo representa 
 \end{minipage}
 \end{figure}
 
-Al definir los errores en la posici\'on de distribuci\'on normal, la funci\'on de densidad de probabilidad $p(\Delta \bar{r})$ en los puntos cercanos al punto de mayor acercamiento, se expresa:
+Al definir los errores con distribuci\'on normal, la funci\'on de densidad de probabilidad $p(\Delta \bar{r})$ en los puntos cercanos al punto de mayor acercamiento, se expresa:
 
 \begin{equation}
  p(\Delta \bar{r})=\frac{1}{\sqrt{(2 \pi)^{3} det(P)}} exp [-\frac{1}{2}\Delta \bar{r}^{T}P^{-1}\Delta \bar{r}]
@@ -349,10 +349,10 @@ Al definir los errores en la posici\'on de distribuci\'on normal, la funci\'on d
 
 \begin{itemize}
  \item P $=$ matriz de covarianzas combinadas
- \item $\Delta \bar{r} = \Delta \bar{r}_{tca} + \Delta \bar{v}_{tca}(t-t_{tca})$
+ \item $\Delta \bar{r} = \Delta \bar{r}_{tca} + \Delta \bar{v}_{tca}(t-t_{tca})$, {\it{tca}} instante que se corresponde al momento de mayor acercamiento. 
 \end{itemize}
 
-La probabilidad de colisi\'on total resulta de la integraci\'on de la funci\'on densidad de probabilidad en el volumen contenido dentro del tubo y enmarcado por el elipsoide. Es decir: 
+La probabilidad de colisi\'on total, resulta de la integraci\'on de la funci\'on densidad de probabilidad en el volumen contenido dentro del tubo y enmarcado por el elipsoide. Es decir: 
 
 \begin{equation}
  PoC=\frac{1}{2 \pi \sqrt{det(P)}} \int_{V} exp [-S] dv
@@ -376,7 +376,11 @@ Sin embargo, retomando ciertas consideraciones:
 la resoluci\'on compleja de esta integral de 3 dimensiones se simplifica en una integral de 2 dimensiones. 
 
 \subsubsection{Objetos esf\'ericos}
-Considerar objetos esf\'ericos evita tener que tener en cuenta la actitud de los objetos, lo que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos en los que los desechos orbitan con actitud fuera de control no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamintos en este punto. 
+Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos en los que los desechos orbitan con actitud fuera de control no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamintos en este punto. 
+
+\subsubsection{Matrices de covarianza no correlacionadas}
+Dado que los procesos de determinaci\'on orbital se calculan para objeto por separado, se desconoce c\'omo se correlacionan esas \'orbitas. Para poder estimarlo es necesario hacer procesamientos simult\'aneos considerando los mismos par\'ametros en los modelos de fuerza y el mismo bias para los sistemas de rastreo, entre otras cuestiones que resultan muy complejas y demandan mucho tiempo.
+
 
 
 AQUI COMIENZA LO ANTERIOR\\
@@ -480,22 +484,28 @@ En su trabajo \citep{alfano2008method} desarroll\'o un complejo m\'etodo para el
 $$
 PoC= \left\{ \begin{array}{lcc}
              0.48394 r &   si  & r \leq 0.8 \\
-             \\ 0.21329 exp(1.01511 r)-0.09025 &  si & 0.8 < r < 1 \\
-             \\ 0.5 &  si  & r 0 1
+             \\ 0.21329 e^{1.01511 r}-0.09025 &  si & 0.8 < r < 1 \\
+             \\ 0.5 &  si  & r = 1
              \end{array}
    \right.
 $$
 
+Donde, $r$ es el radio combinado de los objetos (COR), escalado con la m\'inima distancia (Miss Distance): 
+
+$$
+ r = \frac{COR}{Miss Distance}
+$$
+
+Esta expresi\'on resulta de considerar la peor configuraci\'on  posible del an\'alisis, por lo que el resultado ser\'a siempre un valor de PoC sobrestimado. 
+
+
 
 \subsection{C\'alculo simplificado de Lei-Chen}\label{subsec:pocsimp}
 
-Veamos ahora el c\'alculo simplificado para la PoC, que propone Lei-Chen junto a otros autores en el libro 
-{\it{Orbital Data Applications for Space Objects. Conjunction Assessment and Situation Analysis}} \citep{leichen}.
+El c\'alculo simplificado para la PoC, que propone Lei-Chen junto a otros autores en el libro 
+{\it{Orbital Data Applications for Space Objects. Conjunction Assessment and Situation Analysis}} \citep{leichen} se basa en el desarrollo anal\'itico de Chan \citep{chan2003improved}.
 
-Lei-Chen se basa en el desarrollo anal\'itco de Chan \citep{chan2003improved} y otros estudios anteriores del problema del c\'alculo de la probabilidad de colisi\'on en encuentros cortos, que reducen el problema en tres dimensiones a un plano de encuentro.
-Con este planteo, se reduce el problema a calcular la integral de la funci\'on de densidad de probabilidad (PDF) en dos dimensiones, sobre el \'area de la secci\'on circular de colisi\'on que se proyecta en el plano de encuentro.\\
-
-La secci\'on circular de colisi\'on que se proyecta en el plano de encuentro, con radio $r_{a}$, est\'a centrada en las coordenadas $\mu_{x}$, $\mu_{y}$ del plano. Las desviaciones est\'andar que resultan de la matriz combinada de covarianzas de ambos objetos, proyectadas, son $\sigma_{x}$ y $\sigma_{y}$  (Fig. \ref{fig:planoenc}).\\
+En el planteo de Lei-Chen, la secci\'on circular de colisi\'on que se proyecta en el plano de encuentro, con radio $r_{a}$, est\'a centrada en las coordenadas $\mu_{x}$, $\mu_{y}$ del plano. Las desviaciones est\'andar que resultan de la matriz combinada de covarianzas de ambos objetos, proyectadas, son $\sigma_{x}$ y $\sigma_{y}$  (Fig. \ref{fig:planoenc}).\\
 
 \begin{figure}[!h]
 \centering

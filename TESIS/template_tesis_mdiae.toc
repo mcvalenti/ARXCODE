@@ -1,60 +1,22 @@
 \select@language {spanish}
-\contentsline {chapter}{\numberline {1}Introducci\IeC {\'o}n}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Los desechos espaciales}{1}{section.1.1}
-\contentsline {section}{\numberline {1.2}El riesgo de colisi\'on}{7}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}El estudio del riesgo de colisi\'on}{9}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}Rastreo y cat\'alogos}{12}{subsection.1.2.2}
-\contentsline {section}{\numberline {1.3}Las regulaciones nacionales e internacionales}{13}{section.1.3}
-\contentsline {section}{\numberline {1.4}Antecedentes}{14}{section.1.4}
-\contentsline {section}{\numberline {1.5}La Comisi\'on Nacional de Actividades Espaciales (CONAE)}{14}{section.1.5}
-\contentsline {section}{\numberline {1.6}Planteo del Problema}{15}{section.1.6}
-\contentsline {section}{\numberline {1.7}Objetivos}{17}{section.1.7}
-\contentsline {section}{\numberline {1.8}Estructura del trabajo}{18}{section.1.8}
-\contentsline {chapter}{\numberline {2}Marco Te\IeC {\'o}rico}{19}{chapter.2}
-\contentsline {section}{\numberline {2.1}Introducci\'on}{19}{section.2.1}
-\contentsline {section}{\numberline {2.2}La posici\'on de los objetos involucrados}{20}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}La posici\'on de la misi\'on operativa}{21}{subsection.2.2.1}
-\contentsline {subsection}{\numberline {2.2.2}La posici\'on del desecho espacial}{21}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}Los archivos TLE}{22}{subsection.2.2.3}
-\contentsline {subsection}{\numberline {2.2.4}El propagador SGP4}{23}{subsection.2.2.4}
-\contentsline {subsection}{\numberline {2.2.5}Sistemas de Referencia}{24}{subsection.2.2.5}
-\contentsline {section}{\numberline {2.3}El estudio de los errores}{26}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1} El m\'etodo de Osweiler}{28}{subsection.2.3.1}
-\contentsline {subsection}{\numberline {2.3.2}Propagaci\'on de errores utilizando datos de TLE y efem\'erides precisas}{29}{subsection.2.3.2}
-\contentsline {section}{\numberline {2.4}La probabilidad de colisi\'on}{31}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}El planteo general del problema}{32}{subsection.2.4.1}
-\contentsline {subsubsection}{\numberline {2.4.1.1}Objetos esf\'ericos}{33}{subsubsection.2.4.1.1}
-\contentsline {subsection}{\numberline {2.4.2}M\'etodo del l\'imite}{36}{subsection.2.4.2}
-\contentsline {subsection}{\numberline {2.4.3}C\'alculo simplificado de Lei-Chen}{36}{subsection.2.4.3}
-\contentsline {section}{\numberline {2.5}Comunicaciones de riesgo de colisi\'on}{41}{section.2.5}
-\contentsline {subsection}{\numberline {2.5.1}El mensaje de alerta CDM}{42}{subsection.2.5.1}
-\contentsline {section}{\numberline {2.6}Resumen}{46}{section.2.6}
-\contentsline {chapter}{\numberline {3}Metodolog\IeC {\'\i }a de Desarrollo}{48}{chapter.3}
-\contentsline {section}{\numberline {3.1}Inicializaci\'on}{48}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}Plan de Desarrollo}{49}{subsection.3.1.1}
-\contentsline {section}{\numberline {3.2}Iteraci\'on}{51}{section.3.2}
-\contentsline {section}{\numberline {3.3}Seguimiento y Control}{51}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Verificaci\'on y Validaci\'on}{51}{subsection.3.3.1}
-\contentsline {paragraph}{Aplicaci\'on}{53}{section*.88}
-\contentsline {subsection}{\numberline {3.3.2}Gesti\'on de la Configuraci\'on}{53}{subsection.3.3.2}
-\contentsline {subsection}{\numberline {3.3.3}Aseguramiento de la Calidad}{54}{subsection.3.3.3}
-\contentsline {section}{\numberline {3.4}Entorno de Desarrollo}{54}{section.3.4}
-\contentsline {chapter}{\numberline {4}ARxCODE}{56}{chapter.4}
-\contentsline {section}{\numberline {4.1}Especificaciones generales}{56}{section.4.1}
-\contentsline {section}{\numberline {4.2}Requerimientos}{56}{section.4.2}
-\contentsline {section}{\numberline {4.3}Interfaces}{58}{section.4.3}
-\contentsline {section}{\numberline {4.4}Casos de Uso}{59}{section.4.4}
-\contentsline {section}{\numberline {4.5}Arquitectura}{60}{section.4.5}
-\contentsline {section}{\numberline {4.6}Flujo din\'amico de ARxCODE}{65}{section.4.6}
-\contentsline {chapter}{\numberline {5}Validaci\'on y Resultados}{70}{chapter.5}
-\contentsline {section}{\numberline {5.1}Introducci\'on}{70}{section.5.1}
-\contentsline {section}{\numberline {5.2}Implementaci\'on del modelo SGP4 en Python}{71}{section.5.2}
-\contentsline {section}{\numberline {5.3}Estudio de errores de TLE con datos hist\'oricos}{72}{section.5.3}
-\contentsline {section}{\numberline {5.4}Estudio de errores de TLE con efem\'erides precisas}{75}{section.5.4}
-\contentsline {section}{\numberline {5.5}C\'alculo de la Probabilidad de Colisi\'on}{77}{section.5.5}
-\contentsline {section}{\numberline {5.6}An\'alisis}{85}{section.5.6}
-\contentsline {chapter}{\numberline {6}Conclusiones}{88}{chapter.6}
-\contentsline {chapter}{\numberline {7}Ap\'endice}{91}{chapter.7}
-\contentsline {section}{\numberline {7.1}Appendix 1: Transformaci\'on de Coordenadas}{91}{section.7.1}
-\contentsline {section}{\numberline {7.2}Appendix 2: El archivo CDM}{93}{section.7.2}
-\contentsline {section}{\numberline {7.3}Appendix 3: Gr\'aficos de las probabilidades de colisi\'on}{98}{section.7.3}
+\contentsline {chapter}{\numberline {1}ARxCODE: Especificaciones}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Especifiaciones Iniciales}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Casos de Uso}{2}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}\IeC {\'A}mbito del sistema}{3}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Caracter\'isticas de los Usuarios}{3}{subsection.1.1.3}
+\contentsline {subsection}{\numberline {1.1.4}Restricciones}{3}{subsection.1.1.4}
+\contentsline {subsection}{\numberline {1.1.5}Interfaces}{3}{subsection.1.1.5}
+\contentsline {section}{\numberline {1.2}Especificaciones Finales}{4}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Requerimientos Finales}{4}{subsection.1.2.1}
+\contentsline {section}{\numberline {1.3}Flujo din\'amico de ARxCODE}{6}{section.1.3}
+\contentsline {chapter}{\numberline {2}Metodolog\IeC {\'\i }a de Desarrollo}{8}{chapter.2}
+\contentsline {section}{\numberline {2.1}Plan de Desarrollo}{8}{section.2.1}
+\contentsline {section}{\numberline {2.2}Entorno de Desarrollo}{10}{section.2.2}
+\contentsline {chapter}{\numberline {3}Dise\IeC {\~n}o, Seguimiento y Control}{12}{chapter.3}
+\contentsline {section}{\numberline {3.1}Arquitectura}{12}{section.3.1}
+\contentsline {section}{\numberline {3.2}Interfaces}{17}{section.3.2}
+\contentsline {section}{\numberline {3.3}Seguimiento y Control}{18}{section.3.3}
+\contentsline {subsection}{\numberline {3.3.1}Verificaci\'on y Validaci\'on}{18}{subsection.3.3.1}
+\contentsline {paragraph}{Aplicaci\'on}{19}{section*.55}
+\contentsline {subsection}{\numberline {3.3.2}Gesti\'on de la Configuraci\'on}{20}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.3}Aseguramiento de la Calidad}{20}{subsection.3.3.3}

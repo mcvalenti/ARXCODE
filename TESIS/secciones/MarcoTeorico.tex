@@ -375,8 +375,20 @@ Sin embargo, retomando ciertas consideraciones:
 
 la resoluci\'on compleja de esta integral de 3 dimensiones se simplifica en una integral de 2 dimensiones. 
 
-\subsubsection{Objetos esf\'ericos}
+\subsubsection*{Objetos esf\'ericos}
 Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos en los que los desechos orbitan con actitud fuera de control no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamintos en este punto. 
+
+\subsubsection*{Matrices de covarianza no correlacionadas}
+Dado que los procesos de determinaci\'on orbital se calculan para objeto por separado, se desconoce c\'omo se correlacionan esas \'orbitas. Para poder estimarlo es necesario hacer procesamientos simult\'aneos considerando los mismos par\'ametros en los modelos de fuerza y el mismo bias para los sistemas de rastreo, entre otras cuestiones que resultan muy complejas y demandan mucho tiempo.
+
+En uno de sus trabajos, Coppola \citep{coppola2004effects} examina la sensibilidad de los c\'alculos de la PoC considerando matrices correlacionadas. De sus investigaciones se desprende que si bien pueden existir valores significativos en la correlaci\'on, esto no modifica el orden de magnitud de los valores de la PoC y que s\'olo para pocos casos supera en un 7$\%$ al valor sin correlaci\'on. A su vez concluye que los valores de correlaci\'on importantes se diluyen muy r\'apidamente en el tiempo.
+
+\subsubsection*{Movimiento lineal}
+La velocidad promedio de los objetos en \'orbitas bajas es muy alta, de aproximadamente 7 $km/s$. Esto quiere decir que la velocidad relativa en los encuentros en general, ser\'a superior, por lo que la duraci\'on del momento de encuentro ser\'a muy breve. Entonces, en ese breve intervalo que dura el encuentro es factible considerar las trayectorias lineales. Una demostraci\'on detallada se describe en \citep{arrufat2013study}
+
+\subsubsection*{Errores en la velocidad despreciables}
+En la misma direcci\'on que el punto anterior, dadas las altas velocidades implicadas y que los errores en la velocidad rondan algunos metros, la magnitud del error es de orden de $10^{-4}$, que puede despreciarse. 
+
 
 
 AQUI COMIENZA LO ANTERIOR\\

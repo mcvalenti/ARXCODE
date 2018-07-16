@@ -19,7 +19,8 @@ with open(filename, 'w') as csvfile:
 
     with open('tabladatos.csv') as File:  
         reader = csv.reader(File)
-        for row in reader:
+        cdm_list=list(reader)
+        for row in cdm_list:
             obj1_id=row[0]
             obj2_id=row[1]
             tca=datetime.strptime(row[2], '%d/%m/%Y %H:%M:%S')
