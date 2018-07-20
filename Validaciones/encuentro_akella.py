@@ -9,7 +9,7 @@ from Encuentro.Encuentro import Encuentro
 
 
 hr=0.009 # radio combinado [km]
-filename='valLeinchen.csv'
+filename='valAkella.csv'
 with open(filename, 'w') as csvfile:
     fieldnames = ['Event ID', 'data Miss Dist.', 'computed Miss Dist.',
                   'data poc','computed poc','sigma2_1','sigma2_2','sigma2_3' ]
@@ -19,7 +19,7 @@ with open(filename, 'w') as csvfile:
     with open('tabladatos.csv') as File:  
         reader = csv.reader(File)
         cdm_list=list(reader)
-        for row in cdm_list[10:11]:
+        for row in cdm_list:
             obj1_id=row[0]
             obj2_id=row[1]
             tca=datetime.strptime(row[2], '%d/%m/%Y %H:%M:%S')
@@ -42,7 +42,8 @@ with open(filename, 'w') as csvfile:
             encuentro1=Encuentro(tle_sat,tle_deb,tca,hr)
             
             # Procesamiento Lei-Chen
-            poc_lei=encuentro1.calculaPoC_circ()
+            #poc_lei=encuentro1.calculaPoC_circ()
+            poc_ak=encuentro1.calculaPoC_akella()
             tca_string=row[2].split()[0]
             event_id=str(obj1_id)+'_'+str(obj2_id)+'_'+tca_string
             ma_sat_RTN_tca=encuentro1.ma_sat_RTN_tca
@@ -51,42 +52,5 @@ with open(filename, 'w') as csvfile:
             sigma2_2=ma_sat_RTN_tca[1][1]+ma_deb_RTN_tca[1][1]
             sigma2_3=ma_sat_RTN_tca[2][2]+ma_deb_RTN_tca[2][2]
             writer.writerow({'Event ID':event_id, 'data Miss Dist.':row[3], 'computed Miss Dist.':encuentro1.mod_minDist,
-                             'data poc':row[4],'computed poc':poc_lei,
+                             'data poc':row[4],'computed poc':poc_ak,
                              'sigma2_1':sigma2_1,'sigma2_2':sigma2_2,'sigma2_3':sigma2_3})
-           
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            

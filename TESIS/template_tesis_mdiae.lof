@@ -1,22 +1,28 @@
 \select@language {spanish}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {1.1}{\ignorespaces Casos de Uso de ARxCODE\relax }}{2}{figure.caption.15}
-\contentsline {figure}{\numberline {1.2}{\ignorespaces Diagrama de Interfaces del Sistema}}{4}{figure.caption.17}
-\contentsline {figure}{\numberline {1.3}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{7}{figure.caption.21}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Desechos Espaciales seg\'un Scopus}}{2}{figure.caption.16}
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Riesgos de Colisi\'on seg\'un Scopus}}{3}{figure.caption.17}
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Objetos en \'Orbita seg\'un NASA.}}{5}{figure.caption.25}
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Distribuci\'on de objetos en funci\'on del semieje mayor.}}{6}{figure.caption.26}
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Proyecci\'on de Sat\'elites 2016-2030}}{7}{figure.caption.27}
+\contentsline {figure}{\numberline {1.6}{\ignorespaces Fragmentos de Cohetes 2016-2030}}{8}{figure.caption.28}
+\contentsline {figure}{\numberline {1.7}{\ignorespaces Cantidad de Objetos catalogados al 2014}}{8}{figure.caption.29}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Evoluci\'on de las causas de la generaci\'on de Desechos}}{9}{figure.caption.30}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces N\'umero de Desechos en las \'orbitas LEO desde 2015 al 2065}}{10}{figure.caption.31}
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Estudio de Colisi\'on}}{12}{figure.caption.37}
+\contentsline {figure}{\numberline {1.11}{\ignorespaces USSTRATCOM - SSN}}{13}{figure.caption.40}
+\contentsline {figure}{\numberline {1.12}{\ignorespaces Interfaces del ARxCODE}}{17}{figure.caption.43}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Planificaci\'on de la distribuci\'on del total de horas asignadas dentro de la maestr\'ia al desarrollo y la escritura del trabajo de tesis.\relax }}{9}{figure.caption.22}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Planificaci\'on de las tareas agrupadas por semestres para el a\IeC {\~n}o 2016\relax }}{9}{figure.caption.23}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Planificaci\'on de las tareas agrupadas por semanas para el a\IeC {\~n}o 2017\relax }}{10}{figure.caption.24}
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Componentes de ARxCODE\relax }}{13}{figure.caption.31}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Clases Tle y setTLE}}{14}{figure.caption.33}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{14}{figure.caption.33}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{14}{figure.caption.33}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Clases CDM y EphemCODS}}{15}{figure.caption.37}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{15}{figure.caption.37}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{15}{figure.caption.37}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Clase Encuentro}}{16}{figure.caption.42}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{17}{figure.caption.47}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Esquema de la metodolog\IeC {\'\i }a para realizar las pruebas de unidad sobre los m\IeC {\'o}dulos.\relax }}{18}{figure.caption.49}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Casos de Prueba I}}{19}{figure.caption.56}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Casos de Prueba II}}{19}{figure.caption.56}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Sistemas de Referencia centrados en el Sat\'elite}}{25}{figure.caption.54}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces M\'etodo de Osweiler, \citep {osweiler} para la generaci\'on de la matriz de covarianza}}{29}{figure.caption.58}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Descripci\'on del m\'etodo propuesto para la propagaci\'on de errores}}{30}{figure.caption.60}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Tabla de Estimaci\'on de errores.}}{31}{figure.caption.61}
+\contentsline {figure}{\numberline {2.5}{\ignorespaces El planteo general de la PoC}}{32}{figure.caption.63}
+\contentsline {figure}{\numberline {2.6}{\ignorespaces El plano de encuentro}}{32}{figure.caption.63}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Plano de Encuentro}}{38}{figure.caption.69}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces M\'aximo acercamiento en \'orbitas circulares}}{39}{figure.caption.71}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{40}{figure.caption.72}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Proyecci\'on de los elipsoides de error al plano de encuentro}}{40}{figure.caption.72}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{41}{figure.caption.73}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{46}{figure.caption.79}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{48}{figure.caption.80}

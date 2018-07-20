@@ -625,7 +625,8 @@ class ProcEncuentro(QWidget):
         self.min_dist= encuentro1.mod_minDist
         self.tca_calc= encuentro1.tca_c
         #self.ma_comb, self.maCovar_sat, self.maCovar_deb= encuentro1.calculaMacombinada() # ! Ojo!! devuelve siempre lo mismo!
-        self.poc_arx=encuentro1.calculaPoC_circ()
+        #self.poc_arx=encuentro1.calculaPoC_circ()
+        self.poc_arx=encuentro1.calculaPoC_akella()
         self.maCovar_sat=encuentro1.ma_sat_RTN_tca
         self.maCovar_deb=encuentro1.ma_deb_RTN_tca
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))

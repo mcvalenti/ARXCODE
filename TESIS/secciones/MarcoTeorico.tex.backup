@@ -363,59 +363,97 @@ La probabilidad de colisi\'on total, resulta de la integraci\'on de la funci\'on
  \item S $= -\frac{1}{2}\Delta \bar{r}^{T}P^{-1}\Delta \bar{r}$
 \end{itemize}
 
-Sin embargo, retomando ciertas consideraciones: 
+Sin embargo, la resoluci\'on compleja de esta integral de 3 dimensiones se simplifica en una integral de 2 dimensiones cuando se aplican las consideraciones antes mencionadas: 
 
 \begin{itemize}
  \item Objetos esf\'ericos
  \item Matrices de covarianzas no correlacionadas
  \item Movimiento lineal
  \item Errores en la velocidad despreciables
-\end{itemize}
+\end{itemize} 
+
+\subsubsection*{Objetos esf\'ericos}
+Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos los desechos orbitan con actitud fuera de control, de modo que considerarlos esf\'ericos no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamintos en este punto. 
+
+\subsubsection*{Matrices de covarianza no correlacionadas}
+Dado que los procesos de determinaci\'on orbital se calculan para cada objeto por separado, se desconoce c\'omo se correlacionan esas \'orbitas. Para poder estimarlo es necesario hacer procesamientos simult\'aneos considerando los mismos par\'ametros en los modelos de fuerza y el mismo bias para los sistemas de rastreo, entre otras cuestiones que resultan muy complejas y demandan mucho tiempo.
+
+En uno de sus trabajos, Coppola \citep{coppola2004effects} examina la sensibilidad de los c\'alculos de la PoC considerando matrices correlacionadas. De sus investigaciones se desprende que, si bien pueden existir valores significativos en la correlaci\'on, esto no modifica el orden de magnitud de los valores de la PoC y que s\'olo para pocos casos el valor de la PoC se modifica en un 7$\%$ respecto al valor sin correlaci\'on. A su vez concluye que los valores de correlaci\'on importantes se diluyen muy r\'apidamente en el tiempo.
+
+\subsubsection*{Movimiento lineal}
+La velocidad promedio de los objetos en \'orbitas bajas es muy alta, de aproximadamente 7 $km/s$. Esto quiere decir que la velocidad relativa en los encuentros en general, ser\'a superior, por lo que la duraci\'on del momento de encuentro ser\'a muy breve. Entonces, en ese breve intervalo que dura el encuentro es factible considerar las trayectorias lineales. Una demostraci\'on detallada se describe en \citep{arrufat2013study}
+
+\subsubsection*{Errores en la velocidad despreciables}
+En la misma direcci\'on que el punto anterior, dadas las altas velocidades implicadas y que los errores en la velocidad rondan algunos metros, los errores en las velocidades pueden despreciarse. 
+
+\subsection{Simplificaci\'on del problema a dos dimensiones (2D)}
+
+Tal cual lo describe Akella en la introducci\'on de su trabajo \citep{akellaAlfriend}, se expresan las posiciones con los errores, de la misi\'on y del desecho seg\'un:
+
+\begin{align*}
+ \tilde{r}_m &= \bar{r}_m+\bar{e}_m & \tilde{r}_d &= \bar{r}_d+\bar{e}_d 
+\end{align*}
+
+Considerando las trayectorias lineales, para un dado instante $t$, la posci\'on ser\'a:
+
+\begin{align*}
+ \tilde{r}_m(t) &= \tilde{r}_m+ \bar{V}_m t& \tilde{r}_d &= \tilde{r}_d+\bar{V}_d t 
+\end{align*}
+
+La distancia relativa entre ellos ser\'a:
+
+\begin{align*}
+ \tilde{\rho}(t) &= \tilde{r}_d(t)-\tilde{r}_m(t) \\
+  &=\tilde{r}_d+\bar{V}_d t-\tilde{r}_m- \bar{V}_m t\\
+  &=\bar{r}_d+\bar{e}_d + \bar{V}_d t - \bar{r}_m - \bar{e}_m - \bar{V}_m t\\
+  &=\bar{r}_d-\bar{r}_m + (\bar{V}_d-\bar{V}_m)t+\bar{e}_d-\bar{e}_m\\
+  &=\bar{\rho} + \bar{V}_rt+\bar{e}_d-\bar{e}_m\\
+  &=\tilde{\rho}+\bar{V}_rt
+\end{align*}
+
+Debido a que durante el encuentro los valores de la distancia relativa van disminuyendo, hasta que alcanzan la distancia m\'inima y luego comienzan a crecer nuevamente; en el momento del m\'aximo acercamiento, $t=TCA$, la variaci\'on de la distancia relativa atraviesa una transici\'on por el valor cero.
+Es decir, $\frac{d}{dt}(\tilde{\rho}.\tilde{\rho})=0$
+
+\begin{align*}
+ \frac{d}{dt}(\tilde{\rho}(t).\tilde{\rho}(t))&= \frac{d}{dt}[(\tilde{\rho}+\bar{V}_rt).(\tilde{\rho}+\bar{V}_rt)]\\
+ &=\frac{d}{dt}[\tilde{\rho}.\tilde{\rho}+2\tilde{\rho}\bar{V}_rt+\bar{V}_r.\bar{V}_rt^{2}]\\
+ &=2\tilde{\rho}.\bar{V}_r+2\bar{V}_r.\bar{V}_rt = 0
+\end{align*}
+
+Resolviendo la ecuaci\'on:
+
+\begin{align}\label{eq:ttca}
+ t_{TCA}&=\frac{-\tilde{\rho}.\bar{V}_r}{\bar{V}_r.\bar{V}_r}
+\end{align}
+
+Por definici\'on, cuando $\bar{e}_m=0$, $\bar{e}_d=0$, entonces $\tilde{\rho}=\bar{\rho}$ y $t_{TCA}=0$. Considerando esto en Eq. \ref{eq:ttca}, se obtiene:
 
 
-la resoluci\'on compleja de esta integral de 3 dimensiones se simplifica en una integral de 2 dimensiones. 
+\begin{align*}
+  \tilde{\rho}.\bar{V}_r &= 0
+\end{align*}
 
-\subsubsection{Objetos esf\'ericos}
-Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos en los que los desechos orbitan con actitud fuera de control no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamintos en este punto. 
+Si a continuaci\'on utilizamos nuevamente la Eq. \ref{eq:ttca} para analizar la proyecci\'on del error del vector de la distancia relativa, en la direcci\'on de la velocidad relativa para el instante TCA, resutla:
 
-\subsubsection{Matrices de covarianza no correlacionadas}
-Dado que los procesos de determinaci\'on orbital se calculan para objeto por separado, se desconoce c\'omo se correlacionan esas \'orbitas. Para poder estimarlo es necesario hacer procesamientos simult\'aneos considerando los mismos par\'ametros en los modelos de fuerza y el mismo bias para los sistemas de rastreo, entre otras cuestiones que resultan muy complejas y demandan mucho tiempo.
+\begin{align*}
+  [\tilde{\rho}(t_{TCA})-\bar{\rho}].\bar{V}_r &= [\tilde{\rho}+\bar{V}_rt_{TCA}-\bar{\rho}].\bar{V}\\
+  &=\tilde{\rho}.\bar{V}_r +\bar{V}_r .\bar{V}_r t_{TCA}-\bar{\rho}.\bar{V}_r\\
+  &=-\bar{\rho}.\bar{V}_r=0
+\end{align*}
+
+Este resultado indica que no existen incertezas de la posici\'on relativa en la direcci\'on de de la velocidad relativa para el instante TCA y esto es as\'i para todos los casos posibles de colisi\'on. Este importante resultado permite pensar el problema en dos dimensiones, estimando la probabilidad de colisi\'on en el plano perpendicular a la velocidad relativa, {\it{plano de encuentro}}, de acuerdo a la expresi\'on: 
+
+\begin{equation}
+ PoC=\frac{1}{2 \pi \sqrt{det(P)}}\int_{-Rc}^{Rc}\int_{-\sqrt(Rc^{2}-x^{2})}^{\sqrt(Rc^{2}-x^{2})}exp [-S] dxdy
+ \label{eq:pocintegralarea}
+\end{equation}
+
+Donde, $Rc$ es el radio de colisi\'on construido a partir de la suma de los radios de ambos objetos y $(x,y)$ son las coordenadas en el plano. 
 
 
+\subsection{El c\'alculo de la PoC}
 
-AQUI COMIENZA LO ANTERIOR\\
-
-Para su estudio, los encuentros pueden clasificarse seg\'un sean, encuentros cortos o largos. En particular en este trabajo, analizamos las situaciones de encuentros cortos considerando las hip\'otesis que propone Lei-Chen \citep{leichen}.\\
-
-\begin{itemize}
- \item {\bf{Encuentros cortos}}: se asume que el movimiento relativo presenta comportamiento lineal durante el breve intervalo del encuentro.
- \item {\bf{Encuentros largos}}: el encuentro no es lo suficientemente corto como para considerar movimiento relativo lineal.
-\end{itemize}
-
-
-En los encuentros cortos puede asumirse que:\\
-
-\begin{itemize}
-\itemsep0em
- \item El movimiento relativo es lineal.
- \item Los errores en la posici\'on durante el encuentro son constantes e iguales al del error en TCA.
- \item No hay errores en la velocidad.
- \item Los errores en la posici\'on se representan con una distribuci\'on gaussiana de tres dimensiones.
-\end{itemize}
-
-La probabilidad de colisi\'on se calcula en cada caso, conociendo: las posiciones, las matrices de covarianza de ambos objetos en el instante TCA, ($\bar{X}_{sat}(TCA)$, $\bar{X}_{deb}(TCA)$, $C_{sat}(TCA)$, $C_{deb}(TCA)$) y los radios de colisi\'on respectivos, $R1$ y $R2$. En este trabajo, los radios $R1$ y $R2$  son los radios de dos esferas que envuelven a la misi\'on primaria y al desecho respectivamente. En todos los casos, el radio de la misi\'on primaria es conocido, mientras que el radio del desecho de determina a partir del seguimiento con radares, considerando la RCS (Radar Cross Section). 
-
-\subsection*{C\'alculo de la PoC en encuentros cortos}
-
-Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC (Ver tabla \ref{tab:trabajosPoc}). Todos ellos comparten las siguientes consideraciones:\\
-\begin{itemize}
-\itemsep0em
-\item El error en la posici\'on puede representarse por una funci\'on de distribuci\'on Gaussiana en tres dimensiones (3D).
-\item Tanto el objeto primario, como el desecho se mueven con movimiento rectil\'ineo de velocidad constante durante el encuentro.
-\item Los errores en las velocidades se desprecian.
-\item Los errores en las posiciones del objeto primario y del desecho no est\'an correlacionados.
-\item Los errores en las posiciones son constantes durante el encuentro, al igual que la matrices de covarianzas correspondientes al TCA.
-\end{itemize}
+Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC (Ver tabla \ref{tab:trabajosPoc}).
 
 \begin{table}\renewcommand{\arraystretch}{1.5}
 \caption[Trabajos sobre el c\'alculo de la PoC]{Distintos autores y trabajos para el c\'alculo de la Probabilidad de Colisi\'on PoC}
@@ -425,34 +463,33 @@ Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC 
  \hline \hline
  Autor/es & Metodolog\'ia\\
  \hline \hline
-    Akella y Alfriend & Calcula la integral de superficie, del problema simplificado a 2D.\\
+    Akella y Alfriend & Calcula la integral de superficie, del problema simplificado a 2D. \citep{akellaAlfriend}\\
     \hline
     \multirow{4}{*}{Foster} & Calcula la integral de superficie del problema simplificado a 2D, utilizando la suma\\
     &  acumulada de anillos el\'ipticos conc\'entricos. Transforma el sistema a un sistema   \\
     & de referencia polar, e integra cada $0.5^{\circ}$ y un radio de $r_{a}/12$.\\
-    & Es el m\'etodo que utiliza NASA para la ISS.\\
+    & Es el m\'etodo que utiliza NASA para la ISS. \citep{foster}\\
     \hline
-    \multirow{4}{*}{Chan} & Desarroll\'o una soluci\'on anal\'itica en base a una serie infinita de\\
-    &  t\'erminos que converge para la mayor\'ia de los valores m\'as comunes del problema,  \\
-    &  a saber: radios combinados $r_{a}$ entre $1-100 m$, distancias m\'inimas  \\
-    & de $10m-100km$ y covarianzas en el rango de $1m-10km$. \\
+    \multirow{4}{*}{Chan} & Desarroll\'o una soluci\'on anal\'itica en base a una serie infinita de t\'erminos que converge\\
+    & para la mayor\'ia de los valores m\'as comunes del problema, a saber: radios\\
+    & combinados $r_{a}$ entre $1-100 m$, distancias m\'inimas de $10m-100km$ y covarianzas \\
+    &  en el rango de $1m-10km$. \citep{chan2003improved}\\
     \hline
-    \multirow{3}{*}{Patera} & Transforma la integral de superficie a una integral de l\'inea\\
-    &  de una dimensi\'on. Este nuevo planteo permite adaptar la secci\'on \\
-    & de superfice a la forma de los objetos.\\
+    \multirow{2}{*}{Patera} & Transforma la integral de superficie a una integral de l\'inea de una dimensi\'on.\\
+    & Permite adaptar la secci\'on de superficie a la forma de los objetos. \\
     \hline
-    \multirow{2}{*}{Alfano (Serie)} & Utiliza una serie que combina las funciones error y\\
-    & t\'erminos exponenciales para aproximar la integral de 2D.\\
+    \multirow{2}{*}{Alfano (Serie)} & Utiliza una serie que combina las funciones error y t\'erminos exponenciales para \\
+    & aproximar la integral de 2D. \citep{alfano2008method}\\
     \hline
-    \multirow{3}{*}{Alfano (Prob. M\'axima)} & Expresi\'on simplificada que permite hacer una estimaci\'on grosera\\
-    & cuando no se cuenta con datos precisos de posici\'on o de la matriz de covarianza. \\
+    \multirow{3}{*}{Alfano (Prob. M\'axima)} & Expresi\'on simplificada que permite hacer una estimaci\'on grosera cuando no se cuenta\\
+    & con datos precisos de posici\'on o de la matriz de covarianza. \\
     & Utiliza una relaci\'on entre los radios combinados y la m\'inima distancia.\\
     \hline
  \end{tabular} }
  \label{tab:trabajosPoc}
 \end{table}
 
-En su mayor\'ia, los m\'etodos que se mencionan en la Tabla \ref{tab:trabajosPoc}, son aceptados en el est\'andar del mensaje de alerta para el c\'alculo de la probabilidad de colisi\'on, (Fig. \ref{fig:pagsana}).
+En su mayor\'ia los m\'etodos que se mencionan en la Tabla \ref{tab:trabajosPoc}, son aceptados en el est\'andar del mensaje de alerta para el c\'alculo de la probabilidad de colisi\'on, (Fig. \ref{fig:pagsana}).
 
 % Los resultados del c\'alculo son sensibles a:
 % 

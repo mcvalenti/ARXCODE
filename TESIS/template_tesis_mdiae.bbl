@@ -17,9 +17,9 @@ Alfano, S. (2008).
   rectangular-shaped objects.
 \newblock US Patent 7,383,153.
 
-\bibitem[\protect\astroncite{{Analytical Graphics, Inc.}}{2016}]{stk}
-{Analytical Graphics, Inc.} (2016).
-\newblock System tool kit - stk 11x64.
+\bibitem[\protect\astroncite{Arrufat~Jackson}{2013}]{arrufat2013study}
+Arrufat~Jackson, T. (2013).
+\newblock Study of the risk of impact between a spacecraft and space debris.
 
 \bibitem[\protect\astroncite{Arsenault et~al.}{1964}]{arsenault1964general}
 Arsenault, J., Chaffee, L., and Kuhlman, J. (1964).
@@ -38,10 +38,6 @@ Bowman, B. (1971).
 \newblock A first order semi-analytic perturbation theory for highly eccentric
   12 hour resonating satellite orbits.
 \newblock {\em NORAD document, Nov}.
-
-\bibitem[\protect\astroncite{{Brandon Rhodes}}{2015}]{sgp4python}
-{Brandon Rhodes} (2015).
-\newblock sgp4-1.4.
 
 \bibitem[\protect\astroncite{Brouwer}{1959}]{brouwer1959solution}
 Brouwer, D. (1959).
@@ -66,6 +62,12 @@ Chan, K. (2003).
   probabilities.
 \newblock {\em Advances in the Astronautical Sciences}, 114:1197--1216.
 
+\bibitem[\protect\astroncite{Coppola et~al.}{2004}]{coppola2004effects}
+Coppola, V.~T., Woodburn, J., and Hujsak, R. (2004).
+\newblock Effects of cross correlated covariance on space-craft collision
+  probability.
+\newblock In {\em AAS/AIAA Spaceflight Mechanics Meeting}.
+
 \bibitem[\protect\astroncite{Cranford}{1969}]{cranfordimproved}
 Cranford, K. (1969).
 \newblock An improved analytical drag theory for the artificial satellite
@@ -77,11 +79,11 @@ ESA (2013).
 \newblock {Space Debris}.
 \newblock http://www.esa.int/Our\_Activities/Operations/Space\_Debris.
 
-\bibitem[\protect\astroncite{Flohrer et~al.}{2008}]{flohrer2008assessment}
-Flohrer, T., Krag, H., and Klinkrad, H. (2008).
-\newblock Assessment and categorization of tle orbit errors for the us ssn
-  catalogue.
-\newblock {\em risk}, 8(9):10--11.
+\bibitem[\protect\astroncite{{Foster}}{2001}]{foster}
+{Foster}, Jr., J.~L. (2001).
+\newblock {The analytic basis for debris avoidance operations for the
+  International Space Station}.
+\newblock In {\em Space Debris}.
 
 \bibitem[\protect\astroncite{Hoots and Roehrich}{1980a}]{hoots1980models}
 Hoots, F.~R. and Roehrich, R.~L. (1980a).
@@ -141,15 +143,15 @@ Kessler, D. and Cour-Palais, B. (1978).
   debris belt.
 \newblock {\em Journal of Geophysical Research}, 83:2637--2646.
 
-\bibitem[\protect\astroncite{Klinkrad}{2006a}]{Klinkrad}
+\bibitem[\protect\astroncite{Klinkrad}{2006a}]{KlinkradChapter8}
 Klinkrad, H. (2006a).
-\newblock {\em Space Debris. Models and Risk Analysis}.
-\newblock Springer.
-
-\bibitem[\protect\astroncite{Klinkrad}{2006b}]{KlinkradChapter8}
-Klinkrad, H. (2006b).
 \newblock {\em Space Debris. Models and Risk Analysis}, chapter~8, pages
   215--241.
+\newblock Springer.
+
+\bibitem[\protect\astroncite{Klinkrad}{2006b}]{Klinkrad}
+Klinkrad, H. (2006b).
+\newblock {\em Space Debris. Models and Risk Analysis}.
 \newblock Springer.
 
 \bibitem[\protect\astroncite{Kozai}{1962}]{kozai1962second}
@@ -200,12 +202,6 @@ Lyddane, R. (1963).
   artificial satellite.
 \newblock {\em The Astronomical Journal}, 68:555.
 
-\bibitem[\protect\astroncite{Montenbruck and
-  Gill}{2012}]{montenbruck2012satellite}
-Montenbruck, O. and Gill, E. (2012).
-\newblock {\em Satellite orbits: models, methods and applications}.
-\newblock Springer Science \& Business Media.
-
 \bibitem[\protect\astroncite{NASA}{2014}]{ODQN14}
 NASA (2014).
 \newblock Space missions and satellite box score.
@@ -235,11 +231,5 @@ NASA (2017c).
 Wang, R., Liu, J., and Zhang, Q. (2009).
 \newblock Propagation errors analysis of tle data.
 \newblock {\em Advances in Space Research}, 43(7):1065--1069.
-
-\bibitem[\protect\astroncite{Xu and Xiong}{2014}]{xu2014method}
-Xu, X.-L. and Xiong, Y.-Q. (2014).
-\newblock A method for calculating probability of collision between space
-  objects.
-\newblock {\em Research in Astronomy and Astrophysics}, 14(5):601.
 
 \end{thebibliography}

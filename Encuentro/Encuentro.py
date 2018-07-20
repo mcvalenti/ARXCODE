@@ -172,7 +172,6 @@ class Encuentro():
             # GUARDA EN ARCHIVO Posiciones Relativas en RTN.
             salida3.write(datetime.strftime(self.pos1.epoca,'%Y-%m-%d %H:%M:%S')+' '+str(DistRic[0])+' '+str(DistRic[1])+' '+str(DistRic[2])+'\n')
 
-        print 'Fin del procesamiento de Encuentro'
         salida1.close()
         salida2.close()
         salida3.close()
@@ -213,7 +212,7 @@ class Encuentro():
         return ma_sat_prop_tca, ma_deb_prop_tca
     
     def maT_rtn_eci(self,r,v,ma_RTN):
-        # Transformacion al sistema inercial
+        """Transformacion al sistema inercial"""
         maT_teme2ric_sat=ric_matrix(r,v)
         R1_eci=maT_teme2ric_sat.transpose()
         a_x=[]
@@ -277,23 +276,34 @@ class Encuentro():
         return [-np.sqrt(ra*ra-y*y), np.sqrt(ra*ra-y*y)]
     
     """ Calculos de PoC """
+    
+    def calculaPoC_limite(self,ra):
+        """ PoC - Metodo de cota limite de Alfano """
+        erre=ra/self.mod_minDist
+        if erre < 0.8:
+            PoC_limit=0.48394*erre
+        else:
+            PoC_limit=0.21329*np.exp(1.01511*erre)-0.09025
+        return PoC_limit
         
     def calculaPoC_circ(self):
         """PoC - Metodo simplificado de Lei-Chen"""
         #=======================================================================
-        # Generacion, propagacion y transformaciones de la matriz de covarianzas
+        # Generacion y propagacion de las matrices de covarianza en RTN
         #=======================================================================
         # OSWEILER
-#         sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
-#         deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
-#         # Propagacion de errores.
-#         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+        sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
+        deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
+        # Propagacion de errores.
+        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
         #------------------------------------------------------------------------
         # SOCRATES
-        sat_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
-        deb_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+#         sat_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+#         deb_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
         # Propagacion de errores.
-        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maSOC_RTN, deb_maSOC_RTN)
+        #self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maSOC_RTN, deb_maSOC_RTN)
+        #--------------------------------------------------------------------------
+        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
         mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
         pocVsra=open('../Validaciones/pocvsra.txt','w')
         ra=self.hit_rad
@@ -306,39 +316,83 @@ class Encuentro():
 #             pocVsra.write(str(ra)+' '+str(PoC)+'\n')
 #             ra=ra+0.0003  
         print 'POC explicita de CHAN =%e ' % PoC 
-#         #===============
-#         # POC limit
-#         #================
-#         erre=ra/self.mod_minDist
-#         if erre < 0.8:
-#             PoC_limit=0.48394*erre
-#         else:
-#             PoC_limit=0.21329*np.exp(1.01511*erre)-0.09025
-#         print 'PoC limit = %e ' %  PoC_limit 
-        return PoC       
-       
-    def calculaPoC_klinkrad(self):
-        """ Klinkrad expression based on the most adverse possible configuration """
-        radius_obj1,  radius_obj2=self._get_radius()
-        r_c=radius_obj1/1000.0+radius_obj2/1000.0
+                
+    def calculaPoC_akella(self):    
+        """ PoC - Metodo de cota limite de Alfano """
         #=======================================================================
-        # Generacion, propagacion y transformaciones de la matriz de covarianzas
+        # MATRICES DE COVARIANZA
+        # Generacion, propagacion y transformacion al ECI
         #=======================================================================
         # OSWEILER
-        sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
-        deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
-        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
-        ma_sat_eci=maT_rtn2eci(self.r_tca,self.v_tca,self.ma_sat_RTN_tca)
-        ma_deb_eci=maT_rtn2eci(self.r1_tca,self.v_tca,self.ma_deb_RTN_tca)
-        # Proyeccion al plano
-        C_B,  r_relative_B=self._project_Klinkrad_Bplane(ma_sat_eci,ma_deb_eci)
-        vector_product=np.dot(r_relative_B.transpose(), np.dot(inv(C_B),r_relative_B))
-        det=np.linalg.det(C_B)
-        if det < 0:
-            myError = ValueError('Covariance matrix determinant should be a positive')
-            raise myError
-        poc_max=r_c*r_c/(np.exp(1.0)*np.sqrt(det)*vector_product)
-        print 'PoC max KLINKRAD =%e ' %  poc_max         
+#         sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
+#         deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
+#         # Propagacion de errores.
+#         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+        #------------------------------------------------------------------------
+        # SOCRATES
+        sat_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        deb_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        # Propagacion de errores.
+        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maSOC_RTN, deb_maSOC_RTN)
+        #------------------------------------------------------------------------
+        # Transformacion de las matrices ya propagadas al sistema ECI
+        ma_sat_eci=self.maT_rtn_eci(self.r_tca,self.v_tca,self.ma_sat_RTN_tca)
+        ma_deb_eci=self.maT_rtn_eci(self.r1_tca,self.v_tca,self.ma_deb_RTN_tca)
+        # Construyo R_B: transformation matrix to B-plane
+        v_relative_module=np.sqrt(np.dot(self.VelVector_min,self.VelVector_min))
+        i_ax=np.dot(1.0/v_relative_module, self.VelVector_min)
+        v1_ak=self.v_tca
+        v2_ak=self.v1_tca
+        v2xv1=np.cross(v2_ak, v1_ak)
+        v2xv1_mod=np.sqrt(np.dot(v2xv1, v2xv1))
+        j_ax=np.dot(1.0/v2xv1_mod, v2xv1)
+        k_ax=np.cross(i_ax, j_ax)
+        R_B=np.array([i_ax, j_ax, k_ax])
+        #  t* and t
+        t_star=np.array([[0,1,0],[0,0,1]])
+        R_B0=np.concatenate((-R_B,R_B),axis=1)
+        t=np.dot(t_star, R_B0)
+        # p* covariances matrices
+        z=(3, 3)
+        z=np.zeros(z)
+        p_star0=np.concatenate((ma_sat_eci, z), axis=0)
+        p_star1=np.concatenate((z, ma_deb_eci), axis=0)
+        p_star2=np.concatenate((p_star0,p_star1),axis=1)
+        p_star=np.dot(t,np.dot(p_star2,t.transpose()))
+        # PoC integral partial calculus
+        rho_0=self.DistVector_min
+        #rho_0_star=np.dot(t_star, np.dot(R_B, rho_0.transpose()))
+        # PoC 
+        radius_obj1,  radius_obj2=self._get_radius()
+        r_c= self.hit_rad #radius_obj1/1000.0+radius_obj2/1000.0
+        coeff=1.0/(2*np.pi*np.sqrt(np.linalg.det(p_star)))
+        poc_integral,  err= nquad(self.f, [self.bounds_z, self.bounds_y], args=(rho_0, R_B, p_star, r_c)) # double integrals 
+        poc_ak = coeff*poc_integral
+        print 'PoC Akella =%e ' %  poc_ak
+        return poc_ak
+
+#     def calculaPoC_klinkrad(self):
+#         """ Klinkrad expression based on the most adverse possible configuration """
+#         radius_obj1,  radius_obj2=self._get_radius()
+#         r_c=radius_obj1/1000.0+radius_obj2/1000.0
+#         #=======================================================================
+#         # Generacion, propagacion y transformaciones de la matriz de covarianzas
+#         #=======================================================================
+#         # OSWEILER
+#         sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
+#         deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
+#         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+#         ma_sat_eci=maT_rtn2eci(self.r_tca,self.v_tca,self.ma_sat_RTN_tca)
+#         ma_deb_eci=maT_rtn2eci(self.r1_tca,self.v_tca,self.ma_deb_RTN_tca)
+#         # Proyeccion al plano
+#         C_B,  r_relative_B=self._project_Klinkrad_Bplane(ma_sat_eci,ma_deb_eci)
+#         vector_product=np.dot(r_relative_B.transpose(), np.dot(inv(C_B),r_relative_B))
+#         det=np.linalg.det(C_B)
+#         if det < 0:
+#             myError = ValueError('Covariance matrix determinant should be a positive')
+#             raise myError
+#         poc_max=r_c*r_c/(np.exp(1.0)*np.sqrt(det)*vector_product)
+#         print 'PoC max KLINKRAD =%e ' %  poc_max         
 #         #================
 #         # POC 1D
 #         #================
@@ -347,46 +401,6 @@ class Encuentro():
 #         sigma_r=np.sqrt(C[0][0]+C[1][1]+C[2][2])
 #         coef=1.0/(np.sqrt(2*np.pi)* sigma_r)
 #         result = integrate.quad(lambda r:np.exp(-(r-self.mod_minDist)*(r-self.mod_minDist)/(2*sigma_r)) , -ra,ra)
-#         print 'PoC 1D = ', coef*result[0]                     
-#         #================
-#         # POC AKELLA
-#         #================
-#         """
-#         * C matrix generation (b-plane)
-#         * T and T* generation
-#         *   P* generation
-#         """
-#         # Construyo R_B: transformation matrix to B-plane
-#         v_relative_module=np.sqrt(np.dot(self.VelVector_min,self.VelVector_min))
-#         i_ax=np.dot(1.0/v_relative_module, self.VelVector_min)
-#         v1_ak=self.v_tca
-#         v2_ak=self.v1_tca
-#         v2xv1=np.cross(v2_ak, v1_ak)
-#         v2xv1_mod=np.sqrt(np.dot(v2xv1, v2xv1))
-#         j_ax=np.dot(1.0/v2xv1_mod, v2xv1)
-#         k_ax=np.cross(i_ax, j_ax)
-#         R_B=np.array([i_ax, j_ax, k_ax])
-#         #  t* and t
-#         t_star=np.array([[0,1,0],[0,0,1]])
-#         R_B0=np.concatenate((-R_B,R_B),axis=1)
-#         t=np.dot(t_star, R_B0)
-#         # p* covariances matrices
-#         z=(3, 3)
-#         z=np.zeros(z)
-#         self.matriz_combinada, C1_eci, C2_eci=self.calculaMacombinada()
-#         p_star0=np.concatenate((C1_eci, z), axis=0)
-#         p_star1=np.concatenate((z, C2_eci), axis=0)
-#         p_star2=np.concatenate((p_star0,p_star1),axis=1)
-#         p_star=np.dot(t,np.dot(p_star2,t.transpose()))
-#         # PoC integral partial calculus
-#         rho_0=self.DistVector_min
-#         #rho_0_star=np.dot(t_star, np.dot(R_B, rho_0.transpose()))
-#         # PoC 
-#         radius_obj1,  radius_obj2=self._get_radius()
-#         r_c=radius_obj1/1000.0+radius_obj2/1000.0
-#         coeff=1.0/(2*np.pi*np.sqrt(np.linalg.det(p_star)))
-#         poc_integral,  err= nquad(self.f, [self.bounds_z, self.bounds_y], args=(rho_0, R_B, p_star, r_c)) # double integrals 
-#         poc_ak = coeff*poc_integral
-#         print 'PoC Akella =%e ' %  poc_ak
+#         print 'PoC 1D = ', coef*result[0]    
         
     
