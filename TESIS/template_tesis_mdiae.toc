@@ -25,8 +25,41 @@
 \contentsline {subsection}{\numberline {2.4.1}El planteo general del problema}{32}{subsection.2.4.1}
 \contentsline {subsection}{\numberline {2.4.2}Simplificaci\'on del problema a dos dimensiones (2D)}{34}{subsection.2.4.2}
 \contentsline {subsection}{\numberline {2.4.3}El c\'alculo de la PoC}{35}{subsection.2.4.3}
-\contentsline {subsection}{\numberline {2.4.4}M\'etodo del l\'imite}{37}{subsection.2.4.4}
-\contentsline {subsection}{\numberline {2.4.5}C\'alculo simplificado de Lei-Chen}{37}{subsection.2.4.5}
+\contentsline {subsubsection}{\numberline {2.4.3.1}M\'etodo del l\'imite}{37}{subsubsection.2.4.3.1}
+\contentsline {subsubsection}{\numberline {2.4.3.2}C\'alculo simplificado de Lei-Chen}{37}{subsubsection.2.4.3.2}
 \contentsline {section}{\numberline {2.5}Comunicaciones de riesgo de colisi\'on}{42}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}El mensaje de alerta CDM}{43}{subsection.2.5.1}
 \contentsline {section}{\numberline {2.6}Resumen}{47}{section.2.6}
+\contentsline {chapter}{\numberline {3}ARxCODE: Especificaciones}{49}{chapter.3}
+\contentsline {section}{\numberline {3.1}Especifiaciones Iniciales}{49}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}Casos de Uso}{50}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}\IeC {\'A}mbito del sistema}{51}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Caracter\'isticas de los Usuarios}{51}{subsection.3.1.3}
+\contentsline {subsection}{\numberline {3.1.4}Restricciones}{51}{subsection.3.1.4}
+\contentsline {subsection}{\numberline {3.1.5}Interfaces}{51}{subsection.3.1.5}
+\contentsline {section}{\numberline {3.2}Especificaciones Finales}{52}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Requerimientos Finales}{52}{subsection.3.2.1}
+\contentsline {section}{\numberline {3.3}Flujo din\'amico de ARxCODE}{54}{section.3.3}
+\contentsline {chapter}{\numberline {4}Metodolog\IeC {\'\i }a de Desarrollo}{56}{chapter.4}
+\contentsline {section}{\numberline {4.1}Plan de Desarrollo}{56}{section.4.1}
+\contentsline {section}{\numberline {4.2}Entorno de Desarrollo}{58}{section.4.2}
+\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o, Seguimiento y Control}{60}{chapter.5}
+\contentsline {section}{\numberline {5.1}Arquitectura}{60}{section.5.1}
+\contentsline {section}{\numberline {5.2}Interfaces}{65}{section.5.2}
+\contentsline {section}{\numberline {5.3}Seguimiento y Control}{66}{section.5.3}
+\contentsline {subsection}{\numberline {5.3.1}Verificaci\'on y Validaci\'on}{66}{subsection.5.3.1}
+\contentsline {paragraph}{Aplicaci\'on}{67}{section*.122}
+\contentsline {subsection}{\numberline {5.3.2}Gesti\'on de la Configuraci\'on}{68}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.3}Aseguramiento de la Calidad}{68}{subsection.5.3.3}
+\contentsline {chapter}{\numberline {6}Validaci\'on y Resultados}{70}{chapter.6}
+\contentsline {section}{\numberline {6.1}Introducci\'on}{70}{section.6.1}
+\contentsline {section}{\numberline {6.2}Implementaci\'on del modelo SGP4 en Python}{71}{section.6.2}
+\contentsline {section}{\numberline {6.3}Estudio de errores de TLE con datos hist\'oricos}{72}{section.6.3}
+\contentsline {section}{\numberline {6.4}Estudio de errores de TLE con efem\'erides precisas}{75}{section.6.4}
+\contentsline {section}{\numberline {6.5}C\'alculo de la Probabilidad de Colisi\'on}{77}{section.6.5}
+\contentsline {section}{\numberline {6.6}An\'alisis}{87}{section.6.6}
+\contentsline {chapter}{\numberline {7}Conclusiones}{90}{chapter.7}
+\contentsline {chapter}{\numberline {8}Ap\'endice}{93}{chapter.8}
+\contentsline {section}{\numberline {8.1}Appendix 1: Transformaci\'on de Coordenadas}{93}{section.8.1}
+\contentsline {section}{\numberline {8.2}Appendix 2: El archivo CDM}{95}{section.8.2}
+\contentsline {section}{\numberline {8.3}Appendix 3: Gr\'aficos de las probabilidades de colisi\'on}{100}{section.8.3}

@@ -277,9 +277,9 @@ class Encuentro():
     
     """ Calculos de PoC """
     
-    def calculaPoC_limite(self,ra):
+    def calculaPoC_limite(self):
         """ PoC - Metodo de cota limite de Alfano """
-        erre=ra/self.mod_minDist
+        erre=self.hit_rad/self.mod_minDist
         if erre < 0.8:
             PoC_limit=0.48394*erre
         else:
@@ -301,7 +301,9 @@ class Encuentro():
 #         sat_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
 #         deb_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
         # Propagacion de errores.
-        #self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maSOC_RTN, deb_maSOC_RTN)
+        #self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
+#         self.ma_sat_RTN_tca=sat_maSOC_RTN
+#         self.ma_deb_RTN_tca=deb_maSOC_RTN
         #--------------------------------------------------------------------------
         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
         mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
@@ -316,6 +318,7 @@ class Encuentro():
 #             pocVsra.write(str(ra)+' '+str(PoC)+'\n')
 #             ra=ra+0.0003  
         print 'POC explicita de CHAN =%e ' % PoC 
+        return PoC
                 
     def calculaPoC_akella(self):    
         """ PoC - Metodo de cota limite de Alfano """
@@ -324,20 +327,20 @@ class Encuentro():
         # Generacion, propagacion y transformacion al ECI
         #=======================================================================
         # OSWEILER
-#         sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
-#         deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
+#        sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
+#        deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
 #         # Propagacion de errores.
-#         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+#        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
         #------------------------------------------------------------------------
         # SOCRATES
         sat_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
         deb_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
-        # Propagacion de errores.
+#         # Propagacion de errores.
         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maSOC_RTN, deb_maSOC_RTN)
         #------------------------------------------------------------------------
         # Transformacion de las matrices ya propagadas al sistema ECI
-        ma_sat_eci=self.maT_rtn_eci(self.r_tca,self.v_tca,self.ma_sat_RTN_tca)
-        ma_deb_eci=self.maT_rtn_eci(self.r1_tca,self.v_tca,self.ma_deb_RTN_tca)
+        self.ma_sat_eci=self.maT_rtn_eci(self.r_tca,self.v_tca,self.ma_sat_RTN_tca)
+        self.ma_deb_eci=self.maT_rtn_eci(self.r1_tca,self.v_tca,self.ma_deb_RTN_tca)
         # Construyo R_B: transformation matrix to B-plane
         v_relative_module=np.sqrt(np.dot(self.VelVector_min,self.VelVector_min))
         i_ax=np.dot(1.0/v_relative_module, self.VelVector_min)
@@ -355,8 +358,8 @@ class Encuentro():
         # p* covariances matrices
         z=(3, 3)
         z=np.zeros(z)
-        p_star0=np.concatenate((ma_sat_eci, z), axis=0)
-        p_star1=np.concatenate((z, ma_deb_eci), axis=0)
+        p_star0=np.concatenate((self.ma_sat_eci, z), axis=0)
+        p_star1=np.concatenate((z, self.ma_deb_eci), axis=0)
         p_star2=np.concatenate((p_star0,p_star1),axis=1)
         p_star=np.dot(t,np.dot(p_star2,t.transpose()))
         # PoC integral partial calculus

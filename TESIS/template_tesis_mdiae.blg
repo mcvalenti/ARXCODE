@@ -6,6 +6,12 @@ A level-1 auxiliary file: secciones/Agradecimientos.aux
 A level-1 auxiliary file: secciones/Acronimos.aux
 A level-1 auxiliary file: secciones/Introduccion.aux
 A level-1 auxiliary file: secciones/MarcoTeorico.aux
+A level-1 auxiliary file: secciones/ARxCODE2.aux
+A level-1 auxiliary file: secciones/Metodologia.aux
+A level-1 auxiliary file: secciones/Disenio.aux
+A level-1 auxiliary file: secciones/Resultados.aux
+A level-1 auxiliary file: secciones/Conclusiones.aux
+A level-1 auxiliary file: secciones/Apendice.aux
 The style file: apa.bst
 Database file #1: template_tesis_mdiae.bib
 You're missing a field name---line 161 of file template_tesis_mdiae.bib
@@ -18,50 +24,51 @@ I was expecting a `{' or a `('---line 249 of file template_tesis_mdiae.bib
  : @BOOK{osweiler,
 (Error may have been on previous line)
 I'm skipping whatever remains of this entry
+Warning--I didn't find a database entry for "Alfano"
 Warning--empty journal in arrufat2013study
 Warning--empty journal in karacalioglu2016impact
 Warning--empty journal in kelso2007validation
 Warning--can't use both author and editor fields in KlinkradChapter8
 Warning--empty publisher in osweiler
-You've used 41 entries,
+You've used 47 entries,
             1940 wiz_defined-function locations,
-            688 strings with 9251 characters,
-and the built_in function-call counts, 13467 in all, are:
-= -- 1297
-> -- 423
-< -- 39
-+ -- 150
-- -- 130
-* -- 1056
-:= -- 2408
-add.period$ -- 119
-call.type$ -- 41
-change.case$ -- 268
-chr.to.int$ -- 37
-cite$ -- 46
-duplicate$ -- 588
-empty$ -- 992
-format.name$ -- 188
-if$ -- 2609
+            726 strings with 10172 characters,
+and the built_in function-call counts, 15358 in all, are:
+= -- 1480
+> -- 494
+< -- 44
++ -- 174
+- -- 152
+* -- 1216
+:= -- 2753
+add.period$ -- 135
+call.type$ -- 47
+change.case$ -- 308
+chr.to.int$ -- 43
+cite$ -- 52
+duplicate$ -- 663
+empty$ -- 1119
+format.name$ -- 222
+if$ -- 2964
 int.to.chr$ -- 5
 int.to.str$ -- 0
-missing$ -- 38
-newline$ -- 204
-num.names$ -- 123
-pop$ -- 244
+missing$ -- 43
+newline$ -- 232
+num.names$ -- 141
+pop$ -- 275
 preamble$ -- 1
-purify$ -- 269
+purify$ -- 310
 quote$ -- 0
-skip$ -- 447
+skip$ -- 508
 stack$ -- 0
-substring$ -- 786
-swap$ -- 100
+substring$ -- 888
+swap$ -- 110
 text.length$ -- 5
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 234
+type$ -- 268
 warning$ -- 5
-while$ -- 104
+while$ -- 119
 width$ -- 0
-write$ -- 511
+write$ -- 582
 (There were 2 error messages)

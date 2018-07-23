@@ -19,7 +19,7 @@ with open(filename, 'w') as csvfile:
     with open('tabladatos.csv') as File:  
         reader = csv.reader(File)
         cdm_list=list(reader)
-        for row in cdm_list:
+        for row in cdm_list[4:6]:
             obj1_id=row[0]
             obj2_id=row[1]
             tca=datetime.strptime(row[2], '%d/%m/%Y %H:%M:%S')
@@ -46,8 +46,8 @@ with open(filename, 'w') as csvfile:
             poc_ak=encuentro1.calculaPoC_akella()
             tca_string=row[2].split()[0]
             event_id=str(obj1_id)+'_'+str(obj2_id)+'_'+tca_string
-            ma_sat_RTN_tca=encuentro1.ma_sat_RTN_tca
-            ma_deb_RTN_tca=encuentro1.ma_deb_RTN_tca
+            ma_sat_RTN_tca=encuentro1.ma_sat_eci #encuentro1.ma_sat_RTN_tca
+            ma_deb_RTN_tca=encuentro1.ma_deb_eci #encuentro1.ma_deb_RTN_tca
             sigma2_1=ma_sat_RTN_tca[0][0]+ma_deb_RTN_tca[0][0]
             sigma2_2=ma_sat_RTN_tca[1][1]+ma_deb_RTN_tca[1][1]
             sigma2_3=ma_sat_RTN_tca[2][2]+ma_deb_RTN_tca[2][2]
