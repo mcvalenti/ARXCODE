@@ -451,7 +451,7 @@ Este resultado indica que no existen incertezas de la posici\'on relativa en la 
 Donde, $Rc$ es el radio de colisi\'on construido a partir de la suma de los radios de ambos objetos y $(x,y)$ son las coordenadas en el plano. 
 
 
-\subsection{El c\'alculo de la PoC}
+\subsection{El c\'alculo de la PoC}\label{sec:calculoPoC}
 
 Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC (Ver tabla \ref{tab:trabajosPoc}).
 En su mayor\'ia los m\'etodos que se mencionan en la Tabla \ref{tab:trabajosPoc}, son aceptados en el est\'andar del mensaje de alerta para el c\'alculo de la probabilidad de colisi\'on, (Fig. \ref{fig:pagsana}).
@@ -490,7 +490,7 @@ En su mayor\'ia los m\'etodos que se mencionan en la Tabla \ref{tab:trabajosPoc}
  \label{tab:trabajosPoc}
 \end{table}
 
-En este trabajo se implementaron tres m\'etodos de distinta complejidad. En primer lugar se utiliza una expresi\'on muy simplificada que no contempla los errores de las posiciones. Luego se utiliza una aproximaci\'on del m\'etodo de Chan \citep{chan2003improved} propuesta por Lei-Chen \citep{leichen} y finalmente se calcula la integral de la PoC en dos dimensiones utilizando el m\'etodo de Akella \citep{akellaAlfriend}.
+En este trabajo se implementaron tres m\'etodos de distinta complejidad. En primer lugar se utiliza una expresi\'on muy simplificada que no contempla los errores de las posiciones, m\'etodo del l\'imite  \citep{alfano2008method}. Luego se utiliza una aproximaci\'on del m\'etodo de Chan \citep{chan2003improved} para \'orbitas circulares propuesta por Lei-Chen \citep{leichen} y finalmente se calcula la integral de la PoC en dos dimensiones utilizando el m\'etodo de Akella \citep{akellaAlfriend}.
 
 \subsubsection{M\'etodo del l\'imite}
 El m\'etodo del l\'imite es una simple expresi\'on que s\'olo tiene en cuenta los valores de los radios de los objetos y la m\'inima distancia entre ellos, sin considerar los errores en la posici\'on. Este m\'etodo s\'olo ofrece una estimaci\'on grosera y siempre sobrestimada de la PoC, sin embargo es una cota puede ser un primer estimador cuando no se cuenta con valores para los errores o los datos no son de buena calidad. 

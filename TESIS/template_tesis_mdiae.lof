@@ -48,23 +48,18 @@
 \contentsline {figure}{\numberline {5.7}{\ignorespaces Casos de Prueba I}}{67}{figure.caption.123}
 \contentsline {figure}{\numberline {5.8}{\ignorespaces Casos de Prueba II}}{67}{figure.caption.123}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Esquematizaci\'on del algoritmo para comparar la propagaci\'on de cada TLE del set hacia fechas futuras de los TLE del set. Extra\'ido del trabajo de Osweiler, \citep {osweiler}\relax }}{73}{figure.caption.136}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Esquematizaci\'on del algoritmo para comparar la propagaci\'on de cada TLE del set hacia fechas futuras de los TLE del set. Extra\'ido del trabajo de Osweiler, \citep {osweiler}\relax }}{74}{figure.caption.136}
 \contentsline {figure}{\numberline {6.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{74}{figure.caption.137}
 \contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{74}{figure.caption.137}
 \contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler, \citep {osweiler}}}}{74}{figure.caption.137}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{74}{figure.caption.138}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{74}{figure.caption.138}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler, \citep {osweiler}}}}{74}{figure.caption.138}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Tendencia anual de las diferencias contra los datos de din\'amica orbital en coordenadas cartesianas del Sistema TOD\relax }}{76}{figure.caption.142}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces {\it {Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 01 de Enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de Flohrer et al., \citep {flohrer2008assessment}\relax }}{77}{figure.caption.145}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces Contenido de los correos electr\'onicos utilizados para comparar los resultados.\relax }}{78}{figure.caption.147}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{79}{figure.caption.148}
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Tabla con las matrices de covarianza calculadas por ARxCODE (m\'etodo de Osweiler) para la misi\'on y el desecho. Se resaltan los valores que con errores grandes\relax }}{83}{figure.caption.162}
-\contentsline {figure}{\numberline {6.9}{\ignorespaces An\'alisis de la PoC en funci\'on del radio de colisi\'on. La l\'inea roja indica el valor de la PoC calculada por Klinkrad \citep {Klinkrad} y el c\'irculo se\~nala el cruce con el radio $r_{a}$ correspondiente. La l\'inea verde indica la PoC calculada por ARxCODE para un $r_{a}=0.01$ km. (Escenario 1)\relax }}{87}{figure.caption.173}
-\contentsline {figure}{\numberline {6.10}{\ignorespaces An\'alisis de la PoC en funci\'on del radio de colisi\'on. La l\'inea roja indica el valor de la PoC calculada por Klinkrad \citep {Klinkrad} y el c\'irculo se\~nala el cruce con el radio $r_{a}$ correspondiente. La l\'inea verde indica la PoC calculada por ARxCODE para un $r_{a}=0.01$ km. (Escenario 2)\relax }}{88}{figure.caption.174}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{75}{figure.caption.138}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{75}{figure.caption.138}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler, \citep {osweiler}}}}{75}{figure.caption.138}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Diferencias en las posiciones propagadas durante el a\~no 2012 y las efem\'erides precisas generadas por CODS [Sistema TOD]\relax }}{76}{figure.caption.142}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Diferencias en las posiciones propagadas durante el a\~no 2013 y las efem\'erides precisas generadas por CODS [Sistema TOD]\relax }}{77}{figure.caption.143}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces {\it {Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 01 de Enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de Flohrer et al., \citep {flohrer2008assessment}\relax }}{78}{figure.caption.146}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Contenido de los correos electr\'onicos utilizados para comparar los resultados.\relax }}{79}{figure.caption.148}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{79}{figure.caption.149}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Notificaci\'on del d\'ia 3 de Julio por parte de la ESA de la realizaci\'on de una maniobra evasiva para el Sentinel 1B (caso \#1). El texto dice: {\it {{\bf {Sentinel 1B}} maniobra evasiva el d\'ia 29 de Junio de 2018. Fue realizada una maniobra evasiva por el Sentinel 1B para reducir el riesgo de colisi\'on con un fragmento del IRIDIUM 33, potencialmente estimado para el d\'ia 29 de Junio de 2018 a las 22:22 UTC}} - Luego indica los productos satelitales afectados.\relax }}{89}{figure.caption.173}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {8.1}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{100}{figure.caption.177}
-\contentsline {figure}{\numberline {8.2}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{100}{figure.caption.178}
-\contentsline {figure}{\numberline {8.3}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{101}{figure.caption.179}
-\contentsline {figure}{\numberline {8.4}{\ignorespaces An\'alisis de la Probabilidad de Colisi\'on en funci\'on del radio de colisi\'on\relax }}{101}{figure.caption.180}

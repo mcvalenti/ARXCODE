@@ -47,7 +47,7 @@
 \BOOKMARK [2][-]{subsection.5.3.1}{Verificaci\363n y Validaci\363n}{section.5.3}% 47
 \BOOKMARK [2][-]{subsection.5.3.2}{Gesti\363n de la Configuraci\363n}{section.5.3}% 48
 \BOOKMARK [2][-]{subsection.5.3.3}{Aseguramiento de la Calidad}{section.5.3}% 49
-\BOOKMARK [0][-]{chapter.6}{Validaci\363n y Resultados}{}% 50
+\BOOKMARK [0][-]{chapter.6}{Resultados}{}% 50
 \BOOKMARK [1][-]{section.6.1}{Introducci\363n}{chapter.6}% 51
 \BOOKMARK [1][-]{section.6.2}{Implementaci\363n del modelo SGP4 en Python}{chapter.6}% 52
 \BOOKMARK [1][-]{section.6.3}{Estudio de errores de TLE con datos hist\363ricos}{chapter.6}% 53
@@ -58,4 +58,3 @@
 \BOOKMARK [0][-]{chapter.8}{Ap\351ndice}{}% 58
 \BOOKMARK [1][-]{section.8.1}{Appendix 1: Transformaci\363n de Coordenadas}{chapter.8}% 59
 \BOOKMARK [1][-]{section.8.2}{Appendix 2: El archivo CDM}{chapter.8}% 60
-\BOOKMARK [1][-]{section.8.3}{Appendix 3: Gr\341ficos de las probabilidades de colisi\363n}{chapter.8}% 61

@@ -152,14 +152,15 @@ class Encuentro():
                 self.v_tca=v
                 self.v1_tca=v1
 #                print self.tca_c, self.mod_minDist
-#            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
-            self.epoca_ini=self.epoca_ini+timedelta(microseconds=1000)
+            self.epoca_ini=self.epoca_ini+timedelta(seconds=1)
+            #self.epoca_ini=self.epoca_ini+timedelta(microseconds=1000)
             epoca_ini_list.append(self.epoca_ini)
             distancias_list.append(mod_Dist1)
             self.tca_min_data=[epoca_ini_list,distancias_list]
             #====================================
             # Distancias Minimas en RTN.
             #====================================
+            print 'Vector miss distance en [RTN] : ', self.DistRic_min
             self.r_comp=self.DistRic_min[0]
             self.s_comp=self.DistRic_min[1]
             self.w_comp=self.DistRic_min[2]
