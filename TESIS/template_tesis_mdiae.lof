@@ -14,17 +14,17 @@
 \contentsline {figure}{\numberline {1.12}{\ignorespaces Interfaces del ARxCODE}}{17}{figure.caption.43}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Sistemas de Referencia centrados en el Sat\'elite}}{25}{figure.caption.54}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces M\'etodo de Osweiler, \citep {osweiler} para la generaci\'on de la matriz de covarianza}}{29}{figure.caption.58}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces M\'etodo de Osweiler, \citep {osweiler} para la generaci\'on de la matriz de covarianza}}{28}{figure.caption.57}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Descripci\'on del m\'etodo propuesto para la propagaci\'on de errores}}{30}{figure.caption.60}
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Tabla de Estimaci\'on de errores.}}{31}{figure.caption.61}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Tabla de Estimaci\'on de errores.}}{30}{figure.caption.61}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces El planteo general de la PoC}}{32}{figure.caption.63}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces El plano de encuentro}}{32}{figure.caption.63}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Plano de Encuentro}}{38}{figure.caption.69}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Plano de Encuentro}}{37}{figure.caption.69}
 \contentsline {figure}{\numberline {2.8}{\ignorespaces M\'aximo acercamiento en \'orbitas circulares}}{39}{figure.caption.71}
 \contentsline {figure}{\numberline {2.10}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{40}{figure.caption.72}
 \contentsline {figure}{\numberline {2.11}{\ignorespaces Proyecci\'on de los elipsoides de error al plano de encuentro}}{40}{figure.caption.72}
 \contentsline {figure}{\numberline {2.12}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{41}{figure.caption.73}
-\contentsline {figure}{\numberline {2.13}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{46}{figure.caption.79}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{47}{figure.caption.79}
 \contentsline {figure}{\numberline {2.14}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{48}{figure.caption.80}
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {3.1}{\ignorespaces Casos de Uso de ARxCODE\relax }}{50}{figure.caption.82}
@@ -59,7 +59,7 @@
 \contentsline {figure}{\numberline {6.5}{\ignorespaces Diferencias en las posiciones propagadas durante el a\~no 2013 y las efem\'erides precisas generadas por CODS [Sistema TOD]\relax }}{77}{figure.caption.143}
 \contentsline {figure}{\numberline {6.6}{\ignorespaces {\it {Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 01 de Enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de Flohrer et al., \citep {flohrer2008assessment}\relax }}{78}{figure.caption.146}
 \contentsline {figure}{\numberline {6.7}{\ignorespaces Contenido de los correos electr\'onicos utilizados para comparar los resultados.\relax }}{79}{figure.caption.148}
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{79}{figure.caption.149}
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Notificaci\'on del d\'ia 3 de Julio por parte de la ESA de la realizaci\'on de una maniobra evasiva para el Sentinel 1B (caso \#1). El texto dice: {\it {{\bf {Sentinel 1B}} maniobra evasiva el d\'ia 29 de Junio de 2018. Fue realizada una maniobra evasiva por el Sentinel 1B para reducir el riesgo de colisi\'on con un fragmento del IRIDIUM 33, potencialmente estimado para el d\'ia 29 de Junio de 2018 a las 22:22 UTC}} - Luego indica los productos satelitales afectados.\relax }}{89}{figure.caption.173}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{80}{figure.caption.149}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Notificaci\'on del d\'ia 3 de Julio por parte de la ESA de la realizaci\'on de una maniobra evasiva para el Sentinel 1B (caso \#1). El texto dice: {\it {{\bf {Sentinel 1B}} maniobra evasiva el d\'ia 29 de Junio de 2018. Fue realizada una maniobra evasiva por el Sentinel 1B para reducir el riesgo de colisi\'on con un fragmento del IRIDIUM 33, potencialmente estimado para el d\'ia 29 de Junio de 2018 a las 22:22 UTC}} - Luego indica los productos satelitales afectados.\relax }}{90}{figure.caption.173}
 \addvspace {10\p@ }
 \addvspace {10\p@ }

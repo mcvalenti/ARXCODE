@@ -20,7 +20,9 @@ La siguiente secci\'on describe el tratamiento de errores. Para el estudio de la
 
 Una vez calculada la matriz de covarianza de errores, asociada a la posici\'on inicial, ser\'a necesario propagarla al instante predicho para el encuentro. Para ello se propone la implementaci\'on de una tabla con valores estad\'isticos inferidos del an\'alisis comparativo de efem\'erides precisas de la misi\'on operativa y las propagaciones de los TLE.\\
 
-Contin\'ua la secci\'on que explica el algoritmo para el c\'alculo de la PoC y finalmente se describe en detalle, la forma en que se comunican los acercamientos de riesgo (Sec. \ref{sec:anuncio}), por ejemplo mediante {\it{Conjunction Data Messages}} \ac{CDM}.
+Contin\'ua la secci\'on que explica los conceptos generales para el c\'alculo de la probabilidad de colisi\'on y los tres m\'etodos implementados en este trabajo, a saber: m\'etodo del l\'imite, m\'etodo de Lei-Chen y m\'etodo de Akella \& Alfriend.\\
+
+Finalmente se describe en detalle, la forma en que se comunican los acercamientos de riesgo (Sec. \ref{sec:anuncio}), por ejemplo mediante {\it{Conjunction Data Messages}} \ac{CDM}.
 % Incorporar los estados de alerta de Nasa. (texto de la aseguradora Britanica que me paso Juan ... bla de UNLAM.)
 
 
@@ -166,17 +168,15 @@ Notar que ambos sistemas dependen de la posici\'on y la velocidad, es decir, que
 
 La predicci\'on de un encuentro siempre involucra la propagaci\'on de las posiciones de los objetos hacia el futuro. Se consideran ciertos momentos cuya posici\'on se toma como dato inicial y se utilizan modelos de propagaci\'on orbital para obtener las posiciones en el futuro. Este proceso acumula los errores de las mediciones y de los modelos de la determinaci\'on orbital de las posiciones iniciales, m\'as los errores que introduce la propagaci\'on orbital. Es decir, que en el estudio de las situaciones de riesgo, debe tenerse en cuenta: el error en la posici\'on de los objetos y la propagaci\'on de esos errores hasta el momento en que fue predicho el acercamiento.\\
 
-{\color{red}{Esquema}}
-
 Debido a estas incertezas, el simple procedimiento de propagar las posiciones, calcular la distancia entre los objetos y definir acercamientos de riesgo a partir de ciertas distancias m\'inimas, no es suficiente, es muy poco confiable y genera falsas alarmas que limitan la capacidad de maniobra futura o pueden poner en mayor riesgo al sat\'elite.\\
 
 En la actualidad, en vez de rodear al sat\'elite con una esfera de radio seguro, se calcula la probabilidad de colisi\'on (Ver Sec. \ref{sec:probcol}) y si la probabilidad de colisi\'on supera cierto valor, entonces podr\'ia ser necesario hacer una maniobra. Para el estudio de la probabilidad de colisi\'on se debe contar, no s\'olo con el dato de las posiciones, sino tambi\'en con informaci\'on de los errores asociados.\\
 
 En este trabajo se organiz\'o el tratamiento de errores en dos grandes secciones. En primer lugar, hay que tener en cuenta que en nuestro planteo siempre estar\'a involucrado un desecho, es decir que los TLE ser\'an la \'unica fuente de informaci\'on de la posici\'on que tendremos para ese objeto. Esto implica que se deben estimar los errores que resultan del uso de los TLE, ya que los mismos no son publicados.\\
 
-Tal como lo menciona Lei-Chen \citep{leichen}, muchos estudios analizan la precisi\'on de las posiciones de los TLE compar\'andolas con efem\'erides precisas ({\color{red}{resumen de trabajos sobre esto}}). Pero como se menciona en el p\'arrafo anterior, esto no es pr\'actico cuando se trata de desechos, ya que no se tienen efem\'erides precisas de los mismos. En estos casos, los m\'etodos de comparaci\'on de pares resultan una opci\'on v\'alida. El concepto b\'asico consiste en comparar posiciones orbitales en la \'epoca del TLE contra posiciones predichas usando TLE anteriores y el modelo de propagaci\'on SGP4. Los residuos se analizan estad\'isticamente para obtener informaci\'on de los errores. (Ver Tabla \ref{tab:trabajosprecisas})
+Tal como lo menciona Lei-Chen \citep{leichen}, muchos estudios analizan la precisi\'on de las posiciones de los TLE compar\'andolas con efem\'erides precisas. Pero como se menciona en el p\'arrafo anterior, esto no es pr\'actico cuando se trata de desechos, ya que no se tienen efem\'erides precisas de los mismos. En estos casos, los m\'etodos de comparaci\'on de pares resultan una opci\'on v\'alida. El concepto b\'asico consiste en comparar posiciones orbitales en la \'epoca del TLE contra posiciones predichas usando TLE anteriores y el modelo de propagaci\'on SGP4. Los residuos se analizan estad\'isticamente para obtener informaci\'on de los errores. (Ver Tabla \ref{tab:trabajosprecisas})\\
 
-\begin{table}
+\begin{table}[!h]
 \caption[Estimaciones con TLE]{Trabajos que estiman los errores de los TLE utilizando TLE hist\'oricos y el m\'etodo de comparaci\'on de pares}
   \begin{tabular}{p{5cm}p{12cm}}
   \hline \hline
@@ -188,17 +188,14 @@ Tal como lo menciona Lei-Chen \citep{leichen}, muchos estudios analizan la preci
   \hline
   {\it{Validation of SGP4 and IS—GPS-200D against GPS precision ephemerides}} \citep{kelso2007validation} & Se realizan propagaciones hacia adelante y hacia atr\'as de la \'epoca del TLE. Se Resalta el hecho de que cada objeto debe ser considerado individualmente ya que los errores para objetos de \'orbitas similares resultan muy diferentes. No obstante se aclara que este m\'etodo resulta complejo e ineficiente para el estudio de grandes cantidades de objetos.\\
   \hline
-  mason &\\
-  \hline
   \end{tabular}
   \label{tab:trabajosprecisas}
 \end{table}
 
 
-{\color{red}{Elegimos OSW}}A tal fin, implementamos el m\'etodo de construcci\'on de matrices de covarianzas que propone Osweiler, \citep{osweiler}. Este m\'etodo permite construir una matriz de covarianza para la posici\'on de un TLE, utilizando el conjunto de TLE de los \'ultimos 15 d\'ias anteriores al TLE en cuesti\'on. Resultando los errores asociados a la posici\'on inicial. Es decir, dado un TLE que utilizaremos para hacer las propagaciones, el m\'etodo de Osweiler nos sirve para calcular los errores iniciales de ese TLE (Ver Sec. \ref{subsec:osw})\\
+Dado que en este trabajo y en el ambiente de utilizaci\'on que se proyecta para este software s\'olo se contar\'a con TLE para la propagaci\'on de las \'orbitas de los desechos, se decidi\'o implementar el m\'etodo de construcci\'on de matrices de covarianzas que propone Osweiler, \citep{osweiler}. Este m\'etodo permite construir una matriz de covarianza para la posici\'on de un TLE, utilizando el conjunto de TLE de los \'ultimos 15 d\'ias anteriores al TLE en cuesti\'on. Resultando los errores asociados a la posici\'on inicial. Es decir, dado un TLE que utilizaremos para hacer las propagaciones, el m\'etodo de Osweiler nos sirve para calcular los errores iniciales de ese TLE (Ver Sec. \ref{subsec:osw}). Se eligi\'o este m\'etodo por su simplicidad y porque el trabajo en el que se describe ofrece varios ejemplos y resultados intermedios que permit\'ian una buena verificaci\'on de su correcta implementaci\'on..\\
 
-En segundo lugar, para obtener los errores que introduce la propagaci\'on del TLE hasta el momento predicho para el m\'aximo acercamiento, no se utilizan comparaciones s\'olo con TLE, sino que se propone una forma para calcular la propagaci\'on de errores, a partir de estudios estad\'isticos del comportamiento de errores de los TLE (Sec. \ref{subsec:tablaprop}) comparados con efem\'erides precisas.\\
-
+En un paso siguiente, para obtener los errores que introduce la propagaci\'on del TLE hasta el momento predicho para el m\'aximo acercamiento, no se utilizan comparaciones s\'olo con TLE, sino que se propone una forma para calcular la propagaci\'on de errores, a partir de estudios estad\'isticos del comportamiento de errores de los TLE (Sec. \ref{subsec:tablaprop}) comparados con efem\'erides precisas.\\
 Debe tenerse en cuenta que al utilizar los TLE y el modelo SGP4  los datos propagados resultan en el sistema de referencia \ac{TEME}. Para poder comparar esos datos con las efem\'erides precisas publicadas en el sistema TOD, fue necesario hacer la transformaci\'on que se detalla en el Ap\'endice \ref{App1}.\\
 
 Finalmente, las matrices de error de cada objeto en el instante de m\'aximo acercamiento, se construyen sumando a las matrices de error inicial, las matrices de error de propagaci\'on que resultan del estudio estad\'istico de la comparaci\'on de las posiciones de los TLE propagados y las efem\'erides precisas.
@@ -206,29 +203,8 @@ Finalmente, las matrices de error de cada objeto en el instante de m\'aximo acer
 \subsection{ El m\'etodo de Osweiler}\label{subsec:osw}
 Es un m\'etodo que propone una manera de estimar los errores que se cometen al utilizar los TLE para determinar la posici\'on y la velocidad de un objeto que orbita la Tierra.
 El mismo consiste en utilizar un conjunto de TLE de un intervalo de dos semanas, y considerar el \'ultimo TLE del conjunto, al que denomina {\it{Primario}} como el valor real o verdadero.\\
+
 A partir de esa premisa, el autor propaga los TLEs anteriores hasta la \'epoca del TLE Primario y con las diferencias que resultan de la comparaci\'on, realiza los c\'alculos estad\'isticos de los valores medios y las varianzas, para construir la matriz covarianza correspondiente a la posici\'on del TLE Primario.\\
-
-\subsubsection*{Esquema reducido del m\'etodo}
-
-Dados:
-\begin{itemize}
-\itemsep0em
- \item N la cantidad de TLEs del conjunto.
- \item $\bar{X}_{epoca} = $  Estimaci\'on del valor verdadero para la \'epoca.
- \item $\delta X_{epoca} = $ Residuos que se generan de la comparaci\'on del valor verdadero con los valores propagados.
- \item $m = $ Valores medios de los residuos.
- \item $P = $ Matriz de covarianza.
-\end{itemize}
-
-Se obtiene la matriz de covarianza $P$ a partir de:\\
-
-\begin{equation}
- m=\sum_{i=1}^{N-1} \frac{(\delta X_{epoca})_{i}}{N-1} 
-\end{equation}
-
-\begin{equation}
- P_{epoca}=\sum_{i=1}^{N-1} \frac{(\delta X_{epoca}-m)_{i}(\delta X_{epoca}-m)_{i}^{T}}{N-1}
-\end{equation}
 
 \begin{figure}[!h]
 \centering
@@ -237,19 +213,41 @@ Se obtiene la matriz de covarianza $P$ a partir de:\\
 \label{fig:tleosw}
 \end{figure}
 
+\subsubsection*{Esquema reducido del m\'etodo}
+
+Dados:
+\begin{itemize}
+\itemsep0em
+ \item N $=$ la cantidad de TLEs del conjunto.
+ \item $\bar{X}_{epoca} = $  Estimaci\'on del valor verdadero para la \'epoca.
+ \item $\delta \bar{X}_{epoca} = $ Residuos que se generan de la comparaci\'on del valor verdadero con los valores propagados.
+ \item $\bar{m} = $ Valores medios de los residuos.
+ \item $P = $ Matriz de covarianza.
+\end{itemize}
+
+Se obtiene la matriz de covarianza $P$ a partir de:
+
+\begin{equation}
+ \bar{m}=\sum_{i=1}^{N-1} \frac{(\delta \bar{X}_{epoca})_{i}}{N-1} 
+\end{equation}
+
+\begin{equation}
+ P_{epoca}=\sum_{i=1}^{N-1} \frac{(\delta \bar{X}_{epoca}-\bar{m})_{i}(\delta \bar{X}_{epoca}-\bar{m})_{i}^{T}}{N-1}
+\end{equation}
+
 Este mismo m\'etodo se aplica a la misi\'on operativa, en aquellos escenarios en los que no se tiene acceso al dato de las efem\'erides precisas, como ocurre con los casos de estudio de validaci\'on que involucran misiones operativas de otras agencias.\\
 
 \subsection{Propagaci\'on de errores utilizando datos de TLE y efem\'erides precisas}\label{subsec:tablaprop}
 Una vez que ya se conoce la matriz de covarianza del desecho para la posici\'on inicial, ser\'a necesario propagar esos errores al momento de m\'aximo acercamiento.
 Dado que se desconocen los errores que introduce el propagador SGP4, fue necesario pensar una metodolog\'ia que permita hacer una estimaci\'on independiente.\\
 
-Se propone un m\'etodo que utiliza las diferencias que resultan de los valores que ofrecen las efem\'erides precisas, en comparaci\'on con los valores que resultan de las propagaciones de TLE mediante SGP4. Se evalu\'o la tendencia en una ventana temporal de seis meses y se calcularon los valores medios de los errores, en funci\'on de la cantidad de d\'ias de propagaci\'on.
+Se propone un m\'etodo que utiliza las diferencias que resultan de los valores que ofrecen las efem\'erides precisas, en comparaci\'on con los valores que resultan de las propagaciones de TLE mediante SGP4. Se evalu\'o la tendencia en una ventana temporal de un a\~no y se calcularon los valores medios de los errores, en funci\'on de la cantidad de d\'ias de propagaci\'on.
 
 \subsubsection*{Metodolog\'ia del estudio de la propagaci\'on de errores}\label{subsec:errorProp}
 Pasos que se realizan, (Fig. \ref{fig:metodotabla}):
 \begin{itemize}
 \itemsep0em
-\item Se selecciona un intervalo de 6 meses.
+\item Se selecciona un intervalo de 1 a\~no.
 \item Se extraen los productos orbitales de la misi\'on operativa tabulados cada un segundo.
 \item Se solicitan los TLE de la misi\'on correspondientes al intervalo.
 \item Se toma el TLE del primer d\'ia y se lo propaga cada un segundo, para los pr\'oximos 7 d\'ias.
@@ -273,32 +271,32 @@ A partir de las diferencias calculadas para cada segundo de cada d\'ia, se calcu
 \begin{figure}[!h]
 \centering
 \includegraphics[width=\textwidth]{imagenes/tablacompleta}
-\caption[Tabla de Estimaci\'on de errores.]{Fracci\'on de tabla con el total de datos calculados para la estimaci\'on estad\'istica. Se muestran s\'olo algunos d\'ias (primera columna de cada set) de los 6 meses, y los agrupamientos seg\'un sean respecto a propagaciones $< 1$ d\'ia, $= 1$ d\'ia o $= 2$ d\'ias}
+\caption[Tabla de Estimaci\'on de errores.]{Fracci\'on de tabla con el total de datos calculados para la estimaci\'on estad\'istica. Se muestran s\'olo algunos d\'ias (primera columna de cada set) del a\~no, y los agrupamientos seg\'un sean respecto a propagaciones $< 1$ d\'ia, $= 1$ d\'ia o $= 2$ d\'ias}
 \label{fig:tablacompleta}
 \end{figure}
 
 Luego se agrupan los valores seg\'un el intervalo de propagaci\'on, es decir, si son valores medios y varianzas de haber propagado 1, 2, 3 ... o hasta 6 d\'ias, y se toman los valores medios. Los resultados finales se plasman en una tabla cuyas columnas indican los valores medios de las varianzas por coordenada, y las filas los valores medios de las varianzas por intervalo propagado.\\
 
 \begin{table}[!h]
-\caption[Tabla con los valores medios para la propagaci\'on de errores.]{Valores medios de las varianzas para la propagaci\'on de errores. }
-\begin{tabular}{l c c c}
+\caption[Tabla con los valores medios para la propagaci\'on de errores.]{Valores medios de las varianzas calculadas\\ para la propagaci\'on de errores.\\ Autor\'ia propia.}
+\begin{tabular}{lccc}
 \hline \hline
 \rowcolor{yellow!35}
 &$\sigma^{2}_R [km]$ &$\sigma^{2}_T [km]$ &$\sigma^{2}_N [km]$\\
 \hline \hline
-< 1 d\'ia & 0.05287535953&0.5110606907&0.09802202353\\
-
-1 d\'ia & 0.03846388969&0.4517572281&0.09807457894\\
-
-2 d\'ias & 0.02760890529&0.4086434248&0.09904162392\\
-
-3 d\'ias & 0.01963580775&0.3765098311&0.09022336881\\
-
-4 d\'ias & 0.01469071678&0.3577884914&0.1182060362\\
-
-5 d\'ias & 0.01332578794&0.3557767231&0.1264764812\\
-
-6 d\'ias & 0.01524829841&0.365815954&0.1607439516\\
+< 1 d\'ia & 0.052& 0.644& 0.138\\
+\hline
+1 d\'ia & 0.038& 0.450& 0.142\\
+\hline
+2 d\'ias & 0.027& 0.408& 0.148\\
+\hline
+3 d\'ias & 0.019& 0.384& 0.155\\
+\hline
+4 d\'ias & 0.014& 0.374& 0.165\\
+\hline
+5 d\'ias & 0.013& 0.377& 0.179\\
+\hline
+6 d\'ias & 0.015& 0.399& 0.196\\
 \hline
 \end{tabular}
 \label{tab:resultatabla0}
@@ -320,9 +318,9 @@ Para el estudio del problema que planteamos a continuaci\'on se asumen ciertas s
 
 El elipsoide de error de la matriz combinada, se centrar\'a en uno de los objetos (por ejemplo en el desecho, aunque depende del autor) y en el otro objeto se centrar\'a el centro de masa de un cuerpo esf\'erico con los radios combinados. \\
 
-Si se centra el elipsoide de errores combinados en el desecho, se estudia la situaci\'on en la que la misi\'on operativa atraviesa ese elipsoide, generando una trayectoria con forma de tubo. Ese tubo representar\'a un c\'irculo, si se lo proyecta en el plano del corte del elipsoide que se corresponde con el momento de m\'aximo acercamiento (plano de encuentro). 
+Si se centra el elipsoide de errores combinados en el desecho, se estudia la situaci\'on en la que la misi\'on operativa atraviesa ese elipsoide, generando una trayectoria con forma de tubo. Ese tubo representar\'a un c\'irculo, si se lo proyecta en el plano del corte del elipsoide que se corresponde con el momento de m\'aximo acercamiento (plano de encuentro).\\
 
-As\'i lo describe Alfano en su trabajo \citep{alfano2007review} y lo representa con las siguientes figuras:
+As\'i lo describe Alfano en su trabajo \citep{alfano2007review} y lo representa con las siguientes figuras:\\
 
 
 \begin{figure}[!h]
@@ -340,7 +338,7 @@ As\'i lo describe Alfano en su trabajo \citep{alfano2007review} y lo representa 
 \end{minipage}
 \end{figure}
 
-Al definir los errores con distribuci\'on normal, la funci\'on de densidad de probabilidad $p(\Delta \bar{r})$ en los puntos cercanos al punto de mayor acercamiento, se expresa:
+Al definir los errores con distribuci\'on normal, la funci\'on de densidad de probabilidad $p(\Delta \bar{r})$ en los puntos cercanos al punto de mayor acercamiento, se expresa:\\
 
 \begin{equation}
  p(\Delta \bar{r})=\frac{1}{\sqrt{(2 \pi)^{3} det(P)}} exp [-\frac{1}{2}\Delta \bar{r}^{T}P^{-1}\Delta \bar{r}]
@@ -352,7 +350,7 @@ Al definir los errores con distribuci\'on normal, la funci\'on de densidad de pr
  \item $\Delta \bar{r} = \Delta \bar{r}_{tca} + \Delta \bar{v}_{tca}(t-t_{tca})$, {\it{tca}} instante que se corresponde al momento de mayor acercamiento. 
 \end{itemize}
 
-La probabilidad de colisi\'on total, resulta de la integraci\'on de la funci\'on densidad de probabilidad en el volumen contenido dentro del tubo y enmarcado por el elipsoide. Es decir: 
+La probabilidad de colisi\'on total, resulta de la integraci\'on de la funci\'on densidad de probabilidad en el volumen contenido dentro del tubo y enmarcado por el elipsoide. Es decir:\\ 
 
 \begin{equation}
  PoC=\frac{1}{2 \pi \sqrt{det(P)}} \int_{V} exp [-S] dv
@@ -453,10 +451,9 @@ Donde, $Rc$ es el radio de colisi\'on construido a partir de la suma de los radi
 
 \subsection{El c\'alculo de la PoC}\label{sec:calculoPoC}
 
-Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC (Ver tabla \ref{tab:trabajosPoc}).
-En su mayor\'ia los m\'etodos que se mencionan en la Tabla \ref{tab:trabajosPoc}, son aceptados en el est\'andar del mensaje de alerta para el c\'alculo de la probabilidad de colisi\'on, (Fig. \ref{fig:pagsana}).
+Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC (Ver tabla \ref{tab:trabajosPoc}). En su mayor\'ia los m\'etodos que se mencionan en la Tabla \ref{tab:trabajosPoc}, son aceptados en el est\'andar del mensaje de alerta para el c\'alculo de la probabilidad de colisi\'on, (Fig. \ref{fig:pagsana}).
 
-\begin{table}\renewcommand{\arraystretch}{1.5}
+\begin{table}[H]\renewcommand{\arraystretch}{1.5}
 \caption[Trabajos sobre el c\'alculo de la PoC]{Distintos autores y trabajos para el c\'alculo de la Probabilidad de Colisi\'on PoC}
  \centering
   \resizebox{\linewidth}{!}{
@@ -716,30 +713,60 @@ Finalmente, si se reemplazan los valores de $\mu_{x}, \mu_{y}, \sigma_{x}$ y $\s
 \end{equation}
 
 
-%\subsubsection{M\'etodo de Akella}
-% En este trabajo para el c\'alculo de la PoC se utilizar\'a el m\'etodo de Alfriend \& Akella \citep{akellaAlfriend} ya que es conceptualmente simple y aunque tiene un alto costo computacional, es realizable por las m\'aquinas actuales en tiempos menores a un segundo.\\
-% 
-% El mismo requiere como entradas:
-% \begin{itemize}
-% \itemsep0em
-% \item Conocer el instante de m\'aximo acercamiento: TCA (Time of Closest Approach).
-% \item La posici\'on relativa del desecho respecto al objeto primario en el TCA.
-% \item La velocidad relativa del desecho respecto al objeto primario en el TCA.
-% \item Las matrices de error de ambos objetos.
-% \end{itemize}
-% 
+\subsubsection{M\'etodo de Akella \& Alfriend}
+El m\'etodo de Alfriend \& Akella \citep{akellaAlfriend} es conceptualmente simple y aunque tiene un alto costo computacional, es realizable por las m\'aquinas actuales en tiempos menores a un segundo.\\
+
+El mismo no propone simplificaciones y resuelve la integral bi-dimensional que se menciona al comienzo de esta secci\'on (Eq. \ref{eq:pocintegralarea}). 
+
+Basado en la definici\'on del plano ortogonal a la velocidad que propone  Foster \citep{foster}, Akella \& Alfriend construyen el sistema de referencia a partir de la velocidad relativa y las velocidades de cada objeto involucrado, $\bar{V}_{r}$, $\bar{V}_{s}$ y $\bar{V}_{d}$,  respectivamente de acuerdo a: 
+
+\begin{align}
+ \hat{i}&=\frac{\bar{V}_{r}}{\mid \bar{V}_{r}\mid}, \quad \hat{j}=\frac{\bar{V}_{d} \times \bar{V}_{s} }{\mid \bar{V}_{d} \times \bar{V}_{s}\mid}, \quad \hat{k}=\hat{i}\times\hat{j}
+\end{align}
+
+Sea $C$ la matriz que resulta para la transformaci\'on al nuevo sistema y sean $P_{s}$ y $P_{d}$ las matrices de error del sat\'elite y del desecho. Dado que va a proyectarse el problema al plano perpendicular a la direcci\'on de la velocidad relativa, la matriz de error combinada de ambos objetos proyectada en el plano se construye a partir de:
+
+\begin{equation}
+ P^{*}=T \begin{bmatrix}
+P_{s} & 0 \\ 
+0 & P_{d}
+\end{bmatrix} T^{T}
+\end{equation}
+
+
+\begin{equation}
+ T= \begin{bmatrix}
+0 & 1 & 0\\ 
+0 & 0 & 1
+\end{bmatrix} 
+ \begin{bmatrix}
+-C & C \\
+\end{bmatrix} 
+\end{equation}
+
+La expresi\'on para la integral en dos dimensiones resulta:
+
+\begin{equation}
+ PoC=\frac{1}{2 \pi \sqrt{det(P)^{*}}}\int_{-Rc}^{Rc}\int_{-\sqrt(Rc^{2}-y^{2})}^{\sqrt(Rc^{2}-y^{2})}exp [-S] dzdy
+ \label{eq:integralAkella}
+\end{equation}
+
+Donde:
+
+\begin{itemize}
+ \item $S^{*}=(\tilde{\rho}^{*}-\bar{\rho}_{0}^{*})P^{*-1}(\tilde{\rho}^{*}-\bar{\rho}_{0}^{*})/2$
+ \item $\tilde{\rho}^{*}=T^{*}C\tilde{\rho}$, distancia relativa entre los objetos, proyectada al plano.
+ \item $\bar{\rho}_{0}^{*}=T^{*}C\bar{\rho}$, m\'inima distancia proyectada al plano.
+ \item $\tilde{\rho}= \tilde{r}_{d}(t)-\tilde{r}_{s}(t)$, distancia relativa entre los objetos al tiempo t.
+ \item $\bar{\rho}_{0}=\bar{r}_{d0}-\bar{r}_{d0}$, m\'inima distancia.
+ \item $R_{c}=$ Radio de colisi\'on (suma de los radios de ambos objetos)
+\end{itemize}
+
+
+
 % En los momentos pr\'oximos al encuentro, la posici\'on relativa de riesgo $\Delta r$ puede expresarse en funci\'on de un intervalo de tiempo respecto del TCA, es decir, $\Delta t_{tca}=t-t_{tca}$.
 % 
-% \begin{equation}
-% \Delta r(t)=\Delta r_{tca}+\Delta v_{tca}(t-t_{tca})
-% \end{equation}
 % 
-% Las matrices de covarianza de los errores que son calculadas para un momento dado t previo al TCA, deben ser propagadas. ({\bf{ver metodolog\'ia}})
-% Dado que consideramos que los errores en las posiciones de ambos objetos no est\'an correlacionadas, ambas contribuciones pueden combinarse en una \'unica matriz, a partir de la suma de ambas.
-% 
-% \begin{equation}
-% C=C_{p}+C_{d}
-% \end{equation}
 % 
 % De $C$ s\'olo consideraremos la submatriz superior de la izquierda de dimensiones (3x3), que corresponde a los errores en las posiciones, con un $1 \sigma$.\\
 % Dado que adem\'as asumimos que los errores en la posici\'on son de distribuci\'on normal en 3D, la funci\'on densidad de probabilidad $p(\Delta r)$ en momentos pr\'oximos al m\'aximo acercamiento queda definida por la expresi\'on {\bf{eq ..bla}}:
@@ -767,7 +794,7 @@ Finalmente, si se reemplazan los valores de $\mu_{x}, \mu_{y}, \sigma_{x}$ y $\s
 % \begin{equation}
 % \frac{\Delta v_{tca} \Delta r_{tca}}{\Delta r_{tca}}= \dot{\rho}_{tca}=0.0 \quad \rightarrow \quad t_{tca}
 % \end{equation}
-% 
+% % 
 % Definamos los vectores directores unitarios del plano como $X_{B}$ e $Y_{B}$, de acuerdo a las expresiones:
 % 
 % \begin{equation}
@@ -839,7 +866,6 @@ El {\it{CCSDS 508.0-B-1, Conjunction Data Message Recommended Standard}} describ
 \subsection{El mensaje de alerta CDM}\label{subsec:cdm}
 
 Es un mensaje estandarizado para el intercambio de informaci\'on entre los organismos capaces de detectar acercamientos y los due\~nos y/o operadores de los objetos involucrados en el encuentro.\\
-
 Los CDM se env\'ian 72 horas antes del encuentro a los operadores a cargo y/o se disponibilizan en la p\'agina de Space-track para usuarios con permisos especiales. Los mismos se generan y se distribuyen de acuerdo a ciertos criterios.\\
 
 
@@ -998,7 +1024,7 @@ A tal fin, (Fig. \ref{fig:flujomain}):\\
 \item Se calcula la matriz de covarianza con el m\'etodo de Osweiler, \citep{osweiler} para el desecho (y para la misi\'on si los datos orbitales de la misma no se conocieran).
 \item Se propagan ambas matrices hasta el TCA utilizando los datos estad\'isticos de la tabla generada, seg\'un la cantidad de d\'ias que se necesite propagar.
 \item Se proyectan los distintos par\'ametros a un plano de encuentro que simplifica los c\'alculos.
-\item Se calcula la probabilidad de colisi\'on mediante la expresi\'on aproximada de Lei-Chen, \citep{leichen}.
+\item Se calcula la probabilidad de colisi\'on mediante los tres m\'etodos implementados:m\'etodo del l\'imite, m\'etodo de Lei-Chen y m\'etodo de Akella \& Alfriend.
 \end{itemize}
 
 \begin{figure}[!h]

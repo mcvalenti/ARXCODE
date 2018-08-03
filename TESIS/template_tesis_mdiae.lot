@@ -29,14 +29,14 @@
 \contentsline {table}{\numberline {6.11}{\ignorespaces Tabla con los valores medios para la propagaci\'on de errores.}}{77}{table.caption.145}
 \contentsline {table}{\numberline {6.12}{\ignorespaces Casos de Prueba tomados del servicio SOCRATES (Celestrack.com).\relax }}{80}{table.caption.150}
 \contentsline {table}{\numberline {6.13}{\ignorespaces Casos de prueba tomados del libro de Klinkrad \citep {Klinkrad}.\relax }}{80}{table.caption.151}
-\contentsline {table}{\numberline {6.14}{\ignorespaces Casos de prueba tomados del trabajo de Xu \& Xiong \citep {xu2014method}.\relax }}{80}{table.caption.152}
-\contentsline {table}{\numberline {6.15}{\ignorespaces Resultados Comparativos del c\'alculo de la PoC.\relax }}{81}{table.6.15}
+\contentsline {table}{\numberline {6.14}{\ignorespaces Casos de prueba tomados del trabajo de Xu \& Xiong \citep {xu2014method}.\relax }}{81}{table.caption.152}
+\contentsline {table}{\numberline {6.15}{\ignorespaces Resultados Comparativos del c\'alculo de la PoC.\relax }}{82}{table.6.15}
 \contentsline {table}{\numberline {6.16}{\ignorespaces Vectores de Posiciones Inerciales al momento TCA.\relax }}{82}{table.caption.156}
-\contentsline {table}{\numberline {6.17}{\ignorespaces Comparaci\'on entre el m\'odulo {\it {sisRic}} de autor\'ia propia y los datos de Lei-Chen \citep {leichen}.\relax }}{82}{table.caption.157}
+\contentsline {table}{\numberline {6.17}{\ignorespaces Comparaci\'on entre el m\'odulo {\it {sisRic}} de autor\'ia propia y los datos de Lei-Chen \citep {leichen}.\relax }}{83}{table.caption.157}
 \contentsline {table}{\numberline {6.18}{\ignorespaces ARxCODE a partir de correos electr\'onicos Propagaciones cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km - M\'etodo de c\'alculo de PoC: Lei-Chen\relax }}{83}{table.caption.160}
-\contentsline {table}{\numberline {6.19}{\ignorespaces ARxCODE a partir de correos electr\'onicos Propagaciones cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km)- M\'etodo de c\'alculo de PoC: Lei-Chen\relax }}{83}{table.caption.161}
+\contentsline {table}{\numberline {6.19}{\ignorespaces ARxCODE a partir de correos electr\'onicos Propagaciones cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km)- M\'etodo de c\'alculo de PoC: Lei-Chen\relax }}{84}{table.caption.161}
 \contentsline {table}{\numberline {6.20}{\ignorespaces M\'inimas distancias de acercamiento para distintos pasos de propagaci\'on y resultados de los los correos electr\'onicos.\relax }}{84}{table.caption.162}
-\contentsline {table}{\numberline {6.21}{\ignorespaces ARxCODE a partir de los CDM Propagaciones cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km) - M\'etodo de c\'alculo de PoC: Lei-Chen\relax }}{84}{table.caption.164}
+\contentsline {table}{\numberline {6.21}{\ignorespaces ARxCODE a partir de los CDM Propagaciones cada 1 segundo - (Radio de colisi\'on $r_{a}=0.01$ km) - M\'etodo de c\'alculo de PoC: Lei-Chen\relax }}{85}{table.caption.164}
 \contentsline {table}{\numberline {6.22}{\ignorespaces ARxCODE a partir de los CDM Propagaciones cada 100.000 microsegundos - (Radio de colisi\'on $r_{a}=0.01$ km) - M\'etodo de c\'alculo de PoC: Lei-Chen\relax }}{85}{table.caption.165}
 \contentsline {table}{\numberline {6.23}{\ignorespaces M\'inimas distancias de acercamiento para distintos pasos de propagaci\'on y resultados de los CDM. (Radio de colisi\'on $r_{a}=0.01$ km)\relax }}{85}{table.caption.166}
 \contentsline {table}{\numberline {6.24}{\ignorespaces Diferencias que resultan de comparar las distancias calculadas y las PoC que se obtienen con el m\'etodo del l\'imite, respecto de los valores de los casos de prueba.\relax }}{86}{table.caption.168}

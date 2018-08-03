@@ -22,12 +22,13 @@
 \contentsline {subsection}{\numberline {2.3.1} El m\'etodo de Osweiler}{28}{subsection.2.3.1}
 \contentsline {subsection}{\numberline {2.3.2}Propagaci\'on de errores utilizando datos de TLE y efem\'erides precisas}{29}{subsection.2.3.2}
 \contentsline {section}{\numberline {2.4}La probabilidad de colisi\'on}{31}{section.2.4}
-\contentsline {subsection}{\numberline {2.4.1}El planteo general del problema}{32}{subsection.2.4.1}
+\contentsline {subsection}{\numberline {2.4.1}El planteo general del problema}{31}{subsection.2.4.1}
 \contentsline {subsection}{\numberline {2.4.2}Simplificaci\'on del problema a dos dimensiones (2D)}{34}{subsection.2.4.2}
 \contentsline {subsection}{\numberline {2.4.3}El c\'alculo de la PoC}{35}{subsection.2.4.3}
-\contentsline {subsubsection}{\numberline {2.4.3.1}M\'etodo del l\'imite}{37}{subsubsection.2.4.3.1}
+\contentsline {subsubsection}{\numberline {2.4.3.1}M\'etodo del l\'imite}{36}{subsubsection.2.4.3.1}
 \contentsline {subsubsection}{\numberline {2.4.3.2}C\'alculo simplificado de Lei-Chen}{37}{subsubsection.2.4.3.2}
-\contentsline {section}{\numberline {2.5}Comunicaciones de riesgo de colisi\'on}{42}{section.2.5}
+\contentsline {subsubsection}{\numberline {2.4.3.3}M\'etodo de Akella \& Alfriend}{42}{subsubsection.2.4.3.3}
+\contentsline {section}{\numberline {2.5}Comunicaciones de riesgo de colisi\'on}{43}{section.2.5}
 \contentsline {subsection}{\numberline {2.5.1}El mensaje de alerta CDM}{43}{subsection.2.5.1}
 \contentsline {section}{\numberline {2.6}Resumen}{47}{section.2.6}
 \contentsline {chapter}{\numberline {3}ARxCODE: Especificaciones}{49}{chapter.3}
@@ -58,8 +59,8 @@
 \contentsline {section}{\numberline {6.4}Estudio de errores de TLE con efem\'erides precisas}{75}{section.6.4}
 \contentsline {section}{\numberline {6.5}C\'alculo de la Probabilidad de Colisi\'on}{78}{section.6.5}
 \contentsline {paragraph}{El caso \# 1}{89}{section*.172}
-\contentsline {section}{\numberline {6.6}An\'alisis}{90}{section.6.6}
-\contentsline {chapter}{\numberline {7}Conclusiones}{92}{chapter.7}
-\contentsline {chapter}{\numberline {8}Ap\'endice}{95}{chapter.8}
-\contentsline {section}{\numberline {8.1}Appendix 1: Transformaci\'on de Coordenadas}{95}{section.8.1}
-\contentsline {section}{\numberline {8.2}Appendix 2: El archivo CDM}{97}{section.8.2}
+\contentsline {section}{\numberline {6.6}An\'alisis}{91}{section.6.6}
+\contentsline {chapter}{\numberline {7}Conclusiones}{93}{chapter.7}
+\contentsline {chapter}{\numberline {8}Ap\'endice}{96}{chapter.8}
+\contentsline {section}{\numberline {8.1}Appendix 1: Transformaci\'on de Coordenadas}{96}{section.8.1}
+\contentsline {section}{\numberline {8.2}Appendix 2: El archivo CDM}{98}{section.8.2}

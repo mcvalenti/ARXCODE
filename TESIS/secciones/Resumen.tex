@@ -9,7 +9,7 @@ En la actualidad, adem\'as de la distancia m\'inima de acercamiento, debe consid
 
 Para la construcci\'on de la matriz de covarianza de la posici\'on del desecho correspondiente al \'ultimo TLE disponible m\'as cercano al momento del m\'aximo acercamiento \ac{TCA}, se implementa el m\'etodo desarrollado por Osweiler \citep{osweiler}.
 Para la estimaci\'on de los errores que introducen las propagaciones de los TLE, con el modelo de propagaci\'on anal\'itico \ac{SGP4} se desarroll\'o una metodolog\'ia que incorpora el análisis hist\'orico de los productos orbitales precisos de la misi\'on SAC-D.
-Finalmente para el c\'alculo de la probabilidad de colisi\'on, se implementa un m\'etodo simplificado desarrollado por Lei-Chen \citep{leichen}.
+Finalmente para el c\'alculo de la probabilidad de colisi\'on, se implementaron tres m\'etodos con complejidades diferentes: m\'etodo del l\'imite \citep{alfano2008method}, m\'etodo de Lei-Chen, \citep{leichen} y m\'etodo de Akella \& Alfriend \citep{akellaAlfriend}.
 
 ARxCODE es una herramienta que ofrece a los operadores de los centros de control de misi\'on, una visi\'on m\'as clara de las situaciones de encuentro, para los momentos de di\'alogo e intercambio de informaci\'on con los organismos internacionales de alerta.
 
