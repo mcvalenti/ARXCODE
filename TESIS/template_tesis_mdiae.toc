@@ -40,27 +40,29 @@
 \contentsline {subsection}{\numberline {3.1.5}Interfaces}{51}{subsection.3.1.5}
 \contentsline {section}{\numberline {3.2}Especificaciones Finales}{52}{section.3.2}
 \contentsline {subsection}{\numberline {3.2.1}Requerimientos Finales}{52}{subsection.3.2.1}
-\contentsline {section}{\numberline {3.3}Flujo din\'amico de ARxCODE}{54}{section.3.3}
-\contentsline {chapter}{\numberline {4}Metodolog\IeC {\'\i }a de Desarrollo}{56}{chapter.4}
-\contentsline {section}{\numberline {4.1}Plan de Desarrollo}{56}{section.4.1}
-\contentsline {section}{\numberline {4.2}Entorno de Desarrollo}{58}{section.4.2}
-\contentsline {chapter}{\numberline {5}Dise\IeC {\~n}o, Seguimiento y Control}{60}{chapter.5}
-\contentsline {section}{\numberline {5.1}Arquitectura}{60}{section.5.1}
-\contentsline {section}{\numberline {5.2}Interfaces}{65}{section.5.2}
-\contentsline {section}{\numberline {5.3}Seguimiento y Control}{66}{section.5.3}
-\contentsline {subsection}{\numberline {5.3.1}Verificaci\'on y Validaci\'on}{66}{subsection.5.3.1}
-\contentsline {paragraph}{Aplicaci\'on}{67}{section*.122}
-\contentsline {subsection}{\numberline {5.3.2}Gesti\'on de la Configuraci\'on}{68}{subsection.5.3.2}
-\contentsline {subsection}{\numberline {5.3.3}Aseguramiento de la Calidad}{68}{subsection.5.3.3}
-\contentsline {chapter}{\numberline {6}Resultados}{70}{chapter.6}
-\contentsline {section}{\numberline {6.1}Introducci\'on}{70}{section.6.1}
-\contentsline {section}{\numberline {6.2}Implementaci\'on del modelo SGP4 en Python}{71}{section.6.2}
-\contentsline {section}{\numberline {6.3}Estudio de errores de TLE con datos hist\'oricos}{72}{section.6.3}
-\contentsline {section}{\numberline {6.4}Estudio de errores de TLE con efem\'erides precisas}{75}{section.6.4}
-\contentsline {section}{\numberline {6.5}C\'alculo de la Probabilidad de Colisi\'on}{78}{section.6.5}
-\contentsline {paragraph}{El caso \# 1}{89}{section*.172}
-\contentsline {section}{\numberline {6.6}An\'alisis}{91}{section.6.6}
-\contentsline {chapter}{\numberline {7}Conclusiones}{93}{chapter.7}
-\contentsline {chapter}{\numberline {8}Ap\'endice}{96}{chapter.8}
-\contentsline {section}{\numberline {8.1}Appendix 1: Transformaci\'on de Coordenadas}{96}{section.8.1}
-\contentsline {section}{\numberline {8.2}Appendix 2: El archivo CDM}{98}{section.8.2}
+\contentsline {subsection}{\numberline {3.2.2}Flujo din\'amico de ARxCODE}{54}{subsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2.3}Arquitectura}{54}{subsection.3.2.3}
+\contentsline {subsection}{\numberline {3.2.4}Interfaces}{60}{subsection.3.2.4}
+\contentsline {chapter}{\numberline {4}Metodolog\IeC {\'\i }a de Desarrollo}{61}{chapter.4}
+\contentsline {section}{\numberline {4.1}Plan de Desarrollo}{61}{section.4.1}
+\contentsline {section}{\numberline {4.2}Entorno de Desarrollo}{63}{section.4.2}
+\contentsline {chapter}{\numberline {5}Aseguramiento de la Calidad}{65}{chapter.5}
+\contentsline {section}{\numberline {5.1}Prop\'osito}{65}{section.5.1}
+\contentsline {paragraph}{Documento de referencia}{65}{section*.115}
+\contentsline {section}{\numberline {5.2}Ciclo de vida}{65}{section.5.2}
+\contentsline {section}{\numberline {5.3}Actividades}{65}{section.5.3}
+\contentsline {section}{\numberline {5.4}Verificaci\'on y Validaci\'on}{67}{section.5.4}
+\contentsline {paragraph}{Aplicaci\'on}{69}{section*.131}
+\contentsline {section}{\numberline {5.5}Gesti\'on de la Configuraci\'on}{70}{section.5.5}
+\contentsline {chapter}{\numberline {6}Resultados}{72}{chapter.6}
+\contentsline {section}{\numberline {6.1}Introducci\'on}{72}{section.6.1}
+\contentsline {section}{\numberline {6.2}Implementaci\'on del modelo SGP4 en Python}{73}{section.6.2}
+\contentsline {section}{\numberline {6.3}Estudio de errores de TLE con datos hist\'oricos}{74}{section.6.3}
+\contentsline {section}{\numberline {6.4}Estudio de errores de TLE con efem\'erides precisas}{77}{section.6.4}
+\contentsline {section}{\numberline {6.5}C\'alculo de la Probabilidad de Colisi\'on}{80}{section.6.5}
+\contentsline {paragraph}{El caso \# 1}{91}{section*.183}
+\contentsline {section}{\numberline {6.6}An\'alisis}{93}{section.6.6}
+\contentsline {chapter}{\numberline {7}Conclusiones}{95}{chapter.7}
+\contentsline {chapter}{\numberline {8}Ap\'endice}{98}{chapter.8}
+\contentsline {section}{\numberline {8.1}Appendix 1: Transformaci\'on de Coordenadas}{98}{section.8.1}
+\contentsline {section}{\numberline {8.2}Appendix 2: El archivo CDM}{100}{section.8.2}

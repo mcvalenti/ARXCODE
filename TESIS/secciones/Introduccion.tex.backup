@@ -447,9 +447,9 @@ El cap\'itulo 4: {\bf{Metodolog\'ia de Desarrollo}}, se informa el plan de desar
 
 En el cap\'itulo 5 de {\bf{Dise\~no, seguimiento y control}}, se describe la arquitectura, las interfaces, el plan de verificaci\'on y control, y se hace una breve  menci\'on al control de configuraci\'on y el aseguramiento de la calidad. 
 
-En el cap\'itulo de {\bf{Validaciones y Resultados}} se muestran los resultados m\'as significativos que se obtienen al utilizar el ARxCODE, y resultados intermedios que fueron necesarios para la generaci\'on de los productos finales. En cada caso se indica la fuente que se utiliz\'o para validarlos y se presentan valores comparativos en tablas o gr\'aficos. Al final del cap\'itulo se realiza un an\'alisis de los mismos. 
+En el cap\'itulo 6 de {\bf{Resultados}} se muestran los resultados m\'as significativos que se obtienen al utilizar el ARxCODE, y resultados intermedios que fueron necesarios para la generaci\'on de los productos finales. En cada caso se indica la fuente que se utiliz\'o para validarlos y se presentan valores comparativos en tablas o gr\'aficos. Al final del cap\'itulo se realiza un an\'alisis de los mismos. 
 
-Finalmente el cap\'itulo 6, contiene las {\bf{Conclusiones}} y el trabajo a futuro. 
+Finalmente el cap\'itulo 7, contiene las {\bf{Conclusiones}} y el trabajo a futuro. 
 
 
 \endinput
