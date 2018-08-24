@@ -1,8 +1,3 @@
-'''
-Created on 26/06/2017
-
-@author: mcvalenti
-'''
 
 '''
 Created on 26/01/2017

@@ -23,7 +23,7 @@ mission= "SAC-D"
 # ------------------------------------------------------------
 # IMPRESION DE DATOS 
 # ------------------------------------------------------------
-canvas = canvas.Canvas("../Encuentro/registros/hello.pdf")
+canvas = canvas.Canvas("../Encuentro/registros/registro_prueba.pdf")
 
 canvas.setLineWidth(.3)
 canvas.setFont('Helvetica', 12)

@@ -8,25 +8,29 @@ import numpy as np
 from datetime import datetime, timedelta
 from PyQt4.QtGui import *
 from PyQt4.QtCore import *
-from CDM.cdmParser import CDM,extraeCDM
-#from pruebas.claseTle import Tle, Encuentro
-#from TleAdmin.TleArchivos import divide_setTLE
+from CDM.cdmParser import CDM
 from TleAdmin.TLE import Tle
 from Encuentro.Encuentro import Encuentro
-#from TleAdmin.get_tle import importarSetTLE
-from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
-from Estadistica.maCovar import EjecutaMaCovar, EjecutaMaCovarCODS
-#from Encuentro.akellaPoC import evaluaEncuentro
-from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods, dif_tleCODS15dias
+from Estadistica.maCovar import EjecutaMaCovarCODS
+from Comparar.TlevsCodsOSW import dif_tleCODS15dias
 from visual import ploteos
-#from visual.trackencuentro import grafica_track
-from visual.TleOsweiler import VerGrafico
-# #from visual.TlevsCodsGraf import VerGraficoMision
-# from visual.CodsOsweiler import VerGraficoCods
-from visual.binGraf import histograma_bin, desviacion_standard_graf
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 from Validaciones.valida_PoC import proyecta_plano_de_encuentro, calcula_Poc_manual
+#---------------------------
+# Importaciones comentadas
+#---------------------------
+#from pruebas.claseTle import Tle, Encuentro
+#from TleAdmin.TleArchivos import divide_setTLE
+#from TleAdmin.get_tle import importarSetTLE
+#from AjustarTLE.AjustarTLE import generadorDatos, ordenaTles, difTle, difPrimario, genera_estadisticaBin
+#from Encuentro.akellaPoC import evaluaEncuentro
+#from visual.trackencuentro import grafica_track
+# #from visual.TlevsCodsGraf import VerGraficoMision
+# from visual.CodsOsweiler import VerGraficoCods
+#from Comparar.TlevsCodsOSW import ejecutaProcesamientoCods
+#from visual.TleOsweiler import VerGrafico
+#from visual.binGraf import histograma_bin, desviacion_standard_graf
 
 class ProcARxCODE(QMainWindow):
     
@@ -372,13 +376,6 @@ class ProcCDM(QWidget):
     
     def salirCdm(self):
         self.close()
-
-class EmittingStream(QObject):
-
-    textWritten = pyqtSignal(str)
-
-    def write(self, text):
-        self.textWritten.emit(str(text))
         
 class ProcEncuentro(QWidget):
  #   def __init__(self,parent=None):
@@ -406,8 +403,6 @@ class ProcEncuentro(QWidget):
             self.maCovar_deb=None  
             self.propagacion_errores=[]   
         self.initUI()
-        
-        sys.stdout = EmittingStream(textWritten=self.normalOutputWritten)
         
     def initUI(self):
         self.palette = QPalette()
@@ -451,7 +446,7 @@ class ProcEncuentro(QWidget):
         self.tca_text    = QDateEdit()  
         self.tca_text.setDate(self.qdate)
         self.tca_text.setCalendarPopup(True)
-        self.te_process   =QTextEdit()
+        
         """
         Otros
         """
@@ -488,11 +483,11 @@ class ProcEncuentro(QWidget):
         lab_metodo     = QLabel('METODO')
         lab_hitradio   = QLabel('HR (hitradius) [km]')
         self.le_hitradio    = QLineEdit()
-        cbox_metodos   = QComboBox()
-        metodos_list   = ['Lei-Chen','Akella','Max Poc']
-        cbox_metodos.addItems(metodos_list)
+        self.cbox_metodos   = QComboBox()
+        metodos_list   = ['Lei-Chen','Akella','Limit']
+        self.cbox_metodos.addItems(metodos_list)
         layH_config.addWidget(lab_metodo)
-        layH_config.addWidget(cbox_metodos)
+        layH_config.addWidget(self.cbox_metodos)
         layH_config.addWidget(lab_hitradio)
         layH_config.addWidget(self.le_hitradio)
         gbox_poc_config.setLayout(layH_config)
@@ -552,7 +547,6 @@ class ProcEncuentro(QWidget):
         # horizontal box layout
         hlayout_principal = QHBoxLayout()
         hlayout_principal.addLayout(layV_principal)
-        hlayout_principal.addWidget(self.te_process)
         self.setLayout(hlayout_principal)
         #self.setFixedSize(hlayout_principal.sizeHint()) !agranda verticalmente la pantalla y no se lee!!
      
@@ -572,7 +566,6 @@ class ProcEncuentro(QWidget):
 #        self.boton_dif.clicked.connect(self.mostrarDif)
         self.boton_track.setEnabled(False)
 #        self.boton_dif.setEnabled(False)
-
 #         self.setLayout(layV_principal)
 #         self.setFixedSize(layV_principal.sizeHint())
         self.setWindowTitle('Procesamiento con ARxCODE')    
@@ -624,25 +617,25 @@ class ProcEncuentro(QWidget):
         encuentro1=Encuentro(tle_sat,tle_deb,self.tca,self.hit_rad)
         self.min_dist= encuentro1.mod_minDist
         self.tca_calc= encuentro1.tca_c
+        self.poc_method=str(self.cbox_metodos.currentText())
         #self.ma_comb, self.maCovar_sat, self.maCovar_deb= encuentro1.calculaMacombinada() # ! Ojo!! devuelve siempre lo mismo!
-        self.poc_arx=encuentro1.calculaPoC_circ()
-        #self.poc_arx=encuentro1.calculaPoC_akella()
+        if self.poc_method=='Lei-Chen':
+            self.poc_arx=encuentro1.calculaPoC_circ()
+        elif self.poc_method=='Limite':
+            self.poc_arx=encuentro1.calculaPoC_limite()
+        else:   
+            self.poc_arx=encuentro1.calculaPoC_akella()
+        print 'Se utilizo el metodo: ', self.poc_method
         self.maCovar_sat=encuentro1.ma_sat_RTN_tca
         self.maCovar_deb=encuentro1.ma_deb_RTN_tca
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
         self.tableEncuentro.setItem(0,1, QTableWidgetItem(str(round(self.min_dist,6))))
         self.tableEncuentro.setItem(0,2, QTableWidgetItem(str(round(self.poc_arx,8))))
-        # formato de tabla
-#         header = self.tableEncuentro.horizontalHeader()
-#         header.setResizeMode(0,QHeaderView.ResizeToContents)
-#         header.setResizeMode(1,QHeaderView.ResizeToContents)
-#         header.setResizeMode(2,QHeaderView.ResizeToContents)
-#         header.setResizeMode(3,QHeaderView.ResizeToContents)
         # archivo de diferencias.
         self.archivo_dif=encuentro1.archivo_dif
         print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.tca_c
-#        grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
-#        print 'fin del procesamiento.'
+        #grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
+        #print 'fin del procesamiento.'
        
         self.boton_track.setEnabled(True)
 #        self.boton_dif.setEnabled(True)
@@ -690,15 +683,7 @@ class ProcEncuentro(QWidget):
     def __del__(self):
         # Restore sys.stdout
         sys.stdout = sys.__stdout__
-     
-    def normalOutputWritten(self, text):
-        """Append text to the QTextEdit."""
-        # Maybe QTextEdit.append() works as well, but this is how I do it:
-        cursor = self.te_process.textCursor()
-        cursor.movePosition(QTextCursor.End)
-        cursor.insertText(text)
-        self.te_process.setTextCursor(cursor)
-        self.te_process.ensureCursorVisible()
+
         
     def salir(self):
         self.close() 

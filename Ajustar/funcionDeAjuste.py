@@ -1,19 +1,14 @@
 '''
 Created on 20/01/2017
-
 Este modulo toma las tablas que contienen las diferencias 
 entre los datos TLE y los datos CODS, para las coordenadas
 u,v y w; hace un ajuste con la funcion Polynomial y luego
 hace las graficas. 
-
 @author: mcvalenti
 '''
 from os import system
-import numpy as np
 import numpy.polynomial as P
-from datetime import datetime
-from astropy.time import Time
-from funcionesUtiles.funciones import toTimestamp
+#from astropy.time import Time
 
 def funcionDeAjuste(arch1,arch2):
     """
@@ -32,7 +27,6 @@ def funcionDeAjuste(arch1,arch2):
         ajustesUVW.eps: grafico con las diferencias y el ajuste en las 3 componentes.
         
     """
-    
     datos=open('diferencias/'+arch1,'r')
     salida=open('diferencias/diferenciasAjustadas','w')
     JD=[]
@@ -43,7 +37,7 @@ def funcionDeAjuste(arch1,arch2):
     for l in datos1:
         campos=l.split()
         dt=l[:19]
-        dt=Time(dt, format='iso')
+        #dt=Time(dt, format='iso')
         juliano1=dt.jd
         JD.append(juliano1-2456600)
 #         dt=datetime.strptime(dt,'%Y-%m-%d %H:%M:%S')
@@ -78,8 +72,7 @@ def funcionDeAjuste(arch1,arch2):
         y4.append(cw+bw*z+aw*z*z)
     for k in range(len(JD)):
         info1=str(JD[k])+' '+str(u[k])+' '+str(v[k])+' '+str(w[k])+' '+str(y2[k])+' '+str(y3[k])+' '+str(y4[k])+'\n'
-        salida.write(info1)
-        
+        salida.write(info1)    
     """
     Grafico
     """   
@@ -88,7 +81,6 @@ def funcionDeAjuste(arch1,arch2):
 if __name__=='__main__':
     
     print 'Procesamiento iniciado ....'
-    
     funcionDeAjuste('diferenciasUVW','ajustesGraf')
     print 'Fin'
         

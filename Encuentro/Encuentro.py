@@ -4,8 +4,7 @@ Created on 23/06/2017
 @author: mcvalenti
 '''
 import numpy as np
-from scipy.integrate import dblquad, nquad
-import scipy.integrate as integrate
+from scipy.integrate import nquad
 from numpy.linalg import inv
 import sys
 from Aplicacion.globals import tabla
@@ -293,18 +292,18 @@ class Encuentro():
         # Generacion y propagacion de las matrices de covarianza en RTN
         #=======================================================================
         # OSWEILER
-        sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
-        deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
+#         sat_maOSW_RTN=self.genera_maOSW_RTN(self.tle_sat.catID(),self.tle_sat.epoca())
+#         deb_maOSW_RTN=self.genera_maOSW_RTN(self.tle_deb.catID(), self.tle_deb.epoca())
         # Propagacion de errores.
-        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
+#        self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(sat_maOSW_RTN, deb_maOSW_RTN)
         #------------------------------------------------------------------------
         # SOCRATES
-#         sat_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
-#         deb_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        sat_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
+        deb_maSOC_RTN=np.array([[0.1*0.1,0,0],[0,0.3*0.3,0],[0,0,0.1*0.1]])
         # Propagacion de errores.
         #self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
-#         self.ma_sat_RTN_tca=sat_maSOC_RTN
-#         self.ma_deb_RTN_tca=deb_maSOC_RTN
+        self.ma_sat_RTN_tca=sat_maSOC_RTN
+        self.ma_deb_RTN_tca=deb_maSOC_RTN
         #--------------------------------------------------------------------------
         self.ma_sat_RTN_tca, self.ma_deb_RTN_tca=self.suma_prop_errores(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)
         mu_x,mu_y,var_x,var_y=self.proyecta_alplano_encuentro(self.ma_sat_RTN_tca, self.ma_deb_RTN_tca)

@@ -8,11 +8,11 @@ from PyQt4.QtGui import *
 from PyQt4.QtCore import *
 import matplotlib.dates as mdates
 import datetime as dt
-from Comparar.TleVsCods import EjecutaComparacion
+#from Comparar.TleVsCods import EjecutaComparacion
 from Estadistica.maCovar import EjecutaMaCovarCODS
 from visual.TlevsCodsGraf import VerGraficoMision
 from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
+#from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
 import matplotlib.pyplot as plt
 
 
@@ -178,8 +178,8 @@ class ProcCODS(QWidget):
         print 'El archivo CODS es: ', self.archivoCODS
         self.CODS_comp_edit.setText(self.archivoCODS)
         
-    def ProcDif(self):
-        self.diferencias=EjecutaComparacion(self.sat_id, self.archivoTLE, self.archivoCODS)
+    #def ProcDif(self):
+        #self.diferencias=EjecutaComparacion(self.sat_id, self.archivoTLE, self.archivoCODS)
         
     def Macovar(self):
         self.macovarT=EjecutaMaCovarCODS(self.diferencias)
@@ -212,7 +212,7 @@ class Figura(QDialog):
         self.canvas = FigureCanvas(self.figure)
 
         # this is the Navigation widget
-        self.toolbar = NavigationToolbar(self.canvas, self)
+        #self.toolbar = NavigationToolbar(self.canvas, self)
 
         # Just some button connected to `plot` method
         self.button = QPushButton('Plot')
