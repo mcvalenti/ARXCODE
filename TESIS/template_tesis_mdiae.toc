@@ -64,5 +64,5 @@
 \contentsline {section}{\numberline {6.6}An\'alisis}{93}{section.6.6}
 \contentsline {chapter}{\numberline {7}Conclusiones}{95}{chapter.7}
 \contentsline {chapter}{\numberline {8}Ap\'endice}{98}{chapter.8}
-\contentsline {section}{\numberline {8.1}Appendix 1: Transformaci\'on de Coordenadas}{98}{section.8.1}
-\contentsline {section}{\numberline {8.2}Appendix 2: El archivo CDM}{100}{section.8.2}
+\contentsline {section}{\numberline {8.1}A1: Transformaci\'on de Coordenadas}{98}{section.8.1}
+\contentsline {section}{\numberline {8.2}A2: El archivo CDM}{100}{section.8.2}

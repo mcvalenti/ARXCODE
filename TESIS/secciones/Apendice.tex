@@ -1,15 +1,16 @@
 \chapter{Ap\'endice}
-\section{Appendix 1: Transformaci\'on de Coordenadas}
+\section{A1: Transformaci\'on de Coordenadas}
 \label{App1}
 
 %[Montenbruck, Vallado Revisitin, Vallado Coorde Sys, tabla de Boado]
 
 Para la comparaci\'on de las posiciones en coordenadas cartesianas, es necesario llevar ambos vectores a un mismo sistema de referencia.
-La figura (ref) muestra un resumen de los distintos sistemas y las consideraciones de cada uno. 
+La figura \ref{fig:sistReferenciasAp} muestra un resumen de los distintos sistemas y las consideraciones de cada uno. 
 
 \begin{figure}[!h]
   \centering
   \includegraphics[width=0.7\textwidth]{imagenes/sistReferencias}
+  \label{fig:sistReferenciasAp}
 \end{figure}
 
 En nuestro caso en particular, los datos que provee CODS se publican en el sistema TOD: True of Date (Verdadero de la \'epoca), mientras que los vectores de estado que genera el propagador SGP4 est\'an calculados en el sistema TEME: True Equator Mean Equinox (Ecuador Verdadero y Equinoccio Medio), tambi\'en denominado UOD (Uniform Equinox of Date).
@@ -71,7 +72,7 @@ Y el resto de los par\'ametros se calcula seg\'un las expresiones:\\
 
 \newpage
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Appendix 2: El archivo CDM}
+\section{A2: El archivo CDM}
 \label{App2}
 
 \lstset{language=XML,basicstyle=\small}

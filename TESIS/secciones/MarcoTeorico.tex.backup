@@ -31,8 +31,8 @@ Al estudio de posiciones orbitales se lo puede dividir en tres etapas: medici\'o
 
 \begin{itemize}
 \itemsep0em
- \item {\bf{Medici\'on y/o rastreo:}} Abarca las mediciones desde Tierra, con radares, instrumentos \'opticos, l\'aser o doppler; y en el caso de las misiones operativas, sistemas de navegaci\'on abordo, como por ejemplo GPS (Global Positioning System).\\
- \item {\bf{Determinaci\'on Orbital:}} Consiste en la utilizaci\'on de modelos de la \'orbita, que incorporan las mediciones y datos del entorno espacial (atm\'osfera, radiaci\'on solar, etc ) para ajustar los par\'ametros del modelo. Son procesamientos que se realizan a posteriori y que ofrecen distintos grados de precisión seg\'un las consideraciones que se tengan en cuenta.\\
+ \item {\bf{Medici\'on y/o rastreo:}} Abarca las mediciones desde la Tierra, con radares, instrumentos \'opticos, l\'aser o doppler; y en el caso de las misiones operativas, sistemas de navegaci\'on abordo, como por ejemplo GPS (Global Positioning System).\\
+ \item {\bf{Determinaci\'on Orbital:}} Consiste en la utilizaci\'on de modelos de la \'orbita, que incorporan las mediciones y datos del entorno espacial (atm\'osfera, radiaci\'on solar, etc.) para ajustar los par\'ametros del modelo. Son procesamientos que se realizan a posteriori y que ofrecen distintos grados de precisión seg\'un las consideraciones que se tengan en cuenta.\\
  \item {\bf{Propagaci\'on Orbital:}} Es el proceso mediante el cual, se extrapolan hacia el futuro las \'orbitas calculadas mediante determinaci\'on orbital.\\
 \end{itemize}
 
@@ -104,15 +104,15 @@ En la segunda l\'inea se ubican los elementos orbitales cl\'asicos medios: incli
 \subsection{El propagador SGP4}\label{subsec:sgp4model}
 De acuerdo a las rese\~nas hist\'orica presentadas por Hoots \citep{hootshistoria}, \citep{hoots2004history}, los or\'igenes del propagador SGP4 se remontan al a\~no 1960 en EE.UU, cuando se desarroll\'o el modelo General Simplificado de Perturbaciones o SGP ({\it{Simplified General Pertubations}}).
 
-Los fundametos te\'oricos inician en el a\~no 1959, durante ese a\~no bajo el proyecto SPACETRACK, Dirk Brouwer desarroll\'o una soluci\'on para calcular las \'orbitas de sat\'elites cercanos a la Tierra considerando la influecia de las perturbaciones gravitatorias de los arm\'onicos $J_{2}$, $J_{3}$ y $J_{4}$ \citep{brouwer1959solution}. En paralelo Yoshihide Kozai preset\'o otra soluci\'on al mismo problema \citep{kozai1962second}.
+Los fundametos te\'oricos inician en el a\~no 1959, durante ese a\~no bajo el proyecto SPACETRACK, Dirk Brouwer desarroll\'o una soluci\'on para calcular las \'orbitas de sat\'elites cercanos a la Tierra considerando la influecia de las perturbaciones gravitatorias de los arm\'onicos $J_{2}$, $J_{3}$ y $J_{4}$ \citep{brouwer1959solution}. En paralelo Yoshihide Kozai present\'o otra soluci\'on al mismo problema \citep{kozai1962second}.
 
-En 1961 Brouwer junto a Hori \citep{brouwer1961theoretical}, desarrollaron una modificaci\'on sobre el modelo para incorporar los efectos de la atm\'osfera. El modelo de densidad de la atm\'osfera de aquel desarrollo consideraba una densidad atmosf\'erica est\'atica, exponencial, de escala constante con la altura. Este planteo conduc\'ia a una expansi\'on en series, de convergencia lenta que imposibilitaba su implementaci\'on en las computadoras de la \'epoca. As\'i mismo, a comienzos del a\~no 1960, el grupo del Centro de Control de Vigilancia Espacial de Massachuset (NSSCC, por sus siglas en ingl\'es) desarroll\'o un nuevo modelo de densidad atmosf\'erica asumiendo que la escala de alturas var\'ia linealmente con la altura y considerando las ecuaciones b\'asicas de la hidrost\'atica. El resultado es una representaci\'on de la atm\'osfera que evita la expansi\'on en series porque utiliza potencias de funciones con exponentes integrales. Esto permiti\'o la inclusi\'on del efecto del frenado atmosf\'erico o drag en el modelo de Brouwer en forma m\'as compacta y completa. La incorporaci\'on de este nuevo modelo de densidad atmosf\'erica al planteo del modelo orbital fue desarrollado por Max Lane en el a\~no 1965 \citep{lane1965development} con posteriores mejoras de Lane y Cranford en 1969 \citep{cranfordimproved}. Lyddane \citep{lyddane1963small} sum\'o un aporte importante en 1963 reformulando las variables de Delaunay que hab\'ia utilizado Brouwer, a variables de Poincar\'e para evitar divisiones por cero en las excentricidades y los senos de la incliaci\'on.
+En 1961 Brouwer junto a Hori \citep{brouwer1961theoretical}, desarrollaron una modificaci\'on sobre el modelo para incorporar los efectos de la atm\'osfera. El modelo de densidad de la atm\'osfera de aquel desarrollo consideraba una densidad atmosf\'erica est\'atica, exponencial, de escala constante con la altura. Este planteo conduc\'ia a una expansi\'on en series, de convergencia lenta que imposibilitaba su implementaci\'on en las computadoras de la \'epoca. As\'i mismo, a comienzos del a\~no 1960, el grupo del Centro de Control de Vigilancia Espacial de Massachusetts (NSSCC, por sus siglas en ingl\'es) desarroll\'o un nuevo modelo de densidad atmosf\'erica asumiendo que la escala de alturas var\'ia linealmente con la altura y considerando las ecuaciones b\'asicas de la hidrost\'atica. El resultado es una representaci\'on de la atm\'osfera que evita la expansi\'on en series porque utiliza potencias de funciones con exponentes integrales. Esto permiti\'o la inclusi\'on del efecto del frenado atmosf\'erico o drag en el modelo de Brouwer en forma m\'as compacta y completa. La incorporaci\'on de este nuevo modelo de densidad atmosf\'erica al planteo del modelo orbital fue desarrollado por Max Lane en el a\~no 1965 \citep{lane1965development} con posteriores mejoras de Lane y Cranford en 1969 \citep{cranfordimproved}. Lyddane \citep{lyddane1963small} sum\'o un aporte importante en 1963 reformulando las variables de Delaunay que hab\'ia utilizado Brouwer, a variables de Poincar\'e para evitar divisiones por cero en las excentricidades y los senos de la incliaci\'on.
 
 La implementaci\'on operativa de estas teor\'ias transcurri\'o entre los a\~nos 1964 y 1979 y tuvo dos caminos. Por un lado el Sistema de Vigilancia Espacial Naval (NAVSPASUR, por sus siglas en ingl\'es) desarroll\'o el PP3 (Position and Partials of functios of time), y por otro en Colorado se desarroll\'o e implement\'o un modelo anal\'itico de predicci\'on orbital. El mismo se basaba en los trabajos de Brouwer y Kozai, a los que luego Arsenault, Chaffee y Kuhlman \citep{arsenault1964general} agregar\'ian modificaciones para la divisi\'on por cero de las excentricidades y los senos de la inclinaci\'on. La soluci\'on resultaba en una serie de par\'ametros no singulares que reten\'ia s\'olo los t\'erminos m\'as importantes. La implementaci\'on inclu\'ia s\'olo los t\'erminos de largo y corto per\'iodo que no contienen a la excentricidad como factor y tambi\'en adoptaba el modelo de Kozai que relaciona el movimiento medio al semieje mayor. Esta \'ultima implementaci\'on es finalmente, el modelo SGP mencionado al comienzo.
 
 Una mejora al SGP se logr\'o incorporando el modelo anal\'itico de densidad desarrollado por Lane y Cranford, pero luego el crecimiento de la cantidad de objetos en el cat\'alogo no hizo posible procesar el gran n\'umero de t\'erminos en el modelo. Esto condujo a una versi\'on simplificada del trabajo de Lane y Cranford que adem\'as, s\'olo retiene los t\'erminos principales del efecto secular del frenado atmosf\'erico \citep{lane1979general}. Las nuevas implementaciones se materializaron en el SGP4 desarrollado en 1970. En el mismo, se recorta el modelo de gravedad s\'olo a los t\'erminos de corto y largo per\'iodo que no contienen a la excentricidad como factor. 
 
-En el a\~no 1965 el lanzamiento del primer sat\'elite con una \'orbita de gran excentridad y per\'iodo de 12 horas motiv\'o la incorporaci\'on al modelo de los efectos gravitacionales del Sol y la Luna, as\'i como tambi\'en el efecto de las resonancias que producen los arm\'onicos teserales terrestres. En 1967 Bruce Bowman \citep{bowman1971first} presenta un tratamiento semianal\'itico para este tipo especial de \'orbitas y en 1977 Dick Hujsak \citep{hujsak1979restricted} incorpora parte del trabajo de Bowman a un nuevo modelo del SGP4. Esta incorporaci\'on completa el modelo SGP4 que se utiliza hoy en d\'ia.
+En el a\~no 1965 el lanzamiento del primer sat\'elite con una \'orbita de gran excentridad y per\'iodo de 12 horas motiv\'o la incorporaci\'on al modelo de los efectos gravitacionales del Sol y la Luna, as\'i como tambi\'en el efecto de las resonancias que producen los arm\'onicos teserales terrestres. En 1967 Bruce Bowman \citep{bowman1971first} presenta un tratamiento semianal\'itico para este tipo especial de \'orbitas y en 1977, Dick Hujsak \citep{hujsak1979restricted} incorpora parte del trabajo de Bowman a un nuevo modelo del SGP4. Esta incorporaci\'on completa el modelo SGP4 que se utiliza hoy en d\'ia.
 
 La primera versi\'on liberada del c\'odigo fuente del propagador SGP4 se public\'o en el Spacetrack Report Number 3 \citep{spacetrackreport3}. En 2004 Hoots public\'o un documento completo \citep{hoots2004history} con todas las ecuaciones (incluidas las correspondientes al modelo para espacio profundo); incorporando resonancias, las fuerzas que ejercen otros cuerpos, el frenado atmosf\'erico y otras perturbaciones en las t\'ecnicas matem\'aticas.
 
@@ -300,9 +300,6 @@ Luego se agrupan los valores seg\'un el intervalo de propagaci\'on, es decir, si
 \hline
 \end{tabular}
 \label{tab:resultatabla0}
-\begin{flushleft}
-\small Autor\'ia propia.
-\end{flushleft}
 \end{table}
 
 De la Tabla \ref{tab:resultatabla0} se extrae que la componente T es la que mayor error introduce; con valores del orden de centenas de metros. Esto se debe a que el modelo de propagaci\'on SGP4 es d\'ebil en su representaci\'on del efecto que imprime el frenado atmosf\'erico en la componente asociada al movimiento o {\it{along-track}} T. 
@@ -371,7 +368,7 @@ Sin embargo, la resoluci\'on compleja de esta integral de 3 dimensiones se simpl
 \end{itemize} 
 
 \subsubsection*{Objetos esf\'ericos}
-Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos los desechos orbitan con actitud fuera de control, de modo que considerarlos esf\'ericos no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamintos en este punto. 
+Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos los desechos orbitan con actitud fuera de control, de modo que considerarlos esf\'ericos no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamientos en este punto. 
 
 \subsubsection*{Matrices de covarianza no correlacionadas}
 Dado que los procesos de determinaci\'on orbital se calculan para cada objeto por separado, se desconoce c\'omo se correlacionan esas \'orbitas. Para poder estimarlo es necesario hacer procesamientos simult\'aneos considerando los mismos par\'ametros en los modelos de fuerza y el mismo bias para los sistemas de rastreo, entre otras cuestiones que resultan muy complejas y demandan mucho tiempo.
@@ -382,7 +379,7 @@ En uno de sus trabajos, Coppola \citep{coppola2004effects} examina la sensibilid
 La velocidad promedio de los objetos en \'orbitas bajas es muy alta, de aproximadamente 7 $km/s$. Esto quiere decir que la velocidad relativa en los encuentros en general, ser\'a superior, por lo que la duraci\'on del momento de encuentro ser\'a muy breve. Entonces, en ese breve intervalo que dura el encuentro es factible considerar las trayectorias lineales. Una demostraci\'on detallada se describe en \citep{arrufat2013study}
 
 \subsubsection*{Errores en la velocidad despreciables}
-En la misma direcci\'on que el punto anterior, dadas las altas velocidades implicadas y que los errores en la velocidad rondan algunos metros, los errores en las velocidades pueden despreciarse. 
+En la misma direcci\'on que el punto anterior, dadas las altas velocidades implicadas y que los errores en la velocidad rondan algunos metros por segundo, los errores en las velocidades pueden despreciarse. 
 
 \subsection{Simplificaci\'on del problema a dos dimensiones (2D)}
 
@@ -409,7 +406,7 @@ La distancia relativa entre ellos ser\'a:
   &=\tilde{\rho}+\bar{V}_rt
 \end{align*}
 
-Debido a que durante el encuentro los valores de la distancia relativa van disminuyendo, hasta que alcanzan la distancia m\'inima y luego comienzan a crecer nuevamente; en el momento del m\'aximo acercamiento, $t=TCA$, la variaci\'on de la distancia relativa atraviesa una transici\'on por el valor cero.
+Debido a que durante el encuentro los valores de la distancia relativa van disminuyendo hasta que alcanzan la distancia m\'inima, y luego comienzan a crecer nuevamente; en el momento del m\'aximo acercamiento, $t=TCA$, la variaci\'on de la distancia relativa atraviesa una transici\'on por el valor cero.
 Es decir, $\frac{d}{dt}(\tilde{\rho}.\tilde{\rho})=0$
 
 \begin{align*}
@@ -490,7 +487,7 @@ Distintos autores han desarrollado varios m\'etodos para el c\'alculo de la PoC 
 En este trabajo se implementaron tres m\'etodos de distinta complejidad. En primer lugar se utiliza una expresi\'on muy simplificada que no contempla los errores de las posiciones, m\'etodo del l\'imite  \citep{alfano2008method}. Luego se utiliza una aproximaci\'on del m\'etodo de Chan \citep{chan2003improved} para \'orbitas circulares propuesta por Lei-Chen \citep{leichen} y finalmente se calcula la integral de la PoC en dos dimensiones utilizando el m\'etodo de Akella \citep{akellaAlfriend}.
 
 \subsubsection{M\'etodo del l\'imite}
-El m\'etodo del l\'imite es una simple expresi\'on que s\'olo tiene en cuenta los valores de los radios de los objetos y la m\'inima distancia entre ellos, sin considerar los errores en la posici\'on. Este m\'etodo s\'olo ofrece una estimaci\'on grosera y siempre sobrestimada de la PoC, sin embargo es una cota puede ser un primer estimador cuando no se cuenta con valores para los errores o los datos no son de buena calidad. 
+El m\'etodo del l\'imite es una simple expresi\'on que s\'olo tiene en cuenta los valores de los radios de los objetos y la m\'inima distancia entre ellos, sin considerar los errores en la posici\'on. Este m\'etodo s\'olo ofrece una estimaci\'on grosera y siempre sobrestimada de la PoC, sin embargo es una cota que puede ser un primer estimador cuando no se cuenta con valores para los errores o los datos no son de buena calidad. 
 
 Es com\'un que al momento del an\'alisis  del encuentro no se cuente con datos precisos o confiables de los errores en la posici\'on de los objetos. En estos casos, los c\'alculos de la PoC con m\'etodos que utilizan la informaci\'on de las covarianzas resultan por debajo del valor real, desestimando situaciones que podr\'ian ser de de riesgo. 
 
@@ -859,7 +856,7 @@ Donde:
 \section{Comunicaciones de riesgo de colisi\'on}{\label{sec:anuncio}}
 
 
-A partir de los primeros accidentes y da\~nos por impactos, las agencias u organismos capaces de rastrear el ambiente espacial comenzaron a implementar sistemas de comunicaci\'on para advertir sobre posibles colisiones. Las comunicaciones, que en sus or\'igenes eran correos electr\'onicos particulares, fueron migrando a un mensaje formal y estandarizado y finalmente en Junio del 2013, el \ac{CCSDS}, public\'o el mensaje est\'andar recomendado que se utiliza en la actualidad, el: \ac{CDM} \citep{CDM}.\\
+A partir de los primeros accidentes y da\~nos por impactos, las agencias u organismos capaces de rastrear el ambiente espacial comenzaron a implementar sistemas de comunicaci\'on para advertir sobre posibles colisiones. Las comunicaciones, que en sus or\'igenes eran correos electr\'onicos particulares, fueron migrando a un mensaje formal y estandarizado y finalmente en junio del 2013, el \ac{CCSDS}, public\'o el mensaje est\'andar recomendado que se utiliza en la actualidad, el: \ac{CDM} \citep{CDM}.\\
 
 El {\it{CCSDS 508.0-B-1, Conjunction Data Message Recommended Standard}} describe en detalle la estructura del formato recomendado, aunque no propone formas de intercambio, dejando a las partes la potestad de acordar las distintas maneras de realizar la comunicaci\'on de los mismos, que, deber\'an ser detalladas en el documento de interfaces (ICD).\\
 
@@ -1024,7 +1021,7 @@ A tal fin, (Fig. \ref{fig:flujomain}):\\
 \item Se calcula la matriz de covarianza con el m\'etodo de Osweiler, \citep{osweiler} para el desecho (y para la misi\'on si los datos orbitales de la misma no se conocieran).
 \item Se propagan ambas matrices hasta el TCA utilizando los datos estad\'isticos de la tabla generada, seg\'un la cantidad de d\'ias que se necesite propagar.
 \item Se proyectan los distintos par\'ametros a un plano de encuentro que simplifica los c\'alculos.
-\item Se calcula la probabilidad de colisi\'on mediante la expresi\'on aproximada de Lei-Chen, \citep{leichen}.
+\item Se calcula la probabilidad de colisi\'on mediante los tres m\'etodos implementados:m\'etodo del l\'imite, m\'etodo de Lei-Chen y m\'etodo de Akella \& Alfriend.
 \end{itemize}
 
 \begin{figure}[!h]
