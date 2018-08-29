@@ -121,11 +121,12 @@ El propagador SGP4 es actualmente, el \'unico modelo para el mantenimiento del c
 \subsection{Sistemas de Referencia}\label{subsec:sistRef}
 
 \subsubsection*{\ac{TEME}}
- Es un sistema inercial con origen en el centro de la Tierra, que utiliza como plano fundamental el Ecuador Verdadero. El eje {\it{x}} se ubica en el plano del Ecuador Verdadero y apunta en la direcci\'on del Equinoccio Medio, el eje {\it{y}} tambi\'en se ubica sobre el plano ecuatorial a $90^{\circ}$ del eje {\it{x}}, y el eje {\it{z}} apunta en la direcci\'on del eje de rotaci\'on de la Tierra, perpendicular al plano ecuatorial. Sus siglas hacen referencia a un Ecuador Verdadero y un Equinoccio Medio o \ac{TEME}. Si bien no es un sistema convencional estandarizado, es el sistema que utiliza NORAD para la generaci\'on y propagaci\'on de los TLE, por lo que se encuentra ampliamente difundido.
+ Es un sistema inercial con origen en el centro de la Tierra, que utiliza como plano fundamental el Ecuador Verdadero. El eje {\it{x}} se ubica en el plano del Ecuador Verdadero y apunta en la direcci\'on del Equinoccio Medio, el eje {\it{y}} tambi\'en se ubica sobre el plano ecuatorial a $90^{\circ}$ del eje {\it{x}}, y el eje {\it{z}} apunta en la direcci\'on del eje de rotaci\'on de la Tierra, perpendicular al plano ecuatorial. Sus siglas hacen referencia a un Ecuador Verdadero y un Equinoccio Medio o \ac{TEME}. Si bien no es un sistema convencional estandarizado, es el sistema que utiliza NORAD para la generaci\'on y propagaci\'on de los TLE, por lo que se encuentra ampliamente difundido.\\
  
 \subsubsection*{True of Date (TOD)}}
  Al igual que el TEME, es un sistema inercial definido con origen en el centro de la Tierra, con plano fundamental el Ecuador Verdadero. Su eje {\it{x}} tambi\'en yace sobre el plano ecuatorial pero se orienta en la direcci\'on del Equinoccio Verdadero (de la fecha).\\
- En el Ap\'endice \ref{App1} se describe en forma detallada la transformaci\'on de coordenadas del sistema TEME al sistema TOD.
+ En el Ap\'endice \ref{App1} se describe en forma detallada la transformaci\'on de coordenadas del sistema TEME al sistema TOD.\\
+ 
  
 \subsubsection*{Sistemas centrados en el objeto}
 Los sistemas \ac{RSW} y \ac{NTW} son dos sistemas con origen centrado en el objeto (Figura \ref{fig:sistref}). Esta caracter\'istica ofrece ventajas cuando se hacen estudios de movimientos relativos, como en las misiones de sistemas distribuidos, o en los acoplamientos entre naves y tambi\'en aclaran la influencia de ciertos efectos perturbadores, como por ejemplo el del frenado atmosf\'erico, muy notorio en la componente a lo largo de la velocidad.\\
@@ -208,7 +209,7 @@ A partir de esa premisa, el autor propaga los TLEs anteriores hasta la \'epoca d
 
 \begin{figure}[!h]
 \centering
-\fbox{\includegraphics[width=0.8\textwidth]{imagenes/tleosw}}
+\fbox{\includegraphics[width=0.9\textwidth]{imagenes/tleosw}}
 \caption[M\'etodo de Osweiler, \citep{osweiler} para la generaci\'on de la matriz de covarianza]{Esquema del m\'etodo de Osweiler \citep{osweiler} para la generaci\'on de la matriz de covarianza a partir de un conjunto de TLE}
 \label{fig:tleosw}
 \end{figure}
@@ -368,7 +369,27 @@ Sin embargo, la resoluci\'on compleja de esta integral de 3 dimensiones se simpl
 \end{itemize} 
 
 \subsubsection*{Objetos esf\'ericos}
-Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos los desechos orbitan con actitud fuera de control, de modo que considerarlos esf\'ericos no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamientos en este punto. 
+Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos los desechos orbitan con actitud fuera de control, de modo que considerarlos esf\'ericos no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamientos en este punto.
+
+En la mayor\'ia de los casos se desconoce el tama\~no del desecho espacial involucrado, e incluso pude no conocerse con precisi\'on el radio de un objeto a\'un activo. De acuerdo a la estad\'istica, pueden utilizarse radios preasignados como se indican en la Tabla \ref{tab:radiosPreasig}.
+
+\begin{table}[!h]
+\caption[Tabla con los valores de radios preasignados.]{Valor de los radios preasignados seg\'un el tipo de objeto.}
+\begin{tabular}{lc}
+\hline \hline
+\rowcolor{green!35}
+Tipo de objeto & radio preasignado\\
+\hline \hline
+Cargas \'utiles y plataformas & 5 m\\
+\hline
+Fragmentos de Cohetes y objetos desconocidos & 3 m\\
+\hline
+Desechos espaciales & 1 m\\
+\hline
+\end{tabular}
+\label{tab:radiosPreasig}
+\end{table}
+
 
 \subsubsection*{Matrices de covarianza no correlacionadas}
 Dado que los procesos de determinaci\'on orbital se calculan para cada objeto por separado, se desconoce c\'omo se correlacionan esas \'orbitas. Para poder estimarlo es necesario hacer procesamientos simult\'aneos considerando los mismos par\'ametros en los modelos de fuerza y el mismo bias para los sistemas de rastreo, entre otras cuestiones que resultan muy complejas y demandan mucho tiempo.

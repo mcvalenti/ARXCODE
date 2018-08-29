@@ -332,7 +332,7 @@ Como se explic\'o en la Sec. \ref{subsec:errorProp}, para estimar los errores en
 \label{tab:resultatabla}
 \end{table}
 
-Los resultados que se encuentran, no es posible validarlos directamente. No obstante, son comparables a los que proponen Flohrer et al., \citep{flohrer2008assessment}, en la {\it{lookup table}} generada considerando todos los objetos del cat\'alogo al 01 de Enero de 2008 (Fig.  \ref{fig:flohrer}). Los valores de las desviaciones est\'andar que resultan del m\'etodo propuesto son menores casi en un orden de magnitud en la componente R y de igual orden en T y N en relaci\'on a los valores correspondientes a las tablas gen\'ericas que publican Flohrer et al., \citep{flohrer2008assessment}. Puede concluirse que el escenario de la misi\'on SAC-D est\'a contenido en la estad\'istica que refleja el trabajo de Flohrer. 
+Los resultados que se encuentran, no es posible validarlos directamente. No obstante, son comparables a los que proponen Flohrer et al., \citep{flohrer2008assessment}, en la {\it{lookup table}} generada considerando todos los objetos del cat\'alogo al 01 de Enero de 2008 (Fig.  \ref{fig:flohrer} y \ref{fig:flohrer2}). Los valores de las desviaciones est\'andar que resultan del m\'etodo propuesto son menores casi en un orden de magnitud en la componente R y de igual orden en T y N en relaci\'on a los valores correspondientes a las tablas gen\'ericas que publican Flohrer et al., \citep{flohrer2008assessment}. Puede concluirse que el escenario de la misi\'on SAC-D est\'a contenido en la estad\'istica que refleja el trabajo de Flohrer. 
 
 \begin{figure}[!h]
   \centering
@@ -340,6 +340,15 @@ Los resultados que se encuentran, no es posible validarlos directamente. No obst
   \caption{{\it{Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 1 de enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de Flohrer et al., \citep{flohrer2008assessment}}.
   \label{fig:flohrer}
 \end{figure}
+
+\begin{figure}[!h]
+  \centering
+  \fbox{\includegraphics[width=0.7\textwidth]{imagenes/FlohrerPorOrbita}}
+  \caption{Estimaci\'on de errores en las distintas componentes, clasificadas por tipo de \'orbita. \\ Extra\'ido de Flohrer et al., \citep{flohrer2008assessment}}.
+  \label{fig:flohrer2}
+\end{figure}
+
+Valores similares utiliza y propone el servicio SOCRATES, que considera una elipse de covarianza de 100 metros, 300 metros y 100 metros en las componentes radial (R), a lo largo de la trayectoria (T) y normal al plano orbital respectivamente (N).  
 
 % \begin{itemize}
 %  \item Klinkrad Tabla para 14 misiones.
@@ -356,12 +365,12 @@ Resta hacer pruebas que involucren todo el procedimiento, es decir, identificar 
 A tal fin, fue necesario conseguir registros que contuvieran la informaci\'on completa de una situaci\'on de encuentro.\\
 
 \subsection*{Casos de Prueba}
-Por un lado se consiguieron correos electr\'onicos de alerta p\'ublicos en internet, y por otro CDM tambi\'en p\'ublicos\footnote{https://cwe.ccsds.org/moims/docs/Forms/AllItems.aspx?RootFolder=\%2Fmoims\%2Fdocs\%2FMOIMS-NAV\%2FDraft\%20Documents\%2FConjunction\%20Data\%20Message\%20\%28CDM\%29}, pero ninguno de esos datos se corresponden con la misi\'on operativa, cuyas efem\'erides precisas analizamos y utilizamos en la construcci\'on del modelo estad\'istico de propagaci\'on de errores.
-As\'i mismo, ni los correos encontrados ni los CDM descargados contienen informaci\'on de la PoC asociada al encuentro. 
+Por un lado se consiguieron correos electr\'onicos de alerta p\'ublicos en internet, y por otro CDM tambi\'en p\'ublicos\footnote{https://cwe.ccsds.org/moims/docs/Forms/AllItems.aspx?RootFolder=\%2Fmoims\%2Fdocs\%2FMOIMS-NAV\%2FDraft\%20Documents\%2FConjunction\%20Data\%20Message\%20\%28CDM\%29}, pero ninguno de esos datos se corresponden con la misi\'on operativa, cuyas efem\'erides precisas analizamos y utilizamos en la construcci\'on del modelo estad\'istico de propagaci\'on de errores.\\
+As\'i mismo, ni los correos encontrados ni los CDM descargados contienen informaci\'on de la PoC asociada al encuentro.\\
 
 Formato de los {\bf{correos electr\'onicos}}:\\
 \begin{center}
-\fbox{\parbox[b]{0.8\linewidth}{\small{
+\fbox{\parbox[b]{0.9\linewidth}{\small{
 The United States Joint Space Operations Center (JSpOC) has identified a\\
 predicted conjunction between DELFI C3 (SCC\# 32789) and SCC\# 23657.\\
 

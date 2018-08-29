@@ -370,6 +370,24 @@ Sin embargo, la resoluci\'on compleja de esta integral de 3 dimensiones se simpl
 \subsubsection*{Objetos esf\'ericos}
 Considerar objetos esf\'ericos evita tener en cuenta la actitud de los objetos que agrega mucha complejidad a los c\'alculos. No obstante, asumir esferas es un resultado conservativo del problema, y en muchos casos los desechos orbitan con actitud fuera de control, de modo que considerarlos esf\'ericos no se aleja tanto de la situaci\'on real del objeto. Misiones m\'as complejas, extendidas y con tripulaci\'on como la Estaci\'on Espacial Internacional, requieren sin duda refinamientos en este punto. 
 
+\begin{table}[!h]
+\caption[Tabla con los valores de radios pre\-asignados.]{Valor de los radios pre\-asignados seg\'un el tipo de objeto.}
+\begin{tabular}{lc}
+\hline \hline
+\rowcolor{green!35}
+Tipo de objeto & radio preasignado\\
+\hline \hline
+Cargas \'utiles y plataformas & 5 m\\
+\hline
+Fragmentos de Cohetes y objetos desconocidos & 3 m\\
+\hline
+Desechos espaciales & 1 m\\
+\hline
+\end{tabular}
+\label{tab:radiosPreasig}
+\end{table}
+
+
 \subsubsection*{Matrices de covarianza no correlacionadas}
 Dado que los procesos de determinaci\'on orbital se calculan para cada objeto por separado, se desconoce c\'omo se correlacionan esas \'orbitas. Para poder estimarlo es necesario hacer procesamientos simult\'aneos considerando los mismos par\'ametros en los modelos de fuerza y el mismo bias para los sistemas de rastreo, entre otras cuestiones que resultan muy complejas y demandan mucho tiempo.
 
@@ -896,7 +914,7 @@ El mensaje contiene una {\it{keyword}} por l\'inea, y el orden en que se present
 
 \begin{itemize}
 \itemsep0em
-\item Un Encabezado.
+\item Un encabezado.
 \item Metadatos y datos relativos (datos que describen relaciones entre los objetos).
 \item Metadatos (datos respecto a c\'omo fueron creados los objetos).
 \item Datos de cada uno de los objetos.
@@ -1016,7 +1034,7 @@ A tal fin, (Fig. \ref{fig:flujomain}):\\
 
 \begin{itemize}
 \itemsep0em
-\item Se identifican los objetos involucrados, y se extra su identificador de NORAD y el TCA.
+\item Se identifican los objetos involucrados, y se extrae su identificador de NORAD y el TCA.
 \item Se solicitan los TLE de los \'ultimos 15 d\'ias m\'as pr\'oximos a la fecha del encuentro, para el desecho y para la misi\'on operativa en caso de no contar con datos m\'as precisos. Si para la misi\'on operativa se contara con productos orbitales propios se utilizar\'an los errores calculados asociados a los mismos.
 \item Se calcula la matriz de covarianza con el m\'etodo de Osweiler, \citep{osweiler} para el desecho (y para la misi\'on si los datos orbitales de la misma no se conocieran).
 \item Se propagan ambas matrices hasta el TCA utilizando los datos estad\'isticos de la tabla generada, seg\'un la cantidad de d\'ias que se necesite propagar.

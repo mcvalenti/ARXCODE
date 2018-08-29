@@ -19,47 +19,49 @@
 \contentsline {figure}{\numberline {2.4}{\ignorespaces Tabla de Estimaci\'on de errores.}}{30}{figure.caption.62}
 \contentsline {figure}{\numberline {2.5}{\ignorespaces El planteo general de la PoC}}{32}{figure.caption.64}
 \contentsline {figure}{\numberline {2.6}{\ignorespaces El plano de encuentro}}{32}{figure.caption.64}
-\contentsline {figure}{\numberline {2.7}{\ignorespaces Plano de Encuentro}}{37}{figure.caption.70}
-\contentsline {figure}{\numberline {2.8}{\ignorespaces M\'aximo acercamiento en \'orbitas circulares}}{39}{figure.caption.72}
-\contentsline {figure}{\numberline {2.10}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{40}{figure.caption.73}
-\contentsline {figure}{\numberline {2.11}{\ignorespaces Proyecci\'on de los elipsoides de error al plano de encuentro}}{40}{figure.caption.73}
-\contentsline {figure}{\numberline {2.12}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{41}{figure.caption.74}
-\contentsline {figure}{\numberline {2.13}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{47}{figure.caption.80}
-\contentsline {figure}{\numberline {2.14}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{48}{figure.caption.81}
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Plano de Encuentro}}{37}{figure.caption.71}
+\contentsline {figure}{\numberline {2.8}{\ignorespaces M\'aximo acercamiento en \'orbitas circulares}}{39}{figure.caption.73}
+\contentsline {figure}{\numberline {2.10}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{40}{figure.caption.74}
+\contentsline {figure}{\numberline {2.11}{\ignorespaces Proyecci\'on de los elipsoides de error al plano de encuentro}}{40}{figure.caption.74}
+\contentsline {figure}{\numberline {2.12}{\ignorespaces Plano de encuentro y proyecci\'on del sistema RSW}}{41}{figure.caption.75}
+\contentsline {figure}{\numberline {2.13}{\ignorespaces M\'etodos de c\'alculo de PoC - (Sitio Web SANA)}}{47}{figure.caption.81}
+\contentsline {figure}{\numberline {2.14}{\ignorespaces Esquema del Procedimiento General del c\'alculo de PoC}}{48}{figure.caption.82}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Casos de Uso de ARxCODE\relax }}{50}{figure.caption.83}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Diagrama de Interfaces del Sistema}}{52}{figure.caption.85}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{55}{figure.caption.89}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Componentes de ARxCODE\relax }}{56}{figure.caption.91}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Clases Tle y setTLE}}{57}{figure.caption.93}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{57}{figure.caption.93}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{57}{figure.caption.93}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Clases CDM y EphemCODS}}{58}{figure.caption.97}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{58}{figure.caption.97}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{58}{figure.caption.97}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Clase Encuentro}}{59}{figure.caption.102}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{60}{figure.caption.107}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Casos de Uso de ARxCODE\relax }}{50}{figure.caption.84}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Diagrama de Interfaces del Sistema}}{52}{figure.caption.86}
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Diagrama de Actividades de ARxCODE\relax }}{55}{figure.caption.90}
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Componentes de ARxCODE\relax }}{56}{figure.caption.92}
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Clases Tle y setTLE}}{57}{figure.caption.94}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase TLE (TleAdmin/TLE/Tle)}}}{57}{figure.caption.94}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase setTLE (TleAdmin/TLE/setTLE)}}}{57}{figure.caption.94}
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Clases CDM y EphemCODS}}{58}{figure.caption.98}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Clase CDM (CDM/CDM).}}}{58}{figure.caption.98}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Clase EphemCODS (CodsAdmin/EphemCODS)}}}{58}{figure.caption.98}
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Clase Encuentro}}{59}{figure.caption.103}
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Diagrama de Interfaces Implementadas en ARxCODE}}{60}{figure.caption.108}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Planificaci\'on de la distribuci\'on del total de horas asignadas dentro de la maestr\'ia al desarrollo y la escritura del trabajo de tesis.\relax }}{62}{figure.caption.108}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Planificaci\'on de las tareas agrupadas por semestres para el a\IeC {\~n}o 2016\relax }}{62}{figure.caption.109}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Planificaci\'on de las tareas agrupadas por semanas para el a\IeC {\~n}o 2017\relax }}{63}{figure.caption.110}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Metodolog\'ia iterativa incremental\relax }}{61}{figure.caption.109}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Planificaci\'on de la distribuci\'on del total de horas asignadas dentro de la maestr\'ia al desarrollo y la escritura del trabajo de tesis.\relax }}{62}{figure.caption.110}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Planificaci\'on de las tareas agrupadas por semestres para el a\IeC {\~n}o 2016\relax }}{62}{figure.caption.111}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Planificaci\'on de las tareas agrupadas por semanas para el a\IeC {\~n}o 2017\relax }}{63}{figure.caption.112}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquema de la metodolog\IeC {\'\i }a para realizar las pruebas de unidad sobre los m\IeC {\'o}dulos.\relax }}{68}{figure.caption.124}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Casos de Prueba I}}{69}{figure.caption.129}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Casos de Prueba II}}{70}{figure.caption.131}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Esquema de la metodolog\IeC {\'\i }a para realizar las pruebas de unidad sobre los m\IeC {\'o}dulos.\relax }}{68}{figure.caption.126}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Casos de Prueba I}}{69}{figure.caption.131}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Casos de Prueba II}}{70}{figure.caption.133}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {6.1}{\ignorespaces Esquematizaci\'on del algoritmo para comparar la propagaci\'on de cada TLE del set hacia fechas futuras de los TLE del set. Extra\'ido del trabajo de Osweiler, \citep {osweiler}\relax }}{76}{figure.caption.148}
-\contentsline {figure}{\numberline {6.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{76}{figure.caption.149}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{76}{figure.caption.149}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler, \citep {osweiler}}}}{76}{figure.caption.149}
-\contentsline {figure}{\numberline {6.3}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{77}{figure.caption.150}
-\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{77}{figure.caption.150}
-\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler, \citep {osweiler}}}}{77}{figure.caption.150}
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Diferencias en las posiciones propagadas durante el a\~no 2012 y las efem\'erides precisas generadas por CODS [Sistema TOD]\relax }}{78}{figure.caption.154}
-\contentsline {figure}{\numberline {6.5}{\ignorespaces Diferencias en las posiciones propagadas durante el a\~no 2013 y las efem\'erides precisas generadas por CODS [Sistema TOD]\relax }}{79}{figure.caption.155}
-\contentsline {figure}{\numberline {6.6}{\ignorespaces {\it {Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 1 de enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de Flohrer et al., \citep {flohrer2008assessment}\relax }}{80}{figure.caption.158}
-\contentsline {figure}{\numberline {6.7}{\ignorespaces Contenido de los correos electr\'onicos utilizados para comparar los resultados.\relax }}{81}{figure.caption.160}
-\contentsline {figure}{\numberline {6.8}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{82}{figure.caption.161}
-\contentsline {figure}{\numberline {6.9}{\ignorespaces Notificaci\'on del d\'ia 3 de Julio por parte de la ESA de la realizaci\'on de una maniobra evasiva para el Sentinel 1B (caso \#1). El texto dice: {\it {{\bf {Sentinel 1B}} maniobra evasiva el d\'ia 29 de Junio de 2018. Fue realizada una maniobra evasiva por el Sentinel 1B para reducir el riesgo de colisi\'on con un fragmento del IRIDIUM 33, potencialmente estimado para el d\'ia 29 de Junio de 2018 a las 22:22 UTC}} - Luego indica los productos satelitales afectados.\relax }}{92}{figure.caption.185}
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Esquematizaci\'on del algoritmo para comparar la propagaci\'on de cada TLE del set hacia fechas futuras de los TLE del set. Extra\'ido del trabajo de Osweiler, \citep {osweiler}\relax }}{76}{figure.caption.150}
+\contentsline {figure}{\numberline {6.2}{\ignorespaces Gr\'afico con Diferencias Totales del escenario ICESAT\relax }}{76}{figure.caption.151}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias ICESAT - ARxCODE}}}{76}{figure.caption.151}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias ICESAT - Osweiler, \citep {osweiler}}}}{76}{figure.caption.151}
+\contentsline {figure}{\numberline {6.3}{\ignorespaces Gr\'afico con Diferencias Totales del escenario LAGEOS-1\relax }}{77}{figure.caption.152}
+\contentsline {subfigure}{\numberline {(a)}{\ignorespaces {Diferencias LAGEOS-1 - ARxCODE}}}{77}{figure.caption.152}
+\contentsline {subfigure}{\numberline {(b)}{\ignorespaces {Diferencias LAGEOS-1 - Osweiler, \citep {osweiler}}}}{77}{figure.caption.152}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Diferencias en las posiciones propagadas durante el a\~no 2012 y las efem\'erides precisas generadas por CODS [Sistema TOD]\relax }}{78}{figure.caption.156}
+\contentsline {figure}{\numberline {6.5}{\ignorespaces Diferencias en las posiciones propagadas durante el a\~no 2013 y las efem\'erides precisas generadas por CODS [Sistema TOD]\relax }}{79}{figure.caption.157}
+\contentsline {figure}{\numberline {6.6}{\ignorespaces {\it {Look-up table}} [metros] de los resultados promediados del an\'alisis del cat\'ologo completo al 1 de enero de 2008, de los errores en las coordenadas UVW, clasificados por excentricidad, inclinaci\'on y altura. Se resaltan en celeste las celdas correspondientes a la configuraci\'on de la misi\'on operativa que se utiliz\'o en este trabajo. Extra\'ido de Flohrer et al., \citep {flohrer2008assessment}\relax }}{80}{figure.caption.160}
+\contentsline {figure}{\numberline {6.7}{\ignorespaces Estimaci\'on de errores en las distintas componentes, clasificadas por tipo de \'orbita. Extra\'ido de Flohrer et al., \citep {flohrer2008assessment}\relax }}{80}{figure.caption.161}
+\contentsline {figure}{\numberline {6.8}{\ignorespaces Contenido de los correos electr\'onicos utilizados para comparar los resultados.\relax }}{82}{figure.caption.163}
+\contentsline {figure}{\numberline {6.9}{\ignorespaces Contenido de los CDM utilizados para comparar los resultados.\relax }}{82}{figure.caption.164}
+\contentsline {figure}{\numberline {6.10}{\ignorespaces Notificaci\'on del d\'ia 3 de Julio por parte de la ESA de la realizaci\'on de una maniobra evasiva para el Sentinel 1B (caso \#1). El texto dice: {\it {{\bf {Sentinel 1B}} maniobra evasiva el d\'ia 29 de Junio de 2018. Fue realizada una maniobra evasiva por el Sentinel 1B para reducir el riesgo de colisi\'on con un fragmento del IRIDIUM 33, potencialmente estimado para el d\'ia 29 de Junio de 2018 a las 22:22 UTC}} - Luego indica los productos satelitales afectados.\relax }}{92}{figure.caption.188}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
