@@ -154,7 +154,7 @@ def difTle(tleOrdenados,cantidad_tles):
         data: lista de listas, [dt_frac,dv,dn,dc]
     """  
     
-    print 'Procesando datos TLE...'
+    print ('Procesando datos TLE...')
     tles=glob.glob('../TleAdmin/tle/*')
     dic_tles=generadorDatos(tles)
     tle_ordenados=ordenaTles(dic_tles)
@@ -249,15 +249,15 @@ def difTle(tleOrdenados,cantidad_tles):
              dvv[:15],dnn[:15],dcc[:15],dt_frac[:15]]    
     data1=[dt_tle,dv,dn,dc,dvv,dnn,dnn,dt_frac]
     
-    print '++++++++++++GRADO 2++++++++++++++++++'
+    print ('++++++++++++GRADO 2++++++++++++++++++')
     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,dataPri,2)
-    print coef
-    print statsReport
+    print (coef)
+    print (statsReport)
     
-    print '++++++++++++GRADO 1++++++++++++++++++'
+    print ('++++++++++++GRADO 1++++++++++++++++++')
     dt1,coef1,statsReport1=ajustar_diferencias(epoca_ffin,dataPri,1)
-    print coef1
-    print statsReport1
+    print (coef1)
+    print (statsReport1)
     
     data=[dt,data1,coef,nombre]
         
@@ -434,12 +434,12 @@ def difPrimario():
     var_n=np.var(dn)
     var_c=np.var(dc)
     
-    print '*******************************************************'
-    print '-----------------Varianzas---------------------------'
-    print '*******************************************************'
-    print 'Var en R = ', var_v
-    print 'Var en T = ', var_n
-    print 'Var en N = ', var_c
+    print ('*******************************************************')
+    print ('-----------------Varianzas---------------------------')
+    print ('*******************************************************')
+    print ('Var en R = ', var_v)
+    print ('Var en T = ', var_n)
+    print ('Var en N = ', var_c)
     
 #     print '++++++++++++GRADO 2++++++++++++++++++'
     dt,coef,statsReport=ajustar_diferencias(epoca_ffin,data1,2)

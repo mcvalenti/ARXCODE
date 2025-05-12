@@ -134,14 +134,14 @@ if __name__=='__main__':
     Impresion por pantalla.
     """
     info1='Acercamiento entre '+str(obj_list[0][0])+' y '+str(obj_list[1][0])
-    print '=============================================================='
-    print info1
-    print '=============================================================='
-    print 'Mision Id= ', str(obj_list[0][1])
-    print 'Target Id= ', str(obj_list[1][1])
-    print 'Tiempo de maximo acercamiento= ', TCA
-    print 'Minima Distancia = ', MISS_DISTANCE
-    print 'Probabilidad de Colision = ', POC
+    print ('==============================================================')
+    print (info1)
+    print ('==============================================================')
+    print ('Mision Id= ', str(obj_list[0][1]))
+    print ('Target Id= ', str(obj_list[1][1]))
+    print ('Tiempo de maximo acercamiento= ', TCA)
+    print ('Minima Distancia = ', MISS_DISTANCE)
+    print ('Probabilidad de Colision = ', POC)
     
     
 #         """

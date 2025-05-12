@@ -565,14 +565,14 @@ def ejecutaProcesamientoCods():
     estadistica_salida.write(info_esta)
     estadistica_salida.close()
     
-    print 'DIFERENCIAS:'
-    print '-------------------------------------------------------------------------'
+    print ('DIFERENCIAS:')
+    print ('-------------------------------------------------------------------------')
     diferencias=[data[1][len(tles)-1],data[2][len(tles)-1],data[3][len(tles)-1],data[4][len(tles)-1],data[5][len(tles)-1],data[6][len(tles)-1]]
-    print 'dv =',data[1][len(tles)-1]
-    print 'dn =',data[2][len(tles)-1]
-    print 'dc =',data[3][len(tles)-1]
-    print '-------------------------------------------------------------------------'
-    print 'Fin del Calculo de Diferencias'
+    print ('dv =',data[1][len(tles)-1])
+    print ('dn =',data[2][len(tles)-1])
+    print ('dc =',data[3][len(tles)-1])
+    print ('-------------------------------------------------------------------------')
+    print ('Fin del Calculo de Diferencias')
 
 #    set_datos=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),dt,data,coef,archivo]
     set_data15=[str(cat_id),linea1,linea2,epoca_ini.strftime("%Y-%m-%d %H:%M:%S.%f"),epoca_ffin.strftime("%Y-%m-%d %H:%M:%S.%f"),data15,coef1,archivo]
@@ -641,7 +641,7 @@ def analizaEO():
  
 #    grafica_tendencia(data)
     grafica_EO(eo)
-    print 'fin'
+    print ('fin')
 
 if __name__=='__main__':
 #    analizaEO()
@@ -726,7 +726,7 @@ if __name__=='__main__':
     c1, stats = P.polynomial.polyfit(dt_frac, dn, deg=g, full=True)
     c2, stats = P.polynomial.polyfit(dt_frac, dc, deg=g, full=True)
     coef=[c,c1,c2]
-    print stats     
+    print (stats)     
 #    eo=[t,a,i]
  
     grafica_set15dias(data,coef)

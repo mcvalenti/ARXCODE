@@ -159,7 +159,7 @@ class Encuentro():
             #====================================
             # Distancias Minimas en RTN.
             #====================================
-            print 'Vector miss distance en [RTN] : ', self.DistRic_min
+            print ('Vector miss distance en [RTN] : ', self.DistRic_min)
             self.r_comp=self.DistRic_min[0]
             self.s_comp=self.DistRic_min[1]
             self.w_comp=self.DistRic_min[2]
@@ -317,7 +317,7 @@ class Encuentro():
 #             PoC_int=PoC_int=dblquad(lambda y, x: (1.0/(2.0*np.pi*np.sqrt(var_x)*np.sqrt(var_y)))*np.exp((-1.0/2.0)*((x*x/(var_x))+(y*y/(var_y)))), mu_x-ra, mu_x+ra, lambda y: -np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y, lambda y: np.sqrt(ra*ra-(y-mu_x)*(y-mu_x))+mu_y)
 #             pocVsra.write(str(ra)+' '+str(PoC)+'\n')
 #             ra=ra+0.0003  
-        print 'POC explicita de CHAN =%e ' % PoC 
+        print ('POC explicita de CHAN =%e ' % PoC) 
         return PoC
                 
     def calculaPoC_akella(self):    
@@ -371,7 +371,7 @@ class Encuentro():
         coeff=1.0/(2*np.pi*np.sqrt(np.linalg.det(p_star)))
         poc_integral,  err= nquad(self.f, [self.bounds_z, self.bounds_y], args=(rho_0, R_B, p_star, r_c)) # double integrals 
         poc_ak = coeff*poc_integral
-        print 'PoC Akella =%e ' %  poc_ak
+        print ('PoC Akella =%e ' %  poc_ak)
         return poc_ak
 
 #     def calculaPoC_klinkrad(self):

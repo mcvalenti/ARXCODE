@@ -2,7 +2,7 @@
 
 import numpy as np
 from datetime import datetime
-from sist_deTiempo import calcula_mjd, jd
+from SistReferencia.sist_deTiempo import calcula_mjd, jd
 
 #from newton import newton
 
@@ -350,6 +350,6 @@ if __name__=='__main__':
     r_todVal=[3961.4214985,6010.4752688,4619.301531]
     r_tod=teme2tod(epoca, r_teme)
 
-    print epoca
-    print r_tod
-    print r_todVal-r_tod
+    print (epoca)
+    print (r_tod)
+    print (r_todVal-r_tod)

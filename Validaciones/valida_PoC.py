@@ -113,10 +113,10 @@ def valida_bibl():
     Poc_bibl=0.0001807975
 #     dif_poc=PoC-Poc_bibl
 #     dif_porc=dif_poc*100.0/Poc_bibl
-    print '=========================================='
-    print 'PoC calculada en forma explicita    = ','%.7e' % round(PoC,11)
-    print 'PoC calculada mediante una integral = ','%.7e' % round(PoC_int[0],11)
-    print 'PoC calculada en la  bibliografia   = ', '%.7e' % round(Poc_bibl,11)
+    print ('==========================================')
+    print ('PoC calculada en forma explicita    = ','%.7e' % round(PoC,11))
+    print ('PoC calculada mediante una integral = ','%.7e' % round(PoC_int[0],11))
+    print ('PoC calculada en la  bibliografia   = ', '%.7e' % round(Poc_bibl,11))
 #     print 'Diferencia = ', dif_poc
 #     print 'Porcentanje de error = ', dif_porc
 
@@ -128,10 +128,10 @@ def valida_bibl():
     dif_r1=r_sat-r_deb
     rr1,i1,c1=ricSis(r_deb,v_deb, dif_r1)
     
-    print'=========================================='
-    print 'Posicion relativa bibliografia = ', dr,ds,dw
-    print 'Posicion relativa calculada  satelite  = ', round(rr,7), round(i,7), round(c,7)
-    print 'Posicion relativa calculada  deb  = ', round(rr1,7), round(i1,7), round(c1,7)
+    print ('==========================================')
+    print ('Posicion relativa bibliografia = ', dr,ds,dw)
+    print ('Posicion relativa calculada  satelite  = ', round(rr,7), round(i,7), round(c,7))
+    print ('Posicion relativa calculada  deb  = ', round(rr1,7), round(i1,7), round(c1,7))
 
 def valida_cdm(cdm_archivo):
     """
@@ -169,11 +169,11 @@ def valida_cdm(cdm_archivo):
 #     print '=========================================='
 #     print 'Proyeccion al Plano'
 #     print mu_x,mu_y,sig2_xc,sig2_yc
-    print '=========================================='
+    print ('==========================================')
 #    print 'PoC del CDM    = ','%.7e' % round(poc_cdm,11)
-    print 'PoC calculada en forma explicita    = ','%.7e' % round(PoC,11)
-    print 'PoC calculada mediante una integral = ','%.7e' % round(PoC_int[0],11)
-    print '=========================================='
+    print ('PoC calculada en forma explicita    = ','%.7e' % round(PoC,11))
+    print ('PoC calculada mediante una integral = ','%.7e' % round(PoC_int[0],11))
+    print ('==========================================')
     #===============================================
     #Calculo del Encuentro.
     #===============================================
@@ -182,11 +182,11 @@ def valida_cdm(cdm_archivo):
     tle_deb=Tle.creadoxParam(deb_id, tca_epoca)
     n=0
     encuentro = Encuentro(tle_sat,tle_deb,tca_epoca,n)
-    print '=========================================='
-    print 'Min distancia Calculada = ', encuentro.mod_minDist
-    print 'TCA calculado = ', encuentro.tca_c
-    print 'Componentes RTN del CDM: ', dr, ds, dw
-    print 'Componentes RTN calculadas: ', encuentro.r_comp, encuentro.s_comp, encuentro.w_comp
+    print ('==========================================')
+    print ('Min distancia Calculada = ', encuentro.mod_minDist)
+    print ('TCA calculado = ', encuentro.tca_c)
+    print ('Componentes RTN del CDM: ', dr, ds, dw)
+    print ('Componentes RTN calculadas: ', encuentro.r_comp, encuentro.s_comp, encuentro.w_comp)
     
 if __name__=='__main__':
     

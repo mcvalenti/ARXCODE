@@ -6,15 +6,16 @@ Created on Feb 5, 2017
 import sys, glob, os, re
 import numpy as np
 from datetime import datetime, timedelta
-from PyQt4.QtGui import *
-from PyQt4.QtCore import *
+from PyQt5.QtWidgets import *
+from PyQt5.QtGui import *
+from PyQt5.QtCore import *
 from CDM.cdmParser import CDM
 from TleAdmin.TLE import Tle
 from Encuentro.Encuentro import Encuentro
 from Estadistica.maCovar import EjecutaMaCovarCODS
 from Comparar.TlevsCodsOSW import dif_tleCODS15dias
 from visual import ploteos
-from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
 import matplotlib.pyplot as plt
 from Validaciones.valida_PoC import proyecta_plano_de_encuentro, calcula_Poc_manual
 #---------------------------
@@ -47,7 +48,7 @@ class ProcARxCODE(QMainWindow):
         extractAction1 = QAction("&Gestion de Claves", self)
         extractAction2 = QAction("&Directorios para inputs/outputs", self)
         
-        self.center()
+        #self.center()
         self.statusBar().showMessage('Ready')
         mainMenu = self.menuBar()
         fileMenu = mainMenu.addMenu('&File')
@@ -107,8 +108,10 @@ class ProcARxCODE(QMainWindow):
          
     def carga_manual(self):
         ventana2=ProcEncuentro()
-        self.central_widget.addWidget(ventana2)
-        self.central_widget.setCurrentWidget(ventana2)    
+        ventana2.exec()
+        #self.central_widget.addWidget(ventana2)
+        #self.central_widget.setCurrentWidget(ventana2)  
+        
 
 #     def item_click1(self):
 #         c_item=self.listWidget1.currentItem().text()
@@ -185,9 +188,9 @@ class ProcCDM(QWidget):
         listaHLabels=['TCA','Dist. total [m]','PoC']
         listaVLabels=['CDM']
         header = self.tablePOC.horizontalHeader()
-        header.setResizeMode(QHeaderView.Stretch)
+        header.setSectionResizeMode(QHeaderView.Stretch)
         width = self.tablePOC.verticalHeader()
-        width.setResizeMode(QHeaderView.Stretch)
+        width.setSectionResizeMode(QHeaderView.Stretch)
         self.tablePOC.setHorizontalHeaderLabels(listaHLabels)
         self.tablePOC.setVerticalHeaderLabels(listaVLabels)        
         # CDM box layout
@@ -219,9 +222,9 @@ class ProcCDM(QWidget):
         self.tablesatelite.setColumnCount(3)
         listaLabels=['Radial','Transverse','Normal']
         header = self.tablesatelite.horizontalHeader()
-        header.setResizeMode(QHeaderView.Stretch)
+        header.setSectionResizeMode(QHeaderView.Stretch)
         width = self.tablesatelite.verticalHeader()
-        width.setResizeMode(QHeaderView.Stretch)
+        width.setSectionResizeMode(QHeaderView.Stretch)
         self.tablesatelite.setHorizontalHeaderLabels(listaLabels)
         # Ma. del desecho
         self.tabledesecho   = QTableWidget()
@@ -229,9 +232,9 @@ class ProcCDM(QWidget):
         self.tabledesecho.setColumnCount(3)
         listaLabels=['Radial','Transverse','Normal']
         header = self.tabledesecho.horizontalHeader()
-        header.setResizeMode(QHeaderView.Stretch)
+        header.setSectionResizeMode(QHeaderView.Stretch)
         width = self.tabledesecho.verticalHeader()
-        width.setResizeMode(QHeaderView.Stretch)
+        width.setSectionResizeMode(QHeaderView.Stretch)
         self.tabledesecho.setHorizontalHeaderLabels(listaLabels) 
         
         # GBOX matriz del satelite
@@ -313,19 +316,19 @@ class ProcCDM(QWidget):
         self.cn_t_2=float(self.CDM.cn_t_2)*(0.001*0.001)
         self.cn_n_2=float(self.CDM.cn_n_2)*(0.001*0.001) 
         self.cov_rtn_2=np.array([[self.cr_r_2,self.ct_r_2,self.cn_r_2],[self.ct_r_2,self.ct_t_2,self.cn_t_2],[self.cn_r_2,self.cn_t_2,self.cn_n_2]])     
-        print'**********************'
-        print 'r_sat = ',self.r_sat
-        print 'v_sat = ',self.v_sat
-        print 'r_deb = ',self.r_deb
-        print 'v_deb = ',self.v_deb
-        print '======================'
-        print '------Posiciones Rel--'
-        print '======================'
-        print self.dr,self.ds,self.dw
-        print '*********************'
-        print self.cr_r_1
-        print self.ct_r_1,self.ct_t_1
-        print self.cn_r_1,self.cn_t_1,self.cn_n_1        
+        print ('**********************')
+        print ('r_sat = ',self.r_sat)
+        print ('v_sat = ',self.v_sat)
+        print ('r_deb = ',self.r_deb)
+        print ('v_deb = ',self.v_deb)
+        print ('======================')
+        print ('------Posiciones Rel--')
+        print ('======================')
+        print (self.dr,self.ds,self.dw)
+        print ('*********************')
+        print (self.cr_r_1)
+        print (self.ct_r_1,self.ct_t_1)
+        print (self.cn_r_1,self.cn_t_1,self.cn_n_1)        
         #Calculo el angulo entre los vectores velocidad.
         cos_phi=np.dot(self.v_sat,self.v_deb)/(np.sqrt(np.dot(self.v_sat,self.v_sat))*np.sqrt(np.dot(self.v_deb,self.v_deb)))
         phi=np.arccos(cos_phi) 
@@ -333,10 +336,10 @@ class ProcCDM(QWidget):
         #Validacion del calculo POC a partir de datos CDM.
         mu_x,mu_y,sig2_xc,sig2_yc=proyecta_plano_de_encuentro(self.rsw_vect,self.cov_rtn_1,phi)
         poc, poc_int=calcula_Poc_manual(mu_x, mu_y, sig2_xc, sig2_yc)
-        print '======================'
-        print '------POC-------------'
-        print '======================'
-        print poc, poc_int[0]
+        print ('======================')
+        print ('------POC-------------')
+        print ('======================')
+        print (poc, poc_int[0])
         """
         Carga de Informacion 
         """
@@ -367,7 +370,7 @@ class ProcCDM(QWidget):
         self.tabledesecho.setItem(2,1,QTableWidgetItem(str(self.cn_t_2)))
         self.tabledesecho.setItem(2,2,QTableWidgetItem(str(self.cn_n_2)))      
 
-        print 'FIN DE LA CARGA'
+        print ('FIN DE LA CARGA')
     
     def procesa_arcode(self):
         ventana2=ProcEncuentro(norad_sat=self.noradID_mision,norad_deb=self.noradID_deb,TCA=self.TCA)
@@ -377,24 +380,24 @@ class ProcCDM(QWidget):
     def salirCdm(self):
         self.close()
         
-class ProcEncuentro(QWidget):
+class ProcEncuentro(QDialog):
  #   def __init__(self,parent=None):
     def __init__(self, **kwargs):
-        QWidget.__init__(self)
+        super().__init__()
 
         self.setWindowModality(Qt.ApplicationModal)      
         # Parametros
         if not bool(kwargs):
             self.sat_id="41456"
             self.deb_id="35732"
-            self.qdate= QDate(2018,06,29)
-            self.qhora=QTime(22,22,48.14)
+            self.qdate= QDate(2018,6,29)
+            self.qhora=QTime(22,22,48,14)
         else:            
             self.sat_id=kwargs["norad_sat"]
             self.deb_id=kwargs["norad_deb"]
             self.tca=kwargs["TCA"]
-            self.qdate= QDate(2013,03,18)
-            self.qhora=QTime(14,44,34.0)
+            self.qdate= QDate(2013,3,18)
+            self.qhora=QTime(14,44,34,0)
             self.hit_rad='0.01'
             self.min_dist=None
             self.tca_calc=None 
@@ -456,9 +459,9 @@ class ProcEncuentro(QWidget):
         listaLabels=['TCA','MinD [km]','PoC']
         self.tableEncuentro.setHorizontalHeaderLabels(listaLabels)
         header = self.tableEncuentro.horizontalHeader()
-        header.setResizeMode(QHeaderView.Stretch) 
+        header.setSectionResizeMode(QHeaderView.Stretch) 
         width = self.tableEncuentro.verticalHeader()
-        width.setResizeMode(QHeaderView.Stretch)    
+        width.setSectionResizeMode(QHeaderView.Stretch)    
 #       # Fecha y Hora
         self.hora = QTimeEdit()
         self.hora.setDisplayFormat("HH:mm:ss.zzz")
@@ -505,9 +508,9 @@ class ProcEncuentro(QWidget):
         self.tablesatelite.setColumnCount(3)
         listaLabels=['Radial','Transverse','Normal']
         header = self.tablesatelite.horizontalHeader()
-        header.setResizeMode(QHeaderView.Stretch)
+        header.setSectionResizeMode(QHeaderView.Stretch)
         width = self.tablesatelite.verticalHeader()
-        width.setResizeMode(QHeaderView.Stretch)
+        width.setSectionResizeMode(QHeaderView.Stretch)
         self.tablesatelite.setHorizontalHeaderLabels(listaLabels)
         # Ma. del desecho
         self.tabledesecho   = QTableWidget()
@@ -515,9 +518,9 @@ class ProcEncuentro(QWidget):
         self.tabledesecho.setColumnCount(3)
         listaLabels=['Radial','Transverse','Normal']
         header = self.tabledesecho.horizontalHeader()
-        header.setResizeMode(QHeaderView.Stretch)
+        header.setSectionResizeMode(QHeaderView.Stretch)
         width = self.tabledesecho.verticalHeader()
-        width.setResizeMode(QHeaderView.Stretch)
+        width.setSectionResizeMode(QHeaderView.Stretch)
         self.tabledesecho.setHorizontalHeaderLabels(listaLabels) 
         
         # GBOX matriz del satelite
@@ -595,20 +598,20 @@ class ProcEncuentro(QWidget):
         
         # Corroborar que el TLE es anterior en fecha y hora al tca
         if tle_sat.epoca() >= self.tca:
-            print 'Comparacion de epocas'
-            print tle_sat.epoca(), self.tca
+            print ('Comparacion de epocas')
+            print (tle_sat.epoca(), self.tca)
             tca_sust=self.tca-timedelta(days=1)
             tle_sat=Tle.creadoxParam(self.sat_id,tca_sust)
-            print 'Nuevas epocas'
-            print tle_sat.epoca()
+            print ('Nuevas epocas')
+            print (tle_sat.epoca())
             
         if tle_deb.epoca() >= self.tca:
-            print 'Comparacion de epocas'
-            print tle_deb.epoca(), self.tca
+            print ('Comparacion de epocas')
+            print (tle_deb.epoca(), self.tca)
             tca_sust=self.tca-timedelta(days=1)
             tle_deb=Tle.creadoxParam(self.deb_id,tca_sust)
-            print 'Nuevas epocas'
-            print tle_deb.epoca()
+            print ('Nuevas epocas')
+            print (tle_deb.epoca())
 #         
         """
         Propagacion hasta el Encuentro
@@ -625,7 +628,7 @@ class ProcEncuentro(QWidget):
             self.poc_arx=encuentro1.calculaPoC_limite()
         else:   
             self.poc_arx=encuentro1.calculaPoC_akella()
-        print 'Se utilizo el metodo: ', self.poc_method
+        print ('Se utilizo el metodo: ', self.poc_method)
         self.maCovar_sat=encuentro1.ma_sat_RTN_tca
         self.maCovar_deb=encuentro1.ma_deb_RTN_tca
         self.tableEncuentro.setItem(0,0, QTableWidgetItem(datetime.strftime(self.tca_calc,'%Y-%m-%d %H:%M:%S')))
@@ -633,7 +636,7 @@ class ProcEncuentro(QWidget):
         self.tableEncuentro.setItem(0,2, QTableWidgetItem(str(round(self.poc_arx,8))))
         # archivo de diferencias.
         self.archivo_dif=encuentro1.archivo_dif
-        print 'Minima Distancia = ', encuentro1.mod_minDist,encuentro1.tca_c
+        print ('Minima Distancia = ', encuentro1.mod_minDist,encuentro1.tca_c)
         #grafica_track('../Encuentro/archivos/'+str(self.sat_id)+'U', '../Encuentro/archivos/'+str(self.deb_id)+'U')
         #print 'fin del procesamiento.'
        
@@ -751,9 +754,9 @@ class Errores(QDialog):
         self.tablesatelite.setColumnCount(3)
         listaLabels=['Radial','Transverse','Normal']
         header = self.tablesatelite.horizontalHeader()
-        header.setResizeMode(QHeaderView.Stretch)
+        header.setSectionResizeMode(QHeaderView.Stretch)
         width = self.tablesatelite.verticalHeader()
-        width.setResizeMode(QHeaderView.Stretch)
+        width.setSectionResizeMode(QHeaderView.Stretch)
         self.tablesatelite.setHorizontalHeaderLabels(listaLabels)
         self.tablesatelite.setItem(0,0, QTableWidgetItem(str(3)))
         # Ma. del desecho
@@ -762,9 +765,9 @@ class Errores(QDialog):
         self.tabledesecho.setColumnCount(3)
         listaLabels=['Radial','Transverse','Normal']
         header = self.tabledesecho.horizontalHeader()
-        header.setResizeMode(QHeaderView.Stretch)
+        header.setSectionResizeMode(QHeaderView.Stretch)
         width = self.tabledesecho.verticalHeader()
-        width.setResizeMode(QHeaderView.Stretch)
+        width.setSectionResizeMode(QHeaderView.Stretch)
         self.tabledesecho.setHorizontalHeaderLabels(listaLabels)  
         
         
@@ -1402,8 +1405,15 @@ class ProcMision(QDialog):
         
         
 #def IniciaApp():
+
+
+# Para debug
+def excepthook(exc_type,exc_value, exc_tb):
+    traceback.print_exception(exc_type, exc_value, exc_tb)
+
 if __name__ == '__main__':
-    
+    import traceback # Para el debug
+
     """
     Se crean los directorios necesarios.
     """
@@ -1434,6 +1444,7 @@ if __name__ == '__main__':
     INICIA LA INTERFAZ
     """
     QApplication.setStyle("windows") # plastique, cde, motif, sgi, windows, cleanlooks, mac
+    sys.ecepthook = excepthook
     app = QApplication(sys.argv)
     ex = ProcARxCODE()
     sys.exit(app.exec_())

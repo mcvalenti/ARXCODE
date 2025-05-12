@@ -58,21 +58,21 @@ class Tle:
                 inst1.f0=datetime.strftime(inst1.f0,'%Y-%m-%d')
                 cont=cont+1
             if cont > 1:
-                    print 'El proceso cambio la fecha inicial del set = ', inst1.f0
+                    print ('El proceso cambio la fecha inicial del set = ', inst1.f0)
             fquery1='https://www.space-track.org/basicspacedata/query/class/tle/EPOCH/'+inst1.f0+'--'+inst1.f1+'/NORAD_CAT_ID/'+inst1.noradId+'/orderby/TLE_LINE1 ASC/format/tle'
             r = s.get(fquery1)
             inst1.tle_text=r.text
             inst1.lineas=inst1.tle_text.split('\n')
             if len(inst1.lineas) > 1 and r.status_code == 200:
-                print 'Se ha generado el tle para el objeto de NORAD_ID= ',inst1.noradId
+                print ('Se ha generado el tle para el objeto de NORAD_ID= ',inst1.noradId)
                 inst1.linea1=inst1.lineas[-3]
                 inst1.linea2=inst1.lineas[-2]
             else:
-                print 'No pudo completarse la solicitud para el objeto de NORAD_ID= ',inst1.noradId                      
+                print ('No pudo completarse la solicitud para el objeto de NORAD_ID= ',inst1.noradId)                      
     
         except exceptions.HTTPError as e:
-            print "Error: " + str(e)
-            return "Error: " + str(e)
+            print ("Error: " + str(e))
+            return ("Error: " + str(e))
 
         return inst1
     
@@ -184,7 +184,7 @@ class SetTLE():
             if r.text !='' and r.status_code == 200:
                 pass #print 'Se ha generado el archivo= ', self.archivo
             else:
-                print 'No pudo completarse la solicitud'
+                print ('No pudo completarse la solicitud')
             
         except exceptions.HTTPError as e:
             return "Error: " + str(e)

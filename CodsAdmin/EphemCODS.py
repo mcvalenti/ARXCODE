@@ -57,7 +57,7 @@ if __name__=='__main__':
     ephem=EphemCODS('../CodsAdmin/CUSS_CODS/DENSEPHEM_TOD_XYZ/'+archivo)
      
     ephem_dic=ephem.genera_diccionario()
-    d1=datetime(2013,05,31,14,10,10)
-    print ephem_dic[d1]['x']
+    d1=datetime(2013,5,31,14,10,10)
+    print (ephem_dic[d1]['x'])
       
          
